@@ -178,9 +178,4 @@ try {
 ## Лицензия
 
 MIT
-
-## Ссылки
-
-- **GitHub:** [https://github.com/sergeantnahryuk/ozon-seller-api](https://github.com/sergeantnahryuk/ozon-seller-api)
-- **npm:** [https://www.npmjs.com/package/ozon-seller-api-extended](https://www.npmjs.com/package/ozon-seller-api-extended)
-
+ 
