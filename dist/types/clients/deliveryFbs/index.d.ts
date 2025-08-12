@@ -1,0 +1,33 @@
+import type { HttpClient } from '../../http/HttpClient';
+import { DeliveryFbsCarriageManager } from './carriage';
+import { DeliveryFbsActsManager } from './acts';
+import { DeliveryFbsLabelsManager } from './labels';
+import { DeliveryFbsPdfsManager } from './pdfs';
+export declare class DeliveryFbsAPI {
+    readonly carriage: DeliveryFbsCarriageManager;
+    readonly acts: DeliveryFbsActsManager;
+    readonly labels: DeliveryFbsLabelsManager;
+    readonly pdfs: DeliveryFbsPdfsManager;
+    constructor(httpClient: HttpClient);
+    createCarriage(...args: Parameters<DeliveryFbsCarriageManager['createCarriage']>): Promise<import("../..").IHttpResponse<import("./types").CreateCarriageResponse>>;
+    approveCarriage(...args: Parameters<DeliveryFbsCarriageManager['approveCarriage']>): Promise<import("../..").IHttpResponse<import("./types").ApproveCarriageResponse>>;
+    setPostings(...args: Parameters<DeliveryFbsCarriageManager['setPostings']>): Promise<import("../..").IHttpResponse<import("./types").SetPostingsResponse>>;
+    cancelCarriage(...args: Parameters<DeliveryFbsCarriageManager['cancelCarriage']>): Promise<import("../..").IHttpResponse<import("./types").CancelCarriageResponse>>;
+    getCarriageDeliveryList(...args: Parameters<DeliveryFbsCarriageManager['getCarriageDeliveryList']>): Promise<import("../..").IHttpResponse<import("./types").GetCarriageDeliveryListResponse>>;
+    getCarriage(...args: Parameters<DeliveryFbsCarriageManager['getCarriage']>): Promise<import("../..").IHttpResponse<import("./types").GetCarriageResponse>>;
+    createFBSAct(...args: Parameters<DeliveryFbsActsManager['createFBSAct']>): Promise<import("../..").IHttpResponse<import("./types").CreateFBSActResponse>>;
+    getAvailableCarriageList(...args: Parameters<DeliveryFbsActsManager['getAvailableCarriageList']>): Promise<import("../..").IHttpResponse<import("./types").GetAvailableCarriageListResponse>>;
+    iterateAvailableCarriageList(...args: Parameters<DeliveryFbsActsManager['iterateAvailableCarriageList']>): AsyncGenerator<import("./types").AvailableCarriage[], void, unknown>;
+    splitFBSPosting(...args: Parameters<DeliveryFbsActsManager['splitFBSPosting']>): Promise<import("../..").IHttpResponse<import("./types").SplitFBSPostingResponse>>;
+    getActPostingsList(...args: Parameters<DeliveryFbsActsManager['getActPostingsList']>): Promise<import("../..").IHttpResponse<import("./types").GetActPostingsListResponse>>;
+    getContainerLabels(...args: Parameters<DeliveryFbsLabelsManager['getContainerLabels']>): Promise<import("../..").IHttpResponse<import("./types").GetContainerLabelsResponse>>;
+    getBarcode(...args: Parameters<DeliveryFbsLabelsManager['getBarcode']>): Promise<import("../..").IHttpResponse<import("./types").GetBarcodeResponse>>;
+    getBarcodeText(...args: Parameters<DeliveryFbsLabelsManager['getBarcodeText']>): Promise<import("../..").IHttpResponse<import("./types").GetBarcodeTextResponse>>;
+    checkDigitalActStatus(...args: Parameters<DeliveryFbsLabelsManager['checkDigitalActStatus']>): Promise<import("../..").IHttpResponse<import("./types").CheckDigitalActStatusResponse>>;
+    getActPDF(...args: Parameters<DeliveryFbsPdfsManager['getActPDF']>): Promise<import("../..").IHttpResponse<import("./types").GetActPDFResponse>>;
+    getFBSActsList(...args: Parameters<DeliveryFbsPdfsManager['getFBSActsList']>): Promise<import("../..").IHttpResponse<import("./types").GetFBSActsListResponse>>;
+    iterateFBSActsList(...args: Parameters<DeliveryFbsPdfsManager['iterateFBSActsList']>): AsyncGenerator<import("./types").ActInfo[], void, unknown>;
+    getDigitalActPDF(...args: Parameters<DeliveryFbsPdfsManager['getDigitalActPDF']>): Promise<import("../..").IHttpResponse<import("./types").GetDigitalActPDFResponse>>;
+    checkActStatus(...args: Parameters<DeliveryFbsLabelsManager['checkActStatus']>): Promise<import("../..").IHttpResponse<import("./types").CheckActStatusResponse>>;
+}
+export type * from './types';

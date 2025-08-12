@@ -1,0 +1,4 @@
+import type { ILastIdPaginationParams, LastIdPageFetcher, IPaginationConfig, IPaginationIteratorResult } from './types';
+export declare function iterateByLastId<TParams extends ILastIdPaginationParams, TResult>(fetchPage: LastIdPageFetcher<TParams, TResult>, initialParams: TParams, config?: Partial<IPaginationConfig>): AsyncGenerator<IPaginationIteratorResult<Awaited<ReturnType<typeof fetchPage>>>, void, unknown>;
+export declare function collectByLastId<TParams extends ILastIdPaginationParams, TResult>(fetchPage: LastIdPageFetcher<TParams, TResult>, initialParams: TParams, config?: Partial<IPaginationConfig>): Promise<Array<Awaited<ReturnType<typeof fetchPage>>>>;
+export declare function collectItemsByLastId<TParams extends ILastIdPaginationParams, TResult, TItem>(fetchPage: LastIdPageFetcher<TParams, TResult>, initialParams: TParams, extractItems: (page: Awaited<ReturnType<typeof fetchPage>>) => TItem[], config?: Partial<IPaginationConfig>): Promise<TItem[]>;

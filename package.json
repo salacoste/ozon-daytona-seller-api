@@ -1,6 +1,6 @@
 {
-  "name": "daytona-ozon-api",
-  "version": "1.0.0",
+  "name": "daytona-ozon-seller-api",
+  "version": "1.0.1",
   "description": "DAYTONA OZON SELLER API - comprehensive, type-safe TypeScript SDK covering 263 endpoints across 32 API groups",
   "type": "module",
   "main": "./dist/cjs/index.js",
@@ -52,6 +52,8 @@
   },
   "keywords": [
     "ozon",
+    "ozon-api",
+    "ozon-seller-api",
     "api",
     "seller",
     "marketplace",
@@ -61,8 +63,14 @@
     "fbs",
     "ecommerce",
     "russia",
+    "russian-marketplace",
     "rest-api",
-    "client-library"
+    "client-library",
+    "nodejs",
+    "javascript",
+    "automation",
+    "integration",
+    "daytona"
   ],
   "author": {
     "name": "salacoste",
@@ -84,14 +92,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/salacoste/ozon-seller-api.git"
+    "url": "git+https://github.com/salacoste/ozon-daytona-seller-api.git"
   },
   "bugs": {
-    "url": "https://github.com/salacoste/ozon-seller-api/issues"
+    "url": "https://github.com/salacoste/ozon-daytona-seller-api/issues"
   },
-  "homepage": "https://github.com/salacoste/ozon-seller-api#readme",
+  "homepage": "https://github.com/salacoste/ozon-daytona-seller-api#readme",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "tslib": "^2.8.1"
   }
 }

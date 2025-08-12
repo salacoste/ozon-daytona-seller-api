@@ -1,0 +1,4 @@
+import type { IOffsetPaginationParams, OffsetPageFetcher, IPaginationConfig, IPaginationIteratorResult } from './types';
+export declare function iterateByOffset<TParams extends IOffsetPaginationParams, TResult>(fetchPage: OffsetPageFetcher<TParams, TResult>, initialParams: TParams, config?: Partial<IPaginationConfig>): AsyncGenerator<IPaginationIteratorResult<Awaited<ReturnType<typeof fetchPage>>>, void, unknown>;
+export declare function collectByOffset<TParams extends IOffsetPaginationParams, TResult>(fetchPage: OffsetPageFetcher<TParams, TResult>, initialParams: TParams, config?: Partial<IPaginationConfig>): Promise<Array<Awaited<ReturnType<typeof fetchPage>>>>;
+export declare function collectItemsByOffset<TParams extends IOffsetPaginationParams, TResult, TItem>(fetchPage: OffsetPageFetcher<TParams, TResult>, initialParams: TParams, extractItems: (page: Awaited<ReturnType<typeof fetchPage>>) => TItem[], config?: Partial<IPaginationConfig>): Promise<TItem[]>;

@@ -1,0 +1,4 @@
+import type { ICursorPaginationParams, CursorPageFetcher, IPaginationConfig, IPaginationIteratorResult } from './types';
+export declare function iterateByCursor<TParams extends ICursorPaginationParams, TResult>(fetchPage: CursorPageFetcher<TParams, TResult>, initialParams: TParams, config?: Partial<IPaginationConfig>): AsyncGenerator<IPaginationIteratorResult<Awaited<ReturnType<typeof fetchPage>>>, void, unknown>;
+export declare function collectByCursor<TParams extends ICursorPaginationParams, TResult>(fetchPage: CursorPageFetcher<TParams, TResult>, initialParams: TParams, config?: Partial<IPaginationConfig>): Promise<Array<Awaited<ReturnType<typeof fetchPage>>>>;
+export declare function collectItemsByCursor<TParams extends ICursorPaginationParams, TResult, TItem>(fetchPage: CursorPageFetcher<TParams, TResult>, initialParams: TParams, extractItems: (page: Awaited<ReturnType<typeof fetchPage>>) => TItem[], config?: Partial<IPaginationConfig>): Promise<TItem[]>;

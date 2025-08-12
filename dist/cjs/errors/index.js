@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ErrorUtils = exports.ErrorFactory = exports.NetworkError = exports.ValidationError = exports.AuthError = exports.RateLimitError = exports.OzonApiError = void 0;
+var OzonApiError_1 = require("./OzonApiError");
+Object.defineProperty(exports, "OzonApiError", { enumerable: true, get: function () { return OzonApiError_1.OzonApiError; } });
+var SpecializedErrors_1 = require("./SpecializedErrors");
+Object.defineProperty(exports, "RateLimitError", { enumerable: true, get: function () { return SpecializedErrors_1.RateLimitError; } });
+Object.defineProperty(exports, "AuthError", { enumerable: true, get: function () { return SpecializedErrors_1.AuthError; } });
+Object.defineProperty(exports, "ValidationError", { enumerable: true, get: function () { return SpecializedErrors_1.ValidationError; } });
+Object.defineProperty(exports, "NetworkError", { enumerable: true, get: function () { return SpecializedErrors_1.NetworkError; } });
+var ErrorFactory_1 = require("./ErrorFactory");
+Object.defineProperty(exports, "ErrorFactory", { enumerable: true, get: function () { return ErrorFactory_1.ErrorFactory; } });
+Object.defineProperty(exports, "ErrorUtils", { enumerable: true, get: function () { return ErrorFactory_1.ErrorUtils; } });

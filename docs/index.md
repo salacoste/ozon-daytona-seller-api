@@ -64,7 +64,7 @@
 ## 🎯 Быстрый старт
 
 ```typescript
-import { OzonClient } from 'daytona-ozon-api';
+import { OzonClient } from 'daytona-ozon-seller-api';
 
 const client = new OzonClient({
   clientId: 'your-client-id',

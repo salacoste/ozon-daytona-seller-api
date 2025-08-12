@@ -1,0 +1,32 @@
+import type { HttpClient } from '../../http/HttpClient';
+import { FboSupplyRequestDrafts } from './drafts';
+import { FboSupplyRequestSupply } from './supply';
+import { FboSupplyRequestCargoes } from './cargoes';
+import { FboSupplyRequestOrders } from './orders';
+export type { IV1ClusterType, IV1DraftClusterListRequest, IV1DraftClusterListResponse, IV1CreateType, IV1DraftGetWarehouseFboListRequest, IV1DraftGetWarehouseFboListResponse, IV1DraftCreateRequest, IV1DraftCreateResponse, IV1DraftCreateInfoRequest, IV1DraftCreateInfoResponse, IV1DraftTimeslotInfoRequest, IV1DraftTimeslotInfoResponse, IV1DraftSupplyCreateRequest, IV1DraftSupplyCreateResponse, IV1DraftSupplyCreateStatusRequest, IV1DraftSupplyCreateStatusResponse, IV1CargoesCreateRequest, IV1CargoesCreateResponse, IV1CargoesCreateInfoRequest, IV1CargoesCreateInfoResponse, IV1CargoesDeleteRequest, IV1CargoesDeleteResponse, IV1CargoesDeleteStatusRequest, IV1CargoesDeleteStatusResponse, IV1CargoesRulesGetRequest, IV1CargoesRulesGetResponse, IV1CargoesLabelCreateRequest, IV1CargoesLabelCreateResponse, IV1CargoesLabelGetRequest, IV1CargoesLabelGetResponse, IV1SupplyOrderCancelRequest, IV1SupplyOrderCancelResponse, IV1SupplyOrderCancelStatusRequest, IV1SupplyOrderCancelStatusResponse, IV1SupplyOrderContentUpdateRequest, IV1SupplyOrderContentUpdateResponse, IV1SupplyOrderContentUpdateStatusRequest, IV1SupplyOrderContentUpdateStatusResponse, } from '../../types/generated/fbosupplyrequest';
+export declare class FboSupplyRequestAPI {
+    private drafts;
+    private supply;
+    private cargoes;
+    private orders;
+    constructor(httpClient: HttpClient);
+    getClusterList(params: Parameters<FboSupplyRequestDrafts['getClusterList']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1DraftClusterListResponse>>;
+    getWarehouseFboList(params: Parameters<FboSupplyRequestDrafts['getWarehouseFboList']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1DraftGetWarehouseFboListResponse>>;
+    createDraft(params: Parameters<FboSupplyRequestDrafts['createDraft']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1DraftCreateResponse>>;
+    getDraftCreateInfo(params: Parameters<FboSupplyRequestDrafts['getDraftCreateInfo']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1DraftCreateInfoResponse>>;
+    getDraftTimeslotInfo(params: Parameters<FboSupplyRequestDrafts['getDraftTimeslotInfo']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1DraftTimeslotInfoResponse>>;
+    createSupply(params: Parameters<FboSupplyRequestSupply['createSupply']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1DraftSupplyCreateResponse>>;
+    getSupplyCreateStatus(params: Parameters<FboSupplyRequestSupply['getSupplyCreateStatus']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1DraftSupplyCreateStatusResponse>>;
+    createCargoes(params: Parameters<FboSupplyRequestCargoes['createCargoes']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1CargoesCreateResponse>>;
+    getCargoesCreateInfo(params: Parameters<FboSupplyRequestCargoes['getCargoesCreateInfo']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1CargoesCreateInfoResponse>>;
+    deleteCargoes(params: Parameters<FboSupplyRequestCargoes['deleteCargoes']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1CargoesDeleteResponse>>;
+    getCargoesDeleteStatus(params: Parameters<FboSupplyRequestCargoes['getCargoesDeleteStatus']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1CargoesDeleteStatusResponse>>;
+    getCargoesRules(params: Parameters<FboSupplyRequestCargoes['getCargoesRules']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1CargoesRulesGetResponse>>;
+    createCargoesLabel(params: Parameters<FboSupplyRequestCargoes['createCargoesLabel']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1CargoesLabelCreateResponse>>;
+    getCargoesLabel(params: Parameters<FboSupplyRequestCargoes['getCargoesLabel']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1CargoesLabelGetResponse>>;
+    getCargoesLabelFile(file_guid: string): Promise<import("../..").IHttpResponse<ArrayBuffer>>;
+    cancelSupplyOrder(params: Parameters<FboSupplyRequestOrders['cancelSupplyOrder']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1SupplyOrderCancelResponse>>;
+    getSupplyOrderCancelStatus(params: Parameters<FboSupplyRequestOrders['getSupplyOrderCancelStatus']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1SupplyOrderCancelStatusResponse>>;
+    updateSupplyOrderContent(params: Parameters<FboSupplyRequestOrders['updateSupplyOrderContent']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1SupplyOrderContentUpdateResponse>>;
+    getSupplyOrderContentUpdateStatus(params: Parameters<FboSupplyRequestOrders['getSupplyOrderContentUpdateStatus']>[0]): Promise<import("../..").IHttpResponse<import("../../types/generated/fbosupplyrequest").IV1SupplyOrderContentUpdateStatusResponse>>;
+}
