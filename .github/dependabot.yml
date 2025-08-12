@@ -1,0 +1,62 @@
+version: 2
+updates:
+  # NPM dependencies
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "salacoste"
+    assignees:
+      - "salacoste"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    groups:
+      # Group development dependencies
+      development-dependencies:
+        patterns:
+          - "@types/*"
+          - "eslint*"
+          - "prettier*"  
+          - "typescript*"
+          - "vitest*"
+          - "tsx*"
+      # Group testing dependencies
+      testing-dependencies:
+        patterns:
+          - "*test*"
+          - "*mock*"
+          - "*jest*"
+          - "vitest*"
+      # Group build tools
+      build-tools:
+        patterns:
+          - "webpack*"
+          - "rollup*"
+          - "esbuild*"
+          - "vite*"
+    ignore:
+      # Ignore major version updates for critical dependencies
+      - dependency-name: "node"
+        update-types: ["version-update:semver-major"]
+      # Ignore patch updates for stable packages (reduce noise)
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-patch"]
+
+  # GitHub Actions updates
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      day: "monday"
+      time: "06:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci"
+      include: "scope"

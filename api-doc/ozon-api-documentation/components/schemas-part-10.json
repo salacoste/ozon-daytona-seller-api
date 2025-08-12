@@ -1,0 +1,2450 @@
+{
+  "schemasCount": 100,
+  "schemas": {
+    "OperationItem": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "sku": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "OperationPosting": {
+      "properties": {
+        "delivery_schema": {
+          "type": "string",
+          "description": "Схема доставки:\n  - `FBO` — доставка со склада Ozon,\n  - `FBS` — доставка со своего склада,\n  - `CROSSBORDER` — доставка из-за рубежа,\n  - `RFBS` — доставка по выбору продавца,\n  - `FBP` — доставка с партнёрских складов Ozon,\n  - `FBOECONOMY` — доставка эконом-товаров со склада Ozon,\n  - `FBSECONOMY` — доставка эконом-товаров со своего склада.\n"
+        },
+        "order_date": {
+          "type": "string",
+          "description": "Дата принятия отправления в обработку."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "warehouse_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор склада."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Информация об отправлении."
+    },
+    "OperationService": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название услуги:\n  - `MarketplaceNotDeliveredCostItem` — возврат невостребованного товара от покупателя на склад.\n  - `MarketplaceReturnAfterDeliveryCostItem` — возврат от покупателя на склад после доставки.\n  - `MarketplaceDeliveryCostItem` — доставка товара до покупателя.\n  - `MarketplaceSaleReviewsItem` — приобретение отзывов на платформе.\n  - `ItemAdvertisementForSupplierLogistic` — доставка товаров на склад Ozon — кросс-докинг.\n  - `OperationMarketplaceServiceStorage` — размещения товаров.\n  - `MarketplaceMarketingActionCostItem` — продвижение товаров.\n  - `MarketplaceServiceItemInstallment` — продвижениe и продажа в рассрочку.\n  - `MarketplaceServiceItemMarkingItems` — обязательная маркировка товаров.\n  - `MarketplaceServiceItemFlexiblePaymentSchedule` — гибкий график выплат.\n  - `MarketplaceServiceItemReturnFromStock` — комплектация товаров для вывоза продавцом.\n  - `ItemAdvertisementForSupplierLogisticSeller` — транспортно-экспедиционные услуги.\n  - `ItemAgentServiceStarsMembership` — вознаграждение за услугу [«Звёздные товары»](https://s.ozon.ru/e7NlR6b).\n  - `MarketplaceServiceItemDelivToCustomer` — последняя миля.\n  - `MarketplaceServiceItemDirectFlowTrans` — магистраль.\n  - `MarketplaceServiceItemDropoffFF` — обработка отправления.\n  - `MarketplaceServiceItemDropoffPVZ` — обработка отправления.\n  - `MarketplaceServiceItemDropoffSC` — обработка отправления.\n  - `MarketplaceServiceItemFulfillment` — сборка заказа.\n  - `MarketplaceServiceItemPickup` — выезд транспортного средства по адресу продавца для забора отправлений — Pick-up.\n  - `MarketplaceServiceItemReturnAfterDelivToCustomer` — обработка возврата.\n  - `MarketplaceServiceItemReturnFlowTrans` — обратная магистраль.\n  - `MarketplaceServiceItemReturnNotDelivToCustomer` — обработка отмен.\n  - `MarketplaceServiceItemReturnPartGoodsCustomer` — обработка невыкупа.\n  - `MarketplaceRedistributionOfAcquiringOperation` — оплата эквайринга.\n  - `MarketplaceReturnStorageServiceAtThePickupPointFbsItem` — краткосрочное размещение возврата FBS.\n  - `MarketplaceReturnStorageServiceInTheWarehouseFbsItem` — долгосрочное размещение возврата FBS.\n  - `MarketplaceServiceItemDeliveryKGT` — доставка крупногабаритного товара (КГТ).\n  - `MarketplaceServiceItemDirectFlowLogistic` — логистика.\n  - `MarketplaceServiceItemReturnFlowLogistic` — обратная логистика.\n  - `MarketplaceServicePremiumCashbackIndividualPoints` — услуга продвижения «Бонусы продавца».\n  - `MarketplaceServicePremiumPromotion` — услуга продвижение Premium, фиксированная комиссия.\n  - `OperationMarketplaceWithHoldingForUndeliverableGoods` — удержание за недовложение товара.\n  - `MarketplaceServiceItemDropoffPPZ` — услуга drop-off в пункте приёма заказов.\n  - `MarketplaceServiceItemRedistributionReturnsPVZ` — перевыставление возвратов на ПВЗ.\n  - `OperationMarketplaceAgencyFeeAggregator3PLGlobal` — тарификация агентской услуги Agregator 3PL Global.\n  - `MarketplaceServiceItemDirectFlowLogisticVDC` — логистика вРЦ.\n"
+        },
+        "price": {
+          "format": "double",
+          "type": "number",
+          "description": "Цена."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "FinanceTransactionListV3ResponseOperation": {
+      "properties": {
+        "accruals_for_sale": {
+          "format": "double",
+          "type": "number",
+          "description": "Стоимость товаров с учётом скидок продавца."
+        },
+        "amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Итоговая сумма операции."
+        },
+        "delivery_charge": {
+          "format": "double",
+          "type": "number",
+          "description": "Стоимость доставки для начислений по тарифам, которые действовали до 1 февраля 2021 года, а также начислений для крупногабаритных товаров."
+        },
+        "items": {
+          "items": {
+            "$ref": "#/components/schemas/OperationItem"
+          },
+          "type": "array",
+          "description": "Информация о товаре."
+        },
+        "operation_date": {
+          "type": "string",
+          "description": "Дата операции."
+        },
+        "operation_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор операции."
+        },
+        "operation_type": {
+          "type": "string",
+          "description": "Тип операции."
+        },
+        "operation_type_name": {
+          "type": "string",
+          "description": "Название типа операции."
+        },
+        "posting": {
+          "$ref": "#/components/schemas/OperationPosting"
+        },
+        "return_delivery_charge": {
+          "format": "double",
+          "type": "number",
+          "description": "Плата за возвраты и отмены для начислений по тарифам, которые действовали до 1 февраля 2021 года, а также начислений для крупногабаритных товаров."
+        },
+        "sale_commission": {
+          "format": "double",
+          "type": "number",
+          "description": "Комиссия за продажу или возврат комиссии за продажу."
+        },
+        "services": {
+          "items": {
+            "$ref": "#/components/schemas/OperationService"
+          },
+          "type": "array",
+          "description": "Название услуги."
+        },
+        "type": {
+          "type": "string",
+          "description": "Тип начисления:\n- `all` — все,\n- `orders` — заказы,\n- `returns` — возвраты и отмены,\n- `services` — сервисные сборы,\n- `compensation` — компенсация,\n- `transferDelivery` — стоимость доставки,\n- `other` — прочее.\n"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "financev3FinanceTransactionListV3ResponseResult": {
+      "properties": {
+        "operations": {
+          "items": {
+            "$ref": "#/components/schemas/FinanceTransactionListV3ResponseOperation"
+          },
+          "type": "array",
+          "description": "Информация об операциях."
+        },
+        "page_count": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество страниц. Если 0, страниц больше нет."
+        },
+        "row_count": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество транзакций на всех страницах. Если 0, транзакций больше нет."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результаты запроса."
+    },
+    "financev3FinanceTransactionListV3Response": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/financev3FinanceTransactionListV3ResponseResult"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "FinanceTransactionTotalsV3RequestDate": {
+      "properties": {
+        "from": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Начало периода.\n\nФормат: `YYYY-MM-DDTHH:mm:ss.sssZ`.<br>\nПример: `2019-11-25T10:43:06.51`.\n"
+        },
+        "to": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Конец периода.\n\nФормат: `YYYY-MM-DDTHH:mm:ss.sssZ`.<br>\nПример: `2019-11-25T10:43:06.51`.\n"
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр по дате."
+    },
+    "financev3FinanceTransactionTotalsV3Request": {
+      "oneOf": [
+        {
+          "title": "posting_number",
+          "required": [
+            "posting_number"
+          ]
+        },
+        {
+          "title": "date",
+          "required": [
+            "date"
+          ]
+        }
+      ],
+      "properties": {
+        "date": {
+          "$ref": "#/components/schemas/FinanceTransactionTotalsV3RequestDate"
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "transaction_type": {
+          "type": "string",
+          "description": "Тип операции:\n - `all` — все,\n - `orders` — заказы,\n - `returns` — возвраты и отмены,\n - `services` — сервисные сборы,\n - `compensation` — компенсация,\n - `transferDelivery` — стоимость доставки,\n - `other` — прочее.\n"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "financev3FinanceTransactionTotalsV3ResponseResult": {
+      "properties": {
+        "accruals_for_sale": {
+          "format": "double",
+          "type": "number",
+          "description": "Общая стоимость товаров и возвратов в заданный период."
+        },
+        "compensation_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Компенсации."
+        },
+        "money_transfer": {
+          "format": "double",
+          "type": "number",
+          "description": "Начисления за доставку и возвраты при работе по схеме «Доставка по выбору продавца»."
+        },
+        "others_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Прочие начисления."
+        },
+        "processing_and_delivery": {
+          "format": "double",
+          "type": "number",
+          "description": "Стоимость услуг обработки отправлений, сборки заказов, магистрали и последней мили, а также доставки до введения новых комиссий и тарифов с 1 февраля 2021 года.\n\nМагистраль — доставка товаров между кластерами.\n\nПоследняя миля — доставка товаров покупателю в пункт выдачи заказов, постамат или курьером.\n"
+        },
+        "refunds_and_cancellations": {
+          "format": "double",
+          "type": "number",
+          "description": "Стоимость обратной магистрали, обработки возвратов, отмен и невыкупа товара, а также возвратов до введения новых комиссий и тарифов с 1 февраля 2021 года.\n\nМагистраль — доставка товаров между кластерами.\n\nПоследняя миля — доставка товаров покупателю в пункт выдачи заказов, постамат или курьером.\n"
+        },
+        "sale_commission": {
+          "format": "double",
+          "type": "number",
+          "description": "Сумма комиссии, которая была удержана при продаже товара и возвращена при его возврате."
+        },
+        "services_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Стоимость дополнительных услуг, не связанных напрямую с доставками и возвратами товаров. Например, продвижения или размещения товаров."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результаты запроса."
+    },
+    "financev3FinanceTransactionTotalsV3Response": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/financev3FinanceTransactionTotalsV3ResponseResult"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "commonLanguage": {
+      "default": "DEFAULT",
+      "enum": null,
+      "title": "Language",
+      "type": "string",
+      "description": "Язык ответа:\n  - `RU` — русский,\n  - `EN` — английский.\n"
+    },
+    "v1CreateDocumentB2BSalesReportRequest": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Отчётный период в формате `YYYY-MM`."
+        },
+        "language": {
+          "$ref": "#/components/schemas/commonLanguage"
+        }
+      }
+    },
+    "v1CreateDocumentB2BSalesJSONReportRequest": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Отчётный период в формате `YYYY-MM`. Отчёт доступен до января 2019 включительно."
+        }
+      }
+    },
+    "CreateDocumentB2BSalesJSONReportResponseBuyer": {
+      "type": "object",
+      "description": "Информация о покупателе.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название компании."
+        },
+        "address": {
+          "type": "string",
+          "description": "Юридический адрес."
+        },
+        "inn": {
+          "type": "string",
+          "description": "ИНН."
+        },
+        "kpp": {
+          "type": "string",
+          "description": "КПП."
+        }
+      }
+    },
+    "CreateDocumentB2BSalesJSONReportResponseInvoiceInfoType": {
+      "type": "string",
+      "enum": [
+        "UPD",
+        "UKD"
+      ],
+      "description": "Тип документа:\n- `UPD` - УПД;\n- `UKD` - УКД.\n"
+    },
+    "CreateDocumentB2BSalesJSONReportResponseInvoiceInfo": {
+      "type": "object",
+      "description": "Информация о счёте-фактуре.",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Дата счёта-фактуры продавца в формате `YYYY-MM-DD`."
+        },
+        "number": {
+          "type": "string",
+          "description": "Номер счёта-фактуры продавца."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус УКД или УПД."
+        },
+        "type": {
+          "$ref": "#/components/schemas/CreateDocumentB2BSalesJSONReportResponseInvoiceInfoType"
+        }
+      }
+    },
+    "CreateDocumentB2BSalesJSONReportResponseLegalSaleOperationType": {
+      "type": "string",
+      "enum": [
+        "DELIVERY",
+        "RETURN"
+      ],
+      "description": "Тип операции:\n- `DELIVERY` — отправление,\n- `RETURN` — возврат.\n"
+    },
+    "CreateDocumentB2BSalesJSONReportResponseLegalSaleOperation": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма реализации или возврата."
+        },
+        "cost_without_vat": {
+          "type": "number",
+          "format": "double",
+          "description": "Стоимость товара без НДС."
+        },
+        "date": {
+          "type": "string",
+          "description": "Дата операции в формате `YYYY-MM-DD`."
+        },
+        "gtd_number": {
+          "type": "string",
+          "description": "Номер ГТД."
+        },
+        "origin_country": {
+          "type": "string",
+          "description": "Страна происхождения товара."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена реализации или возврата в рублях."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товаров."
+        },
+        "rnpt_number": {
+          "type": "string",
+          "description": "РНПТ."
+        },
+        "type": {
+          "$ref": "#/components/schemas/CreateDocumentB2BSalesJSONReportResponseLegalSaleOperationType"
+        },
+        "vat_amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма НДС, которая взимается с покупателя."
+        },
+        "vat_rate": {
+          "type": "number",
+          "format": "double",
+          "description": "Ставка НДС."
+        }
+      }
+    },
+    "CreateDocumentB2BSalesJSONReportResponseLegalSaleInvoice": {
+      "type": "object",
+      "properties": {
+        "buyer_info": {
+          "$ref": "#/components/schemas/CreateDocumentB2BSalesJSONReportResponseBuyer"
+        },
+        "currency": {
+          "type": "string",
+          "description": "Валюта."
+        },
+        "currency_code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код валюты."
+        },
+        "info": {
+          "description": "Информация о счёте-фактуре.",
+          "$ref": "#/components/schemas/CreateDocumentB2BSalesJSONReportResponseInvoiceInfo"
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "operations": {
+          "type": "array",
+          "description": "Список операций.",
+          "items": {
+            "$ref": "#/components/schemas/CreateDocumentB2BSalesJSONReportResponseLegalSaleOperation"
+          }
+        },
+        "product_name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "unit_code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код условного обозначения."
+        },
+        "unit_name": {
+          "type": "string",
+          "description": "Условное обозначение."
+        }
+      }
+    },
+    "CreateDocumentB2BSalesJSONReportResponseSellerInfo": {
+      "type": "object",
+      "description": "Информация о продавце.",
+      "properties": {
+        "company_name": {
+          "type": "string",
+          "description": "Название компании."
+        },
+        "inn": {
+          "type": "string",
+          "description": "ИНН."
+        },
+        "kpp": {
+          "type": "string",
+          "description": "КПП."
+        }
+      }
+    },
+    "v1CreateDocumentB2BSalesJSONReportResponse": {
+      "type": "object",
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "description": "Дата начала отчётного периода в формате `YYYY-MM-DD`."
+        },
+        "date_to": {
+          "type": "string",
+          "description": "Дата окончания отчётного периода в формате `YYYY-MM-DD`."
+        },
+        "invoices": {
+          "type": "array",
+          "description": "Список счетов-фактур.",
+          "items": {
+            "$ref": "#/components/schemas/CreateDocumentB2BSalesJSONReportResponseLegalSaleInvoice"
+          }
+        },
+        "seller_info": {
+          "$ref": "#/components/schemas/CreateDocumentB2BSalesJSONReportResponseSellerInfo"
+        }
+      }
+    },
+    "v1CreateMutualSettlementReportRequest": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Отчётный период в формате `YYYY-MM`."
+        },
+        "language": {
+          "$ref": "#/components/schemas/commonLanguage"
+        }
+      }
+    },
+    "v1GetRealizationReportByDayRequest": {
+      "required": [
+        "day",
+        "month",
+        "year"
+      ],
+      "type": "object",
+      "properties": {
+        "day": {
+          "description": "День.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "month": {
+          "description": "Месяц.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "year": {
+          "description": "Год.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "GetRealizationReportByDayResponseRow": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "commission_ratio": {
+          "type": "number",
+          "format": "double",
+          "description": "Доля комиссии за продажу по категории."
+        },
+        "delivery_commission": {
+          "$ref": "#/components/schemas/RowItemCommission"
+        },
+        "item": {
+          "$ref": "#/components/schemas/RowItem"
+        },
+        "return_commission": {
+          "$ref": "#/components/schemas/RowItemCommissionReturn"
+        },
+        "rowNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Номер строки в отчёте."
+        },
+        "seller_price_per_instance": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена продавца с учётом скидки."
+        }
+      }
+    },
+    "GetRealizationReportByDayResponse": {
+      "properties": {
+        "rows": {
+          "description": "Таблица отчёта.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/GetRealizationReportByDayResponseRow"
+          }
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса."
+    },
+    "v1GetFinanceProductsBuyoutRequest": {
+      "type": "object",
+      "required": [
+        "date_from",
+        "date_to"
+      ],
+      "properties": {
+        "date_from": {
+          "description": "Дата, с которой будут данные в отчёте.",
+          "type": "string"
+        },
+        "date_to": {
+          "description": "Дата, по которую будут данные в отчёте.\n\nМаксимальный период — 31 день.\n",
+          "type": "string"
+        }
+      }
+    },
+    "GetFinanceProductsBuyoutResponseProduct": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "float",
+          "description": "Сумма к начислению."
+        },
+        "buyout_price": {
+          "type": "number",
+          "format": "float",
+          "description": "Цена выкупа товара с НДС."
+        },
+        "deduction_by_category_percent": {
+          "type": "number",
+          "format": "float",
+          "description": "Скидка по категории в процентах."
+        },
+        "name": {
+          "description": "Название товара.",
+          "type": "string"
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товара."
+        },
+        "seller_price_per_instance": {
+          "type": "number",
+          "format": "float",
+          "description": "Цена продавца с учётом скидки."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "vat_percent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Ставка НДС для товара в процентах."
+        }
+      }
+    },
+    "v1GetFinanceProductsBuyoutResponse": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "description": "Список выкупленных товаров",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/GetFinanceProductsBuyoutResponseProduct"
+          }
+        }
+      }
+    },
+    "compensationReportLanguage": {
+      "default": "RU",
+      "enum": null,
+      "title": "Language",
+      "type": "string",
+      "description": "Язык отчёта:\n  - `RU` — русский,\n  - `EN` — английский.\n"
+    },
+    "v1GetCompensationReportRequest": {
+      "required": [
+        "date"
+      ],
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Отчётный период в формате `YYYY-MM`."
+        },
+        "language": {
+          "$ref": "#/components/schemas/compensationReportLanguage"
+        }
+      }
+    },
+    "CreateReportResponseCodeNoDeadline": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Уникальный идентификатор отчёта. Чтобы получить отчёт, передайте это значение в метод [/v1/report/info](#operation/ReportAPI_ReportInfo)."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса."
+    },
+    "CreateReportResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/CreateReportResponseCodeNoDeadline"
+        }
+      }
+    },
+    "v1GetDecompensationReportRequest": {
+      "required": [
+        "date"
+      ],
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Отчётный период в формате `YYYY-MM`."
+        },
+        "language": {
+          "$ref": "#/components/schemas/compensationReportLanguage"
+        }
+      }
+    },
+    "RatingItemChange": {
+      "type": "object",
+      "title": "object",
+      "description": "Изменение рейтинга: отношение предыдущего значения к текущему.\n",
+      "properties": {
+        "direction": {
+          "description": "Как изменилось значение рейтинга:\n- `DIRECTION_UNKNOWN` — не определено.\n- `DIRECTION_NONE` — не изменилось.\n- `DIRECTION_RISE` — выросло.\n- `DIRECTION_FALL` — упало.\n",
+          "type": "string"
+        },
+        "meaning": {
+          "description": "Что означает изменение:\n- `MEANING_UNKNOWN` — неизвестно.\n- `MEANING_NONE` — нейтрально.\n- `MEANING_GOOD` — показатель улучшается, всё хорошо.\n- `MEANING_BAD` — показатель падает, нужно что-то сделать.\n",
+          "type": "string"
+        }
+      }
+    },
+    "v1RatingItem": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "change": {
+          "$ref": "#/components/schemas/RatingItemChange"
+        },
+        "current_value": {
+          "description": "Текущее значение рейтинга.",
+          "type": "number",
+          "format": "double"
+        },
+        "name": {
+          "description": "Название рейтинга.",
+          "type": "string"
+        },
+        "past_value": {
+          "description": "Предыдущее значение рейтинга.",
+          "type": "number",
+          "format": "double"
+        },
+        "rating": {
+          "description": "Название рейтинга в системе.",
+          "type": "string"
+        },
+        "rating_direction": {
+          "description": "Каким должно быть значение рейтинга, чтобы оно считалось хорошим:\n- `UNKNOWN_DIRECTION` — не определено.\n- `NEUTRAL` — неважно.\n- `HIGHER_IS_BETTER` — чем выше, тем лучше.\n- `LOWER_IS_BETTER` — чем ниже, тем лучше.\n",
+          "type": "string"
+        },
+        "status": {
+          "description": "Статус рейтинга:\n- `UNKNOWN_STATUS` — не определён.\n- `OK` — все хорошо.\n- `WARNING` — показатели требуют внимания.\n- `CRITICAL` — критичный рейтинг.\n",
+          "type": "string"
+        },
+        "value_type": {
+          "description": "Тип значения:\n- `UNKNOWN_VALUE` — не определён.\n- `INDEX` — индекс.\n- `PERCENT` — процент.\n- `TIME` — время.\n- `RATIO` — коэффициент.\n- `REVIEW_SCORE` — оценка.\n- `COUNT` — счёт.\n",
+          "type": "string"
+        }
+      }
+    },
+    "RatingSummaryV1ResponseGroup": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "group_name": {
+          "description": "Название группы рейтингов.",
+          "type": "string"
+        },
+        "items": {
+          "description": "Список рейтингов.",
+          "items": {
+            "$ref": "#/components/schemas/v1RatingItem"
+          }
+        }
+      }
+    },
+    "RatingSummaryV1ResponseLocalIndex": {
+      "type": "object",
+      "properties": {
+        "calculation_date": {
+          "description": "Дата расчёта индекса локализации.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "localization_percentage": {
+          "description": "Значение индекса локализации.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1RatingSummaryV1Response": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "groups": {
+          "description": "Список с группами рейтингов.",
+          "items": {
+            "$ref": "#/components/schemas/RatingSummaryV1ResponseGroup"
+          }
+        },
+        "localization_index": {
+          "description": "Данные по индексу локализации. Если за последние 14 дней у вас не было продаж, поля параметра будут пустыми.",
+          "items": {
+            "$ref": "#/components/schemas/RatingSummaryV1ResponseLocalIndex"
+          }
+        },
+        "penalty_score_exceeded": {
+          "description": "Признак, что баланс штрафных баллов превышен.",
+          "type": "boolean"
+        },
+        "premium": {
+          "description": "Признак наличия подписки [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program).",
+          "type": "boolean"
+        },
+        "premium_plus": {
+          "description": "Признак наличия подписки [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).",
+          "type": "boolean"
+        }
+      }
+    },
+    "v1RatingHistoryV1Request": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "date_from": {
+          "description": "Начало периода.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "date_to": {
+          "description": "Конец периода.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "ratings": {
+          "description": "Фильтр по рейтингу.\n\nРейтинги, по которым нужно получить значение за период:\n\n- `rating_on_time` — процент заказов, выполненных вовремя за последние 30 дней.\n- `rating_review_avg_score_total` — средняя оценка всех товаров.\n- `rating_price` — индекс цен: отношение стоимости ваших товаров к самой низкой цене на такой же товар на других площадках.\n- `rating_order_cancellation` — процент отмен FBS-отправлений по вашей вине за последние 7 дней. Текущий и предыдущий день не учитываются.\n- `rating_shipment_delay` — процент FBS-отправлений, которые за последние 7 дней не были переданы в доставку по вашей вине. Текущий и предыдущий день не учитываются.\n- `rating_ssl` — оценка работы по FBO. Учитывает `rating_on_time_supply_delivery`, `rating_on_time_supply_cancellation` и `rating_order_accuracy`.\n- `rating_on_time_supply_delivery` — процент поставок, которые вы привезли на склад в выбранный временной интервал за последние 60 дней.\n- `rating_order_accuracy` — процент поставок без излишков, недостач, пересорта и брака за последние 60 дней.\n- `rating_on_time_supply_cancellation` — процент заявок на поставку, которые завершились или были отменены без опоздания за последние 60 дней.\n- `rating_reaction_time` — время, в течение которого покупатели в среднем ждали ответа на своё первое сообщение в чате за последние 30 дней.\n- `rating_average_response_time` — время, в течение которого покупатели в среднем ждали вашего ответа за последние 30 дней.\n- `rating_replied_dialogs_ratio` — доля диалогов хотя бы с одним вашим ответом в течение 24 часов за последние 30 дней.\n\nЕсли вы хотите получить информацию по начисленным штрафным баллам для рейтингов `rating_on_time` и `rating_review_avg_score_total`,\nпередайте значения нужных рейтингов в этом параметре и `with_premium_scores=true`.\n",
+          "items": {
+            "type": "string"
+          }
+        },
+        "with_premium_scores": {
+          "description": "Признак, что в ответе нужно вернуть информацию о штрафных баллах в Premium-программе.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "ratings",
+        "date_from",
+        "date_to"
+      ]
+    },
+    "PremiumScoresScore": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата, когда были начислены штрафные баллы."
+        },
+        "rating_value": {
+          "type": "number",
+          "format": "double",
+          "description": "Значение рейтинга, за которое были начислены штрафные баллы."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество начисленных штрафных баллов."
+        }
+      }
+    },
+    "v1PremiumScores": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "rating": {
+          "description": "Название рейтинга.",
+          "type": "string"
+        },
+        "scores": {
+          "description": "Информация о штрафных баллах.",
+          "items": {
+            "$ref": "#/components/schemas/PremiumScoresScore"
+          }
+        }
+      }
+    },
+    "v1RatingStatus": {
+      "type": "object",
+      "title": "object",
+      "description": "Статус рейтинга.",
+      "properties": {
+        "danger": {
+          "type": "boolean",
+          "description": "Признак, превышено ли пороговое значение рейтинга для блокировки."
+        },
+        "premium": {
+          "type": "boolean",
+          "description": "Признак, достигнуто ли пороговое значение для участия в Premium-программе."
+        },
+        "warning": {
+          "type": "boolean",
+          "description": "Признак наличия предупреждения о возможном превышении порогового значения для блокировки."
+        }
+      }
+    },
+    "RatingValue": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата начала подсчёта рейтинга."
+        },
+        "date_to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата конца подсчёта рейтинга."
+        },
+        "status": {
+          "$ref": "#/components/schemas/v1RatingStatus"
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Значение рейтинга."
+        }
+      }
+    },
+    "v1Rating": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "danger_threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Пороговое значение рейтинга, после которого продажи будут заблокированы."
+        },
+        "premium_threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Пороговое значение рейтинга для участия в Premium-программе."
+        },
+        "rating": {
+          "type": "string",
+          "description": "Системное название рейтинга."
+        },
+        "values": {
+          "description": "Список значений рейтинга.",
+          "items": {
+            "$ref": "#/components/schemas/RatingValue"
+          }
+        },
+        "warning_threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Пороговое значение рейтинга, после которого появится предупреждение о возможной блокировке."
+        }
+      }
+    },
+    "v1RatingHistoryV1Response": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "premium_scores": {
+          "description": "Информация о штрафных баллах в Premium-программе.",
+          "items": {
+            "$ref": "#/components/schemas/v1PremiumScores"
+          }
+        },
+        "ratings": {
+          "description": "Информация о рейтингах продавца.",
+          "items": {
+            "$ref": "#/components/schemas/v1Rating"
+          }
+        }
+      }
+    },
+    "v1AnalyticsManageStocksRequestFilter": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр.",
+      "properties": {
+        "skus": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Идентификаторы товаров в системе Ozon — SKU."
+        },
+        "stock_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "STOCK_TYPE_VALID",
+              "STOCK_TYPE_WAITING_DOCS",
+              "STOCK_TYPE_EXPIRING",
+              "STOCK_TYPE_DEFECT"
+            ]
+          },
+          "description": "Тип оставшегося на складе товара:\n- `STOCK_TYPE_VALID` — валидный сток. Остаток товара, доступного для продажи. \n- `STOCK_TYPE_WAITING_DOCS` — превалидный сток. Остаток товара, который Ozon не может продавать, пока продавец не прислал в Ozon документы по обязательной маркировке. Товар перейдёт в валидный сток, когда документы будут подписаны.\n- `STOCK_TYPE_EXPIRING` — предпросрок. Остаток товара, который снят с полки, но срок годности формально не истёк. \n- `STOCK_TYPE_DEFECT` — брак. Остаток товара, который находится на складах Ozon, но повреждён.\n"
+        },
+        "warehouse_ids": {
+          "type": "array",
+          "description": "Идентификаторы складов.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1AnalyticsManageStocksRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "filter": {
+          "type": "object",
+          "$ref": "#/components/schemas/v1AnalyticsManageStocksRequestFilter"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1000,
+          "description": "Количество значений в ответе.\n",
+          "required": true
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество элементов, которое будет пропущено в ответе.\n\nНапример, если `offset = 10`, ответ начнётся с 11-го найденного элемента.\n",
+          "required": true
+        }
+      }
+    },
+    "v1AnalyticsManageStocksResponseItem": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "defect_stock_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Остаток дефектного товара, шт."
+        },
+        "expiring_stock_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Остаток товара с истекающим сроком годности, шт."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "valid_stock_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Остаток товара, доступного для продажи."
+        },
+        "waitingdocs_stock_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Остаток товара, ожидающего документы."
+        },
+        "warehouse_name": {
+          "type": "string",
+          "description": "Название склада."
+        }
+      }
+    },
+    "v1AnalyticsManageStocksResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Товары.",
+          "items": {
+            "$ref": "#/components/schemas/v1AnalyticsManageStocksResponseItem"
+          }
+        }
+      }
+    },
+    "v1AnalyticsStocksRequest": {
+      "type": "object",
+      "title": "object",
+      "required": [
+        "skus"
+      ],
+      "properties": {
+        "cluster_ids": {
+          "description": "Фильтр по идентификаторам кластеров. Получить идентификаторы можно через метод [/v1/cluster/list](#operation/SupplyDraftAPI_DraftClusterList).",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "item_tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ITEM_ATTRIBUTE_NONE",
+              "ECONOM",
+              "NOVEL",
+              "DISCOUNT",
+              "FBS_RETURN",
+              "SUPER"
+            ]
+          },
+          "description": "Фильтр по тегам товара:      \n- `ITEM_ATTRIBUTE_NONE` — без тега;\n- `ECONOM` — эконом-товар;\n- `NOVEL` — новинка;\n- `DISCOUNT` — уценённый товар;\n- `FBS_RETURN` — товар из возврата FBS;\n- `SUPER` — Super-товар.\n"
+        },
+        "skus": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "maximum": 100,
+          "description": "Фильтр по идентификаторам товаров в системе Ozon — SKU."
+        },
+        "turnover_grades": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "TURNOVER_GRADE_NONE",
+              "DEFICIT",
+              "POPULAR",
+              "ACTUAL",
+              "SURPLUS",
+              "NO_SALES",
+              "WAS_NO_SALES",
+              "RESTRICTED_NO_SALES",
+              "COLLECTING_DATA",
+              "WAITING_FOR_SUPPLY",
+              "WAS_DEFICIT",
+              "WAS_POPULAR",
+              "WAS_ACTUAL",
+              "WAS_SURPLUS"
+            ]
+          },
+          "description": "Фильтр по статусу ликвидности товаров:      \n- `TURNOVER_GRADE_NONE` — нет статуса ликвидности.      \n- `DEFICIT` — дефицитный. Остатков товара хватит до 28 дней.\n- `POPULAR` — очень популярный. Остатков товара хватит на 28–56 дней.\n- `ACTUAL` — популярный. Остатков товара хватит на 56–120 дней.\n- `SURPLUS` — избыточный. Товар продаётся медленно, остатков хватит более чем на 120 дней.\n- `NO_SALES` — без продаж. У товара нет продаж последние 28 дней.\n- `WAS_NO_SALES` — был без продаж. У товара не было продаж и остатков последние 28 дней.\n- `RESTRICTED_NO_SALES` — без продаж, ограничен. У товара не было продаж более 120 дней. Такой товар [нельзя добавить в поставку](https://seller-edu.ozon.ru/fbo/rabota-so-stokom/nehodovye-tovary).\n- `COLLECTING_DATA` — сбор данных. Для расчёта ликвидности нового товара собираем данные в течение 60 дней после поставки.\n- `WAITING_FOR_SUPPLY` — ожидаем поставки. На складе нет остатков, доступных к продаже. Сделайте поставку для начала сбора данных.\n- `WAS_DEFICIT` — был дефицитным. Товар был дефицитным последние 56 дней. Сейчас у него нет остатков.\n- `WAS_POPULAR` — был очень популярным. Товар был очень популярным последние 56 дней. Сейчас у него нет остатков.\n- `WAS_ACTUAL` — был популярным. Товар был популярным последние 56 дней. Сейчас у него нет остатков.\n- `WAS_SURPLUS` — был избыточным. Товар был избыточным последние 56 дней. Сейчас у него нет остатков.\n"
+        },
+        "warehouse_ids": {
+          "description": "Фильтр по идентификаторам складов. Получить идентификаторы можно через метод [/v1/warehouse/list](#operation/WarehouseAPI_WarehouseList).",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1AnalyticsStocksResponseItem": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "ads": {
+          "type": "number",
+          "format": "double",
+          "description": "Среднесуточное количество проданных единиц товара за последние 28 дней по всем кластерам."
+        },
+        "ads_cluster": {
+          "type": "number",
+          "format": "double",
+          "description": "Среднесуточное количество проданных единиц товара за последние 28 дней в кластере."
+        },
+        "available_stock_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество единиц товара, доступное к продаже."
+        },
+        "cluster_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор кластера. Получить подробную информацию о кластере можно через метод [/v1/cluster/list](#operation/SupplyDraftAPI_DraftClusterList)."
+        },
+        "cluster_name": {
+          "type": "string",
+          "description": "Название кластера."
+        },
+        "days_without_sales": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество дней без продаж по всем кластерам."
+        },
+        "days_without_sales_cluster": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество дней без продаж в кластере."
+        },
+        "excess_stock_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество излишков с поставки, которые доступны к вывозу."
+        },
+        "expiring_stock_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество единиц товара с истекающим сроком годности."
+        },
+        "idc": {
+          "type": "number",
+          "format": "double",
+          "description": "Количество дней, на которое хватит остатка товара с учётом среднесуточных продаж за 28 дней по всем кластерам."
+        },
+        "idc_cluster": {
+          "type": "number",
+          "format": "double",
+          "description": "Количество дней, на которое хватит остатка товара с учётом среднесуточных продаж за 28 дней в кластере."
+        },
+        "item_tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ITEM_ATTRIBUTE_NONE",
+              "ECONOM",
+              "NOVEL",
+              "DISCOUNT",
+              "FBS_RETURN",
+              "SUPER"
+            ]
+          },
+          "description": "Теги товара:      \n- `ITEM_ATTRIBUTE_NONE` — без тега;\n- `ECONOM` — эконом-товар;\n- `NOVEL` — новинка;\n- `DISCOUNT` — уценённый товар;\n- `FBS_RETURN` — товар из возврата FBS;\n- `SUPER` — Super-товар.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "other_stock_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество единиц товара, проходящих проверку."
+        },
+        "requested_stock_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество единиц товара в заявках на поставку."
+        },
+        "return_from_customer_stock_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество единиц товара в процессе возврата от покупателей."
+        },
+        "return_to_seller_stock_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество единиц товара, готовящихся к вывозу по вашей заявке."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "stock_defect_stock_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество брака, доступное к вывозу со стока."
+        },
+        "transit_defect_stock_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество брака, доступное к вывозу с поставки."
+        },
+        "transit_stock_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество единиц товара в поставках в пути."
+        },
+        "turnover_grade": {
+          "type": "string",
+          "enum": [
+            "UNSPECIFIED",
+            "TURNOVER_GRADE_NONE",
+            "DEFICIT",
+            "POPULAR",
+            "ACTUAL",
+            "SURPLUS",
+            "NO_SALES",
+            "WAS_NO_SALES",
+            "RESTRICTED_NO_SALES",
+            "COLLECTING_DATA",
+            "WAITING_FOR_SUPPLY",
+            "WAS_DEFICIT",
+            "WAS_POPULAR",
+            "WAS_ACTUAL",
+            "WAS_SURPLUS"
+          ],
+          "description": "Статус ликвидности товара по всем кластерам:      \n- `UNSPECIFIED` — значение не определено.\n- `TURNOVER_GRADE_NONE` — нет статуса ликвидности.\n- `DEFICIT` — дефицитный. Остатков товара хватит до 28 дней.\n- `POPULAR` — очень популярный. Остатков товара хватит на 28–56 дней.\n- `ACTUAL` — популярный. Остатков товара хватит на 56–120 дней.\n- `SURPLUS` — избыточный. Товар продаётся медленно, остатков хватит более чем на 120 дней.\n- `NO_SALES` — без продаж. У товара нет продаж последние 28 дней.\n- `WAS_NO_SALES` — был без продаж. У товара не было продаж и остатков последние 28 дней.\n- `RESTRICTED_NO_SALES` — без продаж, ограничен. У товара не было продаж более 120 дней. Такой товар [нельзя добавить в поставку](https://seller-edu.ozon.ru/fbo/rabota-so-stokom/nehodovye-tovary).\n- `COLLECTING_DATA` — сбор данных. Для расчёта ликвидности нового товара собираем данные в течение 60 дней после поставки.\n- `WAITING_FOR_SUPPLY` — ожидаем поставки. На складе нет остатков, доступных к продаже. Сделайте поставку для начала сбора данных.\n- `WAS_DEFICIT` — был дефицитным. Товар был дефицитным последние 56 дней. Сейчас у него нет остатков.\n- `WAS_POPULAR` — был очень популярным. Товар был очень популярным последние 56 дней. Сейчас у него нет остатков.\n- `WAS_ACTUAL` — был популярным. Товар был популярным последние 56 дней. Сейчас у него нет остатков.\n- `WAS_SURPLUS` — был избыточным. Товар был избыточным последние 56 дней. Сейчас у него нет остатков.\n"
+        },
+        "turnover_grade_cluster": {
+          "type": "string",
+          "enum": [
+            "UNSPECIFIED",
+            "TURNOVER_GRADE_NONE",
+            "DEFICIT",
+            "POPULAR",
+            "ACTUAL",
+            "SURPLUS",
+            "NO_SALES",
+            "WAS_NO_SALES",
+            "RESTRICTED_NO_SALES",
+            "COLLECTING_DATA",
+            "WAITING_FOR_SUPPLY",
+            "WAS_DEFICIT",
+            "WAS_POPULAR",
+            "WAS_ACTUAL",
+            "WAS_SURPLUS"
+          ],
+          "description": "Статус ликвидности товара в кластере:      \n- `UNSPECIFIED` — значение не определено.\n- `TURNOVER_GRADE_NONE` — нет статуса ликвидности.\n- `DEFICIT` — дефицитный. Остатков товара хватит до 28 дней.\n- `POPULAR` — очень популярный. Остатков товара хватит на 28–56 дней.\n- `ACTUAL` — популярный. Остатков товара хватит на 56–120 дней.\n- `SURPLUS` — избыточный. Товар продаётся медленно, остатков хватит более чем на 120 дней.\n- `NO_SALES` — без продаж. У товара нет продаж последние 28 дней.\n- `WAS_NO_SALES` — был без продаж. У товара не было продаж и остатков последние 28 дней.\n- `RESTRICTED_NO_SALES` — без продаж, ограничен. У товара не было продаж более 120 дней. Такой товар [нельзя добавить в поставку](https://seller-edu.ozon.ru/fbo/rabota-so-stokom/nehodovye-tovary).\n- `COLLECTING_DATA` — сбор данных. Для расчёта ликвидности нового товара собираем данные в течение 60 дней после поставки.\n- `WAITING_FOR_SUPPLY` — ожидаем поставки. На складе нет остатков, доступных к продаже. Сделайте поставку для начала сбора данных.\n- `WAS_DEFICIT` — был дефицитным. Товар был дефицитным последние 56 дней. Сейчас у него нет остатков.\n- `WAS_POPULAR` — был очень популярным. Товар был очень популярным последние 56 дней. Сейчас у него нет остатков.\n- `WAS_ACTUAL` — был популярным. Товар был популярным последние 56 дней. Сейчас у него нет остатков.\n- `WAS_SURPLUS` — был избыточным. Товар был избыточным последние 56 дней. Сейчас у него нет остатков.\n"
+        },
+        "valid_stock_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товара без брака и с достаточным сроком годности, которое скоро разместим на складе Ozon и начнём продавать."
+        },
+        "waiting_docs_stock_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество маркируемых товаров, которые ожидают ваших действий."
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор склада."
+        },
+        "warehouse_name": {
+          "type": "string",
+          "description": "Название склада."
+        }
+      }
+    },
+    "v1AnalyticsStocksResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Информация о товарах.",
+          "items": {
+            "$ref": "#/components/schemas/v1AnalyticsStocksResponseItem"
+          }
+        }
+      }
+    },
+    "v1AverageDeliveryTimeRequestDeliverySchema": {
+      "type": "string",
+      "default": "All",
+      "description": "Схема доставки:\n- `ALL` — все;\n- `FBO` — доставка со склада Ozon;\n- `FBS` — доставка со своего склада;\n- `UNKNOWN` — неизвестное значение.\n",
+      "enum": [
+        "All",
+        "FBO",
+        "FBS",
+        "UNKNOWN"
+      ]
+    },
+    "v1AverageDeliveryTimeRequestSupplyPeriod": {
+      "type": "string",
+      "description": "Период поставки в неделях:\n- `ONE_WEEK` — 1;\n- `TWO_WEEKS` — 2;\n- `FOUR_WEEKS` — 4;\n- `EIGHT_WEEKS` — 8.\n",
+      "default": "FOUR_WEEKS",
+      "enum": [
+        "FOUR_WEEKS",
+        "ONE_WEEK",
+        "TWO_WEEKS",
+        "EIGHT_WEEKS"
+      ]
+    },
+    "v1AverageDeliveryTimeRequest": {
+      "type": "object",
+      "required": [
+        "delivery_schema",
+        "supply_period"
+      ],
+      "properties": {
+        "delivery_schema": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeRequestDeliverySchema"
+        },
+        "sku": {
+          "maximum": 100,
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "supply_period": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeRequestSupplyPeriod"
+        }
+      }
+    },
+    "v1AverageDeliveryTimeResponseDeliveryTimeStatus": {
+      "type": "string",
+      "description": "Нормативное время доставки:\n- `UNKNOWN` — неизвестное значение;\n- `FAST` — до 29 часов;\n- `MEDIUM` — от 30 до 49 часов;\n- `LONG` — от 50 часов.\n",
+      "default": "UNKNOWN",
+      "enum": [
+        "UNKNOWN",
+        "FAST",
+        "MEDIUM",
+        "LONG"
+      ]
+    },
+    "v1AverageDeliveryTimeResponseClustersDataAmnesty": {
+      "type": "object",
+      "properties": {
+        "delivery_time": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Нормативное время доставки в часах."
+        },
+        "delivery_time_status": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseDeliveryTimeStatus"
+        },
+        "orders_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество заказанных товаров из кластера."
+        },
+        "orders_percent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Процент заказов из указанного кластера от общего количества заказов по всем кластерам отгрузки."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeResponseClustersData": {
+      "type": "object",
+      "properties": {
+        "another_delivery_time": {
+          "description": "Зачли с другим временем доставки.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseClustersDataAmnesty"
+          }
+        },
+        "cluster_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор кластера."
+        },
+        "delivery_time_FBO": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Нормативное время доставки по FBO в часах."
+        },
+        "delivery_time_FBS": {
+          "type": "number",
+          "format": "double",
+          "description": "Нормативное время доставки по FBS в часах."
+        },
+        "delivery_time_status": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseDeliveryTimeStatus"
+        },
+        "orders_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество заказанных товаров из кластера отгрузки."
+        },
+        "orders_percent": {
+          "description": "Процент заказов из указанного кластера от общего количества заказов по всем кластерам отгрузки.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "AttentionLevelEnum": {
+      "type": "string",
+      "description": "Доля влияния кластера на общий показатель:\n - `UNKNOWN` — неизвестное значение;\n - `LOW` — хороший показатель поставки товаров;\n - `MEDIUM` — требуется поставка недостающих товаров;\n - `HI` — требуется поставка недостающих товаров в первую очередь.\n",
+      "default": "UNKNOWN",
+      "enum": [
+        "UNKNOWN",
+        "LOW",
+        "MEDIUM",
+        "HI"
+      ]
+    },
+    "v1AverageDeliveryTimeResponseMetricsOrdersCountValueFast": {
+      "description": "Нормативное время доставки до покупателя не больше 29 часов.",
+      "type": "object",
+      "properties": {
+        "percent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в процентах."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в штуках."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeResponseMetricsOrdersCountValueLong": {
+      "description": "Нормативное время доставки до покупателя от 50 часов и больше.",
+      "type": "object",
+      "properties": {
+        "percent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в процентах."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в штуках."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeResponseMetricsOrdersCountValueMedium": {
+      "type": "object",
+      "description": "Нормативное время доставки до покупателя от 30 до 49 часов.",
+      "properties": {
+        "percent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в процентах."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в штуках."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeResponseMetricsOrdersCount": {
+      "type": "object",
+      "description": "Количество заказанных товаров.",
+      "properties": {
+        "fast": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseMetricsOrdersCountValueFast"
+        },
+        "long": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseMetricsOrdersCountValueLong"
+        },
+        "medium": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseMetricsOrdersCountValueMedium"
+        },
+        "total": {
+          "description": "Всего.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1AverageDeliveryTimeResponseMetrics": {
+      "description": "Метрики доставки.",
+      "type": "object",
+      "properties": {
+        "attention_level": {
+          "$ref": "#/components/schemas/AttentionLevelEnum"
+        },
+        "average_delivery_time": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Среднее время доставки до покупателя."
+        },
+        "average_delivery_time_status": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseDeliveryTimeStatus"
+        },
+        "impact_share": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Доля влияния кластера на общий показатель в процентах.",
+          "deprecated": true
+        },
+        "exact_impact_share": {
+          "type": "string",
+          "description": "Доля влияния кластера на общий показатель c точностью до 4 знаков после запятой."
+        },
+        "lost_profit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Переплата за логистику."
+        },
+        "orders_count": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseMetricsOrdersCount"
+        },
+        "recommended_supply": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Рекомендуемая поставка в штуках."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeResponseData": {
+      "type": "object",
+      "properties": {
+        "clusters_data": {
+          "type": "array",
+          "description": "Данные по кластерам отгрузки.",
+          "items": {
+            "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseClustersData"
+          }
+        },
+        "delivery_cluster_id": {
+          "description": "Идентификатор кластера доставки.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "metrics": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseMetrics"
+        }
+      }
+    },
+    "v1AverageDeliveryTimeResponseOrdersCountValueFast": {
+      "description": "Нормативное время доставки до покупателя не больше 29 часов.",
+      "type": "object",
+      "properties": {
+        "percent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в процентах."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в штуках."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeResponseOrdersCountValueLong": {
+      "description": "Нормативное время доставки до покупателя от 50 часов и больше.",
+      "type": "object",
+      "properties": {
+        "percent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в процентах."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в штуках."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeResponseOrdersCountValueMedium": {
+      "description": "Нормативное время доставки до покупателя от 30 до 49 часов.",
+      "type": "object",
+      "properties": {
+        "percent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в процентах."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в штуках."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeResponseOrdersCount": {
+      "description": "Количество заказанных товаров из кластера отгрузки.",
+      "type": "object",
+      "properties": {
+        "fast": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseOrdersCountValueFast"
+        },
+        "long": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseOrdersCountValueLong"
+        },
+        "medium": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseOrdersCountValueMedium"
+        },
+        "total": {
+          "description": "Всего.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "AverageDeliveryTimeResponseTotal": {
+      "description": "Общие данные.",
+      "type": "object",
+      "properties": {
+        "attention_level": {
+          "$ref": "#/components/schemas/AttentionLevelEnum"
+        },
+        "average_delivery_time": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Среднее время доставки до покупателя."
+        },
+        "average_delivery_time_status": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseDeliveryTimeStatus"
+        },
+        "impact_share": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Доля влияния кластера на общий показатель в процентах.",
+          "deprecated": true
+        },
+        "exact_impact_share": {
+          "type": "string",
+          "description": "Доля влияния кластера на общий показатель c точностью до 4 знаков после запятой."
+        },
+        "lost_profit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Переплата за логистику."
+        },
+        "orders_count": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseOrdersCount"
+        },
+        "recommended_supply": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Рекомендуемая поставка в штуках."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "Информация о кластере.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1AverageDeliveryTimeResponseData"
+          }
+        },
+        "total": {
+          "$ref": "#/components/schemas/AverageDeliveryTimeResponseTotal"
+        }
+      }
+    },
+    "AverageDeliveryTimeDetailsRequestFiltersDeliverySchema": {
+      "type": "string",
+      "default": "ALL",
+      "description": "Схема доставки:\n- `ALL` — все;\n- `FBO` — доставка со склада Ozon;\n- `FBS` — доставка со своего склада.\n",
+      "enum": [
+        "ALL",
+        "FBO",
+        "FBS"
+      ]
+    },
+    "AverageDeliveryTimeDetailsRequestFiltersSupplyPeriod": {
+      "type": "string",
+      "default": "FOUR_WEEKS",
+      "description": "Период поставки в неделях:\n- `ONE_WEEK` — 1;\n- `TWO_WEEKS` — 2;\n- `FOUR_WEEKS` — 4;\n- `EIGHT_WEEKS` — 8.\n",
+      "enum": [
+        "ONE_WEEK",
+        "TWO_WEEKS",
+        "FOUR_WEEKS",
+        "EIGHT_WEEKS"
+      ]
+    },
+    "AverageDeliveryTimeDetailsRequestFilters": {
+      "type": "object",
+      "description": "Фильтры.",
+      "properties": {
+        "delivery_schema": {
+          "$ref": "#/components/schemas/AverageDeliveryTimeDetailsRequestFiltersDeliverySchema"
+        },
+        "supply_period": {
+          "$ref": "#/components/schemas/AverageDeliveryTimeDetailsRequestFiltersSupplyPeriod"
+        }
+      }
+    },
+    "v1AverageDeliveryTimeDetailsRequest": {
+      "type": "object",
+      "required": [
+        "cluster_id",
+        "limit",
+        "offset"
+      ],
+      "properties": {
+        "cluster_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор кластера."
+        },
+        "filters": {
+          "$ref": "#/components/schemas/AverageDeliveryTimeDetailsRequestFilters"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "default": 100,
+          "maximum": 1000,
+          "description": "Количество элементов в ответе.\n"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "default": 0,
+          "description": "Количество элементов, которое будет пропущено в ответе. \nНапример, если `offset=10`, ответ начнётся с 11-го найденного элемента.\n"
+        }
+      }
+    },
+    "v1AverageDeliveryTimeDetailsResponseDeliveryTimeStatus": {
+      "type": "string",
+      "description": "Нормативное время доставки:\n- `UNKNOWN` — неизвестное значение;\n- `FAST` — до 29 часов;\n- `MEDIUM` — от 30 до 49 часов;\n- `LONG` — от 50 часов.\n",
+      "enum": [
+        "UNKNOWN",
+        "FAST",
+        "MEDIUM",
+        "LONG"
+      ]
+    },
+    "v1AverageDeliveryTimeDetailsResponseClustersDataAmnesty": {
+      "type": "object",
+      "properties": {
+        "delivery_time": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Нормативное время доставки в часах."
+        },
+        "delivery_time_status": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeDetailsResponseDeliveryTimeStatus"
+        },
+        "orders_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество заказанных товаров из кластера."
+        },
+        "orders_percent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Процент заказов из указанного кластера от общего количества заказов по всем кластерам отгрузки."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeDetailsResponseClustersData": {
+      "type": "object",
+      "properties": {
+        "another_delivery_time": {
+          "description": "Зачли доставку с другим временем.\n",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1AverageDeliveryTimeDetailsResponseClustersDataAmnesty"
+          }
+        },
+        "cluster_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор кластера."
+        },
+        "delivery_time_FBO": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Нормативное время доставки по FBO в часах."
+        },
+        "delivery_time_FBS": {
+          "type": "number",
+          "format": "double",
+          "description": "Нормативное время доставки по FBS в часах."
+        },
+        "delivery_time_status": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeDetailsResponseDeliveryTimeStatus"
+        },
+        "orders_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество заказанных товаров из кластера отгрузки."
+        },
+        "orders_percent": {
+          "description": "Процент заказов из указанного кластера от общего количества заказов по всем кластерам отгрузки.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "AverageDeliveryTimeDetailsResponseItemDataDeliverySchema": {
+      "type": "string",
+      "description": "Схема доставки:\n- `ALL` — все:\n- `FBO` — доставка со склада Ozon;\n- `FBS` — доставка со своего склада;\n- `UNKNOWN` — неизвестное значение.\n",
+      "enum": [
+        "ALL",
+        "FBO",
+        "FBS",
+        "UNKNOWN"
+      ]
+    },
+    "AverageDeliveryTimeDetailsResponseItemData": {
+      "type": "object",
+      "description": "Данные о товаре.",
+      "properties": {
+        "delivery_schema": {
+          "$ref": "#/components/schemas/AverageDeliveryTimeDetailsResponseItemDataDeliverySchema"
+        },
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "AverageDeliveryTimeDetailsResponseMetricsAttentionLevel": {
+      "type": "string",
+      "description": "Влияние кластера на общий показатель:\n\n- `LOW` — хороший показатель поставки товаров;\n- `MEDIUM` — поставьте недостающие товары;\n- `HI` — поставьте недостающие товары в первую очередь;\n- `UNKNOWN` — неизвестное значение.\n",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HI",
+        "UNKNOWN"
+      ]
+    },
+    "v1AverageDeliveryTimeDetailsResponseMetricsOrdersCountValueFast": {
+      "type": "object",
+      "description": "Быстрое нормативное время доставки.",
+      "properties": {
+        "percent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в процентах."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в штуках."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeDetailsResponseMetricsOrdersCountValueLong": {
+      "type": "object",
+      "description": "Долгое нормативное время доставки.",
+      "properties": {
+        "percent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в процентах."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в штуках."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeDetailsResponseMetricsOrdersCountValueMedium": {
+      "type": "object",
+      "description": "Среднее нормативное время доставки.",
+      "properties": {
+        "percent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в процентах."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение в штуках."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeDetailsResponseMetricsOrdersCount": {
+      "type": "object",
+      "description": "Заказано товаров по нормативному времени доставки.",
+      "properties": {
+        "fast": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeDetailsResponseMetricsOrdersCountValueFast"
+        },
+        "long": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeDetailsResponseMetricsOrdersCountValueLong"
+        },
+        "medium": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeDetailsResponseMetricsOrdersCountValueMedium"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Общее количество заказанных товаров."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeDetailsResponseMetrics": {
+      "type": "object",
+      "description": "Метрики доставки.",
+      "properties": {
+        "attention_level": {
+          "$ref": "#/components/schemas/AverageDeliveryTimeDetailsResponseMetricsAttentionLevel"
+        },
+        "average_delivery_time": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Среднее время доставки до покупателя."
+        },
+        "average_delivery_time_status": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeDetailsResponseDeliveryTimeStatus"
+        },
+        "impact_share": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Доля влияния кластера на общий показатель в процентах.",
+          "deprecated": true
+        },
+        "exact_impact_share": {
+          "type": "string",
+          "description": "Доля влияния кластера на общий показатель c точностью до 4 знаков после запятой."
+        },
+        "lost_profit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Переплата за логистику."
+        },
+        "orders_count": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeDetailsResponseMetricsOrdersCount"
+        },
+        "recommended_supply": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Рекомендуемая поставка в штуках."
+        }
+      }
+    },
+    "v1AverageDeliveryTimeDetailsResponseData": {
+      "type": "object",
+      "properties": {
+        "clusters_data": {
+          "type": "array",
+          "description": "Данные по кластерам отгрузки.",
+          "items": {
+            "$ref": "#/components/schemas/v1AverageDeliveryTimeDetailsResponseClustersData"
+          }
+        },
+        "item": {
+          "$ref": "#/components/schemas/AverageDeliveryTimeDetailsResponseItemData"
+        },
+        "metrics": {
+          "$ref": "#/components/schemas/v1AverageDeliveryTimeDetailsResponseMetrics"
+        }
+      }
+    },
+    "v1AverageDeliveryTimeDetailsResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "description": "Информация о кластере.",
+          "items": {
+            "$ref": "#/components/schemas/v1AverageDeliveryTimeDetailsResponseData"
+          }
+        },
+        "total_rows": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Всего записей."
+        }
+      }
+    },
+    "AverageDeliveryTimeSummaryResponseTariffStatus": {
+      "type": "string",
+      "description": "Статус тарифа FBO:\n - `TariffStatus_Unspecified` — неизвестное значение;\n - `GOOD` — быстро;\n - `MEDIUM` — средне;\n - `BAD` — долго.\n",
+      "default": "TariffStatus_Unspecified",
+      "enum": [
+        "TariffStatus_Unspecified",
+        "GOOD",
+        "MEDIUM",
+        "BAD"
+      ]
+    },
+    "AverageDeliveryTimeSummaryResponseTariff": {
+      "type": "object",
+      "description": "Информация о тарифе.",
+      "properties": {
+        "fee": {
+          "description": "Процент от цены товаров.",
+          "type": "number",
+          "format": "float"
+        },
+        "start": {
+          "description": "Значение метрики среднего времени доставки.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "tariff_status": {
+          "$ref": "#/components/schemas/AverageDeliveryTimeSummaryResponseTariffStatus"
+        },
+        "tariff_value": {
+          "description": "Процент к базовому тарифу логистики FBO.",
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "v1AverageDeliveryTimeSummaryResponse": {
+      "type": "object",
+      "properties": {
+        "average_delivery_time": {
+          "description": "Среднее время доставки до покупателя.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "current_tariff": {
+          "$ref": "#/components/schemas/AverageDeliveryTimeSummaryResponseTariff"
+        },
+        "lost_profit": {
+          "description": "Переплата за логистику FBO.",
+          "type": "number",
+          "format": "double"
+        },
+        "perfect_delivery_time": {
+          "description": "Рекомендуемое среднее время доставки до покупателя.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "updated_at": {
+          "description": "Дата и время последнего обновления данных.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1ProductInfoWrongVolumeRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "cursor": {
+          "type": "string",
+          "description": "Указатель для выборки следующих данных."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "maximum": 1000,
+          "description": "Максимальное количество элементов в ответе."
+        }
+      }
+    },
+    "ProductInfoWrongVolumeResponseWrongVolumeProduct": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "height": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Высота товара."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Длина товара."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Вес товара в упаковке."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Ширина товара."
+        }
+      }
+    },
+    "v1ProductInfoWrongVolumeResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "cursor": {
+          "type": "string",
+          "description": "Указатель для выборки следующих данных."
+        },
+        "products": {
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/ProductInfoWrongVolumeResponseWrongVolumeProduct"
+          }
+        }
+      }
+    },
+    "RolesByTokenResponseRoles": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название роли."
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Методы, доступные для роли."
+        }
+      }
+    },
+    "v1RolesByTokenResponse": {
+      "type": "object",
+      "properties": {
+        "roles": {
+          "type": "array",
+          "description": "Информация о доступных ролях и методах.",
+          "items": {
+            "$ref": "#/components/schemas/RolesByTokenResponseRoles"
+          }
+        }
+      }
+    },
+    "v1GetSupplyReturnsSummaryReportRequest": {
+      "type": "object",
+      "required": [
+        "date_from",
+        "date_to",
+        "limit"
+      ],
+      "properties": {
+        "date_from": {
+          "description": "Дата начала отчётного периода в формате `YYYY-MM-DD`.",
+          "type": "string"
+        },
+        "date_to": {
+          "description": "Дата окончания отчётного периода в формате `YYYY-MM-DD`.",
+          "type": "string"
+        },
+        "last_id": {
+          "description": "Идентификатор последнего значения на странице. Чтобы получить следующие значения, укажите `last_id` из ответа предыдущего запроса.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Количество элементов в ответе.",
+          "minimum": 1,
+          "maximum": 500,
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1GetSupplyReturnsSummaryReportResponseRow": {
+      "type": "object",
+      "properties": {
+        "barcode": {
+          "description": "Штрихкод товара.",
+          "type": "string"
+        },
+        "box_barcode": {
+          "description": "Штрихкод коробки.",
+          "type": "string"
+        },
+        "box_height": {
+          "description": "Высота коробки в метрах.",
+          "type": "number",
+          "format": "double"
+        },
+        "box_id": {
+          "description": "Идентификатор коробки.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "box_length": {
+          "description": "Длина коробки в метрах.",
+          "type": "number",
+          "format": "double"
+        },
+        "box_state": {
+          "description": "Статус коробки:\n- `доступно к вывозу`;\n- `уже в заявке на вывоз`;\n- `подготовка к вывозу`;\n- `потеряна`;\n- `в пути`;\n- `компенсировано продавцу`;\n- `утилизирована`;\n- `собрано`;\n- `на СЦ`;\n- `у курьера`;\n- `неудачная попытка доставки`;\n- `получена`;\n- `отменено`;\n- `в процессе утилизации`;\n- `в пункте выдачи`;\n- `расформирована`.\n",
+          "type": "string"
+        },
+        "box_volume": {
+          "description": "Объём коробки в литрах.",
+          "type": "number",
+          "format": "double"
+        },
+        "box_weight": {
+          "description": "Вес коробки в килограммах.",
+          "type": "number",
+          "format": "double"
+        },
+        "box_width": {
+          "description": "Ширина коробки в метрах.",
+          "type": "number",
+          "format": "double"
+        },
+        "clearing_warehouse_name": {
+          "description": "Склад, на котором подготовили товары для вывоза.",
+          "type": "string"
+        },
+        "delivery_date": {
+          "description": "Дата доставки товара в ПВЗ, СЦ или курьером.",
+          "type": "string"
+        },
+        "delivery_type": {
+          "description": "Способ вывоза:\n- `самовывоз`;\n- `ПВЗ`;\n- `СЦ`;\n- `курьерская доставка`.\n",
+          "type": "string"
+        },
+        "destination_warehouse_address": {
+          "description": "Адрес склада назначения.",
+          "type": "string"
+        },
+        "destination_warehouse_name": {
+          "description": "Название склада назначения.",
+          "type": "string"
+        },
+        "given_out_date": {
+          "description": "Дата, когда продавец забрал товары самовывозом со склада Ozon.",
+          "type": "string"
+        },
+        "is_auto_return": {
+          "description": "Признак, что заявка на вывоз была создана автоматически.\n\n[Подробнее об автовывозе в Базе знаний продавца](https://seller-edu.ozon.ru/fbo/vozvraty-utilizaciya-izlishki/vyvoz-tovarov-so-sklada-ozon/avtovyvoz-tovarov-so-sklada-ozon)\n",
+          "type": "boolean"
+        },
+        "name": {
+          "description": "Название товара.",
+          "type": "string"
+        },
+        "offer_id": {
+          "description": "Артикул товара.",
+          "type": "string"
+        },
+        "preliminary_delivery_price": {
+          "description": "Предварительная стоимость вывоза товара со склада силами Ozon.",
+          "type": "number",
+          "format": "double"
+        },
+        "quant_count": {
+          "description": "Количество квантов в заявке на вывоз.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "quantity_for_return": {
+          "description": "Количество единиц товара в коробке или заявке на вывоз.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "return_created_at": {
+          "description": "Дата создания заявки на вывоз.",
+          "type": "string"
+        },
+        "return_id": {
+          "description": "Идентификатор заявки на вывоз.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "return_state": {
+          "description": "Статус заявки на вывоз.\n\nВозможные значения для самовывоза со стока:\n- `создана`;\n- `собирается на складе`;\n- `собрана складом`;\n- `завершена`;\n- `заполнение данных`;\n- `утилизирована`.\n\nВозможные значения для СЦ, ПВЗ и курьерской доставки со стока:\n- `создаётся`;\n- `собирается на складке`;\n- `передаём в логистику`;\n- `в пути`;\n- `завершено`;\n- `можно забирать часть`;\n- `можно забирать все`;\n- `утилизирована`.\n\nВозможные значения для вывоза с поставок:\n\n- `заполнение данных`;\n- `подготовка к выдаче`;\n- `выдача`;\n- `завершено`;\n- `отклонено складом`;\n- `готово к вывозу`;\n- `утилизировано`;\n- `обрабатывается`;\n- `собирается на складе`;\n- `передаётся в логистику`;\n- `в пути`;\n- `можно забрать часть`;\n- `можно забрать все`.\n",
+          "type": "string"
+        },
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "stock_type": {
+          "description": "Тип остатков для товаров стока:\n- `доступно к продаже`;\n- `маркируемые товары, ожидающие действий`;\n- `истекает срок годности`;\n- `брак, доступный к вывозу со стока`.\n\nТип остатков для товаров в коробках:\n- `брак`;\n- `опознанные излишки`;\n- `неопознанные излишки без SKU`.\n",
+          "type": "string"
+        },
+        "utilization_date": {
+          "description": "Дата утилизации.",
+          "type": "string"
+        }
+      }
+    },
+    "v1GetSupplyReturnsSummaryReportResponse": {
+      "type": "object",
+      "properties": {
+        "last_id": {
+          "description": "Идентификатор последнего значения на странице.",
+          "type": "string"
+        },
+        "returns_summary_report_rows": {
+          "description": "Информация о товарах.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1GetSupplyReturnsSummaryReportResponseRow"
+          }
+        }
+      }
+    },
+    "v1GetSupplierReturnsSummaryReportRequest": {
+      "type": "object",
+      "required": [
+        "date_from",
+        "date_to",
+        "limit"
+      ],
+      "properties": {
+        "date_from": {
+          "description": "Дата начала отчётного периода в формате `YYYY-MM-DD`.",
+          "type": "string"
+        },
+        "date_to": {
+          "description": "Дата окончания отчётного периода в формате `YYYY-MM-DD`.",
+          "type": "string"
+        },
+        "last_id": {
+          "description": "Идентификатор последнего значения на странице. Чтобы получить следующие значения, укажите `last_id` из ответа предыдущего запроса.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Количество элементов в ответе.",
+          "minimum": 1,
+          "maximum": 500,
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  }
+}

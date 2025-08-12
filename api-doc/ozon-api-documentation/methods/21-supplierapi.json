@@ -1,0 +1,454 @@
+{
+  "metadata": {
+    "tag": "SupplierAPI",
+    "name": "SupplierAPI",
+    "displayName": "Накладные",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 4,
+    "schemasCount": 12,
+    "generatedAt": "2025-08-09T16:28:42.341Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v2/invoice/create-or-update",
+      "method": "POST",
+      "operationId": "InvoiceAPI_InvoiceCreateOrUpdateV2",
+      "summary": "Создать или изменить счёт-фактуру",
+      "description": "Создание или изменение таможенного счёта-фактуры для возврата НДС продавцам из Турции.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Создать или изменить счёт-фактуру",
+        "description": "Создание или изменение таможенного счёта-фактуры для возврата НДС продавцам из Турции.",
+        "operationId": "InvoiceAPI_InvoiceCreateOrUpdateV2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2InvoiceCreateOrUpdateV2Request"
+              },
+              "example": {
+                "HS_code": [
+                  {
+                    "sku": "SKU123",
+                    "code": "534758761999"
+                  },
+                  {
+                    "sku": "SKU456",
+                    "code": "534758761000"
+                  },
+                  {
+                    "sku": "SKU789",
+                    "code": "534758761777"
+                  }
+                ],
+                "date": "2023-08-01T12:08:44.342Z",
+                "number": "424fdsf234",
+                "posting_number": "33920146-0252-1",
+                "price": 234.34,
+                "price_currency": "RUB",
+                "url": "https://cdn.ozone.ru/s3/ozon-disk-api/techdoc/seller-api/earsivfatura_1690960445.pdf"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Счёт-фактура создана или изменена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2InvoiceCreateOrUpdateV2Response"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "SupplierAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/invoice/file/upload",
+      "method": "POST",
+      "operationId": "invoice_upload",
+      "summary": "Загрузка счёта-фактуры",
+      "description": "Доступные форматы: JPEG и PDF. Максимальный размер файла: 10 МБ.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Загрузка счёта-фактуры",
+        "description": "Доступные форматы: JPEG и PDF. Максимальный размер файла: 10 МБ.\n",
+        "operationId": "invoice_upload",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1InvoiceFileUploadRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Ссылка на счёт-фактуру",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1InvoiceFileUploadResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "SupplierAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v2/invoice/get",
+      "method": "POST",
+      "operationId": "invoice_getV2",
+      "summary": "Получить информацию о счёте-фактуре",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить информацию о счёте-фактуре",
+        "description": null,
+        "operationId": "invoice_getV2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1InvoiceGetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о счёте-фактуре",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2InvoiceGetV2Response"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "SupplierAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/invoice/delete",
+      "method": "POST",
+      "operationId": "invoice_delete",
+      "summary": "Удалить ссылку на счёт-фактуру",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Удалить ссылку на счёт-фактуру",
+        "description": null,
+        "operationId": "invoice_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1InvoiceDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Ссылка удалена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1InvoiceDeleteResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "SupplierAPI"
+        ]
+      }
+    }
+  ],
+  "schemas": {
+    "v2InvoiceCreateOrUpdateV2Request": {
+      "required": [
+        "date",
+        "posting_number",
+        "url"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата счёта-фактуры."
+        },
+        "hs_codes": {
+          "type": "array",
+          "description": "HS-коды товаров.",
+          "items": {
+            "$ref": "#/components/schemas/v2HsCode"
+          }
+        },
+        "number": {
+          "type": "string",
+          "description": "Номер счёта-фактуры. Номер может содержать буквы и цифры, максимальная длина — 50 символов."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Стоимость, указанная в счёте-фактуре. Разделитель дробной части — точка, до двух знаков после точки."
+        },
+        "price_currency": {
+          "type": "string",
+          "description": "Валюта счёта-фактуры:\n- `USD` — доллар, \n- `EUR` — евро, \n- `TRY` — турецкая лира, \n- `CNY` — юань, \n- `RUB` — рубль, \n- `GBP` — фунт стерлингов.\n\nЗначение по умолчанию — `USD`.\n"
+        },
+        "url": {
+          "type": "string",
+          "description": "Ссылка на счёт-фактуру. Чтобы создать ссылку, используйте метод [v1/invoice/file/upload](#operation/invoice_upload)."
+        }
+      }
+    },
+    "v2HsCode": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "HS-код товара."
+        },
+        "sku": {
+          "type": "string",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "v2InvoiceCreateOrUpdateV2Response": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "boolean",
+          "description": "Результат работы метода."
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v1InvoiceFileUploadRequest": {
+      "required": [
+        "base64_content",
+        "posting_number"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "base64_content": {
+          "type": "string",
+          "description": "Счёт-фактура в кодировке Base64."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    },
+    "v1InvoiceFileUploadResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Ссылка на счёт-фактуру."
+        }
+      }
+    },
+    "v1InvoiceGetRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    },
+    "v2InvoiceGetV2Response": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/InvoiceGetV2ResponseResult"
+        }
+      }
+    },
+    "InvoiceGetV2ResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация о счёте-фактуре.",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата загрузки счёта-фактуры."
+        },
+        "file_url": {
+          "type": "string",
+          "description": "Ссылка на счёт-фактуру."
+        },
+        "hs_codes": {
+          "type": "array",
+          "description": "HS-коды товаров.",
+          "items": {
+            "$ref": "#/components/schemas/v2HsCode"
+          }
+        },
+        "number": {
+          "type": "string",
+          "description": "Номер счёта-фактуры."
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Стоимость, указанная в счёте-фактуре.\nРазделитель дробной части — точка, до двух знаков после точки.\nПример: `199.99`.\n"
+        },
+        "price_currency": {
+          "type": "string",
+          "description": "Валюта счёта-фактуры:\n- `USD` — доллар, \n- `EUR` — евро, \n- `TRY` — турецкая лира, \n- `CNY` — юань, \n- `RUB` — рубль, \n- `GBP` — фунт стерлингов.\n\nЗначение по умолчанию — `USD`.\n"
+        }
+      }
+    },
+    "v1InvoiceDeleteRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    },
+    "v1InvoiceDeleteResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "boolean",
+          "description": "Результат работы метода."
+        }
+      }
+    }
+  }
+}

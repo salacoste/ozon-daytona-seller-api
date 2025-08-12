@@ -1,0 +1,1253 @@
+{
+  "metadata": {
+    "tag": "PricingStrategyAPI",
+    "name": "PricingStrategyAPI",
+    "displayName": "Стратегии ценообразования",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 12,
+    "schemasCount": 31,
+    "generatedAt": "2025-08-09T16:28:42.336Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/pricing-strategy/competitors/list",
+      "method": "POST",
+      "operationId": "pricing_competitors",
+      "summary": "Список конкурентов",
+      "description": "Метод для получения списка конкурентов — продавцов с похожими товарами в других интернет-магазинах и маркетплейсах.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список конкурентов",
+        "description": "Метод для получения списка конкурентов — продавцов с похожими товарами в других интернет-магазинах и маркетплейсах.",
+        "tags": [
+          "PricingStrategyAPI"
+        ],
+        "operationId": "pricing_competitors",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetCompetitorsRequest"
+              },
+              "example": {
+                "page": 1,
+                "limit": 20
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список конкурентов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetCompetitorsResponse"
+                },
+                "example": {
+                  "competitor": [
+                    {
+                      "competitor_name": "string",
+                      "competitor_id": 0
+                    }
+                  ],
+                  "total": 0
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/pricing-strategy/list",
+      "method": "POST",
+      "operationId": "pricing_list",
+      "summary": "Список стратегий",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список стратегий",
+        "description": null,
+        "tags": [
+          "PricingStrategyAPI"
+        ],
+        "operationId": "pricing_list",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetStrategyListRequest"
+              },
+              "example": {
+                "page": 1,
+                "limit": 20
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список стратегий",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetStrategyListResponse"
+                },
+                "example": {
+                  "strategies": [
+                    {
+                      "strategy_id": "string",
+                      "strategy_name": "string",
+                      "type": "string",
+                      "update_type": "string",
+                      "updated_at": "string",
+                      "products_count": 0,
+                      "competitors_count": 0,
+                      "enabled": true
+                    }
+                  ],
+                  "total": 0
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/pricing-strategy/create",
+      "method": "POST",
+      "operationId": "pricing_create",
+      "summary": "Создать стратегию",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Создать стратегию",
+        "description": null,
+        "tags": [
+          "PricingStrategyAPI"
+        ],
+        "operationId": "pricing_create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CreatePricingStrategyRequest"
+              },
+              "example": {
+                "strategy_name": "Новая стратегия",
+                "competitors": [
+                  {
+                    "competitor_id": 1008426,
+                    "coefficient": 1
+                  },
+                  {
+                    "competitor_id": 204,
+                    "coefficient": 1
+                  },
+                  {
+                    "competitor_id": 91,
+                    "coefficient": 1
+                  },
+                  {
+                    "competitor_id": 48,
+                    "coefficient": 1
+                  }
+                ],
+                "company_id": 7
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Стратегия создана",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CreatePricingStrategyResponse"
+                },
+                "example": {
+                  "result": {
+                    "id": "4f3a1d4c-5833-4f04-b69b-495cbc1f6f1c"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/pricing-strategy/info",
+      "method": "POST",
+      "operationId": "pricing_info",
+      "summary": "Информация о стратегии",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Информация о стратегии",
+        "description": null,
+        "tags": [
+          "PricingStrategyAPI"
+        ],
+        "operationId": "pricing_info",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/v1StrategyRequest",
+          "example": {
+            "strategy_id": "4f3a1d4c-5833-4f04-b69b-495cbc1f6f1c"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о стратегии",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetStrategyResponse"
+                },
+                "example": {
+                  "result": {
+                    "strategy_name": "тест1",
+                    "enabled": true,
+                    "update_type": "strategyItemsListChanged",
+                    "type": "COMP_PRICE",
+                    "competitors": [
+                      {
+                        "competitor_id": 204,
+                        "coefficient": 1
+                      },
+                      {
+                        "competitor_id": 1008426,
+                        "coefficient": 1
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/pricing-strategy/update",
+      "method": "POST",
+      "operationId": "pricing_update",
+      "summary": "Обновить стратегию",
+      "description": "Можно обновить все стратегии кроме системной.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Обновить стратегию",
+        "description": "Можно обновить все стратегии кроме системной.",
+        "tags": [
+          "PricingStrategyAPI"
+        ],
+        "operationId": "pricing_update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1UpdatePricingStrategyRequest"
+              },
+              "example": {
+                "strategy_id": "a3de1826-9c54-40f1-bb6d-1a9e2638b058",
+                "strategy_name": "Новая стратегия",
+                "competitors": [
+                  {
+                    "competitor_id": 1008426,
+                    "coefficient": 1
+                  },
+                  {
+                    "competitor_id": 204,
+                    "coefficient": 1
+                  },
+                  {
+                    "competitor_id": 91,
+                    "coefficient": 1
+                  },
+                  {
+                    "competitor_id": 48,
+                    "coefficient": 1
+                  },
+                  {
+                    "competitor_id": 45,
+                    "coefficient": 1
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Стратегия обновлена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1Empty"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/pricing-strategy/products/add",
+      "method": "POST",
+      "operationId": "pricing_items-add",
+      "summary": "Добавить товары в стратегию",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Добавить товары в стратегию",
+        "description": null,
+        "tags": [
+          "PricingStrategyAPI"
+        ],
+        "operationId": "pricing_items-add",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1AddStrategyItemsRequest"
+              },
+              "example": {
+                "product_id": [
+                  "29209"
+                ],
+                "strategy_id": "e29114f0-177d-4160-8d06-2bc528470dda"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Ошибки при добавлении товаров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1AddStrategyItemsResponse"
+                },
+                "example": {
+                  "result": {
+                    "failed_product_count": 0
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/pricing-strategy/strategy-ids-by-product-ids",
+      "method": "POST",
+      "operationId": "pricing_ids",
+      "summary": "Список идентификаторов стратегий",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список идентификаторов стратегий",
+        "description": null,
+        "tags": [
+          "PricingStrategyAPI"
+        ],
+        "operationId": "pricing_ids",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/v1ItemIDsRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Список идентификаторов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetStrategyIDsByItemIDsResponse"
+                },
+                "example": {
+                  "result": {
+                    "products_info": [
+                      {
+                        "product_id": 29209,
+                        "strategy_id": "b7cd30e6-5667-424d-b105-fbec30a52477"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/pricing-strategy/products/list",
+      "method": "POST",
+      "operationId": "pricing_items-list",
+      "summary": "Список товаров в стратегии",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список товаров в стратегии",
+        "description": null,
+        "tags": [
+          "PricingStrategyAPI"
+        ],
+        "operationId": "pricing_items-list",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/v1StrategyRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Список товаров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetStrategyItemsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/pricing-strategy/product/info",
+      "method": "POST",
+      "operationId": "pricing_items-info",
+      "summary": "Цена товара у конкурента",
+      "description": "Если вы добавили товар в стратегию ценообразования, метод вернёт цену и ссылку на товар у конкурента.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Цена товара у конкурента",
+        "description": "Если вы добавили товар в стратегию ценообразования, метод вернёт цену и ссылку на товар у конкурента.",
+        "tags": [
+          "PricingStrategyAPI"
+        ],
+        "operationId": "pricing_items-info",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetStrategyItemInfoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Цена товара у конкурента",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetStrategyItemInfoResponse"
+                },
+                "example": {
+                  "result": {
+                    "strategy_id": "string",
+                    "is_enabled": true,
+                    "strategy_product_price": 0,
+                    "price_downloaded_at": "2022-11-17T15:33:53.936Z",
+                    "strategy_competitor_id": 0,
+                    "strategy_competitor_product_url": "string"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/pricing-strategy/products/delete",
+      "method": "POST",
+      "operationId": "pricing_items-delete",
+      "summary": "Удалить товары из стратегии",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Удалить товары из стратегии",
+        "description": null,
+        "tags": [
+          "PricingStrategyAPI"
+        ],
+        "operationId": "pricing_items-delete",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/v1ItemIDsRequest",
+          "example": {
+            "product_id": [
+              "29209"
+            ]
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ошибки при удалении товаров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1DeleteStrategyItemsResponse"
+                },
+                "example": {
+                  "result": {
+                    "failed_product_count": 0
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/pricing-strategy/status",
+      "method": "POST",
+      "operationId": "pricing_status",
+      "summary": "Изменить статус стратегии",
+      "description": "Можно изменить статус любой стратегии кроме системной.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Изменить статус стратегии",
+        "description": "Можно изменить статус любой стратегии кроме системной.",
+        "tags": [
+          "PricingStrategyAPI"
+        ],
+        "operationId": "pricing_status",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1UpdateStatusStrategyRequest"
+              },
+              "example": {
+                "strategy_id": "c7516438-7124-4e2c-85d3-ccd92b6b9b65",
+                "enabled": true
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус стратегии изменён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1Empty"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/pricing-strategy/delete",
+      "method": "POST",
+      "operationId": "pricing_delete",
+      "summary": "Удалить стратегию",
+      "description": "Можно удалить любую стратегию кроме системной.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Удалить стратегию",
+        "description": "Можно удалить любую стратегию кроме системной.",
+        "tags": [
+          "PricingStrategyAPI"
+        ],
+        "operationId": "pricing_delete",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/v1StrategyRequest",
+          "example": {
+            "strategy_id": "c7516438-7124-4e2c-85d3-ccd92b6b9b65"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Стратегия удалена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1Empty"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "v1GetCompetitorsRequest": {
+      "required": [
+        "page",
+        "limit"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Страница списка, с которой нужно выгрузить конкурентов. Минимальное значение — `1`."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Максимальное количество конкурентов на странице. Допустимы значения от `1` до `50`."
+        }
+      }
+    },
+    "v1GetCompetitorsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "competitor": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/GetCompetitorsResponseCompetitorInfo"
+          },
+          "description": "Список конкурентов."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Общее количество конкурентов."
+        }
+      }
+    },
+    "GetCompetitorsResponseCompetitorInfo": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название конкурента."
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор конкурента."
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v1GetStrategyListRequest": {
+      "required": [
+        "page",
+        "limit"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Страница списка, с которой нужно выгрузить стратегии. Минимальное значение — `1`."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Максимальное количество стратегий на странице. Допустимые значения — от `1` до `50`."
+        }
+      }
+    },
+    "v1GetStrategyListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "strategies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/GetStrategyListResponseStrategy"
+          },
+          "description": "Список стратегий."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Общее количество стратегий."
+        }
+      }
+    },
+    "GetStrategyListResponseStrategy": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Идентификатор стратегии."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название стратегии."
+        },
+        "type": {
+          "type": "string",
+          "description": "Тип стратегии:\n- `MIN_EXT_PRICE` — системная,\n- `COMP_PRICE` — пользовательская.\n"
+        },
+        "update_type": {
+          "type": "string",
+          "description": "Тип последнего изменения стратегии:\n- `strategyEnabled` — возобновлена,\n- `strategyDisabled` — остановлена,\n- `strategyChanged` — обновлена,\n- `strategyCreated` — создана,\n- `strategyItemsListChanged` — изменён набор товаров в стратегии.\n"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "Дата последнего изменения."
+        },
+        "products_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество товаров в стратегии."
+        },
+        "competitors_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество выбранных конкурентов."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Статус стратегии:\n- `true` — включена,\n- `false` — отключена.\n"
+        }
+      }
+    },
+    "v1CreatePricingStrategyRequest": {
+      "required": [
+        "competitors",
+        "strategy_name"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "competitors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1Competitor"
+          },
+          "description": "Список конкурентов."
+        },
+        "strategy_name": {
+          "type": "string",
+          "description": "Название стратегии."
+        }
+      }
+    },
+    "v1Competitor": {
+      "required": [
+        "coefficient",
+        "competitor_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "coefficient": {
+          "type": "number",
+          "format": "float",
+          "description": "Коэффициент, на который будет умножаться минимальная цена среди конкурентов. Допустимый диапазон — от `0.5` до `1.2`."
+        },
+        "competitor_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор конкурента."
+        }
+      }
+    },
+    "v1CreatePricingStrategyResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1CreatePricingStrategyResponseResult"
+        }
+      }
+    },
+    "v1CreatePricingStrategyResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "strategy_id": {
+          "type": "string",
+          "description": "Идентификатор стратегии."
+        }
+      }
+    },
+    "v1GetStrategyResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1GetStrategyResponseResult"
+        }
+      }
+    },
+    "v1GetStrategyResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "competitors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1Competitor"
+          },
+          "description": "Список конкурентов."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Статус стратегии:\n- `true` — включена,\n- `false` — отключена.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Название стратегии."
+        },
+        "type": {
+          "type": "string",
+          "description": "Тип стратегии:\n- `MIN_EXT_PRICE` — системная стратегия,\n- `COMP_PRICE` — пользовательская стратегия.\n"
+        },
+        "update_type": {
+          "type": "string",
+          "description": "Тип последнего изменения стратегии:\n  - `strategyEnabled` — возобновлена,\n  - `strategyDisabled` — остановлена,\n  - `strategyChanged` — обновлена,\n  - `strategyCreated` — создана,\n  - `strategyItemsListChanged` — изменён набор товаров в стратегии.\n"
+        }
+      }
+    },
+    "v1UpdatePricingStrategyRequest": {
+      "required": [
+        "competitors",
+        "strategy_id",
+        "strategy_name"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "competitors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1Competitor"
+          },
+          "description": "Список конкурентов."
+        },
+        "strategy_id": {
+          "type": "string",
+          "description": "Идентификатор стратегии."
+        },
+        "strategy_name": {
+          "type": "string",
+          "description": "Название стратегии."
+        }
+      }
+    },
+    "v1Empty": {
+      "type": "object",
+      "title": "object"
+    },
+    "v1AddStrategyItemsRequest": {
+      "required": [
+        "product_id",
+        "strategy_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Список идентификаторов товаров в системе продавца — `product_id`. Максимальное количество — 50."
+        },
+        "strategy_id": {
+          "type": "string",
+          "description": "Идентификатор стратегии."
+        }
+      }
+    },
+    "v1AddStrategyItemsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1AddStrategyItemsResponseResult"
+        }
+      }
+    },
+    "v1AddStrategyItemsResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/AddStrategyItemsResponseError"
+          },
+          "description": "Товары с ошибками."
+        },
+        "failed_product_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товаров с ошибками."
+        }
+      }
+    },
+    "AddStrategyItemsResponseError": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "error": {
+          "type": "string",
+          "description": "Текст ошибки."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        }
+      }
+    },
+    "v1GetStrategyIDsByItemIDsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1GetStrategyIDsByItemIDsResponseResult"
+        }
+      }
+    },
+    "v1GetStrategyIDsByItemIDsResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "products_info": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/GetStrategyIDsByItemIDsResponseProductInfo"
+          },
+          "description": "Информация о товаре."
+        }
+      }
+    },
+    "GetStrategyIDsByItemIDsResponseProductInfo": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "strategy_id": {
+          "type": "string",
+          "description": "Идентификатор стратегии, в которую добавлен товар."
+        }
+      }
+    },
+    "v1GetStrategyItemsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1GetStrategyItemsResponseResult"
+        }
+      }
+    },
+    "v1GetStrategyItemsResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Список товаров.",
+      "properties": {
+        "product_id": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        }
+      }
+    },
+    "v1GetStrategyItemInfoRequest": {
+      "required": [
+        "product_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        }
+      }
+    },
+    "v1GetStrategyItemInfoResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1GetStrategyItemInfoResponseResult"
+        }
+      }
+    },
+    "v1GetStrategyItemInfoResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "strategy_id": {
+          "type": "string",
+          "description": "Идентификатор стратегии."
+        },
+        "is_enabled": {
+          "type": "boolean",
+          "description": "`true`, если товар участвует в стратегии ценообразования.\n"
+        },
+        "strategy_product_price": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Цена по стратегии."
+        },
+        "price_downloaded_at": {
+          "type": "string",
+          "description": "Дата установки цены по стратегии."
+        },
+        "strategy_competitor_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор конкурента.",
+          "deprecated": true
+        },
+        "strategy_competitor_product_url": {
+          "type": "string",
+          "description": "Ссылка на товар конкурента."
+        }
+      }
+    },
+    "v1DeleteStrategyItemsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1DeleteStrategyItemsResponseResult"
+        }
+      }
+    },
+    "v1DeleteStrategyItemsResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "failed_product_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товаров с ошибками."
+        }
+      }
+    },
+    "v1UpdateStatusStrategyRequest": {
+      "required": [
+        "strategy_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Статус стратегии:\n- `true` — включена,\n- `false` — отключена.\n"
+        },
+        "strategy_id": {
+          "type": "string",
+          "description": "Идентификатор стратегии."
+        }
+      }
+    }
+  }
+}

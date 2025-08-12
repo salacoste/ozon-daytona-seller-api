@@ -1,0 +1,2263 @@
+{
+  "schemasCount": 100,
+  "schemas": {
+    "fbsv4FbsPostingShipV4Response": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "additional_data": {
+          "description": "Дополнительная информация об отправлениях.",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingShipV4ResponseShipAdditionalData"
+          }
+        },
+        "result": {
+          "description": "Результат сборки отправлений.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v4FbsPostingShipPackageV4RequestProduct": {
+      "type": "object",
+      "properties": {
+        "exemplarsIds": {
+          "description": "Идентификаторы экземпляров товара.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "product_id": {
+          "description": "Идентификатор товара в системе продавца — SKU.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "quantity": {
+          "description": "Количество экземпляров.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "product_id",
+        "quantity"
+      ]
+    },
+    "v4FbsPostingShipPackageV4Request": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string"
+        },
+        "products": {
+          "description": "Список товаров в отправлении.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v4FbsPostingShipPackageV4RequestProduct"
+          }
+        }
+      },
+      "required": [
+        "posting_number"
+      ]
+    },
+    "v4FbsPostingShipPackageV4Response": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "Номера отправлений, сформированные после сборки.",
+          "type": "string"
+        }
+      }
+    },
+    "ExemplarsMarks": {
+      "type": "object",
+      "properties": {
+        "mark": {
+          "type": "string",
+          "description": "Значение кода маркировки."
+        },
+        "mark_type": {
+          "type": "string",
+          "description": "Тип кода маркировки:\n - `mandatory_mark` — обязательная маркировка «Честный ЗНАК»;\n - `jw_uin` — уникальный идентификационный номер (УИН) ювелирного изделия.\n"
+        }
+      }
+    },
+    "FbsPostingProductExemplarSetV6RequestExemplars": {
+      "type": "object",
+      "properties": {
+        "exemplar_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор экземпляра."
+        },
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "is_gtd_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан номер грузовой таможенной декларации (ГТД)."
+        },
+        "is_rnpt_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ)."
+        },
+        "marks": {
+          "description": "Ошибки при проверке контрольных идентификационных знаков (КИЗ).",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ExemplarsMarks"
+          }
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "FbsPostingProductExemplarSetV6RequestProducts": {
+      "type": "object",
+      "properties": {
+        "exemplars": {
+          "type": "array",
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingProductExemplarSetV6RequestExemplars"
+          }
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "v6FbsPostingProductExemplarSetV6Request": {
+      "type": "object",
+      "properties": {
+        "multi_box_qty": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество коробок, в которые упакован товар."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "type": "array",
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingProductExemplarSetV6RequestProducts"
+          }
+        }
+      }
+    },
+    "v6FbsPostingProductExemplarCreateOrGetV6Request": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    },
+    "ExemplarMark": {
+      "type": "object",
+      "properties": {
+        "mark": {
+          "type": "string",
+          "description": "Значение кода маркировки."
+        },
+        "mark_type": {
+          "type": "string",
+          "description": "Тип кода маркировки:\n - `mandatory_mark` — обязательная маркировка «Честный ЗНАК»;\n - `jw_uin` — уникальный идентификационный номер (УИН) ювелирного изделия.\n"
+        }
+      }
+    },
+    "ProductExemplar": {
+      "type": "object",
+      "properties": {
+        "exemplar_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор экземпляра."
+        },
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "is_gtd_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан номер грузовой таможенной декларации (ГТД)."
+        },
+        "is_rnpt_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ)."
+        },
+        "marks": {
+          "type": "array",
+          "description": "Ошибки при проверке контрольных идентификационных знаков (КИЗ).",
+          "items": {
+            "$ref": "#/components/schemas/ExemplarMark"
+          }
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "FbsPostingProductExemplarCreateOrGetV6ResponseProduct": {
+      "type": "object",
+      "properties": {
+        "exemplars": {
+          "type": "array",
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/ProductExemplar"
+          }
+        },
+        "is_gtd_needed": {
+          "type": "boolean",
+          "description": "Признак того, что необходимо передать номер грузовой таможенной декларации (ГТД) для продукта и отправления."
+        },
+        "is_jw_uin_needed": {
+          "type": "boolean",
+          "description": "Признак того, что необходимо передать уникальный идентификационный номер ювелирного изделия (УИН)."
+        },
+        "is_mandatory_mark_needed": {
+          "type": "boolean",
+          "description": "Признак того, что необходимо передать маркировку «Честный ЗНАК»."
+        },
+        "is_mandatory_mark_possible": {
+          "type": "boolean",
+          "description": "Признак того, что возможно заполнить маркировку «Честный ЗНАК»."
+        },
+        "is_rnpt_needed": {
+          "type": "boolean",
+          "description": "Признак того, что необходимо передать номер партии товара (РНПТ)."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество экземпляров."
+        }
+      }
+    },
+    "v6FbsPostingProductExemplarCreateOrGetV6Response": {
+      "type": "object",
+      "properties": {
+        "multi_box_qty": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество коробок, в которые упакован товар."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "type": "array",
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingProductExemplarCreateOrGetV6ResponseProduct"
+          }
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarStatusV5Request": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarStatusV5ResponseProductExemplarMark": {
+      "type": "object",
+      "properties": {
+        "check_status": {
+          "type": "string",
+          "description": "Статус проверки."
+        },
+        "error_codes": {
+          "description": "Ошибки при проверке контрольных идентификационных знаков (КИЗ).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mark": {
+          "type": "string",
+          "description": "Значение кода маркировки."
+        },
+        "mark_type": {
+          "type": "string",
+          "description": "Тип кода маркировки:\n - `mandatory_mark` — обязательная маркировка «Честный ЗНАК»;\n - `jw_uin` — уникальный идентификационный номер (УИН) ювелирного изделия.\n"
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarStatusV5ResponseProductExemplar": {
+      "type": "object",
+      "properties": {
+        "exemplar_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор экземпляра."
+        },
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "gtd_check_status": {
+          "type": "string",
+          "description": "Статус проверки грузовой таможенной декларации."
+        },
+        "gtd_error_codes": {
+          "type": "array",
+          "description": "Коды ошибок при проверке грузовой таможенной декларации.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_gtd_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан номер таможенной декларации (ГТД)."
+        },
+        "is_rnpt_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ)."
+        },
+        "marks": {
+          "type": "array",
+          "description": "Список контрольных идентификационных знаков (КИЗ) в одном экземпляре.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarStatusV5ResponseProductExemplarMark"
+          }
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        },
+        "rnpt_check_status": {
+          "type": "string",
+          "description": "Статус проверки регистрационного номера партии товара."
+        },
+        "rnpt_error_codes": {
+          "type": "array",
+          "description": "Коды ошибок при проверке регистрационного номера партии товара.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarStatusV5ResponseProduct": {
+      "type": "object",
+      "properties": {
+        "exemplars": {
+          "type": "array",
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarStatusV5ResponseProductExemplar"
+          }
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarStatusV5Response": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "type": "array",
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarStatusV5ResponseProduct"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус проверки всех экземпляров и доступности сборки:\n - `ship_available` — сборка доступна,\n - `ship_not_available` — сборка недоступна,\n - `validation_in_process` — экземпляры на проверке.\n"
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5RequestProductExemplarMark": {
+      "type": "object",
+      "properties": {
+        "mark": {
+          "type": "string",
+          "description": "Значение кода маркировки."
+        },
+        "mark_type": {
+          "type": "string",
+          "description": "Тип кода маркировки:\n - `mandatory_mark` — обязательная маркировка «Честный ЗНАК»;\n - `jw_uin` — уникальный идентификационный номер (УИН) ювелирного изделия.\n"
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5RequestProductExemplar": {
+      "type": "object",
+      "properties": {
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "marks": {
+          "type": "array",
+          "description": "Список контрольных идентификационных знаков (КИЗ) в одном экземпляре.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarValidateV5RequestProductExemplarMark"
+          }
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5RequestProduct": {
+      "type": "object",
+      "properties": {
+        "exemplars": {
+          "type": "array",
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarValidateV5RequestProductExemplar"
+          }
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5Request": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string"
+        },
+        "products": {
+          "type": "array",
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarValidateV5RequestProduct"
+          }
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5ResponseProductExemplarMark": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Ошибки при проверке контрольных идентификационных знаков (КИЗ).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mark": {
+          "type": "string",
+          "description": "Значение кода маркировки."
+        },
+        "mark_type": {
+          "type": "string",
+          "description": "Тип кода маркировки:\n - `mandatory_mark` — обязательная маркировка «Честный ЗНАК»;\n - `jw_uin` — уникальный идентификационный номер (УИН) ювелирного изделия.\n"
+        },
+        "valid": {
+          "type": "boolean",
+          "description": "Результат прохождения проверки. `true`, если контрольный идентификационный знак (КИЗ) соответствует требованиям."
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5ResponseProductExemplar": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Ошибки валидации экземпляра.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "marks": {
+          "type": "array",
+          "description": "Список контрольных идентификационных знаков (КИЗ) в одном экземпляре.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarValidateV5ResponseProductExemplarMark"
+          }
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        },
+        "valid": {
+          "type": "boolean",
+          "description": "Результат прохождения проверки. `true`, если код экземпляра соответствует требованиям."
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5ResponseProduct": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "exemplars": {
+          "type": "array",
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarValidateV5ResponseProductExemplar"
+          }
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "valid": {
+          "type": "boolean",
+          "description": "Результат прохождения проверки. `true`, если коды всех экземпляров соответствуют требованиям."
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5Response": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarValidateV5ResponseProduct"
+          }
+        }
+      }
+    },
+    "v1FbsPostingProductExemplarUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    },
+    "v1CarriageCreateRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "delivery_method_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор метода доставки."
+        },
+        "departure_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата отгрузки. По умолчанию — текущая дата."
+        }
+      }
+    },
+    "v1CarriageCreateResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "carriage_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор перевозки."
+        }
+      }
+    },
+    "v1CarriageApproveRequest": {
+      "type": "object",
+      "title": "object",
+      "required": [
+        "carriage_id"
+      ],
+      "properties": {
+        "carriage_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор отгрузки.",
+          "required": true
+        },
+        "containers_count": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество грузовых мест. \n\nИспользуйте параметр, если вы подключены к доверительной приёмке и отгружаете заказы грузовыми местами. Если вы не подключены к доверительной приёмке, пропустите его.\n"
+        }
+      }
+    },
+    "v1CarriageApproveResponse": {
+      "type": "object",
+      "title": "object"
+    },
+    "v1SetPostingsRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "carriage_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор отгрузки.",
+          "required": true
+        },
+        "posting_numbers": {
+          "type": "array",
+          "description": "Актуальный список отправлений.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SetPostingsResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Описание ошибки."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "result": {
+          "description": "Результат обработки запроса. `true`, если запрос был обработан успешно.\n",
+          "type": "boolean"
+        }
+      }
+    },
+    "v1SetPostingsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "items": {
+            "$ref": "#/components/schemas/SetPostingsResponseResult"
+          }
+        }
+      }
+    },
+    "v1CarriageCancelRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "carriage_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор отгрузки.",
+          "required": true
+        }
+      }
+    },
+    "v1CarriageCancelResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Описание ошибки."
+        },
+        "carriage_status": {
+          "type": "string",
+          "description": "Статус отгрузки."
+        }
+      }
+    },
+    "v1CarriageDeliveryListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "delivery_method_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор метода доставки."
+        },
+        "departure_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата отгрузки. По умолчанию — текущая дата."
+        }
+      }
+    },
+    "v1CarriageDeliveryListResponseResultCarriages": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "description": "Идентификатор перевозки."
+        },
+        "postings_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество отправлений в перевозке."
+        },
+        "quantum_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество квантов в перевозке."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус перевозки для запрашиваемых метода и даты."
+        }
+      }
+    },
+    "v1CarriageDeliveryListResponseResultErrors": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "description": {
+          "type": "string",
+          "description": "Описание ошибки."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус ошибки."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v1CarriageDeliveryListResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "assembly_list_availability": {
+          "type": "boolean",
+          "description": "`true`, если доступен лист подбора.\n"
+        },
+        "can_create_another_carriage": {
+          "type": "boolean",
+          "description": "`true`, если можно создать ещё одну перевозку.\n"
+        },
+        "carriage_postings_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество отправлений в перевозке."
+        },
+        "carriage_quantum_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество квантов в перевозке."
+        },
+        "carriages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "$ref": "#/components/schemas/v1CarriageDeliveryListResponseResultCarriages"
+          },
+          "description": "Список перевозок."
+        },
+        "cut_in": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Время начала сборки и часовой пояс времени склада."
+        },
+        "delivery_method_id": {
+          "type": "integer",
+          "description": "Идентификатор метода доставки."
+        },
+        "delivery_method_name": {
+          "type": "string",
+          "description": "Название метода доставки."
+        },
+        "delivery_method_status": {
+          "type": "string",
+          "description": "Статус метода доставки."
+        },
+        "departure_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата отгрузки."
+        },
+        "dropoff_address": {
+          "type": "string",
+          "description": "Адрес точки отгрузки."
+        },
+        "dropoff_change_availability": {
+          "type": "string",
+          "description": "Статус возможности смены точки отгрузки."
+        },
+        "dropoff_point_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор точки отгрузки."
+        },
+        "dropoff_point_type": {
+          "type": "string",
+          "description": "Способ отгрузки."
+        },
+        "errors": {
+          "items": {
+            "$ref": "#/components/schemas/v1CarriageDeliveryListResponseResultErrors"
+          },
+          "type": "array",
+          "description": "Массив ошибок, которые возникли при обработке запроса."
+        },
+        "first_mile_changing": {
+          "type": "boolean",
+          "description": "`true`, если точка отгрузки изменилась.\n"
+        },
+        "first_mile_type": {
+          "type": "string",
+          "description": "Тип первой мили."
+        },
+        "has_entrusted_acceptance": {
+          "type": "boolean",
+          "description": "Признак доверительной приёмки. `true`, если доверительная приёмка включена на складе."
+        },
+        "integration_type": {
+          "type": "string",
+          "description": "Тип интеграции со службой доставки."
+        },
+        "is_presort": {
+          "type": "boolean",
+          "description": "`true`, если отгрузка с предсортировкой.\n"
+        },
+        "is_rfbs": {
+          "type": "boolean",
+          "description": "`true`, если склад работает по схеме rFBS.\n"
+        },
+        "recommended_time_local": {
+          "type": "string",
+          "description": "Рекомендуемое местное время отгрузки в пункт приёма заказов."
+        },
+        "recommended_time_utc_offset_in_minutes": {
+          "type": "number",
+          "format": "int32",
+          "description": "Смещение часового пояса рекомендуемого времени отгрузки от UTC-0 в минутах."
+        },
+        "cutoff_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата и время, до которых нужно собрать отправление."
+        },
+        "mandatory_packaged_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество «обязательных» собранных отправлений."
+        },
+        "mandatory_packaged_quantum_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество «обязательных» собранных квантов."
+        },
+        "mandatory_postings_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество отправлений, которые нужно собрать."
+        },
+        "mandatory_quantum_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество квантов, которые нужно собрать."
+        },
+        "optional_packaged_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество собранных «необязательных» отправлений."
+        },
+        "postings_for_another_carriage_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество отправлений, которые могут попасть в следующую перевозку."
+        },
+        "quantum_for_another_carriage_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество квантов, которые могут попасть в следующую перевозку."
+        },
+        "timeslot_from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Начало таймслота в точке отгрузки."
+        },
+        "timeslot_to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Окончание таймслота в точке отгрузки."
+        },
+        "tpl_provider_icon_url": {
+          "type": "string",
+          "description": "Ссылка на иконку службы доставки."
+        },
+        "tpl_provider_name": {
+          "type": "string",
+          "description": "Название службы доставки."
+        },
+        "warehouse_city": {
+          "type": "string",
+          "description": "Город склада."
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор склада."
+        },
+        "warehouse_name": {
+          "type": "string",
+          "description": "Название склада."
+        }
+      }
+    },
+    "v1CarriageDeliveryListResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1CarriageDeliveryListResponseResult"
+          }
+        }
+      }
+    },
+    "postingPostingFBSActCreateRequest": {
+      "required": [
+        "delivery_method_id"
+      ],
+      "properties": {
+        "containers_count": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество грузовых мест. \n\nИспользуйте параметр, если вы подключены к доверительной приёмке и отгружаете заказы грузовыми местами. Если вы не подключены к доверительной приёмке, пропустите его.\n\n[Подробнее в Базе знаний продавца](https://docs.ozon.ru/partners/prodayoa-so-svoego-sklada-fbs/doveritel-naya-priemka-gruzovogo-mesta)\n"
+        },
+        "delivery_method_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор метода доставки. Можно получить с помощью метода [/v1/delivery-method/list](#operation/WarehouseAPI_DeliveryMethodList)."
+        },
+        "departure_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата отгрузки."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "PostingFBSActCreateResponseAct": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Номер задания на формирование штрихкода и документов."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода."
+    },
+    "postingPostingFBSActCreateResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/PostingFBSActCreateResponseAct"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingv1GetCarriageAvailableListRequest": {
+      "required": [
+        "delivery_method_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "delivery_method_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Фильтр по методу доставки. Можно получить с помощью метода [/v1/delivery-method/list](#operation/WarehouseAPI_DeliveryMethodList)."
+        },
+        "departure_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата отгрузки. По умолчанию — текущая дата."
+        }
+      }
+    },
+    "ResultError": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "status": {
+          "type": "string",
+          "description": "Тип ошибки:\n- `warning` — предупреждение;\n- `critical` — критическая ошибка.\n"
+        }
+      }
+    },
+    "GetCarriageAvailableListResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "carriage_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор перевозки (также номер задания на формирование документов)."
+        },
+        "carriage_postings_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество отправлений в перевозке."
+        },
+        "carriage_status": {
+          "type": "string",
+          "description": "Статус перевозки для запрашиваемого метода доставки и даты отгрузки."
+        },
+        "cutoff_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата и время, до которых нужно собрать отправление."
+        },
+        "delivery_method_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор метода доставки."
+        },
+        "delivery_method_name": {
+          "type": "string",
+          "description": "Название метода доставки."
+        },
+        "errors": {
+          "description": "Список ошибок.",
+          "items": {
+            "$ref": "#/components/schemas/ResultError"
+          }
+        },
+        "first_mile_type": {
+          "type": "string",
+          "description": "Тип первой мили."
+        },
+        "has_entrusted_acceptance": {
+          "type": "boolean",
+          "description": "Признак доверительной приёмки. `true`, если доверительная приёмка включена на складе."
+        },
+        "mandatory_postings_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество отправлений, которые нужно собрать."
+        },
+        "mandatory_packaged_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество собранных отправлений."
+        },
+        "recommended_time_local": {
+          "type": "string",
+          "description": "Рекомендуемое местное время отгрузки на пункт приёма заказов."
+        },
+        "recommended_time_utc_offset_in_minutes": {
+          "type": "number",
+          "format": "int32",
+          "description": "Смещение часового пояса рекомендуемого времени отгрузки от UTC-0 в минутах."
+        },
+        "tpl_provider_icon_url": {
+          "type": "string",
+          "description": "Ссылка на иконку службы доставки."
+        },
+        "tpl_provider_name": {
+          "type": "string",
+          "description": "Название службы доставки."
+        },
+        "warehouse_city": {
+          "type": "string",
+          "description": "Город склада."
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор склада."
+        },
+        "warehouse_name": {
+          "type": "string",
+          "description": "Название склада."
+        },
+        "warehouse_timezone": {
+          "type": "string",
+          "description": "Часовой пояс, в котором находится склад."
+        }
+      }
+    },
+    "postingv1GetCarriageAvailableListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "description": "Результат работы метода.",
+          "items": {
+            "$ref": "#/components/schemas/GetCarriageAvailableListResponseResult"
+          }
+        }
+      }
+    },
+    "carriageCarriageGetRequest": {
+      "required": [
+        "carriage_id"
+      ],
+      "type": "object",
+      "properties": {
+        "carriage_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор перевозки."
+        }
+      }
+    },
+    "carriageCarriageGetResponseCancelAvailability": {
+      "type": "object",
+      "title": "object",
+      "description": "Возможность отмены.",
+      "properties": {
+        "is_cancel_available": {
+          "type": "boolean",
+          "description": "`true`, если перевозку можно отменить.\n"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Причина, почему перевозку нельзя отменить."
+        }
+      }
+    },
+    "carriageCarriageGetResponse": {
+      "type": "object",
+      "properties": {
+        "act_type": {
+          "type": "string",
+          "description": "Тип акта приёма-передачи. Актуально для продавцов FBS."
+        },
+        "is_waybill_enabled": {
+          "type": "boolean",
+          "description": "`true`, если доступна печать транспортной накладной.\n"
+        },
+        "is_econom": {
+          "type": "boolean",
+          "description": "`true`, если отгрузка относится к товарам «Суперэконом».\n"
+        },
+        "arrival_pass_ids": {
+          "type": "array",
+          "description": "Список идентификаторов пропусков, оформленных на перевозку.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "available_actions": {
+          "type": "array",
+          "description": "Доступные действия с перевозкой.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cancel_availability": {
+          "$ref": "#/components/schemas/carriageCarriageGetResponseCancelAvailability"
+        },
+        "carriage_id": {
+          "type": "integer",
+          "description": "Идентификатор перевозки.",
+          "format": "int64"
+        },
+        "company_id": {
+          "type": "integer",
+          "description": "Идентификатор продавца.",
+          "format": "int64"
+        },
+        "containers_count": {
+          "type": "integer",
+          "description": "Количество грузовых мест.",
+          "format": "int32"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "Дата создания перевозки.",
+          "format": "date-time"
+        },
+        "delivery_method_id": {
+          "type": "integer",
+          "description": "Идентификатор метода доставки.",
+          "format": "int64"
+        },
+        "departure_date": {
+          "type": "string",
+          "description": "Дата выполнения перевозки."
+        },
+        "first_mile_type": {
+          "type": "string",
+          "description": "Тип первой мили."
+        },
+        "has_postings_for_next_carriage": {
+          "type": "boolean",
+          "description": "`true`, если есть отправления, которые не попали в перевозку, но нужно отгрузить.\n"
+        },
+        "integration_type": {
+          "type": "string",
+          "description": "Тип перевозки."
+        },
+        "is_container_label_printed": {
+          "type": "boolean",
+          "description": "`true`, если вы уже напечатали этикетки на грузовые места.\n"
+        },
+        "is_partial": {
+          "type": "boolean",
+          "description": "`true`, если перевозка частичная.\n"
+        },
+        "partial_num": {
+          "type": "integer",
+          "description": "Порядковый номер частичной перевозки.",
+          "format": "int64"
+        },
+        "retry_count": {
+          "type": "integer",
+          "description": "Количество повторных попыток создания перевозки.",
+          "format": "int32"
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус перевозки:\n- `received` — идёт приёмка,\n- `closed` — завершена после приёмки,\n- `sended` — отправлена,\n- `cancelled` — отменена.\n"
+        },
+        "tpl_provider_id": {
+          "type": "integer",
+          "description": "Идентификатор провайдера доставки.",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "Дата последнего обновления информации о перевозке.",
+          "format": "date-time"
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "description": "Идентификатор склада.",
+          "format": "int64"
+        }
+      }
+    },
+    "v1ProductFbsSplit": {
+      "type": "object",
+      "title": "PostingFbsSplit",
+      "properties": {
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество экземпляров."
+        }
+      },
+      "required": [
+        "product_id",
+        "quantity"
+      ]
+    },
+    "v1PostingFbsSplitRequestPosting": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "description": "Список товаров в заказе.",
+          "items": {
+            "$ref": "#/components/schemas/v1ProductFbsSplit"
+          }
+        }
+      },
+      "required": [
+        "products"
+      ]
+    },
+    "v1PostingFbsSplitRequest": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "postings": {
+          "type": "array",
+          "description": "Список отправлений, на которые поделится заказ. За один запрос можно разделить один заказ.",
+          "items": {
+            "$ref": "#/components/schemas/v1PostingFbsSplitRequestPosting"
+          }
+        }
+      },
+      "required": [
+        "posting_number",
+        "postings"
+      ]
+    },
+    "v1PostingFbsSplitResponsePostingParent": {
+      "type": "object",
+      "description": "Информация об изначальном отправлении.",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер изначального отправления."
+        },
+        "products": {
+          "type": "array",
+          "description": "Список товаров в отправлении.",
+          "items": {
+            "$ref": "#/components/schemas/v1ProductFbsSplit"
+          }
+        }
+      }
+    },
+    "v1PostingFbsSplitResponsePosting": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "type": "array",
+          "description": "Список товаров в отправлении.",
+          "items": {
+            "$ref": "#/components/schemas/v1ProductFbsSplit"
+          }
+        }
+      }
+    },
+    "v1PostingFbsSplitResponse": {
+      "type": "object",
+      "properties": {
+        "parent_posting": {
+          "$ref": "#/components/schemas/v1PostingFbsSplitResponsePostingParent"
+        },
+        "postings": {
+          "type": "array",
+          "description": "Список отправлений, на которые разделился заказ.",
+          "items": {
+            "$ref": "#/components/schemas/v1PostingFbsSplitResponsePosting"
+          }
+        }
+      }
+    },
+    "v2PostingFBSActGetPostingsRequest": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "int",
+          "format": "int64",
+          "description": "Идентификатор акта. Можно получить с помощью метода [/v2/posting/fbs/act/list](#operation/PostingAPI_FbsActList). Нужное значение — в параметре ответа `result.id`."
+        }
+      }
+    },
+    "v2PostingFBSActGetProducts": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "price": {
+          "type": "string",
+          "description": "Цена товара."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товара в отправлении."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "v2PostingFBSActGetPostingsResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор акта."
+        },
+        "multi_box_qty": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество коробок, в которые упакован товар."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус отправления."
+        },
+        "seller_error": {
+          "type": "string",
+          "description": "Расшифровка кода ошибки."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата и время обновления записи об отправлении."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата и время создания записи об отправлении."
+        },
+        "products": {
+          "type": "array",
+          "description": "Список товаров в отправлении.",
+          "items": {
+            "$ref": "#/components/schemas/v2PostingFBSActGetProducts"
+          }
+        }
+      }
+    },
+    "v2PostingFBSActGetPostingsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "description": "Информация об отправлениях.",
+          "items": {
+            "$ref": "#/components/schemas/v2PostingFBSActGetPostingsResult"
+          }
+        }
+      }
+    },
+    "postingPostingFBSActGetContainerLabelsRequest": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Номер задания на формирование документов (также идентификатор перевозки) из метода [POST /v2/posting/fbs/act/create](#operation/PostingAPI_PostingFBSActCreate)."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingPostingFBSActGetContainerLabelsResponse": {
+      "properties": {
+        "file_content": {
+          "format": "byte",
+          "type": "string",
+          "description": "Содержание файла в бинарном виде."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Название файла."
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Тип файла."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v2PostingFBSGetBarcodeRequest": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор перевозки."
+        }
+      }
+    },
+    "v2PostingFBSGetBarcodeResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "file_content": {
+          "type": "string",
+          "description": "Изображение со штрихкодом в бинарном виде."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Название файла."
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Тип файла."
+        }
+      }
+    },
+    "v2PostingFBSGetBarcodeTextResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "string",
+          "description": "Штрихкод в текстовом виде."
+        }
+      }
+    },
+    "v2PostingFBSDigitalActCheckStatusRequest": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Номер задания на формирование документов (также идентификатор перевозки) из метода [POST /v2/posting/fbs/act/create](#operation/PostingAPI_PostingFBSActCreate)."
+        }
+      }
+    },
+    "v2PostingFBSDigitalActCheckStatusResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Номер задания на формирование документов."
+        },
+        "status": {
+          "type": "string",
+          "description": "Cтатус формирования документов:\n- `FORMING` — ещё не готовы,\n- `FORMED` — сформированы успешно,\n- `CONFIRMED` — подписаны Ozon,\n- `CONFIRMED_WITH_MISMATCH` — подписаны Ozon с расхождениями,\n- `NOT_FOUND` — документы не найдены,\n- `UNKNOWN_ERROR` — произошла ошибка.\n"
+        }
+      }
+    },
+    "postingPostingFBSGetActRequest": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Номер задания на формирование документов (также идентификатор перевозки) из метода [POST /v2/posting/fbs/act/create](#operation/PostingAPI_PostingFBSActCreate)."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingPostingFBSGetActResponse": {
+      "properties": {
+        "file_content": {
+          "format": "byte",
+          "type": "string",
+          "description": "Содержание файла в бинарном виде."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Название файла."
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Тип файла."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v2PostingFBSActListFilter": {
+      "type": "object",
+      "title": "object",
+      "description": "Параметры фильтра.",
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "description": "Начальная дата создания отгрузок."
+        },
+        "date_to": {
+          "type": "string",
+          "description": "Конечная дата создания отгрузок."
+        },
+        "integration_type": {
+          "type": "string",
+          "description": "Тип интеграции со службой доставки:\n  - `ozon` — доставка через Ozon логистику.\n  - `aggregator` — доставка внешней службой, Ozon регистрирует заказ.\n  - `3pl_tracking` — доставка внешней службой, продавец регистрирует заказ.\n  - `non_integrated` — доставка силами продавца.\n"
+        },
+        "status": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Статусы перевозок:\n  - `new` — новая,\n  - `awaiting_retry` — повторная попытка создания,\n  - `in_process` — собирается,\n  - `success` — создана,\n  - `error` — ошибка при создании,\n  - `sended` — отправлена,\n  - `received` — получена,\n  - `formed` — собрана,\n  - `cancelled` — отменена,\n  - `pending` — в очереди на сборку,\n  - `completion_enqueued` — в очереди на завершение,\n  - `completion_processing` — в процессе завершения,\n  - `completion_failed` — ошибка при завершении,\n  - `cancelation_enqueued` — в очереди на отмену,\n  - `cancelation_processing` — в процессе отмены,\n  - `cancelation_failed` — ошибка при отмене,\n  - `completed` — завершена,\n  - `closed` — закрыта.\n"
+        }
+      },
+      "required": [
+        "date_from",
+        "date_to"
+      ]
+    },
+    "v2PostingFBSActListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/components/schemas/v2PostingFBSActListFilter"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Максимальное количество актов в ответе."
+        }
+      },
+      "required": [
+        "limit"
+      ]
+    },
+    "v2PostingFBSActListRelatedDocs": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация про акты перевозки.",
+      "properties": {
+        "act_of_acceptance": {
+          "type": "object",
+          "description": "Информация про акт приёма-передачи.",
+          "properties": {
+            "created_at": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Дата создания акта."
+            },
+            "document_status": {
+              "type": "string",
+              "description": "Статус акта:\n  - `FORMING` — ещё не готов,\n  - `FORMED` — сформирован,\n  - `CONFIRMED` — подписан Ozon,\n  - `CONFIRMED_WITH_MISMATCH` — подписан Ozon с расхождениями,\n  - `ACCEPTED_BY_CARGO_PLACES` — принят по грузовым местам,\n  - `PRINTED_CARRIAGE` — электронная подпись не нужна,\n  - `ERROR`, `UNKNOWN_ERROR` — ошибка.\n"
+            }
+          }
+        },
+        "act_of_mismatch": {
+          "type": "object",
+          "description": "Информация про акт о расхождениях.",
+          "properties": {
+            "created_at": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Дата создания перевозки."
+            },
+            "document_status": {
+              "type": "string",
+              "description": "Статус перевозки или акта:\n  - `NEED_TO_SIGN` — требуется подпись,\n  - `ON_CONFIRMATION` — на подписании Ozon,\n  - `CONFIRMED` — подписан Ozon,\n  - `DISPUTE_OPENED` — принят по грузовым местам,\n  - `PRINTED_CARRIAGE` — электронная подпись не нужна,\n  - `UNKNOWN_ERROR` — ошибка.\n"
+            }
+          }
+        },
+        "act_of_excess": {
+          "type": "object",
+          "description": "Информация про акт об излишках.",
+          "properties": {
+            "created_at": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Дата создания акта."
+            },
+            "document_status": {
+              "type": "string",
+              "description": "Статус акта:\n  - `NEED_TO_SIGN` — требуется подпись,\n  - `CONFIRMED` — подписан Ozon,\n  - `UNKNOWN_ERROR` — ошибка.\n"
+            }
+          }
+        }
+      }
+    },
+    "v2PostingFBSActListResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "int",
+          "format": "int64",
+          "description": "Идентификатор отгрузки."
+        },
+        "delivery_method_id": {
+          "type": "int",
+          "format": "int64",
+          "description": "Идентификатор метода доставки."
+        },
+        "delivery_method_name": {
+          "type": "string",
+          "description": "Название метода доставки."
+        },
+        "integration_type": {
+          "type": "string",
+          "description": "Тип интеграции со службой доставки:\n  - `ozon` — доставка через Ozon логистику.\n  - `3pl` — доставка внешней службой, продавец регистрирует заказ.\n"
+        },
+        "containers_count": {
+          "type": "int",
+          "format": "int32",
+          "description": "Число грузовых мест."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус отгрузки."
+        },
+        "departure_date": {
+          "type": "string",
+          "description": "Дата отгрузки."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата создания записи об отгрузке."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата обновления записи об отгрузке."
+        },
+        "act_type": {
+          "type": "string",
+          "description": "Тип акта приёма-передачи для FBS продавцов."
+        },
+        "is_partial": {
+          "type": "boolean",
+          "description": "Признак частичной перевозки. `true`, если перевозка частичная.\n\nЧастичная перевозка значит, что отгрузка была разделена на несколько частей и по каждой из частей формируются отдельные акты.\n"
+        },
+        "has_postings_for_next_carriage": {
+          "type": "boolean",
+          "description": "Признак наличия подлежащих отгрузке отправлений, которые не попали в текущую перевозку. `true`, если такие отправления есть."
+        },
+        "partial_num": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Порядковый номер частичной перевозки."
+        },
+        "related_docs": {
+          "$ref": "#/components/schemas/v2PostingFBSActListRelatedDocs"
+        }
+      }
+    },
+    "v2PostingFBSActListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "description": "Результат запроса.",
+          "items": {
+            "$ref": "#/components/schemas/v2PostingFBSActListResult"
+          }
+        }
+      }
+    },
+    "v2PostingFBSGetDigitalActRequest": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Номер задания на формирование документов (также идентификатор перевозки) из метода [POST /v2/posting/fbs/act/create](#operation/PostingAPI_PostingFBSActCreate)."
+        },
+        "doc_type": {
+          "format": "string",
+          "description": "Тип электронного документа:\n- `act_of_acceptance` — лист отгрузки,\n- `act_of_mismatch` — акт о расхождениях,\n- `act_of_excess` — акт об излишках.\n"
+        }
+      }
+    },
+    "v2PostingFBSGetDigitalActResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "file_content": {
+          "type": "string",
+          "format": "byte",
+          "description": "Содержание файла в бинарном виде."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Название файла."
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Тип файла."
+        }
+      }
+    },
+    "postingPostingFBSActCheckStatusRequest": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Номер задания на формирование документов (также идентификатор перевозки) из метода [POST /v2/posting/fbs/act/create](#operation/PostingAPI_PostingFBSActCreate)."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "PostingFBSActCheckStatusResponseStatus": {
+      "properties": {
+        "act_type": {
+          "type": "string",
+          "description": "Тип документов.\n\nЕсли значение `ozon_digital`, используйте методы [/v2/posting/fbs/digital/act/check-status](#operation/PostingAPI_PostingFBSDigitalActCheckStatus) \n    и [/v2/posting/fbs/digital/act/get-pdf](#operation/PostingAPI_PostingFBSGetDigitalAct) для получения электронной транспортной накладной.\n"
+        },
+        "added_to_act": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Массив c номерами отправлений, которые добавлены в перевозку. Эти отправления нужно передать сегодня."
+        },
+        "removed_from_act": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Массив с номерами отправлений, которые не попали в перевозку. Такие отправления нужно передавать со следующей отгрузкой."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус запроса:\n - `in_process` — документы формируются, нужно подождать.\n - `ready` — документы сформированы и готовы для скачивания.\n - `error` — произошла ошибка при формировании документов, запросите документы повторно.\n - `cancelled` — создание документов отменено, запросите их повторно.\n - `The next postings aren't ready` — произошла ошибка, отправления не включены в отгрузку. Подождите некоторое время и проверьте результат запроса. Если ошибка повторяется, обратитесь в службу поддержки.\n"
+        },
+        "is_partial": {
+          "type": "boolean",
+          "description": "Признак частичной перевозки. `true`, если перевозка частичная.\n\nЧастичная перевозка значит, что отгрузка была разделена на несколько частей.\n"
+        },
+        "has_postings_for_next_carriage": {
+          "type": "boolean",
+          "description": "`true`, если есть отправления, не попавшие в текущую перевозку, но которые нужно отгрузить.\n\nЕсли в ответе вернулось `true`, подтвердите отгрузку или создайте новый акт через метод [/v2/posting/fbs/act/create](#operation/PostingAPI_PostingFBSActCreate) и проверьте их статус. Повторяйте действия, пока в ответе не вернётся `false`.\n"
+        },
+        "partial_num": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Порядковый номер частичной перевозки."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода."
+    },
+    "postingPostingFBSActCheckStatusResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/PostingFBSActCheckStatusResponseStatus"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "FbsPostingTrackingNumberSetRequestTrackingNumber": {
+      "required": [
+        "posting_number",
+        "tracking_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Идентификатор отправления."
+        },
+        "tracking_number": {
+          "type": "string",
+          "description": "Трек-номер отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingFbsPostingTrackingNumberSetRequest": {
+      "required": [
+        "tracking_numbers"
+      ],
+      "properties": {
+        "tracking_numbers": {
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingTrackingNumberSetRequestTrackingNumber"
+          },
+          "type": "array",
+          "description": "Массив с парами идентификатор отправления — трек-номер."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "FbsPostingMoveStatusResponseMoveStatus": {
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Ошибка при обработке запроса."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "result": {
+          "type": "boolean",
+          "description": "Если запрос выполнен без ошибок — `true`."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingFbsPostingMoveStatusResponse": {
+      "properties": {
+        "result": {
+          "description": "Результат работы метода.",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingMoveStatusResponseMoveStatus"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingFbsPostingSentbysellerRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Список идентификаторов отправлений."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingFbsPostingSentbysellerResponseItem": {
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Ошибка."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Идентификатор отправления."
+        },
+        "result": {
+          "type": "boolean"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingFbsPostingSentbysellerResponse": {
+      "properties": {
+        "result": {
+          "description": "Результат работы метода.",
+          "items": {
+            "$ref": "#/components/schemas/postingFbsPostingSentbysellerResponseItem"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingFbsPostingDeliveringRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Идентификатор отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingFbsPostingLastMileRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Идентификатор отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingFbsPostingDeliveredRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Идентификатор отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v1PostingFbsTimeslotChangeRestrictionsRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    },
+    "v1PostingFbsTimeslotChangeRestrictionsDeliveryInterval": {
+      "type": "object",
+      "title": "object",
+      "description": "Период дат, доступных для переноса.",
+      "properties": {
+        "begin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата начала периода.\n\nФормат: `YYYY-MM-DDTHH:mm:ss.sssZ`.\n"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата конца периода.\n\nФормат: `YYYY-MM-DDTHH:mm:ss.sssZ`.\n"
+        }
+      }
+    },
+    "v1PostingFbsTimeslotChangeRestrictionsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "delivery_interval": {
+          "$ref": "#/components/schemas/v1PostingFbsTimeslotChangeRestrictionsDeliveryInterval"
+        },
+        "remaining_changes_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество оставшихся переносов."
+        }
+      }
+    },
+    "v1PostingFbsTimeslotSetNewTimeslot": {
+      "required": [
+        "from",
+        "to"
+      ],
+      "type": "object",
+      "title": "object",
+      "description": "Новый период для даты доставки.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата начала периода.\n\nФормат: `YYYY-MM-DDTHH:mm:ss.sssZ`.\n"
+        },
+        "to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата конца периода.\n\nФормат: `YYYY-MM-DDTHH:mm:ss.sssZ`.\n"
+        }
+      }
+    },
+    "v1PostingFbsTimeslotSetRequest": {
+      "required": [
+        "new_timeslot",
+        "posting_number"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "new_timeslot": {
+          "$ref": "#/components/schemas/v1PostingFbsTimeslotSetNewTimeslot"
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    },
+    "v1PostingFbsTimeslotSetResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "boolean",
+          "description": "`true`, если дата изменена.\n"
+        }
+      }
+    },
+    "v1SetPostingCutoffRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "new_cutoff_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Новая дата отгрузки."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      },
+      "required": [
+        "new_cutoff_date",
+        "posting_number"
+      ]
+    },
+    "v1SetPostingCutoffResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "boolean",
+          "description": "`true`, если установлена новая дата.\n"
+        }
+      }
+    },
+    "postingv3GetFbsPostingUnfulfilledListRequestFilter": {
+      "required": [
+        "cutoff_from",
+        "cutoff_to"
+      ],
+      "properties": {
+        "cutoff_from": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Фильтр по времени, до которого продавцу нужно собрать заказ. Начало периода.\n\nФормат: YYYY-MM-DDThh:mm:ss.mcsZ.\nПример: 2020-03-18T07:34:50.359Z.\n"
+        },
+        "cutoff_to": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Фильтр по времени, до которого продавцу нужно собрать заказ. Конец периода.\n\nФормат: YYYY-MM-DDThh:mm:ss.mcsZ.\nПример: 2020-03-18T07:34:50.359Z.\n"
+        },
+        "delivering_date_from": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Минимальная дата передачи отправления в доставку."
+        },
+        "delivering_date_to": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Максимальная дата передачи отправления в доставку."
+        },
+        "delivery_method_id": {
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": "array",
+          "description": "Идентификатор способа доставки. Можно получить с помощью метода [/v1/delivery-method/list](#operation/WarehouseAPI_DeliveryMethodList)."
+        },
+        "is_quantum": {
+          "type": "boolean",
+          "description": "Укажите `true`, чтобы получить только отправления квантов.\n\nПо умолчанию — `false`, в ответе придут все отправления.\n"
+        },
+        "provider_id": {
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": "array",
+          "description": "Идентификатор службы доставки. Можно получить с помощью метода [/v1/delivery-method/list](#operation/WarehouseAPI_DeliveryMethodList)."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус отправления:\n- `acceptance_in_progress` — идёт приёмка,\n- `awaiting_approve` — ожидает подтверждения,\n- `awaiting_packaging` — ожидает упаковки,\n- `awaiting_registration` — ожидает регистрации,\n- `awaiting_deliver` — ожидает отгрузки,\n- `arbitration` — арбитраж,\n- `client_arbitration` — клиентский арбитраж доставки,\n- `delivering` — доставляется,\n- `driver_pickup` — у водителя,\n- `not_accepted` — не принят на сортировочном центре.\n"
+        },
+        "warehouse_id": {
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": "array",
+          "description": "Идентификатор склада. Можно получить с помощью метода [/v1/warehouse/list](#operation/WarehouseAPI_WarehouseList)."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр запроса.\n\nИспользуйте фильтр либо по времени сборки — `cutoff`, либо по дате передачи отправления в доставку — `delivering_date`.\nЕсли использовать их вместе, в ответе вернётся ошибка.\n\nЧтобы использовать фильтр по времени сборки, заполните поля `cutoff_from` и `cutoff_to`.\n\nЧтобы использовать фильтр по дате передачи отправления в доставку, заполните поля `delivering_date_from` и `delivering_date_to`.\n"
+    },
+    "postingv3FbsPostingWithParams": {
+      "properties": {
+        "analytics_data": {
+          "type": "boolean",
+          "description": "Добавить в ответ данные аналитики."
+        },
+        "barcodes": {
+          "type": "boolean",
+          "description": "Добавить в ответ штрихкоды отправления."
+        },
+        "financial_data": {
+          "type": "boolean",
+          "description": "Добавить в ответ финансовые данные."
+        },
+        "legal_info": {
+          "type": "boolean",
+          "description": "Добавить в ответ юридическую информацию."
+        },
+        "translit": {
+          "type": "boolean",
+          "description": "Выполнить транслитерацию возвращаемых значений."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Дополнительные поля, которые нужно добавить в ответ."
+    }
+  }
+}

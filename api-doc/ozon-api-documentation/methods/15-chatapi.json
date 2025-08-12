@@ -1,0 +1,1520 @@
+{
+  "metadata": {
+    "tag": "ChatAPI",
+    "name": "ChatAPI",
+    "displayName": "Чаты с покупателями",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 8,
+    "schemasCount": 31,
+    "generatedAt": "2025-08-09T16:28:42.339Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/chat/send/message",
+      "method": "POST",
+      "operationId": "ChatAPI_ChatSendMessage",
+      "summary": "Отправить сообщение",
+      "description": "\nОтправляет сообщение в существующий чат по его идентификатору. <br><br> Отправить сообщение в чат с покупателем могут только продавцы с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\nПолучите список чатов с покупателем `chats.chat.chat_type=\"Buyer_Seller\"` в ответе метода [/v3/chat/list](#operation/ChatAPI_ChatListV3).\n\nДля отправлений:\n- FBO — вы можете отправить сообщение в течение 48 часов с момента получения последнего сообщения от покупателя. \n- FBS или rFBS — вы можете отправить сообщение покупателю после оплаты и в течение 72 часов после доставки отправления. После этого вы можете только отвечать на сообщения в течение 48 часов с момента получения последнего сообщения от покупателя.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отправить сообщение",
+        "description": "\nОтправляет сообщение в существующий чат по его идентификатору. <br><br> Отправить сообщение в чат с покупателем могут только продавцы с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\nПолучите список чатов с покупателем `chats.chat.chat_type=\"Buyer_Seller\"` в ответе метода [/v3/chat/list](#operation/ChatAPI_ChatListV3).\n\nДля отправлений:\n- FBO — вы можете отправить сообщение в течение 48 часов с момента получения последнего сообщения от покупателя. \n- FBS или rFBS — вы можете отправить сообщение покупателю после оплаты и в течение 72 часов после доставки отправления. После этого вы можете только отвечать на сообщения в течение 48 часов с момента получения последнего сообщения от покупателя.\n",
+        "operationId": "ChatAPI_ChatSendMessage",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/chatChatSendMessageRequest"
+              },
+              "example": {
+                "chat_id": "99feb3fc-a474-469f-95d5-268b470cc607",
+                "text": "test"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Сообщение отправлено",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/chatChatSendMessageResponse"
+                },
+                "example": {
+                  "result": "success"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ChatAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/chat/send/file",
+      "method": "POST",
+      "operationId": "ChatAPI_ChatSendFile",
+      "summary": "Отправить файл",
+      "description": "Отправляет файл в существующий чат по его идентификатору. <br><br> Отправить файл в чат с покупателем могут только продавцы с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\nПолучите список чатов с покупателем `chats.chat.chat_type=\"Buyer_Seller\"` в ответе метода [/v3/chat/list](#operation/ChatAPI_ChatListV3). \n\nДля отправлений:\n- FBO — вы можете отправить файл в течение 48 часов с момента получения последнего сообщения от покупателя. \n- FBS или rFBS — вы можете отправить файл покупателю после оплаты и в течение 72 часов после доставки отправления. После этого вы можете только отвечать на сообщения в течение 48 часов с момента получения последнего сообщения от покупателя.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отправить файл",
+        "description": "Отправляет файл в существующий чат по его идентификатору. <br><br> Отправить файл в чат с покупателем могут только продавцы с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\nПолучите список чатов с покупателем `chats.chat.chat_type=\"Buyer_Seller\"` в ответе метода [/v3/chat/list](#operation/ChatAPI_ChatListV3). \n\nДля отправлений:\n- FBO — вы можете отправить файл в течение 48 часов с момента получения последнего сообщения от покупателя. \n- FBS или rFBS — вы можете отправить файл покупателю после оплаты и в течение 72 часов после доставки отправления. После этого вы можете только отвечать на сообщения в течение 48 часов с момента получения последнего сообщения от покупателя.\n",
+        "operationId": "ChatAPI_ChatSendFile",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/chatChatSendFileRequest"
+              },
+              "example": {
+                "base64_content": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+                "chat_id": "99feb3fc-a474-469f-95d5-268b470cc607",
+                "name": "tempor"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Файл отправлен",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/chatChatSendFileResponse"
+                },
+                "example": {
+                  "result": "success"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ChatAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/chat/start",
+      "method": "POST",
+      "operationId": "ChatAPI_ChatStart",
+      "summary": "Создать новый чат",
+      "description": "Метод доступен только для продавцов с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus). \n\nСоздает новый чат с покупателем по отправлению. Например, чтобы уточнить адрес или модель товара. \n\nДля отправлений:\n- FBO — начать чат может только покупатель.\n- FBS и rFBS — вы можете открыть чат в течение 72 часов после оплаты или доставки отправления.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Создать новый чат",
+        "description": "Метод доступен только для продавцов с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus). \n\nСоздает новый чат с покупателем по отправлению. Например, чтобы уточнить адрес или модель товара. \n\nДля отправлений:\n- FBO — начать чат может только покупатель.\n- FBS и rFBS — вы можете открыть чат в течение 72 часов после оплаты или доставки отправления.\n",
+        "operationId": "ChatAPI_ChatStart",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/chatChatStartRequest"
+              },
+              "example": {
+                "posting_number": "47873153-0052-1"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Создан новый чат",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/chatChatStartResponse"
+                },
+                "example": {
+                  "result": {
+                    "chat_id": "5969c331-2e64-44b7-8a0e-ff9526762c62"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ChatAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v2/chat/list",
+      "method": "POST",
+      "operationId": "ChatAPI_ChatListV2",
+      "summary": "Список чатов",
+      "description": "<aside class=\"warning\">\nМетод устаревает и будет отключён в будущем. Переключитесь на новую версию <a href=\"#operation/ChatAPI_ChatListV3\">/v3/chat/list</a>.\n</aside> \n\nВозвращает информацию о чатах по указанным фильтрам.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список чатов",
+        "description": "<aside class=\"warning\">\nМетод устаревает и будет отключён в будущем. Переключитесь на новую версию <a href=\"#operation/ChatAPI_ChatListV3\">/v3/chat/list</a>.\n</aside> \n\nВозвращает информацию о чатах по указанным фильтрам.\n",
+        "operationId": "ChatAPI_ChatListV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatList"
+              },
+              "example": {
+                "filter": {
+                  "chat_status": "Opened",
+                  "unread_only": true
+                },
+                "limit": 1,
+                "offset": 0
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список чатов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2ChatListResponse"
+                },
+                "example": {
+                  "chats": [
+                    {
+                      "chat": {
+                        "created_at": "2022-07-22T08:07:19.581Z",
+                        "chat_id": "5e767w03-b400-4y1b-a841-75319ca8a5c8",
+                        "chat_status": "Opened",
+                        "chat_type": "Seller_Support"
+                      },
+                      "first_unread_message_id": "3000000000118021931",
+                      "last_message_id": "30000000001280042740",
+                      "unread_count": 1
+                    }
+                  ],
+                  "total_chats_count": 25,
+                  "total_unread_count": 5
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ChatAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v3/chat/list",
+      "method": "POST",
+      "operationId": "ChatAPI_ChatListV3",
+      "summary": "Список чатов",
+      "description": "Возвращает информацию о чатах по указанным фильтрам.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список чатов",
+        "description": "Возвращает информацию о чатах по указанным фильтрам.",
+        "operationId": "ChatAPI_ChatListV3",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v3ChatList"
+              },
+              "example": {
+                "filter": {
+                  "chat_status": "Opened",
+                  "unread_only": true
+                },
+                "limit": 1,
+                "cursor": "304000402034"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список чатов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3ChatListResponse"
+                },
+                "example": {
+                  "chats": [
+                    {
+                      "chat": {
+                        "created_at": "2022-07-22T08:07:19.581Z",
+                        "chat_id": "5e767w03-b400-4y1b-a841-75319ca8a5c8",
+                        "chat_status": "Opened",
+                        "chat_type": "Seller_Support"
+                      },
+                      "first_unread_message_id": "3000000000118021931",
+                      "last_message_id": "30000000001280042740",
+                      "unread_count": 1
+                    }
+                  ],
+                  "total_unread_count": 5,
+                  "cursor": "30000002342123123",
+                  "has_next": "true"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ChatAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v2/chat/history",
+      "method": "POST",
+      "operationId": "ChatAPI_ChatHistoryV2",
+      "summary": "История чата",
+      "description": "<aside class=\"warning\">\n13 июля 2025 года метод будет отключён. Переключитесь на <a href=\"#operation/ChatAPI_ChatHistoryV3\">/v3/chat/history</a>.\n\n</aside>\n\nВозвращает историю сообщений чата. По умолчанию от самого нового сообщения к старым. <br><br> История чата с покупателем доступна только для продавцов с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\nПолучите список чатов с покупателем `chats.chat.chat_type=\"Buyer_Seller\"` в ответе метода [/v3/chat/list](#operation/ChatAPI_ChatListV3).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "История чата",
+        "operationId": "ChatAPI_ChatHistoryV2",
+        "description": "<aside class=\"warning\">\n13 июля 2025 года метод будет отключён. Переключитесь на <a href=\"#operation/ChatAPI_ChatHistoryV3\">/v3/chat/history</a>.\n\n</aside>\n\nВозвращает историю сообщений чата. По умолчанию от самого нового сообщения к старым. <br><br> История чата с покупателем доступна только для продавцов с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\nПолучите список чатов с покупателем `chats.chat.chat_type=\"Buyer_Seller\"` в ответе метода [/v3/chat/list](#operation/ChatAPI_ChatListV3).\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatHistory"
+              },
+              "example": {
+                "chat_id": "18b8e1f9-4ae7-461c-84ea-8e1f54d1a45e",
+                "direction": "Forward",
+                "from_message_id": 3000000000118032000,
+                "limit": 1
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "История чата",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2ChatHistoryResponse"
+                },
+                "example": {
+                  "has_next": true,
+                  "messages": [
+                    {
+                      "message_id": "3000000000817031942",
+                      "user": {
+                        "id": "115568",
+                        "type": "Сustomer"
+                      },
+                      "created_at": "2022-07-18T20:58:04.528Z",
+                      "is_read": true,
+                      "data": [
+                        "Здравствуйте, у меня вопрос по вашему товару \"Стекло защитное для смартфонов\", артикул 11223. Подойдет ли он на данную [ модель ](https://www.ozon.ru/product/smartfon-samsung-galaxy-a03s-4-64-gb-chernyy) телефона?"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ChatAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v3/chat/history",
+      "method": "POST",
+      "operationId": "ChatAPI_ChatHistoryV3",
+      "summary": "История чата",
+      "description": "Возвращает историю сообщений чата. По умолчанию от самого нового сообщения к старым. <br><br> История чата с покупателем доступна только для продавцов с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\nПолучите список чатов с покупателем `chats.chat.chat_type=\"Buyer_Seller\"` в ответе метода [/v3/chat/list](#operation/ChatAPI_ChatListV3).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "История чата",
+        "tags": [
+          "ChatAPI"
+        ],
+        "operationId": "ChatAPI_ChatHistoryV3",
+        "description": "Возвращает историю сообщений чата. По умолчанию от самого нового сообщения к старым. <br><br> История чата с покупателем доступна только для продавцов с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\nПолучите список чатов с покупателем `chats.chat.chat_type=\"Buyer_Seller\"` в ответе метода [/v3/chat/list](#operation/ChatAPI_ChatListV3).\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v3ChatHistoryRequest"
+              },
+              "example": {
+                "chat_id": "18b8e1f9-4ae7-461c-84ea-8e1f54d1a45e",
+                "direction": "Forward",
+                "filter": {
+                  "message_ids": [
+                    "3000000300211559667"
+                  ]
+                },
+                "from_message_id": 3000000000118032000,
+                "limit": 1
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "История чата",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3ChatHistoryResponse"
+                },
+                "example": {
+                  "has_next": true,
+                  "messages": [
+                    {
+                      "context": {
+                        "order_number": "123456789",
+                        "sku": "987654321"
+                      },
+                      "created_at": "2019-08-24T14:15:22Z",
+                      "data": [
+                        "Здравствуйте, у меня вопрос по вашему товару \"Стекло защитное для смартфонов\", артикул 11223. Подойдет ли он на данную [ модель ](https://www.ozon.ru/product/smartfon-samsung-galaxy-a03s-4-64-gb-chernyy) телефона?"
+                      ],
+                      "is_image": true,
+                      "is_read": true,
+                      "message_id": "3000000000817031942",
+                      "moderate_image_status": "SUCCESS",
+                      "user": {
+                        "id": "115568",
+                        "type": "Сustomer"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/chat/read",
+      "method": "POST",
+      "operationId": "ChatAPI_ChatReadV2",
+      "summary": "Отметить сообщения как прочитанные",
+      "description": "Метод для отметки выбранного сообщения и сообщений до него прочитанными. <br><br> Отметить сообщения с покупателем как прочитанные могут только продавцы с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus). Получите список чатов с покупателем `chats.chat.chat_type=\"Buyer_Seller\"` в ответе метода [/v3/chat/list](#operation/ChatAPI_ChatListV3).",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отметить сообщения как прочитанные",
+        "description": "Метод для отметки выбранного сообщения и сообщений до него прочитанными. <br><br> Отметить сообщения с покупателем как прочитанные могут только продавцы с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus). Получите список чатов с покупателем `chats.chat.chat_type=\"Buyer_Seller\"` в ответе метода [/v3/chat/list](#operation/ChatAPI_ChatListV3).",
+        "operationId": "ChatAPI_ChatReadV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatRead"
+              },
+              "example": {
+                "chat_id": "99feb3fc-a474-469f-95d5-268b470cc607",
+                "from_message_id": 3000000000118032000
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2ChatReadResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ChatAPI"
+        ]
+      }
+    }
+  ],
+  "schemas": {
+    "chatChatSendMessageRequest": {
+      "required": [
+        "chat_id",
+        "text"
+      ],
+      "properties": {
+        "chat_id": {
+          "type": "string",
+          "description": "Идентификатор чата."
+        },
+        "text": {
+          "type": "string",
+          "description": "Текст сообщения в формате plain text от 1 до 1000 символов."
+        }
+      },
+      "title": "ChatSendMessage",
+      "type": "object"
+    },
+    "chatChatSendMessageResponse": {
+      "properties": {
+        "result": {
+          "type": "string",
+          "description": "Результат обработки запроса."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "chatChatSendFileRequest": {
+      "required": [
+        "chat_id"
+      ],
+      "properties": {
+        "base64_content": {
+          "type": "string",
+          "description": "Файл в виде строки base64."
+        },
+        "chat_id": {
+          "type": "string",
+          "description": "Идентификатор чата."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название файла с расширением."
+        }
+      },
+      "title": "ChatSendFile",
+      "type": "object"
+    },
+    "chatChatSendFileResponse": {
+      "properties": {
+        "result": {
+          "type": "string",
+          "description": "Результат обработки запроса."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "chatChatStartRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Идентификатор отправления."
+        }
+      },
+      "title": "ChatStart",
+      "type": "object"
+    },
+    "chatChatStartResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/ChatStartResponseResult"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "ChatStartResponseResult": {
+      "properties": {
+        "chat_id": {
+          "type": "string",
+          "description": "Идентификатор чата."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода."
+    },
+    "ChatList": {
+      "required": [
+        "limit"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/components/schemas/ChatListRequestFilter"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество значений в ответе. Значение по умолчанию — 30. Максимальное значение — 1000."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество элементов, которое будет пропущено в ответе. Например, если `offset=10`, ответ начнётся с 11-го найденного элемента."
+        }
+      }
+    },
+    "ChatListRequestFilter": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр по чатам.",
+      "properties": {
+        "chat_status": {
+          "type": "string",
+          "description": "Фильтр по статусу чата:\n- `All` — все чаты.\n- `Opened` — открытые чаты.\n- `Closed` — закрытые чаты.\n\nЗначение по умолчанию: `All`.\n"
+        },
+        "unread_only": {
+          "type": "boolean",
+          "description": "Фильтр по чатам с непрочитанными сообщениями."
+        }
+      }
+    },
+    "v2ChatListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "chats": {
+          "description": "Данные чатов.",
+          "items": {
+            "$ref": "#/components/schemas/ChatInfo"
+          }
+        },
+        "total_chats_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Общее количество чатов."
+        },
+        "total_unread_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Общее количество непрочитанных сообщений."
+        }
+      }
+    },
+    "ChatInfo": {
+      "type": "object",
+      "title": "object",
+      "description": "Данные чата.",
+      "properties": {
+        "chat_id": {
+          "type": "string",
+          "description": "Идентификатор чата."
+        },
+        "chat_status": {
+          "type": "string",
+          "description": "Статус чата:\n- `All` — все чаты.\n- `Opened` — открытые чаты.\n- `Closed` — закрытые чаты.\n"
+        },
+        "chat_type": {
+          "type": "string",
+          "description": "Тип чата:\n- `Seller_Support` — чат с поддержкой.\n- `Buyer_Seller` — чат с покупателем.\n"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата создания чата."
+        },
+        "first_unread_message_id": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор первого непрочитанного сообщения в чате."
+        },
+        "last_message_id": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор последнего сообщения в чате."
+        },
+        "unread_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество непрочитанных сообщений в чате."
+        }
+      }
+    },
+    "v3ChatList": {
+      "required": [
+        "limit"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/components/schemas/v3ChatListRequestFilter"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество значений в ответе. Значение по умолчанию — 30. Максимальное значение — 1000."
+        },
+        "cursor": {
+          "type": "string",
+          "description": "Указатель для выборки следующих данных."
+        }
+      }
+    },
+    "v3ChatListRequestFilter": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр по чатам.",
+      "properties": {
+        "chat_status": {
+          "type": "string",
+          "description": "Фильтр по статусу чата:\n- `All` — все чаты.\n- `Opened` — открытые чаты.\n- `Closed` — закрытые чаты.\n\nЗначение по умолчанию: `All`.\n"
+        },
+        "unread_only": {
+          "type": "boolean",
+          "description": "Фильтр по чатам с непрочитанными сообщениями."
+        }
+      }
+    },
+    "v3ChatListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "chats": {
+          "description": "Данные чатов.",
+          "items": {
+            "$ref": "#/components/schemas/v3ChatInfo"
+          }
+        },
+        "total_unread_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Общее количество непрочитанных сообщений."
+        },
+        "cursor": {
+          "type": "string",
+          "description": "Указатель для выборки следующих данных."
+        },
+        "has_next": {
+          "type": "boolean",
+          "description": "Признак, что в ответе вернулись не все чаты:\n- `true` — сделайте повторный запрос с новым параметром `cursor` для получения остальных чатов;\n- `false` — ответ содержит все чаты для фильтра, который был задан в запросе.\n"
+        }
+      }
+    },
+    "v3ChatInfo": {
+      "type": "object",
+      "properties": {
+        "chat": {
+          "$ref": "#/components/schemas/v3ChatDetailsInfo"
+        },
+        "first_unread_message_id": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор первого непрочитанного сообщения в чате."
+        },
+        "last_message_id": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор последнего сообщения в чате."
+        },
+        "unread_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество непрочитанных сообщений в чате."
+        }
+      }
+    },
+    "v3ChatDetailsInfo": {
+      "type": "object",
+      "description": "Информация о чате.",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата создания чата."
+        },
+        "chat_id": {
+          "type": "string",
+          "description": "Идентификатор чата."
+        },
+        "chat_status": {
+          "type": "string",
+          "description": "Статус чата:\n- `All` — все чаты.\n- `Opened` — открытые чаты.\n- `Closed` — закрытые чаты.\n- `UNSPECIFIED` — не определено.\n"
+        },
+        "chat_type": {
+          "type": "string",
+          "description": "Тип чата:\n- `Seller_Support` — чат с поддержкой.\n- `Buyer_Seller` — чат с покупателем.\n- `UNSPECIFIED` — не определено.\n"
+        }
+      }
+    },
+    "ChatHistory": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "chat_id": {
+          "type": "string",
+          "description": "Идентификатор чата."
+        },
+        "direction": {
+          "type": "string",
+          "description": "Направление сортировки сообщений:\n- `Forward` — от старых к новым.\n- `Backward` — от новых к старым.\n\nЗначение по умолчанию — `Backward`. Количество сообщений можно установить в параметре `limit`.\n"
+        },
+        "from_message_id": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор сообщения, с которого начать вывод истории чата. По умолчанию — последнее видимое сообщение."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество сообщений в ответе. По умолчанию — 50. Максимальное значение — 1000."
+        }
+      },
+      "required": [
+        "chat_id",
+        "limit"
+      ]
+    },
+    "v2ChatHistoryResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "has_next": {
+          "type": "boolean",
+          "description": "Признак, что в ответе вернули не все сообщения."
+        },
+        "messages": {
+          "description": "Массив сообщений, отсортированный в соответствии с параметром `direction` из тела запроса.",
+          "items": {
+            "$ref": "#/components/schemas/v2ChatMessage"
+          }
+        }
+      }
+    },
+    "v2ChatMessage": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата создания сообщения."
+        },
+        "data": {
+          "description": "Массив с содержимым сообщения в формате Markdown.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_read": {
+          "type": "boolean",
+          "description": "Признак, что сообщение прочитано."
+        },
+        "messageId": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор сообщения."
+        },
+        "user": {
+          "$ref": "#/components/schemas/v2User"
+        }
+      }
+    },
+    "v2User": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация об участнике чата.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Идентификатор участника чата."
+        },
+        "type": {
+          "type": "string",
+          "description": "Тип участника чата:\n- `customer` — покупатель,\n- `seller` — продавец,\n- `crm` — системные сообщения,\n- `courier` — курьер,\n- `support` — поддержка.\n"
+        }
+      }
+    },
+    "v3ChatHistoryRequest": {
+      "type": "object",
+      "properties": {
+        "chat_id": {
+          "type": "string",
+          "description": "Идентификатор чата."
+        },
+        "direction": {
+          "type": "string",
+          "description": "Направление сортировки сообщений:\n- `Forward` — от старых к новым.\n- `Backward` — от новых к старым.\n\nЗначение по умолчанию — `Backward`. Количество сообщений можно установить в параметре `limit`.\n"
+        },
+        "filter": {
+          "$ref": "#/components/schemas/ChatHistoryRequestFilter"
+        },
+        "from_message_id": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор сообщения, с которого начать вывод истории чата. По умолчанию — последнее видимое сообщение."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество сообщений в ответе. По умолчанию — 50. Максимальное значение — 1000."
+        }
+      },
+      "required": [
+        "chat_id"
+      ]
+    },
+    "ChatHistoryRequestFilter": {
+      "type": "object",
+      "description": "Фильтр по сообщениям.",
+      "properties": {
+        "message_ids": {
+          "description": "Идентификаторы сообщений.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uint64"
+          }
+        }
+      }
+    },
+    "v3ChatHistoryResponse": {
+      "type": "object",
+      "properties": {
+        "has_next": {
+          "type": "boolean",
+          "description": "Признак, что в ответе вернули не все сообщения."
+        },
+        "messages": {
+          "description": "Массив сообщений, отсортированный в соответствии с параметром `direction` из тела запроса.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v3ChatMessage"
+          }
+        }
+      }
+    },
+    "v3ChatMessage": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/components/schemas/ChatMessageContext"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата создания сообщения."
+        },
+        "data": {
+          "description": "Массив с содержимым сообщения в формате Markdown.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_image": {
+          "description": "Признак, что сообщение содержит изображение.",
+          "type": "boolean"
+        },
+        "is_read": {
+          "type": "boolean",
+          "description": "Признак, что сообщение прочитано."
+        },
+        "message_id": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор сообщения."
+        },
+        "moderate_image_status": {
+          "description": "Статус модерации изображения.",
+          "$ref": "#/components/schemas/ChatMessageModerateImageStatus"
+        },
+        "user": {
+          "$ref": "#/components/schemas/v3User"
+        }
+      }
+    },
+    "ChatMessageContext": {
+      "type": "object",
+      "description": "Информация о чате.",
+      "properties": {
+        "order_number": {
+          "description": "Номер заказа.",
+          "type": "string"
+        },
+        "sku": {
+          "type": "string",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "ChatMessageModerateImageStatus": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "MODERATION",
+        "FAILED"
+      ],
+      "description": "Статус модерации изображения: \n  - `SUCCESS` — прошло модерацию;\n  - `MODERATION` — на модерации;\n  - `FAILED` — не прошло модерацию.\n"
+    },
+    "v3User": {
+      "type": "object",
+      "description": "Информация об участнике чата.",
+      "properties": {
+        "id": {
+          "description": "Идентификатор участника чата.",
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "Тип участника чата:\n- `customer` — покупатель,\n- `seller` — продавец,\n- `crm` — системные сообщения,\n- `courier` — курьер,\n- `support` — поддержка.\n"
+        }
+      }
+    },
+    "ChatRead": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "chat_id": {
+          "type": "string",
+          "description": "Идентификатор чата."
+        },
+        "from_message_id": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор сообщения."
+        }
+      },
+      "required": [
+        "chat_id"
+      ]
+    },
+    "v2ChatReadResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "unread_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество непрочитанных сообщений в чате."
+        }
+      }
+    }
+  }
+}

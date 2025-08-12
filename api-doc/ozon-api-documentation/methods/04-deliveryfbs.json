@@ -1,0 +1,3020 @@
+{
+  "metadata": {
+    "tag": "DeliveryFBS",
+    "name": "DeliveryFBS",
+    "displayName": "Доставка FBS",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 18,
+    "schemasCount": 53,
+    "generatedAt": "2025-08-09T16:28:42.334Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/carriage/create",
+      "method": "POST",
+      "operationId": "CarriageAPI_CarriageCreate",
+      "summary": "Создание отгрузки",
+      "description": "\n<aside class=\"warning\">\nЕсли вы продавец не из России, обратите внимание на доступность <a href=\"https://seller-edu.ozon.ru/fbs/ozon-logistika/sobrat-zakazy#шаг-2-сформируите-отгрузку\">рекомендованного времени</a> в личном кабинете.\nЕсли вам не доступен этот функционал, создайте отгрузку через метод <a href=\"#operation/PostingAPI_PostingFBSActCreate\">/v2/posting/fbs/act/create</a>. \nПодтверждать отгрузку, которую создали через этот метод, не нужно. Вы не сможете отредактировать состав отгрузки.\n\n</aside>\n\nИспользуйте метод для создания первой FBS отгрузки. В неё попадут все отправления со статусом «Готов к отгрузке». Созданная отгрузка получит статус `new`.\n\nДля отгрузки в статусе `new` можно перезаписать состав отправлений методом [/v1/carriage/set-postings](#operation/CarriageAPI_SetPostings). Если из отгрузки исключить часть отправлений, они могут попасть в следующую отгрузку. \n\nЧтобы получить список отправлений в отгрузке, используйте метод [/v2/posting/fbs/act/get-postings](#operation/PostingAPI_ActPostingList).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Создание отгрузки",
+        "description": "\n<aside class=\"warning\">\nЕсли вы продавец не из России, обратите внимание на доступность <a href=\"https://seller-edu.ozon.ru/fbs/ozon-logistika/sobrat-zakazy#шаг-2-сформируите-отгрузку\">рекомендованного времени</a> в личном кабинете.\nЕсли вам не доступен этот функционал, создайте отгрузку через метод <a href=\"#operation/PostingAPI_PostingFBSActCreate\">/v2/posting/fbs/act/create</a>. \nПодтверждать отгрузку, которую создали через этот метод, не нужно. Вы не сможете отредактировать состав отгрузки.\n\n</aside>\n\nИспользуйте метод для создания первой FBS отгрузки. В неё попадут все отправления со статусом «Готов к отгрузке». Созданная отгрузка получит статус `new`.\n\nДля отгрузки в статусе `new` можно перезаписать состав отправлений методом [/v1/carriage/set-postings](#operation/CarriageAPI_SetPostings). Если из отгрузки исключить часть отправлений, они могут попасть в следующую отгрузку. \n\nЧтобы получить список отправлений в отгрузке, используйте метод [/v2/posting/fbs/act/get-postings](#operation/PostingAPI_ActPostingList).\n",
+        "operationId": "CarriageAPI_CarriageCreate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CarriageCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация об отгрузке",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CarriageCreateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DeliveryFBS"
+        ]
+      }
+    },
+    {
+      "path": "/v1/carriage/approve",
+      "method": "POST",
+      "operationId": "CarriageAPI_CarriageApprove",
+      "summary": "Подтверждение отгрузки",
+      "description": "\nИспользуйте метод, чтобы подтвердить отгрузку после её создания.\nПосле подтверждения отгрузка перейдёт в статус «Сформирована».\n\nПосле подтверждения отгрузки вы можете получить лист отгрузки методом [/v2/posting/fbs/digital/act/get-pdf](#operation/PostingAPI_PostingFBSGetDigitalAct) и штрихкод отгрузки методом [/v2/posting/fbs/act/get-barcode](#operation/PostingAPI_PostingFBSGetBarcode). \n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Подтверждение отгрузки",
+        "description": "\nИспользуйте метод, чтобы подтвердить отгрузку после её создания.\nПосле подтверждения отгрузка перейдёт в статус «Сформирована».\n\nПосле подтверждения отгрузки вы можете получить лист отгрузки методом [/v2/posting/fbs/digital/act/get-pdf](#operation/PostingAPI_PostingFBSGetDigitalAct) и штрихкод отгрузки методом [/v2/posting/fbs/act/get-barcode](#operation/PostingAPI_PostingFBSGetBarcode). \n",
+        "operationId": "CarriageAPI_CarriageApprove",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CarriageApproveRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Отгрузка подтверждена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CarriageApproveResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DeliveryFBS"
+        ]
+      }
+    },
+    {
+      "path": "/v1/carriage/set-postings",
+      "method": "POST",
+      "operationId": "CarriageAPI_SetPostings",
+      "summary": "Изменение состава отгрузки",
+      "description": "\n<aside class=\"warning\">\nМетод недоступен для продавцов из СНГ. <br>\n\nПолностью перезаписывает список заказов в отгрузке. Передавайте только те заказы, которые находятся в статусе <code>Ожидает отгрузки</code>, и вы готовы их отгрузить.    \n</aside>\n\n<br>\n\n<aside class=\"notice\">\nЧтобы вернуться к списку заказов, удалите отгрузку с помощью метода <a href=\"#operation/CarriageAPI_CarriageCancel\">/v1/carriage/cancel</a>, и создайте новую.\n</aside>\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Изменение состава отгрузки",
+        "description": "\n<aside class=\"warning\">\nМетод недоступен для продавцов из СНГ. <br>\n\nПолностью перезаписывает список заказов в отгрузке. Передавайте только те заказы, которые находятся в статусе <code>Ожидает отгрузки</code>, и вы готовы их отгрузить.    \n</aside>\n\n<br>\n\n<aside class=\"notice\">\nЧтобы вернуться к списку заказов, удалите отгрузку с помощью метода <a href=\"#operation/CarriageAPI_CarriageCancel\">/v1/carriage/cancel</a>, и создайте новую.\n</aside>\n",
+        "operationId": "CarriageAPI_SetPostings",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1SetPostingsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация об отправлении",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1SetPostingsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DeliveryFBS"
+        ]
+      }
+    },
+    {
+      "path": "/v1/carriage/cancel",
+      "method": "POST",
+      "operationId": "CarriageAPI_CarriageCancel",
+      "summary": "Удаление отгрузки",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Удаление отгрузки",
+        "operationId": "CarriageAPI_CarriageCancel",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CarriageCancelRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация об отправлении",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CarriageCancelResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DeliveryFBS"
+        ]
+      }
+    },
+    {
+      "path": "/v1/carriage/delivery/list",
+      "method": "POST",
+      "operationId": "CarriageAPI_CarriageDeliveryList",
+      "summary": "Список методов доставки и отгрузок",
+      "description": "\nИспользуйте метод, чтобы получить список созданных отгрузок для метода доставки и их статусы.    \n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список методов доставки и отгрузок",
+        "description": "\nИспользуйте метод, чтобы получить список созданных отгрузок для метода доставки и их статусы.    \n",
+        "operationId": "CarriageAPI_CarriageDeliveryList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CarriageDeliveryListRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список методов и отгрузок",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CarriageDeliveryListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DeliveryFBS"
+        ]
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/act/create",
+      "method": "POST",
+      "operationId": "PostingAPI_PostingFBSActCreate",
+      "summary": "Подтвердить отгрузку и создать документы",
+      "description": "Подтверждает отгрузку и запускает формирование транспортной накладной и штрихкода для отгрузки.\nДля продавцов из России также запускается формирование листа отгрузки, а для продавцов из СНГ — акта приёма-передачи.\n\nЧтобы сформировать и получить документы, переведите отправление в статус `awaiting_deliver`.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryFBS"
+        ],
+        "summary": "Подтвердить отгрузку и создать документы",
+        "description": "Подтверждает отгрузку и запускает формирование транспортной накладной и штрихкода для отгрузки.\nДля продавцов из России также запускается формирование листа отгрузки, а для продавцов из СНГ — акта приёма-передачи.\n\nЧтобы сформировать и получить документы, переведите отправление в статус `awaiting_deliver`.\n",
+        "operationId": "PostingAPI_PostingFBSActCreate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingPostingFBSActCreateRequest"
+              },
+              "example": {
+                "containers_count": 1,
+                "delivery_method_id": 230039077005,
+                "departure_date": "2022-06-10T11:42:06.444Z"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Отгрузка подтверждена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingPostingFBSActCreateResponse"
+                },
+                "example": {
+                  "result": {
+                    "id": 5819327210249
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/posting/carriage-available/list",
+      "method": "POST",
+      "operationId": "PostingAPI_GetCarriageAvailableList",
+      "summary": "Список доступных перевозок",
+      "description": "Метод для получения перевозок, по которым нужно распечатать штрихкод для отгрузки и документы:\n- для продацов из России — лист отгрузки и транспортную накладную;\n- для продавцов из СНГ — акт и транспортную накладную.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryFBS"
+        ],
+        "summary": "Список доступных перевозок",
+        "description": "Метод для получения перевозок, по которым нужно распечатать штрихкод для отгрузки и документы:\n- для продацов из России — лист отгрузки и транспортную накладную;\n- для продавцов из СНГ — акт и транспортную накладную.\n",
+        "operationId": "PostingAPI_GetCarriageAvailableList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingv1GetCarriageAvailableListRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список перевозок",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingv1GetCarriageAvailableListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/carriage/get",
+      "method": "POST",
+      "operationId": "CarriageGet",
+      "summary": "Информация о перевозке",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryFBS"
+        ],
+        "summary": "Информация о перевозке",
+        "operationId": "CarriageGet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/carriageCarriageGetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о перевозке",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/carriageCarriageGetResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/posting/fbs/split",
+      "method": "POST",
+      "operationId": "FbsSplit",
+      "summary": "Разделить заказ на отправления без сборки",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryFBS"
+        ],
+        "operationId": "FbsSplit",
+        "summary": "Разделить заказ на отправления без сборки",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/v1PostingFbsSplitRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Заказ разделён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1PostingFbsSplitResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/act/get-postings",
+      "method": "POST",
+      "operationId": "PostingAPI_ActPostingList",
+      "summary": "Список отправлений в акте",
+      "description": "Возвращает список отправлений в акте по его идентификатору.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список отправлений в акте",
+        "description": "Возвращает список отправлений в акте по его идентификатору.",
+        "operationId": "PostingAPI_ActPostingList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2PostingFBSActGetPostingsRequest"
+              },
+              "example": {
+                "id": 900000250859000
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список отправлений",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2PostingFBSActGetPostingsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DeliveryFBS"
+        ]
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/act/get-container-labels",
+      "method": "POST",
+      "operationId": "PostingAPI_PostingFBSActGetContainerLabels",
+      "summary": "Этикетки для грузового места",
+      "description": "Метод создает этикетки для грузового места.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Этикетки для грузового места",
+        "description": "Метод создает этикетки для грузового места.",
+        "operationId": "PostingAPI_PostingFBSActGetContainerLabels",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingPostingFBSActGetContainerLabelsRequest"
+              },
+              "example": {
+                "id": 295662811
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Этикетки для грузового места",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingPostingFBSActGetContainerLabelsResponse"
+                },
+                "example": {
+                  "content_type": "application/pdf",
+                  "file_name": "carriage-containers-20903594.pdf",
+                  "file_content": "%PDF-1.4\n%âãÏÓ\n2 0 obj\n<</Length 2992/Filter/FlateDecode>>stream\nxµ}[ێ\u001c·\u0011}¯èç\u0000¦Èb\u0015/ @»+\u0019y0Ë\u0002ù\u0000%q\u0010X\u0001ìü?Ãn²ÉéfÍì(ò®\u001duMÝ/<Å\u0019\u001bòyýY,0Ã?=[ccyýåëå×K¡§\u000bAÂâ؉x\u001dßþqùÛ\u001fÿà-dp¢UÔø\u001aün)¿ùqÙ^üöóåݏùù¿«X¶i\t²JúçåÏøýõÙ$Gxn²\u0011&\u000f¥ÉCj¾§2aæºr&­^,~hI²)F¤ù7¥íu£:oÊ\u0013Ùȹ0ûLdB\u001a\u0018y§xk;ë<^Lv)%¼)í\u0014öcyóÎX:\u0018ÚõIXå\u0015\u0013╏\rõɌ5dýÆ\u0016Ê!6Ñpys\u001aÄXYÃ1­Ô\r:H©(%U´³bR"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DeliveryFBS"
+        ]
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/act/get-barcode",
+      "method": "POST",
+      "operationId": "PostingAPI_PostingFBSGetBarcode",
+      "summary": "Штрихкод для отгрузки отправления",
+      "description": "Метод для получения штрихкода, который нужно показать в пункте выдачи или сортировочном центре при отгрузке отправления.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Штрихкод для отгрузки отправления",
+        "description": "Метод для получения штрихкода, который нужно показать в пункте выдачи или сортировочном центре при отгрузке отправления.",
+        "operationId": "PostingAPI_PostingFBSGetBarcode",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2PostingFBSGetBarcodeRequest"
+              },
+              "example": {
+                "id": "295662811"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Штрихкод для отправления",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2PostingFBSGetBarcodeResponse"
+                },
+                "example": {
+                  "content_type": "image/png",
+                  "file_name": "20913984_barcode.png",
+                  "file_content": "PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0003\u0010\u0000\u0000\u0000\u0010\u0000\u0000\u0000\u0000íZ\u000e'\u0000\u0000\u0002pIDATxìÕÁJ\u00031\u0014@Q+þÿ/×E\u0017\u000e¼\u0010u¡-ç¬$£Éˌp?î÷·§t» }ýü¸Ãcåz¹2wOWû\\Ϛ뫧×Ùö;ì|rÇýßîç¼úî{§¬N?í7oìv¸®µ¹Ãùû¹¾ÿÏ9ÿî?a¸ºéê7O&߿É9çÉ\u000eÏáý¯\u0007\u0000à\u0012\b\u0000@\u0000\u0004\u0002$\u0010\u0000$\u0000 \t\u0004\u0000I \u0000H\u0002\u0001@\u0012\b\u0000@\u0000\u0004\u0002$\u0010\u0000$\u0000 \t\u0004\u0000I \u0000H\u0002\u0001@\u0012\b\u0000@\u0000\u0004\u0002$\u0010\u0000$\u0000 \t\u0004\u0000I \u0000H\u0002\u0001@\u0012\b\u0000@\u0000\u0004\u0002$\u0010\u0000$\u0000 \t\u0004\u0000I \u0000H\u0002\u0001@\u0012\b\u0000@\u0000\u0004\u0002$\u0010\u0000"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DeliveryFBS"
+        ]
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/act/get-barcode/text",
+      "method": "POST",
+      "operationId": "PostingAPI_PostingFBSGetBarcodeText",
+      "summary": "Значение штрихкода для отгрузки отправления",
+      "description": "Используйте этот метод, чтобы получить штрихкод из ответа\n[/v2/posting/fbs/act/get-barcode](#operation/PostingAPI_PostingFBSGetBarcode) в текстовом виде.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Значение штрихкода для отгрузки отправления",
+        "description": "Используйте этот метод, чтобы получить штрихкод из ответа\n[/v2/posting/fbs/act/get-barcode](#operation/PostingAPI_PostingFBSGetBarcode) в текстовом виде.\n",
+        "tags": [
+          "DeliveryFBS"
+        ],
+        "operationId": "PostingAPI_PostingFBSGetBarcodeText",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2PostingFBSGetBarcodeRequest"
+              },
+              "example": {
+                "id": "295662811"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Значение штрихкода",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2PostingFBSGetBarcodeTextResponse"
+                },
+                "example": {
+                  "result": "%303%24276481394"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/digital/act/check-status",
+      "method": "POST",
+      "operationId": "PostingAPI_PostingFBSDigitalActCheckStatus",
+      "summary": "Статус формирования накладной",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryFBS"
+        ],
+        "summary": "Статус формирования накладной",
+        "operationId": "PostingAPI_PostingFBSDigitalActCheckStatus",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2PostingFBSDigitalActCheckStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус формирования накладной",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2PostingFBSDigitalActCheckStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/act/get-pdf",
+      "method": "POST",
+      "operationId": "PostingAPI_PostingFBSGetAct",
+      "summary": "Получить PDF c документами",
+      "description": "С помощью метода можно получить:\n- продацам из России — лист отгрузки и транспортную накладную;\n- продавцам из СНГ — акт и транспортную накладную.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryFBS"
+        ],
+        "summary": "Получить PDF c документами",
+        "description": "С помощью метода можно получить:\n- продацам из России — лист отгрузки и транспортную накладную;\n- продавцам из СНГ — акт и транспортную накладную.\n",
+        "operationId": "PostingAPI_PostingFBSGetAct",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingPostingFBSGetActRequest"
+              },
+              "example": {
+                "id": 22435521842000
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Документы",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingPostingFBSGetActResponse"
+                },
+                "example": {
+                  "content_type": "application/pdf",
+                  "file_name": "20928233.pdf",
+                  "file_content": "%PDF-1.4\n%âãÏÓ\n2 0 obj\n<</Length 13528/Filter/FlateDecode>>stream\nxí }[ ¯ä:vÞ{ ÿz\u000e{ { { }\\\\x1d\\\\xde/\\\\xc0{ } } } ]µw\u000fò` 9ój8ö\u0000í$¶\u0003ä燔Dº|\"µo ]ÝØ})D\\\\÷õ­NHßÿº°ðûoºì¿NñÎsïÝå\u001fþõÇÿù\u0011¯\u000be}ǍÑ\u0017©í¤4âòïÿøãïþËåßÂ7dÇ\u0014÷BðþYËÿGðKüýßÿt\u0019þñïýñ۟äå¯ÿÑ?Ùq}\u0011Éø¸ê?añ«Ã?ú¯ªøÕN_\r8®.9\u0013¿þ\u001fáÜ]ò?íÛ\u000fç\u0011½Há/V°ø\"qÄø«O\\G\u000bµþDëõ'έ>ñ|}ëïpÆÅæ#³\u0018?ܣDxM>èT?¹ìÏ8ï͇aÞ×ßüöß.øÃo{û¯¯"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/act/list",
+      "method": "POST",
+      "operationId": "PostingAPI_FbsActList",
+      "summary": "Список актов по отгрузкам",
+      "description": "Возвращает список актов по отгрузкам с возможностью отфильтровать отгрузки по периоду, статусу и типу интеграции.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryFBS"
+        ],
+        "summary": "Список актов по отгрузкам",
+        "description": "Возвращает список актов по отгрузкам с возможностью отфильтровать отгрузки по периоду, статусу и типу интеграции.",
+        "operationId": "PostingAPI_FbsActList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2PostingFBSActListRequest"
+              },
+              "example": {
+                "filter": {
+                  "date_from": "2021-08-04",
+                  "date_to": "2022-08-04",
+                  "integration_type": "ozon",
+                  "status": [
+                    "delivered"
+                  ]
+                },
+                "limit": 100
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список актов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2PostingFBSActListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/digital/act/get-pdf",
+      "method": "POST",
+      "operationId": "PostingAPI_PostingFBSGetDigitalAct",
+      "summary": "Получить лист отгрузки по перевозке",
+      "description": "Вы можете получить документы, если в ответе метода [/v2/posting/fbs/digital/act/check-status](#operation/PostingAPI_PostingFBSDigitalActCheckStatus) был один из статусов:\n- `FORMED` — перевозка сформирована успешно,\n- `CONFIRMED` — перевозка подтверждена Ozon,\n- `CONFIRMED_WITH_MISMATCH` — перевозка принята Ozon с расхождениями.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryFBS"
+        ],
+        "summary": "Получить лист отгрузки по перевозке",
+        "description": "Вы можете получить документы, если в ответе метода [/v2/posting/fbs/digital/act/check-status](#operation/PostingAPI_PostingFBSDigitalActCheckStatus) был один из статусов:\n- `FORMED` — перевозка сформирована успешно,\n- `CONFIRMED` — перевозка подтверждена Ozon,\n- `CONFIRMED_WITH_MISMATCH` — перевозка принята Ozon с расхождениями.\n",
+        "operationId": "PostingAPI_PostingFBSGetDigitalAct",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2PostingFBSGetDigitalActRequest"
+              },
+              "example": {
+                "id": 900000250859000,
+                "doc_type": "act_of_acceptance"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Файл с документом",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2PostingFBSGetDigitalActResponse"
+                },
+                "example": {
+                  "content_type": "application/pdf",
+                  "file_name": "20816409_act_of_mismatch.pdf",
+                  "file_content": "%PDF-1.4\n%ÓôÌá\n1 0 obj\n<<\n/Creator(Chromium)\n/Producer(PDFsharp 1.50.5147 \\([www.pdfsharp.com|http://www.pdfsharp.com/]\\) \\(Original: Skia/PDF m103\\))\n/CreationDate(D:20230625092529+00'00')\n/ModDate(D:20230625092529+00'00')\n>>\nendobj\n2 0 obj\n<<\n/Type/Page\n/Resources\n<<\n/ProcSet[/PDF/Text/ImageB/ImageC/ImageI]\n/ExtGState\n<<\n/G3 3 0 R\n/G8 8 0 R\n>>\n/XObject\n<<\n/X6 6 0 R\n/X7 7 0 R\n>>\n/Font\n<<\n/F4 4 0 R\n/F5 5 0 R\n>>\n>>\n/MediaBox[0 0 594.96 841.92]\n/Contents 9 0 R\n/StructParents 0\n/Parent 13 0 R\n/Group\n<<\n/CS/DeviceRGB\n/S/Transparency\n>>\n>>\nendobj\n3 0 obj\n<<\n/ca 1\n/BM/Normal\n>>\nendobj\n4 0 obj\n<<\n/Type/Font\n/Subtype/Type0\n/BaseFont/AAAAAA+LiberationSans\n/Encoding/Identity-H\n/DescendantFonts[160 0 R]\n/ToUnicode 161 0 R\n>>\nendobj\n5 0 obj\n<<\n/Type/Font\n/Subtype/Type0\n/BaseFont/BAAAAA+LiberationSans-Bold\n/Encoding/Identity-H\n/DescendantFonts[164 0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/act/check-status",
+      "method": "POST",
+      "operationId": "PostingAPI_PostingFBSActCheckStatus",
+      "summary": "Статус отгрузки и документов",
+      "description": "Возвращает статус формирования штрихкода для отгрузки и документов:\n- для продавцов из России — транспортной накладной и листа отгрузки;\n- для продавцов из СНГ — транспортной накладной и акта приёма-передачи.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryFBS"
+        ],
+        "summary": "Статус отгрузки и документов",
+        "description": "Возвращает статус формирования штрихкода для отгрузки и документов:\n- для продавцов из России — транспортной накладной и листа отгрузки;\n- для продавцов из СНГ — транспортной накладной и акта приёма-передачи.\n",
+        "operationId": "PostingAPI_PostingFBSActCheckStatus",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingPostingFBSActCheckStatusRequest"
+              },
+              "example": {
+                "id": 900000250859000
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус отгрузки и документов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingPostingFBSActCheckStatusResponse"
+                },
+                "example": {
+                  "result": {
+                    "added_to_act": [
+                      "true"
+                    ],
+                    "removed_from_act": [
+                      "false"
+                    ],
+                    "status": "ready"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "v1CarriageCreateRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "delivery_method_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор метода доставки."
+        },
+        "departure_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата отгрузки. По умолчанию — текущая дата."
+        }
+      }
+    },
+    "v1CarriageCreateResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "carriage_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор перевозки."
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v1CarriageApproveRequest": {
+      "type": "object",
+      "title": "object",
+      "required": [
+        "carriage_id"
+      ],
+      "properties": {
+        "carriage_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор отгрузки.",
+          "required": true
+        },
+        "containers_count": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество грузовых мест. \n\nИспользуйте параметр, если вы подключены к доверительной приёмке и отгружаете заказы грузовыми местами. Если вы не подключены к доверительной приёмке, пропустите его.\n"
+        }
+      }
+    },
+    "v1CarriageApproveResponse": {
+      "type": "object",
+      "title": "object"
+    },
+    "v1SetPostingsRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "carriage_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор отгрузки.",
+          "required": true
+        },
+        "posting_numbers": {
+          "type": "array",
+          "description": "Актуальный список отправлений.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1SetPostingsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "items": {
+            "$ref": "#/components/schemas/SetPostingsResponseResult"
+          }
+        }
+      }
+    },
+    "SetPostingsResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Описание ошибки."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "result": {
+          "description": "Результат обработки запроса. `true`, если запрос был обработан успешно.\n",
+          "type": "boolean"
+        }
+      }
+    },
+    "v1CarriageCancelRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "carriage_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор отгрузки.",
+          "required": true
+        }
+      }
+    },
+    "v1CarriageCancelResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Описание ошибки."
+        },
+        "carriage_status": {
+          "type": "string",
+          "description": "Статус отгрузки."
+        }
+      }
+    },
+    "v1CarriageDeliveryListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "delivery_method_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор метода доставки."
+        },
+        "departure_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата отгрузки. По умолчанию — текущая дата."
+        }
+      }
+    },
+    "v1CarriageDeliveryListResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1CarriageDeliveryListResponseResult"
+          }
+        }
+      }
+    },
+    "v1CarriageDeliveryListResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "assembly_list_availability": {
+          "type": "boolean",
+          "description": "`true`, если доступен лист подбора.\n"
+        },
+        "can_create_another_carriage": {
+          "type": "boolean",
+          "description": "`true`, если можно создать ещё одну перевозку.\n"
+        },
+        "carriage_postings_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество отправлений в перевозке."
+        },
+        "carriage_quantum_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество квантов в перевозке."
+        },
+        "carriages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "$ref": "#/components/schemas/v1CarriageDeliveryListResponseResultCarriages"
+          },
+          "description": "Список перевозок."
+        },
+        "cut_in": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Время начала сборки и часовой пояс времени склада."
+        },
+        "delivery_method_id": {
+          "type": "integer",
+          "description": "Идентификатор метода доставки."
+        },
+        "delivery_method_name": {
+          "type": "string",
+          "description": "Название метода доставки."
+        },
+        "delivery_method_status": {
+          "type": "string",
+          "description": "Статус метода доставки."
+        },
+        "departure_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата отгрузки."
+        },
+        "dropoff_address": {
+          "type": "string",
+          "description": "Адрес точки отгрузки."
+        },
+        "dropoff_change_availability": {
+          "type": "string",
+          "description": "Статус возможности смены точки отгрузки."
+        },
+        "dropoff_point_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор точки отгрузки."
+        },
+        "dropoff_point_type": {
+          "type": "string",
+          "description": "Способ отгрузки."
+        },
+        "errors": {
+          "items": {
+            "$ref": "#/components/schemas/v1CarriageDeliveryListResponseResultErrors"
+          },
+          "type": "array",
+          "description": "Массив ошибок, которые возникли при обработке запроса."
+        },
+        "first_mile_changing": {
+          "type": "boolean",
+          "description": "`true`, если точка отгрузки изменилась.\n"
+        },
+        "first_mile_type": {
+          "type": "string",
+          "description": "Тип первой мили."
+        },
+        "has_entrusted_acceptance": {
+          "type": "boolean",
+          "description": "Признак доверительной приёмки. `true`, если доверительная приёмка включена на складе."
+        },
+        "integration_type": {
+          "type": "string",
+          "description": "Тип интеграции со службой доставки."
+        },
+        "is_presort": {
+          "type": "boolean",
+          "description": "`true`, если отгрузка с предсортировкой.\n"
+        },
+        "is_rfbs": {
+          "type": "boolean",
+          "description": "`true`, если склад работает по схеме rFBS.\n"
+        },
+        "recommended_time_local": {
+          "type": "string",
+          "description": "Рекомендуемое местное время отгрузки в пункт приёма заказов."
+        },
+        "recommended_time_utc_offset_in_minutes": {
+          "type": "number",
+          "format": "int32",
+          "description": "Смещение часового пояса рекомендуемого времени отгрузки от UTC-0 в минутах."
+        },
+        "cutoff_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата и время, до которых нужно собрать отправление."
+        },
+        "mandatory_packaged_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество «обязательных» собранных отправлений."
+        },
+        "mandatory_packaged_quantum_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество «обязательных» собранных квантов."
+        },
+        "mandatory_postings_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество отправлений, которые нужно собрать."
+        },
+        "mandatory_quantum_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество квантов, которые нужно собрать."
+        },
+        "optional_packaged_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество собранных «необязательных» отправлений."
+        },
+        "postings_for_another_carriage_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество отправлений, которые могут попасть в следующую перевозку."
+        },
+        "quantum_for_another_carriage_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество квантов, которые могут попасть в следующую перевозку."
+        },
+        "timeslot_from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Начало таймслота в точке отгрузки."
+        },
+        "timeslot_to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Окончание таймслота в точке отгрузки."
+        },
+        "tpl_provider_icon_url": {
+          "type": "string",
+          "description": "Ссылка на иконку службы доставки."
+        },
+        "tpl_provider_name": {
+          "type": "string",
+          "description": "Название службы доставки."
+        },
+        "warehouse_city": {
+          "type": "string",
+          "description": "Город склада."
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор склада."
+        },
+        "warehouse_name": {
+          "type": "string",
+          "description": "Название склада."
+        }
+      }
+    },
+    "v1CarriageDeliveryListResponseResultCarriages": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "description": "Идентификатор перевозки."
+        },
+        "postings_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество отправлений в перевозке."
+        },
+        "quantum_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество квантов в перевозке."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус перевозки для запрашиваемых метода и даты."
+        }
+      }
+    },
+    "v1CarriageDeliveryListResponseResultErrors": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "description": {
+          "type": "string",
+          "description": "Описание ошибки."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус ошибки."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingPostingFBSActCreateRequest": {
+      "required": [
+        "delivery_method_id"
+      ],
+      "properties": {
+        "containers_count": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество грузовых мест. \n\nИспользуйте параметр, если вы подключены к доверительной приёмке и отгружаете заказы грузовыми местами. Если вы не подключены к доверительной приёмке, пропустите его.\n\n[Подробнее в Базе знаний продавца](https://docs.ozon.ru/partners/prodayoa-so-svoego-sklada-fbs/doveritel-naya-priemka-gruzovogo-mesta)\n"
+        },
+        "delivery_method_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор метода доставки. Можно получить с помощью метода [/v1/delivery-method/list](#operation/WarehouseAPI_DeliveryMethodList)."
+        },
+        "departure_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата отгрузки."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingPostingFBSActCreateResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/PostingFBSActCreateResponseAct"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "PostingFBSActCreateResponseAct": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Номер задания на формирование штрихкода и документов."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода."
+    },
+    "postingv1GetCarriageAvailableListRequest": {
+      "required": [
+        "delivery_method_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "delivery_method_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Фильтр по методу доставки. Можно получить с помощью метода [/v1/delivery-method/list](#operation/WarehouseAPI_DeliveryMethodList)."
+        },
+        "departure_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата отгрузки. По умолчанию — текущая дата."
+        }
+      }
+    },
+    "postingv1GetCarriageAvailableListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "description": "Результат работы метода.",
+          "items": {
+            "$ref": "#/components/schemas/GetCarriageAvailableListResponseResult"
+          }
+        }
+      }
+    },
+    "GetCarriageAvailableListResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "carriage_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор перевозки (также номер задания на формирование документов)."
+        },
+        "carriage_postings_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество отправлений в перевозке."
+        },
+        "carriage_status": {
+          "type": "string",
+          "description": "Статус перевозки для запрашиваемого метода доставки и даты отгрузки."
+        },
+        "cutoff_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата и время, до которых нужно собрать отправление."
+        },
+        "delivery_method_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор метода доставки."
+        },
+        "delivery_method_name": {
+          "type": "string",
+          "description": "Название метода доставки."
+        },
+        "errors": {
+          "description": "Список ошибок.",
+          "items": {
+            "$ref": "#/components/schemas/ResultError"
+          }
+        },
+        "first_mile_type": {
+          "type": "string",
+          "description": "Тип первой мили."
+        },
+        "has_entrusted_acceptance": {
+          "type": "boolean",
+          "description": "Признак доверительной приёмки. `true`, если доверительная приёмка включена на складе."
+        },
+        "mandatory_postings_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество отправлений, которые нужно собрать."
+        },
+        "mandatory_packaged_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество собранных отправлений."
+        },
+        "recommended_time_local": {
+          "type": "string",
+          "description": "Рекомендуемое местное время отгрузки на пункт приёма заказов."
+        },
+        "recommended_time_utc_offset_in_minutes": {
+          "type": "number",
+          "format": "int32",
+          "description": "Смещение часового пояса рекомендуемого времени отгрузки от UTC-0 в минутах."
+        },
+        "tpl_provider_icon_url": {
+          "type": "string",
+          "description": "Ссылка на иконку службы доставки."
+        },
+        "tpl_provider_name": {
+          "type": "string",
+          "description": "Название службы доставки."
+        },
+        "warehouse_city": {
+          "type": "string",
+          "description": "Город склада."
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор склада."
+        },
+        "warehouse_name": {
+          "type": "string",
+          "description": "Название склада."
+        },
+        "warehouse_timezone": {
+          "type": "string",
+          "description": "Часовой пояс, в котором находится склад."
+        }
+      }
+    },
+    "ResultError": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "status": {
+          "type": "string",
+          "description": "Тип ошибки:\n- `warning` — предупреждение;\n- `critical` — критическая ошибка.\n"
+        }
+      }
+    },
+    "carriageCarriageGetRequest": {
+      "required": [
+        "carriage_id"
+      ],
+      "type": "object",
+      "properties": {
+        "carriage_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор перевозки."
+        }
+      }
+    },
+    "carriageCarriageGetResponse": {
+      "type": "object",
+      "properties": {
+        "act_type": {
+          "type": "string",
+          "description": "Тип акта приёма-передачи. Актуально для продавцов FBS."
+        },
+        "is_waybill_enabled": {
+          "type": "boolean",
+          "description": "`true`, если доступна печать транспортной накладной.\n"
+        },
+        "is_econom": {
+          "type": "boolean",
+          "description": "`true`, если отгрузка относится к товарам «Суперэконом».\n"
+        },
+        "arrival_pass_ids": {
+          "type": "array",
+          "description": "Список идентификаторов пропусков, оформленных на перевозку.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "available_actions": {
+          "type": "array",
+          "description": "Доступные действия с перевозкой.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cancel_availability": {
+          "$ref": "#/components/schemas/carriageCarriageGetResponseCancelAvailability"
+        },
+        "carriage_id": {
+          "type": "integer",
+          "description": "Идентификатор перевозки.",
+          "format": "int64"
+        },
+        "company_id": {
+          "type": "integer",
+          "description": "Идентификатор продавца.",
+          "format": "int64"
+        },
+        "containers_count": {
+          "type": "integer",
+          "description": "Количество грузовых мест.",
+          "format": "int32"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "Дата создания перевозки.",
+          "format": "date-time"
+        },
+        "delivery_method_id": {
+          "type": "integer",
+          "description": "Идентификатор метода доставки.",
+          "format": "int64"
+        },
+        "departure_date": {
+          "type": "string",
+          "description": "Дата выполнения перевозки."
+        },
+        "first_mile_type": {
+          "type": "string",
+          "description": "Тип первой мили."
+        },
+        "has_postings_for_next_carriage": {
+          "type": "boolean",
+          "description": "`true`, если есть отправления, которые не попали в перевозку, но нужно отгрузить.\n"
+        },
+        "integration_type": {
+          "type": "string",
+          "description": "Тип перевозки."
+        },
+        "is_container_label_printed": {
+          "type": "boolean",
+          "description": "`true`, если вы уже напечатали этикетки на грузовые места.\n"
+        },
+        "is_partial": {
+          "type": "boolean",
+          "description": "`true`, если перевозка частичная.\n"
+        },
+        "partial_num": {
+          "type": "integer",
+          "description": "Порядковый номер частичной перевозки.",
+          "format": "int64"
+        },
+        "retry_count": {
+          "type": "integer",
+          "description": "Количество повторных попыток создания перевозки.",
+          "format": "int32"
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус перевозки:\n- `received` — идёт приёмка,\n- `closed` — завершена после приёмки,\n- `sended` — отправлена,\n- `cancelled` — отменена.\n"
+        },
+        "tpl_provider_id": {
+          "type": "integer",
+          "description": "Идентификатор провайдера доставки.",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "Дата последнего обновления информации о перевозке.",
+          "format": "date-time"
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "description": "Идентификатор склада.",
+          "format": "int64"
+        }
+      }
+    },
+    "carriageCarriageGetResponseCancelAvailability": {
+      "type": "object",
+      "title": "object",
+      "description": "Возможность отмены.",
+      "properties": {
+        "is_cancel_available": {
+          "type": "boolean",
+          "description": "`true`, если перевозку можно отменить.\n"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Причина, почему перевозку нельзя отменить."
+        }
+      }
+    },
+    "v1PostingFbsSplitResponse": {
+      "type": "object",
+      "properties": {
+        "parent_posting": {
+          "$ref": "#/components/schemas/v1PostingFbsSplitResponsePostingParent"
+        },
+        "postings": {
+          "type": "array",
+          "description": "Список отправлений, на которые разделился заказ.",
+          "items": {
+            "$ref": "#/components/schemas/v1PostingFbsSplitResponsePosting"
+          }
+        }
+      }
+    },
+    "v1PostingFbsSplitResponsePostingParent": {
+      "type": "object",
+      "description": "Информация об изначальном отправлении.",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер изначального отправления."
+        },
+        "products": {
+          "type": "array",
+          "description": "Список товаров в отправлении.",
+          "items": {
+            "$ref": "#/components/schemas/v1ProductFbsSplit"
+          }
+        }
+      }
+    },
+    "v1ProductFbsSplit": {
+      "type": "object",
+      "title": "PostingFbsSplit",
+      "properties": {
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество экземпляров."
+        }
+      },
+      "required": [
+        "product_id",
+        "quantity"
+      ]
+    },
+    "v1PostingFbsSplitResponsePosting": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "type": "array",
+          "description": "Список товаров в отправлении.",
+          "items": {
+            "$ref": "#/components/schemas/v1ProductFbsSplit"
+          }
+        }
+      }
+    },
+    "v2PostingFBSActGetPostingsRequest": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "int",
+          "format": "int64",
+          "description": "Идентификатор акта. Можно получить с помощью метода [/v2/posting/fbs/act/list](#operation/PostingAPI_FbsActList). Нужное значение — в параметре ответа `result.id`."
+        }
+      }
+    },
+    "v2PostingFBSActGetPostingsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "description": "Информация об отправлениях.",
+          "items": {
+            "$ref": "#/components/schemas/v2PostingFBSActGetPostingsResult"
+          }
+        }
+      }
+    },
+    "v2PostingFBSActGetPostingsResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор акта."
+        },
+        "multi_box_qty": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество коробок, в которые упакован товар."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус отправления."
+        },
+        "seller_error": {
+          "type": "string",
+          "description": "Расшифровка кода ошибки."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата и время обновления записи об отправлении."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата и время создания записи об отправлении."
+        },
+        "products": {
+          "type": "array",
+          "description": "Список товаров в отправлении.",
+          "items": {
+            "$ref": "#/components/schemas/v2PostingFBSActGetProducts"
+          }
+        }
+      }
+    },
+    "v2PostingFBSActGetProducts": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "price": {
+          "type": "string",
+          "description": "Цена товара."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товара в отправлении."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "postingPostingFBSActGetContainerLabelsRequest": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Номер задания на формирование документов (также идентификатор перевозки) из метода [POST /v2/posting/fbs/act/create](#operation/PostingAPI_PostingFBSActCreate)."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingPostingFBSActGetContainerLabelsResponse": {
+      "properties": {
+        "file_content": {
+          "format": "byte",
+          "type": "string",
+          "description": "Содержание файла в бинарном виде."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Название файла."
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Тип файла."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v2PostingFBSGetBarcodeRequest": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор перевозки."
+        }
+      }
+    },
+    "v2PostingFBSGetBarcodeResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "file_content": {
+          "type": "string",
+          "description": "Изображение со штрихкодом в бинарном виде."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Название файла."
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Тип файла."
+        }
+      }
+    },
+    "v2PostingFBSGetBarcodeTextResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "string",
+          "description": "Штрихкод в текстовом виде."
+        }
+      }
+    },
+    "v2PostingFBSDigitalActCheckStatusRequest": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Номер задания на формирование документов (также идентификатор перевозки) из метода [POST /v2/posting/fbs/act/create](#operation/PostingAPI_PostingFBSActCreate)."
+        }
+      }
+    },
+    "v2PostingFBSDigitalActCheckStatusResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Номер задания на формирование документов."
+        },
+        "status": {
+          "type": "string",
+          "description": "Cтатус формирования документов:\n- `FORMING` — ещё не готовы,\n- `FORMED` — сформированы успешно,\n- `CONFIRMED` — подписаны Ozon,\n- `CONFIRMED_WITH_MISMATCH` — подписаны Ozon с расхождениями,\n- `NOT_FOUND` — документы не найдены,\n- `UNKNOWN_ERROR` — произошла ошибка.\n"
+        }
+      }
+    },
+    "postingPostingFBSGetActRequest": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Номер задания на формирование документов (также идентификатор перевозки) из метода [POST /v2/posting/fbs/act/create](#operation/PostingAPI_PostingFBSActCreate)."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingPostingFBSGetActResponse": {
+      "properties": {
+        "file_content": {
+          "format": "byte",
+          "type": "string",
+          "description": "Содержание файла в бинарном виде."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Название файла."
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Тип файла."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v2PostingFBSActListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/components/schemas/v2PostingFBSActListFilter"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Максимальное количество актов в ответе."
+        }
+      },
+      "required": [
+        "limit"
+      ]
+    },
+    "v2PostingFBSActListFilter": {
+      "type": "object",
+      "title": "object",
+      "description": "Параметры фильтра.",
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "description": "Начальная дата создания отгрузок."
+        },
+        "date_to": {
+          "type": "string",
+          "description": "Конечная дата создания отгрузок."
+        },
+        "integration_type": {
+          "type": "string",
+          "description": "Тип интеграции со службой доставки:\n  - `ozon` — доставка через Ozon логистику.\n  - `aggregator` — доставка внешней службой, Ozon регистрирует заказ.\n  - `3pl_tracking` — доставка внешней службой, продавец регистрирует заказ.\n  - `non_integrated` — доставка силами продавца.\n"
+        },
+        "status": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Статусы перевозок:\n  - `new` — новая,\n  - `awaiting_retry` — повторная попытка создания,\n  - `in_process` — собирается,\n  - `success` — создана,\n  - `error` — ошибка при создании,\n  - `sended` — отправлена,\n  - `received` — получена,\n  - `formed` — собрана,\n  - `cancelled` — отменена,\n  - `pending` — в очереди на сборку,\n  - `completion_enqueued` — в очереди на завершение,\n  - `completion_processing` — в процессе завершения,\n  - `completion_failed` — ошибка при завершении,\n  - `cancelation_enqueued` — в очереди на отмену,\n  - `cancelation_processing` — в процессе отмены,\n  - `cancelation_failed` — ошибка при отмене,\n  - `completed` — завершена,\n  - `closed` — закрыта.\n"
+        }
+      },
+      "required": [
+        "date_from",
+        "date_to"
+      ]
+    },
+    "v2PostingFBSActListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "description": "Результат запроса.",
+          "items": {
+            "$ref": "#/components/schemas/v2PostingFBSActListResult"
+          }
+        }
+      }
+    },
+    "v2PostingFBSActListResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "int",
+          "format": "int64",
+          "description": "Идентификатор отгрузки."
+        },
+        "delivery_method_id": {
+          "type": "int",
+          "format": "int64",
+          "description": "Идентификатор метода доставки."
+        },
+        "delivery_method_name": {
+          "type": "string",
+          "description": "Название метода доставки."
+        },
+        "integration_type": {
+          "type": "string",
+          "description": "Тип интеграции со службой доставки:\n  - `ozon` — доставка через Ozon логистику.\n  - `3pl` — доставка внешней службой, продавец регистрирует заказ.\n"
+        },
+        "containers_count": {
+          "type": "int",
+          "format": "int32",
+          "description": "Число грузовых мест."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус отгрузки."
+        },
+        "departure_date": {
+          "type": "string",
+          "description": "Дата отгрузки."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата создания записи об отгрузке."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата обновления записи об отгрузке."
+        },
+        "act_type": {
+          "type": "string",
+          "description": "Тип акта приёма-передачи для FBS продавцов."
+        },
+        "is_partial": {
+          "type": "boolean",
+          "description": "Признак частичной перевозки. `true`, если перевозка частичная.\n\nЧастичная перевозка значит, что отгрузка была разделена на несколько частей и по каждой из частей формируются отдельные акты.\n"
+        },
+        "has_postings_for_next_carriage": {
+          "type": "boolean",
+          "description": "Признак наличия подлежащих отгрузке отправлений, которые не попали в текущую перевозку. `true`, если такие отправления есть."
+        },
+        "partial_num": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Порядковый номер частичной перевозки."
+        },
+        "related_docs": {
+          "$ref": "#/components/schemas/v2PostingFBSActListRelatedDocs"
+        }
+      }
+    },
+    "v2PostingFBSActListRelatedDocs": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация про акты перевозки.",
+      "properties": {
+        "act_of_acceptance": {
+          "type": "object",
+          "description": "Информация про акт приёма-передачи.",
+          "properties": {
+            "created_at": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Дата создания акта."
+            },
+            "document_status": {
+              "type": "string",
+              "description": "Статус акта:\n  - `FORMING` — ещё не готов,\n  - `FORMED` — сформирован,\n  - `CONFIRMED` — подписан Ozon,\n  - `CONFIRMED_WITH_MISMATCH` — подписан Ozon с расхождениями,\n  - `ACCEPTED_BY_CARGO_PLACES` — принят по грузовым местам,\n  - `PRINTED_CARRIAGE` — электронная подпись не нужна,\n  - `ERROR`, `UNKNOWN_ERROR` — ошибка.\n"
+            }
+          }
+        },
+        "act_of_mismatch": {
+          "type": "object",
+          "description": "Информация про акт о расхождениях.",
+          "properties": {
+            "created_at": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Дата создания перевозки."
+            },
+            "document_status": {
+              "type": "string",
+              "description": "Статус перевозки или акта:\n  - `NEED_TO_SIGN` — требуется подпись,\n  - `ON_CONFIRMATION` — на подписании Ozon,\n  - `CONFIRMED` — подписан Ozon,\n  - `DISPUTE_OPENED` — принят по грузовым местам,\n  - `PRINTED_CARRIAGE` — электронная подпись не нужна,\n  - `UNKNOWN_ERROR` — ошибка.\n"
+            }
+          }
+        },
+        "act_of_excess": {
+          "type": "object",
+          "description": "Информация про акт об излишках.",
+          "properties": {
+            "created_at": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Дата создания акта."
+            },
+            "document_status": {
+              "type": "string",
+              "description": "Статус акта:\n  - `NEED_TO_SIGN` — требуется подпись,\n  - `CONFIRMED` — подписан Ozon,\n  - `UNKNOWN_ERROR` — ошибка.\n"
+            }
+          }
+        }
+      }
+    },
+    "v2PostingFBSGetDigitalActRequest": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Номер задания на формирование документов (также идентификатор перевозки) из метода [POST /v2/posting/fbs/act/create](#operation/PostingAPI_PostingFBSActCreate)."
+        },
+        "doc_type": {
+          "format": "string",
+          "description": "Тип электронного документа:\n- `act_of_acceptance` — лист отгрузки,\n- `act_of_mismatch` — акт о расхождениях,\n- `act_of_excess` — акт об излишках.\n"
+        }
+      }
+    },
+    "v2PostingFBSGetDigitalActResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "file_content": {
+          "type": "string",
+          "format": "byte",
+          "description": "Содержание файла в бинарном виде."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Название файла."
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Тип файла."
+        }
+      }
+    },
+    "postingPostingFBSActCheckStatusRequest": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Номер задания на формирование документов (также идентификатор перевозки) из метода [POST /v2/posting/fbs/act/create](#operation/PostingAPI_PostingFBSActCreate)."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingPostingFBSActCheckStatusResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/PostingFBSActCheckStatusResponseStatus"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "PostingFBSActCheckStatusResponseStatus": {
+      "properties": {
+        "act_type": {
+          "type": "string",
+          "description": "Тип документов.\n\nЕсли значение `ozon_digital`, используйте методы [/v2/posting/fbs/digital/act/check-status](#operation/PostingAPI_PostingFBSDigitalActCheckStatus) \n    и [/v2/posting/fbs/digital/act/get-pdf](#operation/PostingAPI_PostingFBSGetDigitalAct) для получения электронной транспортной накладной.\n"
+        },
+        "added_to_act": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Массив c номерами отправлений, которые добавлены в перевозку. Эти отправления нужно передать сегодня."
+        },
+        "removed_from_act": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Массив с номерами отправлений, которые не попали в перевозку. Такие отправления нужно передавать со следующей отгрузкой."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус запроса:\n - `in_process` — документы формируются, нужно подождать.\n - `ready` — документы сформированы и готовы для скачивания.\n - `error` — произошла ошибка при формировании документов, запросите документы повторно.\n - `cancelled` — создание документов отменено, запросите их повторно.\n - `The next postings aren't ready` — произошла ошибка, отправления не включены в отгрузку. Подождите некоторое время и проверьте результат запроса. Если ошибка повторяется, обратитесь в службу поддержки.\n"
+        },
+        "is_partial": {
+          "type": "boolean",
+          "description": "Признак частичной перевозки. `true`, если перевозка частичная.\n\nЧастичная перевозка значит, что отгрузка была разделена на несколько частей.\n"
+        },
+        "has_postings_for_next_carriage": {
+          "type": "boolean",
+          "description": "`true`, если есть отправления, не попавшие в текущую перевозку, но которые нужно отгрузить.\n\nЕсли в ответе вернулось `true`, подтвердите отгрузку или создайте новый акт через метод [/v2/posting/fbs/act/create](#operation/PostingAPI_PostingFBSActCreate) и проверьте их статус. Повторяйте действия, пока в ответе не вернётся `false`.\n"
+        },
+        "partial_num": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Порядковый номер частичной перевозки."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода."
+    }
+  }
+}

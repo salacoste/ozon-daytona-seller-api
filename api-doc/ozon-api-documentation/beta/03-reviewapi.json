@@ -1,0 +1,815 @@
+{
+  "metadata": {
+    "tag": "ReviewAPI",
+    "name": "ReviewAPI",
+    "displayName": "Работа с отзывами",
+    "description": "",
+    "externalDocs": null,
+    "directory": "beta",
+    "groupInfo": {
+      "groupName": "Бета-методы Seller API",
+      "groupIndex": 2,
+      "dataSelector": null
+    },
+    "endpointsCount": 7,
+    "schemasCount": 18,
+    "generatedAt": "2025-08-09T16:28:42.344Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/review/comment/create",
+      "method": "POST",
+      "operationId": "ReviewAPI_CommentCreate",
+      "summary": "Оставить комментарий на отзыв",
+      "description": "Доступно только для продавцов с подпиской Premium Plus.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1190-Metody-dlia-raboty-s-otzyvami) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Оставить комментарий на отзыв",
+        "description": "Доступно только для продавцов с подпиской Premium Plus.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1190-Metody-dlia-raboty-s-otzyvami) в сообществе разработчиков Ozon for dev.\n",
+        "tags": [
+          "ReviewAPI"
+        ],
+        "operationId": "ReviewAPI_CommentCreate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CommentCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Комментарий создан",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CommentCreateResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/review/comment/delete",
+      "method": "POST",
+      "operationId": "ReviewAPI_CommentDelete",
+      "summary": "Удалить комментарий на отзыв",
+      "description": "Доступно только для продавцов с подпиской Premium Plus.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1190-Metody-dlia-raboty-s-otzyvami) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Удалить комментарий на отзыв",
+        "description": "Доступно только для продавцов с подпиской Premium Plus.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1190-Metody-dlia-raboty-s-otzyvami) в сообществе разработчиков Ozon for dev.\n",
+        "tags": [
+          "ReviewAPI"
+        ],
+        "operationId": "ReviewAPI_CommentDelete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CommentDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Комментарий удалён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/review/comment/list",
+      "method": "POST",
+      "operationId": "ReviewAPI_CommentList",
+      "summary": "Список комментариев на отзыв",
+      "description": "Доступно только для продавцов с подпиской Premium Plus.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1190-Metody-dlia-raboty-s-otzyvami) в сообществе разработчиков Ozon for dev.\n\nМетод возвращает информацию по комментариям на отзывы, которые прошли модерацию.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список комментариев на отзыв",
+        "description": "Доступно только для продавцов с подпиской Premium Plus.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1190-Metody-dlia-raboty-s-otzyvami) в сообществе разработчиков Ozon for dev.\n\nМетод возвращает информацию по комментариям на отзывы, которые прошли модерацию.\n",
+        "tags": [
+          "ReviewAPI"
+        ],
+        "operationId": "ReviewAPI_CommentList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CommentListRequest"
+              },
+              "example": {
+                "limit": 100,
+                "offset": 0,
+                "review_id": "0187310a-97d9-dfcf-3039-82d809f0e233",
+                "sort_dir": "ASC"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о комментариях на отзыв",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CommentListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/review/change-status",
+      "method": "POST",
+      "operationId": "ReviewAPI_ReviewChangeStatus",
+      "summary": "Изменить статус отзывов",
+      "description": "Доступно только для продавцов с подпиской Premium Plus.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1190-Metody-dlia-raboty-s-otzyvami) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Изменить статус отзывов",
+        "description": "Доступно только для продавцов с подпиской Premium Plus.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1190-Metody-dlia-raboty-s-otzyvami) в сообществе разработчиков Ozon for dev.\n",
+        "tags": [
+          "ReviewAPI"
+        ],
+        "operationId": "ReviewAPI_ReviewChangeStatus",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ReviewChangeStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус изменён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/review/count",
+      "method": "POST",
+      "operationId": "ReviewAPI_ReviewCount",
+      "summary": "Количество отзывов по статусам",
+      "description": "Доступно только для продавцов с подпиской Premium Plus.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1190-Metody-dlia-raboty-s-otzyvami) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Количество отзывов по статусам",
+        "description": "Доступно только для продавцов с подпиской Premium Plus.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1190-Metody-dlia-raboty-s-otzyvami) в сообществе разработчиков Ozon for dev.\n",
+        "tags": [
+          "ReviewAPI"
+        ],
+        "operationId": "ReviewAPI_ReviewCount",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/QuestionAPI_GetQuestionCountBody"
+        },
+        "responses": {
+          "200": {
+            "description": "Количество обработанных и необработанных отзывов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ReviewCountResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/review/info",
+      "method": "POST",
+      "operationId": "ReviewAPI_ReviewInfo",
+      "summary": "Получить информацию об отзыве",
+      "description": "Доступно только для продавцов с подпиской Premium Plus.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1190-Metody-dlia-raboty-s-otzyvami) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить информацию об отзыве",
+        "description": "Доступно только для продавцов с подпиской Premium Plus.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1190-Metody-dlia-raboty-s-otzyvami) в сообществе разработчиков Ozon for dev.\n",
+        "tags": [
+          "ReviewAPI"
+        ],
+        "operationId": "ReviewAPI_ReviewInfo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ReviewInfoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация об отзыве",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ReviewInfoResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/review/list",
+      "method": "POST",
+      "operationId": "ReviewAPI_ReviewList",
+      "summary": "Получить список отзывов",
+      "description": "Доступно только для продавцов с подпиской Premium Plus.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1190-Metody-dlia-raboty-s-otzyvami) в сообществе разработчиков Ozon for dev.\n\nМетод не возвращает параметры «Достоинства» и «Недостатки», если они есть в отзывах на товар. Эти параметры устарели, в новых отзывах их нет.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить список отзывов",
+        "description": "Доступно только для продавцов с подпиской Premium Plus.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1190-Metody-dlia-raboty-s-otzyvami) в сообществе разработчиков Ozon for dev.\n\nМетод не возвращает параметры «Достоинства» и «Недостатки», если они есть в отзывах на товар. Эти параметры устарели, в новых отзывах их нет.\n",
+        "tags": [
+          "ReviewAPI"
+        ],
+        "operationId": "ReviewAPI_ReviewList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ReviewListRequest"
+              },
+              "example": {
+                "last_id": "",
+                "limit": 100,
+                "sort_dir": "ASC",
+                "status": "ALL"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список отзывов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ReviewListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "v1CommentCreateRequest": {
+      "type": "object",
+      "properties": {
+        "mark_review_as_processed": {
+          "description": "Обновление статуса у отзыва:\n- `true` — статус изменится на `Processed`.\n- `false` — статус не изменится.\n",
+          "type": "boolean"
+        },
+        "parent_comment_id": {
+          "description": "Идентификатор родительского комментария, на который вы отвечаете.",
+          "type": "string"
+        },
+        "review_id": {
+          "description": "Идентификатор отзыва.",
+          "type": "string"
+        },
+        "text": {
+          "description": "Текст комментария.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "review_id",
+        "text"
+      ]
+    },
+    "v1CommentCreateResponse": {
+      "type": "object",
+      "properties": {
+        "comment_id": {
+          "description": "Идентификатор комментария.",
+          "type": "string"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v1CommentDeleteRequest": {
+      "type": "object",
+      "properties": {
+        "comment_id": {
+          "description": "Идентификатор комментария.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "comment_id"
+      ]
+    },
+    "v1CommentListRequest": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "description": "Ограничение значений в ответе.\nМинимум — 20. Максимум — 100.\n",
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "description": "Количество элементов, которое будет пропущено с начала списка в ответе. Например, если `offset = 10`, то ответ начнётся с 11-го найденного элемента.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "review_id": {
+          "description": "Идентификатор отзыва.",
+          "type": "string"
+        },
+        "sort_dir": {
+          "$ref": "#/components/schemas/v1CommentSort"
+        }
+      },
+      "required": [
+        "review_id",
+        "limit"
+      ]
+    },
+    "v1CommentSort": {
+      "type": "string",
+      "default": "ASC",
+      "enum": [
+        "ASC",
+        "DESC"
+      ],
+      "description": "Направление сортировки:\n  - `ASC` — по возрастанию,\n  - `DESC` — по убыванию.\n"
+    },
+    "v1CommentListResponse": {
+      "type": "object",
+      "properties": {
+        "comments": {
+          "description": "Информация о комментарии.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CommentListResponseComment"
+          }
+        },
+        "offset": {
+          "description": "Количество элементов в выдаче.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "CommentListResponseComment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Идентификатор комментария.",
+          "type": "string"
+        },
+        "is_official": {
+          "description": "`true`, если комментарий оставило официальное лицо, `false` — покупатель.\n",
+          "type": "boolean"
+        },
+        "is_owner": {
+          "description": "`true`, если комментарий оставил продавец, `false` — покупатель.\n",
+          "type": "boolean"
+        },
+        "parent_comment_id": {
+          "description": "Идентификатор родительского комментария, на который нужно ответить.",
+          "type": "string"
+        },
+        "published_at": {
+          "description": "Дата публикации комментария.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "text": {
+          "description": "Текст комментария.",
+          "type": "string"
+        }
+      }
+    },
+    "v1ReviewChangeStatusRequest": {
+      "type": "object",
+      "title": "ReviewChangeStatus",
+      "properties": {
+        "review_ids": {
+          "description": "Массив с идентификаторами отзывов от 1 до 100.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "description": "Статус отзыва:\n- `PROCESSED` — обработанный,\n- `UNPROCESSED` — необработанный.\n",
+          "type": "string"
+        }
+      },
+      "required": [
+        "review_ids",
+        "status"
+      ]
+    },
+    "v1ReviewCountResponse": {
+      "type": "object",
+      "properties": {
+        "processed": {
+          "description": "Количество обработанных отзывов.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "total": {
+          "description": "Количество всех отзывов.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "unprocessed": {
+          "description": "Количество необработанных отзывов.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1ReviewInfoRequest": {
+      "type": "object",
+      "title": "ReviewInfo",
+      "properties": {
+        "review_id": {
+          "description": "Идентификатор отзыва.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "review_id"
+      ]
+    },
+    "v1ReviewInfoResponse": {
+      "type": "object",
+      "properties": {
+        "comments_amount": {
+          "description": "Количество комментариев к отзыву.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "dislikes_amount": {
+          "description": "Количество дизлайков на отзыве.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "id": {
+          "description": "Идентификатор отзыва.",
+          "type": "string"
+        },
+        "is_rating_participant": {
+          "description": "`true`, если отзыв участвует в подсчёте рейтинга.\n",
+          "type": "boolean"
+        },
+        "likes_amount": {
+          "description": "Количество лайков на отзыве.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "order_status": {
+          "type": "string",
+          "description": "Статус заказа, на который покупатель оставил отзыв:\n- `DELIVERED` — доставлен,\n- `CANCELLED` — отменён.\n"
+        },
+        "photos": {
+          "type": "array",
+          "description": "Информация об изображении.",
+          "items": {
+            "$ref": "#/components/schemas/ReviewInfoResponsePhoto"
+          }
+        },
+        "photos_amount": {
+          "description": "Количество изображений у отзыва.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "published_at": {
+          "description": "Дата публикации отзыва.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "rating": {
+          "description": "Оценка отзыва.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "description": "Статус отзыва:\n- `UNPROCESSED` — не обработан,\n- `PROCESSED` — обработан.\n",
+          "type": "string"
+        },
+        "text": {
+          "description": "Текст отзыва.",
+          "type": "string"
+        },
+        "videos": {
+          "type": "array",
+          "description": "Информация о видео.",
+          "items": {
+            "$ref": "#/components/schemas/ReviewInfoResponseVideo"
+          }
+        },
+        "videos_amount": {
+          "description": "Количество видео у отзыва.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ReviewInfoResponsePhoto": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "description": "Высота.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "url": {
+          "description": "Ссылка на изображение.",
+          "type": "string"
+        },
+        "width": {
+          "description": "Ширина.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ReviewInfoResponseVideo": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "description": "Высота.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "preview_url": {
+          "description": "Ссылка на превью видео.",
+          "type": "string"
+        },
+        "short_video_preview_url": {
+          "description": "Ссылка на короткое видео.",
+          "type": "string"
+        },
+        "url": {
+          "description": "Ссылка на видео.",
+          "type": "string"
+        },
+        "width": {
+          "description": "Ширина.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1ReviewListRequest": {
+      "type": "object",
+      "title": "ReviewList",
+      "properties": {
+        "last_id": {
+          "description": "Идентификатор последнего отзыва на странице.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Количество отзывов в ответе. Минимум — 20, максимум — 100.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort_dir": {
+          "description": "Направление сортировки:\n- `ASC` — по возрастанию,\n- `DESC` — по убыванию.\n",
+          "type": "string"
+        },
+        "status": {
+          "description": "Статусы отзывов:\n- `ALL` — все,\n- `UNPROCESSED` — необработанные,\n- `PROCESSED` — обработанные.\n",
+          "type": "string"
+        }
+      },
+      "required": [
+        "limit"
+      ]
+    },
+    "v1ReviewListResponse": {
+      "type": "object",
+      "properties": {
+        "has_next": {
+          "description": "`true`, если в ответе вернули не все отзывы.\n",
+          "type": "boolean"
+        },
+        "last_id": {
+          "description": "Идентификатор последнего отзыва на странице.",
+          "type": "string"
+        },
+        "reviews": {
+          "description": "Информация об отзыве.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ReviewListResponseReview"
+          }
+        }
+      }
+    },
+    "ReviewListResponseReview": {
+      "type": "object",
+      "properties": {
+        "comments_amount": {
+          "description": "Количество комментариев у отзыва.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "id": {
+          "description": "Идентификатор отзыва.",
+          "type": "string"
+        },
+        "is_rating_participant": {
+          "description": "`true`, если отзыв участвует в подсчёте рейтинга.\n",
+          "type": "boolean"
+        },
+        "order_status": {
+          "description": "Статус заказа, на который покупатель оставил отзыв:\n- `DELIVERED` — доставлен,\n- `CANCELLED` — отменён.\n",
+          "type": "string"
+        },
+        "photos_amount": {
+          "description": "Количество изображений у отзыва.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "published_at": {
+          "description": "Дата публикации отзыва.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "rating": {
+          "description": "Оценка отзыва.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "description": "Статус отзыва:\n- `UNPROCESSED` — не обработан,\n- `PROCESSED` — обработан.\n",
+          "type": "string"
+        },
+        "text": {
+          "description": "Текст отзыва.",
+          "type": "string"
+        },
+        "videos_amount": {
+          "description": "Количество видео у отзыва.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  }
+}

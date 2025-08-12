@@ -1,0 +1,1180 @@
+{
+  "metadata": {
+    "tag": "CancellationAPI",
+    "name": "CancellationAPI",
+    "displayName": "Отмены заказов",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 7,
+    "schemasCount": 24,
+    "generatedAt": "2025-08-09T16:28:42.340Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/conditional-cancellation/get",
+      "method": "POST",
+      "operationId": "CancellationAPI_GetConditionalCancellation",
+      "summary": "Получить информацию о заявке на отмену rFBS",
+      "description": "<aside class=\"warning\">\n3 августа 2025 года метод будет отключён. Переключитесь на <a href=\"#operation/CancellationAPI_GetConditionalCancellationListV2\">/v2/conditional-cancellation/list</a>.\n</aside>\n\nМетод для получения информации о заявке на отмену rFBS-заказа.\n",
+      "deprecated": true,
+      "security": null,
+      "operation": {
+        "summary": "Получить информацию о заявке на отмену rFBS",
+        "description": "<aside class=\"warning\">\n3 августа 2025 года метод будет отключён. Переключитесь на <a href=\"#operation/CancellationAPI_GetConditionalCancellationListV2\">/v2/conditional-cancellation/list</a>.\n</aside>\n\nМетод для получения информации о заявке на отмену rFBS-заказа.\n",
+        "operationId": "CancellationAPI_GetConditionalCancellation",
+        "deprecated": true,
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetConditionalCancellationRequest"
+              },
+              "example": {
+                "cancellation_id": 90066344
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о заявке на отмену",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetConditionalCancellationResponse"
+                },
+                "example": {
+                  "result": {
+                    "cancellation_id": 90066344,
+                    "posting_number": "47134289-0029-1",
+                    "cancellation_reason": {
+                      "id": 508,
+                      "name": "Покупатель отменил заказ"
+                    },
+                    "cancelled_at": "2022-04-07T06:37:26.871105Z",
+                    "cancellation_reason_message": "Изменение пункта выдачи заказа.",
+                    "tpl_integration_type": "ThirdPartyTracking",
+                    "state": {
+                      "id": 2,
+                      "name": "Подтверждена",
+                      "state": "APPROVED"
+                    },
+                    "cancellation_initiator": "CLIENT",
+                    "order_date": "2022-04-06T17:17:24.517Z",
+                    "approve_comment": "",
+                    "approve_date": "2022-04-07T07:52:45.971824Z",
+                    "auto_approve_date": "2022-04-09T06:37:26.871105Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CancellationAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v2/conditional-cancellation/list",
+      "method": "POST",
+      "operationId": "CancellationAPI_GetConditionalCancellationListV2",
+      "summary": "Получить список заявок на отмену rFBS",
+      "description": "Метод для получения списка заявок на отмену rFBS-заказов.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CancellationAPI"
+        ],
+        "summary": "Получить список заявок на отмену rFBS",
+        "description": "Метод для получения списка заявок на отмену rFBS-заказов.",
+        "operationId": "CancellationAPI_GetConditionalCancellationListV2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetConditionalCancellationListV2Request"
+              },
+              "example": {
+                "filters": {
+                  "cancellation_initiator": [
+                    "CLIENT"
+                  ],
+                  "posting_number": [
+                    "34009011-0094-1"
+                  ],
+                  "state": "ALL"
+                },
+                "limit": 500,
+                "last_id": 0,
+                "with": {
+                  "counter": true
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список заявок на отмену",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetConditionalCancellationListV2Response"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "approve_comment": "string",
+                      "approve_date": "2024-11-27T12:31:43.621Z",
+                      "auto_approve_date": "2024-11-27T12:31:43.621Z",
+                      "cancellation_id": 0,
+                      "cancellation_initiator": "OZON",
+                      "cancellation_reason": {
+                        "id": 0,
+                        "name": "string"
+                      },
+                      "cancellation_reason_message": "string",
+                      "cancelled_at": "2024-11-27T12:31:43.621Z",
+                      "order_date": "2024-11-27T12:31:43.621Z",
+                      "posting_number": "string",
+                      "state": {
+                        "id": 0,
+                        "name": "string",
+                        "state": "ALL"
+                      },
+                      "tpl_integration_type": "string"
+                    }
+                  ],
+                  "counter": "1",
+                  "last_id": 283784254
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/conditional-cancellation/list",
+      "method": "POST",
+      "operationId": "CancellationAPI_GetConditionalCancellationList",
+      "summary": "Получить список заявок на отмену rFBS",
+      "description": "<aside class=\"warning\">\n3 августа 2025 года метод будет отключён. Переключитесь на <a href=\"#operation/CancellationAPI_GetConditionalCancellationListV2\">/v2/conditional-cancellation/list</a>.\n</aside>\n\nМетод для получения списка заявок на отмену rFBS-заказов.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить список заявок на отмену rFBS",
+        "description": "<aside class=\"warning\">\n3 августа 2025 года метод будет отключён. Переключитесь на <a href=\"#operation/CancellationAPI_GetConditionalCancellationListV2\">/v2/conditional-cancellation/list</a>.\n</aside>\n\nМетод для получения списка заявок на отмену rFBS-заказов.\n",
+        "operationId": "CancellationAPI_GetConditionalCancellationList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetConditionalCancellationListRequest"
+              },
+              "example": {
+                "filters": {
+                  "cancellation_initiator": [
+                    "CLIENT"
+                  ],
+                  "posting_number": [],
+                  "state": "ALL"
+                },
+                "limit": 2,
+                "offset": 0,
+                "with": {
+                  "counters": true
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список заявок на отмену",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetConditionalCancellationListResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "cancellation_id": 50186754,
+                      "posting_number": "41267064-0032-1",
+                      "cancellation_reason": {
+                        "id": 508,
+                        "name": "Покупатель отменил заказ"
+                      },
+                      "cancelled_at": "2021-09-03T07:17:12.116114Z",
+                      "cancellation_reason_message": "",
+                      "tpl_integration_type": "ThirdPartyTracking",
+                      "state": {
+                        "id": 2,
+                        "name": "Подтверждена",
+                        "state": "APPROVED"
+                      },
+                      "cancellation_initiator": "CLIENT",
+                      "order_date": "2021-09-03T07:04:53.220Z",
+                      "approve_comment": "",
+                      "approve_date": "2021-09-03T09:13:12.614200Z",
+                      "auto_approve_date": "2021-09-06T07:17:12.116114Z"
+                    },
+                    {
+                      "cancellation_id": 51956491,
+                      "posting_number": "14094410-0018-1",
+                      "cancellation_reason": {
+                        "id": 507,
+                        "name": "Покупатель передумал"
+                      },
+                      "cancelled_at": "2021-09-13T15:03:25.155827Z",
+                      "cancellation_reason_message": "",
+                      "tpl_integration_type": "ThirdPartyTracking",
+                      "state": {
+                        "id": 5,
+                        "name": "Автоматически отменена",
+                        "state": "REJECTED"
+                      },
+                      "cancellation_initiator": "CLIENT",
+                      "order_date": "2021-09-13T07:48:50.143Z",
+                      "approve_comment": "",
+                      "approve_date": null,
+                      "auto_approve_date": "2021-09-16T15:03:25.155827Z"
+                    }
+                  ],
+                  "total": 19,
+                  "counters": {
+                    "on_approval": 0,
+                    "approved": 14,
+                    "rejected": 5
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CancellationAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v2/conditional-cancellation/approve",
+      "method": "POST",
+      "operationId": "CancellationAPI_ConditionalCancellationApproveV2",
+      "summary": "Подтвердить заявку на отмену rFBS",
+      "description": "Метод позволяет согласовать заявку на отмену в статусе `ON_APPROVAL`. Заказ будет отменён, а деньги вернутся покупателю.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CancellationAPI"
+        ],
+        "summary": "Подтвердить заявку на отмену rFBS",
+        "description": "Метод позволяет согласовать заявку на отмену в статусе `ON_APPROVAL`. Заказ будет отменён, а деньги вернутся покупателю.",
+        "operationId": "CancellationAPI_ConditionalCancellationApproveV2",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/v2ConditionalCancellationMoveV2Request"
+        },
+        "responses": {
+          "200": {
+            "description": "Заявка подтверждена"
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/conditional-cancellation/approve",
+      "method": "POST",
+      "operationId": "CancellationAPI_ConditionalCancellationApprove",
+      "summary": "Подтвердить заявку на отмену rFBS",
+      "description": "<aside class=\"warning\">\n3 августа 2025 года метод будет отключён. Переключитесь на <a href=\"#operation/CancellationAPI_ConditionalCancellationApproveV2\">/v2/conditional-cancellation/approve</a>.\n</aside>\n\nМетод позволяет согласовать заявку на отмену в статусе `ON_APPROVAL`. Метод применим для rFBS-заказов. Заказ будет отменён, а деньги вернутся покупателю.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Подтвердить заявку на отмену rFBS",
+        "description": "<aside class=\"warning\">\n3 августа 2025 года метод будет отключён. Переключитесь на <a href=\"#operation/CancellationAPI_ConditionalCancellationApproveV2\">/v2/conditional-cancellation/approve</a>.\n</aside>\n\nМетод позволяет согласовать заявку на отмену в статусе `ON_APPROVAL`. Метод применим для rFBS-заказов. Заказ будет отменён, а деньги вернутся покупателю.\n",
+        "operationId": "CancellationAPI_ConditionalCancellationApprove",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ConditionalCancellationMoveRequest"
+              },
+              "example": {
+                "cancellation_id": 74393917
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Заявка подтверждена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1Empty"
+                },
+                "example": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CancellationAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v2/conditional-cancellation/reject",
+      "method": "POST",
+      "operationId": "CancellationAPI_ConditionalCancellationRejectV2",
+      "summary": "Отклонить заявку на отмену rFBS",
+      "description": "Метод позволяет отклонить заявку на отмену в статусе `ON_APPROVAL`. В параметре `comment` опишите причину. Заказ останется в том же статусе, и его нужно будет доставить покупателю.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CancellationAPI"
+        ],
+        "summary": "Отклонить заявку на отмену rFBS",
+        "description": "Метод позволяет отклонить заявку на отмену в статусе `ON_APPROVAL`. В параметре `comment` опишите причину. Заказ останется в том же статусе, и его нужно будет доставить покупателю.",
+        "operationId": "CancellationAPI_ConditionalCancellationRejectV2",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/v2ConditionalCancellationMoveV2Request"
+        },
+        "responses": {
+          "200": {
+            "description": "Заявка отклонена"
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/conditional-cancellation/reject",
+      "method": "POST",
+      "operationId": "CancellationAPI_ConditionalCancellationReject",
+      "summary": "Отклонить заявку на отмену rFBS",
+      "description": "<aside class=\"warning\">\n3 августа 2025 года метод будет отключён. Переключитесь на <a href=\"#operation/CancellationAPI_ConditionalCancellationRejectV2\">/v2/conditional-cancellation/reject</a>.\n</aside>\n\nМетод позволяет отклонить заявку на отмену в статусе `ON_APPROVAL`. Метод применим для rFBS-заказов. Объясните своё решение в параметре `comment`. \n\nЗаказ останется в том же статусе, и его нужно будет доставить покупателю.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отклонить заявку на отмену rFBS",
+        "description": "<aside class=\"warning\">\n3 августа 2025 года метод будет отключён. Переключитесь на <a href=\"#operation/CancellationAPI_ConditionalCancellationRejectV2\">/v2/conditional-cancellation/reject</a>.\n</aside>\n\nМетод позволяет отклонить заявку на отмену в статусе `ON_APPROVAL`. Метод применим для rFBS-заказов. Объясните своё решение в параметре `comment`. \n\nЗаказ останется в том же статусе, и его нужно будет доставить покупателю.\n",
+        "operationId": "CancellationAPI_ConditionalCancellationReject",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ConditionalCancellationMoveRequest"
+              },
+              "example": {
+                "cancellation_id": 52394916,
+                "comment": "Заявка на отмену отклоняется. Заказ будет доставлен в указанные сроки. При необходимости вы можете оформить возврат."
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Заявка отклонена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1Empty"
+                },
+                "example": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CancellationAPI"
+        ]
+      }
+    }
+  ],
+  "schemas": {
+    "v1GetConditionalCancellationRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "cancellation_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заявки на отмену."
+        }
+      },
+      "required": [
+        "cancellation_id"
+      ]
+    },
+    "v1GetConditionalCancellationResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1ConditionalCancellation"
+        }
+      }
+    },
+    "v1ConditionalCancellation": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса.",
+      "properties": {
+        "cancellation_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заявки на отмену."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "cancellation_reason": {
+          "$ref": "#/components/schemas/ConditionalCancellationCancellationReason"
+        },
+        "cancelled_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата создания заявки на отмену."
+        },
+        "cancellation_reason_message": {
+          "type": "string",
+          "description": "Комментарий к заявке на отмену, введённый инициатором отмены вручную."
+        },
+        "tpl_integration_type": {
+          "type": "string",
+          "description": "Тип интеграции со службой доставки."
+        },
+        "state": {
+          "$ref": "#/components/schemas/ConditionalCancellationState"
+        },
+        "cancellation_initiator": {
+          "type": "string",
+          "enum": [
+            "OZON",
+            "SELLER",
+            "CLIENT",
+            "SYSTEM",
+            "DELIVERY"
+          ],
+          "description": "Инициатор отмены:\n- `OZON` — Ozon, \n- `SELLER` — продавец, \n- `CLIENT` — покупатель, \n- `SYSTEM` — система, \n- `DELIVERY` — служба доставки.\n"
+        },
+        "order_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата создания заказа."
+        },
+        "approve_comment": {
+          "type": "string",
+          "description": "Комментарий, оставленный при подтверждении или отклонении заявки на отмену."
+        },
+        "approve_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата подтверждения или отклонения заявки на отмену."
+        },
+        "auto_approve_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата, после которой заявка будет автоматически подтверждена."
+        }
+      }
+    },
+    "ConditionalCancellationCancellationReason": {
+      "type": "object",
+      "title": "object",
+      "description": "Причина отмены.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор причины отмены."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название причины отмены."
+        }
+      }
+    },
+    "ConditionalCancellationState": {
+      "type": "object",
+      "title": "object",
+      "description": "Статус заявки на отмену.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор статуса."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название статуса."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "ON_APPROVAL",
+            "APPROVED",
+            "REJECTED"
+          ],
+          "description": "Статус заявки:\n- `ON_APPROVAL` — ожидает решения.\n- `APPROVED` — подтверждённая.\n- `REJECTED` — отклонённая.\n"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v2GetConditionalCancellationListV2Request": {
+      "required": [
+        "limit"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/components/schemas/GetConditionalCancellationListV2RequestFilters"
+        },
+        "last_id": {
+          "description": "Идентификатор последнего значения на странице. Оставьте это поле пустым при выполнении первого запроса.\n\nЧтобы получить следующие значения, укажите `last_id` из ответа предыдущего запроса.\n",
+          "type": "integer",
+          "format": "int64"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество заявок в ответе.",
+          "maximum": 500
+        },
+        "with": {
+          "$ref": "#/components/schemas/GetConditionalCancellationListV2RequestWith"
+        }
+      }
+    },
+    "GetConditionalCancellationListV2RequestFilters": {
+      "type": "object",
+      "description": "Фильтры.",
+      "properties": {
+        "cancellation_initiator": {
+          "type": "array",
+          "description": "Инициатор отмены:\n- `SELLER` — продавец, \n- `CLIENT` — покупатель,\n- `OZON` — Ozon,  \n- `SYSTEM` — система, \n- `DELIVERY` — служба доставки.\n",
+          "items": {
+            "$ref": "#/components/schemas/v2CancellationInitiatorEnum"
+          }
+        },
+        "posting_number": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Фильтр по номеру отправления."
+        },
+        "state": {
+          "description": "Фильтр по статусу заявки на отмену:\n  - `ALL` — заявки в любом статусе,\n  - `ON_APPROVAL` — заявки на рассмотрении,\n  - `APPROVED` — подтверждённые заявки,\n  - `REJECTED` — отклонённые заявки.\n",
+          "$ref": "#/components/schemas/v2CancellationStateEnumFilters"
+        }
+      }
+    },
+    "v2CancellationInitiatorEnum": {
+      "type": "string",
+      "description": "Инициатор отмены:\n- `SELLER` — продавец, \n- `CLIENT` — покупатель,\n- `OZON` — Ozon,  \n- `SYSTEM` — система, \n- `DELIVERY` — служба доставки.\n",
+      "enum": [
+        "OZON",
+        "SELLER",
+        "CLIENT",
+        "SYSTEM",
+        "DELIVERY"
+      ]
+    },
+    "v2CancellationStateEnumFilters": {
+      "type": "string",
+      "default": "ALL",
+      "description": "Фильтр по статусу заявки на отмену:\n- `ALL` — заявки в любом статусе, \n- `ON_APPROVAL` — заявки на рассмотрении,\n- `APPROVED` — подтверждённые заявки, \n- `REJECTED` — отклонённые заявки.\n",
+      "enum": [
+        "ALL",
+        "ON_APPROVAL",
+        "APPROVED",
+        "REJECTED"
+      ]
+    },
+    "GetConditionalCancellationListV2RequestWith": {
+      "type": "object",
+      "description": "Дополнительная информация.",
+      "properties": {
+        "counter": {
+          "description": "Признак, что в ответе нужно вывести счётчик заявок в статусе `ON_APPROVAL`.",
+          "type": "boolean"
+        }
+      }
+    },
+    "v2GetConditionalCancellationListV2Response": {
+      "type": "object",
+      "properties": {
+        "counter": {
+          "description": "Cчётчик заявок в статусе `ON_APPROVAL`.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "last_id": {
+          "description": "Идентификатор последнего значения на странице.\n\nЧтобы получить следующие значения, передайте полученное значение в следующем запросе в параметре `last_id`.\n",
+          "type": "integer",
+          "format": "int64"
+        },
+        "result": {
+          "type": "array",
+          "description": "Информация о заявках на отмену.",
+          "items": {
+            "$ref": "#/components/schemas/GetConditionalCancellationListV2ResponseResult"
+          }
+        }
+      }
+    },
+    "GetConditionalCancellationListV2ResponseResult": {
+      "type": "object",
+      "properties": {
+        "approve_comment": {
+          "type": "string",
+          "description": "Комментарий, оставленный при подтверждении или отклонении заявки на отмену."
+        },
+        "approve_date": {
+          "description": "Дата подтверждения или отклонения заявки на отмену.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "auto_approve_date": {
+          "description": "Дата, после которой заявка будет автоматически подтверждена.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "cancellation_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заявки на отмену."
+        },
+        "cancellation_initiator": {
+          "$ref": "#/components/schemas/v2CancellationInitiatorEnum"
+        },
+        "cancellation_reason": {
+          "$ref": "#/components/schemas/GetConditionalCancellationListV2ResponseCancellationReason"
+        },
+        "cancellation_reason_message": {
+          "description": "Комментарий к заявке на отмену, введённый инициатором отмены вручную.",
+          "type": "string"
+        },
+        "cancelled_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата создания заявки на отмену."
+        },
+        "order_date": {
+          "description": "Дата создания заказа.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "source_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Предыдущий идентификатор заявки на отмену.\n\nИспользуется для поддержания обратной совместимости.\n"
+        },
+        "state": {
+          "$ref": "#/components/schemas/GetConditionalCancellationListV2ResponseState"
+        },
+        "tpl_integration_type": {
+          "description": "Тип интеграции со службой доставки.",
+          "type": "string"
+        }
+      }
+    },
+    "GetConditionalCancellationListV2ResponseCancellationReason": {
+      "type": "object",
+      "description": "Причина отмены.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор причины отмены."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название причины отмены."
+        }
+      }
+    },
+    "GetConditionalCancellationListV2ResponseState": {
+      "type": "object",
+      "description": "Статус заявки на отмену.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор статуса."
+        },
+        "name": {
+          "description": "Название статуса.",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/components/schemas/v2CancellationStateEnum"
+        }
+      }
+    },
+    "v2CancellationStateEnum": {
+      "type": "string",
+      "description": "Статус заявки:\n- `ON_APPROVAL` — заявка на рассмотрении,\n- `APPROVED` — подтверждённая заявка,\n- `REJECTED` — отклонённая заявка.\n",
+      "enum": [
+        "ON_APPROVAL",
+        "APPROVED",
+        "REJECTED"
+      ]
+    },
+    "v1GetConditionalCancellationListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "filters": {
+          "$ref": "#/components/schemas/GetConditionalCancellationListRequestFilters"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество заявок в ответе."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество элементов, которое будет пропущено в ответе. Например, если `offset=10`, ответ начнётся с 11-го найденного элемента."
+        },
+        "with": {
+          "$ref": "#/components/schemas/GetConditionalCancellationListRequestWith"
+        }
+      },
+      "required": [
+        "limit"
+      ]
+    },
+    "GetConditionalCancellationListRequestFilters": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтры.",
+      "properties": {
+        "cancellation_initiator": {
+          "description": "Инициатор отмены:\n- `SELLER` — продавец, \n- `CLIENT` — клиент или покупатель,\n- `OZON` — Ozon,  \n- `SYSTEM` — система, \n- `DELIVERY` — служба доставки.\n\nНеобязательный параметр. Можно передавать несколько значений.\n",
+          "items": {
+            "type": "string",
+            "enum": [
+              "OZON",
+              "SELLER",
+              "CLIENT",
+              "SYSTEM",
+              "DELIVER"
+            ]
+          }
+        },
+        "posting_number": {
+          "description": "Фильтр по номеру отправления.\n\nНеобязательный параметр. Можно передавать несколько значений.\n",
+          "type": "array of strings"
+        },
+        "state": {
+          "description": "Фильтр по статусу заявки на отмену:\n- `ALL` — заявки в любом статусе, \n- `ON_APPROVAL` — заявки на рассмотрении,\n- `APPROVED` — подтверждённые заявки, \n- `REJECTED` — отклонённые заявки.\n",
+          "type": "string",
+          "enum": [
+            "ALL",
+            "ON_APPROVAL",
+            "APPROVED",
+            "REJECTED"
+          ]
+        }
+      }
+    },
+    "GetConditionalCancellationListRequestWith": {
+      "type": "object",
+      "title": "object",
+      "description": "Дополнительная информация.",
+      "properties": {
+        "counters": {
+          "type": "boolean",
+          "description": "Признак, что в ответе нужно вывести счётчик заявок в разных статусах."
+        }
+      }
+    },
+    "v1GetConditionalCancellationListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "description": "Список заявок на отмену.",
+          "items": {
+            "$ref": "#/components/schemas/v1ConditionalCancellation"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Общее количество заявок по заданным фильтрам."
+        },
+        "counters": {
+          "$ref": "#/components/schemas/GetConditionalCancellationListResponseCounters"
+        }
+      }
+    },
+    "GetConditionalCancellationListResponseCounters": {
+      "type": "object",
+      "title": "object",
+      "description": "Cчётчик заявок в разных статусах.",
+      "properties": {
+        "on_approval": {
+          "description": "Количество заявок на рассмотрении.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "approved": {
+          "description": "Количество подтверждённых заявок.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "rejected": {
+          "description": "Количество отклонённых заявок.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1ConditionalCancellationMoveRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "cancellation_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заявки на отмену."
+        },
+        "comment": {
+          "type": "string",
+          "description": "Комментарий."
+        }
+      },
+      "required": [
+        "cancellation_id"
+      ]
+    },
+    "v1Empty": {
+      "type": "object",
+      "title": "object"
+    }
+  }
+}

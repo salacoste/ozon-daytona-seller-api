@@ -1,0 +1,1794 @@
+{
+  "schemasCount": 100,
+  "schemas": {
+    "v1DraftSupplyCreateResponse": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "type": "string",
+          "description": "Идентификатор заявки на поставку."
+        }
+      }
+    },
+    "v1DraftSupplyCreateStatusRequest": {
+      "type": "object",
+      "title": "DraftSupplyCreateStatus",
+      "properties": {
+        "operation_id": {
+          "type": "string",
+          "description": "Идентификатор заявки на поставку."
+        }
+      },
+      "required": [
+        "operation_id"
+      ]
+    },
+    "DraftSupplyCreateStatusResponseResult": {
+      "type": "object",
+      "description": "Идентификаторы заявок на поставку.",
+      "properties": {
+        "order_ids": {
+          "type": "array",
+          "description": "Идентификаторы заявок на поставку.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1DraftSupplyCreateStatus": {
+      "type": "string",
+      "default": "DraftSupplyCreateStatusUnknown",
+      "enum": [
+        "DraftSupplyCreateStatusUnknown",
+        "DraftSupplyCreateStatusSuccess",
+        "DraftSupplyCreateStatusFailed",
+        "DraftSupplyCreateStatusInProgress"
+      ],
+      "description": "Статус создания заявки на поставку:\n  - `DraftSupplyCreateStatusUnknown` — неизвестный,\n  - `DraftSupplyCreateStatusSuccess` — создана,\n  - `DraftSupplyCreateStatusFailed` — не создана,\n  - `DraftSupplyCreateStatusInProgress` — создаётся.\n"
+    },
+    "v1DraftSupplyCreateStatusResponse": {
+      "type": "object",
+      "properties": {
+        "error_messages": {
+          "type": "array",
+          "description": "Ошибки создания заявок.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "result": {
+          "$ref": "#/components/schemas/DraftSupplyCreateStatusResponseResult"
+        },
+        "status": {
+          "$ref": "#/components/schemas/v1DraftSupplyCreateStatus"
+        }
+      }
+    },
+    "ValueItem": {
+      "type": "object",
+      "properties": {
+        "barcode": {
+          "description": "Штрихкод товара.",
+          "type": "string"
+        },
+        "expires_at": {
+          "description": "Годен до.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "quant": {
+          "description": "Размер кванта.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "quantity": {
+          "description": "Количество товара.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ValueCargoType": {
+      "required": [
+        "type"
+      ],
+      "type": "string",
+      "description": "Тип грузоместа: \n   - `BOX` — коробка.\n   - `PALLET` — палета.\n",
+      "default": "BOX",
+      "enum": [
+        "BOX",
+        "PALLET"
+      ]
+    },
+    "v1CargoesCreateRequestCargoValue": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "description": "Информация о грузоместе.",
+      "properties": {
+        "items": {
+          "maxItems": 5000,
+          "description": "Информация о товарах в грузоместе.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ValueItem"
+          }
+        },
+        "type": {
+          "$ref": "#/components/schemas/ValueCargoType"
+        }
+      }
+    },
+    "v1CargoesCreateRequestCargo": {
+      "type": "object",
+      "required": [
+        "key",
+        "value"
+      ],
+      "properties": {
+        "key": {
+          "description": "Уникальный ключ для идентификации грузоместа.",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/components/schemas/v1CargoesCreateRequestCargoValue"
+        }
+      }
+    },
+    "v1CargoesCreateRequest": {
+      "type": "object",
+      "required": [
+        "cargoes",
+        "supply_id"
+      ],
+      "properties": {
+        "cargoes": {
+          "description": "Информация о грузоместах. Вы можете передать не больше 40 палет или 30 коробок.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesCreateRequestCargo"
+          }
+        },
+        "delete_current_version": {
+          "description": "`true`, если нужно удалить предыдущие грузоместа.\n",
+          "type": "boolean"
+        },
+        "supply_id": {
+          "description": "Идентификатор поставки. Можно получить с помощью метода [/v2/supply-order/get](#operation/SupplyOrderAPI_GetSupplyOrdersV2). Нужное значение — в параметре ответа `orders.supplies.supply_id`.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "CargoesCreateErrorsErrorReason": {
+      "type": "string",
+      "default": "INVALID_STATE",
+      "enum": [
+        "INVALID_STATE",
+        "VALIDATION_FAILED",
+        "WAREHOUSE_LIMITS_EXCEED",
+        "SUPPLY_NOT_BELONG_CONTRACTOR",
+        "SUPPLY_NOT_BELONG_COMPANY",
+        "IS_FINALIZED",
+        "SKU_DISTRIBUTION_DISABLED",
+        "SUPPLY_IS_NOT_EMPTY",
+        "OPERATION_NOT_FOUND",
+        "OPERATION_FAILED"
+      ]
+    },
+    "ItemValidationErrorType": {
+      "type": "string",
+      "description": "Тип ошибки:\n  - `SUPPLY_ITEM_NOT_FOUND` — товар не найден.\n  - `DUPLICATED_SUPPLY_ITEM` — найден дубликат товара.\n  - `BEFORE_DEADLINE` — некорректный срок годности.\n  - `SAME_BARCODES` — у разных SKU одинаковые штрихкоды.\n  - `SAME_ARTICLES` — у разных SKU одинаковые артикулы.\n  - `NOT_UNIQUE_SKU_BY_PRODUCT` — одинаковый SKU в грузоместе используется для разных товаров.\n  - `QUANTITY_NOT_DIVISIBLE_BY_QUANT` — количество SKU в грузоместе не кратно кванту.\n  - `NOT_SINGLE_PALLET_SKU_IN_PALLET_CARGO` — в грузоместе отсутствует палетная SKU.\n  - `NOT_ONE_QUANT_PALLET_SKU` — в квантовом палетном грузоместе должен быть только один квант.\n  - `NOT_ECONOM_SKU` — в эконом-поставке указан не эконом-SKU.\n  - `QUANTITY_LESS_ONE` — количество SKU в эконом-поставке меньше 1.\n  - `SUPPLY_ITEM_WITH_QUANT_NOT_FOUND` — товар не найден по артикулу, штрихкоду и размеру кванта.\n",
+      "default": "SUPPLY_ITEM_NOT_FOUND",
+      "enum": [
+        "SUPPLY_ITEM_NOT_FOUND",
+        "DUPLICATED_SUPPLY_ITEM",
+        "BEFORE_DEADLINE",
+        "SAME_BARCODES",
+        "SAME_ARTICLES",
+        "NOT_UNIQUE_SKU_BY_PRODUCT",
+        "QUANTITY_NOT_DIVISIBLE_BY_QUANT",
+        "NOT_SINGLE_PALLET_SKU_IN_PALLET_CARGO",
+        "NOT_ONE_QUANT_PALLET_SKU",
+        "NOT_ECONOM_SKU",
+        "QUANTITY_LESS_ONE",
+        "SUPPLY_ITEM_WITH_QUANT_NOT_FOUND"
+      ]
+    },
+    "CargoesCreateErrorsItemValidation": {
+      "type": "object",
+      "properties": {
+        "barcode": {
+          "description": "Штрихкод товара.",
+          "type": "string"
+        },
+        "cargo_key": {
+          "description": "Ключ грузоместа.",
+          "type": "string"
+        },
+        "quant": {
+          "description": "Размер кванта.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "$ref": "#/components/schemas/ItemValidationErrorType"
+        }
+      }
+    },
+    "v1CargoesCreateErrors": {
+      "type": "object",
+      "description": "Ошибки.",
+      "properties": {
+        "error_reasons": {
+          "description": "Причина ошибки:\n  - `INVALID_STATE` — недопустимое состояние поставки.\n  - `VALIDATION_FAILED` — ошибки валидации.\n  - `WAREHOUSE_LIMITS_EXCEED` — превышены лимиты склада.\n  - `SUPPLY_NOT_BELONG_CONTRACTOR` — поставка не относится к указанному контрагенту.\n  - `SUPPLY_NOT_BELONG_COMPANY` — поставка не относится к указанной компании.\n  - `IS_FINALIZED` — редактирование поставки недоступно.\n  - `SKU_DISTRIBUTION_DISABLED` — распределение состава недоступно.\n  - `SUPPLY_IS_NOT_EMPTY` — поставка содержит распределение состава.\n  - `OPERATION_NOT_FOUND` — операция не найдена.\n  - `OPERATION_FAILED` — ошибка при обработке операции.\n",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CargoesCreateErrorsErrorReason"
+          }
+        },
+        "items_validation": {
+          "description": "Ошибки валидации.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CargoesCreateErrorsItemValidation"
+          }
+        }
+      }
+    },
+    "v1CargoesCreateResponse": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        },
+        "errors": {
+          "$ref": "#/components/schemas/v1CargoesCreateErrors"
+        }
+      }
+    },
+    "v1CargoesCreateInfoRequest": {
+      "required": [
+        "operation_id"
+      ],
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        }
+      }
+    },
+    "CargoesCreateInfoResponseResultCargoValue": {
+      "type": "object",
+      "description": "Информация о грузоместе.",
+      "properties": {
+        "cargo_id": {
+          "description": "Идентификатор грузоместа.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "CargoesCreateInfoResponseResultCargo": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Ключ грузоместа.",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/components/schemas/CargoesCreateInfoResponseResultCargoValue"
+        }
+      }
+    },
+    "CargoesCreateInfoResponseResult": {
+      "type": "object",
+      "description": "Результат запроса.",
+      "properties": {
+        "cargoes": {
+          "description": "Информация о грузоместах.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CargoesCreateInfoResponseResultCargo"
+          }
+        }
+      }
+    },
+    "v1CargoesCreateInfoResponseStatus": {
+      "type": "string",
+      "description": "Статус формирования грузомест:\n  - `SUCCESS` — успешно.\n  - `IN_PROGRESS` — формируются.\n  - `FAILED` — при формировании грузомест произошла ошибка.\n",
+      "default": "SUCCESS",
+      "enum": [
+        "SUCCESS",
+        "IN_PROGRESS",
+        "FAILED"
+      ]
+    },
+    "v1CargoesCreateInfoResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/CargoesCreateInfoResponseResult"
+        },
+        "status": {
+          "$ref": "#/components/schemas/v1CargoesCreateInfoResponseStatus"
+        },
+        "errors": {
+          "$ref": "#/components/schemas/v1CargoesCreateErrors"
+        }
+      }
+    },
+    "v1CargoesDeleteRequest": {
+      "type": "object",
+      "properties": {
+        "cargo_ids": {
+          "type": "array",
+          "description": "Список идентификаторов грузомест, которые нужно удалить.\n\nМаксимум 70 значений.\n",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "supply_id": {
+          "description": "Идентификатор поставки.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CargoesDeleteResponseErrorCargoErrorReasonErrorReasonEnum": {
+      "type": "string",
+      "enum": [
+        "CARGO_NOT_FOUND"
+      ]
+    },
+    "v1CargoesDeleteResponseErrorCargoErrorReason": {
+      "type": "object",
+      "properties": {
+        "cargo_id": {
+          "description": "Идентификатор грузоместа.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "error_reasons": {
+          "description": "Список ошибок грузоместа.\n\nЕсли значение `CARGO_NOT_FOUND`, грузоместо не найдено.\n",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesDeleteResponseErrorCargoErrorReasonErrorReasonEnum"
+          }
+        }
+      }
+    },
+    "v1CargoesDeleteResponseErrorSupplyErrorReasonEnum": {
+      "type": "string",
+      "enum": [
+        "SUPPLY_NOT_FOUND",
+        "CANT_DELETE_ALL_CARGOES",
+        "SUPPLY_DOES_NOT_BELONG_TO_THE_CONTRACTOR",
+        "SUPPLY_DOES_NOT_BELONG_TO_THE_COMPANY",
+        "SUPPLY_CARGOES_IS_FINALIZED",
+        "SUPPLY_CARGOES_LOCKED",
+        "OPERATION_NOT_FOUND"
+      ]
+    },
+    "v1CargoesDeleteResponseError": {
+      "type": "object",
+      "description": "Список ошибок, которые возникли при удалении грузомест.",
+      "properties": {
+        "cargo_error_reasons": {
+          "type": "array",
+          "description": "Ошибки при удалении грузомест.",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesDeleteResponseErrorCargoErrorReason"
+          }
+        },
+        "supply_error_reasons": {
+          "type": "array",
+          "description": "Список ошибок поставки:\n- `SUPPLY_NOT_FOUND` — поставка не найдена,\n- `CANT_DELETE_ALL_CARGOES` — нельзя удалять все грузоместа,\n- `SUPPLY_DOES_NOT_BELONG_TO_THE_CONTRACTOR` — не принадлежит вашему юридическому лицу,\n- `SUPPLY_DOES_NOT_BELONG_TO_THE_COMPANY` — не принадлежит вашему кабинету,\n- `SUPPLY_CARGOES_IS_FINALIZED` — грузоместа поставки нельзя редактировать,\n- `SUPPLY_CARGOES_LOCKED` — другой процесс блокирует редактирование грузомест поставки,\n- `OPERATION_NOT_FOUND` — операция не найдена.\n",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesDeleteResponseErrorSupplyErrorReasonEnum"
+          }
+        }
+      }
+    },
+    "v1CargoesDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "$ref": "#/components/schemas/v1CargoesDeleteResponseError"
+        },
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        }
+      }
+    },
+    "v1CargoesDeleteStatusRequest": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        }
+      }
+    },
+    "v1CargoesDeleteStatusResponseErrorCargoErrorReasonErrorReasonEnum": {
+      "type": "string",
+      "enum": [
+        "CARGO_NOT_FOUND"
+      ]
+    },
+    "v1CargoesDeleteStatusResponseErrorCargoErrorReason": {
+      "type": "object",
+      "properties": {
+        "cargo_id": {
+          "description": "Идентификатор грузоместа.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "error_reasons": {
+          "description": "Список ошибок грузоместа.\n\nЕсли значение `CARGO_NOT_FOUND`, грузоместо не найдено.\n",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesDeleteStatusResponseErrorCargoErrorReasonErrorReasonEnum"
+          }
+        }
+      }
+    },
+    "v1CargoesDeleteStatusResponseErrorSupplyErrorReasonEnum": {
+      "type": "string",
+      "enum": [
+        "SUPPLY_NOT_FOUND",
+        "CANT_DELETE_ALL_CARGOES",
+        "SUPPLY_DOES_NOT_BELONG_TO_THE_CONTRACTOR",
+        "SUPPLY_DOES_NOT_BELONG_TO_THE_COMPANY",
+        "SUPPLY_CARGOES_IS_FINALIZED",
+        "SUPPLY_CARGOES_LOCKED",
+        "OPERATION_NOT_FOUND"
+      ]
+    },
+    "v1CargoesDeleteStatusResponseError": {
+      "type": "object",
+      "description": "Список ошибок, которые возникли при удалении грузомест.",
+      "properties": {
+        "cargo_error_reasons": {
+          "type": "array",
+          "description": "Ошибки при удалении грузомест.",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesDeleteStatusResponseErrorCargoErrorReason"
+          }
+        },
+        "supply_error_reasons": {
+          "type": "array",
+          "description": "Список ошибок поставки:\n- `SUPPLY_NOT_FOUND` — поставка не найдена,\n- `CANT_DELETE_ALL_CARGOES` — нельзя удалять все грузоместа,\n- `SUPPLY_DOES_NOT_BELONG_TO_THE_CONTRACTOR` — не принадлежит вашему юридическому лицу,\n- `SUPPLY_DOES_NOT_BELONG_TO_THE_COMPANY` — не принадлежит вашему кабинету,\n- `SUPPLY_CARGOES_IS_FINALIZED` — грузоместа поставки нельзя редактировать,\n- `SUPPLY_CARGOES_LOCKED` — другой процесс блокирует редактирование грузомест поставки,\n- `OPERATION_NOT_FOUND` — операция не найдена.\n",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesDeleteStatusResponseErrorSupplyErrorReasonEnum"
+          }
+        }
+      }
+    },
+    "CargoesDeleteStatusResponseStatusEnum": {
+      "type": "string",
+      "description": "Статус удаления грузоместа.\n\nВозможные статусы:\n- `SUCCESS` — грузоместо удалено,\n- `IN_PROGRESS` — грузоместо в процессе удаления,\n- `ERROR` — возникла ошибка при удалении грузоместа.\n",
+      "enum": [
+        "SUCCESS",
+        "IN_PROGRESS",
+        "ERROR"
+      ]
+    },
+    "v1CargoesDeleteStatusResponse": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "$ref": "#/components/schemas/v1CargoesDeleteStatusResponseError"
+        },
+        "status": {
+          "$ref": "#/components/schemas/CargoesDeleteStatusResponseStatusEnum"
+        }
+      }
+    },
+    "v1CargoesRulesGetRequest": {
+      "type": "object",
+      "properties": {
+        "supply_ids": {
+          "type": "array",
+          "description": "Список идентификаторов поставок в заявке.\n\nМаксимум 100 идентификаторов.\n",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "CargoesPresentRuleCargoCountPerTypeEnum": {
+      "type": "string",
+      "description": "Тип грузоместа:\n- `BOX` — коробка,\n- `PALLET` — палета.\n",
+      "enum": [
+        "BOX",
+        "PALLET"
+      ]
+    },
+    "CargoesPresentRuleCargoCountPerType": {
+      "type": "object",
+      "title": "Количество грузомест каждого типа",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество грузомест."
+        },
+        "type": {
+          "$ref": "#/components/schemas/CargoesPresentRuleCargoCountPerTypeEnum"
+        }
+      }
+    },
+    "SupplyCheckCargoesPresentRule": {
+      "type": "object",
+      "description": "Правило указания грузомест.",
+      "properties": {
+        "cargo_count_per_type": {
+          "type": "array",
+          "description": "Количество грузомест каждого типа.",
+          "items": {
+            "$ref": "#/components/schemas/CargoesPresentRuleCargoCountPerType"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Общее количество грузомест."
+        },
+        "satisfied": {
+          "type": "boolean",
+          "description": "`true`, если грузоместа указаны.\n"
+        }
+      }
+    },
+    "SupplyCheckEditDeadlineExpireRule": {
+      "type": "object",
+      "description": "Правило крайнего срока редактирования грузомест.",
+      "properties": {
+        "is_applicable": {
+          "type": "boolean",
+          "description": "`true`, если правило применимо к текущей поставке.\n"
+        },
+        "is_required": {
+          "type": "boolean",
+          "description": "`true`, если правило обязательно для текущей поставки.\n"
+        },
+        "satisfied": {
+          "type": "boolean",
+          "description": "`true`, если крайний срок для редактирования не наступил.\n"
+        }
+      }
+    },
+    "SupplyCheckExpireDatePresentedRule": {
+      "type": "object",
+      "description": "Правило указания сроков годности для товаров.",
+      "properties": {
+        "count_sku_with_expiration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество SKU с корректным сроком годности."
+        },
+        "count_sku_with_expiration_filled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество SKU, для которых обязателен срок годности."
+        },
+        "is_applicable": {
+          "type": "boolean",
+          "description": "`true`, если правило применимо к текущей поставке.\n"
+        },
+        "is_required": {
+          "type": "boolean",
+          "description": "`true`, если правило обязательно для текущей поставки.\n"
+        },
+        "satisfied": {
+          "type": "boolean",
+          "description": "`true`, если сроки годности указаны корректно.\n"
+        }
+      }
+    },
+    "SupplyCheckIsValidDistributionRule": {
+      "type": "object",
+      "description": "Правило совпадения составов грузомест с составом поставки.",
+      "properties": {
+        "count_distributed_sku": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество SKU, которые совпадают с поставкой."
+        },
+        "count_sku_total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Общее количество SKU."
+        },
+        "is_applicable": {
+          "type": "boolean",
+          "description": "`true`, если правило применимо к текущей поставке.\n"
+        },
+        "percents_int": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Процент совпадения состава грузомест с составом поставки."
+        },
+        "satisfied": {
+          "type": "boolean",
+          "description": "`true`, если состав грузомест совпадает с составом поставки.\n"
+        }
+      }
+    },
+    "SupplyCheckPackageUnitWithDistributionRule": {
+      "type": "object",
+      "description": "Правило заполнения состава грузомест.",
+      "properties": {
+        "count_all": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Общее количество грузомест."
+        },
+        "count_with_distribution": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество заполненных грузомест."
+        },
+        "is_applicable": {
+          "type": "boolean",
+          "description": "`true`, если правило применимо к текущей поставке.\n"
+        },
+        "is_required": {
+          "type": "boolean",
+          "description": "`true`, если правило обязательно для текущей поставки.\n"
+        },
+        "satisfied": {
+          "type": "boolean",
+          "description": "`true`, если указаны составы для всех грузомест.\n"
+        }
+      }
+    },
+    "SupplyCheckPlacementZoneRule": {
+      "type": "object",
+      "description": "Правило распределения товаров в грузоместах по зонам размещения.",
+      "properties": {
+        "count_cargoes_all": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество грузомест."
+        },
+        "count_cargoes_with_mono_placement_zone": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество грузомест с распределением по зонам размещения."
+        },
+        "is_applicable": {
+          "type": "boolean",
+          "description": "`true`, если правило применимо к текущей поставке.\n"
+        },
+        "satisfied": {
+          "type": "boolean",
+          "description": "`true`, если товары во всех грузоместах распределены по зонам размещения.\n"
+        }
+      }
+    },
+    "CargoesRulesGetResponseSupplyCheck": {
+      "type": "object",
+      "description": "Чек-лист правил заполнения грузомест.",
+      "properties": {
+        "cargoes_presents_rule": {
+          "$ref": "#/components/schemas/SupplyCheckCargoesPresentRule"
+        },
+        "edit_deadline_expire_rule": {
+          "$ref": "#/components/schemas/SupplyCheckEditDeadlineExpireRule"
+        },
+        "expire_dates_presented_rule": {
+          "$ref": "#/components/schemas/SupplyCheckExpireDatePresentedRule"
+        },
+        "is_valid_distribution_rule": {
+          "$ref": "#/components/schemas/SupplyCheckIsValidDistributionRule"
+        },
+        "package_units_with_distribution_rule": {
+          "$ref": "#/components/schemas/SupplyCheckPackageUnitWithDistributionRule"
+        },
+        "placement_zones_rule": {
+          "$ref": "#/components/schemas/SupplyCheckPlacementZoneRule"
+        },
+        "supply_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор поставки."
+        }
+      }
+    },
+    "v1CargoesRulesGetResponse": {
+      "type": "object",
+      "properties": {
+        "supply_check_lists": {
+          "type": "array",
+          "description": "Список чек-листов с правилами заполнения грузомест по поставкам.",
+          "items": {
+            "$ref": "#/components/schemas/CargoesRulesGetResponseSupplyCheck"
+          }
+        }
+      }
+    },
+    "v1CargoesLabelCreateRequestCargo": {
+      "type": "object",
+      "properties": {
+        "cargo_id": {
+          "description": "Идентификатор грузоместа.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CargoesLabelCreateRequest": {
+      "required": [
+        "supply_id"
+      ],
+      "type": "object",
+      "properties": {
+        "cargoes": {
+          "description": "Информация о грузоместах.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesLabelCreateRequestCargo"
+          }
+        },
+        "supply_id": {
+          "description": "Идентификатор поставки.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CargoesLabelCreateErrorsErrorReason": {
+      "type": "string",
+      "default": "INVALID_STATE",
+      "enum": [
+        "INVALID_STATE",
+        "OPERATION_NOT_FOUND",
+        "OPERATION_FAILED",
+        "SUPPLY_NOT_BELONG_CONTRACTOR",
+        "SUPPLY_NOT_BELONG_COMPANY",
+        "SUPPLY_IS_EMPTY",
+        "CARGOES_NOT_FOUND"
+      ]
+    },
+    "v1CargoesLabelCreateErrors": {
+      "type": "object",
+      "description": "Ошибки.",
+      "properties": {
+        "error_reasons": {
+          "description": "Причина ошибки:\n   - `INVALID_STATE` — недопустимое состояние поставки.\n   - `OPERATION_NOT_FOUND` — операция не найдена.\n   - `OPERATION_FAILED` — операция завершилась с ошибкой.\n   - `SUPPLY_NOT_BELONG_CONTRACTOR` — контрагент не соответствует поставке.\n   - `SUPPLY_NOT_BELONG_COMPANY` — компания не соответствует поставке.\n   - `SUPPLY_IS_EMPTY` — поставка без грузомест.\n   - `CARGOES_NOT_FOUND` — грузоместа не найдены.\n",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesLabelCreateErrorsErrorReason"
+          }
+        }
+      }
+    },
+    "v1CargoesLabelCreateResponse": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        },
+        "errors": {
+          "$ref": "#/components/schemas/v1CargoesLabelCreateErrors"
+        }
+      }
+    },
+    "v1CargoesLabelGetRequest": {
+      "required": [
+        "operation_id"
+      ],
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        }
+      }
+    },
+    "v1CargoesLabelGetResponseResult": {
+      "type": "object",
+      "description": "Информация об этикетках.",
+      "properties": {
+        "file_guid": {
+          "description": "Идентификатор для получения файла с этикетками.",
+          "type": "string"
+        }
+      }
+    },
+    "v1CargoesLabelGetResponseStatus": {
+      "type": "string",
+      "description": "Статус формирования этикеток:\n- `SUCCESS` — готовы.\n- `IN_PROGRESS` — формируются.\n- `FAILED` — ошибка при формировании.\n",
+      "default": "SUCCESS",
+      "enum": [
+        "SUCCESS",
+        "IN_PROGRESS",
+        "FAILED"
+      ]
+    },
+    "v1CargoesLabelGetResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1CargoesLabelGetResponseResult"
+        },
+        "status": {
+          "$ref": "#/components/schemas/v1CargoesLabelGetResponseStatus"
+        },
+        "errors": {
+          "$ref": "#/components/schemas/v1CargoesLabelCreateErrors"
+        }
+      }
+    },
+    "v1SupplyOrderCancelRequest": {
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "description": "Идентификатор заявки на поставку.",
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "order_id"
+      ]
+    },
+    "v1SupplyOrderCancelResponse": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции на отмену заявки.",
+          "type": "string"
+        }
+      }
+    },
+    "v1SupplyOrderCancelStatusRequest": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции на отмену заявки на поставку.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation_id"
+      ]
+    },
+    "SupplyOrderCancelStatusResponseCancelOrderError": {
+      "type": "string",
+      "enum": [
+        "INVALID_ORDER_STATE",
+        "ORDER_IS_VIRTUAL",
+        "ORDER_DOES_NOT_BELONG_TO_CONTRACTOR",
+        "ORDER_DOES_NOT_BELONG_TO_COMPANY",
+        "OTHER_ASYNCHRONOUS_OPERATION_IN_PROGRESS"
+      ]
+    },
+    "CancelSupplyResultsCancelSupplyError": {
+      "type": "string",
+      "enum": [
+        "INVALID_SUPPLY_STATE",
+        "SUPPLY_DOES_NOT_BELONG_TO_CONTRACTOR",
+        "SUPPLY_DOES_NOT_BELONG_TO_COMPANY",
+        "SUPPLY_DOES_NOT_BELONG_TO_ORDER",
+        "SUPPLY_BELONGS_TO_VIRTUAL_ORDER",
+        "OTHER_ASYNCHRONOUS_OPERATION_IN_PROGRESS"
+      ]
+    },
+    "SupplyOrderCancelStatusResponseCancelSupplyResults": {
+      "type": "object",
+      "properties": {
+        "error_reasons": {
+          "description": "Причина, по которой не удалось отменить поставки:\n  - `INVALID_SUPPLY_STATE` — неверный статус поставки.\n  - `SUPPLY_DOES_NOT_BELONG_TO_CONTRACTOR` — поставка не принадлежит юридическому лицу.\n  - `SUPPLY_DOES_NOT_BELONG_TO_COMPANY` — поставка не принадлежит продавцу.\n  - `SUPPLY_DOES_NOT_BELONG_TO_ORDER` — поставка не принадлежит заявке на поставку.\n  - `SUPPLY_BELONGS_TO_VIRTUAL_ORDER` — поставка принадлежит виртуальной заявке на поставку.\n  - `OTHER_ASYNCHRONOUS_OPERATION_IN_PROGRESS` — поставка в процессе отмены.\n",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CancelSupplyResultsCancelSupplyError"
+          }
+        },
+        "is_supply_cancelled": {
+          "description": "`true`, если поставка отменена.\n",
+          "type": "boolean"
+        },
+        "supply_id": {
+          "description": "Идентификатор поставки.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "SupplyOrderCancelStatusResponseResult": {
+      "type": "object",
+      "description": "Информация об отмене заявки на поставку.",
+      "properties": {
+        "is_order_cancelled": {
+          "description": "`true`, если заявка на поставку отменена.\n",
+          "type": "boolean"
+        },
+        "supplies": {
+          "description": "Список отменённых поставок.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/SupplyOrderCancelStatusResponseCancelSupplyResults"
+          }
+        }
+      }
+    },
+    "v1SupplyOrderCancelStatusResponseStatus": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "IN_PROGRESS",
+        "ERROR"
+      ],
+      "description": "Статус отмены заявки на поставку. Возможные значения:\n- `SUCCESS` — заявка отменена.\n- `IN_PROGRESS` — заявки в процессе отмены.\n- `ERROR` — ошибка.\n"
+    },
+    "v1SupplyOrderCancelStatusResponse": {
+      "type": "object",
+      "properties": {
+        "error_reasons": {
+          "type": "array",
+          "description": "Причина, по которой не удалось отменить заявку на поставку:\n  - `INVALID_ORDER_STATE` — неверный статус заявки на поставку.\n  - `ORDER_IS_VIRTUAL` — заявка виртуальная. \n  - `ORDER_DOES_NOT_BELONG_TO_CONTRACTOR` —  заявка на поставку не принадлежит вашему юридическому лицу.\n  - `ORDER_DOES_NOT_BELONG_TO_COMPANY` — заявка на поставку не принадлежит продавцу. \n  - `OTHER_ASYNCHRONOUS_OPERATION_IN_PROGRESS` — заявка на поставку в процессе отмены.\n",
+          "items": {
+            "$ref": "#/components/schemas/SupplyOrderCancelStatusResponseCancelOrderError"
+          }
+        },
+        "result": {
+          "$ref": "#/components/schemas/SupplyOrderCancelStatusResponseResult"
+        },
+        "status": {
+          "$ref": "#/components/schemas/v1SupplyOrderCancelStatusResponseStatus"
+        }
+      }
+    },
+    "v1SupplyOrderContentUpdateRequestItem": {
+      "type": "object",
+      "properties": {
+        "quant": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Размер кванта."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товара."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "v1SupplyOrderContentUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Новый товарный состав заявки на поставку.\n\nМаксимум 5000 товаров.\n",
+          "items": {
+            "$ref": "#/components/schemas/v1SupplyOrderContentUpdateRequestItem"
+          }
+        },
+        "order_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заказа."
+        },
+        "supply_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор поставки."
+        }
+      }
+    },
+    "v1SupplyOrderContentUpdateResponseErrorEnum": {
+      "type": "string",
+      "enum": [
+        "INVALID_DRAFT_BUNDLE_ID",
+        "SOME_SERVICE_ERROR",
+        "HAS_UTD",
+        "ORDER_SKU_LIMIT",
+        "SAME_SKU",
+        "SUPPLY_LOCKED",
+        "INBOUND_NO_CAPACITY",
+        "INBOUND_LOCK",
+        "SUPPLY_CONTENT_NOT_VALID",
+        "SUPPLY_BELONG_TO_ANOTHER_CONTRACTOR",
+        "SUPPLY_BELONG_TO_ANOTHER_COMPANY",
+        "INCORRECT_SUPPLY_STATE",
+        "INCORRECT_SUPPLY_SOURCE",
+        "INCORRECT_STORAGE_WAREHOUSE",
+        "DEADLINE",
+        "INACTIVE_CONTRACT",
+        "QUANTITY_OUT_OF_RANGE_BOTTOM",
+        "QUANTITY_OUT_OF_RANGE_UPPER",
+        "EMPTY_CONTENT",
+        "NO_SUPPLY_PRODUCT_BUNDLE_ID",
+        "ONLY_DOCLESS_ALLOWED",
+        "INVALID_VOLUME",
+        "SUPPLY_IS_VIRTUAL",
+        "ORDER_LOCKED",
+        "CONTRACT_IS_NOT_FOUND",
+        "COMPANY_DOES_NOT_BELONGS_TO_CONTRACTOR",
+        "ORDER_IS_NOT_FOUND",
+        "ORDER_DOES_NOT_BELONGS_TO_COMPANY",
+        "SUPPLY_IS_NOT_FOUND",
+        "SUPPLY_DOES_NOT_BELONGS_TO_ORDER",
+        "UTD_IS_UPLOADED",
+        "STORAGE_WAREHOUSE_IS_NOT_WMS",
+        "CONTRACT_IS_NOT_VALID_FOR_HANDLING_ORDERS",
+        "ORDER_DOES_NOT_BELONG_TO_CONTRACTOR"
+      ]
+    },
+    "v1SupplyOrderContentUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Ошибки при редактировании товарного состава:\n- `INVALID_DRAFT_BUNDLE_ID`, `SOME_SERVICE_ERROR`, `ORDER_IS_NOT_FOUND`, `SUPPLY_IS_NOT_FOUND`, `SUPPLY_DOES_NOT_BELONGS_TO_ORDER` — ошибка при редактировании поставки.\n- `HAS_UTD`, `UTD_IS_UPLOADED` — документы в системе ЭДО не удалены. Аннулируйте документы в системе ЭДО. Когда отредактируете состав, сформируйте и подпишите новые документы.\n- `ORDER_SKU_LIMIT` — количество товаров в поставке должно быть меньше или равно 5000.\n- `SAME_SKU` — товарный состав поставки остался прежним.\n- `SUPPLY_LOCKED` — обновление товарного состава в процессе, попробуйте позже.\n- `INBOUND_NO_CAPACITY` — на складе недостаточно места для поставки.\n- `INBOUND_LOCK`, `ORDER_LOCKED`, `STORAGE_WAREHOUSE_IS_NOT_WMS` — нельзя редактировать товарный состав.\n- `SUPPLY_CONTENT_NOT_VALID` — в составе поставки есть товары, которые склад не может принять.\n- `SUPPLY_BELONG_TO_ANOTHER_CONTRACTOR`, `COMPANY_DOES_NOT_BELONGS_TO_CONTRACTOR`, `ORDER_DOES_NOT_BELONG_TO_CONTRACTOR` — заявка на поставку не принадлежит вашему юридическому лицу.\n- `SUPPLY_BELONG_TO_ANOTHER_COMPANY`, `ORDER_DOES_NOT_BELONGS_TO_COMPANY` — заявка на поставку не принадлежит вашему кабинету.\n- `INCORRECT_SUPPLY_STATE` — нельзя изменить поставку в этом статусе.\n- `INCORRECT_SUPPLY_SOURCE` — нельзя изменить поставку с этим источником данных.\n- `INCORRECT_STORAGE_WAREHOUSE` — нельзя изменить поставку с этим складом хранения.\n- `NO_SUPPLY_PRODUCT_BUNDLE_ID` — отсутствует идентификатор товарного состава поставки.\n- `ONLY_DOCLESS_ALLOWED` — нельзя редактировать поставку при наличии документов.\n- `INVALID_VOLUME` — некорректный объём поставки.\n- `SUPPLY_IS_VIRTUAL` — нельзя редактировать виртуальную поставку.\n- `DEADLINE` — нельзя изменить поставку за час до таймслота.\n- `INACTIVE_CONTRACT` — нельзя редактировать состав поставки с истекшим договором.\n- `QUANTITY_OUT_OF_RANGE_BOTTOM` — количество экземпляров каждого товара должно быть больше 0.\n- `QUANTITY_OUT_OF_RANGE_UPPER` — количество экземпляров каждого товара должно быть меньше или равно 1 000 000.\n- `EMPTY_CONTENT` — не сможем принять пустую поставку, добавьте товары.\n- `CONTRACT_IS_NOT_FOUND`, `CONTRACT_IS_NOT_VALID_FOR_HANDLING_ORDERS` — в этом личном кабинете нельзя изменить поставку.\n",
+          "items": {
+            "$ref": "#/components/schemas/v1SupplyOrderContentUpdateResponseErrorEnum"
+          }
+        },
+        "operation_id": {
+          "type": "string",
+          "description": "Идентификатор операции."
+        }
+      }
+    },
+    "v1SupplyOrderContentUpdateStatusRequest": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        }
+      }
+    },
+    "v1SupplyOrderContentUpdateStatusResponseErrorEnum": {
+      "type": "string",
+      "enum": [
+        "INVALID_DRAFT_BUNDLE_ID",
+        "SOME_SERVICE_ERROR",
+        "HAS_UTD",
+        "ORDER_SKU_LIMIT",
+        "SAME_SKU",
+        "SUPPLY_LOCKED",
+        "INBOUND_NO_CAPACITY",
+        "INBOUND_LOCK",
+        "SUPPLY_CONTENT_NOT_VALID",
+        "SUPPLY_BELONG_TO_ANOTHER_CONTRACTOR",
+        "SUPPLY_BELONG_TO_ANOTHER_COMPANY",
+        "INCORRECT_SUPPLY_STATE",
+        "INCORRECT_SUPPLY_SOURCE",
+        "INCORRECT_STORAGE_WAREHOUSE",
+        "DEADLINE",
+        "INACTIVE_CONTRACT",
+        "QUANTITY_OUT_OF_RANGE_BOTTOM",
+        "QUANTITY_OUT_OF_RANGE_UPPER",
+        "EMPTY_CONTENT",
+        "NO_SUPPLY_PRODUCT_BUNDLE_ID",
+        "ONLY_DOCLESS_ALLOWED",
+        "INVALID_VOLUME",
+        "SUPPLY_IS_VIRTUAL",
+        "ORDER_LOCKED"
+      ]
+    },
+    "SupplyOrderContentUpdateStatusResponseStatusEnum": {
+      "type": "string",
+      "description": "Статус редактирования товарного состава поставки.\n\nВозможные статусы:\n- `SUCCESS` — товарный состав изменён,\n- `IN_PROGRESS` — товарный состав в процессе изменения,\n- `ERROR` — возникла ошибка при изменении товарного состава.\n",
+      "enum": [
+        "SUCCESS",
+        "IN_PROGRESS",
+        "ERROR"
+      ]
+    },
+    "v1SupplyOrderContentUpdateStatusResponse": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Список ошибок при редактировании товарного состава:\n- `INVALID_DRAFT_BUNDLE_ID`, `SOME_SERVICE_ERROR` — ошибка при редактировании поставки.\n- `HAS_UTD` — документы в системе ЭДО не удалены. Аннулируйте документы в системе ЭДО. Когда отредактируете состав, сформируйте и подпишите новые документы.\n- `ORDER_SKU_LIMIT` — количество товаров в поставке должно быть меньше или равно 5000.\n- `SAME_SKU` — товарный состав поставки остался прежним.\n- `SUPPLY_LOCKED` — обновление товарного состава в процессе, попробуйте позже.\n- `INBOUND_NO_CAPACITY` — на складе недостаточно места для поставки.\n- `INBOUND_LOCK`, `ORDER_LOCKED` — нельзя редактировать товарный состав.\n- `SUPPLY_CONTENT_NOT_VALID` — в составе поставки есть товары, которые склад не может принять.\n- `SUPPLY_BELONG_TO_ANOTHER_CONTRACTOR` — заявка на поставку не принадлежит вашему юридическому лицу.\n- `SUPPLY_BELONG_TO_ANOTHER_COMPANY` — заявка на поставку не принадлежит вашему кабинету.\n- `INCORRECT_SUPPLY_STATE` — нельзя изменить поставку в этом статусе.\n- `INCORRECT_SUPPLY_SOURCE` — нельзя изменить поставку с этим источником данных.\n- `INCORRECT_STORAGE_WAREHOUSE` — нельзя изменить поставку с этим складом хранения.\n- `NO_SUPPLY_PRODUCT_BUNDLE_ID` — отсутствует идентификатор товарного состава поставки.\n- `ONLY_DOCLESS_ALLOWED` — нельзя редактировать поставку при наличии документов.\n- `INVALID_VOLUME` — некорректный объём поставки.\n- `SUPPLY_IS_VIRTUAL` — нельзя редактировать виртуальную поставку.\n- `DEADLINE` — нельзя изменить поставку за час до таймслота.\n- `INACTIVE_CONTRACT` — нельзя редактировать состав поставки с истекшим договором.\n- `QUANTITY_OUT_OF_RANGE_BOTTOM` — количество экземпляров каждого товара должно быть больше 0.\n- `QUANTITY_OUT_OF_RANGE_UPPER` — количество экземпляров каждого товара должно быть меньше или равно 1 000 000.\n- `EMPTY_CONTENT` — не сможем принять пустую поставку, добавьте товары.\n",
+          "items": {
+            "$ref": "#/components/schemas/v1SupplyOrderContentUpdateStatusResponseErrorEnum"
+          }
+        },
+        "status": {
+          "$ref": "#/components/schemas/SupplyOrderContentUpdateStatusResponseStatusEnum"
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarCreateOrGetV5Request": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "posting_number"
+      ]
+    },
+    "v5FbsPostingProductExemplarCreateOrGetV5ResponseProductExemplar": {
+      "type": "object",
+      "properties": {
+        "exemplar_id": {
+          "description": "Идентификатор экземпляра.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "gtd": {
+          "description": "Номер грузовой таможенной декларации (ГТД).",
+          "type": "string"
+        },
+        "is_gtd_absent": {
+          "description": "Признак того, что не указан номер грузовой таможенной декларации (ГТД).",
+          "type": "boolean"
+        },
+        "is_rnpt_absent": {
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ).",
+          "type": "boolean"
+        },
+        "mandatory_mark": {
+          "description": "Обязательная маркировка «Честный ЗНАК».",
+          "type": "string"
+        },
+        "rnpt": {
+          "description": "Регистрационный номер партии товара (РНПТ).",
+          "type": "string"
+        },
+        "jw_uin": {
+          "description": "Уникальный идентификационный номер (УИН) ювелирного изделия.",
+          "type": "string"
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarCreateOrGetV5ResponseProduct": {
+      "type": "object",
+      "properties": {
+        "exemplars": {
+          "description": "Информация об экземплярах.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarCreateOrGetV5ResponseProductExemplar"
+          }
+        },
+        "is_gtd_needed": {
+          "description": "Признак того, что необходимо передать номер грузовой таможенной декларации (ГТД) для продукта и отправления.",
+          "type": "boolean"
+        },
+        "is_mandatory_mark_needed": {
+          "description": "Признак того, что необходимо передать маркировку «Честный ЗНАК».",
+          "type": "boolean"
+        },
+        "is_rnpt_needed": {
+          "description": "Признак того, что необходимо передать номер партии товара (РНПТ).",
+          "type": "boolean"
+        },
+        "product_id": {
+          "description": "Идентификатор товара в системе продавца — `product_id`.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "quantity": {
+          "description": "Количество экземпляров.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarCreateOrGetV5Response": {
+      "type": "object",
+      "properties": {
+        "multi_box_qty": {
+          "description": "Количество коробок, в которые упакован товар.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string"
+        },
+        "products": {
+          "description": "Список товаров.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarCreateOrGetV5ResponseProduct"
+          }
+        }
+      }
+    },
+    "postingv4FbsPostingProductExemplarValidateRequestProductExemplar": {
+      "required": [
+        "mandatory_mark"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "mandatory_mark": {
+          "type": "string",
+          "description": "Обязательная маркировка «Честный ЗНАК»."
+        },
+        "jw_uin": {
+          "type": "array of strings",
+          "description": "Уникальный идентификационный номер (УИН) ювелирного изделия."
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "postingv4FbsPostingProductExemplarValidateRequestProduct": {
+      "required": [
+        "product_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "exemplars": {
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/postingv4FbsPostingProductExemplarValidateRequestProductExemplar"
+          }
+        },
+        "product_id": {
+          "description": "Идентификатор товара в системе продавца — `product_id`.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "postingv4FbsPostingProductExemplarValidateRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/postingv4FbsPostingProductExemplarValidateRequestProduct"
+          }
+        }
+      }
+    },
+    "FbsPostingProductExemplarValidateResponseFbsPostingProductExemplarValidateResultProductExemplar": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "errors": {
+          "description": "Ошибки валидации экземпляра.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gtd": {
+          "description": "Номер грузовой таможенной декларации (ГТД).",
+          "type": "string"
+        },
+        "mandatory_mark": {
+          "description": "Обязательная маркировка «Честный ЗНАК».",
+          "type": "string"
+        },
+        "jw_uin": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Уникальный идентификационный номер (УИН) ювелирного изделия."
+        },
+        "valid": {
+          "description": "Результат прохождения проверки. `true`, если код экземпляра соответствует требованиям.",
+          "type": "boolean"
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "FbsPostingProductExemplarValidateResponseFbsPostingProductExemplarValidateResultProduct": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "exemplars": {
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingProductExemplarValidateResponseFbsPostingProductExemplarValidateResultProductExemplar"
+          }
+        },
+        "product_id": {
+          "description": "Идентификатор товара в системе продавца — `product_id`.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "valid": {
+          "description": "Результат прохождения проверки. `true`, если коды всех экземпляров соответствуют требованиям.",
+          "type": "boolean"
+        }
+      }
+    },
+    "FbsPostingProductExemplarValidateResponseFbsPostingProductExemplarValidateResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "products": {
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingProductExemplarValidateResponseFbsPostingProductExemplarValidateResultProduct"
+          }
+        }
+      }
+    },
+    "postingv4FbsPostingProductExemplarValidateResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/FbsPostingProductExemplarValidateResponseFbsPostingProductExemplarValidateResult"
+        }
+      }
+    },
+    "fbsv4SetProductExemplarRequestProductExemplar": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "is_gtd_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан номер таможенной декларации."
+        },
+        "mandatory_mark": {
+          "type": "string",
+          "description": "Обязательная маркировка «Честный ЗНАК»."
+        },
+        "jw_uin": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Уникальный идентификационный номер (УИН) ювелирного изделия."
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        },
+        "is_rnpt_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "fbsv4SetProductExemplarRequestProduct": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "exemplars": {
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/fbsv4SetProductExemplarRequestProductExemplar"
+          }
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор FBS товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "fbsv4SetProductExemplarRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/fbsv4SetProductExemplarRequestProduct"
+          }
+        }
+      }
+    },
+    "fbsv4SetProductExemplarResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "description": "Результат обработки запроса. `true`, если запрос обработан успешно.",
+          "type": "boolean"
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarSetV5RequestProductExemplar": {
+      "type": "object",
+      "properties": {
+        "exemplar_id": {
+          "description": "Идентификатор экземпляра.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "gtd": {
+          "description": "Номер грузовой таможенной декларации (ГТД).",
+          "type": "string"
+        },
+        "is_gtd_absent": {
+          "description": "Признак того, что не указан номер грузовой таможенной декларации (ГТД).",
+          "type": "boolean"
+        },
+        "is_rnpt_absent": {
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ).",
+          "type": "boolean"
+        },
+        "mandatory_mark": {
+          "description": "Обязательная маркировка «Честный ЗНАК».",
+          "type": "string"
+        },
+        "rnpt": {
+          "description": "Регистрационный номер партии товара (РНПТ).",
+          "type": "string"
+        },
+        "jw_uin": {
+          "description": "Уникальный идентификационный номер (УИН) ювелирного изделия.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "exemplar_id"
+      ]
+    },
+    "v5FbsPostingProductExemplarSetV5RequestProduct": {
+      "type": "object",
+      "properties": {
+        "exemplars": {
+          "description": "Информация об экземплярах.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarSetV5RequestProductExemplar"
+          }
+        },
+        "is_gtd_needed": {
+          "description": "Признак того, что необходимо передать номер грузовой таможенной декларации (ГТД) для продукта и отправления.",
+          "type": "boolean"
+        },
+        "is_mandatory_mark_needed": {
+          "description": "Признак того, что необходимо передать маркировку «Честный ЗНАК».",
+          "type": "boolean"
+        },
+        "is_rnpt_needed": {
+          "description": "Признак того, что необходимо передать номер партии товара (РНПТ).",
+          "type": "boolean"
+        },
+        "product_id": {
+          "description": "Идентификатор товара в системе продавца — `product_id`.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "quantity": {
+          "description": "Количество экземпляров.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "product_id"
+      ]
+    },
+    "v5FbsPostingProductExemplarSetV5Request": {
+      "type": "object",
+      "properties": {
+        "multi_box_qty": {
+          "description": "Количество коробок, в которые упакован товар.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string",
+          "required": true
+        },
+        "products": {
+          "description": "Список товаров.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarSetV5RequestProduct"
+          }
+        }
+      },
+      "required": [
+        "products",
+        "posting_number"
+      ]
+    },
+    "v5FbsPostingProductExemplarSetV5Response": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "Результат обработки запроса. `true`, если запрос обработан успешно.",
+          "type": "boolean"
+        }
+      }
+    },
+    "fbsv4GetProductExemplarStatusRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    },
+    "fbsv4GetProductExemplarStatusResponseProductExemplar": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "exemplar_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор экземпляра."
+        },
+        "gtd": {
+          "description": "Номер грузовой таможенной декларации (ГТД).",
+          "type": "string"
+        },
+        "gtd_check_status": {
+          "type": "string",
+          "description": "Статус проверки грузовой таможенной декларации."
+        },
+        "gtd_error_codes": {
+          "description": "Коды ошибок при проверке грузовой таможенной декларации.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_gtd_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан номер таможенной декларации."
+        },
+        "jw_uin": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Уникальный идентификационный номер (УИН) ювелирного изделия."
+        },
+        "jw_uin_check_status": {
+          "type": "string",
+          "description": "Статус проверки уникального идентификационного номера (УИН) ювелирного изделия."
+        },
+        "jw_uin_error_codes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Коды ошибок при проверке уникального идентификационного номера (УИН) ювелирного изделия."
+        },
+        "mandatory_mark": {
+          "type": "string",
+          "description": "Обязательная маркировка «Честный ЗНАК»."
+        },
+        "mandatory_mark_check_status": {
+          "type": "string",
+          "description": "Статус проверки маркировки «Честный ЗНАК»:\n- `processing` — маркировка обрабатывается.\n- `passed` — проверка пройдена.\n- `failed` — проверка не пройдена.\n"
+        },
+        "mandatory_mark_error_codes": {
+          "description": "Коды ошибок при проверке маркировки «Честный ЗНАК».",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        },
+        "rnpt_check_status": {
+          "type": "string",
+          "description": "Статус проверки регистрационного номера партии товара."
+        },
+        "rnpt_error_codes": {
+          "items": {
+            "type": "string"
+          },
+          "description": "Коды ошибок при проверке регистрационного номера партии товара."
+        },
+        "is_rnpt_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "fbsv4GetProductExemplarStatusResponseProduct": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "exemplars": {
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/fbsv4GetProductExemplarStatusResponseProductExemplar"
+          }
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        }
+      }
+    },
+    "fbsv4GetProductExemplarStatusResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/fbsv4GetProductExemplarStatusResponseProduct"
+          }
+        },
+        "status": {
+          "description": "Статус проверки всех экземпляров и доступности сборки:\n- `ship_available` — сборка доступна,\n- `ship_not_available` — сборка недоступна,\n- `validation_in_process` — экземпляры на проверке.\n",
+          "type": "string"
+        }
+      }
+    },
+    "FbsPostingShipV4RequestPackageProduct": {
+      "required": [
+        "product_id",
+        "quantity"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество экземпляров."
+        }
+      }
+    },
+    "FbsPostingShipV4RequestPackage": {
+      "required": [
+        "products"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingShipV4RequestPackageProduct"
+          },
+          "description": "Список товаров в отправлении."
+        }
+      }
+    },
+    "FbsPostingShipV4RequestWith": {
+      "type": "object",
+      "title": "object",
+      "description": "Дополнительная информация.",
+      "properties": {
+        "additional_data": {
+          "type": "boolean",
+          "description": "Чтобы получить дополнительную информацию, передайте `true`."
+        }
+      }
+    },
+    "fbsv4FbsPostingShipV4Request": {
+      "required": [
+        "packages",
+        "posting_number"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "packages": {
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingShipV4RequestPackage"
+          },
+          "description": "Список упаковок. Каждая упаковка содержит список отправлений, на которые делится заказ."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "with": {
+          "$ref": "#/components/schemas/FbsPostingShipV4RequestWith"
+        }
+      }
+    },
+    "fbsv4PostingProductDetailWithoutDimensions": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "mandatory_mark": {
+          "description": "Обязательная маркировка «Честный ЗНАК».",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "description": "Название товара.",
+          "type": "string"
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "price": {
+          "type": "string",
+          "description": "Цена."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товара в отправлении."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта ваших цен. Cовпадает с валютой, которая установлена в настройках личного кабинета.\n\nВозможные значения: \n  - `RUB` — российский рубль,\n  - `BYN` — белорусский рубль,\n  - `KZT` — тенге,\n  - `EUR` — евро,\n  - `USD` — доллар США,\n  - `CNY` — юань.\n"
+        }
+      }
+    },
+    "FbsPostingShipV4ResponseShipAdditionalData": {
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "description": "Список товаров в отправлении.",
+          "items": {
+            "$ref": "#/components/schemas/fbsv4PostingProductDetailWithoutDimensions"
+          }
+        }
+      }
+    }
+  }
+}

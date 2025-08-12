@@ -1,0 +1,197 @@
+name: Release Management
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., 1.0.0)'
+        required: true
+        type: string
+      release_notes:
+        description: 'Release notes'
+        required: false
+        type: string
+
+jobs:
+  # Create GitHub Release
+  create-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+      release_id: ${{ steps.create_release.outputs.id }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Extract version from tag or input
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+            echo "tag=v${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+            echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Verify version matches package.json
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          if [ "$PACKAGE_VERSION" != "${{ steps.version.outputs.version }}" ]; then
+            echo "Version mismatch: package.json has $PACKAGE_VERSION, but release version is ${{ steps.version.outputs.version }}"
+            exit 1
+          fi
+          
+      - name: Generate changelog
+        id: changelog
+        run: |
+          if [ -f "CHANGELOG.md" ]; then
+            # Extract changelog for this version
+            sed -n "/^## \[${{ steps.version.outputs.version }}\]/,/^## \[/p" CHANGELOG.md | sed '$d' > release_notes.md
+            if [ ! -s release_notes.md ]; then
+              echo "## What's Changed" > release_notes.md
+              echo "" >> release_notes.md
+              echo "See [CHANGELOG.md](CHANGELOG.md) for detailed changes." >> release_notes.md
+            fi
+          else
+            echo "## What's Changed" > release_notes.md
+            echo "" >> release_notes.md
+            echo "- Full TypeScript SDK for Ozon Seller API" >> release_notes.md
+            echo "- Covers 263 endpoints across 32 API groups" >> release_notes.md
+            echo "- Type-safe with comprehensive error handling" >> release_notes.md
+            echo "- ESM/CJS dual build support" >> release_notes.md
+          fi
+          
+          # Add custom release notes if provided
+          if [ -n "${{ github.event.inputs.release_notes }}" ]; then
+            echo "" >> release_notes.md
+            echo "${{ github.event.inputs.release_notes }}" >> release_notes.md
+          fi
+          
+      - name: Run full quality checks
+        run: |
+          npm run lint
+          npm run typecheck  
+          npm run test
+          
+      - name: Build release artifacts
+        run: npm run build
+        
+      - name: Create release package
+        run: |
+          npm pack
+          mkdir -p release-assets
+          mv *.tgz release-assets/ozon-sdk-${{ steps.version.outputs.version }}.tgz
+          
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          release_name: Release ${{ steps.version.outputs.version }}
+          body_path: release_notes.md
+          draft: false
+          prerelease: ${{ contains(steps.version.outputs.version, '-') }}
+          
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: release-assets/ozon-sdk-${{ steps.version.outputs.version }}.tgz
+          asset_name: ozon-sdk-${{ steps.version.outputs.version }}.tgz
+          asset_content_type: application/gzip
+
+  # Publish to NPM
+  publish-npm:
+    name: Publish to NPM
+    runs-on: ubuntu-latest
+    needs: create-release
+    if: success()
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build project
+        run: npm run build
+        
+      - name: Publish to NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          
+      - name: Create NPM publication summary
+        run: |
+          echo "✅ Successfully published @ozon/sdk@$(node -p 'require(\"./package.json\").version') to NPM" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📦 Installation: \`npm install @ozon/sdk\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📚 [NPM Package](https://www.npmjs.com/package/@ozon/sdk)" >> $GITHUB_STEP_SUMMARY
+
+  # Update documentation
+  update-docs:
+    name: Update Documentation
+    runs-on: ubuntu-latest
+    needs: publish-npm
+    if: success() && github.repository_owner == github.actor
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          
+      - name: Update README badges
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          sed -i "s/v[0-9]\+\.[0-9]\+\.[0-9]\+/v$VERSION/g" README.md
+          
+      - name: Commit documentation updates
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          if git diff --staged --quiet; then
+            echo "No documentation changes to commit"
+          else
+            git commit -m "docs: update README badges for version $(node -p 'require(\"./package.json\").version')"
+            git push
+          fi

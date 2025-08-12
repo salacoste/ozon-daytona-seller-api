@@ -1,0 +1,883 @@
+{
+  "metadata": {
+    "tag": "ReturnAPI",
+    "name": "ReturnAPI",
+    "displayName": "Возвратные отгрузки",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 8,
+    "schemasCount": 22,
+    "generatedAt": "2025-08-09T16:28:42.339Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/returns/company/fbs/info",
+      "method": "POST",
+      "operationId": "returnsCompanyFBSInfo",
+      "summary": "Количество возвратов FBS",
+      "description": "Метод для получения информации о возвратах FBS и их количестве.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "ReturnAPI"
+        ],
+        "summary": "Количество возвратов FBS",
+        "description": "Метод для получения информации о возвратах FBS и их количестве.",
+        "operationId": "returnsCompanyFBSInfo",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ReturnsCompanyFbsInfoRequest"
+              },
+              "example": {
+                "filter": {
+                  "place_id": 0
+                },
+                "pagination": {
+                  "last_id": 0,
+                  "limit": 500
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Количество возвратов FBS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ReturnsCompanyFbsInfoResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/return/giveout/is-enabled",
+      "method": "POST",
+      "operationId": "ReturnAPI_GiveoutIsEnabled",
+      "summary": "Проверить возможность получения возвратных отгрузок по штрихкоду",
+      "description": "Если у вас есть доступ, в параметре `enabled` будет указано значение `true`.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "ReturnAPI"
+        ],
+        "summary": "Проверить возможность получения возвратных отгрузок по штрихкоду",
+        "description": "Если у вас есть доступ, в параметре `enabled` будет указано значение `true`.",
+        "operationId": "ReturnAPI_GiveoutIsEnabled",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1Empty"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Результат проверки",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GiveoutIsEnabledResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/return/giveout/list",
+      "method": "POST",
+      "operationId": "ReturnAPI_GiveoutList",
+      "summary": "Список возвратных отгрузок",
+      "description": "Метод для получения списка активных возвратов.\nВозвратная отгрузка становится активной после сканирования штрихкода. \nПосле сканирования штрихкода второй раз активная выдача переходит в статус неактивной.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "ReturnAPI"
+        ],
+        "summary": "Список возвратных отгрузок",
+        "description": "Метод для получения списка активных возвратов.\nВозвратная отгрузка становится активной после сканирования штрихкода. \nПосле сканирования штрихкода второй раз активная выдача переходит в статус неактивной.\n",
+        "operationId": "ReturnAPI_GiveoutList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GiveoutListRequest"
+              },
+              "example": {
+                "last_id": 0,
+                "limit": 500
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список возвратных отгрузок",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GiveoutListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/return/giveout/info",
+      "method": "POST",
+      "operationId": "ReturnAPI_GiveoutInfo",
+      "summary": "Информация о возвратной отгрузке",
+      "description": "Метод для получения информации о возвратной отгрузке. \nВ параметр `giveout_id` передаётся значение, полученное в методе [/v1/return/giveout/list](#operation/ReturnAPI_GiveoutList).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "ReturnAPI"
+        ],
+        "summary": "Информация о возвратной отгрузке",
+        "description": "Метод для получения информации о возвратной отгрузке. \nВ параметр `giveout_id` передаётся значение, полученное в методе [/v1/return/giveout/list](#operation/ReturnAPI_GiveoutList).\n",
+        "operationId": "ReturnAPI_GiveoutInfo",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GiveoutInfoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о возвратной отгрузке",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GiveoutInfoResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/return/giveout/barcode",
+      "method": "POST",
+      "operationId": "ReturnAPI_GiveoutGetBarcode",
+      "summary": "Значение штрихкода для возвратных отгрузок",
+      "description": "Используйте этот метод, чтобы получить штрихкод из ответа методов [/v1/return/giveout/get-png](#operation/ReturnAPI_GiveoutGetPNG) и [/v1/return/giveout/get-pdf](#operation/ReturnAPI_GiveoutGetPDF) в текстовом виде.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "ReturnAPI"
+        ],
+        "summary": "Значение штрихкода для возвратных отгрузок",
+        "description": "Используйте этот метод, чтобы получить штрихкод из ответа методов [/v1/return/giveout/get-png](#operation/ReturnAPI_GiveoutGetPNG) и [/v1/return/giveout/get-pdf](#operation/ReturnAPI_GiveoutGetPDF) в текстовом виде.",
+        "operationId": "ReturnAPI_GiveoutGetBarcode",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1Empty"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Значение штрихкода",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GiveoutGetBarcodeResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/return/giveout/get-pdf",
+      "method": "POST",
+      "operationId": "ReturnAPI_GiveoutGetPDF",
+      "summary": "Штрихкод для получения возвратной отгрузки в формате PDF",
+      "description": "Возвращает PDF-файл со штрихкодом. Метод работает только для схемы FBS.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "ReturnAPI"
+        ],
+        "summary": "Штрихкод для получения возвратной отгрузки в формате PDF",
+        "description": "Возвращает PDF-файл со штрихкодом. Метод работает только для схемы FBS.",
+        "operationId": "ReturnAPI_GiveoutGetPDF",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1Empty"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Штрихкод для возвратной отгрузки",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GiveoutGetPDFResponse"
+                },
+                "example": {
+                  "content_type": "application/pdf",
+                  "file_name": "string",
+                  "file_content": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/return/giveout/get-png",
+      "method": "POST",
+      "operationId": "ReturnAPI_GiveoutGetPNG",
+      "summary": "Штрихкод для получения возвратной отгрузки в формате PNG",
+      "description": "Возвращает PNG-файл со штрихкодом.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "ReturnAPI"
+        ],
+        "summary": "Штрихкод для получения возвратной отгрузки в формате PNG",
+        "description": "Возвращает PNG-файл со штрихкодом.",
+        "operationId": "ReturnAPI_GiveoutGetPNG",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1Empty"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Штрихкод для возвратной отгрузки",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GiveoutGetPNGResponse"
+                },
+                "example": {
+                  "content_type": "image/png",
+                  "file_name": "string",
+                  "file_content": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/return/giveout/barcode-reset",
+      "method": "POST",
+      "operationId": "ReturnAPI_GiveoutBarcodeReset",
+      "summary": "Сгенерировать новый штрихкод",
+      "description": "Используйте метод, если ваш штрихкод попал в посторонние руки.\n\nМетод возвращает PNG-файл с новым штрихкодом. После использования метода вы не сможете получить возвратную отгрузку по старым штрихкодам.\nЧтобы получить новый штрихкод в PDF-формате, запросите его методом [/v1/return/giveout/get-pdf](#operation/ReturnAPI_GiveoutGetPDF).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "ReturnAPI"
+        ],
+        "summary": "Сгенерировать новый штрихкод",
+        "description": "Используйте метод, если ваш штрихкод попал в посторонние руки.\n\nМетод возвращает PNG-файл с новым штрихкодом. После использования метода вы не сможете получить возвратную отгрузку по старым штрихкодам.\nЧтобы получить новый штрихкод в PDF-формате, запросите его методом [/v1/return/giveout/get-pdf](#operation/ReturnAPI_GiveoutGetPDF).\n",
+        "operationId": "ReturnAPI_GiveoutBarcodeReset",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1Empty"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Новый штрихкод",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GiveoutBarcodeResetResponse"
+                },
+                "example": {
+                  "content_type": "image/png",
+                  "file_name": "string",
+                  "file_content": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "v1ReturnsCompanyFbsInfoRequest": {
+      "required": [
+        "pagination"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/components/schemas/v1ReturnsCompanyFbsInfoRequestFilter"
+        },
+        "pagination": {
+          "$ref": "#/components/schemas/ReturnsCompanyFbsInfoRequestPagination"
+        }
+      }
+    },
+    "v1ReturnsCompanyFbsInfoRequestFilter": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтры.",
+      "properties": {
+        "place_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Фильтр по идентификатору drop-off пункта."
+        }
+      }
+    },
+    "ReturnsCompanyFbsInfoRequestPagination": {
+      "required": [
+        "limit"
+      ],
+      "type": "object",
+      "title": "object",
+      "description": "Разделение ответа метода.",
+      "properties": {
+        "last_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор последнего drop-off пункта на странице. Для первого запроса оставьте это поле пустым.\n\nЧтобы получить следующие значения, укажите `id` последнего drop-off пункта из ответа предыдущего запроса.\n"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество drop-off пунктов на странице. Максимум — 500."
+        }
+      }
+    },
+    "v1ReturnsCompanyFbsInfoResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "drop_off_points": {
+          "description": "Информация о drop-off пунктах.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ReturnsCompanyFbsInfoResponseDropOffPoints"
+          }
+        },
+        "has_next": {
+          "type": "boolean",
+          "description": "Признак, есть ли ещё пункты, где продавца ожидают возвраты."
+        }
+      }
+    },
+    "ReturnsCompanyFbsInfoResponseDropOffPoints": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Адрес drop-off пункта."
+        },
+        "box_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество коробок в drop-off пункте."
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор drop-off пункта."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название drop-off пункта."
+        },
+        "pass_info": {
+          "$ref": "#/components/schemas/ReturnsCompanyFbsInfoResponsePass_info"
+        },
+        "place_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор склада, на который приедет отгрузка."
+        },
+        "returns_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество возвратов в drop-off пункте."
+        },
+        "utc_offset": {
+          "type": "string",
+          "description": "Смещение часового пояса времени отгрузки от UTC-0."
+        },
+        "warehouses_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Идентификатор складов продавца."
+        }
+      }
+    },
+    "ReturnsCompanyFbsInfoResponsePass_info": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация о пропуске.",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество пропусков на drop-off пункт."
+        },
+        "is_required": {
+          "type": "boolean",
+          "description": "Признак, нужен ли пропуск на drop-off пункт."
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v1Empty": {
+      "type": "object",
+      "title": "object"
+    },
+    "v1GiveoutIsEnabledResponse": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "`true`, если вы можете получить возвратную отгрузку по штрихкоду.\n",
+          "type": "boolean"
+        }
+      }
+    },
+    "v1GiveoutListRequest": {
+      "required": [
+        "limit"
+      ],
+      "type": "object",
+      "properties": {
+        "last_id": {
+          "description": "Идентификатор последнего значения на странице.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "limit": {
+          "description": "Количество элементов в ответе.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1GiveoutListResponse": {
+      "type": "object",
+      "properties": {
+        "giveouts": {
+          "description": "Идентификатор отгрузки.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/GiveoutListResponseGiveoutDetails"
+          }
+        }
+      }
+    },
+    "GiveoutListResponseGiveoutDetails": {
+      "type": "object",
+      "properties": {
+        "approved_articles_count": {
+          "description": "Количество товаров в отгрузке.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "created_at": {
+          "description": "Дата и время.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "giveout_id": {
+          "description": "Идентификатор отгрузки.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "giveout_status": {
+          "$ref": "#/components/schemas/v1GiveoutStatus"
+        },
+        "total_articles_count": {
+          "description": "Общее количество товаров, которые нужно забрать со склада.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "warehouse_address": {
+          "description": "Адрес склада.",
+          "type": "string"
+        },
+        "warehouse_id": {
+          "description": "Идентификатор склада.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "warehouse_name": {
+          "description": "Название склада.",
+          "type": "string"
+        }
+      }
+    },
+    "v1GiveoutStatus": {
+      "type": "string",
+      "description": "Статусы возвратной отгрузки:\n - `GIVEOUT_STATUS_UNSPECIFIED` — не определён, напишите в поддержку.\n - `GIVEOUT_STATUS_CREATED` — создана.\n - `GIVEOUT_STATUS_APPROVED` — одобрена.\n - `GIVEOUT_STATUS_COMPLETED` — завершена.\n - `GIVEOUT_STATUS_CANCELLED` — отменена.\n"
+    },
+    "v1GiveoutInfoRequest": {
+      "required": [
+        "giveout_id"
+      ],
+      "type": "object",
+      "properties": {
+        "giveout_id": {
+          "description": "Идентификатор отгрузки.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1GiveoutInfoResponse": {
+      "type": "object",
+      "properties": {
+        "articles": {
+          "description": "Артикулы товаров.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/GiveoutInfoResponseArticleDetails"
+          }
+        },
+        "giveout_id": {
+          "description": "Идентификатор отгрузки.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "giveout_status": {
+          "$ref": "#/components/schemas/v1GiveoutStatus"
+        },
+        "warehouse_address": {
+          "description": "Адрес склада.",
+          "type": "string"
+        },
+        "warehouse_name": {
+          "description": "Название склада.",
+          "type": "string"
+        }
+      }
+    },
+    "GiveoutInfoResponseArticleDetails": {
+      "type": "object",
+      "properties": {
+        "approved": {
+          "description": "`true`, если отгрузка подтверждена.\n",
+          "type": "boolean"
+        },
+        "delivery_schema": {
+          "$ref": "#/components/schemas/v1GiveoutDeliverySchema"
+        },
+        "name": {
+          "description": "Название товара.",
+          "type": "string"
+        },
+        "seller_id": {
+          "description": "Идентификатор продавца.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1GiveoutDeliverySchema": {
+      "type": "string",
+      "description": "Cхема доставки:\n - `GIVEOUT_DELIVERY_SCHEMA_UNSPECIFIED` — не определёна, напишите в поддержку.\n - `GIVEOUT_DELIVERY_SCHEMA_FBO` — FBO.\n - `GIVEOUT_DELIVERY_SCHEMA_FBS` — FBS.\n"
+    },
+    "v1GiveoutGetBarcodeResponse": {
+      "type": "object",
+      "properties": {
+        "barcode": {
+          "description": "Значение штрихкода в текстовом виде.",
+          "type": "string"
+        }
+      }
+    },
+    "v1GiveoutGetPDFResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "file_content": {
+          "type": "string",
+          "description": "PDF-файл со штрихкодом в бинарном виде."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Название файла."
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Тип файла."
+        }
+      }
+    },
+    "v1GiveoutGetPNGResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "file_content": {
+          "type": "string",
+          "description": "PNG-файл со штрихкодом в бинарном виде."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Название файла."
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Тип файла."
+        }
+      }
+    },
+    "v1GiveoutBarcodeResetResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "file_content": {
+          "type": "string",
+          "description": "Изображение со штрихкодом в бинарном виде."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Название файла."
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Тип файла."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,2220 @@
+{
+  "metadata": {
+    "tag": "FBS&rFBSMarks",
+    "name": "FBS&rFBSMarks",
+    "displayName": "Управление кодами маркировки и сборкой заказов для FBS/rFBS",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 12,
+    "schemasCount": 58,
+    "generatedAt": "2025-08-09T16:28:42.336Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v5/fbs/posting/product/exemplar/create-or-get",
+      "method": "POST",
+      "operationId": "PostingAPI_FbsPostingProductExemplarCreateOrGet",
+      "summary": "Получить информацию об экземплярах",
+      "description": "Метод для получения информации по экземплярам товаров из отправления.\nИспользуйте метод для получения `exemplar_id`.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FBS&rFBSMarks"
+        ],
+        "summary": "Получить информацию об экземплярах",
+        "description": "Метод для получения информации по экземплярам товаров из отправления.\nИспользуйте метод для получения `exemplar_id`.\n",
+        "operationId": "PostingAPI_FbsPostingProductExemplarCreateOrGet",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v5FbsPostingProductExemplarCreateOrGetV5Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Данные экземпляров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v5FbsPostingProductExemplarCreateOrGetV5Response"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v4/fbs/posting/product/exemplar/validate",
+      "method": "POST",
+      "operationId": "PostingAPI_FbsPostingProductExemplarValidate",
+      "summary": "Валидация кодов маркировки",
+      "description": "Метод для проверки кодов на соответствие требованиям по количеству и составу символов.<br>\n[Подробнее об ошибках в Базе знаний продавца](https://seller-edu.ozon.ru/fbs/ozon-logistika/markirovka#какие-могут-возникать-ошибки-при-проверке-кода-маркировки)\n\nЕсли у вас нет номера грузовой таможенной декларации (ГТД), вы можете его не указывать.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Валидация кодов маркировки",
+        "description": "Метод для проверки кодов на соответствие требованиям по количеству и составу символов.<br>\n[Подробнее об ошибках в Базе знаний продавца](https://seller-edu.ozon.ru/fbs/ozon-logistika/markirovka#какие-могут-возникать-ошибки-при-проверке-кода-маркировки)\n\nЕсли у вас нет номера грузовой таможенной декларации (ГТД), вы можете его не указывать.\n",
+        "operationId": "PostingAPI_FbsPostingProductExemplarValidate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingv4FbsPostingProductExemplarValidateRequest"
+              },
+              "example": {
+                "posting_number": "23281294-0063-2",
+                "products": [
+                  {
+                    "exemplars": [
+                      {
+                        "gtd": "",
+                        "mandatory_mark": "010290000151642731tVMohkbfFgunB",
+                        "jw_uin": ""
+                      }
+                    ],
+                    "product_id": 476925391
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Результат валидации",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingv4FbsPostingProductExemplarValidateResponse"
+                },
+                "example": {
+                  "result": {
+                    "products": [
+                      {
+                        "product_id": 476925391,
+                        "exemplars": [
+                          {
+                            "mandatory_mark": "010290000151642731tVMohkbfFgunB",
+                            "jw_uin": "",
+                            "gtd": "",
+                            "valid": true,
+                            "errors": []
+                          }
+                        ],
+                        "valid": true,
+                        "error": ""
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS&rFBSMarks"
+        ]
+      }
+    },
+    {
+      "path": "/v4/fbs/posting/product/exemplar/set",
+      "method": "POST",
+      "operationId": "PostingAPI_SetProductExemplar",
+      "summary": "Проверить и сохранить данные экземпляров",
+      "description": "\n<aside class=\"warning\">\n  В будущем метод будет отключён. Мы предупредим вас об этом за месяц в <a href=\"https://dev.ozon.ru/\">сообществе Ozon for Dev</a> и <a href=\"https://t.me/OZON_int\">чате для разработчиков</a>.\n\n  Переключитесь на <a href=\"#operation/PostingAPI_FbsPostingProductExemplarSet\">/v5/fbs/posting/product/exemplar/set</a>.\n</aside>\n\nАсинхронный метод:\n- для проверки наличия экземпляров в обороте в системе «Честный ЗНАК»;\n- для сохранения данных экземпляров. \n\nЧтобы получить результаты проверок, используйте метод [/v4/fbs/posting/product/exemplar/status](#operation/PostingAPI_GetProductExemplarStatus).\n\nПри необходимости укажите номер грузовой таможенной декларации в параметре `gtd`. Если его нет, передайте значение `is_gtd_absent = true`.\n\nЕсли у вас несколько одинаковых товаров в отправлении, укажите один `product_id` и массив `exemplars` для каждого товара из отправления.\n\nВсегда передавайте полный набор данных по экземплярам и продуктам. \n\nНапример, в вашей системе 10 экземпляров. Вы передали их для проверки и сохранения. Потом добавили в своей системе ещё 60 экземпляров.\nПри повторной передаче экземпляров для проверки и сохранения укажите все экземпляры: и старые, и только что добавленные.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Проверить и сохранить данные экземпляров",
+        "description": "\n<aside class=\"warning\">\n  В будущем метод будет отключён. Мы предупредим вас об этом за месяц в <a href=\"https://dev.ozon.ru/\">сообществе Ozon for Dev</a> и <a href=\"https://t.me/OZON_int\">чате для разработчиков</a>.\n\n  Переключитесь на <a href=\"#operation/PostingAPI_FbsPostingProductExemplarSet\">/v5/fbs/posting/product/exemplar/set</a>.\n</aside>\n\nАсинхронный метод:\n- для проверки наличия экземпляров в обороте в системе «Честный ЗНАК»;\n- для сохранения данных экземпляров. \n\nЧтобы получить результаты проверок, используйте метод [/v4/fbs/posting/product/exemplar/status](#operation/PostingAPI_GetProductExemplarStatus).\n\nПри необходимости укажите номер грузовой таможенной декларации в параметре `gtd`. Если его нет, передайте значение `is_gtd_absent = true`.\n\nЕсли у вас несколько одинаковых товаров в отправлении, укажите один `product_id` и массив `exemplars` для каждого товара из отправления.\n\nВсегда передавайте полный набор данных по экземплярам и продуктам. \n\nНапример, в вашей системе 10 экземпляров. Вы передали их для проверки и сохранения. Потом добавили в своей системе ещё 60 экземпляров.\nПри повторной передаче экземпляров для проверки и сохранения укажите все экземпляры: и старые, и только что добавленные.\n",
+        "operationId": "PostingAPI_SetProductExemplar",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/fbsv4SetProductExemplarRequest"
+              },
+              "example": {
+                "posting_number": "23281294-0063-2",
+                "products": [
+                  {
+                    "exemplars": [
+                      {
+                        "gtd": "",
+                        "is_gtd_absent": true,
+                        "jw_uin": "",
+                        "mandatory_mark": "010290000151642731tVMohkbfFgunB"
+                      }
+                    ],
+                    "product_id": 476925391
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Запрос обработан",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fbsv4SetProductExemplarResponse"
+                },
+                "example": {
+                  "result": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS&rFBSMarks"
+        ]
+      }
+    },
+    {
+      "path": "/v5/fbs/posting/product/exemplar/set",
+      "method": "POST",
+      "operationId": "PostingAPI_FbsPostingProductExemplarSet",
+      "summary": "Проверить и сохранить данные экземпляров (версия 5)",
+      "description": "Асинхронный метод:\n- для проверки наличия экземпляров в обороте в системе «Честный ЗНАК»;\n- для сохранения данных экземпляров. \n\nИспользуйте метод только для отправлений в статусе `awaiting_packaging`, иначе вы получите ошибку `INVALID_POSTING_STATE`.\n\nЧтобы получить результаты проверок, используйте метод [/v4/fbs/posting/product/exemplar/status](#operation/PostingAPI_GetProductExemplarStatus). \nДля получения данных о созданных экземплярах, используйте метод [/v5/fbs/posting/product/exemplar/create-or-get](#operation/PostingAPI_FbsPostingProductExemplarCreateOrGet).\n\nПри необходимости укажите номер грузовой таможенной декларации в параметре `gtd`. \nЕсли его нет, передайте значение `is_gtd_absent = true`.\n\nЕсли у вас несколько одинаковых товаров в отправлении, укажите один `product_id` и массив `exemplars` для каждого товара из отправления.\n\nВсегда передавайте полный набор данных по экземплярам и продуктам. \n\nНапример, в вашей системе 10 экземпляров. \nВы передали их для проверки и сохранения. \nПотом добавили в своей системе ещё 60 экземпляров.\nПри повторной передаче экземпляров для проверки и сохранения укажите все экземпляры: и старые, и только что добавленные.\n\nОтличие от [/v4/fbs/posting/product/exemplar/set](#operation/PostingAPI_SetProductExemplar) — вы можете передать в запросе больше информации по экземплярам.\n\nКод ответа 200 не гарантирует, что данные об экземплярах приняты. \nОн указывает, что создана задача для добавления информации. \nЧтобы проверить статус задачи, используйте метод [/v4/fbs/posting/product/exemplar/status](#operation/PostingAPI_GetProductExemplarStatus).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FBS&rFBSMarks"
+        ],
+        "summary": "Проверить и сохранить данные экземпляров (версия 5)",
+        "description": "Асинхронный метод:\n- для проверки наличия экземпляров в обороте в системе «Честный ЗНАК»;\n- для сохранения данных экземпляров. \n\nИспользуйте метод только для отправлений в статусе `awaiting_packaging`, иначе вы получите ошибку `INVALID_POSTING_STATE`.\n\nЧтобы получить результаты проверок, используйте метод [/v4/fbs/posting/product/exemplar/status](#operation/PostingAPI_GetProductExemplarStatus). \nДля получения данных о созданных экземплярах, используйте метод [/v5/fbs/posting/product/exemplar/create-or-get](#operation/PostingAPI_FbsPostingProductExemplarCreateOrGet).\n\nПри необходимости укажите номер грузовой таможенной декларации в параметре `gtd`. \nЕсли его нет, передайте значение `is_gtd_absent = true`.\n\nЕсли у вас несколько одинаковых товаров в отправлении, укажите один `product_id` и массив `exemplars` для каждого товара из отправления.\n\nВсегда передавайте полный набор данных по экземплярам и продуктам. \n\nНапример, в вашей системе 10 экземпляров. \nВы передали их для проверки и сохранения. \nПотом добавили в своей системе ещё 60 экземпляров.\nПри повторной передаче экземпляров для проверки и сохранения укажите все экземпляры: и старые, и только что добавленные.\n\nОтличие от [/v4/fbs/posting/product/exemplar/set](#operation/PostingAPI_SetProductExemplar) — вы можете передать в запросе больше информации по экземплярам.\n\nКод ответа 200 не гарантирует, что данные об экземплярах приняты. \nОн указывает, что создана задача для добавления информации. \nЧтобы проверить статус задачи, используйте метод [/v4/fbs/posting/product/exemplar/status](#operation/PostingAPI_GetProductExemplarStatus).\n",
+        "operationId": "PostingAPI_FbsPostingProductExemplarSet",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v5FbsPostingProductExemplarSetV5Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Запрос обработан",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v5FbsPostingProductExemplarSetV5Response"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v4/fbs/posting/product/exemplar/status",
+      "method": "POST",
+      "operationId": "PostingAPI_GetProductExemplarStatus",
+      "summary": "Получить статус добавления экземпляров",
+      "description": "Метод для получения статусов добавления экземпляров, переданных в методе [/v5/fbs/posting/product/exemplar/set](#operation/PostingAPI_FbsPostingProductExemplarSet). \nТакже возвращает данные по этим экземплярам. \n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить статус добавления экземпляров",
+        "description": "Метод для получения статусов добавления экземпляров, переданных в методе [/v5/fbs/posting/product/exemplar/set](#operation/PostingAPI_FbsPostingProductExemplarSet). \nТакже возвращает данные по этим экземплярам. \n",
+        "operationId": "PostingAPI_GetProductExemplarStatus",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/fbsv4GetProductExemplarStatusRequest"
+              },
+              "example": {
+                "posting_number": "23281294-0063-2"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статусы проверки экземпляров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fbsv4GetProductExemplarStatusResponse"
+                },
+                "example": {
+                  "posting_number": "23281294-0063-2",
+                  "products": [
+                    {
+                      "exemplars": [
+                        {
+                          "exemplar_id": "",
+                          "gtd": "",
+                          "gtd_check_status": "passed",
+                          "gtd_error_codes": [],
+                          "is_gtd_absent": true,
+                          "is_rnpt_absent": true,
+                          "jw_uin": "",
+                          "jw_uin_check_status": "passed",
+                          "jw_uin_error_codes": [],
+                          "mandatory_mark": "010290000151642731tVMohkbfFgunB",
+                          "mandatory_mark_check_status": "passed",
+                          "mandatory_mark_error_codes": [],
+                          "rnpt": "",
+                          "rnpt_check_status": "passed",
+                          "rnpt_error_codes": []
+                        }
+                      ],
+                      "product_id": 476925391
+                    }
+                  ],
+                  "status": "ship_available"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS&rFBSMarks"
+        ]
+      }
+    },
+    {
+      "path": "/v4/posting/fbs/ship",
+      "method": "POST",
+      "operationId": "PostingAPI_ShipFbsPostingV4",
+      "summary": "Собрать заказ (версия 4)",
+      "description": "Делит заказ на отправления и переводит его в статус `awaiting_deliver`.\n\nКаждый элемент в `packages` может содержать несколько элементов `products` или отправлений. \nКаждый элемент в `products` — это товар, включённый в данное отправление.\n\nРазделить заказ нужно, если:\n  - товары не помещаются в одну упаковку,\n  - товары нельзя сложить в одну упаковку.\n  \nЧтобы разделить заказ, передайте в массиве `packages` несколько объектов.\n\nПример запроса, когда заказ разделять не нужно: 2 товара будут в одном отправлении.\n```\n{\n  \"packages\": [\n    {\n      \"products\": [\n        {\n          \"product_id\": 185479045,\n          \"quantity\": 2\n        }\n      ]\n    }\n  ],\n  \"posting_number\": \"89491381-0072-1\"\n}\n```\n\nПример запроса, когда заказ нужно разделить: каждый товар будет в отдельном отправлении.\n\n```\n{\n  \"packages\": [\n    {\n      \"products\": [\n        {\n          \"product_id\": 185479045,\n          \"quantity\": 1\n        }\n      ]\n    },\n    {\n      \"products\": [\n        {\n          \"product_id\": 185479045,\n          \"quantity\": 1\n        }\n      ]\n    }\n  ],\n  \"posting_number\": \"89491381-0072-1\"\n}    \n```  \n\nЧтобы внести информацию по экземплярам, используйте метод [/v5/fbs/posting/product/exemplar/set](#operation/PostingAPI_FbsPostingProductExemplarSet).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FBS&rFBSMarks"
+        ],
+        "summary": "Собрать заказ (версия 4)",
+        "description": "Делит заказ на отправления и переводит его в статус `awaiting_deliver`.\n\nКаждый элемент в `packages` может содержать несколько элементов `products` или отправлений. \nКаждый элемент в `products` — это товар, включённый в данное отправление.\n\nРазделить заказ нужно, если:\n  - товары не помещаются в одну упаковку,\n  - товары нельзя сложить в одну упаковку.\n  \nЧтобы разделить заказ, передайте в массиве `packages` несколько объектов.\n\nПример запроса, когда заказ разделять не нужно: 2 товара будут в одном отправлении.\n```\n{\n  \"packages\": [\n    {\n      \"products\": [\n        {\n          \"product_id\": 185479045,\n          \"quantity\": 2\n        }\n      ]\n    }\n  ],\n  \"posting_number\": \"89491381-0072-1\"\n}\n```\n\nПример запроса, когда заказ нужно разделить: каждый товар будет в отдельном отправлении.\n\n```\n{\n  \"packages\": [\n    {\n      \"products\": [\n        {\n          \"product_id\": 185479045,\n          \"quantity\": 1\n        }\n      ]\n    },\n    {\n      \"products\": [\n        {\n          \"product_id\": 185479045,\n          \"quantity\": 1\n        }\n      ]\n    }\n  ],\n  \"posting_number\": \"89491381-0072-1\"\n}    \n```  \n\nЧтобы внести информацию по экземплярам, используйте метод [/v5/fbs/posting/product/exemplar/set](#operation/PostingAPI_FbsPostingProductExemplarSet).\n",
+        "operationId": "PostingAPI_ShipFbsPostingV4",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/fbsv4FbsPostingShipV4Request"
+              },
+              "example": {
+                "packages": [
+                  {
+                    "products": [
+                      {
+                        "product_id": 185479045,
+                        "quantity": 1
+                      }
+                    ]
+                  }
+                ],
+                "posting_number": "89491381-0072-1",
+                "with": {
+                  "additional_data": true
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Заказ собран",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fbsv4FbsPostingShipV4Response"
+                },
+                "example": {
+                  "additional_data": [
+                    {
+                      "posting_number": "89491381-0072-1",
+                      "products": [
+                        {
+                          "currency_code": "RUB",
+                          "mandatory_mark": [
+                            "123"
+                          ],
+                          "name": "string",
+                          "offer_id": "17125",
+                          "price": "2000",
+                          "quantity": 1,
+                          "sku": 149618972
+                        }
+                      ]
+                    }
+                  ],
+                  "result": [
+                    "89491381-0072-1"
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v4/posting/fbs/ship/package",
+      "method": "POST",
+      "operationId": "PostingAPI_ShipFbsPostingPackage",
+      "summary": "Частичная сборка отправления (версия 4)",
+      "description": "Если в запросе передать часть товаров из отправления, метод разделит первичное отправление на две части. \nВ первичном несобранном отправлении останется часть товаров, которую не передали в запросе.\n\nПо умолчанию статус созданных отправлений `awaiting_packaging` — ожидает сборки.\n\nСтатус изначального отправления изменится только после изменения статуса отправлений, на которые он разделился.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FBS&rFBSMarks"
+        ],
+        "summary": "Частичная сборка отправления (версия 4)",
+        "description": "Если в запросе передать часть товаров из отправления, метод разделит первичное отправление на две части. \nВ первичном несобранном отправлении останется часть товаров, которую не передали в запросе.\n\nПо умолчанию статус созданных отправлений `awaiting_packaging` — ожидает сборки.\n\nСтатус изначального отправления изменится только после изменения статуса отправлений, на которые он разделился.\n",
+        "operationId": "PostingAPI_ShipFbsPostingPackage",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v4FbsPostingShipPackageV4Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Отправление собрано",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v4FbsPostingShipPackageV4Response"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v6/fbs/posting/product/exemplar/set",
+      "method": "POST",
+      "operationId": "PostingAPI_FbsPostingProductExemplarSetV6",
+      "summary": "Проверить и сохранить данные экземпляров",
+      "description": "Асинхронный метод:\n- для проверки наличия экземпляров в обороте в системе «Честный ЗНАК»;\n- для сохранения данных экземпляров. \n\nЧтобы получить результаты проверок, используйте метод [/v5/fbs/posting/product/exemplar/status](#operation/PostingAPI_FbsPostingProductExemplarStatusV5). \nДля получения данных о созданных экземплярах, используйте метод [/v6/fbs/posting/product/exemplar/create-or-get](#operation/PostingAPI_FbsPostingProductExemplarCreateOrGetV6).\n\nЕсли у вас несколько одинаковых товаров в отправлении, укажите один `product_id` и массив `exemplars` для каждого товара из отправления.\n\nВсегда передавайте полный набор данных по экземплярам и продуктам. \n\nНапример, в вашей системе 10 экземпляров. \nВы передали их для проверки и сохранения. \nПотом добавили в своей системе ещё 60 экземпляров.\nПри повторной передаче экземпляров для проверки и сохранения укажите все экземпляры: и старые, и только что добавленные.\n\nКод ответа 200 не гарантирует, что данные об экземплярах приняты. \nОн указывает, что создана задача для добавления информации. \nЧтобы проверить статус задачи, используйте метод [/v5/fbs/posting/product/exemplar/status](#operation/PostingAPI_FbsPostingProductExemplarStatusV5).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Проверить и сохранить данные экземпляров",
+        "description": "Асинхронный метод:\n- для проверки наличия экземпляров в обороте в системе «Честный ЗНАК»;\n- для сохранения данных экземпляров. \n\nЧтобы получить результаты проверок, используйте метод [/v5/fbs/posting/product/exemplar/status](#operation/PostingAPI_FbsPostingProductExemplarStatusV5). \nДля получения данных о созданных экземплярах, используйте метод [/v6/fbs/posting/product/exemplar/create-or-get](#operation/PostingAPI_FbsPostingProductExemplarCreateOrGetV6).\n\nЕсли у вас несколько одинаковых товаров в отправлении, укажите один `product_id` и массив `exemplars` для каждого товара из отправления.\n\nВсегда передавайте полный набор данных по экземплярам и продуктам. \n\nНапример, в вашей системе 10 экземпляров. \nВы передали их для проверки и сохранения. \nПотом добавили в своей системе ещё 60 экземпляров.\nПри повторной передаче экземпляров для проверки и сохранения укажите все экземпляры: и старые, и только что добавленные.\n\nКод ответа 200 не гарантирует, что данные об экземплярах приняты. \nОн указывает, что создана задача для добавления информации. \nЧтобы проверить статус задачи, используйте метод [/v5/fbs/posting/product/exemplar/status](#operation/PostingAPI_FbsPostingProductExemplarStatusV5).\n",
+        "operationId": "PostingAPI_FbsPostingProductExemplarSetV6",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v6FbsPostingProductExemplarSetV6Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Запрос обработан"
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS&rFBSMarks"
+        ]
+      }
+    },
+    {
+      "path": "/v6/fbs/posting/product/exemplar/create-or-get",
+      "method": "POST",
+      "operationId": "PostingAPI_FbsPostingProductExemplarCreateOrGetV6",
+      "summary": "Получить данные созданных экземпляров",
+      "description": "Метод для получения информации по экземплярам товаров из отправления, переданных в методе [/v6/fbs/posting/product/exemplar/set](#operation/PostingAPI_FbsPostingProductExemplarSetV6).\n\nИспользуйте метод для получения `exemplar_id`.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить данные созданных экземпляров",
+        "description": "Метод для получения информации по экземплярам товаров из отправления, переданных в методе [/v6/fbs/posting/product/exemplar/set](#operation/PostingAPI_FbsPostingProductExemplarSetV6).\n\nИспользуйте метод для получения `exemplar_id`.\n",
+        "operationId": "PostingAPI_FbsPostingProductExemplarCreateOrGetV6",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v6FbsPostingProductExemplarCreateOrGetV6Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Данные экземпляров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v6FbsPostingProductExemplarCreateOrGetV6Response"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS&rFBSMarks"
+        ]
+      }
+    },
+    {
+      "path": "/v5/fbs/posting/product/exemplar/status",
+      "method": "POST",
+      "operationId": "PostingAPI_FbsPostingProductExemplarStatusV5",
+      "summary": "Получить статус добавления экземпляров",
+      "description": "Метод для получения статусов добавления экземпляров, переданных в методе [/v6/fbs/posting/product/exemplar/set](PostingAPI_FbsPostingProductExemplarSetV6). Также возвращает данные по этим экземплярам.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить статус добавления экземпляров",
+        "description": "Метод для получения статусов добавления экземпляров, переданных в методе [/v6/fbs/posting/product/exemplar/set](PostingAPI_FbsPostingProductExemplarSetV6). Также возвращает данные по этим экземплярам.\n",
+        "operationId": "PostingAPI_FbsPostingProductExemplarStatusV5",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v5FbsPostingProductExemplarStatusV5Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статусы проверки экземпляров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v5FbsPostingProductExemplarStatusV5Response"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS&rFBSMarks"
+        ]
+      }
+    },
+    {
+      "path": "/v5/fbs/posting/product/exemplar/validate",
+      "method": "POST",
+      "operationId": "PostingAPI_FbsPostingProductExemplarValidateV5",
+      "summary": "Валидация кодов маркировки",
+      "description": "Метод для проверки кодов на соответствие требованиям системы «Честный ЗНАК» по количеству и составу символов.\n\nЕсли у вас нет номера грузовой таможенной декларации (ГТД), вы можете его не указывать.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Валидация кодов маркировки",
+        "description": "Метод для проверки кодов на соответствие требованиям системы «Честный ЗНАК» по количеству и составу символов.\n\nЕсли у вас нет номера грузовой таможенной декларации (ГТД), вы можете его не указывать.\n",
+        "operationId": "PostingAPI_FbsPostingProductExemplarValidateV5",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v5FbsPostingProductExemplarValidateV5Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Результат валидации",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v5FbsPostingProductExemplarValidateV5Response"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS&rFBSMarks"
+        ]
+      }
+    },
+    {
+      "path": "/v1/fbs/posting/product/exemplar/update",
+      "method": "POST",
+      "operationId": "PostingAPI_FbsPostingProductExemplarUpdate",
+      "summary": "Обновить данные экземпляров",
+      "description": "Используйте метод после передачи информации по экземплярам методом [/v6/fbs/posting/product/exemplar/set](#operation/PostingAPI_FbsPostingProductExemplarSetV6), чтобы сохранить обновлённые данные по экземплярам для отправлений в статусе «Ожидает отгрузки».\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Обновить данные экземпляров",
+        "description": "Используйте метод после передачи информации по экземплярам методом [/v6/fbs/posting/product/exemplar/set](#operation/PostingAPI_FbsPostingProductExemplarSetV6), чтобы сохранить обновлённые данные по экземплярам для отправлений в статусе «Ожидает отгрузки».\n",
+        "operationId": "PostingAPI_FbsPostingProductExemplarUpdate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1FbsPostingProductExemplarUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Данные обновлены"
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS&rFBSMarks"
+        ]
+      }
+    }
+  ],
+  "schemas": {
+    "v5FbsPostingProductExemplarCreateOrGetV5Request": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "posting_number"
+      ]
+    },
+    "v5FbsPostingProductExemplarCreateOrGetV5Response": {
+      "type": "object",
+      "properties": {
+        "multi_box_qty": {
+          "description": "Количество коробок, в которые упакован товар.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string"
+        },
+        "products": {
+          "description": "Список товаров.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarCreateOrGetV5ResponseProduct"
+          }
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarCreateOrGetV5ResponseProduct": {
+      "type": "object",
+      "properties": {
+        "exemplars": {
+          "description": "Информация об экземплярах.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarCreateOrGetV5ResponseProductExemplar"
+          }
+        },
+        "is_gtd_needed": {
+          "description": "Признак того, что необходимо передать номер грузовой таможенной декларации (ГТД) для продукта и отправления.",
+          "type": "boolean"
+        },
+        "is_mandatory_mark_needed": {
+          "description": "Признак того, что необходимо передать маркировку «Честный ЗНАК».",
+          "type": "boolean"
+        },
+        "is_rnpt_needed": {
+          "description": "Признак того, что необходимо передать номер партии товара (РНПТ).",
+          "type": "boolean"
+        },
+        "product_id": {
+          "description": "Идентификатор товара в системе продавца — `product_id`.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "quantity": {
+          "description": "Количество экземпляров.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarCreateOrGetV5ResponseProductExemplar": {
+      "type": "object",
+      "properties": {
+        "exemplar_id": {
+          "description": "Идентификатор экземпляра.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "gtd": {
+          "description": "Номер грузовой таможенной декларации (ГТД).",
+          "type": "string"
+        },
+        "is_gtd_absent": {
+          "description": "Признак того, что не указан номер грузовой таможенной декларации (ГТД).",
+          "type": "boolean"
+        },
+        "is_rnpt_absent": {
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ).",
+          "type": "boolean"
+        },
+        "mandatory_mark": {
+          "description": "Обязательная маркировка «Честный ЗНАК».",
+          "type": "string"
+        },
+        "rnpt": {
+          "description": "Регистрационный номер партии товара (РНПТ).",
+          "type": "string"
+        },
+        "jw_uin": {
+          "description": "Уникальный идентификационный номер (УИН) ювелирного изделия.",
+          "type": "string"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "postingv4FbsPostingProductExemplarValidateRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/postingv4FbsPostingProductExemplarValidateRequestProduct"
+          }
+        }
+      }
+    },
+    "postingv4FbsPostingProductExemplarValidateRequestProduct": {
+      "required": [
+        "product_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "exemplars": {
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/postingv4FbsPostingProductExemplarValidateRequestProductExemplar"
+          }
+        },
+        "product_id": {
+          "description": "Идентификатор товара в системе продавца — `product_id`.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "postingv4FbsPostingProductExemplarValidateRequestProductExemplar": {
+      "required": [
+        "mandatory_mark"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "mandatory_mark": {
+          "type": "string",
+          "description": "Обязательная маркировка «Честный ЗНАК»."
+        },
+        "jw_uin": {
+          "type": "array of strings",
+          "description": "Уникальный идентификационный номер (УИН) ювелирного изделия."
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "postingv4FbsPostingProductExemplarValidateResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/FbsPostingProductExemplarValidateResponseFbsPostingProductExemplarValidateResult"
+        }
+      }
+    },
+    "FbsPostingProductExemplarValidateResponseFbsPostingProductExemplarValidateResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "products": {
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingProductExemplarValidateResponseFbsPostingProductExemplarValidateResultProduct"
+          }
+        }
+      }
+    },
+    "FbsPostingProductExemplarValidateResponseFbsPostingProductExemplarValidateResultProduct": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "exemplars": {
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingProductExemplarValidateResponseFbsPostingProductExemplarValidateResultProductExemplar"
+          }
+        },
+        "product_id": {
+          "description": "Идентификатор товара в системе продавца — `product_id`.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "valid": {
+          "description": "Результат прохождения проверки. `true`, если коды всех экземпляров соответствуют требованиям.",
+          "type": "boolean"
+        }
+      }
+    },
+    "FbsPostingProductExemplarValidateResponseFbsPostingProductExemplarValidateResultProductExemplar": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "errors": {
+          "description": "Ошибки валидации экземпляра.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gtd": {
+          "description": "Номер грузовой таможенной декларации (ГТД).",
+          "type": "string"
+        },
+        "mandatory_mark": {
+          "description": "Обязательная маркировка «Честный ЗНАК».",
+          "type": "string"
+        },
+        "jw_uin": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Уникальный идентификационный номер (УИН) ювелирного изделия."
+        },
+        "valid": {
+          "description": "Результат прохождения проверки. `true`, если код экземпляра соответствует требованиям.",
+          "type": "boolean"
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "fbsv4SetProductExemplarRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/fbsv4SetProductExemplarRequestProduct"
+          }
+        }
+      }
+    },
+    "fbsv4SetProductExemplarRequestProduct": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "exemplars": {
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/fbsv4SetProductExemplarRequestProductExemplar"
+          }
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор FBS товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "fbsv4SetProductExemplarRequestProductExemplar": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "is_gtd_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан номер таможенной декларации."
+        },
+        "mandatory_mark": {
+          "type": "string",
+          "description": "Обязательная маркировка «Честный ЗНАК»."
+        },
+        "jw_uin": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Уникальный идентификационный номер (УИН) ювелирного изделия."
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        },
+        "is_rnpt_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "fbsv4SetProductExemplarResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "description": "Результат обработки запроса. `true`, если запрос обработан успешно.",
+          "type": "boolean"
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarSetV5Request": {
+      "type": "object",
+      "properties": {
+        "multi_box_qty": {
+          "description": "Количество коробок, в которые упакован товар.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string",
+          "required": true
+        },
+        "products": {
+          "description": "Список товаров.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarSetV5RequestProduct"
+          }
+        }
+      },
+      "required": [
+        "products",
+        "posting_number"
+      ]
+    },
+    "v5FbsPostingProductExemplarSetV5RequestProduct": {
+      "type": "object",
+      "properties": {
+        "exemplars": {
+          "description": "Информация об экземплярах.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarSetV5RequestProductExemplar"
+          }
+        },
+        "is_gtd_needed": {
+          "description": "Признак того, что необходимо передать номер грузовой таможенной декларации (ГТД) для продукта и отправления.",
+          "type": "boolean"
+        },
+        "is_mandatory_mark_needed": {
+          "description": "Признак того, что необходимо передать маркировку «Честный ЗНАК».",
+          "type": "boolean"
+        },
+        "is_rnpt_needed": {
+          "description": "Признак того, что необходимо передать номер партии товара (РНПТ).",
+          "type": "boolean"
+        },
+        "product_id": {
+          "description": "Идентификатор товара в системе продавца — `product_id`.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "quantity": {
+          "description": "Количество экземпляров.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "product_id"
+      ]
+    },
+    "v5FbsPostingProductExemplarSetV5RequestProductExemplar": {
+      "type": "object",
+      "properties": {
+        "exemplar_id": {
+          "description": "Идентификатор экземпляра.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "gtd": {
+          "description": "Номер грузовой таможенной декларации (ГТД).",
+          "type": "string"
+        },
+        "is_gtd_absent": {
+          "description": "Признак того, что не указан номер грузовой таможенной декларации (ГТД).",
+          "type": "boolean"
+        },
+        "is_rnpt_absent": {
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ).",
+          "type": "boolean"
+        },
+        "mandatory_mark": {
+          "description": "Обязательная маркировка «Честный ЗНАК».",
+          "type": "string"
+        },
+        "rnpt": {
+          "description": "Регистрационный номер партии товара (РНПТ).",
+          "type": "string"
+        },
+        "jw_uin": {
+          "description": "Уникальный идентификационный номер (УИН) ювелирного изделия.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "exemplar_id"
+      ]
+    },
+    "v5FbsPostingProductExemplarSetV5Response": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "Результат обработки запроса. `true`, если запрос обработан успешно.",
+          "type": "boolean"
+        }
+      }
+    },
+    "fbsv4GetProductExemplarStatusRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    },
+    "fbsv4GetProductExemplarStatusResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/fbsv4GetProductExemplarStatusResponseProduct"
+          }
+        },
+        "status": {
+          "description": "Статус проверки всех экземпляров и доступности сборки:\n- `ship_available` — сборка доступна,\n- `ship_not_available` — сборка недоступна,\n- `validation_in_process` — экземпляры на проверке.\n",
+          "type": "string"
+        }
+      }
+    },
+    "fbsv4GetProductExemplarStatusResponseProduct": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "exemplars": {
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/fbsv4GetProductExemplarStatusResponseProductExemplar"
+          }
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        }
+      }
+    },
+    "fbsv4GetProductExemplarStatusResponseProductExemplar": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "exemplar_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор экземпляра."
+        },
+        "gtd": {
+          "description": "Номер грузовой таможенной декларации (ГТД).",
+          "type": "string"
+        },
+        "gtd_check_status": {
+          "type": "string",
+          "description": "Статус проверки грузовой таможенной декларации."
+        },
+        "gtd_error_codes": {
+          "description": "Коды ошибок при проверке грузовой таможенной декларации.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_gtd_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан номер таможенной декларации."
+        },
+        "jw_uin": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Уникальный идентификационный номер (УИН) ювелирного изделия."
+        },
+        "jw_uin_check_status": {
+          "type": "string",
+          "description": "Статус проверки уникального идентификационного номера (УИН) ювелирного изделия."
+        },
+        "jw_uin_error_codes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Коды ошибок при проверке уникального идентификационного номера (УИН) ювелирного изделия."
+        },
+        "mandatory_mark": {
+          "type": "string",
+          "description": "Обязательная маркировка «Честный ЗНАК»."
+        },
+        "mandatory_mark_check_status": {
+          "type": "string",
+          "description": "Статус проверки маркировки «Честный ЗНАК»:\n- `processing` — маркировка обрабатывается.\n- `passed` — проверка пройдена.\n- `failed` — проверка не пройдена.\n"
+        },
+        "mandatory_mark_error_codes": {
+          "description": "Коды ошибок при проверке маркировки «Честный ЗНАК».",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        },
+        "rnpt_check_status": {
+          "type": "string",
+          "description": "Статус проверки регистрационного номера партии товара."
+        },
+        "rnpt_error_codes": {
+          "items": {
+            "type": "string"
+          },
+          "description": "Коды ошибок при проверке регистрационного номера партии товара."
+        },
+        "is_rnpt_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "fbsv4FbsPostingShipV4Request": {
+      "required": [
+        "packages",
+        "posting_number"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "packages": {
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingShipV4RequestPackage"
+          },
+          "description": "Список упаковок. Каждая упаковка содержит список отправлений, на которые делится заказ."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "with": {
+          "$ref": "#/components/schemas/FbsPostingShipV4RequestWith"
+        }
+      }
+    },
+    "FbsPostingShipV4RequestPackage": {
+      "required": [
+        "products"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingShipV4RequestPackageProduct"
+          },
+          "description": "Список товаров в отправлении."
+        }
+      }
+    },
+    "FbsPostingShipV4RequestPackageProduct": {
+      "required": [
+        "product_id",
+        "quantity"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество экземпляров."
+        }
+      }
+    },
+    "FbsPostingShipV4RequestWith": {
+      "type": "object",
+      "title": "object",
+      "description": "Дополнительная информация.",
+      "properties": {
+        "additional_data": {
+          "type": "boolean",
+          "description": "Чтобы получить дополнительную информацию, передайте `true`."
+        }
+      }
+    },
+    "fbsv4FbsPostingShipV4Response": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "additional_data": {
+          "description": "Дополнительная информация об отправлениях.",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingShipV4ResponseShipAdditionalData"
+          }
+        },
+        "result": {
+          "description": "Результат сборки отправлений.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FbsPostingShipV4ResponseShipAdditionalData": {
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "description": "Список товаров в отправлении.",
+          "items": {
+            "$ref": "#/components/schemas/fbsv4PostingProductDetailWithoutDimensions"
+          }
+        }
+      }
+    },
+    "fbsv4PostingProductDetailWithoutDimensions": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "mandatory_mark": {
+          "description": "Обязательная маркировка «Честный ЗНАК».",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "description": "Название товара.",
+          "type": "string"
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "price": {
+          "type": "string",
+          "description": "Цена."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товара в отправлении."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта ваших цен. Cовпадает с валютой, которая установлена в настройках личного кабинета.\n\nВозможные значения: \n  - `RUB` — российский рубль,\n  - `BYN` — белорусский рубль,\n  - `KZT` — тенге,\n  - `EUR` — евро,\n  - `USD` — доллар США,\n  - `CNY` — юань.\n"
+        }
+      }
+    },
+    "v4FbsPostingShipPackageV4Request": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string"
+        },
+        "products": {
+          "description": "Список товаров в отправлении.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v4FbsPostingShipPackageV4RequestProduct"
+          }
+        }
+      },
+      "required": [
+        "posting_number"
+      ]
+    },
+    "v4FbsPostingShipPackageV4RequestProduct": {
+      "type": "object",
+      "properties": {
+        "exemplarsIds": {
+          "description": "Идентификаторы экземпляров товара.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "product_id": {
+          "description": "Идентификатор товара в системе продавца — SKU.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "quantity": {
+          "description": "Количество экземпляров.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "product_id",
+        "quantity"
+      ]
+    },
+    "v4FbsPostingShipPackageV4Response": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "Номера отправлений, сформированные после сборки.",
+          "type": "string"
+        }
+      }
+    },
+    "v6FbsPostingProductExemplarSetV6Request": {
+      "type": "object",
+      "properties": {
+        "multi_box_qty": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество коробок, в которые упакован товар."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "type": "array",
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingProductExemplarSetV6RequestProducts"
+          }
+        }
+      }
+    },
+    "FbsPostingProductExemplarSetV6RequestProducts": {
+      "type": "object",
+      "properties": {
+        "exemplars": {
+          "type": "array",
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingProductExemplarSetV6RequestExemplars"
+          }
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "FbsPostingProductExemplarSetV6RequestExemplars": {
+      "type": "object",
+      "properties": {
+        "exemplar_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор экземпляра."
+        },
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "is_gtd_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан номер грузовой таможенной декларации (ГТД)."
+        },
+        "is_rnpt_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ)."
+        },
+        "marks": {
+          "description": "Ошибки при проверке контрольных идентификационных знаков (КИЗ).",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ExemplarsMarks"
+          }
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "ExemplarsMarks": {
+      "type": "object",
+      "properties": {
+        "mark": {
+          "type": "string",
+          "description": "Значение кода маркировки."
+        },
+        "mark_type": {
+          "type": "string",
+          "description": "Тип кода маркировки:\n - `mandatory_mark` — обязательная маркировка «Честный ЗНАК»;\n - `jw_uin` — уникальный идентификационный номер (УИН) ювелирного изделия.\n"
+        }
+      }
+    },
+    "v6FbsPostingProductExemplarCreateOrGetV6Request": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    },
+    "v6FbsPostingProductExemplarCreateOrGetV6Response": {
+      "type": "object",
+      "properties": {
+        "multi_box_qty": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество коробок, в которые упакован товар."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "type": "array",
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingProductExemplarCreateOrGetV6ResponseProduct"
+          }
+        }
+      }
+    },
+    "FbsPostingProductExemplarCreateOrGetV6ResponseProduct": {
+      "type": "object",
+      "properties": {
+        "exemplars": {
+          "type": "array",
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/ProductExemplar"
+          }
+        },
+        "is_gtd_needed": {
+          "type": "boolean",
+          "description": "Признак того, что необходимо передать номер грузовой таможенной декларации (ГТД) для продукта и отправления."
+        },
+        "is_jw_uin_needed": {
+          "type": "boolean",
+          "description": "Признак того, что необходимо передать уникальный идентификационный номер ювелирного изделия (УИН)."
+        },
+        "is_mandatory_mark_needed": {
+          "type": "boolean",
+          "description": "Признак того, что необходимо передать маркировку «Честный ЗНАК»."
+        },
+        "is_mandatory_mark_possible": {
+          "type": "boolean",
+          "description": "Признак того, что возможно заполнить маркировку «Честный ЗНАК»."
+        },
+        "is_rnpt_needed": {
+          "type": "boolean",
+          "description": "Признак того, что необходимо передать номер партии товара (РНПТ)."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество экземпляров."
+        }
+      }
+    },
+    "ProductExemplar": {
+      "type": "object",
+      "properties": {
+        "exemplar_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор экземпляра."
+        },
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "is_gtd_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан номер грузовой таможенной декларации (ГТД)."
+        },
+        "is_rnpt_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ)."
+        },
+        "marks": {
+          "type": "array",
+          "description": "Ошибки при проверке контрольных идентификационных знаков (КИЗ).",
+          "items": {
+            "$ref": "#/components/schemas/ExemplarMark"
+          }
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "ExemplarMark": {
+      "type": "object",
+      "properties": {
+        "mark": {
+          "type": "string",
+          "description": "Значение кода маркировки."
+        },
+        "mark_type": {
+          "type": "string",
+          "description": "Тип кода маркировки:\n - `mandatory_mark` — обязательная маркировка «Честный ЗНАК»;\n - `jw_uin` — уникальный идентификационный номер (УИН) ювелирного изделия.\n"
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarStatusV5Request": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarStatusV5Response": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "type": "array",
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarStatusV5ResponseProduct"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус проверки всех экземпляров и доступности сборки:\n - `ship_available` — сборка доступна,\n - `ship_not_available` — сборка недоступна,\n - `validation_in_process` — экземпляры на проверке.\n"
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarStatusV5ResponseProduct": {
+      "type": "object",
+      "properties": {
+        "exemplars": {
+          "type": "array",
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarStatusV5ResponseProductExemplar"
+          }
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarStatusV5ResponseProductExemplar": {
+      "type": "object",
+      "properties": {
+        "exemplar_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор экземпляра."
+        },
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "gtd_check_status": {
+          "type": "string",
+          "description": "Статус проверки грузовой таможенной декларации."
+        },
+        "gtd_error_codes": {
+          "type": "array",
+          "description": "Коды ошибок при проверке грузовой таможенной декларации.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_gtd_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан номер таможенной декларации (ГТД)."
+        },
+        "is_rnpt_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ)."
+        },
+        "marks": {
+          "type": "array",
+          "description": "Список контрольных идентификационных знаков (КИЗ) в одном экземпляре.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarStatusV5ResponseProductExemplarMark"
+          }
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        },
+        "rnpt_check_status": {
+          "type": "string",
+          "description": "Статус проверки регистрационного номера партии товара."
+        },
+        "rnpt_error_codes": {
+          "type": "array",
+          "description": "Коды ошибок при проверке регистрационного номера партии товара.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarStatusV5ResponseProductExemplarMark": {
+      "type": "object",
+      "properties": {
+        "check_status": {
+          "type": "string",
+          "description": "Статус проверки."
+        },
+        "error_codes": {
+          "description": "Ошибки при проверке контрольных идентификационных знаков (КИЗ).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mark": {
+          "type": "string",
+          "description": "Значение кода маркировки."
+        },
+        "mark_type": {
+          "type": "string",
+          "description": "Тип кода маркировки:\n - `mandatory_mark` — обязательная маркировка «Честный ЗНАК»;\n - `jw_uin` — уникальный идентификационный номер (УИН) ювелирного изделия.\n"
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5Request": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string"
+        },
+        "products": {
+          "type": "array",
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarValidateV5RequestProduct"
+          }
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5RequestProduct": {
+      "type": "object",
+      "properties": {
+        "exemplars": {
+          "type": "array",
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarValidateV5RequestProductExemplar"
+          }
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5RequestProductExemplar": {
+      "type": "object",
+      "properties": {
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "marks": {
+          "type": "array",
+          "description": "Список контрольных идентификационных знаков (КИЗ) в одном экземпляре.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarValidateV5RequestProductExemplarMark"
+          }
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5RequestProductExemplarMark": {
+      "type": "object",
+      "properties": {
+        "mark": {
+          "type": "string",
+          "description": "Значение кода маркировки."
+        },
+        "mark_type": {
+          "type": "string",
+          "description": "Тип кода маркировки:\n - `mandatory_mark` — обязательная маркировка «Честный ЗНАК»;\n - `jw_uin` — уникальный идентификационный номер (УИН) ювелирного изделия.\n"
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5Response": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarValidateV5ResponseProduct"
+          }
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5ResponseProduct": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "exemplars": {
+          "type": "array",
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarValidateV5ResponseProductExemplar"
+          }
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "valid": {
+          "type": "boolean",
+          "description": "Результат прохождения проверки. `true`, если коды всех экземпляров соответствуют требованиям."
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5ResponseProductExemplar": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Ошибки валидации экземпляра.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "marks": {
+          "type": "array",
+          "description": "Список контрольных идентификационных знаков (КИЗ) в одном экземпляре.",
+          "items": {
+            "$ref": "#/components/schemas/v5FbsPostingProductExemplarValidateV5ResponseProductExemplarMark"
+          }
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        },
+        "valid": {
+          "type": "boolean",
+          "description": "Результат прохождения проверки. `true`, если код экземпляра соответствует требованиям."
+        }
+      }
+    },
+    "v5FbsPostingProductExemplarValidateV5ResponseProductExemplarMark": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Ошибки при проверке контрольных идентификационных знаков (КИЗ).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mark": {
+          "type": "string",
+          "description": "Значение кода маркировки."
+        },
+        "mark_type": {
+          "type": "string",
+          "description": "Тип кода маркировки:\n - `mandatory_mark` — обязательная маркировка «Честный ЗНАК»;\n - `jw_uin` — уникальный идентификационный номер (УИН) ювелирного изделия.\n"
+        },
+        "valid": {
+          "type": "boolean",
+          "description": "Результат прохождения проверки. `true`, если контрольный идентификационный знак (КИЗ) соответствует требованиям."
+        }
+      }
+    },
+    "v1FbsPostingProductExemplarUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    }
+  }
+}

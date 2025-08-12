@@ -1,51 +1,97 @@
 {
-  "name": "ozon-seller-api-extended",
-  "version": "1.1.6",
-  "description": "API клиент для работы с API продавца Ozon / API client for working with Ozon Seller API",
-  "main": "src/index.js",
-  "type": "commonjs",
+  "name": "daytona-ozon-api",
+  "version": "1.0.0",
+  "description": "DAYTONA OZON SELLER API - comprehensive, type-safe TypeScript SDK covering 263 endpoints across 32 API groups",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
-    "src",
-    "test",
+    "dist/",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CHANGELOG.md"
   ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
-    "test": "mocha test/ozon-seller-api.test.js",
-    "test:api": "node test/test-api-calls.js",
-    "test:deep": "node test/test-deepEqual.js",
-    "test:all": "npm run test && npm run test:api && npm run test:deep",
-    "test:monitor": "node test/server/server.js",
-    "monitor:dev": "nodemon test/server/server.js"
+    "build": "npm run clean && npm run build:types && npm run build:esm && npm run build:cjs",
+    "build:types": "tsc --project tsconfig.build.json --declaration --emitDeclarationOnly --outDir dist/types",
+    "build:esm": "tsc --project tsconfig.build.json --module es2020 --outDir dist/esm",
+    "build:cjs": "tsc --project tsconfig.build.json --module commonjs --outDir dist/cjs && echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json",
+    "clean": "rm -rf dist/",
+    "lint": "npx eslint@8 src/**/*.ts --max-warnings 0",
+    "lint:fix": "npx eslint@8 src/**/*.ts --fix",
+    "format": "prettier --write src/**/*.ts",
+    "format:check": "prettier --check src/**/*.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:unit": "vitest run --config vitest.unit.config.ts",
+    "test:contract": "vitest run --config vitest.contract.config.ts",
+    "test:e2e": "vitest run --config vitest.e2e.config.ts",
+    "generate:types": "tsx scripts/codegen.ts",
+    "generate:client": "tsx scripts/generate-client.ts",
+    "dev": "tsx --watch src/index.ts",
+    "prepublishOnly": "npm run lint && npm run typecheck && npm run test && npm run build"
   },
   "keywords": [
     "ozon",
     "api",
     "seller",
     "marketplace",
+    "typescript",
+    "sdk",
     "fbo",
-    "timeslots"
+    "fbs",
+    "ecommerce",
+    "russia",
+    "rest-api",
+    "client-library"
   ],
-  "author": "largus",
-  "license": "MIT",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.21.2",
-    "node-fetch": "^2.6.7",
-    "socket.io": "^4.8.1"
+  "author": {
+    "name": "salacoste",
+    "url": "https://github.com/salacoste"
   },
+  "license": "MIT",
   "devDependencies": {
-    "chai": "^4.3.4",
-    "mocha": "^9.1.3",
-    "nodemon": "^3.0.2",
-    "sinon": "^12.0.1"
+    "@eslint/js": "^9.33.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "@vitest/coverage-v8": "^1.0.0",
+    "eslint": "^9.33.0",
+    "eslint-formatter-compact": "^8.40.0",
+    "prettier": "^3.2.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.9.2",
+    "vitest": "^1.3.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sergeantnahryuk/ozon-seller-api.git"
+    "url": "git+https://github.com/salacoste/ozon-seller-api.git"
   },
   "bugs": {
-    "url": "https://github.com/sergeantnahryuk/ozon-seller-api/issues"
+    "url": "https://github.com/salacoste/ozon-seller-api/issues"
   },
-  "homepage": "https://github.com/sergeantnahryuk/ozon-seller-api#readme"
+  "homepage": "https://github.com/salacoste/ozon-seller-api#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }

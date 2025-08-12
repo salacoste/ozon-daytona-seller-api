@@ -1,0 +1,142 @@
+name: Feature Request
+description: Suggest an idea for the Ozon Seller API SDK
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+assignees:
+  - salacoste
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Please provide as much detail as possible.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: Is your feature request related to a problem? Please describe.
+      placeholder: I'm always frustrated when...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe the solution you'd like
+      placeholder: I would like to see...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: Describe alternatives you've considered
+      placeholder: I've also considered...
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feature Category
+      description: What category does this feature fall into?
+      options:
+        - New API Group Implementation
+        - Existing API Group Enhancement
+        - Developer Experience
+        - Documentation
+        - Testing/Quality
+        - Performance
+        - Security
+        - Build/Tooling
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: api-group
+    attributes:
+      label: Related API Group (if applicable)
+      description: Which API group would this feature affect?
+      options:
+        - FBS
+        - FBO
+        - ProductAPI
+        - PricesStocks
+        - Warehouse
+        - Analytics
+        - Reports
+        - Finance
+        - Category
+        - Supplier
+        - Chat
+        - Cancellation
+        - Returns
+        - DeliveryFBS
+        - Barcode
+        - Polygon
+        - SellerRating
+        - BrandAPI
+        - Promos
+        - Pass
+        - ReviewAPI (Beta)
+        - Digital (Beta)
+        - Quants (Beta)
+        - BetaMethod (Beta)
+        - Questions&Answers (Beta)
+        - Core SDK Features
+        - Not Applicable
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - Nice to have
+        - Would be helpful
+        - Important for my use case
+        - Critical/Blocking
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case
+      description: Describe your specific use case for this feature
+      placeholder: In my application, I need to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: api-example
+    attributes:
+      label: Proposed API Design
+      description: How would you like the API to look? (if applicable)
+      render: typescript
+      placeholder: |
+        // Example of how you'd like to use this feature
+        const result = await client.newFeature.someMethod({
+          param1: 'value',
+          param2: 123
+        });
+
+  - type: checkboxes
+    id: implementation
+    attributes:
+      label: Implementation
+      description: Are you willing to help implement this feature?
+      options:
+        - label: I'm willing to submit a pull request for this feature
+        - label: I can help with testing
+        - label: I can help with documentation
+        - label: I need someone else to implement this
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any other context, screenshots, or links
+      placeholder: Add any other context...

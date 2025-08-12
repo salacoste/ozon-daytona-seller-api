@@ -1,0 +1,6 @@
+---
+description: Описание проекта который мы делаем
+alwaysApply: false
+---
+Наш проект - это написание SDK для ozon seller API на typescript. у нас есть документация API, она находится в api-doc/ozon-api-documentation папке. 
+PRD файл находится в папке prd-project-files

@@ -1,0 +1,362 @@
+{
+  "apiInfo": {
+    "title": "Документация Ozon Seller API",
+    "version": 2.1,
+    "description": "По вопросам работы с Seller API обращайтесь в поддержку через личный кабинет.\n\n> [Инструкции по работе с маркетплейсом](https://seller-edu.ozon.ru)\n\n> [Информационная платформа и сообщество разработчиков Ozon for dev](https://dev.ozon.ru/)\n",
+    "logo": {
+      "url": "https://cdn2.ozone.ru/s3/redoc/ozon-seller-logo.svg",
+      "backgroundColor": null,
+      "altText": "Ozon logo"
+    }
+  },
+  "structure": {
+    "tagGroups": [
+      {
+        "name": "Общее описание",
+        "tagsCount": 5,
+        "tags": [
+          "Introduction",
+          "Getting started",
+          "Auth",
+          "Environment",
+          "Process"
+        ]
+      },
+      {
+        "name": "Методы Seller API",
+        "tagsCount": 28,
+        "tags": [
+          "CategoryAPI",
+          "ProductAPI",
+          "BarcodeAPI",
+          "Prices&StocksAPI",
+          "Promos",
+          "PricingStrategyAPI",
+          "BrandAPI",
+          "CertificationAPI",
+          "WarehouseAPI",
+          "FBS",
+          "PolygonAPI",
+          "FBO",
+          "FboSupplyRequest",
+          "FBS&rFBSMarks",
+          "DeliveryFBS",
+          "DeliveryrFBS",
+          "Pass",
+          "ReturnsAPI",
+          "RFBSReturnsAPI",
+          "ReturnAPI",
+          "CancellationAPI",
+          "ChatAPI",
+          "SupplierAPI",
+          "ReportAPI",
+          "AnalyticsAPI",
+          "FinanceAPI",
+          "SellerRating",
+          "InvoiceAPI"
+        ]
+      },
+      {
+        "name": "Бета-методы Seller API",
+        "tagsCount": 6,
+        "tags": [
+          "BetaIntro",
+          "BetaMethod",
+          "Digital",
+          "Quants",
+          "ReviewAPI",
+          "Questions&Answers"
+        ]
+      },
+      {
+        "name": "Приложения",
+        "tagsCount": 1,
+        "tags": [
+          "Errors"
+        ]
+      },
+      {
+        "name": "Пуш-уведомления",
+        "tagsCount": 5,
+        "tags": [
+          "push_intro",
+          "push_start",
+          "push_resending",
+          "push_types",
+          "service_response"
+        ]
+      },
+      {
+        "name": "Обновления",
+        "tagsCount": 1,
+        "tags": [
+          "News"
+        ]
+      }
+    ],
+    "directories": {
+      "general": "Общая информация и введение",
+      "documentation": "Документационные разделы с описанием концепций",
+      "methods": "Основные методы API",
+      "beta": "Бета-методы (экспериментальные)",
+      "push": "Пуш-уведомления",
+      "appendix": "Приложения и справочники",
+      "components": "Схемы и компоненты"
+    }
+  },
+  "statistics": {
+    "totalPaths": 263,
+    "totalMethods": 263,
+    "totalSchemas": 1069,
+    "totalGroups": 32,
+    "usedSchemas": 1064
+  },
+  "files": {
+    "byDirectory": {
+      "methods": [
+        {
+          "file": "01-fbs.json",
+          "tag": "FBS",
+          "name": "FBS",
+          "endpoints": 22,
+          "schemas": 98
+        },
+        {
+          "file": "02-fbosupplyrequest.json",
+          "tag": "FboSupplyRequest",
+          "name": "FboSupplyRequest",
+          "endpoints": 19,
+          "schemas": 107
+        },
+        {
+          "file": "03-productapi.json",
+          "tag": "ProductAPI",
+          "name": "ProductAPI",
+          "endpoints": 18,
+          "schemas": 105
+        },
+        {
+          "file": "04-deliveryfbs.json",
+          "tag": "DeliveryFBS",
+          "name": "DeliveryFBS",
+          "endpoints": 18,
+          "schemas": 53
+        },
+        {
+          "file": "05-certificationapi.json",
+          "tag": "CertificationAPI",
+          "name": "CertificationAPI",
+          "endpoints": 15,
+          "schemas": 44
+        },
+        {
+          "file": "06-fbo.json",
+          "tag": "FBO",
+          "name": "FBO",
+          "endpoints": 13,
+          "schemas": 69
+        },
+        {
+          "file": "07-pricingstrategyapi.json",
+          "tag": "PricingStrategyAPI",
+          "name": "PricingStrategyAPI",
+          "endpoints": 12,
+          "schemas": 31
+        },
+        {
+          "file": "08-fbs-rfbsmarks.json",
+          "tag": "FBS&rFBSMarks",
+          "name": "FBS&rFBSMarks",
+          "endpoints": 12,
+          "schemas": 58
+        },
+        {
+          "file": "09-financeapi.json",
+          "tag": "FinanceAPI",
+          "name": "FinanceAPI",
+          "endpoints": 11,
+          "schemas": 53
+        },
+        {
+          "file": "10-prices-stocksapi.json",
+          "tag": "Prices&StocksAPI",
+          "name": "Prices&StocksAPI",
+          "endpoints": 9,
+          "schemas": 46
+        },
+        {
+          "file": "11-promos.json",
+          "tag": "Promos",
+          "name": "Promos",
+          "endpoints": 8,
+          "schemas": 28
+        },
+        {
+          "file": "12-deliveryrfbs.json",
+          "tag": "DeliveryrFBS",
+          "name": "DeliveryrFBS",
+          "endpoints": 8,
+          "schemas": 20
+        },
+        {
+          "file": "13-rfbsreturnsapi.json",
+          "tag": "RFBSReturnsAPI",
+          "name": "RFBSReturnsAPI",
+          "endpoints": 8,
+          "schemas": 24
+        },
+        {
+          "file": "14-returnapi.json",
+          "tag": "ReturnAPI",
+          "name": "ReturnAPI",
+          "endpoints": 8,
+          "schemas": 22
+        },
+        {
+          "file": "15-chatapi.json",
+          "tag": "ChatAPI",
+          "name": "ChatAPI",
+          "endpoints": 8,
+          "schemas": 31
+        },
+        {
+          "file": "16-reportapi.json",
+          "tag": "ReportAPI",
+          "name": "ReportAPI",
+          "endpoints": 8,
+          "schemas": 43
+        },
+        {
+          "file": "17-pass.json",
+          "tag": "Pass",
+          "name": "Pass",
+          "endpoints": 7,
+          "schemas": 18
+        },
+        {
+          "file": "18-cancellationapi.json",
+          "tag": "CancellationAPI",
+          "name": "CancellationAPI",
+          "endpoints": 7,
+          "schemas": 24
+        },
+        {
+          "file": "19-analyticsapi.json",
+          "tag": "AnalyticsAPI",
+          "name": "AnalyticsAPI",
+          "endpoints": 5,
+          "schemas": 33
+        },
+        {
+          "file": "20-categoryapi.json",
+          "tag": "CategoryAPI",
+          "name": "CategoryAPI",
+          "endpoints": 4,
+          "schemas": 15
+        },
+        {
+          "file": "21-supplierapi.json",
+          "tag": "SupplierAPI",
+          "name": "SupplierAPI",
+          "endpoints": 4,
+          "schemas": 12
+        },
+        {
+          "file": "22-barcodeapi.json",
+          "tag": "BarcodeAPI",
+          "name": "BarcodeAPI",
+          "endpoints": 2,
+          "schemas": 9
+        },
+        {
+          "file": "23-warehouseapi.json",
+          "tag": "WarehouseAPI",
+          "name": "WarehouseAPI",
+          "endpoints": 2,
+          "schemas": 9
+        },
+        {
+          "file": "24-polygonapi.json",
+          "tag": "PolygonAPI",
+          "name": "PolygonAPI",
+          "endpoints": 2,
+          "schemas": 10
+        },
+        {
+          "file": "25-sellerrating.json",
+          "tag": "SellerRating",
+          "name": "SellerRating",
+          "endpoints": 2,
+          "schemas": 15
+        },
+        {
+          "file": "26-brandapi.json",
+          "tag": "BrandAPI",
+          "name": "BrandAPI",
+          "endpoints": 1,
+          "schemas": 6
+        },
+        {
+          "file": "27-returnsapi.json",
+          "tag": "ReturnsAPI",
+          "name": "ReturnsAPI",
+          "endpoints": 1,
+          "schemas": 23
+        }
+      ],
+      "beta": [
+        {
+          "file": "01-betamethod.json",
+          "tag": "BetaMethod",
+          "name": "BetaMethod",
+          "endpoints": 9,
+          "schemas": 60
+        },
+        {
+          "file": "02-questions-answers.json",
+          "tag": "Questions&Answers",
+          "name": "Questions&Answers",
+          "endpoints": 8,
+          "schemas": 17
+        },
+        {
+          "file": "03-reviewapi.json",
+          "tag": "ReviewAPI",
+          "name": "ReviewAPI",
+          "endpoints": 7,
+          "schemas": 18
+        },
+        {
+          "file": "04-digital.json",
+          "tag": "Digital",
+          "name": "Digital",
+          "endpoints": 3,
+          "schemas": 25
+        },
+        {
+          "file": "05-quants.json",
+          "tag": "Quants",
+          "name": "Quants",
+          "endpoints": 2,
+          "schemas": 15
+        }
+      ]
+    }
+  },
+  "processingInstructions": {
+    "order": [
+      "1. Начните с файла general/00-api-info.json для понимания структуры",
+      "2. Обработайте группы в порядке: general → methods → beta → push → appendix",
+      "3. Внутри каждой директории обрабатывайте файлы по порядку нумерации",
+      "4. Компоненты в components/ используйте как справочник для схем",
+      "5. Каждый файл группы самодостаточен и содержит все необходимые схемы"
+    ],
+    "notes": [
+      "Файлы пронумерованы по убыванию количества методов",
+      "Схемы дублируются в файлах групп для удобства",
+      "Полный набор схем находится в components/schemas*.json"
+    ]
+  },
+  "generatedAt": "2025-08-09T16:28:42.350Z",
+  "generatorVersion": "2.0.0"
+}

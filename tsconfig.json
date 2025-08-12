@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    // Development settings
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
+    
+    // Include test files for development
+    "types": ["node", "vitest/globals"]
+  },
+  "include": [
+    "src/**/*",
+    "tests/**/*",
+    "scripts/**/*",
+    "*.config.ts",
+    "vitest.config.ts"
+  ]
+}

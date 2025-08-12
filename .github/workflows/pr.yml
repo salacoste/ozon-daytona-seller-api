@@ -1,0 +1,235 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  # PR validation and quality checks
+  pr-validation:
+    name: PR Validation
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Check PR title format
+        uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+            revert
+          requireScope: false
+          
+      - name: Check file changes
+        run: |
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}..HEAD)
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+          
+          # Check for large files
+          for file in $CHANGED_FILES; do
+            if [[ -f "$file" && $(wc -l < "$file" 2>/dev/null || echo 0) -gt 500 ]]; then
+              echo "⚠️ File $file exceeds 500 lines ($(wc -l < "$file"))"
+            fi
+          done
+          
+      - name: Run linter with annotations
+        run: |
+          npm run lint 2>&1 | tee lint-results.txt
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo "::error::Linting failed"
+            cat lint-results.txt
+            exit 1
+          fi
+          
+      - name: Check formatting
+        run: |
+          npm run format:check 2>&1 | tee format-results.txt
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo "::error::Code formatting check failed"
+            echo "::notice::Run 'npm run format' to fix formatting issues"
+            cat format-results.txt
+            exit 1
+          fi
+          
+      - name: Type checking
+        run: |
+          npm run typecheck 2>&1 | tee typecheck-results.txt
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo "::error::TypeScript compilation failed"
+            cat typecheck-results.txt
+            exit 1
+          fi
+          
+      - name: Run tests with coverage
+        run: |
+          npm run test:coverage 2>&1 | tee test-results.txt
+          if [ ${PIPESTATUS[0]} -ne 0 ]; then
+            echo "::error::Tests failed"
+            cat test-results.txt
+            exit 1
+          fi
+          
+      - name: Coverage report
+        uses: romeovs/lcov-reporter-action@v0.3.1
+        with:
+          lcov-file: ./coverage/lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Build verification
+        run: |
+          npm run build
+          echo "✅ Build completed successfully"
+          
+      - name: Test build artifacts
+        run: |
+          test -f dist/esm/index.js || (echo "ESM build missing" && exit 1)
+          test -f dist/cjs/index.js || (echo "CJS build missing" && exit 1)  
+          test -f dist/types/index.d.ts || (echo "Type declarations missing" && exit 1)
+          echo "✅ All build artifacts present"
+
+  # Check for breaking changes
+  breaking-changes:
+    name: Breaking Changes Check
+    runs-on: ubuntu-latest
+    if: github.base_ref == 'main'
+    
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Check for API breaking changes
+        run: |
+          # Build current version
+          npm run build
+          cp -r dist dist-new
+          
+          # Checkout base branch and build
+          git checkout origin/${{ github.base_ref }}
+          npm ci
+          npm run build
+          cp -r dist dist-old
+          
+          # Compare API surfaces (simplified check)
+          if ! diff -q dist-old/types/index.d.ts dist-new/types/index.d.ts > /dev/null 2>&1; then
+            echo "::warning::Potential breaking changes detected in type definitions"
+            echo "::notice::Please ensure version bump follows semantic versioning"
+            diff dist-old/types/index.d.ts dist-new/types/index.d.ts || true
+          else
+            echo "✅ No breaking changes detected in type definitions"
+          fi
+
+  # Performance regression check
+  performance-check:
+    name: Performance Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build size check
+        run: |
+          npm run build
+          
+          # Check bundle sizes
+          ESM_SIZE=$(stat -f%z dist/esm/index.js 2>/dev/null || stat -c%s dist/esm/index.js)
+          CJS_SIZE=$(stat -f%z dist/cjs/index.js 2>/dev/null || stat -c%s dist/cjs/index.js)
+          TYPES_SIZE=$(stat -f%z dist/types/index.d.ts 2>/dev/null || stat -c%s dist/types/index.d.ts)
+          
+          echo "📦 Build sizes:"
+          echo "ESM: $(( ESM_SIZE / 1024 ))KB"
+          echo "CJS: $(( CJS_SIZE / 1024 ))KB"  
+          echo "Types: $(( TYPES_SIZE / 1024 ))KB"
+          
+          # Warn if bundles are too large
+          if [ $ESM_SIZE -gt 1048576 ]; then  # 1MB
+            echo "::warning::ESM bundle is larger than 1MB"
+          fi
+          if [ $CJS_SIZE -gt 1048576 ]; then  # 1MB
+            echo "::warning::CJS bundle is larger than 1MB"
+          fi
+          
+          # Create summary
+          echo "## Bundle Size Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Build | Size |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|------|" >> $GITHUB_STEP_SUMMARY
+          echo "| ESM | $(( ESM_SIZE / 1024 ))KB |" >> $GITHUB_STEP_SUMMARY
+          echo "| CJS | $(( CJS_SIZE / 1024 ))KB |" >> $GITHUB_STEP_SUMMARY
+          echo "| Types | $(( TYPES_SIZE / 1024 ))KB |" >> $GITHUB_STEP_SUMMARY
+
+  # Security check for PR
+  security-check:
+    name: Security Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Audit dependencies
+        run: |
+          npm audit --audit-level=moderate
+          
+      - name: Check for secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.base_ref }}
+          head: HEAD

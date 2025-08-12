@@ -1,0 +1,1904 @@
+{
+  "metadata": {
+    "tag": "ReportAPI",
+    "name": "ReportAPI",
+    "displayName": "Отчёты",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 8,
+    "schemasCount": 43,
+    "generatedAt": "2025-08-09T16:28:42.339Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/report/info",
+      "method": "POST",
+      "operationId": "ReportAPI_ReportInfo",
+      "summary": "Информация об отчёте",
+      "description": "Возвращает информацию о созданном ранее отчёте по его идентификатору.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Информация об отчёте",
+        "description": "Возвращает информацию о созданном ранее отчёте по его идентификатору.",
+        "operationId": "ReportAPI_ReportInfo",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/reportReportInfoRequest"
+              },
+              "example": {
+                "code": "REPORT_seller_products_924336_1720170405_a9ea2f27-a473-4b13-99f9-d0cfcb5b1a69"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация об отчёте",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/reportReportInfoResponse"
+                },
+                "example": {
+                  "result": {
+                    "code": "REPORT_seller_products_924336_1720170405_a9ea2f27",
+                    "status": "success",
+                    "error": "",
+                    "file": "https://cdn1.ozone.ru/s3/item-picture-6/f3/ce/f4ceae54b323213d3e61e59c323bd8e5.csv",
+                    "report_type": "seller_products",
+                    "params": {},
+                    "created_at": "2021-11-25T14:54:55.688260Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReportAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/report/list",
+      "method": "POST",
+      "operationId": "ReportAPI_ReportList",
+      "summary": "Список отчётов",
+      "description": "Возвращает список отчётов, которые были сформированы раньше.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список отчётов",
+        "description": "Возвращает список отчётов, которые были сформированы раньше.",
+        "operationId": "ReportAPI_ReportList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/reportReportListRequest"
+              },
+              "example": {
+                "page": 1,
+                "page_size": 1000,
+                "report_type": "ALL"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список отчётов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/reportReportListResponse"
+                },
+                "example": {
+                  "result": {
+                    "reports": [
+                      {
+                        "code": "REPORT_seller_products_924336_1720170405_a9ea2f27-a473-4b13-99f9-d0cfcb5b1a69",
+                        "status": "success",
+                        "error": "",
+                        "file": "https://cdn1.ozone.ru/s3/item-picture-6/f3/ce/f4ceae54b323213d3e61e59c323bd8e5.csvv",
+                        "report_type": "seller_products",
+                        "params": {
+                          "visibility": "3"
+                        },
+                        "created_at": "2019-02-06T12:09:47.258062Z"
+                      },
+                      {
+                        "code": "REPORT_seller_products_924336_1720170405_a9ea2f27-a473-4b13-99f9-d0cfcb5b1a69",
+                        "status": "success",
+                        "error": "",
+                        "file": "https://cdn1.ozone.ru/s3/item-picture-6/f3/ce/f4ceae54b323213d3e61e59c323bd8e5.csv",
+                        "report_type": "seller_products",
+                        "params": {
+                          "visibility": "3"
+                        },
+                        "created_at": "2019-02-15T08:34:32.267178Z"
+                      }
+                    ],
+                    "total": 2
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReportAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/report/products/create",
+      "method": "POST",
+      "operationId": "ReportAPI_CreateCompanyProductsReport",
+      "summary": "Отчёт по товарам",
+      "description": "Метод для получения отчёта с данными о товарах. Например, Ozon ID, количества товаров, цен, статуса.\nСоответствует разделу/действию **Товары и цены → Список товаров → Скачать → Товары CSV** в личном кабинете.\n\nПояснения к некоторым полям:\n  - __Ozon Product ID__ — идентификатор товара в нашей системе. Например, если вы продаёте товар со склада Ozon и со своего склада, Ozon Product ID будет для них одинаковым.\n  - __FBO Ozon SKU ID__ — идентификатор товара, который продаётся со склада Ozon.\n  - __FBS Ozon SKU ID__ — идентификатор товара, который продаётся с вашего склада.\n  - __CrossBorder Ozon SKU__ — идентификатор товара, который продаётся из-за границы.\n  - __Barcode__ — штрихкод товара, который печатается на маркировке.\n  - __Статус товара__ — можно ли купить товар на Ozon. Если статус «Готов к продаже», товар купить нельзя.\n  - __Доступно на складе Ozon, шт__ — сколько штук товара на складе доступно для продажи. Это количество не включает зарезервированные товары.\n  - __Зарезервировано, шт__ — сколько штук товара со статусом «Зарезервировано». Товар зарезервирован с момента получения заказа на Ozon и до упаковки для передачи покупателю.\n  - __Текущая цена с учётом скидки, руб.__ — цена, по которой товар продаётся сейчас (на момент загрузки отчёта, с учётом скидки). Если товар участвует в акции, указана цена без её учёта.\n  - __Базовая цена (цена до скидок), руб.__ — цена без учёта скидки.\n  - __Цена Premium, руб.__ — цена для покупателей с подпиской Ozon Premium.\n  - __Рекомендованная цена, руб.__ — минимальная цена на товар на другой торговой площадке.\n  - __Актуальная ссылка на рекомендованную цену__ — ссылка на товар с рекомендованной ценой на другой торговой площадке.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отчёт по товарам",
+        "description": "Метод для получения отчёта с данными о товарах. Например, Ozon ID, количества товаров, цен, статуса.\nСоответствует разделу/действию **Товары и цены → Список товаров → Скачать → Товары CSV** в личном кабинете.\n\nПояснения к некоторым полям:\n  - __Ozon Product ID__ — идентификатор товара в нашей системе. Например, если вы продаёте товар со склада Ozon и со своего склада, Ozon Product ID будет для них одинаковым.\n  - __FBO Ozon SKU ID__ — идентификатор товара, который продаётся со склада Ozon.\n  - __FBS Ozon SKU ID__ — идентификатор товара, который продаётся с вашего склада.\n  - __CrossBorder Ozon SKU__ — идентификатор товара, который продаётся из-за границы.\n  - __Barcode__ — штрихкод товара, который печатается на маркировке.\n  - __Статус товара__ — можно ли купить товар на Ozon. Если статус «Готов к продаже», товар купить нельзя.\n  - __Доступно на складе Ozon, шт__ — сколько штук товара на складе доступно для продажи. Это количество не включает зарезервированные товары.\n  - __Зарезервировано, шт__ — сколько штук товара со статусом «Зарезервировано». Товар зарезервирован с момента получения заказа на Ozon и до упаковки для передачи покупателю.\n  - __Текущая цена с учётом скидки, руб.__ — цена, по которой товар продаётся сейчас (на момент загрузки отчёта, с учётом скидки). Если товар участвует в акции, указана цена без её учёта.\n  - __Базовая цена (цена до скидок), руб.__ — цена без учёта скидки.\n  - __Цена Premium, руб.__ — цена для покупателей с подпиской Ozon Premium.\n  - __Рекомендованная цена, руб.__ — минимальная цена на товар на другой торговой площадке.\n  - __Актуальная ссылка на рекомендованную цену__ — ссылка на товар с рекомендованной ценой на другой торговой площадке.\n",
+        "operationId": "ReportAPI_CreateCompanyProductsReport",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/reportCreateCompanyProductsReportRequest"
+              },
+              "example": {
+                "language": "DEFAULT",
+                "offer_id": [],
+                "search": "",
+                "sku": [],
+                "visibility": "ALL"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Отчёт по товарам",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/reportCreateReportResponse"
+                },
+                "example": {
+                  "result": {
+                    "code": "REPORT_seller_products_924336_1720170405_a9ea2f27-a473-4b13-99f9-d0cfcb5b1a69"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReportAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v2/report/returns/create",
+      "method": "POST",
+      "operationId": "ReportAPI_ReportReturnsCreate",
+      "summary": "Отчёт о возвратах",
+      "description": "Метод для получения отчёта о возвратах FBO и FBS.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отчёт о возвратах",
+        "description": "Метод для получения отчёта о возвратах FBO и FBS.",
+        "operationId": "ReportAPI_ReportReturnsCreate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2ReportReturnsCreateRequest"
+              },
+              "example": {
+                "filter": {
+                  "delivery_schema": "fbs",
+                  "date_from": "2024-09-16T00:00:00.000Z",
+                  "date_to": "2024-09-19T23:59:59.999Z",
+                  "status": "MovingToSeller"
+                },
+                "language": "DEFAULT"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Отчёт о возвратах FBO и FBS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2ReportReturnsCreateResponse"
+                },
+                "example": {
+                  "result": {
+                    "code": "REPORT_seller_products_924336_1720170405_a9ea2f27-a473-4b13-99f9-d0cfcb5b1a69"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReportAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/report/postings/create",
+      "method": "POST",
+      "operationId": "ReportAPI_CreateCompanyPostingsReport",
+      "summary": "Отчёт об отправлениях",
+      "description": "Отчёт об отправлениях с информацией по заказам:\n  - статусы заказов,\n  - дата начала обработки,\n  - номера заказов,\n  - номера отправлений,\n  - стоимость отправлений,\n  - содержимое отправлений.\nСоответствует разделу **FBO → Заказы со склада Ozon** и **FBS → Заказы с моих складов → CSV** в личном кабинете.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отчёт об отправлениях",
+        "description": "Отчёт об отправлениях с информацией по заказам:\n  - статусы заказов,\n  - дата начала обработки,\n  - номера заказов,\n  - номера отправлений,\n  - стоимость отправлений,\n  - содержимое отправлений.\nСоответствует разделу **FBO → Заказы со склада Ozon** и **FBS → Заказы с моих складов → CSV** в личном кабинете.\n",
+        "operationId": "ReportAPI_CreateCompanyPostingsReport",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/reportCreateCompanyPostingsReportRequest"
+              },
+              "example": {
+                "filter": {
+                  "processed_at_from": "2021-09-02T17:10:54.861Z",
+                  "processed_at_to": "2021-11-02T17:10:54.861Z",
+                  "delivery_schema": [
+                    "fbo"
+                  ],
+                  "sku": [],
+                  "cancel_reason_id": [],
+                  "offer_id": "",
+                  "status_alias": [],
+                  "statuses": [],
+                  "title": ""
+                },
+                "language": "DEFAULT"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Отчёт об отправлениях",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/reportCreateReportResponse"
+                },
+                "example": {
+                  "result": {
+                    "code": "REPORT_seller_postings_514893_1722847571_32a3508c-6b53-408c-a212-6c97138d23ed"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReportAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/finance/cash-flow-statement/list",
+      "method": "POST",
+      "operationId": "FinanceAPI_FinanceCashFlowStatementList",
+      "summary": "Финансовый отчёт",
+      "description": "Метод для получения финансового отчёта за периоды с 01 по 15 и с 16 по 31. \nЗапросить отчёт за отдельные дни не получится. \nСоответствует разделу **Финансы → Баланс** в личном кабинете.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Финансовый отчёт",
+        "operationId": "FinanceAPI_FinanceCashFlowStatementList",
+        "description": "Метод для получения финансового отчёта за периоды с 01 по 15 и с 16 по 31. \nЗапросить отчёт за отдельные дни не получится. \nСоответствует разделу **Финансы → Баланс** в личном кабинете.\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v3FinanceCashFlowStatementListRequest"
+              },
+              "example": {
+                "date": {
+                  "from": "2022-01-01T00:00:00.000Z",
+                  "to": "2022-12-31T00:00:00.000Z"
+                },
+                "with_details": true,
+                "page": 1,
+                "page_size": 1
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Финансовый отчёт",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3FinanceCashFlowStatementListResponse"
+                },
+                "example": {
+                  "result": {
+                    "cash_flows": [
+                      {
+                        "commission_amount": 1437,
+                        "currency_code": "string",
+                        "item_delivery_and_return_amount": 1991,
+                        "orders_amount": 1000,
+                        "period": {
+                          "begin": "2023-04-03T09:12:10.239Z",
+                          "end": "2023-04-03T09:12:10.239Z",
+                          "id": 11567022278500
+                        },
+                        "returns_amount": -3000,
+                        "services_amount": 8471.28
+                      }
+                    ],
+                    "details": {
+                      "period": {
+                        "begin": "2023-04-03T09:12:10.239Z",
+                        "end": "2023-04-03T09:12:10.239Z",
+                        "id": 11567022278500
+                      },
+                      "payments": [
+                        {
+                          "payment": 0,
+                          "currency_code": "string"
+                        }
+                      ],
+                      "begin_balance_amount": 0,
+                      "delivery": {
+                        "total": 0,
+                        "amount": 0,
+                        "delivery_services": {
+                          "total": 0,
+                          "items": [
+                            {
+                              "name": "string",
+                              "price": 0
+                            }
+                          ]
+                        }
+                      },
+                      "return": {
+                        "total": 0,
+                        "amount": 0,
+                        "return_services": {
+                          "total": 0,
+                          "items": [
+                            {
+                              "name": "string",
+                              "price": 0
+                            }
+                          ]
+                        }
+                      },
+                      "loan": 0,
+                      "invoice_transfer": 0,
+                      "rfbs": {
+                        "total": 0,
+                        "transfer_delivery": 0,
+                        "transfer_delivery_return": 0,
+                        "compensation_delivery_return": 0,
+                        "partial_compensation": 0,
+                        "partial_compensation_return": 0
+                      },
+                      "services": {
+                        "total": 0,
+                        "items": [
+                          {
+                            "name": "string",
+                            "price": 0
+                          }
+                        ]
+                      },
+                      "others": {
+                        "total": 0,
+                        "items": [
+                          {
+                            "name": "string",
+                            "price": 0
+                          }
+                        ]
+                      },
+                      "end_balance_amount": 0
+                    }
+                  },
+                  "page_count": 15
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReportAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/report/discounted/create",
+      "method": "POST",
+      "operationId": "ReportAPI_CreateDiscountedReport",
+      "summary": "Отчёт об уценённых товарах",
+      "description": "Запускает генерацию отчёта по уценённым товарам на складе Ozon.\nOzon может сам уценить товар, например, при повреждении.\n\nВ результате запроса будет не сам отчёт, а его уникальный идентификатор. \nЧтобы получить отчёт, отправьте идентификатор в запросе метода [/v1/report/info](#operation/ReportAPI_ReportInfo).\n\nС одного аккаунта продавца можно отправить 1 запрос в минуту.\nСоответствует разделу **Аналитика → Отчёты → Продажи со склада Ozon → Товары, уценённые Ozon** в личном кабинете.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отчёт об уценённых товарах",
+        "description": "Запускает генерацию отчёта по уценённым товарам на складе Ozon.\nOzon может сам уценить товар, например, при повреждении.\n\nВ результате запроса будет не сам отчёт, а его уникальный идентификатор. \nЧтобы получить отчёт, отправьте идентификатор в запросе метода [/v1/report/info](#operation/ReportAPI_ReportInfo).\n\nС одного аккаунта продавца можно отправить 1 запрос в минуту.\nСоответствует разделу **Аналитика → Отчёты → Продажи со склада Ozon → Товары, уценённые Ozon** в личном кабинете.\n",
+        "operationId": "ReportAPI_CreateDiscountedReport",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/reportCreateDiscountedRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Результат запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/reportCreateDiscountedResponse"
+                },
+                "example": {
+                  "code": "REPORT_seller_products_924336_1720170405_a9ea2f27-a473-4b13-99f9-d0cfcb5b1a69"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReportAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/report/warehouse/stock",
+      "method": "POST",
+      "operationId": "ReportAPI_CreateStockByWarehouseReport",
+      "summary": "Отчёт об остатках на FBS-складе",
+      "description": "\nОтчёт с информацией о количестве доступных и зарезервированных единиц товара на складе.\nСоответствует разделу **FBS → Управление логистикой → Управление остатками → Скачать в XLS** в личном кабинете.\n\nВ результате запроса будет не сам отчёт, а его уникальный идентификатор. \nЧтобы получить отчёт, отправьте идентификатор в запросе метода [/v1/report/info](#operation/ReportAPI_ReportInfo).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отчёт об остатках на FBS-складе",
+        "description": "\nОтчёт с информацией о количестве доступных и зарезервированных единиц товара на складе.\nСоответствует разделу **FBS → Управление логистикой → Управление остатками → Скачать в XLS** в личном кабинете.\n\nВ результате запроса будет не сам отчёт, а его уникальный идентификатор. \nЧтобы получить отчёт, отправьте идентификатор в запросе метода [/v1/report/info](#operation/ReportAPI_ReportInfo).\n",
+        "operationId": "ReportAPI_CreateStockByWarehouseReport",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CreateStockByWarehouseReportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Результат запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/commonCreateReportResponse"
+                },
+                "example": {
+                  "code": "REPORT_seller_products_924336_1720170405_a9ea2f27-a473-4b13-99f9-d0cfcb5b1a69"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReportAPI"
+        ]
+      }
+    }
+  ],
+  "schemas": {
+    "reportReportInfoRequest": {
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Уникальный идентификатор отчёта."
+        }
+      },
+      "title": "ReportInfo",
+      "type": "object"
+    },
+    "reportReportInfoResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/reportReportinfo"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "reportReportinfo": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Уникальный идентификатор отчёта."
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата создания отчёта."
+        },
+        "error": {
+          "type": "string",
+          "description": "Код ошибки при генерации отчёта."
+        },
+        "file": {
+          "type": "string",
+          "description": "Ссылка на XLSX-файл.\n\nДля отчёта с типом `SELLER_RETURNS` ссылка доступна 5 минут после выполнения запроса.\n"
+        },
+        "params": {
+          "additionalProperties": {
+            "type": "string",
+            "description": "Фильтр."
+          },
+          "type": "object",
+          "description": "Массив с фильтрами, указанными при создании отчёта продавцом."
+        },
+        "report_type": {
+          "type": "string",
+          "description": "Тип отчёта:\n  - `SELLER_PRODUCTS` — отчёт по товарам,\n  - `SELLER_TRANSACTIONS` — отчёт по транзакциям,\n  - `SELLER_PRODUCT_PRICES` — отчёт по ценам товаров,\n  - `SELLER_STOCK` — отчёт об остатках товаров,\n  - `SELLER_RETURNS` — отчёт о возвратах,\n  - `SELLER_POSTINGS` — отчёт об отправлениях,\n  - `SELLER_FINANCE` — отчёт о финансах,\n  - `SELLER_PRODUCT_DISCOUNTED` — отчёт об уценённых товарах,\n  - `DOCUMENT_B2B_SALES` — отчёт о продажах юридическим лицам,\n  - `MUTUAL_SETTLEMENT` — отчёт о взаиморасчётах,\n  - `SELLER_RETURNS_V2` — отчёт о возвратах FBO и FBS,\n  - `COMPENSATION` — отчёт о компенсациях,\n  - `DECOMPENSATION` — отчёт о декомпенсациях.\n"
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус генерации отчёта:\n  - `waiting` — в очереди на обработку,\n  - `processing` — обрабатывается,\n  - `success` — отчёт успешно создан,\n  - `failed` — ошибка при создании отчёта.\n"
+        }
+      },
+      "title": "Common",
+      "type": "object",
+      "description": "Информация об отчёте."
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "reportReportListRequest": {
+      "required": [
+        "page",
+        "page_size"
+      ],
+      "properties": {
+        "page": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Номер страницы."
+        },
+        "page_size": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество значений на странице:\n  - по умолчанию — 100,\n  - маĸсимальное значение — 1000.\n"
+        },
+        "report_type": {
+          "$ref": "#/components/schemas/ReportListRequestReportType"
+        }
+      },
+      "title": "ReportList",
+      "type": "object"
+    },
+    "ReportListRequestReportType": {
+      "default": "ALL",
+      "enum": null,
+      "type": "string",
+      "title": "string",
+      "description": "Тип отчёта:\n  - `ALL` — все отчёты,\n  - `SELLER_PRODUCTS` — отчёт по товарам,\n  - `SELLER_TRANSACTIONS` — отчёт по транзакциям,\n  - `SELLER_PRODUCT_PRICES` — отчёт по ценам товаров,\n  - `SELLER_STOCK` — отчёт об остатках товаров,\n  - `SELLER_RETURNS` — отчёт о возвратах,\n  - `SELLER_POSTINGS` — отчёт об отправлениях,\n  - `SELLER_FINANCE` — отчёт о финансах,\n  - `SELLER_PRODUCT_DISCOUNTED` — отчёт об уценённых товарах,\n  - `DOCUMENT_B2B_SALES` — отчёт о продажах юридическим лицам,\n  - `MUTUAL_SETTLEMENT` — отчёт о взаиморасчётах,\n  - `SELLER_RETURNS_V2` — отчёт о возвратах FBO и FBS,\n  - `COMPENSATION` — отчёт о компенсациях,\n  - `DECOMPENSATION` — отчёт о декомпенсациях.\n"
+    },
+    "reportReportListResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/ReportListResponseResult"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "ReportListResponseResult": {
+      "properties": {
+        "reports": {
+          "items": {
+            "$ref": "#/components/schemas/reportReport"
+          },
+          "type": "array",
+          "description": "Массив со всеми сгенерированными отчётами."
+        },
+        "total": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Суммарное количество отчётов."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результаты запроса."
+    },
+    "reportReport": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Уникальный идентификатор отчёта. Чтобы получить отчёт, передайте это значение в метод [/v1/report/info](#operation/ReportAPI_ReportInfo)."
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата создания отчёта."
+        },
+        "error": {
+          "type": "string",
+          "description": "Код ошибки при генерации отчёта."
+        },
+        "file": {
+          "type": "string",
+          "description": "Ссылка на XLSX-файл.\n\nДля отчёта с типом `SELLER_RETURNS` ссылка доступна 5 минут после выполнения запроса.\n"
+        },
+        "params": {
+          "additionalProperties": {
+            "type": "string",
+            "description": "Фильтр."
+          },
+          "type": "object",
+          "description": "Массив с фильтрами, указанными при создании отчёта продавцом."
+        },
+        "report_type": {
+          "type": "string",
+          "description": "Тип отчёта:\n  - `SELLER_PRODUCTS` — отчёт по товарам,\n  - `SELLER_TRANSACTIONS` — отчёт по транзакциям,\n  - `SELLER_PRODUCT_PRICES` — отчёт по ценам товаров,\n  - `SELLER_STOCK` — отчёт об остатках товаров,\n  - `SELLER_RETURNS` — отчёт о возвратах,\n  - `SELLER_POSTINGS` — отчёт об отправлениях,\n  - `SELLER_FINANCE` — отчёт о финансах,\n  - `SELLER_PRODUCT_DISCOUNTED` — отчёт об уценённых товарах,\n  - `DOCUMENT_B2B_SALES` — отчёт о продажах юридическим лицам,\n  - `MUTUAL_SETTLEMENT` — отчёт о взаиморасчётах,\n  - `SELLER_RETURNS_V2` — отчёт о возвратах FBO и FBS,\n  - `COMPENSATION` — отчёт о компенсациях,\n  - `DECOMPENSATION` — отчёт о декомпенсациях.\n"
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус генерации отчёта:\n  - `waiting` — в очереди на обработку,\n  - `processing` — обрабатывается,\n  - `success` — отчёт успешно создан,\n  - `failed` — ошибка при создании отчёта.\n"
+        }
+      },
+      "title": "Common",
+      "type": "object",
+      "description": "Информация об отчёте."
+    },
+    "reportCreateCompanyProductsReportRequest": {
+      "properties": {
+        "language": {
+          "$ref": "#/components/schemas/reportLanguage"
+        },
+        "offer_id": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "search": {
+          "type": "string",
+          "description": "Поиск по содержанию записи, проверяет наличие."
+        },
+        "sku": {
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": "array",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "visibility": {
+          "$ref": "#/components/schemas/reportCreateCompanyProductsReportRequestVisibility"
+        }
+      },
+      "title": "CreateCompanyProductsReport",
+      "type": "object"
+    },
+    "reportLanguage": {
+      "default": "DEFAULT",
+      "enum": null,
+      "title": "Language",
+      "type": "string",
+      "description": "Язык ответа:\n  - `RU` — русский,\n  - `EN` — английский.\n"
+    },
+    "reportCreateCompanyProductsReportRequestVisibility": {
+      "default": "ALL",
+      "enum": null,
+      "type": "string",
+      "title": "string",
+      "description": "Фильтр по видимости товара:\n  - `ALL` — все товары, кроме архивных.\n  - `VISIBLE` — товары, которые видны покупателям.\n  - `INVISIBLE` — товары, которые не видны покупателям.\n  - `EMPTY_STOCK` — товары, у которых не указано наличие.\n  - `NOT_MODERATED` — товары, которые не прошли модерацию.\n  - `MODERATED` — товары, которые прошли модерацию.\n  - `DISABLED` — товары, которые видны покупателям, но недоступны к покупке.\n  - `STATE_FAILED` — товары, создание которых завершилось ошибкой.\n  - `READY_TO_SUPPLY` — товары, готовые к поставке.\n  - `VALIDATION_STATE_PENDING` — товары, которые проходят проверку валидатором на премодерации.\n  - `VALIDATION_STATE_FAIL` — товары, которые не прошли проверку валидатором на премодерации.\n  - `VALIDATION_STATE_SUCCESS` — товары, которые прошли проверку валидатором на премодерации.\n  - `TO_SUPPLY` — товары, готовые к продаже.\n  - `IN_SALE` — товары в продаже.\n  - `REMOVED_FROM_SALE` — товары, скрытые от покупателей.\n  - `BANNED` — заблокированные товары.\n  - `OVERPRICED` — товары с завышенной ценой.\n  - `CRITICALLY_OVERPRICED` — товары со слишком завышенной ценой.\n  - `EMPTY_BARCODE` — товары без штрихкода.\n  - `BARCODE_EXISTS` — товары со штрихкодом.\n  - `QUARANTINE` — товары на карантине после изменения цены более чем на 50%.\n"
+    },
+    "reportCreateReportResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/CreateReportResponseCode"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "CreateReportResponseCode": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Уникальный идентификатор отчёта. По нему вы можете получить отчёт в течение 3 дней после запроса. Чтобы получить отчёт, передайте это значение в метод [/v1/report/info](#operation/ReportAPI_ReportInfo)."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результаты запроса."
+    },
+    "v2ReportReturnsCreateRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "filter": {
+          "type": "object",
+          "description": "Фильтр.",
+          "$ref": "#/components/schemas/v2ReportReturnsCreateRequestFilter"
+        },
+        "language": {
+          "$ref": "#/components/schemas/reportLanguage"
+        }
+      }
+    },
+    "v2ReportReturnsCreateRequestFilter": {
+      "properties": {
+        "delivery_schema": {
+          "type": "string",
+          "enum": [
+            "FBS",
+            "FBO",
+            "ALL"
+          ],
+          "description": "Фильтр по схеме работы: \n- `FBS` — возвраты на свой склад. \n- `FBO` — возвраты на склад маркетплейса.\n- `ALL` — все возвраты.\n"
+        },
+        "date_from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата, с которой данные отображаются в отчёте.\n\nДоступно только за последние три месяца.\n"
+        },
+        "date_to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата, по которую данные отображаются в отчёте.\n\nДоступно только за последние три месяца.\n"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DisputeOpened",
+            "OnSellerApproval",
+            "ArrivedAtReturnPlace",
+            "OnSellerClarification",
+            "OnSellerClarificationAfterPartialCompensation",
+            "OfferedPartialCompensation",
+            "ReturnMoneyApproved",
+            "PartialCompensationReturned",
+            "CancelledDisputeNotOpen",
+            "Rejected",
+            "CrmRejected",
+            "Cancelled",
+            "Approved",
+            "ApprovedByOzon",
+            "ReceivedBySeller",
+            "MovingToSeller",
+            "ReturnCompensated",
+            "ReturningToSellerByCourier",
+            "Utilizing",
+            "Utilized",
+            "MoneyReturned",
+            "PartialCompensationInProcess",
+            "DisputeYouOpened",
+            "CompensationRejected",
+            "DisputeOpening",
+            "CompensationOffered",
+            "WaitingCompensation",
+            "SendingError",
+            "CompensationRejectedBySla",
+            "CompensationRejectedBySeller",
+            "MovingToOzon",
+            "ReturnedToOzon",
+            "MoneyReturnedBySystem",
+            "WaitingShipment"
+          ],
+          "description": "Фильтр по статусу возврата:\n- `DisputeOpened` — открыт спор с покупателем;\n- `OnSellerApproval` — на согласовании у продавца;\n- `ArrivedAtReturnPlace` — в пункте выдачи;\n- `OnSellerClarification` — на уточнении у продавца;\n- `OnSellerClarificationAfterPartialCompensation` — на уточнении у продавца после частичной компенсации;\n- `OfferedPartialCompensation` — предложена частичная компенсация;\n- `ReturnMoneyApproved` — одобрен возврат денег;\n- `PartialCompensationReturned` — вернули часть денег;\n- `CancelledDisputeNotOpen` — возврат отклонён, спор не открыт;\n- `Rejected` — заявка отклонена;\n- `CrmRejected` — заявка отклонена Ozon;\n- `Cancelled` — заявка отменена;\n- `Approved` — заявка одобрена продавцом;\n- `ApprovedByOzon` — заявка одобрена Ozon;\n- `ReceivedBySeller` — продавец получил возврат;\n- `MovingToSeller` — возврат на пути к продавцу;\n- `ReturnCompensated` — продавец получил компенсацию;\n- `ReturningToSellerByCourier` — курьер везёт возврат продавцу;\n- `Utilizing` — на утилизации;\n- `Utilized` — утилизирован;\n- `MoneyReturned` — покупателю вернули всю сумму;\n- `PartialCompensationInProcess` — одобрен частичный возврат денег;\n- `DisputeYouOpened` — продавец открыл спор;\n- `CompensationRejected` — отказано в компенсации;\n- `DisputeOpening` — обращение в поддержку отправлено;\n- `CompensationOffered` — ожидает вашего решения по компенсации;\n- `WaitingCompensation` — ожидает компенсации;\n- `SendingError` — ошибка при отправке обращения в поддержку;\n- `CompensationRejectedBySla` — истёк срок решения;\n- `CompensationRejectedBySeller` — продавец отказался от компенсации;\n- `MovingToOzon` — едет на склад Ozon;\n- `ReturnedToOzon` — на складе Ozon;\n- `MoneyReturnedBySystem` — быстрый возврат;\n- `WaitingShipment` — ожидает отправки.\n"
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр.",
+      "required": [
+        "date_from",
+        "date_to",
+        "status"
+      ]
+    },
+    "v2ReportReturnsCreateResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/CreateReportResponseCode"
+        }
+      }
+    },
+    "reportCreateCompanyPostingsReportRequest": {
+      "required": [
+        "filter"
+      ],
+      "properties": {
+        "filter": {
+          "$ref": "#/components/schemas/reportCreateCompanyPostingsReportRequestFilter"
+        },
+        "language": {
+          "$ref": "#/components/schemas/reportLanguage"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "reportCreateCompanyPostingsReportRequestFilter": {
+      "properties": {
+        "cancel_reason_id": {
+          "description": "Идентификатор причины отмены.",
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "delivery_schema": {
+          "description": "Схема работы — FBO или FBS.\n\nЗа один запрос вы можете передать только одно значение:\n* `fbo` — чтобы получить отчёт по схеме FBO,\n* `fbs` — чтобы получить отчёт по схеме FBS.\n",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "offer_id": {
+          "description": "Идентификатор товара в системе продавца — артикул.",
+          "type": "string"
+        },
+        "processed_at_from": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Время, когда заказ попал в обработку."
+        },
+        "processed_at_to": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Время, когда заказ появился в личном кабинете."
+        },
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "status_alias": {
+          "description": "Текст статуса.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "statuses": {
+          "description": "Числовой статус.",
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "title": {
+          "description": "Название товара.",
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр."
+    },
+    "v3FinanceCashFlowStatementListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "date": {
+          "$ref": "#/components/schemas/financev3Period"
+        },
+        "page": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Номер страницы, возвращаемой в запросе."
+        },
+        "with_details": {
+          "type": "boolean",
+          "description": "`true`, если нужно добавить дополнительные параметры в ответ."
+        },
+        "page_size": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество элементов на странице."
+        }
+      },
+      "required": [
+        "page",
+        "page_size",
+        "date"
+      ]
+    },
+    "financev3Period": {
+      "type": "object",
+      "title": "object",
+      "description": "Период формирования отчёта.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата, с ĸоторой рассчитывается отчёт."
+        },
+        "to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата, по ĸоторую рассчитывается отчёт."
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "v3FinanceCashFlowStatementListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v3FinanceCashFlowStatementListResponseResult"
+        }
+      }
+    },
+    "v3FinanceCashFlowStatementListResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "cash_flows": {
+          "description": "Список отчётов.",
+          "items": {
+            "$ref": "#/components/schemas/FinanceCashFlowStatementListResponseCashFlow"
+          }
+        },
+        "details": {
+          "type": "array",
+          "items": null,
+          "$ref": "#/components/schemas/FinanceCashFlowStatementListResponseDetails",
+          "description": "Детализированная информация."
+        },
+        "page_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество страниц с отчётами."
+        }
+      }
+    },
+    "FinanceCashFlowStatementListResponseCashFlow": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "period": {
+          "$ref": "#/components/schemas/v3FinanceCashFlowStatementListResponsePeriod"
+        },
+        "orders_amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма цен реализованных товаров."
+        },
+        "returns_amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма цен возвращённых товаров."
+        },
+        "commission_amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Комиссия Ozon за реализацию товаров."
+        },
+        "services_amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма дополнительных услуг."
+        },
+        "item_delivery_and_return_amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма услуг логистики."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Код валюты, в которой рассчитываются комиссии."
+        }
+      }
+    },
+    "v3FinanceCashFlowStatementListResponsePeriod": {
+      "type": "object",
+      "title": "object",
+      "description": "Период.",
+      "properties": {
+        "begin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Начало периода."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Конец периода."
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор."
+        }
+      }
+    },
+    "FinanceCashFlowStatementListResponseDetails": {
+      "type": "object",
+      "title": "object",
+      "description": "Детализированная информация.",
+      "properties": {
+        "begin_balance_amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Баланс на начало периода."
+        },
+        "delivery": {
+          "$ref": "#/components/schemas/DetailsDeliveryDetails",
+          "description": "Результат работы метода."
+        },
+        "invoice_transfer": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма к выплате за период."
+        },
+        "loan": {
+          "type": "number",
+          "format": "double",
+          "description": "Перевод по договорам займа."
+        },
+        "payments": {
+          "description": "Выплачено в периоде.",
+          "type": "array",
+          "items": null,
+          "$ref": "#/components/schemas/DetailsPayment"
+        },
+        "period": {
+          "$ref": "#/components/schemas/v3FinanceCashFlowStatementListResponsePeriod",
+          "description": "Период."
+        },
+        "return": {
+          "$ref": "#/components/schemas/DetailsReturnDetails"
+        },
+        "rfbs": {
+          "$ref": "#/components/schemas/DetailsRfbsDetails",
+          "description": "Перечисления по схеме rFBS."
+        },
+        "services": {
+          "$ref": "#/components/schemas/DetailsService",
+          "description": "Услуги."
+        },
+        "others": {
+          "$ref": "#/components/schemas/DetailsOthers",
+          "description": "Компенсация и прочие начисления."
+        },
+        "end_balance_amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Баланс на конец периода."
+        }
+      }
+    },
+    "DetailsDeliveryDetails": {
+      "type": "object",
+      "title": "object",
+      "description": "Заказы.",
+      "properties": {
+        "total": {
+          "type": "number",
+          "format": "double",
+          "description": "Общая сумма."
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма, на которую выкуплено товаров с учётом комиссий."
+        },
+        "delivery_services": {
+          "$ref": "#/components/schemas/DetailsServices",
+          "description": "Плата за обработку и доставку."
+        }
+      }
+    },
+    "DetailsServices": {
+      "type": "object",
+      "title": "object",
+      "description": "Плата за обработку и доставку.",
+      "properties": {
+        "total": {
+          "description": "Общая сумма.",
+          "type": "number",
+          "format": "double"
+        },
+        "items": {
+          "description": "Детализация.",
+          "type": "array",
+          "items": null,
+          "$ref": "#/components/schemas/FinanceCashFlowStatementListResponseDeliveryService"
+        }
+      }
+    },
+    "FinanceCashFlowStatementListResponseDeliveryService": {
+      "type": "object",
+      "title": "object",
+      "description": "Детализация.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название операции. Возможные значения:\n - `MarketplaceServiceItemDirectFlowLogisticSum` — логистика,\n - `MarketplaceServiceItemDirectFlowLogisticDC` — логистика РЦ,\n - `MarketplaceServiceItemDropoff` — обработка отправления Drop-off,\n - `MarketplaceServiceItemDirectFlowTrans` — магистраль,\n - `MarketplaceServiceDCFlowTrans` — магистраль РЦ,\n - `MarketplaceServiceItemFulfillment` — сборка заказа,\n - `MarketplaceServiceItemDelivToCustomer` — последняя миля.\n"
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма по операции."
+        }
+      }
+    },
+    "DetailsPayment": {
+      "type": "object",
+      "title": "object",
+      "description": "Выплачено за период.",
+      "properties": {
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта."
+        },
+        "payment": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма выплаты."
+        }
+      }
+    },
+    "DetailsReturnDetails": {
+      "type": "object",
+      "title": "object",
+      "description": "Возвраты и отмены.",
+      "properties": {
+        "total": {
+          "type": "number",
+          "format": "double",
+          "description": "Общая сумма."
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма, на которую получено возвратов с учётом комиссий."
+        },
+        "return_services": {
+          "$ref": "#/components/schemas/DetailsReturns",
+          "description": "Плата за возвраты и отмены."
+        }
+      }
+    },
+    "DetailsReturns": {
+      "type": "object",
+      "title": "object",
+      "description": "Плата за возвраты и отмены.",
+      "properties": {
+        "total": {
+          "description": "Общая сумма.",
+          "type": "number",
+          "format": "double"
+        },
+        "items": {
+          "description": "Детализация.",
+          "type": "array",
+          "items": null,
+          "$ref": "#/components/schemas/FinanceCashFlowStatementListResponseReturnService"
+        }
+      }
+    },
+    "FinanceCashFlowStatementListResponseReturnService": {
+      "type": "object",
+      "title": "object",
+      "description": "Детализация.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название операции. Возможные значения:\n - `MarketplaceServiceItemReturnAfterDelivToCustomer` — обработка возвратов,\n - `MarketplaceServiceItemReturnPartGoodsCustomer` — обработка частичного невыкупа,\n - `MarketplaceServiceItemReturnNotDelivToCustomer` — обработка отменённых и невостребованных товаров,\n - `MarketplaceServiceItemReturnFlowLogistic` — обратная логистика.\n"
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма по операции."
+        }
+      }
+    },
+    "DetailsRfbsDetails": {
+      "type": "object",
+      "title": "object",
+      "description": "Перечисления по схеме rFBS.",
+      "properties": {
+        "total": {
+          "type": "number",
+          "format": "double",
+          "description": "Общая сумма."
+        },
+        "transfer_delivery": {
+          "type": "number",
+          "format": "double",
+          "description": "Перечисления от покупателей."
+        },
+        "transfer_delivery_return": {
+          "type": "number",
+          "format": "double",
+          "description": "Возврат перечислений покупателям."
+        },
+        "compensation_delivery_return": {
+          "type": "number",
+          "format": "double",
+          "description": "Компенсация перечислений за доставку."
+        },
+        "partial_compensation": {
+          "type": "number",
+          "format": "double",
+          "description": "Перечисления частичных компенсаций покупателям."
+        },
+        "partial_compensation_return": {
+          "type": "number",
+          "format": "double",
+          "description": "Возврат частичных компенсаций."
+        }
+      }
+    },
+    "DetailsService": {
+      "type": "object",
+      "title": "object",
+      "description": "Услуги.",
+      "properties": {
+        "total": {
+          "description": "Общая сумма.",
+          "type": "number",
+          "format": "double"
+        },
+        "items": {
+          "description": "Детализация.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/FinanceCashFlowStatementListResponseService"
+          }
+        }
+      }
+    },
+    "FinanceCashFlowStatementListResponseService": {
+      "type": "object",
+      "title": "object",
+      "description": "Детализация.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название операции:\n  - `MarketplaceServiceItemElectronicServiceStencil` — услуга «Трафареты»;\n  - `MarketplaceServiceItemElectronicServicesPromotionInSearch` — услуга «Продвижение в поиске»;\n  - `MarketplaceServiceItemElectronicServicesBrandShelf` — услуга «Брендовая полка»;\n  - `MarketplaceServiceBrandPromotion` и `MarketplaceServiceBrandCommission` — услуга «Продвижение бренда»;\n  - `MarketplaceServiceItemMarketingServices` — маркетинговые услуги; \n  - `MarketplaceServiceItemTechnicalServicesAndOtherServices` — технические и иные услуги;  \n  - `MarketplaceServiceItemOtherElectronicServices` — иные электронные услуги;  \n  - `ItemAgentServiceStarsMembership` — звёздные товары;\n  - `MarketplaceReturnStorageServiceAtThePickupPointFbsItem` — краткосрочное размещение возврата FBS;\n  - `MarketplaceSaleReviewsItem` — приобретение отзывов на платформе;\n  - `MarketplaceServicePremiumCashbackIndividualPoints` — услуга продвижения «Бонусы продавца»;\n  - `OperationMarketplaceServiceStorage` — услуга размещения товаров;\n  - `MarketplaceServiceStockDisposal` — утилизация со стока;\n  - `MarketplaceReturnDisposalServiceFbsItem` — утилизация FBS;\n  - `MarketplaceServiceItemFlexiblePaymentSchedule` — услуга «Гибкий график выплат»;\n  - `MarketplaceServiceProcessingSpoilage` — обработка брака;\n  - `MarketplaceServiceProcessingIdentifiedSurplus` — обработка опознанных излишков;\n  - `MarketplaceServiceProcessingIdentifiedDiscrepancies` — бронирование места для размещения на складе;\n  - `MarketplaceServiceItemInternetSiteAdvertising` — реклама на сайте Ozon;\n  - `MarketplaceServiceItemSubscribtionPremium` — премиум-подписка;\n  - `MarketplaceAgencyFeeAggregator3PLGlobalItem` — агентское вознаграждение Ozon.\n"
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма по операции."
+        }
+      }
+    },
+    "DetailsOthers": {
+      "type": "object",
+      "title": "object",
+      "description": "Компенсация и прочие начисления.",
+      "properties": {
+        "total": {
+          "description": "Общая сумма.",
+          "type": "number",
+          "format": "double"
+        },
+        "items": {
+          "description": "Детализация.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/FinanceCashFlowStatementListResponseDetailsOthers"
+          }
+        }
+      }
+    },
+    "FinanceCashFlowStatementListResponseDetailsOthers": {
+      "type": "object",
+      "title": "object",
+      "description": "Детализация.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название операции. Возможные значения:\n - `MarketplaceRedistributionOfAcquiringOperation` — оплата эквайринга,\n - `MarketplaceSellerCompensationLossOfGoodsOperation` — компенсация за уничтоженный товар,\n - `MarketplaceSellerCorrectionOperation` — корректировка стоимости услуг,\n - `OperationCorrectionSeller` — инвентаризация взаиморасчётов,\n - `OperationMarketplaceWithHoldingForUndeliverableGoods` — компенсация за недовложение товаров,\n - `OperationClaim` — начисления по претензиям.\n"
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма по операции."
+        }
+      }
+    },
+    "reportCreateDiscountedRequest": {
+      "type": "object",
+      "title": "object"
+    },
+    "reportCreateDiscountedResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Уникальный идентификатор отчёта. Чтобы получить отчёт, передайте это значение в метод [/v1/report/info](#operation/ReportAPI_ReportInfo)."
+        }
+      }
+    },
+    "v1CreateStockByWarehouseReportRequest": {
+      "required": [
+        "warehouseId"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/components/schemas/reportLanguage"
+        },
+        "warehouseId": {
+          "description": "Идентификаторы складов.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "commonCreateReportResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/CreateReportResponseCode"
+        }
+      }
+    }
+  }
+}

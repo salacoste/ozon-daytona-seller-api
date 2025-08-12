@@ -1,0 +1,2197 @@
+{
+  "metadata": {
+    "tag": "FinanceAPI",
+    "name": "FinanceAPI",
+    "displayName": "Финансовые отчёты",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 11,
+    "schemasCount": 53,
+    "generatedAt": "2025-08-09T16:28:42.337Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v2/finance/realization",
+      "method": "POST",
+      "operationId": "FinanceAPI_GetRealizationReportV2",
+      "summary": "Отчёт о реализации товаров (версия 2)",
+      "description": "<aside class=\"warning\">\nМетод недоступен для продавцов, которые заключили договор с ТОО «ОЗОН Маркетплейс Казахстан».\n</aside>\n\nОтчёт о реализации доставленных и возвращённых товаров за месяц. Отмены и невыкупы не включаются.\nСоответствует разделу **Финансы → Документы → Отчёты о реализации → Отчёт о реализации товара** в личном кабинете.\n\nОтчёт придёт не позднее 5-го числа следующего месяца.\n\n[Подробнее об отчёте в Базе знаний продавца](https://seller-edu.ozon.ru/docs/finances-documents/calculations-documents/otchet-o-realizacii-tovarov.html)\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отчёт о реализации товаров (версия 2)",
+        "description": "<aside class=\"warning\">\nМетод недоступен для продавцов, которые заключили договор с ТОО «ОЗОН Маркетплейс Казахстан».\n</aside>\n\nОтчёт о реализации доставленных и возвращённых товаров за месяц. Отмены и невыкупы не включаются.\nСоответствует разделу **Финансы → Документы → Отчёты о реализации → Отчёт о реализации товара** в личном кабинете.\n\nОтчёт придёт не позднее 5-го числа следующего месяца.\n\n[Подробнее об отчёте в Базе знаний продавца](https://seller-edu.ozon.ru/docs/finances-documents/calculations-documents/otchet-o-realizacii-tovarov.html)\n",
+        "operationId": "FinanceAPI_GetRealizationReportV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetRealizationReportRequestV2"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Отчёт о реализации",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetRealizationReportResponseV2"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FinanceAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/finance/realization/posting",
+      "method": "POST",
+      "operationId": "FinanceAPI_GetRealizationReportV1",
+      "summary": "Позаказный отчёт о реализации товаров",
+      "description": "<aside class=\"warning\">\nМетод недоступен для продавцов, которые заключили договор с ТОО «ОЗОН Маркетплейс Казахстан».\n</aside>\n\nОтчёт о реализации доставленных и возвращённых товаров с детализацией по каждому заказу. Отмены и невыкупы не включаются. Отчёт доступен с настоящего времени по август 2023 года включительно.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Позаказный отчёт о реализации товаров",
+        "description": "<aside class=\"warning\">\nМетод недоступен для продавцов, которые заключили договор с ТОО «ОЗОН Маркетплейс Казахстан».\n</aside>\n\nОтчёт о реализации доставленных и возвращённых товаров с детализацией по каждому заказу. Отмены и невыкупы не включаются. Отчёт доступен с настоящего времени по август 2023 года включительно.\n",
+        "operationId": "FinanceAPI_GetRealizationReportV1",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetRealizationReportPostingRequest"
+              },
+              "example": {
+                "month": 2,
+                "year": 2025
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Позаказный отчёт о реализации",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetRealizationReportPostingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FinanceAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v3/finance/transaction/list",
+      "method": "POST",
+      "operationId": "FinanceAPI_FinanceTransactionListV3",
+      "summary": "Список транзакций",
+      "description": "\n<aside class=\"warning\">\nИспользуйте метод с последовательной отправкой запросов.<br>\nДанные могут не соответствовать информации в личном кабинете.\n</aside>\n\nВозвращает подробную информацию по всем начислениям. Максимальный период, за который можно получить информацию в одном запросе — 1 месяц.\n\nЕсли в запросе не указывать `posting_number`, то в ответе будут все отправления за указанный период или отправления определённого типа.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список транзакций",
+        "description": "\n<aside class=\"warning\">\nИспользуйте метод с последовательной отправкой запросов.<br>\nДанные могут не соответствовать информации в личном кабинете.\n</aside>\n\nВозвращает подробную информацию по всем начислениям. Максимальный период, за который можно получить информацию в одном запросе — 1 месяц.\n\nЕсли в запросе не указывать `posting_number`, то в ответе будут все отправления за указанный период или отправления определённого типа.\n",
+        "operationId": "FinanceAPI_FinanceTransactionListV3",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/financev3FinanceTransactionListV3Request"
+              },
+              "example": {
+                "filter": {
+                  "date": {
+                    "from": "2021-11-01T00:00:00.000Z",
+                    "to": "2021-11-02T00:00:00.000Z"
+                  },
+                  "operation_type": [],
+                  "posting_number": "",
+                  "transaction_type": "all"
+                },
+                "page": 1,
+                "page_size": 1000
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список транзакций",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/financev3FinanceTransactionListV3Response"
+                },
+                "example": {
+                  "result": {
+                    "operations": [
+                      {
+                        "operation_id": 11401182187840,
+                        "operation_type": "MarketplaceMarketingActionCostOperation",
+                        "operation_date": "2021-11-01 00:00:00",
+                        "operation_type_name": "Услуги продвижения товаров",
+                        "delivery_charge": 0,
+                        "return_delivery_charge": 0,
+                        "accruals_for_sale": 0,
+                        "sale_commission": 0,
+                        "amount": -6.46,
+                        "type": "services",
+                        "posting": {
+                          "delivery_schema": "",
+                          "order_date": "",
+                          "posting_number": "",
+                          "warehouse_id": 0
+                        },
+                        "items": [],
+                        "services": []
+                      }
+                    ],
+                    "page_count": 1,
+                    "row_count": 355
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FinanceAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v3/finance/transaction/totals",
+      "method": "POST",
+      "operationId": "FinanceAPI_FinanceTransactionTotalV3",
+      "summary": "Суммы транзакций",
+      "description": "\n<aside class=\"warning\">\nДанные могут не соответствовать информации в личном кабинете.\n</aside>\n\nВозвращает итоговые суммы по транзакциям за указанный период. \n\nЕсли вы неправильно заполните номера отправлений, в ответе вернутся нулевые значения.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Суммы транзакций",
+        "description": "\n<aside class=\"warning\">\nДанные могут не соответствовать информации в личном кабинете.\n</aside>\n\nВозвращает итоговые суммы по транзакциям за указанный период. \n\nЕсли вы неправильно заполните номера отправлений, в ответе вернутся нулевые значения.\n",
+        "operationId": "FinanceAPI_FinanceTransactionTotalV3",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/financev3FinanceTransactionTotalsV3Request"
+              },
+              "example": {
+                "date": {
+                  "from": "2021-11-01T00:00:00.000Z",
+                  "to": "2021-11-02T00:00:00.000Z"
+                },
+                "posting_number": "",
+                "transaction_type": "all"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Суммы транзакций",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/financev3FinanceTransactionTotalsV3Response"
+                },
+                "example": {
+                  "result": {
+                    "accruals_for_sale": 96647.58,
+                    "sale_commission": -11456.65,
+                    "processing_and_delivery": -24405.68,
+                    "refunds_and_cancellations": -330,
+                    "services_amount": -1307.57,
+                    "compensation_amount": 0,
+                    "money_transfer": 0,
+                    "others_amount": 113.05
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FinanceAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/finance/document-b2b-sales",
+      "method": "POST",
+      "operationId": "ReportAPI_CreateDocumentB2BSalesReport",
+      "summary": "Реестр продаж юридическим лицам",
+      "description": "Используйте метод, чтобы получить отчёт по продажам юридическим лицам. Соответствует разделу **Финансы → Документы → Реестр продаж юр. лицам** в личном кабинете.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Реестр продаж юридическим лицам",
+        "description": "Используйте метод, чтобы получить отчёт по продажам юридическим лицам. Соответствует разделу **Финансы → Документы → Реестр продаж юр. лицам** в личном кабинете.",
+        "operationId": "ReportAPI_CreateDocumentB2BSalesReport",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CreateDocumentB2BSalesReportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Результат запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/commonCreateReportResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FinanceAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/finance/document-b2b-sales/json",
+      "method": "POST",
+      "operationId": "ReportAPI_CreateDocumentB2BSalesJSONReport",
+      "summary": "Реестр продаж юридическим лицам в JSON-формате",
+      "description": "Используйте метод, чтобы получить отчёт по продажам юридическим лицам в JSON-формате. Соответствует разделу **Финансы → Документы → Реестр продаж юр. лицам** в личном кабинете.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Реестр продаж юридическим лицам в JSON-формате",
+        "description": "Используйте метод, чтобы получить отчёт по продажам юридическим лицам в JSON-формате. Соответствует разделу **Финансы → Документы → Реестр продаж юр. лицам** в личном кабинете.\n",
+        "tags": [
+          "FinanceAPI"
+        ],
+        "operationId": "ReportAPI_CreateDocumentB2BSalesJSONReport",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CreateDocumentB2BSalesJSONReportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Отчёт в JSON-формате",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CreateDocumentB2BSalesJSONReportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/finance/mutual-settlement",
+      "method": "POST",
+      "operationId": "ReportAPI_CreateMutualSettlementReport",
+      "summary": "Отчёт о взаиморасчётах",
+      "description": "Используйте метод, чтобы получить отчёт о взаиморасчетах. Соответствует разделу **Финансы → Документы → Аналитические отчеты → Отчет о взаиморасчетах** в личном кабинете.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отчёт о взаиморасчётах",
+        "description": "Используйте метод, чтобы получить отчёт о взаиморасчетах. Соответствует разделу **Финансы → Документы → Аналитические отчеты → Отчет о взаиморасчетах** в личном кабинете.",
+        "operationId": "ReportAPI_CreateMutualSettlementReport",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CreateMutualSettlementReportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Результат запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/commonCreateReportResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FinanceAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/finance/realization/by-day",
+      "method": "POST",
+      "operationId": "FinanceAPI_GetRealizationByDayReportV1",
+      "summary": "Отчёт о реализации товаров за день",
+      "description": "Метод возвращает данные о суммах реализации из [отчёта о реализации товаров](#operation/FinanceAPI_GetRealizationReportV2) за день. Отмены и невыкупы не включаются. Данные доступны не более чем за 32 календарных дня от текущей даты. Метод доступен только с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отчёт о реализации товаров за день",
+        "description": "Метод возвращает данные о суммах реализации из [отчёта о реализации товаров](#operation/FinanceAPI_GetRealizationReportV2) за день. Отмены и невыкупы не включаются. Данные доступны не более чем за 32 календарных дня от текущей даты. Метод доступен только с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).",
+        "operationId": "FinanceAPI_GetRealizationByDayReportV1",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetRealizationReportByDayRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Отчёт о реализации за день",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRealizationReportByDayResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FinanceAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/finance/products/buyout",
+      "method": "POST",
+      "operationId": "GetFinanceProductsBuyout",
+      "summary": "Отчёт о выкупленных товарах",
+      "description": "Возвращает отчёт о товарах, которые выкупил Ozon для продажи в ЕАЭС и другие страны. Соответствует разделу **Финансы → Документы → УПД по сделкам с юр. лицами → УПД по выкупленным товарам** в личном кабинете.\n\n[Подробнее о продаже товаров в ЕАЭС и другие страны в Базе знаний](https://seller-edu.ozon.ru/commissions-tariffs/commissions-tariffs-ozon/prodaji-tovarov-v-eaes-i-drugie-strany?search=выкупленные+товары)\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отчёт о выкупленных товарах",
+        "description": "Возвращает отчёт о товарах, которые выкупил Ozon для продажи в ЕАЭС и другие страны. Соответствует разделу **Финансы → Документы → УПД по сделкам с юр. лицами → УПД по выкупленным товарам** в личном кабинете.\n\n[Подробнее о продаже товаров в ЕАЭС и другие страны в Базе знаний](https://seller-edu.ozon.ru/commissions-tariffs/commissions-tariffs-ozon/prodaji-tovarov-v-eaes-i-drugie-strany?search=выкупленные+товары)\n",
+        "operationId": "GetFinanceProductsBuyout",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetFinanceProductsBuyoutRequest"
+              },
+              "example": {
+                "date_from": "YYYY-MM-DD",
+                "date_to": "YYYY-MM-DD"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Отчёт по выкупленным товарам",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetFinanceProductsBuyoutResponse"
+                },
+                "example": {
+                  "products": [
+                    {
+                      "name": "Футболка Daniele Patrici",
+                      "offer_id": "y9604060-S",
+                      "sku": "985111329",
+                      "posting_number": "0208194185-0001-1",
+                      "seller_price_per_instance": 95,
+                      "deduction_by_category_percent": "3.13",
+                      "buyout_price": 92.3,
+                      "vat_percent": 20,
+                      "quantity": 1,
+                      "amount": 92.3
+                    },
+                    {
+                      "name": "Сабо T.TACCARDI",
+                      "offer_id": "W1496390-41",
+                      "sku": "1505091950",
+                      "posting_number": "84189625-0009-3",
+                      "seller_price_per_instance": 2086,
+                      "deduction_by_category_percent": "3.01",
+                      "buyout_price": 2023.3,
+                      "vat_percent": 20,
+                      "quantity": 1,
+                      "amount": 2023.3
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FinanceAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/finance/compensation",
+      "method": "POST",
+      "operationId": "ReportAPI_GetCompensationReport",
+      "summary": "Отчёт о компенсациях",
+      "description": "Метод для получения отчёта о компенсациях. Соответствует отчёту из раздела **Финансы → Документы → Компенсации и прочие начисления** в личном кабинете.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отчёт о компенсациях",
+        "description": "Метод для получения отчёта о компенсациях. Соответствует отчёту из раздела **Финансы → Документы → Компенсации и прочие начисления** в личном кабинете.\n",
+        "tags": [
+          "FinanceAPI"
+        ],
+        "operationId": "ReportAPI_GetCompensationReport",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetCompensationReportRequest"
+              },
+              "example": {
+                "date": "2023-09",
+                "language": "RU"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Отчёт о компенсациях",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateReportResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/finance/decompensation",
+      "method": "POST",
+      "operationId": "ReportAPI_GetDecompensationReport",
+      "summary": "Отчёт о декомпенсациях",
+      "description": "Метод для получения отчёта о декомпенсациях. Соответствует отчёту из раздела **Финансы → Документы → Компенсации и прочие начисления** в личном кабинете.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отчёт о декомпенсациях",
+        "description": "Метод для получения отчёта о декомпенсациях. Соответствует отчёту из раздела **Финансы → Документы → Компенсации и прочие начисления** в личном кабинете.\n",
+        "tags": [
+          "FinanceAPI"
+        ],
+        "operationId": "ReportAPI_GetDecompensationReport",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetDecompensationReportRequest"
+              },
+              "example": {
+                "date": "2023-09",
+                "language": "RU"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Отчёт о декомпенсациях",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateReportResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "v2GetRealizationReportRequestV2": {
+      "required": [
+        "month",
+        "year"
+      ],
+      "type": "object",
+      "properties": {
+        "month": {
+          "description": "Месяц.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "year": {
+          "description": "Год.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v2GetRealizationReportResponseV2": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/GetRealizationReportResponseV2Result"
+        }
+      }
+    },
+    "GetRealizationReportResponseV2Result": {
+      "properties": {
+        "header": {
+          "$ref": "#/components/schemas/GetRealizationReportResponseV2Header"
+        },
+        "rows": {
+          "description": "Таблица отчёта.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/GetRealizationReportResponseV2Row"
+          }
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса."
+    },
+    "GetRealizationReportResponseV2Header": {
+      "properties": {
+        "contract_date": {
+          "type": "string",
+          "description": "Дата заключения договора."
+        },
+        "contract_number": {
+          "type": "string",
+          "description": "Номер договора."
+        },
+        "currency_sys_name": {
+          "type": "string",
+          "description": "Валюта."
+        },
+        "doc_amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Всего к начислению."
+        },
+        "doc_date": {
+          "type": "string",
+          "description": "Дата формирования документа."
+        },
+        "number": {
+          "type": "string",
+          "description": "Номер отчёта о реализации."
+        },
+        "payer_inn": {
+          "type": "string",
+          "description": "ИНН плательщика."
+        },
+        "payer_kpp": {
+          "type": "string",
+          "description": "КПП плательщика."
+        },
+        "payer_name": {
+          "type": "string",
+          "description": "Название плательщика."
+        },
+        "receiver_inn": {
+          "type": "string",
+          "description": "ИНН получателя."
+        },
+        "receiver_kpp": {
+          "type": "string",
+          "description": "КПП получателя."
+        },
+        "receiver_name": {
+          "type": "string",
+          "description": "Название получателя."
+        },
+        "start_date": {
+          "type": "string",
+          "description": "Начало периода."
+        },
+        "stop_date": {
+          "type": "string",
+          "description": "Конец периода."
+        },
+        "vat_amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма НДС в составе начислений."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Титульный лист отчёта."
+    },
+    "GetRealizationReportResponseV2Row": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "commission_ratio": {
+          "type": "number",
+          "format": "double",
+          "description": "Доля комиссии за продажу по категории."
+        },
+        "delivery_commission": {
+          "$ref": "#/components/schemas/RowItemCommission"
+        },
+        "item": {
+          "$ref": "#/components/schemas/RowItem"
+        },
+        "return_commission": {
+          "$ref": "#/components/schemas/RowItemCommissionReturn"
+        },
+        "rowNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Номер строки в отчёте."
+        },
+        "seller_price_per_instance": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена продавца с учётом скидки."
+        }
+      }
+    },
+    "RowItemCommission": {
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма."
+        },
+        "bonus": {
+          "type": "number",
+          "format": "double",
+          "description": "Баллы за скидки."
+        },
+        "commission": {
+          "type": "number",
+          "format": "double",
+          "description": "Итого комиссия с учётом скидок и наценки."
+        },
+        "compensation": {
+          "type": "number",
+          "format": "double",
+          "description": "Доплата за счёт Ozon."
+        },
+        "price_per_instance": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена за экземпляр."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товара."
+        },
+        "standard_fee": {
+          "type": "number",
+          "format": "double",
+          "description": "Базовое вознаграждение Ozon."
+        },
+        "bank_coinvestment": {
+          "type": "number",
+          "format": "double",
+          "description": "Выплаты по механикам лояльности партнёров: зелёные цены."
+        },
+        "stars": {
+          "type": "number",
+          "format": "double",
+          "description": "Выплаты по механикам лояльности партнёров: звёзды."
+        },
+        "pick_up_point_coinvestment": {
+          "type": "number",
+          "format": "double",
+          "description": "Выплаты по механикам лояльности партнёров: АПВЗ."
+        },
+        "total": {
+          "type": "number",
+          "format": "double",
+          "description": "Итого к начислению."
+        }
+      },
+      "description": "Комиссия за доставку.",
+      "type": "object",
+      "title": "object"
+    },
+    "RowItem": {
+      "properties": {
+        "barcode": {
+          "type": "string",
+          "description": "Штрихкод товара."
+        },
+        "name": {
+          "type": "string",
+          "description": "Наименование товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Информация о товаре."
+    },
+    "RowItemCommissionReturn": {
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма."
+        },
+        "bonus": {
+          "type": "number",
+          "format": "double",
+          "description": "Баллы за скидки."
+        },
+        "commission": {
+          "type": "number",
+          "format": "double",
+          "description": "Итого комиссия с учётом скидок и наценки."
+        },
+        "compensation": {
+          "type": "number",
+          "format": "double",
+          "description": "Доплата за счёт Ozon."
+        },
+        "price_per_instance": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена за экземпляр."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товара."
+        },
+        "standard_fee": {
+          "type": "number",
+          "format": "double",
+          "description": "Базовое вознаграждение Ozon."
+        },
+        "bank_coinvestment": {
+          "type": "number",
+          "format": "double",
+          "description": "Выплаты по механикам лояльности партнёров: зелёные цены."
+        },
+        "stars": {
+          "type": "number",
+          "format": "double",
+          "description": "Выплаты по механикам лояльности партнёров: звёзды."
+        },
+        "pick_up_point_coinvestment": {
+          "type": "number",
+          "format": "double",
+          "description": "Выплаты по механикам лояльности партнёров: АПВЗ."
+        },
+        "total": {
+          "type": "number",
+          "format": "double",
+          "description": "Итого к начислению."
+        }
+      },
+      "description": "Комиссия за возврат товара.",
+      "type": "object",
+      "title": "object"
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v1GetRealizationReportPostingRequest": {
+      "required": [
+        "month",
+        "year"
+      ],
+      "type": "object",
+      "properties": {
+        "month": {
+          "description": "Месяц.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "year": {
+          "description": "Год.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1GetRealizationReportPostingResponse": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса.",
+      "properties": {
+        "header": {
+          "$ref": "#/components/schemas/GetRealizationReportResponseV2Header"
+        },
+        "rows": {
+          "description": "Таблица отчёта.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1GetRealizationReportPostingResponseRow"
+          }
+        }
+      }
+    },
+    "v1GetRealizationReportPostingResponseRow": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "commission_ratio": {
+          "type": "number",
+          "format": "double",
+          "description": "Доля комиссии за продажу по категории."
+        },
+        "delivery_commission": {
+          "$ref": "#/components/schemas/RowItemCommission"
+        },
+        "item": {
+          "$ref": "#/components/schemas/RowItem"
+        },
+        "return_commission": {
+          "$ref": "#/components/schemas/RowItemCommissionReturn"
+        },
+        "row_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Номер строки в отчёте."
+        },
+        "seller_price_per_instance": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена продавца с учётом скидки."
+        },
+        "order": {
+          "$ref": "#/components/schemas/RowItemOrder"
+        },
+        "legal_entity_document": {
+          "$ref": "#/components/schemas/RowItemLegalEntityDocument"
+        }
+      }
+    },
+    "RowItemOrder": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация о заказе.",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "created_date": {
+          "type": "string",
+          "description": "Дата заказа в формате «ГГГГ-ММ-ДД»."
+        }
+      }
+    },
+    "RowItemLegalEntityDocument": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация о продаже юридическому лицу.",
+      "properties": {
+        "number": {
+          "type": "string",
+          "description": "Номер счёта-фактуры."
+        },
+        "sale_date": {
+          "type": "string",
+          "description": "Дата в формате «ГГГГ-ММ-ДД»."
+        }
+      }
+    },
+    "financev3FinanceTransactionListV3Request": {
+      "required": [
+        "page",
+        "page_size"
+      ],
+      "properties": {
+        "filter": {
+          "$ref": "#/components/schemas/FinanceTransactionListV3RequestFilter"
+        },
+        "page": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Номер страницы, возвращаемой в запросе."
+        },
+        "page_size": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество элементов на странице."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "FinanceTransactionListV3RequestFilter": {
+      "oneOf": [
+        {
+          "title": "posting_number",
+          "required": [
+            "posting_number"
+          ]
+        },
+        {
+          "title": "date",
+          "required": [
+            "date"
+          ]
+        }
+      ],
+      "properties": {
+        "date": {
+          "$ref": "#/components/schemas/FilterPeriod"
+        },
+        "operation_type": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Тип операции:\n  - `ClientReturnAgentOperation` — получение возврата, отмены, невыкупа от покупателя;\n  - `MarketplaceMarketingActionCostOperation` — услуги продвижения товаров;\n  - `MarketplaceSaleReviewsOperation` — приобретение отзывов на платформе;\n  - `MarketplaceSellerCompensationOperation` — прочие компенсации;\n  - `OperationAgentDeliveredToCustomer` — доставка покупателю;\n  - `OperationAgentDeliveredToCustomerCanceled` — доставка покупателю — исправленное начисление;\n  - `OperationAgentStornoDeliveredToCustomer` — доставка покупателю — отмена начисления;\n  - `OperationClaim` — начисление по претензии;\n  - `OperationCorrectionSeller` — инвентаризация взаиморасчетов;\n  - `OperationDefectiveWriteOff` — компенсация за повреждённый на складе товар;\n  - `OperationItemReturn` — доставка и обработка возврата, отмены, невыкупа;\n  - `OperationLackWriteOff` — компенсация за утерянный на складе товар;\n  - `OperationMarketplaceCrossDockServiceWriteOff` — доставка товаров на склад Ozon (кросс-докинг);\n  - `OperationMarketplaceServiceStorage` — услуга размещения товаров на складе;\n  - `OperationSetOff` — взаимозачёт с другими договорами контрагента;\n  - `MarketplaceSellerReexposureDeliveryReturnOperation` — перечисление за доставку от покупателя;\n  - `OperationReturnGoodsFBSofRMS` — доставка и обработка возврата, отмены, невыкупа;\n  - `ReturnAgentOperationRFBS` — возврат перечисления за доставку покупателю;\n  - `ItemAgentServiceStarsMembership` — вознаграждение за услугу [«Звёздные товары»](https://s.ozon.ru/e7NlR6b);\n  - `MarketplaceSellerShippingCompensationReturnOperation` — компенсация перечисления за доставку;\n  - `OperationMarketplaceServicePremiumCashback` — услуга продвижения Premium;\n  - `MarketplaceServicePremiumPromotion` — услуга продвижения Premium, фиксированная комиссия;\n  - `MarketplaceRedistributionOfAcquiringOperation` — оплата эквайринга;\n  - `MarketplaceReturnStorageServiceAtThePickupPointFbsItem` — краткосрочное размещение возврата FBS;\n  - `MarketplaceReturnStorageServiceInTheWarehouseFbsItem` — долгосрочное размещение возврата FBS;\n  - `MarketplaceServiceItemDeliveryKGT` — доставка КГТ;\n  - `MarketplaceServiceItemDirectFlowLogistic` — логистика;\n  - `MarketplaceServiceItemReturnFlowLogistic` — обратная логистика;\n  - `MarketplaceServicePremiumCashbackIndividualPoints` — услуга продвижения «Бонусы продавца»;\n  - `OperationMarketplaceWithHoldingForUndeliverableGoods` — удержание за недовложение товара;\n  - `MarketplaceServiceItemDirectFlowLogisticVDC` — логистика вРЦ;\n  - `MarketplaceServiceItemDropoffPPZ` — услуга drop-off в пункте приёма заказов;\n  - `MarketplaceServicePremiumCashback` — услуга продвижения Premium;\n  - `MarketplaceServiceItemRedistributionReturnsPVZ` — перевыставление возвратов на пункте выдачи;\n  - `OperationElectronicServiceStencil` — услуга «Трафареты»;\n  - `OperationElectronicServicesPromotionInSearch` — услуга «Продвижение в поиске»;\n  - `OperationMarketplaceServiceItemElectronicServicesBrandShelf` — услуга «Брендовая полка»;\n  - `OperationSubscriptionPremium` — подписка Premium.\n"
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "transaction_type": {
+          "type": "string",
+          "description": "Тип начисления:\n  - `all` — все,\n  - `orders` — заказы,\n  - `returns` — возвраты и отмены,\n  - `services` — сервисные сборы,\n  - `compensation` — компенсация,\n  - `transferDelivery` — стоимость доставки,\n  - `other` — прочее.\n\nНекоторые операции могут быть разделены во времени. Например, при приёме возврата от покупателя списывается стоимость товара и возвращается комиссия, а когда товар возвращается на склад, взимается стоимость услуга по обработке возврата.\n"
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр."
+    },
+    "FilterPeriod": {
+      "properties": {
+        "from": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Начало периода.\n\nФормат: `YYYY-MM-DDTHH:mm:ss.sssZ`.<br>\nПример: `2019-11-25T10:43:06.51`.\n"
+        },
+        "to": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Конец периода.\n\nФормат: `YYYY-MM-DDTHH:mm:ss.sssZ`.<br>\nПример: `2019-11-25T10:43:06.51`.\n"
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр по дате."
+    },
+    "financev3FinanceTransactionListV3Response": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/financev3FinanceTransactionListV3ResponseResult"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "financev3FinanceTransactionListV3ResponseResult": {
+      "properties": {
+        "operations": {
+          "items": {
+            "$ref": "#/components/schemas/FinanceTransactionListV3ResponseOperation"
+          },
+          "type": "array",
+          "description": "Информация об операциях."
+        },
+        "page_count": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество страниц. Если 0, страниц больше нет."
+        },
+        "row_count": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество транзакций на всех страницах. Если 0, транзакций больше нет."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результаты запроса."
+    },
+    "FinanceTransactionListV3ResponseOperation": {
+      "properties": {
+        "accruals_for_sale": {
+          "format": "double",
+          "type": "number",
+          "description": "Стоимость товаров с учётом скидок продавца."
+        },
+        "amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Итоговая сумма операции."
+        },
+        "delivery_charge": {
+          "format": "double",
+          "type": "number",
+          "description": "Стоимость доставки для начислений по тарифам, которые действовали до 1 февраля 2021 года, а также начислений для крупногабаритных товаров."
+        },
+        "items": {
+          "items": {
+            "$ref": "#/components/schemas/OperationItem"
+          },
+          "type": "array",
+          "description": "Информация о товаре."
+        },
+        "operation_date": {
+          "type": "string",
+          "description": "Дата операции."
+        },
+        "operation_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор операции."
+        },
+        "operation_type": {
+          "type": "string",
+          "description": "Тип операции."
+        },
+        "operation_type_name": {
+          "type": "string",
+          "description": "Название типа операции."
+        },
+        "posting": {
+          "$ref": "#/components/schemas/OperationPosting"
+        },
+        "return_delivery_charge": {
+          "format": "double",
+          "type": "number",
+          "description": "Плата за возвраты и отмены для начислений по тарифам, которые действовали до 1 февраля 2021 года, а также начислений для крупногабаритных товаров."
+        },
+        "sale_commission": {
+          "format": "double",
+          "type": "number",
+          "description": "Комиссия за продажу или возврат комиссии за продажу."
+        },
+        "services": {
+          "items": {
+            "$ref": "#/components/schemas/OperationService"
+          },
+          "type": "array",
+          "description": "Название услуги."
+        },
+        "type": {
+          "type": "string",
+          "description": "Тип начисления:\n- `all` — все,\n- `orders` — заказы,\n- `returns` — возвраты и отмены,\n- `services` — сервисные сборы,\n- `compensation` — компенсация,\n- `transferDelivery` — стоимость доставки,\n- `other` — прочее.\n"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "OperationItem": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "sku": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "OperationPosting": {
+      "properties": {
+        "delivery_schema": {
+          "type": "string",
+          "description": "Схема доставки:\n  - `FBO` — доставка со склада Ozon,\n  - `FBS` — доставка со своего склада,\n  - `CROSSBORDER` — доставка из-за рубежа,\n  - `RFBS` — доставка по выбору продавца,\n  - `FBP` — доставка с партнёрских складов Ozon,\n  - `FBOECONOMY` — доставка эконом-товаров со склада Ozon,\n  - `FBSECONOMY` — доставка эконом-товаров со своего склада.\n"
+        },
+        "order_date": {
+          "type": "string",
+          "description": "Дата принятия отправления в обработку."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "warehouse_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор склада."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Информация об отправлении."
+    },
+    "OperationService": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название услуги:\n  - `MarketplaceNotDeliveredCostItem` — возврат невостребованного товара от покупателя на склад.\n  - `MarketplaceReturnAfterDeliveryCostItem` — возврат от покупателя на склад после доставки.\n  - `MarketplaceDeliveryCostItem` — доставка товара до покупателя.\n  - `MarketplaceSaleReviewsItem` — приобретение отзывов на платформе.\n  - `ItemAdvertisementForSupplierLogistic` — доставка товаров на склад Ozon — кросс-докинг.\n  - `OperationMarketplaceServiceStorage` — размещения товаров.\n  - `MarketplaceMarketingActionCostItem` — продвижение товаров.\n  - `MarketplaceServiceItemInstallment` — продвижениe и продажа в рассрочку.\n  - `MarketplaceServiceItemMarkingItems` — обязательная маркировка товаров.\n  - `MarketplaceServiceItemFlexiblePaymentSchedule` — гибкий график выплат.\n  - `MarketplaceServiceItemReturnFromStock` — комплектация товаров для вывоза продавцом.\n  - `ItemAdvertisementForSupplierLogisticSeller` — транспортно-экспедиционные услуги.\n  - `ItemAgentServiceStarsMembership` — вознаграждение за услугу [«Звёздные товары»](https://s.ozon.ru/e7NlR6b).\n  - `MarketplaceServiceItemDelivToCustomer` — последняя миля.\n  - `MarketplaceServiceItemDirectFlowTrans` — магистраль.\n  - `MarketplaceServiceItemDropoffFF` — обработка отправления.\n  - `MarketplaceServiceItemDropoffPVZ` — обработка отправления.\n  - `MarketplaceServiceItemDropoffSC` — обработка отправления.\n  - `MarketplaceServiceItemFulfillment` — сборка заказа.\n  - `MarketplaceServiceItemPickup` — выезд транспортного средства по адресу продавца для забора отправлений — Pick-up.\n  - `MarketplaceServiceItemReturnAfterDelivToCustomer` — обработка возврата.\n  - `MarketplaceServiceItemReturnFlowTrans` — обратная магистраль.\n  - `MarketplaceServiceItemReturnNotDelivToCustomer` — обработка отмен.\n  - `MarketplaceServiceItemReturnPartGoodsCustomer` — обработка невыкупа.\n  - `MarketplaceRedistributionOfAcquiringOperation` — оплата эквайринга.\n  - `MarketplaceReturnStorageServiceAtThePickupPointFbsItem` — краткосрочное размещение возврата FBS.\n  - `MarketplaceReturnStorageServiceInTheWarehouseFbsItem` — долгосрочное размещение возврата FBS.\n  - `MarketplaceServiceItemDeliveryKGT` — доставка крупногабаритного товара (КГТ).\n  - `MarketplaceServiceItemDirectFlowLogistic` — логистика.\n  - `MarketplaceServiceItemReturnFlowLogistic` — обратная логистика.\n  - `MarketplaceServicePremiumCashbackIndividualPoints` — услуга продвижения «Бонусы продавца».\n  - `MarketplaceServicePremiumPromotion` — услуга продвижение Premium, фиксированная комиссия.\n  - `OperationMarketplaceWithHoldingForUndeliverableGoods` — удержание за недовложение товара.\n  - `MarketplaceServiceItemDropoffPPZ` — услуга drop-off в пункте приёма заказов.\n  - `MarketplaceServiceItemRedistributionReturnsPVZ` — перевыставление возвратов на ПВЗ.\n  - `OperationMarketplaceAgencyFeeAggregator3PLGlobal` — тарификация агентской услуги Agregator 3PL Global.\n  - `MarketplaceServiceItemDirectFlowLogisticVDC` — логистика вРЦ.\n"
+        },
+        "price": {
+          "format": "double",
+          "type": "number",
+          "description": "Цена."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "financev3FinanceTransactionTotalsV3Request": {
+      "oneOf": [
+        {
+          "title": "posting_number",
+          "required": [
+            "posting_number"
+          ]
+        },
+        {
+          "title": "date",
+          "required": [
+            "date"
+          ]
+        }
+      ],
+      "properties": {
+        "date": {
+          "$ref": "#/components/schemas/FinanceTransactionTotalsV3RequestDate"
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "transaction_type": {
+          "type": "string",
+          "description": "Тип операции:\n - `all` — все,\n - `orders` — заказы,\n - `returns` — возвраты и отмены,\n - `services` — сервисные сборы,\n - `compensation` — компенсация,\n - `transferDelivery` — стоимость доставки,\n - `other` — прочее.\n"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "FinanceTransactionTotalsV3RequestDate": {
+      "properties": {
+        "from": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Начало периода.\n\nФормат: `YYYY-MM-DDTHH:mm:ss.sssZ`.<br>\nПример: `2019-11-25T10:43:06.51`.\n"
+        },
+        "to": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Конец периода.\n\nФормат: `YYYY-MM-DDTHH:mm:ss.sssZ`.<br>\nПример: `2019-11-25T10:43:06.51`.\n"
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр по дате."
+    },
+    "financev3FinanceTransactionTotalsV3Response": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/financev3FinanceTransactionTotalsV3ResponseResult"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "financev3FinanceTransactionTotalsV3ResponseResult": {
+      "properties": {
+        "accruals_for_sale": {
+          "format": "double",
+          "type": "number",
+          "description": "Общая стоимость товаров и возвратов в заданный период."
+        },
+        "compensation_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Компенсации."
+        },
+        "money_transfer": {
+          "format": "double",
+          "type": "number",
+          "description": "Начисления за доставку и возвраты при работе по схеме «Доставка по выбору продавца»."
+        },
+        "others_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Прочие начисления."
+        },
+        "processing_and_delivery": {
+          "format": "double",
+          "type": "number",
+          "description": "Стоимость услуг обработки отправлений, сборки заказов, магистрали и последней мили, а также доставки до введения новых комиссий и тарифов с 1 февраля 2021 года.\n\nМагистраль — доставка товаров между кластерами.\n\nПоследняя миля — доставка товаров покупателю в пункт выдачи заказов, постамат или курьером.\n"
+        },
+        "refunds_and_cancellations": {
+          "format": "double",
+          "type": "number",
+          "description": "Стоимость обратной магистрали, обработки возвратов, отмен и невыкупа товара, а также возвратов до введения новых комиссий и тарифов с 1 февраля 2021 года.\n\nМагистраль — доставка товаров между кластерами.\n\nПоследняя миля — доставка товаров покупателю в пункт выдачи заказов, постамат или курьером.\n"
+        },
+        "sale_commission": {
+          "format": "double",
+          "type": "number",
+          "description": "Сумма комиссии, которая была удержана при продаже товара и возвращена при его возврате."
+        },
+        "services_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Стоимость дополнительных услуг, не связанных напрямую с доставками и возвратами товаров. Например, продвижения или размещения товаров."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результаты запроса."
+    },
+    "v1CreateDocumentB2BSalesReportRequest": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Отчётный период в формате `YYYY-MM`."
+        },
+        "language": {
+          "$ref": "#/components/schemas/commonLanguage"
+        }
+      }
+    },
+    "commonLanguage": {
+      "default": "DEFAULT",
+      "enum": null,
+      "title": "Language",
+      "type": "string",
+      "description": "Язык ответа:\n  - `RU` — русский,\n  - `EN` — английский.\n"
+    },
+    "commonCreateReportResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/CreateReportResponseCode"
+        }
+      }
+    },
+    "CreateReportResponseCode": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Уникальный идентификатор отчёта. По нему вы можете получить отчёт в течение 3 дней после запроса. Чтобы получить отчёт, передайте это значение в метод [/v1/report/info](#operation/ReportAPI_ReportInfo)."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результаты запроса."
+    },
+    "v1CreateDocumentB2BSalesJSONReportRequest": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Отчётный период в формате `YYYY-MM`. Отчёт доступен до января 2019 включительно."
+        }
+      }
+    },
+    "v1CreateDocumentB2BSalesJSONReportResponse": {
+      "type": "object",
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "description": "Дата начала отчётного периода в формате `YYYY-MM-DD`."
+        },
+        "date_to": {
+          "type": "string",
+          "description": "Дата окончания отчётного периода в формате `YYYY-MM-DD`."
+        },
+        "invoices": {
+          "type": "array",
+          "description": "Список счетов-фактур.",
+          "items": {
+            "$ref": "#/components/schemas/CreateDocumentB2BSalesJSONReportResponseLegalSaleInvoice"
+          }
+        },
+        "seller_info": {
+          "$ref": "#/components/schemas/CreateDocumentB2BSalesJSONReportResponseSellerInfo"
+        }
+      }
+    },
+    "CreateDocumentB2BSalesJSONReportResponseLegalSaleInvoice": {
+      "type": "object",
+      "properties": {
+        "buyer_info": {
+          "$ref": "#/components/schemas/CreateDocumentB2BSalesJSONReportResponseBuyer"
+        },
+        "currency": {
+          "type": "string",
+          "description": "Валюта."
+        },
+        "currency_code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код валюты."
+        },
+        "info": {
+          "description": "Информация о счёте-фактуре.",
+          "$ref": "#/components/schemas/CreateDocumentB2BSalesJSONReportResponseInvoiceInfo"
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "operations": {
+          "type": "array",
+          "description": "Список операций.",
+          "items": {
+            "$ref": "#/components/schemas/CreateDocumentB2BSalesJSONReportResponseLegalSaleOperation"
+          }
+        },
+        "product_name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "unit_code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код условного обозначения."
+        },
+        "unit_name": {
+          "type": "string",
+          "description": "Условное обозначение."
+        }
+      }
+    },
+    "CreateDocumentB2BSalesJSONReportResponseBuyer": {
+      "type": "object",
+      "description": "Информация о покупателе.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название компании."
+        },
+        "address": {
+          "type": "string",
+          "description": "Юридический адрес."
+        },
+        "inn": {
+          "type": "string",
+          "description": "ИНН."
+        },
+        "kpp": {
+          "type": "string",
+          "description": "КПП."
+        }
+      }
+    },
+    "CreateDocumentB2BSalesJSONReportResponseInvoiceInfo": {
+      "type": "object",
+      "description": "Информация о счёте-фактуре.",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Дата счёта-фактуры продавца в формате `YYYY-MM-DD`."
+        },
+        "number": {
+          "type": "string",
+          "description": "Номер счёта-фактуры продавца."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус УКД или УПД."
+        },
+        "type": {
+          "$ref": "#/components/schemas/CreateDocumentB2BSalesJSONReportResponseInvoiceInfoType"
+        }
+      }
+    },
+    "CreateDocumentB2BSalesJSONReportResponseInvoiceInfoType": {
+      "type": "string",
+      "enum": [
+        "UPD",
+        "UKD"
+      ],
+      "description": "Тип документа:\n- `UPD` - УПД;\n- `UKD` - УКД.\n"
+    },
+    "CreateDocumentB2BSalesJSONReportResponseLegalSaleOperation": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма реализации или возврата."
+        },
+        "cost_without_vat": {
+          "type": "number",
+          "format": "double",
+          "description": "Стоимость товара без НДС."
+        },
+        "date": {
+          "type": "string",
+          "description": "Дата операции в формате `YYYY-MM-DD`."
+        },
+        "gtd_number": {
+          "type": "string",
+          "description": "Номер ГТД."
+        },
+        "origin_country": {
+          "type": "string",
+          "description": "Страна происхождения товара."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена реализации или возврата в рублях."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товаров."
+        },
+        "rnpt_number": {
+          "type": "string",
+          "description": "РНПТ."
+        },
+        "type": {
+          "$ref": "#/components/schemas/CreateDocumentB2BSalesJSONReportResponseLegalSaleOperationType"
+        },
+        "vat_amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма НДС, которая взимается с покупателя."
+        },
+        "vat_rate": {
+          "type": "number",
+          "format": "double",
+          "description": "Ставка НДС."
+        }
+      }
+    },
+    "CreateDocumentB2BSalesJSONReportResponseLegalSaleOperationType": {
+      "type": "string",
+      "enum": [
+        "DELIVERY",
+        "RETURN"
+      ],
+      "description": "Тип операции:\n- `DELIVERY` — отправление,\n- `RETURN` — возврат.\n"
+    },
+    "CreateDocumentB2BSalesJSONReportResponseSellerInfo": {
+      "type": "object",
+      "description": "Информация о продавце.",
+      "properties": {
+        "company_name": {
+          "type": "string",
+          "description": "Название компании."
+        },
+        "inn": {
+          "type": "string",
+          "description": "ИНН."
+        },
+        "kpp": {
+          "type": "string",
+          "description": "КПП."
+        }
+      }
+    },
+    "v1CreateMutualSettlementReportRequest": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Отчётный период в формате `YYYY-MM`."
+        },
+        "language": {
+          "$ref": "#/components/schemas/commonLanguage"
+        }
+      }
+    },
+    "v1GetRealizationReportByDayRequest": {
+      "required": [
+        "day",
+        "month",
+        "year"
+      ],
+      "type": "object",
+      "properties": {
+        "day": {
+          "description": "День.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "month": {
+          "description": "Месяц.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "year": {
+          "description": "Год.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "GetRealizationReportByDayResponse": {
+      "properties": {
+        "rows": {
+          "description": "Таблица отчёта.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/GetRealizationReportByDayResponseRow"
+          }
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса."
+    },
+    "GetRealizationReportByDayResponseRow": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "commission_ratio": {
+          "type": "number",
+          "format": "double",
+          "description": "Доля комиссии за продажу по категории."
+        },
+        "delivery_commission": {
+          "$ref": "#/components/schemas/RowItemCommission"
+        },
+        "item": {
+          "$ref": "#/components/schemas/RowItem"
+        },
+        "return_commission": {
+          "$ref": "#/components/schemas/RowItemCommissionReturn"
+        },
+        "rowNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Номер строки в отчёте."
+        },
+        "seller_price_per_instance": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена продавца с учётом скидки."
+        }
+      }
+    },
+    "v1GetFinanceProductsBuyoutRequest": {
+      "type": "object",
+      "required": [
+        "date_from",
+        "date_to"
+      ],
+      "properties": {
+        "date_from": {
+          "description": "Дата, с которой будут данные в отчёте.",
+          "type": "string"
+        },
+        "date_to": {
+          "description": "Дата, по которую будут данные в отчёте.\n\nМаксимальный период — 31 день.\n",
+          "type": "string"
+        }
+      }
+    },
+    "v1GetFinanceProductsBuyoutResponse": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "description": "Список выкупленных товаров",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/GetFinanceProductsBuyoutResponseProduct"
+          }
+        }
+      }
+    },
+    "GetFinanceProductsBuyoutResponseProduct": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "float",
+          "description": "Сумма к начислению."
+        },
+        "buyout_price": {
+          "type": "number",
+          "format": "float",
+          "description": "Цена выкупа товара с НДС."
+        },
+        "deduction_by_category_percent": {
+          "type": "number",
+          "format": "float",
+          "description": "Скидка по категории в процентах."
+        },
+        "name": {
+          "description": "Название товара.",
+          "type": "string"
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товара."
+        },
+        "seller_price_per_instance": {
+          "type": "number",
+          "format": "float",
+          "description": "Цена продавца с учётом скидки."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "vat_percent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Ставка НДС для товара в процентах."
+        }
+      }
+    },
+    "v1GetCompensationReportRequest": {
+      "required": [
+        "date"
+      ],
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Отчётный период в формате `YYYY-MM`."
+        },
+        "language": {
+          "$ref": "#/components/schemas/compensationReportLanguage"
+        }
+      }
+    },
+    "compensationReportLanguage": {
+      "default": "RU",
+      "enum": null,
+      "title": "Language",
+      "type": "string",
+      "description": "Язык отчёта:\n  - `RU` — русский,\n  - `EN` — английский.\n"
+    },
+    "CreateReportResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/CreateReportResponseCodeNoDeadline"
+        }
+      }
+    },
+    "CreateReportResponseCodeNoDeadline": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Уникальный идентификатор отчёта. Чтобы получить отчёт, передайте это значение в метод [/v1/report/info](#operation/ReportAPI_ReportInfo)."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса."
+    },
+    "v1GetDecompensationReportRequest": {
+      "required": [
+        "date"
+      ],
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Отчётный период в формате `YYYY-MM`."
+        },
+        "language": {
+          "$ref": "#/components/schemas/compensationReportLanguage"
+        }
+      }
+    }
+  }
+}

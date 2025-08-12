@@ -1,0 +1,1202 @@
+{
+  "metadata": {
+    "tag": "DeliveryrFBS",
+    "name": "DeliveryrFBS",
+    "displayName": "Доставка rFBS",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 8,
+    "schemasCount": 20,
+    "generatedAt": "2025-08-09T16:28:42.338Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v2/fbs/posting/tracking-number/set",
+      "method": "POST",
+      "operationId": "PostingAPI_FbsPostingTrackingNumberSet",
+      "summary": "Добавить трек-номера",
+      "description": "Добавить трек-номера к отправлениям. Вы можете передать до 20 трек-номеров за раз.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryrFBS"
+        ],
+        "summary": "Добавить трек-номера",
+        "description": "Добавить трек-номера к отправлениям. Вы можете передать до 20 трек-номеров за раз.",
+        "operationId": "PostingAPI_FbsPostingTrackingNumberSet",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingFbsPostingTrackingNumberSetRequest"
+              },
+              "example": {
+                "tracking_numbers": [
+                  {
+                    "posting_number": "48173252-0033-2",
+                    "tracking_number": "123123123"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Трек-номер добавлен",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingFbsPostingMoveStatusResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "error": "",
+                      "posting_number": "48173252-0033-2",
+                      "result": true
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/fbs/posting/sent-by-seller",
+      "method": "POST",
+      "operationId": "PostingAPI_FbsPostingSentbyseller",
+      "summary": "Изменить статус на «Отправлено продавцом»",
+      "description": "Перевести отправление в статус «Отправлено продавцом». Статус доступен только продавцам с первой милей, продающим из-за рубежа.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryrFBS"
+        ],
+        "summary": "Изменить статус на «Отправлено продавцом»",
+        "description": "Перевести отправление в статус «Отправлено продавцом». Статус доступен только продавцам с первой милей, продающим из-за рубежа.",
+        "operationId": "PostingAPI_FbsPostingSentbyseller",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingFbsPostingSentbysellerRequest"
+              },
+              "example": {
+                "posting_number": [
+                  "47173252-0073-1"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус изменён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingFbsPostingSentbysellerResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "error": null,
+                      "posting_number": "47173252-0073-1",
+                      "result": true
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/fbs/posting/delivering",
+      "method": "POST",
+      "operationId": "PostingAPI_FbsPostingDelivering",
+      "summary": "Изменить статус на «Доставляется»",
+      "description": "Перевести отправление в статус «Доставляется», если используется сторонняя служба доставки.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryrFBS"
+        ],
+        "summary": "Изменить статус на «Доставляется»",
+        "description": "Перевести отправление в статус «Доставляется», если используется сторонняя служба доставки.",
+        "operationId": "PostingAPI_FbsPostingDelivering",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingFbsPostingDeliveringRequest"
+              },
+              "example": {
+                "posting_number": [
+                  "33920157-0018-1"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус изменён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingFbsPostingMoveStatusResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "error": [],
+                      "posting_number": "33920157-0018-1",
+                      "result": true
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/fbs/posting/last-mile",
+      "method": "POST",
+      "operationId": "PostingAPI_FbsPostingLastMile",
+      "summary": "Изменить статус на «Последняя миля»",
+      "description": "Перевести отправление в статус «Последняя миля», если используется сторонняя служба доставки.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryrFBS"
+        ],
+        "summary": "Изменить статус на «Последняя миля»",
+        "description": "Перевести отправление в статус «Последняя миля», если используется сторонняя служба доставки.",
+        "operationId": "PostingAPI_FbsPostingLastMile",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingFbsPostingLastMileRequest"
+              },
+              "example": {
+                "posting_number": [
+                  "48173252-0033-2"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус изменён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingFbsPostingMoveStatusResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "error": [],
+                      "posting_number": "48173252-0033-2",
+                      "result": true
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/fbs/posting/delivered",
+      "method": "POST",
+      "operationId": "PostingAPI_FbsPostingDelivered",
+      "summary": "Изменить статус на «Доставлено»",
+      "description": "Перевести отправление в статус «Доставлено», если используется сторонняя служба доставки.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryrFBS"
+        ],
+        "summary": "Изменить статус на «Доставлено»",
+        "description": "Перевести отправление в статус «Доставлено», если используется сторонняя служба доставки.",
+        "operationId": "PostingAPI_FbsPostingDelivered",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingFbsPostingDeliveredRequest"
+              },
+              "example": {
+                "posting_number": [
+                  "48173252-0033-2"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус изменён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingFbsPostingMoveStatusResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "error": [],
+                      "posting_number": "48173252-0033-2",
+                      "result": true
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/posting/fbs/timeslot/change-restrictions",
+      "method": "POST",
+      "operationId": "PostingAPI_PostingTimeslotChangeRestrictions",
+      "summary": "Доступные даты для переноса доставки",
+      "description": "Метод для получения доступных дат для переноса доставки и количества доступных переносов.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryrFBS"
+        ],
+        "summary": "Доступные даты для переноса доставки",
+        "description": "Метод для получения доступных дат для переноса доставки и количества доступных переносов.\n",
+        "operationId": "PostingAPI_PostingTimeslotChangeRestrictions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1PostingFbsTimeslotChangeRestrictionsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Доступные даты и количество",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1PostingFbsTimeslotChangeRestrictionsResponse"
+                },
+                "example": {
+                  "delivery_interval": {
+                    "begin": "2023-03-27T08:43:05.658Z",
+                    "end": "2023-03-27T08:43:05.658Z"
+                  },
+                  "remaining_changes_count": 0
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/posting/fbs/timeslot/set",
+      "method": "POST",
+      "operationId": "PostingAPI_SetPostingTimeslot",
+      "summary": "Перенести дату доставки",
+      "description": "Вы можете изменить дату доставки отправления не больше двух раз.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryrFBS"
+        ],
+        "summary": "Перенести дату доставки",
+        "description": "Вы можете изменить дату доставки отправления не больше двух раз.\n",
+        "operationId": "PostingAPI_SetPostingTimeslot",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1PostingFbsTimeslotSetRequest"
+              },
+              "example": {
+                "new_timeslot": {
+                  "from": "2023-03-25T08:51:56.932Z",
+                  "to": "2023-03-25T08:51:56.932Z"
+                },
+                "posting_number": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Результат запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1PostingFbsTimeslotSetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/posting/cutoff/set",
+      "method": "POST",
+      "operationId": "PostingAPI_SetPostingCutoff",
+      "summary": "Уточнить дату отгрузки отправления",
+      "description": "Метод для отправлений, которые доставляет продавец или неинтегрированный перевозчик.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "DeliveryrFBS"
+        ],
+        "summary": "Уточнить дату отгрузки отправления",
+        "description": "Метод для отправлений, которые доставляет продавец или неинтегрированный перевозчик.\n",
+        "operationId": "PostingAPI_SetPostingCutoff",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1SetPostingCutoffRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Результат уточнения даты",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1SetPostingCutoffResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "postingFbsPostingTrackingNumberSetRequest": {
+      "required": [
+        "tracking_numbers"
+      ],
+      "properties": {
+        "tracking_numbers": {
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingTrackingNumberSetRequestTrackingNumber"
+          },
+          "type": "array",
+          "description": "Массив с парами идентификатор отправления — трек-номер."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "FbsPostingTrackingNumberSetRequestTrackingNumber": {
+      "required": [
+        "posting_number",
+        "tracking_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Идентификатор отправления."
+        },
+        "tracking_number": {
+          "type": "string",
+          "description": "Трек-номер отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingFbsPostingMoveStatusResponse": {
+      "properties": {
+        "result": {
+          "description": "Результат работы метода.",
+          "items": {
+            "$ref": "#/components/schemas/FbsPostingMoveStatusResponseMoveStatus"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "FbsPostingMoveStatusResponseMoveStatus": {
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Ошибка при обработке запроса."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "result": {
+          "type": "boolean",
+          "description": "Если запрос выполнен без ошибок — `true`."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "postingFbsPostingSentbysellerRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Список идентификаторов отправлений."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingFbsPostingSentbysellerResponse": {
+      "properties": {
+        "result": {
+          "description": "Результат работы метода.",
+          "items": {
+            "$ref": "#/components/schemas/postingFbsPostingSentbysellerResponseItem"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingFbsPostingSentbysellerResponseItem": {
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Ошибка."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Идентификатор отправления."
+        },
+        "result": {
+          "type": "boolean"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingFbsPostingDeliveringRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Идентификатор отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingFbsPostingLastMileRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Идентификатор отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingFbsPostingDeliveredRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Идентификатор отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v1PostingFbsTimeslotChangeRestrictionsRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    },
+    "v1PostingFbsTimeslotChangeRestrictionsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "delivery_interval": {
+          "$ref": "#/components/schemas/v1PostingFbsTimeslotChangeRestrictionsDeliveryInterval"
+        },
+        "remaining_changes_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество оставшихся переносов."
+        }
+      }
+    },
+    "v1PostingFbsTimeslotChangeRestrictionsDeliveryInterval": {
+      "type": "object",
+      "title": "object",
+      "description": "Период дат, доступных для переноса.",
+      "properties": {
+        "begin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата начала периода.\n\nФормат: `YYYY-MM-DDTHH:mm:ss.sssZ`.\n"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата конца периода.\n\nФормат: `YYYY-MM-DDTHH:mm:ss.sssZ`.\n"
+        }
+      }
+    },
+    "v1PostingFbsTimeslotSetRequest": {
+      "required": [
+        "new_timeslot",
+        "posting_number"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "new_timeslot": {
+          "$ref": "#/components/schemas/v1PostingFbsTimeslotSetNewTimeslot"
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      }
+    },
+    "v1PostingFbsTimeslotSetNewTimeslot": {
+      "required": [
+        "from",
+        "to"
+      ],
+      "type": "object",
+      "title": "object",
+      "description": "Новый период для даты доставки.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата начала периода.\n\nФормат: `YYYY-MM-DDTHH:mm:ss.sssZ`.\n"
+        },
+        "to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата конца периода.\n\nФормат: `YYYY-MM-DDTHH:mm:ss.sssZ`.\n"
+        }
+      }
+    },
+    "v1PostingFbsTimeslotSetResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "boolean",
+          "description": "`true`, если дата изменена.\n"
+        }
+      }
+    },
+    "v1SetPostingCutoffRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "new_cutoff_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Новая дата отгрузки."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      },
+      "required": [
+        "new_cutoff_date",
+        "posting_number"
+      ]
+    },
+    "v1SetPostingCutoffResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "boolean",
+          "description": "`true`, если установлена новая дата.\n"
+        }
+      }
+    }
+  }
+}

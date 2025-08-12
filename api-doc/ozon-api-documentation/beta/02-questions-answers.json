@@ -1,0 +1,920 @@
+{
+  "metadata": {
+    "tag": "Questions&Answers",
+    "name": "Questions&Answers",
+    "displayName": "Работа с вопросами и ответами",
+    "description": "",
+    "externalDocs": null,
+    "directory": "beta",
+    "groupInfo": {
+      "groupName": "Бета-методы Seller API",
+      "groupIndex": 2,
+      "dataSelector": null
+    },
+    "endpointsCount": 8,
+    "schemasCount": 17,
+    "generatedAt": "2025-08-09T16:28:42.344Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/question/answer/create",
+      "method": "POST",
+      "operationId": "QuestionAnswer_Create",
+      "summary": "Создать ответ на вопрос",
+      "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Questions&Answers"
+        ],
+        "summary": "Создать ответ на вопрос",
+        "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+        "operationId": "QuestionAnswer_Create",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1QuestionAnswerCreateRequest"
+              },
+              "example": {
+                "average_delivery_time": 54,
+                "perfect_delivery_time": 40,
+                "current_tariff": {
+                  "start": 52,
+                  "tariff_status": "GOOD",
+                  "tariff_value": 77.4,
+                  "fee": 3.87
+                },
+                "updated_at": "0001-01-01T00:00:00Z",
+                "lost_profit": 40513
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Идентификатор ответа на вопрос",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1QuestionAnswerCreateResponse"
+                },
+                "example": {
+                  "answer_id": "0192e7ce-e12c-7a74-afc7-26e877799204"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1QuestionAnswerCreateDefault"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/question/answer/delete",
+      "method": "POST",
+      "operationId": "QuestionAnswer_Delete",
+      "summary": "Удалить ответ на вопрос",
+      "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Questions&Answers"
+        ],
+        "summary": "Удалить ответ на вопрос",
+        "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+        "operationId": "QuestionAnswer_Delete",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1QuestionAnswerDeleteRequest"
+              },
+              "example": {
+                "answer_id": "0192e7ce-e12c-7a74-afc7-26e877799204",
+                "sku": 646399170
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Ответ удалён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Ответ удалён"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1QuestionAnswerCreateDefault"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/question/answer/list",
+      "method": "POST",
+      "operationId": "QuestionAnswer_List",
+      "summary": "Список ответов на вопрос",
+      "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Questions&Answers"
+        ],
+        "summary": "Список ответов на вопрос",
+        "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+        "operationId": "QuestionAnswer_List",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1QuestionAnswerListRequest"
+              },
+              "example": {
+                "last_id": "",
+                "question_id": "019228a7-91d8-76af-a73a-e989dfac7ac8",
+                "sku": 646399170
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список ответов на вопрос",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1QuestionAnswerListResponse"
+                },
+                "example": {
+                  "answers": [
+                    {
+                      "author_name": "string",
+                      "id": "string",
+                      "published_at": "2024-08-14T11:44:35.352Z",
+                      "question_id": "string",
+                      "sku": 646399170,
+                      "text": "string"
+                    }
+                  ],
+                  "last_id": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1QuestionAnswerCreateDefault"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/question/change-status",
+      "method": "POST",
+      "operationId": "Question_ChangeStatus",
+      "summary": "Изменить статус вопросов",
+      "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Questions&Answers"
+        ],
+        "summary": "Изменить статус вопросов",
+        "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+        "operationId": "Question_ChangeStatus",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1QuestionChangeStatusRequest"
+              },
+              "example": {
+                "question_ids": [
+                  "string"
+                ],
+                "status": "VIEWED"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Статус изменён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Статус изменён."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1QuestionAnswerCreateDefault"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/question/count",
+      "method": "POST",
+      "operationId": "Question_Count",
+      "summary": "Количество вопросов по статусам",
+      "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Questions&Answers"
+        ],
+        "summary": "Количество вопросов по статусам",
+        "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+        "operationId": "Question_Count",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Количество вопросов по статусам",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1QuestionCountResponse"
+                },
+                "example": {
+                  "all": 10,
+                  "new": 3,
+                  "processed": 4,
+                  "unprocessed": 1,
+                  "viewed": 1
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1QuestionAnswerCreateDefault"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/question/info",
+      "method": "POST",
+      "operationId": "Question_Info",
+      "summary": "Информацию по вопросу",
+      "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Questions&Answers"
+        ],
+        "summary": "Информацию по вопросу",
+        "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+        "operationId": "Question_Info",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1QuestionInfoRequest"
+              },
+              "example": {
+                "question_id": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Статус изменён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1QuestionInfoResponse"
+                },
+                "example": {
+                  "answers_count": "0",
+                  "author_name": "Пользователь OZON",
+                  "product_url": "https://www.ozon.ru/product/149829950/",
+                  "sku": 646399170,
+                  "id": "0192a009-769f-7ee9-b412-893045171a66",
+                  "text": "Я отказываюсь от твоего отказа!",
+                  "question_link": "https://www.ozon.ru/product/149829950/questions/?qid=290125772&utm_campaign=reviews_sc_link&utm_medium=share_button&utm_source=smm",
+                  "published_at": "2024-10-08T10:09:29.099284Z",
+                  "status": "VIEWED"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1QuestionAnswerCreateDefault"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/question/list",
+      "method": "POST",
+      "operationId": "Question_List",
+      "summary": "Список вопросов",
+      "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Questions&Answers"
+        ],
+        "summary": "Список вопросов",
+        "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+        "operationId": "Question_List",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1QuestionListRequest"
+              },
+              "example": {
+                "filter": {
+                  "date_from": "2019-08-24T14:15:22Z",
+                  "date_to": "2019-08-24T14:15:22Z",
+                  "status": "ALL"
+                },
+                "last_id": ""
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список вопросов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1QuestionListResponse"
+                },
+                "example": {
+                  "questions": [
+                    {
+                      "answers_count": 1,
+                      "author_name": "Пользователь OZON",
+                      "id": "019294ff-6888-7009-89d8-26569e4e450d",
+                      "sku": 646399170,
+                      "product_url": "https://www.ozon.ru/product/1649246352/",
+                      "published_at": "2024-08-14T12:02:01.889Z",
+                      "question_link": "https://www.ozon.ru/product/1649246352/questions/?qid=290180206&utm_campaign=reviews_sc_link&utm_medium=share_button&utm_source=smm",
+                      "text": "Новый вопрос о товаре Света",
+                      "status": "PROCESSED"
+                    }
+                  ],
+                  "last_id": "019228a7-91d8-76af-a73a-e989dfac7ac8"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1QuestionAnswerCreateDefault"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/question/top-sku",
+      "method": "POST",
+      "operationId": "Question_TopSku",
+      "summary": "Товары с наибольшим количеством вопросов",
+      "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Questions&Answers"
+        ],
+        "summary": "Товары с наибольшим количеством вопросов",
+        "description": "Метод доступен по подписке [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n\nВы можете оставить обратную связь по этому методу в комментариях к обсуждению в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community/1198-Metody-dlia-raboty-s-voprosami-otvetami).\n",
+        "operationId": "Question_TopSku",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1QuestionTopSkuRequest"
+              },
+              "example": {
+                "limit": "100"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Статус изменён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1QuestionTopSkuResponse"
+                },
+                "example": {
+                  "sku": [
+                    56371271
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1QuestionAnswerCreateDefault"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "v1QuestionAnswerCreateRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "description": "Идентификатор вопроса."
+        },
+        "sku": {
+          "type": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "text": {
+          "type": "string",
+          "description": "Текст ответа объёмом от 2 до 3000 символов."
+        }
+      },
+      "required": [
+        "question_id",
+        "sku",
+        "text"
+      ]
+    },
+    "v1QuestionAnswerCreateResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "answer_id": {
+          "type": "string",
+          "description": "Идентификатор ответа на вопрос."
+        }
+      }
+    },
+    "v1QuestionAnswerCreateDefault": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "string",
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "v1QuestionAnswerDeleteRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "answer_id": {
+          "type": "string",
+          "description": "Идентификатор ответа."
+        },
+        "sku": {
+          "type": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      },
+      "required": [
+        "answer_id",
+        "sku"
+      ]
+    },
+    "v1QuestionAnswerListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "last_id": {
+          "type": null,
+          "description": "Идентификатор последнего значения на странице. \n\nЕсли запрос первый, оставьте поле пустым. Для следующих значений указывайте `last_id` из ответа предыдущего запроса.\n"
+        },
+        "question_id": {
+          "type": "string",
+          "description": "Идентификатор вопроса."
+        },
+        "sku": {
+          "type": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      },
+      "required": [
+        "question_id",
+        "sku"
+      ]
+    },
+    "v1QuestionAnswerListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "answers": {
+          "description": "Ответы.",
+          "items": {
+            "$ref": "#/components/schemas/v1QuestionAnswerListResponseAnswers"
+          }
+        },
+        "last_id": {
+          "type": "string",
+          "description": "Идентификатор последнего значения на странице.\n\nЧтобы получить следующие значения, передайте полученное значение в следующем запросе в параметре `last_id`.\n"
+        }
+      }
+    },
+    "v1QuestionAnswerListResponseAnswers": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "author_name": {
+          "type": "string",
+          "description": "Автор ответа."
+        },
+        "id": {
+          "type": "string",
+          "description": "Идентификатор ответа."
+        },
+        "published_at": {
+          "type": "timestamp",
+          "description": "Дата публикации ответа."
+        },
+        "question_id": {
+          "type": "string",
+          "description": "Идентификатор вопроса."
+        },
+        "sku": {
+          "type": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "text": {
+          "type": "string",
+          "description": "Текст ответа."
+        }
+      }
+    },
+    "v1QuestionChangeStatusRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "question_ids": {
+          "items": {
+            "type": "string"
+          },
+          "description": "Идентификаторы вопросов."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статусы вопросов:\n  - `NEW` — новые,\n  - `VIEWED` — просмотренные,\n  - `PROCESSED` — обработанные.\n"
+        }
+      },
+      "required": [
+        "question_ids",
+        "status"
+      ]
+    },
+    "v1QuestionCountResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "all": {
+          "type": "int64",
+          "description": "Всего вопросов."
+        },
+        "new": {
+          "type": "int64",
+          "description": "Новые вопросы."
+        },
+        "processed": {
+          "type": "int64",
+          "description": "Обработанные вопросы."
+        },
+        "unprocessed": {
+          "type": "int64",
+          "description": "Необработанные вопросы."
+        },
+        "viewed": {
+          "type": "int64",
+          "description": "Просмотренные вопросы."
+        }
+      }
+    },
+    "v1QuestionInfoRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "description": "Идентификатор вопроса"
+        }
+      },
+      "required": [
+        "question_id"
+      ]
+    },
+    "v1QuestionInfoResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "answers_count": {
+          "type": "int64",
+          "description": "Количество ответов на вопрос."
+        },
+        "author_name": {
+          "type": "string",
+          "description": "Автор вопроса."
+        },
+        "id": {
+          "type": "string",
+          "description": "Идентификатор вопроса."
+        },
+        "product_url": {
+          "type": "string",
+          "description": "Ссылка на товар."
+        },
+        "published_at": {
+          "type": "timestamp",
+          "description": "Дата публикации вопроса."
+        },
+        "question_link": {
+          "type": "string",
+          "description": "Ссылка на вопрос."
+        },
+        "sku": {
+          "type": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "status": {
+          "type": "enum",
+          "description": "Статус вопроса:\n  - `NEW` — новый,\n  - `ALL` — все вопросы,\n  - `VIEWED` — просмотренный,\n  - `PROCESSED` — обработанный,\n  - `UNPROCESSED` — необработанный.\n"
+        },
+        "text": {
+          "type": "string",
+          "description": "Текст вопроса."
+        }
+      }
+    },
+    "v1QuestionListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/components/schemas/v1QuestionListRequestFilter"
+        },
+        "last_id": {
+          "type": "string",
+          "description": "Идентификатор последнего значения на странице. \n\nОставьте это поле пустым при выполнении первого запроса. Чтобы получить следующие значения, укажите `last_id` из ответа предыдущего запроса.\n"
+        }
+      }
+    },
+    "v1QuestionListRequestFilter": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр.",
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Начало периода."
+        },
+        "date_to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Конец периода."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статусы вопроса:\n  - `NEW` — новый,\n  - `ALL` — все вопросы,\n  - `VIEWED` — просмотренный,\n  - `PROCESSED` — обработанный,\n  - `UNPROCESSED` — необработанный.\n"
+        }
+      }
+    },
+    "v1QuestionListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "questions": {
+          "description": "Вопросы.",
+          "items": {
+            "$ref": "#/components/schemas/v1QuestionListResponseQuestions"
+          }
+        },
+        "last_id": {
+          "type": "string",
+          "description": "Идентификатор последнего значения на странице.\n\nЧтобы получить следующие значения, передайте полученное значение в следующем запросе в параметре `last_id`.\n"
+        }
+      }
+    },
+    "v1QuestionListResponseQuestions": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "answers_count": {
+          "type": "int64",
+          "description": "Количество ответов на вопрос."
+        },
+        "author_name": {
+          "type": "string",
+          "description": "Имя автора вопроса."
+        },
+        "id": {
+          "type": "string",
+          "description": "Идентификатор вопроса."
+        },
+        "product_url": {
+          "type": "string",
+          "description": "Ссылка на товар."
+        },
+        "published_at": {
+          "type": "timestamp",
+          "description": "Дата публикации вопроса."
+        },
+        "question_link": {
+          "type": "string",
+          "description": "Ссылка на вопрос."
+        },
+        "sku": {
+          "type": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "status": {
+          "type": "enum",
+          "description": "Статусы вопроса:\n  - `NEW` — новый,\n  - `ALL` — все вопросы,\n  - `VIEWED` — просмотренный,\n  - `PROCESSED` — обработанный,\n  - `UNPROCESSED` — необработанный.\n"
+        },
+        "text": {
+          "type": "string",
+          "description": "Текст вопроса."
+        }
+      }
+    },
+    "v1QuestionTopSkuRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "limit": {
+          "type": "int64",
+          "description": "Количество значений в ответе: максимум — 100, минимум — 1.\n"
+        }
+      },
+      "required": [
+        "limit"
+      ]
+    },
+    "v1QuestionTopSkuResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "sku": {
+          "description": "Список Идентификаторы товаров в системе Ozon — SKU.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    }
+  }
+}

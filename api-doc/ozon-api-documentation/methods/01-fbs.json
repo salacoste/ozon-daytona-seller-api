@@ -1,0 +1,5012 @@
+{
+  "metadata": {
+    "tag": "FBS",
+    "name": "FBS",
+    "displayName": "Обработка заказов FBS и rFBS",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 22,
+    "schemasCount": 98,
+    "generatedAt": "2025-08-09T16:28:42.329Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v3/posting/fbs/unfulfilled/list",
+      "method": "POST",
+      "operationId": "PostingAPI_GetFbsPostingUnfulfilledList",
+      "summary": "Список необработанных отправлений (версия 3)",
+      "description": "Возвращает список необработанных отправлений за указанный период времени — он должен быть не больше одного года.\n\nВозможные статусы отправлений:\n- `awaiting_registration` — ожидает регистрации,\n- `acceptance_in_progress` — идёт приёмка,\n- `awaiting_approve` — ожидает подтверждения,\n- `awaiting_packaging` — ожидает упаковки,\n- `awaiting_deliver` — ожидает отгрузки,\n- `arbitration` — арбитраж,\n- `client_arbitration` — клиентский арбитраж доставки,\n- `delivering` — доставляется,\n- `driver_pickup` — у водителя,\n- `cancelled` — отменено,\n- `not_accepted` — не принят на сортировочном центре,\n- `sent_by_seller` — отправлено продавцом.\n\nЧтобы получать актуальную дату отгрузки, регулярно обновляйте информацию об отправлениях или подключите [пуш-уведомления](#tag/push_start).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список необработанных отправлений (версия 3)",
+        "description": "Возвращает список необработанных отправлений за указанный период времени — он должен быть не больше одного года.\n\nВозможные статусы отправлений:\n- `awaiting_registration` — ожидает регистрации,\n- `acceptance_in_progress` — идёт приёмка,\n- `awaiting_approve` — ожидает подтверждения,\n- `awaiting_packaging` — ожидает упаковки,\n- `awaiting_deliver` — ожидает отгрузки,\n- `arbitration` — арбитраж,\n- `client_arbitration` — клиентский арбитраж доставки,\n- `delivering` — доставляется,\n- `driver_pickup` — у водителя,\n- `cancelled` — отменено,\n- `not_accepted` — не принят на сортировочном центре,\n- `sent_by_seller` — отправлено продавцом.\n\nЧтобы получать актуальную дату отгрузки, регулярно обновляйте информацию об отправлениях или подключите [пуш-уведомления](#tag/push_start).\n",
+        "operationId": "PostingAPI_GetFbsPostingUnfulfilledList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingv3GetFbsPostingUnfulfilledListRequest"
+              },
+              "example": {
+                "dir": "ASC",
+                "filter": {
+                  "cutoff_from": "2021-08-24T14:15:22Z",
+                  "cutoff_to": "2021-08-31T14:15:22Z",
+                  "delivery_method_id": [],
+                  "is_quantum": false,
+                  "provider_id": [],
+                  "status": "awaiting_packaging",
+                  "warehouse_id": []
+                },
+                "limit": 100,
+                "offset": 0,
+                "with": {
+                  "analytics_data": true,
+                  "barcodes": true,
+                  "financial_data": true,
+                  "legal_info": false,
+                  "translit": true
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список необработанных отправлений",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingv3GetFbsPostingUnfulfilledListResponse"
+                },
+                "example": {
+                  "result": {
+                    "postings": [
+                      {
+                        "posting_number": "23713478-0018-3",
+                        "order_id": 559293114,
+                        "order_number": "33713378-0051",
+                        "pickup_code_verified_at": "2025-01-17T11:03:00.124Z",
+                        "status": "awaiting_packaging",
+                        "delivery_method": {
+                          "id": 15110442724000,
+                          "name": "Ozon Логистика курьеру, Москва",
+                          "warehouse_id": 15110442724000,
+                          "warehouse": "Склад на Ленина",
+                          "tpl_provider_id": 24,
+                          "tpl_provider": "Ozon Логистика"
+                        },
+                        "tracking_number": "",
+                        "tpl_integration_type": "ozon",
+                        "in_process_at": "2021-08-25T10:48:38Z",
+                        "shipment_date": "2021-08-26T10:00:00Z",
+                        "delivering_date": null,
+                        "optional": {
+                          "products_with_possible_mandatory_mark": [
+                            0
+                          ]
+                        },
+                        "cancellation": {
+                          "cancel_reason_id": 0,
+                          "cancel_reason": "",
+                          "cancellation_type": "",
+                          "cancelled_after_ship": false,
+                          "affect_cancellation_rating": false,
+                          "cancellation_initiator": ""
+                        },
+                        "customer": null,
+                        "quantum_id": 0,
+                        "products": [
+                          {
+                            "price": "1259",
+                            "currency_code": "RUB",
+                            "is_blr_traceable": true,
+                            "is_marketplace_buyout": true,
+                            "offer_id": "УТ-0001365",
+                            "name": "Мяч, цвет: черный, 5 кг",
+                            "sku": 140048123,
+                            "quantity": 1,
+                            "products_requiring_jw_uin": "0"
+                          }
+                        ],
+                        "addressee": null,
+                        "barcodes": {
+                          "upper_barcode": "%101%806044518",
+                          "lower_barcode": "23024930500000"
+                        },
+                        "analytics_data": {
+                          "region": "Санкт-Петербург",
+                          "city": "Санкт-Петербург",
+                          "delivery_type": "PVZ",
+                          "is_premium": false,
+                          "payment_type_group_name": "Карты оплаты",
+                          "warehouse_id": 15110442724000,
+                          "warehouse": "Склад на Ленина",
+                          "tpl_provider_id": 24,
+                          "tpl_provider": "Ozon Логистика",
+                          "delivery_date_begin": "2022-08-28T14:00:00Z",
+                          "delivery_date_end": "2022-08-28T18:00:00Z",
+                          "is_legal": false
+                        },
+                        "financial_data": {
+                          "products": [
+                            {
+                              "commission_amount": 0,
+                              "commission_percent": 0,
+                              "payout": 0,
+                              "product_id": 140048123,
+                              "old_price": 1888,
+                              "price": 1259,
+                              "total_discount_value": 629,
+                              "total_discount_percent": 33.32,
+                              "actions": [
+                                "Системная виртуальная скидка селлера"
+                              ],
+                              "quantity": 1
+                            }
+                          ]
+                        },
+                        "is_express": false,
+                        "legal_info": {
+                          "company_name": "string",
+                          "inn": "string",
+                          "kpp": "string"
+                        },
+                        "requirements": {
+                          "products_requiring_change_country": [],
+                          "products_requiring_gtd": [],
+                          "products_requiring_country": [],
+                          "products_requiring_jwn": []
+                        },
+                        "tariffication": [
+                          {
+                            "current_tariff_rate": 0,
+                            "current_tariff_type": "",
+                            "current_tariff_charge": "",
+                            "current_tariff_charge_currency_code": "",
+                            "next_tariff_rate": 0,
+                            "next_tariff_type": "",
+                            "next_tariff_charge": "",
+                            "next_tariff_starts_at": "2023-11-13T08:05:57.657Z",
+                            "next_tariff_charge_currency_code": ""
+                          }
+                        ]
+                      }
+                    ],
+                    "count": 55
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v3/posting/fbs/list",
+      "method": "POST",
+      "operationId": "PostingAPI_GetFbsPostingListV3",
+      "summary": "Список отправлений (версия 3)",
+      "description": "Возвращает список отправлений за указанный период времени — он должен быть не больше одного года.\n\nДополнительно можно отфильтровать отправления по их статусу — список доступных для выдачи статусов указан в описании параметра `filter.status`.\n\n`has_next = true` в ответе может значить, что вернули не весь массив отправлений. Чтобы получить информацию об остальных отправлениях, сделайте новый запрос с другим значением `offset`.\n\n Чтобы получать актуальную дату отгрузки, регулярно обновляйте информацию об отправлениях или подключите [пуш-уведомления](#tag/push_start).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список отправлений (версия 3)",
+        "description": "Возвращает список отправлений за указанный период времени — он должен быть не больше одного года.\n\nДополнительно можно отфильтровать отправления по их статусу — список доступных для выдачи статусов указан в описании параметра `filter.status`.\n\n`has_next = true` в ответе может значить, что вернули не весь массив отправлений. Чтобы получить информацию об остальных отправлениях, сделайте новый запрос с другим значением `offset`.\n\n Чтобы получать актуальную дату отгрузки, регулярно обновляйте информацию об отправлениях или подключите [пуш-уведомления](#tag/push_start).\n",
+        "operationId": "PostingAPI_GetFbsPostingListV3",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingv3GetFbsPostingListRequest"
+              },
+              "example": {
+                "dir": "ASC",
+                "filter": {
+                  "delivery_method_id": [
+                    "21321684811000"
+                  ],
+                  "is_quantum": false,
+                  "last_changed_status_date": {
+                    "from": "2023-11-03T11:47:39.878Z",
+                    "to": "2023-11-03T11:47:39.878Z"
+                  },
+                  "order_id": 0,
+                  "provider_id": [
+                    "24"
+                  ],
+                  "since": "2023-11-03T11:47:39.878Z",
+                  "status": "awaiting_packaging",
+                  "to": "2023-11-03T11:47:39.878Z",
+                  "warehouse_id": [
+                    "21321684811000"
+                  ]
+                },
+                "limit": 100,
+                "offset": 0,
+                "with": {
+                  "analytics_data": true,
+                  "barcodes": true,
+                  "financial_data": true,
+                  "translit": true
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список отправлений",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3GetFbsPostingListResponseV3"
+                },
+                "example": {
+                  "result": {
+                    "postings": [
+                      {
+                        "posting_number": "05708065-0029-1",
+                        "order_id": 680420041,
+                        "order_number": "05708065-0029",
+                        "pickup_code_verified_at": "2025-01-17T10:59:26.614Z",
+                        "status": "awaiting_deliver",
+                        "substatus": "posting_awaiting_passport_data",
+                        "delivery_method": {
+                          "id": 21321684811000,
+                          "name": "Ozon Логистика самостоятельно, Красногорск",
+                          "warehouse_id": 21321684811000,
+                          "warehouse": "Стим Тойс Нахабино",
+                          "tpl_provider_id": 24,
+                          "tpl_provider": "Ozon Логистика"
+                        },
+                        "tracking_number": "",
+                        "tpl_integration_type": "ozon",
+                        "in_process_at": "2022-05-13T07:07:32Z",
+                        "shipment_date": "2022-05-13T10:00:00Z",
+                        "delivering_date": null,
+                        "optional": {
+                          "products_with_possible_mandatory_mark": [
+                            0
+                          ]
+                        },
+                        "cancellation": {
+                          "cancel_reason_id": 0,
+                          "cancel_reason": "",
+                          "cancellation_type": "",
+                          "cancelled_after_ship": false,
+                          "affect_cancellation_rating": false,
+                          "cancellation_initiator": ""
+                        },
+                        "customer": null,
+                        "products": [
+                          {
+                            "price": "1390.000000",
+                            "currency_code": "RUB",
+                            "is_blr_traceable": true,
+                            "is_marketplace_buyout": true,
+                            "offer_id": "205953",
+                            "name": " Электронный конструктор PinLab Позитроник",
+                            "sku": 358924380,
+                            "quantity": 1
+                          }
+                        ],
+                        "addressee": null,
+                        "barcodes": null,
+                        "analytics_data": null,
+                        "financial_data": null,
+                        "is_express": false,
+                        "legal_info": {
+                          "company_name": "string",
+                          "inn": "string",
+                          "kpp": "string"
+                        },
+                        "quantum_id": 0,
+                        "requirements": {
+                          "products_requiring_change_country": [],
+                          "products_requiring_gtd": [],
+                          "products_requiring_country": [],
+                          "products_requiring_mandatory_mark": [],
+                          "products_requiring_jwn": []
+                        },
+                        "tariffication": [
+                          {
+                            "current_tariff_rate": 0,
+                            "current_tariff_type": "",
+                            "current_tariff_charge": "",
+                            "current_tariff_charge_currency_code": "",
+                            "next_tariff_rate": 0,
+                            "next_tariff_type": "",
+                            "next_tariff_charge": "",
+                            "next_tariff_starts_at": "2023-11-13T08:05:57.657Z",
+                            "next_tariff_charge_currency_code": ""
+                          }
+                        ]
+                      }
+                    ],
+                    "has_next": true
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v3/posting/fbs/get",
+      "method": "POST",
+      "operationId": "PostingAPI_GetFbsPostingV3",
+      "summary": "Получить информацию об отправлении по идентификатору",
+      "description": "Чтобы получать актуальную дату отгрузки, регулярно обновляйте информацию об отправлениях или подключите [пуш-уведомления](#tag/push_start).",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить информацию об отправлении по идентификатору",
+        "description": "Чтобы получать актуальную дату отгрузки, регулярно обновляйте информацию об отправлениях или подключите [пуш-уведомления](#tag/push_start).",
+        "operationId": "PostingAPI_GetFbsPostingV3",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingv3GetFbsPostingRequest"
+              },
+              "example": {
+                "posting_number": "57195475-0050-3",
+                "with": {
+                  "analytics_data": false,
+                  "barcodes": false,
+                  "financial_data": false,
+                  "legal_info": false,
+                  "product_exemplars": false,
+                  "related_postings": true,
+                  "translit": false
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация об отправлении",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v3GetFbsPostingResponseV3"
+                },
+                "example": {
+                  "result": {
+                    "posting_number": "57195475-0050-3",
+                    "order_id": 438764970,
+                    "order_number": "57195475-0050",
+                    "pickup_code_verified_at": "2025-01-17T11:04:59.958Z",
+                    "status": "awaiting_packaging",
+                    "substatus": "posting_awaiting_passport_data",
+                    "previous_substatus": "posting_transferring_to_delivery",
+                    "delivery_method": {
+                      "id": 18114520187000,
+                      "name": "Ozon Логистика самостоятельно, Москва",
+                      "warehouse_id": 18114520187000,
+                      "warehouse": "Москва основной",
+                      "tpl_provider_id": 24,
+                      "tpl_provider": "Ozon Логистика"
+                    },
+                    "tracking_number": "",
+                    "tpl_integration_type": "ozon",
+                    "in_process_at": "2021-11-20T09:14:16Z",
+                    "shipment_date": "2021-11-23T10:00:00Z",
+                    "delivering_date": null,
+                    "provider_status": "",
+                    "delivery_price": "",
+                    "optional": {
+                      "products_with_possible_mandatory_mark": [
+                        0
+                      ]
+                    },
+                    "cancellation": {
+                      "cancel_reason_id": 0,
+                      "cancel_reason": "",
+                      "cancellation_type": "",
+                      "cancelled_after_ship": false,
+                      "affect_cancellation_rating": false,
+                      "cancellation_initiator": ""
+                    },
+                    "customer": null,
+                    "addressee": null,
+                    "products": [
+                      {
+                        "currency_code": "RUB",
+                        "is_blr_traceable": true,
+                        "is_marketplace_buyout": true,
+                        "price": "279.0000",
+                        "offer_id": "250-7898-1",
+                        "name": "Кофе ароматизированный \"Шоколадный апельсин\" 250 гр",
+                        "sku": 180550365,
+                        "quantity": 1,
+                        "jw_uin": [],
+                        "dimensions": {
+                          "height": "40.00",
+                          "length": "240.00",
+                          "weight": "260",
+                          "width": "140.00"
+                        }
+                      }
+                    ],
+                    "barcodes": null,
+                    "analytics_data": null,
+                    "financial_data": null,
+                    "additional_data": [],
+                    "is_express": false,
+                    "legal_info": {
+                      "company_name": "string",
+                      "inn": "string",
+                      "kpp": "string"
+                    },
+                    "related_postings": {
+                      "related_posting_numbers": [
+                        "string"
+                      ]
+                    },
+                    "requirements": {
+                      "products_requiring_change_country": [],
+                      "products_requiring_gtd": [],
+                      "products_requiring_country": [],
+                      "products_requiring_jwn": []
+                    },
+                    "product_exemplars": null,
+                    "tariffication": [
+                      {
+                        "current_tariff_rate": 0,
+                        "current_tariff_type": "",
+                        "current_tariff_charge": "",
+                        "current_tariff_charge_currency_code": "",
+                        "next_tariff_rate": 0,
+                        "next_tariff_type": "",
+                        "next_tariff_charge": "",
+                        "next_tariff_starts_at": "2023-11-13T08:05:57.657Z",
+                        "next_tariff_charge_currency_code": ""
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/get-by-barcode",
+      "method": "POST",
+      "operationId": "PostingAPI_GetFbsPostingByBarcode",
+      "summary": "Получить информацию об отправлении по штрихкоду",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить информацию об отправлении по штрихкоду",
+        "operationId": "PostingAPI_GetFbsPostingByBarcode",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingGetFbsPostingByBarcodeRequest"
+              },
+              "example": {
+                "barcode": "20325804886000"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация об отправлении",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2FbsPostingResponse"
+                },
+                "example": {
+                  "result": {
+                    "posting_number": "57195475-0050-3",
+                    "order_id": 438764970,
+                    "order_number": "57195475-0050",
+                    "status": "awaiting_packaging",
+                    "delivery_method": {
+                      "id": 18114520187000,
+                      "name": "Ozon Логистика самостоятельно, Москва",
+                      "warehouse_id": 18114520187000,
+                      "warehouse": "Москва основной",
+                      "tpl_provider_id": 24,
+                      "tpl_provider": "Ozon Логистика"
+                    },
+                    "tracking_number": "",
+                    "tpl_integration_type": "ozon",
+                    "in_process_at": "2021-11-20T09:14:16Z",
+                    "shipment_date": "2021-11-23T10:00:00Z",
+                    "delivering_date": null,
+                    "provider_status": "",
+                    "delivery_price": "",
+                    "cancellation": {
+                      "cancel_reason_id": 0,
+                      "cancel_reason": "",
+                      "cancellation_type": "",
+                      "cancelled_after_ship": false,
+                      "affect_cancellation_rating": false,
+                      "cancellation_initiator": ""
+                    },
+                    "customer": null,
+                    "addressee": null,
+                    "products": [
+                      {
+                        "price": "279.0000",
+                        "offer_id": "250-7898-1",
+                        "name": "Кофе ароматизированный \"Шоколадный апельсин\" 250 гр",
+                        "sku": 180550365,
+                        "quantity": 1,
+                        "dimensions": {
+                          "height": "40.00",
+                          "length": "240.00",
+                          "weight": "260",
+                          "width": "140.00"
+                        }
+                      }
+                    ],
+                    "barcodes": null,
+                    "analytics_data": null,
+                    "financial_data": null,
+                    "additional_data": [],
+                    "is_express": false,
+                    "requirements": {
+                      "products_requiring_gtd": [],
+                      "products_requiring_country": []
+                    },
+                    "product_exemplars": null
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v3/posting/multiboxqty/set",
+      "method": "POST",
+      "operationId": "PostingAPI_PostingMultiBoxQtySetV3",
+      "summary": "Указать количество коробок для многокоробочных отправлений",
+      "description": "Метод для передачи количества коробок для отправлений, в которых есть многокоробочные товары.\n\nИспользуйте метод при работе по схеме rFBS Агрегатор — c доставкой партнёрами Ozon.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Указать количество коробок для многокоробочных отправлений",
+        "description": "Метод для передачи количества коробок для отправлений, в которых есть многокоробочные товары.\n\nИспользуйте метод при работе по схеме rFBS Агрегатор — c доставкой партнёрами Ozon.\n",
+        "operationId": "PostingAPI_PostingMultiBoxQtySetV3",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingv3PostingMultiBoxQtySetV3Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Количество коробок указано",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingv3PostingMultiBoxQtySetV3Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/product/change",
+      "method": "POST",
+      "operationId": "PostingAPI_ChangeFbsPostingProduct",
+      "summary": "Добавить вес для весовых товаров в отправлении",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Добавить вес для весовых товаров в отправлении",
+        "operationId": "PostingAPI_ChangeFbsPostingProduct",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingPostingProductChangeRequest"
+              },
+              "example": {
+                "items": [
+                  {
+                    "sku": 1231428352,
+                    "weightReal": [
+                      0.3
+                    ]
+                  }
+                ],
+                "posting_number": "33920158-0006-1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Данные добавлены",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingPostingProductChangeResponse"
+                },
+                "example": {
+                  "result": "33920158-0006-1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/product/country/list",
+      "method": "POST",
+      "operationId": "PostingAPI_ListCountryProductFbsPostingV2",
+      "summary": "Список доступных стран-изготовителей",
+      "description": "Метод для получения списка доступных стран-изготовителей и их ISO кодов.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FBS"
+        ],
+        "summary": "Список доступных стран-изготовителей",
+        "description": "Метод для получения списка доступных стран-изготовителей и их ISO кодов.",
+        "operationId": "PostingAPI_ListCountryProductFbsPostingV2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2FbsPostingProductCountryListRequest"
+              },
+              "example": {
+                "name_search": ""
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список доступных стран-изготовителей",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2FbsPostingProductCountryListResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "name": "Алжир",
+                      "country_iso_code": "DZ"
+                    },
+                    {
+                      "name": "Ангилья",
+                      "country_iso_code": "AI"
+                    },
+                    {
+                      "name": "Виргинские Острова (Великобритания)",
+                      "country_iso_code": "VG"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/product/country/set",
+      "method": "POST",
+      "operationId": "PostingAPI_SetCountryProductFbsPostingV2",
+      "summary": "Добавить информацию о стране-изготовителе товара",
+      "description": "Метод для добавления на продукт атрибута «Страна-изготовитель», если он не был указан.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FBS"
+        ],
+        "summary": "Добавить информацию о стране-изготовителе товара",
+        "description": "Метод для добавления на продукт атрибута «Страна-изготовитель», если он не был указан.",
+        "operationId": "PostingAPI_SetCountryProductFbsPostingV2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2FbsPostingProductCountrySetRequest"
+              },
+              "example": {
+                "country_iso_code": "NO",
+                "posting_number": "57195475-0050-3",
+                "product_id": 180550365
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Страна-изготовитель добавлена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2FbsPostingProductCountrySetResponse"
+                },
+                "example": {
+                  "product_id": 180550365,
+                  "is_gtd_needed": true
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/posting/fbs/restrictions",
+      "method": "POST",
+      "operationId": "PostingAPI_GetRestrictions",
+      "summary": "Получить ограничения пункта приёма",
+      "description": "Метод для получения габаритных, весовых и прочих ограничений пункта приёма по номеру отправления. Метод применим только для работы по схеме FBS.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FBS"
+        ],
+        "summary": "Получить ограничения пункта приёма",
+        "description": "Метод для получения габаритных, весовых и прочих ограничений пункта приёма по номеру отправления. Метод применим только для работы по схеме FBS.",
+        "operationId": "PostingAPI_GetRestrictions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetRestrictionsRequest"
+              },
+              "example": {
+                "posting_number": "76673629-0020-1"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Ограничения пункта приёма",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetRestrictionsResponse"
+                },
+                "example": {
+                  "result": {
+                    "posting_number": "76673629-0020-1",
+                    "max_posting_weight": 40000,
+                    "min_posting_weight": 0,
+                    "width": 500,
+                    "height": 500,
+                    "length": 500,
+                    "max_posting_price": 500000,
+                    "min_posting_price": 0
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/package-label",
+      "method": "POST",
+      "operationId": "PostingAPI_PostingFBSPackageLabel",
+      "summary": "Напечатать этикетку",
+      "description": "<aside class=\"warning\">\nЕсли вы работаете по схеме rFBS или rFBS Express, изучите процесс печати этикетки в <a href=\"https://seller-edu.ozon.ru/rfbs/scheme-of-work\">Базе знаний продавца</a>.\n</aside>\n\nГенерирует PDF-файл с этикетками для указанных отправлений. В одном запросе можно передать не больше 20 идентификаторов. Если хотя бы для одного отправления возникнет ошибка, этикетки не будут подготовлены для всех отправлений в запросе.\n\nРекомендуем запрашивать этикетки через 45–60 секунд после сборки заказа.\n\nОшибка `The next postings aren't ready` означает, что этикетки ещё не готовы, повторите запрос позднее.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Напечатать этикетку",
+        "description": "<aside class=\"warning\">\nЕсли вы работаете по схеме rFBS или rFBS Express, изучите процесс печати этикетки в <a href=\"https://seller-edu.ozon.ru/rfbs/scheme-of-work\">Базе знаний продавца</a>.\n</aside>\n\nГенерирует PDF-файл с этикетками для указанных отправлений. В одном запросе можно передать не больше 20 идентификаторов. Если хотя бы для одного отправления возникнет ошибка, этикетки не будут подготовлены для всех отправлений в запросе.\n\nРекомендуем запрашивать этикетки через 45–60 секунд после сборки заказа.\n\nОшибка `The next postings aren't ready` означает, что этикетки ещё не готовы, повторите запрос позднее.\n",
+        "operationId": "PostingAPI_PostingFBSPackageLabel",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingPostingFBSPackageLabelRequest"
+              },
+              "example": {
+                "posting_number": [
+                  "48173252-0034-4"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Маркировка напечатана",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingPostingFBSPackageLabelResponse"
+                },
+                "example": {
+                  "content_type": "application/pdf",
+                  "file_name": "ticket-170660-2023-07-13T13:17:06Z.pdf",
+                  "file_content": "%PDF-1.7\n%âãÏÓ\n53 0 obj\n<</MarkInfo<</Marked true/Type/MarkInfo>>/Pages 9 0 R/StructTreeRoot 10 0 R/Type/Catalog>>\nendobj\n8 0 obj\n<</Filter/FlateDecode/Length 2888>>\nstream\nxå[[ݶ\u0011~?¿BÏ\u0005Bs\u001c^\u0000Àwí5ú\u0010 m\u0016Èsà¦)\n;hÒ\u0014èÏïG\u0014)<{äµ] ]?¬¬oIÎ}¤F±óϤñï\u001bÕü×X­´OÏï?^~¹$<ø¨È9q\u0013Y\u0012åñì§_¼|ÿégü\t+\u0012\u001bxª}Æxҿ¿¼_º¼xg¦þ5OkuÌ3ýíògüûå\"Ni\u0016C\u0001°\u000fA9g'r¢\"\u0013YóĪ\u0018NÑ{\u001dÕóZ¬\\Ô\""
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v1/posting/fbs/package-label/create",
+      "method": "POST",
+      "operationId": "PostingAPI_CreateLabelBatch",
+      "summary": "Создать задание на выгрузку этикеток",
+      "description": "<aside class=\"warning\">\nВ будущем метод будет отключён. Мы предупредим вас об этом за месяц. Переключитесь на <a href=\"#operation/PostingAPI_CreateLabelBatchV2\">/v2/posting/fbs/package-label/create</a>.\n</aside>\n\nМетод для создания задания на асинхронное формирование этикеток.\n\nДля получения этикеток, созданных в результате вызова метода, используйте [/v1/posting/fbs/package-label/get](#operation/PostingAPI_GetLabelBatch).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Создать задание на выгрузку этикеток",
+        "description": "<aside class=\"warning\">\nВ будущем метод будет отключён. Мы предупредим вас об этом за месяц. Переключитесь на <a href=\"#operation/PostingAPI_CreateLabelBatchV2\">/v2/posting/fbs/package-label/create</a>.\n</aside>\n\nМетод для создания задания на асинхронное формирование этикеток.\n\nДля получения этикеток, созданных в результате вызова метода, используйте [/v1/posting/fbs/package-label/get](#operation/PostingAPI_GetLabelBatch).\n",
+        "operationId": "PostingAPI_CreateLabelBatch",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CreateLabelBatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Идентификатор задания на формирование этикеток",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CreateLabelBatchResponse"
+                },
+                "example": {
+                  "result": {
+                    "task_id": 5819327210249
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/package-label/create",
+      "method": "POST",
+      "operationId": "PostingAPI_CreateLabelBatchV2",
+      "summary": "Создать задание на формирование этикеток",
+      "description": "Метод для создания задания на асинхронное формирование этикеток.\nМетод может вернуть несколько заданий: на формирование маленькой и большой этикетки.\n\nЧтобы получить созданные этикетки, используйте [/v1/posting/fbs/package-label/get](#operation/PostingAPI_GetLabelBatch).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Создать задание на формирование этикеток",
+        "description": "Метод для создания задания на асинхронное формирование этикеток.\nМетод может вернуть несколько заданий: на формирование маленькой и большой этикетки.\n\nЧтобы получить созданные этикетки, используйте [/v1/posting/fbs/package-label/get](#operation/PostingAPI_GetLabelBatch).\n",
+        "operationId": "PostingAPI_CreateLabelBatchV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CreateLabelBatchRequest"
+              },
+              "example": {
+                "posting_number": [
+                  "4708216109137",
+                  "3697105098026"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Задания на формирование этикеток",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2CreateLabelBatchResponse"
+                },
+                "example": {
+                  "result": {
+                    "tasks": [
+                      {
+                        "task_id": 5819327210248,
+                        "task_type": "big_label"
+                      },
+                      {
+                        "task_id": 5819327210249,
+                        "task_type": "small_label"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v1/posting/fbs/package-label/get",
+      "method": "POST",
+      "operationId": "PostingAPI_GetLabelBatch",
+      "summary": "Получить файл с этикетками",
+      "description": "Метод для получения этикеток после вызова [/v1/posting/fbs/package-label/create](#operation/PostingAPI_CreateLabelBatch).",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить файл с этикетками",
+        "description": "Метод для получения этикеток после вызова [/v1/posting/fbs/package-label/create](#operation/PostingAPI_CreateLabelBatch).",
+        "operationId": "PostingAPI_GetLabelBatch",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetLabelBatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус формирования этикеток или файл с ними",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetLabelBatchResponse"
+                },
+                "example": {
+                  "result": {
+                    "status": "completed",
+                    "file_url": "https://cdn1.ozone.ru/s3/sc-temporary/e6/0c/e60cdfd7aed78c2b44d134504fbd591d.pdf"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v1/posting/fbs/cancel-reason",
+      "method": "POST",
+      "operationId": "PostingAPI_GetPostingFbsCancelReasonV1",
+      "summary": "Причины отмены отправления",
+      "description": "Возвращает список причин отмены для конкретных отправлений.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Причины отмены отправления",
+        "description": "Возвращает список причин отмены для конкретных отправлений.",
+        "operationId": "PostingAPI_GetPostingFbsCancelReasonV1",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingCancelReasonRequest"
+              },
+              "example": {
+                "related_posting_numbers": [
+                  "73837363-0010-3"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Причины отмены отправлений",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingCancelReasonResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "posting_number": "73837363-0010-3",
+                      "reasons": [
+                        {
+                          "id": 352,
+                          "title": "Товар закончился на складе продавца",
+                          "type_id": "seller"
+                        },
+                        {
+                          "id": 400,
+                          "title": "Остался только бракованный товар",
+                          "type_id": "seller"
+                        },
+                        {
+                          "id": 402,
+                          "title": "Другое (вина продавца)",
+                          "type_id": "seller"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/cancel-reason/list",
+      "method": "POST",
+      "operationId": "PostingAPI_GetPostingFbsCancelReasonList",
+      "summary": "Причины отмены отправлений",
+      "description": "Возвращает список причин отмены для всех отправлений.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Причины отмены отправлений",
+        "description": "Возвращает список причин отмены для всех отправлений.",
+        "operationId": "PostingAPI_GetPostingFbsCancelReasonList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Причины отмены отправлений",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingCancelReasonListResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "id": 352,
+                      "title": "Товар закончился на складе продавца",
+                      "type_id": "seller",
+                      "is_available_for_cancellation": true
+                    },
+                    {
+                      "id": 401,
+                      "title": "Продавец отклонил арбитраж",
+                      "type_id": "seller",
+                      "is_available_for_cancellation": false
+                    },
+                    {
+                      "id": 402,
+                      "title": "Другое (вина продавца)",
+                      "type_id": "seller",
+                      "is_available_for_cancellation": true
+                    },
+                    {
+                      "id": 666,
+                      "title": "Возврат из службы доставки: нет доставки в указанный регион",
+                      "type_id": "seller",
+                      "is_available_for_cancellation": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/product/cancel",
+      "method": "POST",
+      "operationId": "PostingAPI_CancelFbsPostingProduct",
+      "summary": "Отменить отправку некоторых товаров в отправлении",
+      "description": "Используйте метод, если вы не можете отправить часть продуктов из отправления.\n\nЧтобы получить идентификаторы причин отмены `cancel_reason_id` при работе по схемам FBS или rFBS, используйте метод [/v2/posting/fbs/cancel-reason/list](#operation/PostingAPI_GetPostingFbsCancelReasonList).\n\nУсловно-доставленные отправления отменить нельзя.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отменить отправку некоторых товаров в отправлении",
+        "description": "Используйте метод, если вы не можете отправить часть продуктов из отправления.\n\nЧтобы получить идентификаторы причин отмены `cancel_reason_id` при работе по схемам FBS или rFBS, используйте метод [/v2/posting/fbs/cancel-reason/list](#operation/PostingAPI_GetPostingFbsCancelReasonList).\n\nУсловно-доставленные отправления отменить нельзя.\n",
+        "operationId": "PostingAPI_CancelFbsPostingProduct",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingPostingProductCancelRequest"
+              },
+              "example": {
+                "cancel_reason_id": 352,
+                "cancel_reason_message": "Product is out of stock",
+                "items": [
+                  {
+                    "quantity": 5,
+                    "sku": 150587396
+                  }
+                ],
+                "posting_number": "33920113-1231-1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Отправка отменена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingPostingProductCancelResponse"
+                },
+                "example": {
+                  "result": ""
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/cancel",
+      "method": "POST",
+      "operationId": "PostingAPI_CancelFbsPosting",
+      "summary": "Отменить отправление",
+      "description": "Меняет статус отправления на `cancelled`.\n\nПеред началом работы проверьте причины отмены для конкретного отправления методом [/v1/posting/fbs/cancel-reason](#operation/PostingAPI_GetPostingFbsCancelReasonV1).\n\nУсловно-доставленные отправления отменить нельзя.\n\nЕсли значение параметра `cancel_reason_id` — 402, заполните поле `cancel_reason_message`.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отменить отправление",
+        "description": "Меняет статус отправления на `cancelled`.\n\nПеред началом работы проверьте причины отмены для конкретного отправления методом [/v1/posting/fbs/cancel-reason](#operation/PostingAPI_GetPostingFbsCancelReasonV1).\n\nУсловно-доставленные отправления отменить нельзя.\n\nЕсли значение параметра `cancel_reason_id` — 402, заполните поле `cancel_reason_message`.\n",
+        "operationId": "PostingAPI_CancelFbsPosting",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingCancelFbsPostingRequest"
+              },
+              "example": {
+                "cancel_reason_id": 352,
+                "cancel_reason_message": "Product is out of stock",
+                "posting_number": "33920113-1231-1"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Отправление отменено",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingBooleanResponse"
+                },
+                "example": {
+                  "result": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/arbitration",
+      "method": "POST",
+      "operationId": "PostingAPI_MoveFbsPostingToArbitration",
+      "summary": "Открыть спор по отправлению",
+      "description": "Если отправление передано в доставку, но не просканировано в сортировочном центре, можно открыть спор. Открытый спор переведёт отправление в статус `arbitration`.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Открыть спор по отправлению",
+        "description": "Если отправление передано в доставку, но не просканировано в сортировочном центре, можно открыть спор. Открытый спор переведёт отправление в статус `arbitration`.",
+        "operationId": "PostingAPI_MoveFbsPostingToArbitration",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingMovePostingRequest"
+              },
+              "example": {
+                "posting_number": [
+                  "33920143-1195-1"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Открыт спор по отправлению",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingBooleanResponse"
+                },
+                "example": {
+                  "result": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v2/posting/fbs/awaiting-delivery",
+      "method": "POST",
+      "operationId": "PostingAPI_MoveFbsPostingToAwaitingDelivery",
+      "summary": "Передать отправление к отгрузке",
+      "description": "Передает спорные заказы к отгрузке. Статус отправления изменится на `awaiting_deliver`.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Передать отправление к отгрузке",
+        "description": "Передает спорные заказы к отгрузке. Статус отправления изменится на `awaiting_deliver`.",
+        "operationId": "PostingAPI_MoveFbsPostingToAwaitingDelivery",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2MovePostingToAwaitingDeliveryRequest"
+              },
+              "example": {
+                "posting_number": [
+                  "33920143-1195-1"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Отправление передано к отгрузке",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/postingBooleanResponse"
+                },
+                "example": {
+                  "result": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    },
+    {
+      "path": "/v1/posting/fbs/pick-up-code/verify",
+      "method": "POST",
+      "operationId": "PostingAPI_PostingFBSPickupCodeVerify",
+      "summary": "Проверить код курьера",
+      "description": "Метод позволяет проверить код курьера при передаче отправлений realFBS Express. Подробнее о передаче отправлений в [Базе знаний продавца](https://seller-edu.ozon.ru/contract-for-sellers/regulations-fbs-realfbs/reglament-prodaji-so-svoego-sklada-fbs-express#7-порядок-передачи-отправлении-через-партнёров-ozon-при-экспресс-доставке).",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FBS"
+        ],
+        "summary": "Проверить код курьера",
+        "description": "Метод позволяет проверить код курьера при передаче отправлений realFBS Express. Подробнее о передаче отправлений в [Базе знаний продавца](https://seller-edu.ozon.ru/contract-for-sellers/regulations-fbs-realfbs/reglament-prodaji-so-svoego-sklada-fbs-express#7-порядок-передачи-отправлении-через-партнёров-ozon-при-экспресс-доставке).",
+        "operationId": "PostingAPI_PostingFBSPickupCodeVerify",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1PostingFBSPickupCodeVerifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Результат проверки",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1PostingFBSPickupCodeVerifyResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/posting/global/etgb",
+      "method": "POST",
+      "operationId": "PostingAPI_GetEtgb",
+      "summary": "Таможенные декларации ETGB",
+      "description": "Метод для получения таможенных деклараций Elektronik Ticaret Gümrük Beyannamesi (ETGB) для продавцов из Турции.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FBS"
+        ],
+        "summary": "Таможенные декларации ETGB",
+        "description": "Метод для получения таможенных деклараций Elektronik Ticaret Gümrük Beyannamesi (ETGB) для продавцов из Турции.\n",
+        "operationId": "PostingAPI_GetEtgb",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetEtgbRequest"
+              },
+              "example": {
+                "date": {
+                  "from": "2023-02-13T12:13:16.818Z",
+                  "to": "2023-02-13T12:13:16.818Z"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о декларациях",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetEtgbResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/posting/unpaid-legal/product/list",
+      "method": "POST",
+      "operationId": "PostingAPI_UnpaidLegalProductList",
+      "summary": "Список неоплаченных товаров, заказанных юридическими лицами",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список неоплаченных товаров, заказанных юридическими лицами",
+        "operationId": "PostingAPI_UnpaidLegalProductList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1PostingUnpaidLegalProductListRequest"
+              },
+              "example": {
+                "cursor": "",
+                "limit": 1000
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список неоплаченных товаров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1PostingUnpaidLegalProductListResponse"
+                },
+                "example": {
+                  "products": [
+                    {
+                      "product_id": 145123054,
+                      "offer_id": "10032",
+                      "quantity": 1,
+                      "name": "Телевизор LG",
+                      "image_url": "https://url"
+                    }
+                  ],
+                  "cursor": "hCGiPPopcBFMgMErdzaCEpzQfinuPyEhUoSmBMADuoFAhBjXeA=="
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBS"
+        ]
+      }
+    }
+  ],
+  "schemas": {
+    "postingv3GetFbsPostingUnfulfilledListRequest": {
+      "required": [
+        "filter",
+        "limit",
+        "offset"
+      ],
+      "properties": {
+        "dir": {
+          "type": "string",
+          "description": "Направление сортировки:\n  - `asc` — по возрастанию,\n  - `desc` — по убыванию.\n"
+        },
+        "filter": {
+          "$ref": "#/components/schemas/postingv3GetFbsPostingUnfulfilledListRequestFilter"
+        },
+        "limit": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество значений в ответе:\n  - максимум — 1000,\n  - минимум — 1.\n"
+        },
+        "offset": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество элементов, которое будет пропущено в ответе. Например, если `offset = 10`, то ответ начнётся с 11-го найденного элемента."
+        },
+        "with": {
+          "$ref": "#/components/schemas/postingv3FbsPostingWithParams"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingv3GetFbsPostingUnfulfilledListRequestFilter": {
+      "required": [
+        "cutoff_from",
+        "cutoff_to"
+      ],
+      "properties": {
+        "cutoff_from": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Фильтр по времени, до которого продавцу нужно собрать заказ. Начало периода.\n\nФормат: YYYY-MM-DDThh:mm:ss.mcsZ.\nПример: 2020-03-18T07:34:50.359Z.\n"
+        },
+        "cutoff_to": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Фильтр по времени, до которого продавцу нужно собрать заказ. Конец периода.\n\nФормат: YYYY-MM-DDThh:mm:ss.mcsZ.\nПример: 2020-03-18T07:34:50.359Z.\n"
+        },
+        "delivering_date_from": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Минимальная дата передачи отправления в доставку."
+        },
+        "delivering_date_to": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Максимальная дата передачи отправления в доставку."
+        },
+        "delivery_method_id": {
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": "array",
+          "description": "Идентификатор способа доставки. Можно получить с помощью метода [/v1/delivery-method/list](#operation/WarehouseAPI_DeliveryMethodList)."
+        },
+        "is_quantum": {
+          "type": "boolean",
+          "description": "Укажите `true`, чтобы получить только отправления квантов.\n\nПо умолчанию — `false`, в ответе придут все отправления.\n"
+        },
+        "provider_id": {
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": "array",
+          "description": "Идентификатор службы доставки. Можно получить с помощью метода [/v1/delivery-method/list](#operation/WarehouseAPI_DeliveryMethodList)."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус отправления:\n- `acceptance_in_progress` — идёт приёмка,\n- `awaiting_approve` — ожидает подтверждения,\n- `awaiting_packaging` — ожидает упаковки,\n- `awaiting_registration` — ожидает регистрации,\n- `awaiting_deliver` — ожидает отгрузки,\n- `arbitration` — арбитраж,\n- `client_arbitration` — клиентский арбитраж доставки,\n- `delivering` — доставляется,\n- `driver_pickup` — у водителя,\n- `not_accepted` — не принят на сортировочном центре.\n"
+        },
+        "warehouse_id": {
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": "array",
+          "description": "Идентификатор склада. Можно получить с помощью метода [/v1/warehouse/list](#operation/WarehouseAPI_WarehouseList)."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр запроса.\n\nИспользуйте фильтр либо по времени сборки — `cutoff`, либо по дате передачи отправления в доставку — `delivering_date`.\nЕсли использовать их вместе, в ответе вернётся ошибка.\n\nЧтобы использовать фильтр по времени сборки, заполните поля `cutoff_from` и `cutoff_to`.\n\nЧтобы использовать фильтр по дате передачи отправления в доставку, заполните поля `delivering_date_from` и `delivering_date_to`.\n"
+    },
+    "postingv3FbsPostingWithParams": {
+      "properties": {
+        "analytics_data": {
+          "type": "boolean",
+          "description": "Добавить в ответ данные аналитики."
+        },
+        "barcodes": {
+          "type": "boolean",
+          "description": "Добавить в ответ штрихкоды отправления."
+        },
+        "financial_data": {
+          "type": "boolean",
+          "description": "Добавить в ответ финансовые данные."
+        },
+        "legal_info": {
+          "type": "boolean",
+          "description": "Добавить в ответ юридическую информацию."
+        },
+        "translit": {
+          "type": "boolean",
+          "description": "Выполнить транслитерацию возвращаемых значений."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Дополнительные поля, которые нужно добавить в ответ."
+    },
+    "postingv3GetFbsPostingUnfulfilledListResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/postingv3GetFbsPostingUnfulfilledListResponseResult"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingv3GetFbsPostingUnfulfilledListResponseResult": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Счётчик элементов в ответе."
+        },
+        "postings": {
+          "items": {
+            "$ref": "#/components/schemas/v3FbsPosting"
+          },
+          "type": "array",
+          "description": "Список отправлений и подробная информация по каждому."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса."
+    },
+    "v3FbsPosting": {
+      "properties": {
+        "addressee": {
+          "$ref": "#/components/schemas/v3AddresseeFbsLists"
+        },
+        "analytics_data": {
+          "$ref": "#/components/schemas/v3FbsPostingAnalyticsData"
+        },
+        "available_actions": {
+          "items": {
+            "type": "string"
+          },
+          "description": "Доступные действия и информация об отправлении:\n- `arbitration` — открыть спор;\n- `awaiting_delivery` — перевести в статус «Ожидает отгрузки»;\n- `can_create_chat` — начать чат с покупателем;\n- `cancel` — отменить отправление;\n- `click_track_number` — просмотреть по трек-номеру историю изменения статусов в личном кабинете;\n- `customer_phone_available` — телефон покупателя;\n- `has_weight_products` — весовые товары в отправлении;\n- `hide_region_and_city` — скрыть регион и город покупателя в отчёте;\n- `invoice_get` —  получить информацию из счёта-фактуры;\n- `invoice_send` — создать счёт-фактуру;\n- `invoice_update` — отредактировать счёт-фактуру;\n- `label_download_big` — скачать большую этикетку;\n- `label_download_small` — скачать маленькую этикетку;\n- `label_download` — скачать этикетку;\n- `non_int_delivered` — перевести в статус «Условно доставлен»;\n- `non_int_delivering` — перевести в статус «Доставляется»;\n- `non_int_last_mile` — перевести в статус «Курьер в пути»;\n- `product_cancel` — отменить часть товаров в отправлении;\n- `set_cutoff` — необходимо указать дату отгрузки, воспользуйтесь методом [/v1/posting/cutoff/set](#operation/PostingAPI_SetPostingCutoff);\n- `set_timeslot` — изменить время доставки покупателю;\n- `set_track_number` — указать или изменить трек-номер;\n- `ship_async_in_process` — отправление собирается;\n- `ship_async_retry` — собрать отправление повторно после ошибки сборки;\n- `ship_async` — собрать отправление;\n- `ship_with_additional_info` — необходимо заполнить дополнительную информацию;\n- `ship` — собрать отправление;\n- `update_cis` — изменить дополнительную информацию.\n"
+        },
+        "barcodes": {
+          "$ref": "#/components/schemas/v3Barcodes"
+        },
+        "cancellation": {
+          "$ref": "#/components/schemas/v3Cancellation"
+        },
+        "customer": {
+          "$ref": "#/components/schemas/v3CustomerFbsLists"
+        },
+        "delivering_date": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата передачи отправления в доставку."
+        },
+        "delivery_method": {
+          "$ref": "#/components/schemas/v3DeliveryMethod"
+        },
+        "financial_data": {
+          "$ref": "#/components/schemas/v3PostingFinancialData"
+        },
+        "in_process_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время начала обработки отправления."
+        },
+        "is_express": {
+          "type": "boolean",
+          "description": "Если использовалась быстрая доставка Ozon Express — `true`."
+        },
+        "is_multibox": {
+          "type": "boolean",
+          "description": "Признак, что в отправлении есть многокоробочный товар и нужно передать количество коробок для него:\n\n- `true` — до сборки передайте количество коробок через метод [/v3/posting/multiboxqty/set](#operation/PostingAPI_PostingMultiBoxQtySetV3).\n- `false` — отправление собрано с указанием количества коробок в параметре `multi_box_qty` или в отправлении нет многокоробочного товара.\n"
+        },
+        "legal_info": {
+          "$ref": "#/components/schemas/v2FboSinglePostingLegalInfo"
+        },
+        "multi_box_qty": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество коробок, в которые упакован товар."
+        },
+        "optional": {
+          "$ref": "#/components/schemas/v3FbsPostingDetailOptional"
+        },
+        "order_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор заказа, к которому относится отправление."
+        },
+        "order_number": {
+          "type": "string",
+          "description": "Номер заказа, к которому относится отправление."
+        },
+        "parent_posting_number": {
+          "type": "string",
+          "description": "Номер родительского отправления, в результате разделения которого появилось текущее."
+        },
+        "pickup_code_verified_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата и время успешной валидации кода курьера. Чтобы проверить код курьера, воспользуйтесь методом [/v1/posting/fbs/pick-up-code/verify](#operation/PostingAPI_PostingFBSPickupCodeVerify)."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "items": {
+            "$ref": "#/components/schemas/v3FbsPostingProduct"
+          },
+          "type": "array",
+          "description": "Список товаров в отправлении."
+        },
+        "prr_option": {
+          "type": "string",
+          "description": "Код услуги погрузочно-разгрузочных работ:\n- `lift` — подъём на лифте.\n- `stairs` — подъём по лестнице.\n- `none` — покупатель отказался от услуги, поднимать товары не нужно.\n- `delivery_default` — доставка включена в стоимость, по условиям оферты нужно доставить товар на этаж.\n\nПараметр актуален для КГТ-отправлений с доставкой силами продавца или интегрированной службой.\n"
+        },
+        "quantum_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор эконом-товара."
+        },
+        "requirements": {
+          "$ref": "#/components/schemas/v3FbsPostingRequirementsV3"
+        },
+        "shipment_date": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время, до которой необходимо собрать отправление. Показываем рекомендованное время отгрузки. По истечении этого времени начнёт применяться новый тариф, информацию о нём уточняйте в поле `tariffication`."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус отправления:\n- `acceptance_in_progress` — идёт приёмка,\n- `arbitration` — арбитраж,\n- `awaiting_approve` — ожидает подтверждения,\n- `awaiting_deliver` — ожидает отгрузки,\n- `awaiting_packaging` — ожидает упаковки,\n- `awaiting_registration` — ожидает регистрации,\n- `awaiting_verification` — создано,\n- `cancelled` — отменено,\n- `cancelled_from_split_pending` — отменён из-за разделения отправления,\n- `client_arbitration` — клиентский арбитраж доставки,\n- `delivering` — доставляется,\n- `driver_pickup` — у водителя,\n- `not_accepted` — не принят на сортировочном центре,\n- `sent_by_seller` — отправлено продавцом.\n"
+        },
+        "substatus": {
+          "type": "string",
+          "description": "Подстатус отправления:\n- `posting_acceptance_in_progress`— идёт приёмка,\n- `posting_in_arbitration` — арбитраж,\n- `posting_created` — создано,\n- `posting_in_carriage` — в перевозке,\n- `posting_not_in_carriage` — не добавлено в перевозку,\n- `posting_registered` — зарегистрировано,\n- `posting_transferring_to_delivery` (`status=awaiting_deliver`) — передаётся в доставку,\n- `posting_awaiting_passport_data` — ожидает паспортных данных, \n- `posting_created` — создано,\n- `posting_awaiting_registration` — ожидает регистрации,\n- `posting_registration_error` — ошибка регистрации,\n- `posting_transferring_to_delivery` (`status=awaiting_registration`) — передаётся курьеру,\n- `posting_split_pending` — создано,\n- `posting_canceled` — отменено,\n- `posting_in_client_arbitration` — клиентский арбитраж доставки,\n- `posting_delivered` — доставлено,\n- `posting_received` — получено,\n- `posting_conditionally_delivered` — условно доставлено,\n- `posting_in_courier_service` — курьер в пути,\n- `posting_in_pickup_point` — в пункте выдачи,\n- `posting_on_way_to_city` — в пути в ваш город,\n- `posting_on_way_to_pickup_point` — в пути в пункт выдачи,\n- `posting_returned_to_warehouse` — возвращено на склад,\n- `posting_transferred_to_courier_service` — передаётся в службу доставки,\n- `posting_driver_pick_up` — у водителя,\n- `posting_not_in_sort_center` — не принято на сортировочном центре,\n- `sent_by_seller` — отправлено продавцом.\n"
+        },
+        "tpl_integration_type": {
+          "type": "string",
+          "description": "Тип интеграции со службой доставки:\n  - `ozon` — доставка службой Ozon.\n  - `3pl_tracking` — доставка интегрированной службой.\n  - `non_integrated` — доставка сторонней службой.\n  - `aggregator` — доставка через партнёрскую доставку Ozon.\n  - `hybryd` — схема доставки Почты России.\n"
+        },
+        "tracking_number": {
+          "type": "string",
+          "description": "Трек-номер отправления."
+        },
+        "tariffication": {
+          "items": {
+            "$ref": "#/components/schemas/v3FbsTariffication"
+          },
+          "type": "array",
+          "description": "Информация по тарификации отгрузки."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v3AddresseeFbsLists": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Имя покупателя."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Контактный телефон.\n\nВсегда возвращает пустую строку `\"\"`.\n"
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Контактные данные получателя."
+    },
+    "v3FbsPostingAnalyticsData": {
+      "properties": {
+        "city": {
+          "type": "string",
+          "description": "Город доставки. Только для отправлений rFBS и продавцов из СНГ."
+        },
+        "delivery_date_begin": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время начала доставки."
+        },
+        "delivery_date_end": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время конца доставки."
+        },
+        "delivery_type": {
+          "type": "string",
+          "description": "Способ доставки."
+        },
+        "is_legal": {
+          "type": "boolean",
+          "description": "Признак, что получатель юридическое лицо:\n  - `true` — юридическое лицо,\n  - `false` — физическое лицо.\n"
+        },
+        "is_premium": {
+          "type": "boolean",
+          "description": "Наличие подписки Premium."
+        },
+        "payment_type_group_name": {
+          "type": "string",
+          "description": "Способ оплаты: \n- `картой онлайн`,\n- `Ozon Карта`,\n- `автосписание с Ozon Карты при выдаче`,\n- `сохранённой картой при получении`,\n- `Система Быстрых Платежей`, \n- `Ozon Рассрочка`, \n- `оплата на расчётный счёт`,\n- `SberPay`.\n"
+        },
+        "region": {
+          "type": "string",
+          "description": "Регион доставки. Только для отправлений rFBS."
+        },
+        "tpl_provider": {
+          "type": "string",
+          "description": "Служба доставки."
+        },
+        "tpl_provider_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор службы доставки."
+        },
+        "warehouse": {
+          "type": "string",
+          "description": "Название склада отправки заказа."
+        },
+        "warehouse_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор склада."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Данные аналитики."
+    },
+    "v3Barcodes": {
+      "properties": {
+        "lower_barcode": {
+          "type": "string",
+          "description": "Нижний штрихкод на маркировке отправления."
+        },
+        "upper_barcode": {
+          "type": "string",
+          "description": "Верхний штрихкод на маркировке отправления."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Штрихкоды отправления."
+    },
+    "v3Cancellation": {
+      "properties": {
+        "affect_cancellation_rating": {
+          "type": "boolean",
+          "description": "Если отмена влияет на рейтинг продавца — `true`."
+        },
+        "cancel_reason": {
+          "type": "string",
+          "description": "Причина отмены."
+        },
+        "cancel_reason_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор причины отмены отправления."
+        },
+        "cancellation_initiator": {
+          "type": "string",
+          "description": "Инициатор отмены:\n- `Продавец`, \n- `Клиент` или `покупатель`,\n- `Ozon`,  \n- `Система`, \n- `Служба доставки`.\n"
+        },
+        "cancellation_type": {
+          "type": "string",
+          "description": "Тип отмены отправления:\n- `seller` — отменено продавцом;\n- `client` или `customer` — отменено покупателем;\n- `ozon` — отменено Ozon;\n- `system`— отменено системой;\n- `delivery` — отменено службой доставки.\n"
+        },
+        "cancelled_after_ship": {
+          "type": "boolean",
+          "description": "Если отмена произошла после сборки отправления — `true`."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Информация об отмене."
+    },
+    "v3CustomerFbsLists": {
+      "properties": {
+        "address": {
+          "$ref": "#/components/schemas/v3Address"
+        },
+        "customer_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор покупателя."
+        },
+        "name": {
+          "type": "string",
+          "description": "Имя покупателя."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Контактный телефон.\n\nВсегда возвращает пустую строку `\"\"`.\n"
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Данные о покупателе."
+    },
+    "v3Address": {
+      "properties": {
+        "address_tail": {
+          "type": "string",
+          "description": "Адрес в текстовом формате."
+        },
+        "city": {
+          "type": "string",
+          "description": "Город доставки."
+        },
+        "comment": {
+          "type": "string",
+          "description": "Комментарий к заказу."
+        },
+        "country": {
+          "type": "string",
+          "description": "Страна доставки."
+        },
+        "district": {
+          "type": "string",
+          "description": "Район доставки."
+        },
+        "latitude": {
+          "format": "double",
+          "type": "number",
+          "description": "Широта."
+        },
+        "longitude": {
+          "format": "double",
+          "type": "number",
+          "description": "Долгота."
+        },
+        "provider_pvz_code": {
+          "type": "string",
+          "description": "Код пункта выдачи заказов 3PL провайдера."
+        },
+        "pvz_code": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Код пункта выдачи заказов."
+        },
+        "region": {
+          "type": "string",
+          "description": "Регион доставки."
+        },
+        "zip_code": {
+          "type": "string",
+          "description": "Почтовый индекс получателя."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Информация об адресе доставки."
+    },
+    "v3DeliveryMethod": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор способа доставки."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название способа доставки."
+        },
+        "tpl_provider": {
+          "type": "string",
+          "description": "Служба доставки."
+        },
+        "tpl_provider_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор службы доставки."
+        },
+        "warehouse": {
+          "type": "string",
+          "description": "Название склада."
+        },
+        "warehouse_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор склада."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Метод доставки."
+    },
+    "v3PostingFinancialData": {
+      "properties": {
+        "cluster_from": {
+          "type": "string",
+          "description": "Код региона, откуда отправляется заказ."
+        },
+        "cluster_to": {
+          "type": "string",
+          "description": "Код региона, куда доставляется заказ."
+        },
+        "products": {
+          "items": {
+            "$ref": "#/components/schemas/PostingFinancialDataProduct"
+          },
+          "type": "array",
+          "description": "Список товаров в заказе."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Данные о стоимости товара, размере скидки, выплате и комиссии."
+    },
+    "PostingFinancialDataProduct": {
+      "properties": {
+        "actions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Список акций."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта ваших цен. Cовпадает с валютой, которая установлена в настройках личного кабинета.\n\nВозможные значения: \n  - `RUB` — российский рубль,\n  - `BYN` — белорусский рубль,\n  - `KZT` — тенге,\n  - `EUR` — евро,\n  - `USD` — доллар США,\n  - `CNY` — юань.\n"
+        },
+        "commission_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Размер комиссии за товар."
+        },
+        "commission_percent": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Процент комиссии."
+        },
+        "commissions_currency_code": {
+          "type": "string",
+          "description": "Код валюты, в которой рассчитывались комиссии."
+        },
+        "old_price": {
+          "format": "double",
+          "type": "number",
+          "description": "Цена до учёта скидок. На карточке товара отображается зачёркнутой."
+        },
+        "payout": {
+          "format": "double",
+          "type": "number",
+          "description": "Выплата продавцу."
+        },
+        "price": {
+          "format": "double",
+          "type": "number",
+          "description": "Цена товара с учётом скидок — это значение показывается на карточке товара."
+        },
+        "product_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "quantity": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество товара в отправлении."
+        },
+        "total_discount_percent": {
+          "format": "double",
+          "type": "number",
+          "description": "Процент скидки."
+        },
+        "total_discount_value": {
+          "format": "double",
+          "type": "number",
+          "description": "Сумма скидки."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v2FboSinglePostingLegalInfo": {
+      "type": "object",
+      "description": "Юридическая информация о покупателе.",
+      "properties": {
+        "company_name": {
+          "type": "string",
+          "description": "Название компании."
+        },
+        "inn": {
+          "type": "string",
+          "description": "ИНН."
+        },
+        "kpp": {
+          "type": "string",
+          "description": "КПП."
+        }
+      }
+    },
+    "v3FbsPostingDetailOptional": {
+      "type": "object",
+      "title": "object",
+      "description": "Список товаров с дополнительными характеристиками.",
+      "properties": {
+        "products_with_possible_mandatory_mark": {
+          "type": "array",
+          "description": "Список товаров с возможной маркировкой."
+        }
+      }
+    },
+    "v3FbsPostingProduct": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "price": {
+          "type": "string",
+          "description": "Цена товара."
+        },
+        "quantity": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество товара в отправлении."
+        },
+        "sku": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта ваших цен. Совпадает с валютой, которая установлена в настройках личного кабинета.\n\nВозможные значения: \n  - `RUB` — российский рубль,\n  - `BYN` — белорусский рубль,\n  - `KZT` — тенге,\n  - `EUR` — евро,\n  - `USD` — доллар США,\n  - `CNY` — юань.\n"
+        },
+        "is_blr_traceable": {
+          "type": "boolean",
+          "description": "Признак прослеживаемости товара."
+        },
+        "is_marketplace_buyout": {
+          "type": "boolean",
+          "description": "Признак выкупа товара."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v3FbsPostingRequirementsV3": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "products_requiring_change_country": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Список идентификаторов товаров (SKU), для которых нужно изменить страну-изготовитель. Чтобы изменить страну-изготовитель, используйте методы [/v2/posting/fbs/product/country/list](#operation/PostingAPI_ListCountryProductFbsPostingV2) и [/v2/posting/fbs/product/country/set](#operation/PostingAPI_SetCountryProductFbsPostingV2)."
+        },
+        "products_requiring_gtd": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Список идентификаторов товаров (SKU), для которых нужно передать номера таможенной декларации (ГТД).\n\nДля сборки отправления передайте для всех перечисленных товаров номер таможенной декларации или информацию о том,\nчто номера нет, с помощью метода [/v3/posting/fbs/ship/package](#operation/PostingAPI_PackageShipFbsPostingV3)\nили [/v3/posting/fbs/ship](#operation/PostingAPI_ShipFbsPostingV3).\n"
+        },
+        "products_requiring_country": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Список идентификаторов товаров (SKU), для которых нужно передать информацию о стране-изготовителе.\n\nДля сборки отправления передайте информацию о стране-изготовителе для всех перечисленных товаров с помощью метода [/v2/posting/fbs/product/country/set](#operation/PostingAPI_SetCountryProductFbsPostingV2).\n"
+        },
+        "products_requiring_mandatory_mark": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Список идентификаторов товаров (SKU), для которых нужно передать маркировку «Честный ЗНАК».\n"
+        },
+        "products_requiring_jw_uin": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Список товаров, для которых нужно передать уникальный идентификационный номер (УИН) ювелирного изделия."
+        },
+        "products_requiring_rnpt": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Список идентификаторов товаров (SKU), для которых нужно передать регистрационный номер партии товара (РНПТ).\n"
+        }
+      },
+      "description": "Cписок продуктов, для которых нужно передать страну-изготовителя, номер грузовой таможенной декларации (ГТД), регистрационный номер партии товара (РНПТ) или маркировку «Честный ЗНАК», чтобы перевести отправление в следующий статус."
+    },
+    "v3FbsTariffication": {
+      "properties": {
+        "current_tariff_rate": {
+          "type": "number",
+          "format": "double",
+          "description": "Текущий процент тарификации."
+        },
+        "current_tariff_type": {
+          "type": "string",
+          "description": "Текущий тип тарификации — скидка или надбавка."
+        },
+        "current_tariff_charge": {
+          "type": "string",
+          "description": "Текущая сумма скидки или надбавки."
+        },
+        "current_tariff_charge_currency_code": {
+          "type": "string",
+          "description": "Валюта суммы."
+        },
+        "next_tariff_rate": {
+          "type": "number",
+          "format": "double",
+          "description": "Процент, по которому будет тарифицироваться отправление через указанное в параметре `next_tariff_starts_at` время."
+        },
+        "next_tariff_type": {
+          "type": "string",
+          "description": "Тип тарифа, по которому будет тарифицироваться отправление через указанное в параметре `next_tariff_starts_at` время — скидка или надбавка."
+        },
+        "next_tariff_charge": {
+          "type": "string",
+          "description": "Сумма скидки или надбавки на следующем шаге тарификации."
+        },
+        "next_tariff_starts_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата и время, когда начнёт применяться новый тариф.\n\nФормат: `YYYY-MM-DDThh:mm:ss.mcsZ`. \n\nПример: `2023-11-13T08:05:57.657Z`.\n"
+        },
+        "next_tariff_charge_currency_code": {
+          "type": "string",
+          "description": "Валюта нового тарифа."
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "postingv3GetFbsPostingListRequest": {
+      "required": [
+        "filter",
+        "limit",
+        "offset"
+      ],
+      "properties": {
+        "dir": {
+          "type": "string",
+          "description": "Направление сортировки:\n  - `asc` — по возрастанию,\n  - `desc` — по убыванию.\n"
+        },
+        "filter": {
+          "$ref": "#/components/schemas/postingv3GetFbsPostingListRequestFilter"
+        },
+        "limit": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество значений в ответе:\n  - максимум — 1000,\n  - минимум — 1.\n"
+        },
+        "offset": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество элементов, которое будет пропущено в ответе. Например, если `offset = 10`, то ответ начнётся с 11-го найденного элемента."
+        },
+        "with": {
+          "$ref": "#/components/schemas/postingv3FbsPostingWithParams"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingv3GetFbsPostingListRequestFilter": {
+      "required": [
+        "since",
+        "to"
+      ],
+      "properties": {
+        "delivery_method_id": {
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "description": "Идентификатор способа доставки. Можно получить с помощью метода [/v1/delivery-method/list](#operation/WarehouseAPI_DeliveryMethodList).",
+          "type": "array"
+        },
+        "is_quantum": {
+          "type": "boolean",
+          "description": "Укажите `true`, чтобы получить только отправления квантов.\n\nПо умолчанию — `false`, в ответе придут все отправления.\n"
+        },
+        "order_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор заказа."
+        },
+        "provider_id": {
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "description": "Идентификатор службы доставки. Можно получить с помощью метода [/v1/delivery-method/list](#operation/WarehouseAPI_DeliveryMethodList).",
+          "type": "array"
+        },
+        "since": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата начала периода, за который нужно получить список отправлений.\n\nФормат UTC: ГГГГ-ММ-ДДTЧЧ:ММ:ССZ.\n\nПример: 2019-08-24T14:15:22Z.\n"
+        },
+        "to": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата конца периода, за который нужно получить список отправлений.\n\nФормат UTC: ГГГГ-ММ-ДДTЧЧ:ММ:ССZ.\n\nПример: 2019-08-24T14:15:22Z.\n"
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус отправления:\n- `awaiting_registration` — ожидает регистрации,\n- `acceptance_in_progress` — идёт приёмка,\n- `awaiting_approve` — ожидает подтверждения,\n- `awaiting_packaging` — ожидает упаковки,\n- `awaiting_deliver` — ожидает отгрузки,\n- `arbitration` — арбитраж,\n- `client_arbitration` — клиентский арбитраж доставки,\n- `delivering` — доставляется,\n- `driver_pickup` — у водителя,\n- `delivered` — доставлено,\n- `cancelled` — отменено,\n- `not_accepted` — не принят на сортировочном центре,\n- `sent_by_seller` – отправлено продавцом.\n"
+        },
+        "warehouse_id": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Идентификатор склада. Можно получить с помощью метода [/v1/warehouse/list](#operation/WarehouseAPI_WarehouseList)."
+        },
+        "last_changed_status_date": {
+          "$ref": "#/components/schemas/postinglistV3status"
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр."
+    },
+    "postinglistV3status": {
+      "type": "object",
+      "title": "object",
+      "description": "Период, в который последний раз изменялся статус у отправлений.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата начала периода."
+        },
+        "to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата окончания периода."
+        }
+      }
+    },
+    "v3GetFbsPostingListResponseV3": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v3GetFbsPostingListResponseV3Result"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v3GetFbsPostingListResponseV3Result": {
+      "properties": {
+        "has_next": {
+          "type": "boolean",
+          "description": "Признак, что в ответе вернули не весь массив отправлений:\n- `true` — необходимо сделать новый запрос с другим значением `offset`, чтобы получить информацию об остальных отправлениях;\n- `false` — в ответе вернули весь массив отправлений для фильтра, который был задан в запросе.\n"
+        },
+        "postings": {
+          "items": {
+            "$ref": "#/components/schemas/v3FbsPosting"
+          },
+          "type": "array",
+          "description": "Информация об отправлении."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Массив отправлений."
+    },
+    "postingv3GetFbsPostingRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Идентификатор отправления."
+        },
+        "with": {
+          "$ref": "#/components/schemas/postingv3FbsPostingWithParamsExamplars"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingv3FbsPostingWithParamsExamplars": {
+      "properties": {
+        "analytics_data": {
+          "type": "boolean",
+          "description": "Добавить в ответ данные аналитики."
+        },
+        "barcodes": {
+          "type": "boolean",
+          "description": "Добавить в ответ штрихкоды отправления."
+        },
+        "financial_data": {
+          "type": "boolean",
+          "description": "Добавить в ответ финансовые данные."
+        },
+        "legal_info": {
+          "type": "boolean",
+          "description": "Добавить в ответ юридическую информацию."
+        },
+        "product_exemplars": {
+          "type": "boolean",
+          "description": "Добавить в ответ данные о продуктах и их экземплярах."
+        },
+        "related_postings": {
+          "type": "boolean",
+          "description": "Добавить в ответ номера связанных отправлений. Связанные отправления — те, на которое было разделено родительское отправление при сборке.\n"
+        },
+        "translit": {
+          "type": "boolean",
+          "description": "Выполнить транслитерацию возвращаемых значений."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Дополнительные поля, которые нужно добавить в ответ."
+    },
+    "v3GetFbsPostingResponseV3": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v3FbsPostingDetail"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v3FbsPostingDetail": {
+      "properties": {
+        "additional_data": {
+          "items": {
+            "$ref": "#/components/schemas/v3AdditionalDataItem"
+          },
+          "type": "array"
+        },
+        "addressee": {
+          "$ref": "#/components/schemas/v3Addressee"
+        },
+        "analytics_data": {
+          "$ref": "#/components/schemas/v3FbsPostingAnalyticsData"
+        },
+        "available_actions": {
+          "items": {
+            "type": "string"
+          },
+          "description": "Доступные действия и информация об отправлении:\n- `arbitration` — открыть спор;\n- `awaiting_delivery` — перевести в статус «Ожидает отгрузки»;\n- `can_create_chat` — начать чат с покупателем;\n- `cancel` — отменить отправление;\n- `click_track_number` — просмотреть по трек-номеру историю изменения статусов в личном кабинете;\n- `customer_phone_available` — телефон покупателя;\n- `has_weight_products` — весовые товары в отправлении;\n- `hide_region_and_city` — скрыть регион и город покупателя в отчёте;\n- `invoice_get` —  получить информацию из счёта-фактуры;\n- `invoice_send` — создать счёт-фактуру;\n- `invoice_update` — отредактировать счёт-фактуру;\n- `label_download_big` — скачать большую этикетку;\n- `label_download_small` — скачать маленькую этикетку;\n- `label_download` — скачать этикетку;\n- `non_int_delivered` — перевести в статус «Условно доставлен»;\n- `non_int_delivering` — перевести в статус «Доставляется»;\n- `non_int_last_mile` — перевести в статус «Курьер в пути»;\n- `product_cancel` — отменить часть товаров в отправлении;\n- `set_cutoff` — необходимо указать дату отгрузки, воспользуйтесь методом [/v1/posting/cutoff/set](#operation/PostingAPI_SetPostingCutoff);\n- `set_timeslot` — изменить время доставки покупателю;\n- `set_track_number` — указать или изменить трек-номер;\n- `ship_async_in_process` — отправление собирается;\n- `ship_async_retry` — собрать отправление повторно после ошибки сборки;\n- `ship_async` — собрать отправление;\n- `ship_with_additional_info` — необходимо заполнить дополнительную информацию;\n- `ship` — собрать отправление;\n- `update_cis` — изменить дополнительную информацию.\n"
+        },
+        "barcodes": {
+          "$ref": "#/components/schemas/v3Barcodes"
+        },
+        "cancellation": {
+          "$ref": "#/components/schemas/v3Cancellation"
+        },
+        "courier": {
+          "$ref": "#/components/schemas/FbsPostingDetailCourier"
+        },
+        "customer": {
+          "$ref": "#/components/schemas/v3Customer"
+        },
+        "delivering_date": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата передачи отправления в доставку."
+        },
+        "delivery_method": {
+          "$ref": "#/components/schemas/v3DeliveryMethod"
+        },
+        "delivery_price": {
+          "type": "string",
+          "description": "Стоимость доставки."
+        },
+        "financial_data": {
+          "$ref": "#/components/schemas/v3PostingFinancialData"
+        },
+        "in_process_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время начала обработки отправления."
+        },
+        "is_express": {
+          "type": "boolean",
+          "description": "Если использовалась быстрая доставка Ozon Express — `true`."
+        },
+        "is_multibox": {
+          "type": "boolean",
+          "description": "Признак, что в отправлении есть многокоробочный товар и нужно передать количество коробок для него:\n\n- `true` — до сборки передайте количество коробок через метод [/v3/posting/multiboxqty/set](#operation/PostingAPI_PostingMultiBoxQtySetV3).\n- `false` — отправление собрано с указанием количества коробок в параметре `multi_box_qty` или в отправлении нет многокоробочного товара.\n"
+        },
+        "legal_info": {
+          "$ref": "#/components/schemas/v2FboSinglePostingLegalInfo"
+        },
+        "multi_box_qty": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество коробок, в которые упакован товар."
+        },
+        "optional": {
+          "$ref": "#/components/schemas/v3FbsPostingDetailOptional"
+        },
+        "order_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор заказа, к которому относится отправление."
+        },
+        "order_number": {
+          "type": "string",
+          "description": "Номер заказа, к которому относится отправление."
+        },
+        "parent_posting_number": {
+          "type": "string",
+          "description": "Номер родительского отправления, в результате разделения которого появилось текущее."
+        },
+        "pickup_code_verified_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата и время успешной валидации кода курьера. Чтобы проверить код курьера, воспользуйтесь методом [/v1/posting/fbs/pick-up-code/verify](#operation/PostingAPI_PostingFBSPickupCodeVerify)."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "product_exemplars": {
+          "$ref": "#/components/schemas/v3FbsPostingProductExemplarsV3"
+        },
+        "products": {
+          "items": {
+            "$ref": "#/components/schemas/v3PostingProductDetail"
+          },
+          "type": "array",
+          "description": "Массив товаров в отправлении."
+        },
+        "provider_status": {
+          "type": "string",
+          "description": "Статус службы доставки."
+        },
+        "prr_option": {
+          "$ref": "#/components/schemas/FbsPostingDetailPrrOption"
+        },
+        "related_postings": {
+          "$ref": "#/components/schemas/v3FbsPostingDetailRelatedPostings"
+        },
+        "requirements": {
+          "$ref": "#/components/schemas/v3FbsPostingRequirementsV3"
+        },
+        "shipment_date": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время, до которой необходимо собрать отправление. Показываем рекомендованное время отгрузки. По истечении этого времени начнёт применяться новый тариф, информацию о нём уточняйте в поле `tariffication`."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус отправления:\n- `acceptance_in_progress` — идёт приёмка,\n- `arbitration` — арбитраж,\n- `awaiting_approve` — ожидает подтверждения,\n- `awaiting_deliver` — ожидает отгрузки,\n- `awaiting_packaging` — ожидает упаковки,\n- `awaiting_registration` — ожидает регистрации,\n- `awaiting_verification` — создано,\n- `cancelled` — отменено,\n- `cancelled_from_split_pending` — отменён из-за разделения отправления,\n- `client_arbitration` — клиентский арбитраж доставки,\n- `delivered` — доставлено,\n- `delivering` — доставляется,\n- `driver_pickup` — у водителя,\n- `not_accepted` — не принят на сортировочном центре,\n- `sent_by_seller` – отправлено продавцом.\n"
+        },
+        "substatus": {
+          "type": "string",
+          "description": "Подстатус отправления:\n- `posting_acceptance_in_progress` — идёт приёмка,\n- `posting_in_arbitration` — арбитраж,\n- `posting_created` — создано,\n- `posting_in_carriage` — в перевозке,\n- `posting_not_in_carriage` — не добавлено в перевозку,\n- `posting_registered` — зарегистрировано,\n- `posting_transferring_to_delivery` (`status=awaiting_deliver`) — передаётся в доставку,\n- `posting_awaiting_passport_data` — ожидает паспортных данных, \n- `posting_created` — создано,\n- `posting_awaiting_registration` — ожидает регистрации,\n- `posting_registration_error` — ошибка регистрации,\n- `posting_transferring_to_delivery` (`status=awaiting_registration`) — передаётся курьеру,\n- `posting_split_pending` — создано,\n- `posting_canceled` — отменено,\n- `posting_in_client_arbitration` — клиентский арбитраж доставки,\n- `posting_delivered` — доставлено,\n- `posting_received` — получено,\n- `posting_conditionally_delivered` — условно доставлено,\n- `posting_in_courier_service` — курьер в пути,\n- `posting_in_pickup_point` — в пункте выдачи,\n- `posting_on_way_to_city` — в пути в ваш город,\n- `posting_on_way_to_pickup_point` — в пути в пункт выдачи,\n- `posting_returned_to_warehouse` — возвращено на склад,\n- `posting_transferred_to_courier_service` — передаётся в службу доставки,\n- `posting_driver_pick_up` — у водителя,\n- `posting_not_in_sort_center` — не принято на сортировочном центре,\n- `sent_by_seller` — отправлено продавцом.\n"
+        },
+        "previous_substatus": {
+          "type": "string",
+          "description": "Предыдущий подстатус отправления. Возможные значения:\n- `posting_acceptance_in_progress` — идёт приёмка,\n- `posting_in_arbitration` — арбитраж,\n- `posting_created` — создано,\n- `posting_in_carriage` — в перевозке,\n- `posting_not_in_carriage` — не добавлено в перевозку,\n- `posting_registered` — зарегистрировано,\n- `posting_transferring_to_delivery` (`status=awaiting_deliver`) — передаётся в доставку,\n- `posting_awaiting_passport_data` — ожидает паспортных данных, \n- `posting_created` — создано,\n- `posting_awaiting_registration` — ожидает регистрации,\n- `posting_registration_error` — ошибка регистрации,\n- `posting_transferring_to_delivery` (`status=awaiting_registration`) — передаётся курьеру,\n- `posting_split_pending` — создано,\n- `posting_canceled` — отменено,\n- `posting_in_client_arbitration` — клиентский арбитраж доставки,\n- `posting_delivered` — доставлено,\n- `posting_received` — получено,\n- `posting_conditionally_delivered` — условно доставлено,\n- `posting_in_courier_service` — курьер в пути,\n- `posting_in_pickup_point` — в пункте выдачи,\n- `posting_on_way_to_city` — в пути в ваш город,\n- `posting_on_way_to_pickup_point` — в пути в пункт выдачи,\n- `posting_returned_to_warehouse` — возвращено на склад,\n- `posting_transferred_to_courier_service` — передаётся в службу доставки,\n- `posting_driver_pick_up` — у водителя,\n- `posting_not_in_sort_center` — не принято на сортировочном центре,\n- `sent_by_seller` — отправлено продавцом.\n"
+        },
+        "tpl_integration_type": {
+          "type": "string",
+          "description": "Тип интеграции со службой доставки:\n  - `ozon` — доставка через Ozon логистику.\n  - `aggregator` — доставка внешней службой, Ozon регистрирует заказ.\n  - `3pl_tracking` — доставка внешней службой, продавец регистрирует заказ.\n  - `non_integrated` — доставка силами продавца.\n"
+        },
+        "tracking_number": {
+          "type": "string",
+          "description": "Трек-номер отправления."
+        },
+        "tariffication": {
+          "items": {
+            "$ref": "#/components/schemas/v3FbsTariffication"
+          },
+          "type": "array",
+          "description": "Информация по тарификации отгрузки."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Информация об отправлении."
+    },
+    "v3AdditionalDataItem": {
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v3Addressee": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Имя покупателя."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Контактный телефон. \n\nВсегда возвращает пустую строку `\"\"`.\n"
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Контактные данные получателя."
+    },
+    "FbsPostingDetailCourier": {
+      "type": "object",
+      "title": "object",
+      "description": "Данные о курьере.",
+      "properties": {
+        "car_model": {
+          "type": "string",
+          "description": "Модель автомобиля."
+        },
+        "car_number": {
+          "type": "string",
+          "description": "Номер автомобиля."
+        },
+        "name": {
+          "type": "string",
+          "description": "Полное имя курьера."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Телефон курьера. \n\nВсегда возвращает пустую строку `\"\"`.\n"
+        }
+      }
+    },
+    "v3Customer": {
+      "properties": {
+        "address": {
+          "$ref": "#/components/schemas/v3Address"
+        },
+        "customer_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор покупателя."
+        },
+        "name": {
+          "type": "string",
+          "description": "Имя покупателя."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Контактный телефон. \n\nВсегда возвращает пустую строку `\"\"`.\n"
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Данные о покупателе."
+    },
+    "v3FbsPostingProductExemplarsV3": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v3FbsPostingExemplarProductV3"
+          }
+        }
+      },
+      "description": "Информация по продуктам и их экзмеплярам.\n\nОтвет содержит поле `product_exemplars`, если в запросе передан признак `with.product_exemplars = true`.\n"
+    },
+    "v3FbsPostingExemplarProductV3": {
+      "type": "object",
+      "title": "object",
+      "description": "Список товаров и экземпляров.",
+      "properties": {
+        "exemplars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v3FbsPostingProductExemplarInfoV3"
+          },
+          "description": "Информация по экземплярам."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "v3FbsPostingProductExemplarInfoV3": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "exemplar_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор экземпляра."
+        },
+        "mandatory_mark": {
+          "type": "string",
+          "description": "Обязательная маркировка «Честный ЗНАК»."
+        },
+        "gtd": {
+          "type": "string",
+          "description": "Номер грузовой таможенной декларации (ГТД)."
+        },
+        "is_gtd_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан номер таможенной декларации."
+        },
+        "rnpt": {
+          "type": "string",
+          "description": "Регистрационный номер партии товара (РНПТ)."
+        },
+        "is_rnpt_absent": {
+          "type": "boolean",
+          "description": "Признак того, что не указан регистрационный номер партии товара (РНПТ)."
+        }
+      }
+    },
+    "v3PostingProductDetail": {
+      "properties": {
+        "dimensions": {
+          "$ref": "#/components/schemas/v3Dimensions"
+        },
+        "mandatory_mark": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Обязательная маркировка товара.",
+          "deprecated": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Название."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "price": {
+          "type": "string",
+          "description": "Цена товара с учётом скидок — это значение показывается на карточке товара."
+        },
+        "jw_uin": {
+          "type": "array of strings",
+          "description": "Уникальный идентификационный номер (УИН) ювелирного изделия."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта ваших цен. Совпадает с валютой, которая установлена в настройках личного кабинета.\n\nВозможные значения: \n  - `RUB` — российский рубль,\n  - `BYN` — белорусский рубль,\n  - `KZT` — тенге,\n  - `EUR` — евро,\n  - `USD` — доллар США,\n  - `CNY` — юань.\n"
+        },
+        "is_blr_traceable": {
+          "type": "boolean",
+          "description": "Признак прослеживаемости товара."
+        },
+        "is_marketplace_buyout": {
+          "type": "boolean",
+          "description": "Признак выкупа товара."
+        },
+        "quantity": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество товара."
+        },
+        "sku": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара на Ozon."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Размеры товара."
+    },
+    "v3Dimensions": {
+      "properties": {
+        "height": {
+          "type": "string",
+          "description": "Высота упаковки."
+        },
+        "length": {
+          "type": "string",
+          "description": "Длина товара."
+        },
+        "weight": {
+          "type": "string",
+          "description": "Вес товара в упаковке."
+        },
+        "width": {
+          "type": "string",
+          "description": "Ширина упаковки."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Размеры товара."
+    },
+    "FbsPostingDetailPrrOption": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация об услуге погрузочно-разгрузочных работ. Актуально для КГТ-отправлений с доставкой силами продавца или интегрированной службой.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код услуги погрузочно-разгрузочных работ:\n- `lift` — подъём на лифте.\n- `stairs` — подъём по лестнице.\n- `none` — покупатель отказался от услуги, поднимать товары не нужно.\n- `delivery_default` — доставка включена в стоимость, по условиям оферты нужно доставить товар на этаж.\n"
+        },
+        "price": {
+          "type": "string",
+          "description": "Стоимость услуги, которую Ozon компенсирует продавцу."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта."
+        },
+        "floor": {
+          "type": "string",
+          "description": "Этаж, на который нужно поднять товар."
+        }
+      }
+    },
+    "v3FbsPostingDetailRelatedPostings": {
+      "type": "object",
+      "title": "object",
+      "description": "Связанные отправления.",
+      "properties": {
+        "related_posting_numbers": {
+          "items": {
+            "type": "string"
+          },
+          "description": "Список номеров связанных отправлений."
+        }
+      }
+    },
+    "postingGetFbsPostingByBarcodeRequest": {
+      "properties": {
+        "barcode": {
+          "type": "string",
+          "description": "Штрихкод отправления. Можно получить с помощью методов: [/v3/posting/fbs/get](#operation/PostingAPI_GetFbsPostingV3), [/v3/posting/fbs/list](#operation/PostingAPI_GetFbsPostingListV3) и [/v3/posting/fbs/unfulfilled/list](#operation/PostingAPI_GetFbsPostingUnfulfilledList) в массиве `barcodes`.\n"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v2FbsPostingResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v2FbsPosting"
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Информация об отправлении."
+    },
+    "v2FbsPosting": {
+      "properties": {
+        "analytics_data": {
+          "$ref": "#/components/schemas/FbsPostingFbsPostingAnalyticsData"
+        },
+        "barcodes": {
+          "$ref": "#/components/schemas/FbsPostingBarcodes"
+        },
+        "cancel_reason_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор причины отмены отправления."
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время создания отправления."
+        },
+        "financial_data": {
+          "$ref": "#/components/schemas/v2PostingFinancialData"
+        },
+        "in_process_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время начала обработки отправления."
+        },
+        "order_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор заказа, к которому относится отправление."
+        },
+        "order_number": {
+          "type": "string",
+          "description": "Номер заказа, к которому относится отправление."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "items": {
+            "$ref": "#/components/schemas/v2FbsPostingProduct"
+          },
+          "type": "array",
+          "description": "Список товаров в отправлении."
+        },
+        "shipment_date": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время, до которой необходимо собрать отправление. Если отправление не собрать к этой дате — оно автоматически отменится."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус отправления."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результаты запроса."
+    },
+    "FbsPostingFbsPostingAnalyticsData": {
+      "properties": {
+        "city": {
+          "type": "string",
+          "description": "Город доставки."
+        },
+        "delivery_type": {
+          "type": "string",
+          "description": "Способ доставки."
+        },
+        "is_legal": {
+          "type": "boolean",
+          "description": "Признак, что получатель юридическое лицо:\n  - `true` — юридическое лицо,\n  - `false` — физическое лицо.\n"
+        },
+        "is_premium": {
+          "type": "boolean",
+          "description": "Наличие подписки Premium."
+        },
+        "payment_type_group_name": {
+          "type": "string",
+          "description": "Способ оплаты: \n- `картой онлайн`,\n- `Ozon Карта`,\n- `автосписание с Ozon Карты при выдаче`,\n- `сохранённой картой при получении`,\n- `Система Быстрых Платежей`, \n- `Ozon Рассрочка`, \n- `оплата на расчётный счёт`,\n- `SberPay`.\n"
+        },
+        "region": {
+          "type": "string",
+          "description": "Регион доставки."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Аналитические данные."
+    },
+    "FbsPostingBarcodes": {
+      "properties": {
+        "lower_barcode": {
+          "type": "string",
+          "description": "Нижний штрихкод на маркировке отправления."
+        },
+        "upper_barcode": {
+          "type": "string",
+          "description": "Верхний штрихкод на маркировке отправления."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Штрихкоды отправления."
+    },
+    "v2PostingFinancialData": {
+      "properties": {
+        "cluster_from": {
+          "type": "string",
+          "description": "Код региона, откуда отправляется заказ."
+        },
+        "cluster_to": {
+          "type": "string",
+          "description": "Код региона, куда доставляется заказ."
+        },
+        "products": {
+          "items": {
+            "$ref": "#/components/schemas/PostingFinancialDataProduct"
+          },
+          "type": "array",
+          "description": "Список товаров в заказе."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Финансовые данные."
+    },
+    "v2FbsPostingProduct": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "price": {
+          "type": "string",
+          "description": "Цена товара."
+        },
+        "quantity": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество товара в отправлении."
+        },
+        "sku": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingv3PostingMultiBoxQtySetV3Request": {
+      "required": [
+        "posting_number",
+        "multi_box_qty"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Идентификатор многокоробочного отправления."
+        },
+        "multi_box_qty": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество коробок, в которые упакован товар."
+        }
+      }
+    },
+    "postingv3PostingMultiBoxQtySetV3Response": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/postingv3PostingMultiBoxQtySetV3ResponseResult"
+        }
+      }
+    },
+    "postingv3PostingMultiBoxQtySetV3ResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат передачи количества коробок.",
+      "properties": {
+        "result": {
+          "type": "boolean",
+          "description": "Возможные значения:\n- `true` — значение передано успешно.\n- `false` — при передаче произошла ошибка. Попробуйте снова.\n"
+        }
+      }
+    },
+    "postingPostingProductChangeRequest": {
+      "required": [
+        "items",
+        "posting_number"
+      ],
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/components/schemas/PostingProductChangeRequestItem"
+          },
+          "type": "array",
+          "description": "Информация о товарах."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Идентификатор отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "PostingProductChangeRequestItem": {
+      "required": [
+        "sku",
+        "weightReal"
+      ],
+      "properties": {
+        "sku": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "weightReal": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "description": "Вес единиц товара в отправлении."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingPostingProductChangeResponse": {
+      "properties": {
+        "result": {
+          "type": "string",
+          "description": "Идентификатор отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v2FbsPostingProductCountryListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "name_search": {
+          "type": "string",
+          "description": "Фильтрация по строке."
+        }
+      }
+    },
+    "v2FbsPostingProductCountryListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v2FbsPostingProductCountryListResponseResult"
+          },
+          "description": "Список стран-изготовителей и ISO коды."
+        }
+      }
+    },
+    "v2FbsPostingProductCountryListResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название страны на русском языке."
+        },
+        "country_iso_code": {
+          "type": "string",
+          "description": "ISO код страны."
+        }
+      }
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "v2FbsPostingProductCountrySetRequest": {
+      "required": [
+        "posting_number",
+        "product_id",
+        "country_iso_code"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "country_iso_code": {
+          "type": "string",
+          "description": "Двухбуквенный код добавляемой страны по стандарту ISO_3166-1.\n\nСписок доступных стран-изготовителей и их ISO коды можно получить с помощью метода [/v2/posting/fbs/product/country/list](#operation/PostingAPI_ListCountryProductFbsPostingV2).\n"
+        }
+      }
+    },
+    "v2FbsPostingProductCountrySetResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "is_gtd_needed": {
+          "type": "boolean",
+          "description": "Признак того, что необходимо передать номер грузовой таможенной декларации (ГТД) для продукта и отправления."
+        }
+      }
+    },
+    "v1GetRestrictionsRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления, для которого нужно определить ограничения."
+        }
+      },
+      "required": [
+        "posting_number"
+      ]
+    },
+    "v1GetRestrictionsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1Restriction"
+        }
+      }
+    },
+    "v1Restriction": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "max_posting_weight": {
+          "type": "number",
+          "format": "double",
+          "description": "Ограничение по максимальному весу в граммах."
+        },
+        "min_posting_weight": {
+          "type": "number",
+          "format": "double",
+          "description": "Ограничение по минимальному весу в граммах."
+        },
+        "width": {
+          "type": "number",
+          "format": "double",
+          "description": "Ограничение по ширине в сантиметрах."
+        },
+        "length": {
+          "type": "number",
+          "format": "double",
+          "description": "Ограничение по длине в сантиметрах."
+        },
+        "height": {
+          "type": "number",
+          "format": "double",
+          "description": "Ограничение по высоте в сантиметрах."
+        },
+        "max_posting_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Ограничение по максимальной стоимости отправления в рублях."
+        },
+        "min_posting_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Ограничение по минимальной стоимости отправления в рублях."
+        }
+      }
+    },
+    "postingPostingFBSPackageLabelRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Идентификатор отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingPostingFBSPackageLabelResponse": {
+      "properties": {
+        "file_content": {
+          "format": "byte",
+          "type": "string",
+          "description": "Содержание файла в бинарном виде."
+        },
+        "file_name": {
+          "type": "string",
+          "description": "Название файла."
+        },
+        "content_type": {
+          "type": "string",
+          "description": "Тип файла."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v1CreateLabelBatchRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "description": "Номера отправлений, для которых нужны этикетки.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1CreateLabelBatchResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1CreateLabelBatchResponseResult"
+        }
+      }
+    },
+    "v1CreateLabelBatchResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "task_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор задания на формирование этикеток."
+        }
+      }
+    },
+    "v2CreateLabelBatchResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v2CreateLabelBatchResponseResult"
+        }
+      }
+    },
+    "v2CreateLabelBatchResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "tasks": {
+          "type": "array",
+          "description": "Список заданий.",
+          "items": {
+            "$ref": "#/components/schemas/v2CreateLabelBatchResponseResultTasks"
+          }
+        }
+      }
+    },
+    "v2CreateLabelBatchResponseResultTasks": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "task_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор задания на формирование этикеток. В зависимости от типа этикетки передайте значение в метод [/v1/posting/fbs/package-label/get](#operation/PostingAPI_GetLabelBatch)."
+        },
+        "task_type": {
+          "type": "string",
+          "description": "Тип задания на формирование этикеток:\n- `big_label` — для обычной этикетки,\n- `small_label` — для маленькой этикетки.\n"
+        }
+      }
+    },
+    "v1GetLabelBatchRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "task_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Номер задания на формирование этикеток из ответа метода [/v1/posting/fbs/package-label/create](#operation/PostingAPI_CreateLabelBatch)."
+        }
+      },
+      "required": [
+        "task_id"
+      ]
+    },
+    "v1GetLabelBatchResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1GetLabelBatchResponseResult"
+        }
+      }
+    },
+    "v1GetLabelBatchResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "file_url": {
+          "type": "string",
+          "description": "Ссылка на файл с этикетками."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус формирования этикеток:\n- `pending` — задание в очереди.\n- `in_progress` — формируются.\n- `completed` — файл с этикетками готов.\n- `error` — при формировании файла произошла ошибка.\n"
+        }
+      }
+    },
+    "postingCancelReasonRequest": {
+      "required": [
+        "related_posting_numbers"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "related_posting_numbers": {
+          "type": "array",
+          "description": "Номера отправлений.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "postingCancelReasonResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "description": "Результат запроса.",
+          "items": {
+            "$ref": "#/components/schemas/relatedPostingCancelReason"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "relatedPostingCancelReason": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "reasons": {
+          "type": "array",
+          "description": "Информация о причинах отмены.",
+          "items": {
+            "$ref": "#/components/schemas/relatedPostingCancelReasons"
+          }
+        }
+      }
+    },
+    "relatedPostingCancelReasons": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор причины отмены:\n- `352` — товар закончился на складе продавца. \n- `400` — остался только бракованный товар.\n- `401` — продавец отклонил арбитраж.\n- `402` — другое (вина продавца).\n- `665` — покупатель не забрал заказ.\n- `666` — возврат из службы доставки: нет доставки в указанный регион.\n- `667` — заказ утерян службой доставки.\n"
+        },
+        "title": {
+          "type": "string",
+          "description": "Описание причины отмены."
+        },
+        "type_id": {
+          "type": "string",
+          "description": "Инициатор отмены отправления: \n  - `buyer` — покупатель,\n  - `seller` — продавец.\n"
+        }
+      }
+    },
+    "postingCancelReasonListResponse": {
+      "properties": {
+        "result": {
+          "description": "Результат работы метода.",
+          "items": {
+            "$ref": "#/components/schemas/postingCancelReason"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingCancelReason": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор причины отмены.\n"
+        },
+        "is_available_for_cancellation": {
+          "type": "boolean",
+          "description": "Результат отмены отправления. `true`, если запрос доступен для отмены."
+        },
+        "title": {
+          "type": "string",
+          "description": "Название категории."
+        },
+        "type_id": {
+          "type": "string",
+          "description": "Инициатор отмены отправления:\n- `buyer` — покупатель,\n- `seller` — продавец.\n"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingPostingProductCancelRequest": {
+      "required": [
+        "cancel_reason_id",
+        "cancel_reason_message",
+        "items",
+        "posting_number"
+      ],
+      "properties": {
+        "cancel_reason_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор причины отмены отправления товара."
+        },
+        "cancel_reason_message": {
+          "type": "string",
+          "description": "Обязательное поле. Дополнительная информация по отмене."
+        },
+        "items": {
+          "items": {
+            "$ref": "#/components/schemas/PostingProductCancelRequestItem"
+          },
+          "type": "array",
+          "description": "Информация о товарах."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Идентификатор отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "PostingProductCancelRequestItem": {
+      "required": [
+        "quantity",
+        "sku"
+      ],
+      "properties": {
+        "quantity": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество товара в отправлении."
+        },
+        "sku": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingPostingProductCancelResponse": {
+      "properties": {
+        "result": {
+          "type": "string",
+          "description": "Номер отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingCancelFbsPostingRequest": {
+      "properties": {
+        "cancel_reason_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор причины отмены отправления."
+        },
+        "cancel_reason_message": {
+          "type": "string",
+          "description": "Дополнительная информация по отмене. Если `cancel_reason_id = 402`, параметр обязательный."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Идентификатор отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingBooleanResponse": {
+      "properties": {
+        "result": {
+          "type": "boolean",
+          "description": "Результат обработки запроса. `true`, если запрос выполнился без ошибок."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingMovePostingRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Идентификатор отправления."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v2MovePostingToAwaitingDeliveryRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Идентификатор отправления. Максимальное количество в одном запросе — 100."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v1PostingFBSPickupCodeVerifyRequest": {
+      "type": "object",
+      "properties": {
+        "pickup_code": {
+          "description": "Код курьера.",
+          "type": "string"
+        },
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "pickup_code",
+        "posting_number"
+      ]
+    },
+    "v1PostingFBSPickupCodeVerifyResponse": {
+      "type": "object",
+      "properties": {
+        "valid": {
+          "description": "`true`, если код корректный.\n",
+          "type": "boolean"
+        }
+      }
+    },
+    "v1GetEtgbRequest": {
+      "required": [
+        "date"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "date": {
+          "$ref": "#/components/schemas/GetEtgbRequestDate"
+        }
+      }
+    },
+    "GetEtgbRequestDate": {
+      "required": [
+        "from",
+        "to"
+      ],
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр по периоду создания деклараций.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата начала."
+        },
+        "to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата окончания."
+        }
+      }
+    },
+    "v1GetEtgbResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "description": "Результат запроса.",
+          "items": {
+            "$ref": "#/components/schemas/GetEtgbResponseResult"
+          }
+        }
+      }
+    },
+    "GetEtgbResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "etgb": {
+          "$ref": "#/components/schemas/GetEtgbResponseResultEtgb"
+        }
+      }
+    },
+    "GetEtgbResponseResultEtgb": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация о декларации.",
+      "properties": {
+        "number": {
+          "type": "string",
+          "description": "Номер."
+        },
+        "date": {
+          "type": "string",
+          "description": "Дата создания."
+        },
+        "url": {
+          "type": "string",
+          "description": "Ссылка на файл.\n\nЕсли поле пустое и вам нужен файл, обратитесь в поддержку Ozon.\n"
+        }
+      }
+    },
+    "v1PostingUnpaidLegalProductListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "cursor": {
+          "type": "string",
+          "description": "Указатель для выборки следующих данных."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1000,
+          "description": "Количество значений в ответе.\n",
+          "required": true
+        }
+      }
+    },
+    "v1PostingUnpaidLegalProductListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "description": "Список неоплаченных товаров.",
+          "items": {
+            "$ref": "#/components/schemas/v1PostingUnpaidLegalProductListResponseProducts"
+          }
+        },
+        "cursor": {
+          "type": "string",
+          "description": "Указатель для выборки следующих данных."
+        }
+      }
+    },
+    "v1PostingUnpaidLegalProductListResponseProducts": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество экземпляров."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "image_url": {
+          "type": "string",
+          "description": "Ссылка на изображение товара."
+        }
+      }
+    }
+  }
+}

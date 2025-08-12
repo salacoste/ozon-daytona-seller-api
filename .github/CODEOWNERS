@@ -1,0 +1,27 @@
+# Global Owners
+* @salacoste
+
+# Core SDK Files
+/src/ @salacoste
+/tests/ @salacoste
+
+# API Client Implementations
+/src/clients/ @salacoste
+
+# Build and Configuration
+/package.json @salacoste
+/tsconfig*.json @salacoste
+/eslint.config.js @salacoste
+/.github/ @salacoste
+
+# Documentation
+/README.md @salacoste
+/CHANGELOG.md @salacoste
+/docs/ @salacoste
+
+# Beta API Groups (require special attention)
+/src/clients/reviewApi/ @salacoste
+/src/clients/digital/ @salacoste  
+/src/clients/quants/ @salacoste
+/src/clients/betaMethod/ @salacoste
+/src/clients/questionsAnswers/ @salacoste

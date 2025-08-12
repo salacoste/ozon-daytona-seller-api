@@ -1,0 +1,874 @@
+{
+  "metadata": {
+    "tag": "Digital",
+    "name": "Digital",
+    "displayName": "Работа с цифровыми товарами",
+    "description": "[Подробнее о цифровых товарах в Базе знаний](https://seller-edu.ozon.ru/policies/restrictions/need-access/cifrovye-tovary)",
+    "externalDocs": null,
+    "directory": "beta",
+    "groupInfo": {
+      "groupName": "Бета-методы Seller API",
+      "groupIndex": 2,
+      "dataSelector": null
+    },
+    "endpointsCount": 3,
+    "schemasCount": 25,
+    "generatedAt": "2025-08-09T16:28:42.345Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/posting/digital/codes/upload",
+      "method": "POST",
+      "operationId": "UploadPostingCodes",
+      "summary": "Загрузить коды цифровых товаров для отправления",
+      "description": "Метод доступен только продавцам, работающим с цифровыми товарами. Вы можете загрузить коды цифровых товаров в течение 24 часов с момента получения заказа.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1588-Novye-metody-po-rabote-s-tsifrovymi-tovarami) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Загрузить коды цифровых товаров для отправления",
+        "description": "Метод доступен только продавцам, работающим с цифровыми товарами. Вы можете загрузить коды цифровых товаров в течение 24 часов с момента получения заказа.\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1588-Novye-metody-po-rabote-s-tsifrovymi-tovarami) в сообществе разработчиков Ozon for dev.\n",
+        "operationId": "UploadPostingCodes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1UploadPostingCodesRequest"
+              },
+              "example": {
+                "exemplars_by_sku": [
+                  {
+                    "exemplar_qty": 3,
+                    "not_available_exemplar_qty": 0,
+                    "sku": "6605735423",
+                    "exemplar_keys": [
+                      "4235234234",
+                      "431234234",
+                      "912382368"
+                    ]
+                  }
+                ],
+                "posting_number": "33920151-0719-1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Коды цифровых товаров загружены",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1UploadPostingCodesResponse"
+                },
+                "example": {
+                  "exemplars_by_sku": [
+                    {
+                      "sku": 123456,
+                      "received_qty": 3,
+                      "rejected_qty": 1,
+                      "failed_exemplars": [
+                        {
+                          "key": "23434252345",
+                          "message": "Некорректный формат кода"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Digital"
+        ]
+      }
+    },
+    {
+      "path": "/v1/posting/digital/list",
+      "method": "POST",
+      "operationId": "ListPostingCodes",
+      "summary": "Получить список отправлений",
+      "description": "Возвращает список отправлений, по которым нужно загрузить коды цифровых товаров. Метод доступен только продавцам, работающим с цифровыми товарами. \n\nЧтобы получить список отправлений в любом статусе, воспользуйтесь методом [/v2/posting/fbo/list](#operation/PostingAPI_GetFboPostingList).\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1588-Novye-metody-po-rabote-s-tsifrovymi-tovarami) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить список отправлений",
+        "description": "Возвращает список отправлений, по которым нужно загрузить коды цифровых товаров. Метод доступен только продавцам, работающим с цифровыми товарами. \n\nЧтобы получить список отправлений в любом статусе, воспользуйтесь методом [/v2/posting/fbo/list](#operation/PostingAPI_GetFboPostingList).\n\nВы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1588-Novye-metody-po-rabote-s-tsifrovymi-tovarami) в сообществе разработчиков Ozon for dev.\n",
+        "operationId": "ListPostingCodes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ListPostingCodesRequest"
+              },
+              "example": {
+                "dir": "ASC",
+                "filter": {
+                  "since": "2021-09-01T00:00:00.000Z",
+                  "posting_number": [
+                    "string"
+                  ],
+                  "to": "2021-11-17T10:44:12.828Z"
+                },
+                "limit": 5,
+                "offset": 0,
+                "with": {
+                  "analytics_data": true,
+                  "financial_data": true,
+                  "legal_info": false
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список отправлений",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ListPostingCodesResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "order_id": 354680487,
+                      "order_number": "16965409-0014",
+                      "posting_number": "16965409-0014-1",
+                      "status": "awaiting_packaging",
+                      "cancel_reason_id": 0,
+                      "created_at": "2021-09-01T00:23:45.607000Z",
+                      "in_process_at": "2021-09-01T00:25:30.120000Z",
+                      "waiting_deadline_for_digital_code": "2025-06-16T10:12:00.664Z",
+                      "legal_info": {
+                        "company_name": "string",
+                        "inn": "string",
+                        "kpp": "string"
+                      },
+                      "products": [
+                        {
+                          "sku": 160249683,
+                          "name": "Так говорил Омар Хайям. Жизнеописание. Афоризмы и рубайят. Классика в словах и картинках",
+                          "offer_id": "978-5-906864-56-7",
+                          "price": "81.00",
+                          "required_qty_for_digital_code": 3,
+                          "currency_code": "RUB"
+                        }
+                      ],
+                      "analytics_data": {
+                        "city": "",
+                        "delivery_type": "PVZ",
+                        "is_premium": false,
+                        "payment_type_group_name": "Карты оплаты",
+                        "warehouse_id": 17717042026000,
+                        "warehouse_name": "РОСТОВ-НА-ДОНУ_РФЦ",
+                        "is_legal": false
+                      },
+                      "financial_data": {
+                        "products": [
+                          {
+                            "commission_amount": 12.15,
+                            "commission_percent": 15,
+                            "payout": 68.85,
+                            "product_id": 160249683,
+                            "currency_code": "RUB",
+                            "old_price": 115,
+                            "price": 81,
+                            "total_discount_value": 34,
+                            "total_discount_percent": 29.57,
+                            "actions": [
+                              "Системная виртуальная скидка селлера"
+                            ]
+                          }
+                        ]
+                      },
+                      "additional_data": []
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Digital"
+        ]
+      }
+    },
+    {
+      "path": "/v1/product/digital/stocks/import",
+      "method": "POST",
+      "operationId": "DigitalProductAPI_StocksImport",
+      "summary": "Обновить количество цифровых товаров",
+      "description": "Метод доступен только продавцам, работающим с цифровыми товарами. \n\nИспользуйте метод, чтобы изменить информацию о количестве товара в наличии. \n\nВы можете узнать о работе с цифровыми товарами и оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1588-Novye-metody-po-rabote-s-tsifrovymi-tovarami) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "description": "Метод доступен только продавцам, работающим с цифровыми товарами. \n\nИспользуйте метод, чтобы изменить информацию о количестве товара в наличии. \n\nВы можете узнать о работе с цифровыми товарами и оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1588-Novye-metody-po-rabote-s-tsifrovymi-tovarami) в сообществе разработчиков Ozon for dev.\n",
+        "tags": [
+          "Digital"
+        ],
+        "summary": "Обновить количество цифровых товаров",
+        "operationId": "DigitalProductAPI_StocksImport",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1StocksImportRequest"
+              },
+              "example": {
+                "stocks": [
+                  {
+                    "stock": "2",
+                    "offer_id": "Мяч желтый 543561"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Количество товаров обновлено",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1StocksImportResponse"
+                },
+                "example": {
+                  "status": [
+                    {
+                      "errors": [],
+                      "offer_id": "Мяч желтый 543561",
+                      "updated": true,
+                      "product_id": "29235761",
+                      "sku": "425291243"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "v1UploadPostingCodesRequest": {
+      "type": "object",
+      "properties": {
+        "exemplars_by_sku": {
+          "description": "Данные о кодах цифрового товара по SKU.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/UploadPostingCodesRequestPostingLineExemplarInfo"
+          }
+        },
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string"
+        }
+      }
+    },
+    "UploadPostingCodesRequestPostingLineExemplarInfo": {
+      "type": "object",
+      "required": [
+        "exemplar_qty",
+        "not_available_exemplar_qty",
+        "sku",
+        "posting_number"
+      ],
+      "properties": {
+        "exemplar_keys": {
+          "type": "array",
+          "description": "Список кодов цифрового товара. Количество кодов должно совпадать со значением параметра `exemplar_qty`.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exemplar_qty": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество кодов цифрового товара, которые вы передаёте покупателю. <br><br>  Сумма значений в параметрах `exemplar_qty ` и `not_available_exemplar_qty` должна равняться количеству кодов в заказе. Получите это значение в параметре `required_qty_for_digital_code` в ответе метода [/v1/posting/digital/list](#operation/ListPostingCodes)."
+        },
+        "not_available_exemplar_qty": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество кодов цифрового товара, которые вы не можете передать покупателю. <br><br> Сумма значений в параметрах `exemplar_qty ` и `not_available_exemplar_qty` должна равняться количеству кодов в заказе. Получите это значение в параметре `required_qty_for_digital_code` в ответе метода [/v1/posting/digital/list](#operation/ListPostingCodes)."
+        },
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1UploadPostingCodesResponse": {
+      "type": "object",
+      "properties": {
+        "exemplars_by_sku": {
+          "description": "Данные о кодах цифрового товара по SKU.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/UploadPostingCodesResponsePostingExemplarInfo"
+          }
+        }
+      }
+    },
+    "UploadPostingCodesResponsePostingExemplarInfo": {
+      "type": "object",
+      "properties": {
+        "failed_exemplars": {
+          "description": "Список кодов цифровых товаров с ошибками.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PostingExemplarInfoExemplarError"
+          }
+        },
+        "received_qty": {
+          "description": "Количество кодов цифрового товара, которые были приняты.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "rejected_qty": {
+          "description": "Количество кодов цифровых товаров, которые не были приняты или переданы.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "PostingExemplarInfoExemplarError": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Значение кода цифрового товара.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Текст ошибки.",
+          "type": "string"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v1ListPostingCodesRequest": {
+      "type": "object",
+      "properties": {
+        "dir": {
+          "$ref": "#/components/schemas/DirEnum"
+        },
+        "filter": {
+          "$ref": "#/components/schemas/ListPostingCodesRequestFilter"
+        },
+        "limit": {
+          "description": "Количество значений в ответе:\n - максимум — 1000,\n - минимум — 1.\n",
+          "type": "integer",
+          "format": "int64"
+        },
+        "offset": {
+          "description": "Количество элементов, которое будет пропущено в ответе. Например, если `offset = 10`, то ответ начнётся с 11-го найденного элемента. Максимальное значение — 20000.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "with": {
+          "$ref": "#/components/schemas/ListPostingCodesRequestWithParams"
+        }
+      }
+    },
+    "DirEnum": {
+      "type": "string",
+      "description": "Направление сортировки:\n- `ASC` — по возрастанию,\n- `DESC` — по убыванию.\n",
+      "enum": [
+        "ASC",
+        "DESC"
+      ]
+    },
+    "ListPostingCodesRequestFilter": {
+      "type": "object",
+      "description": "Фильтр для поиска отправлений.",
+      "properties": {
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "since": {
+          "description": "Начало периода в формате `YYYY-MM-DD`.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "description": "Конец периода в формате `YYYY-MM-DD`.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ListPostingCodesRequestWithParams": {
+      "type": "object",
+      "description": "Дополнительные поля, которые нужно добавить в ответ.",
+      "properties": {
+        "analytics_data": {
+          "description": "Передайте `true`, чтобы добавить в ответ данные аналитики.",
+          "type": "boolean"
+        },
+        "financial_data": {
+          "description": "Передайте `true`, чтобы добавить в ответ финансовые данные.",
+          "type": "boolean"
+        },
+        "legal_info": {
+          "description": "Передайте `true`, чтобы добавить в ответ юридическую информацию.",
+          "type": "boolean"
+        }
+      }
+    },
+    "v1ListPostingCodesResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "Список отправлений.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ListPostingCodesResponsePosting"
+          }
+        }
+      }
+    },
+    "ListPostingCodesResponsePosting": {
+      "type": "object",
+      "properties": {
+        "additional_data": {
+          "type": "array",
+          "description": "Дополнительные параметры.",
+          "items": {
+            "$ref": "#/components/schemas/PostingAdditionalDataItem"
+          }
+        },
+        "analytics_data": {
+          "$ref": "#/components/schemas/PostingPostingAnalyticsData"
+        },
+        "cancel_reason_id": {
+          "description": "Идентификатор причины отмены отправления.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "created_at": {
+          "description": "Дата и время создания отправления.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "financial_data": {
+          "$ref": "#/components/schemas/PostingPostingFinancialData"
+        },
+        "in_process_at": {
+          "description": "Дата и время начала обработки отправления.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "legal_info": {
+          "$ref": "#/components/schemas/PostingLegalInfo"
+        },
+        "order_id": {
+          "description": "Идентификатор заказа, к которому относится отправление.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_number": {
+          "description": "Номер заказа, к которому относится отправление.",
+          "type": "string"
+        },
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string"
+        },
+        "products": {
+          "description": "Список товаров в отправлении.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PostingPostingProduct"
+          }
+        },
+        "status": {
+          "description": "Статус отправления: `awaiting_packaging` — ожидает упаковки.\n",
+          "type": "string"
+        },
+        "waiting_deadline_for_digital_code": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Время, до которого нужно передать коды цифровых товаров. Передайте коды цифровых товаров с помощью метода [/v1/posting/digital/codes/upload](#operation/UploadPostingCodes)."
+        }
+      }
+    },
+    "PostingAdditionalDataItem": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Ключ дополнительного параметра.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Значение дополнительного параметра.",
+          "type": "string"
+        }
+      }
+    },
+    "PostingPostingAnalyticsData": {
+      "type": "object",
+      "description": "Данные аналитики.",
+      "properties": {
+        "city": {
+          "description": "Город доставки. Только для отправлений rFBS и продавцов из СНГ.",
+          "type": "string"
+        },
+        "delivery_type": {
+          "description": "Способ доставки.",
+          "type": "string"
+        },
+        "is_legal": {
+          "description": "Признак, что получатель юридическое лицо:\n- `true` — юридическое лицо,\n- `false` — физическое лицо.\n",
+          "type": "boolean"
+        },
+        "is_premium": {
+          "description": "Наличие подписки Premium.",
+          "type": "boolean"
+        },
+        "payment_type_group_name": {
+          "description": "Способ оплаты:\n- `картой онлайн`,\n- `Ozon Карта`,\n- `автосписание с Ozon Карты при выдаче`,\n- `сохранённой картой при получении`,\n- `Система Быстрых Платежей`,\n- `Ozon Рассрочка`,\n- `оплата на расчётный счёт`,\n- `SberPay`.\n",
+          "type": "string"
+        },
+        "region": {
+          "type": "string",
+          "description": "Регион доставки. Только для отправлений rFBS."
+        },
+        "warehouse_id": {
+          "description": "Идентификатор склада.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "warehouse_name": {
+          "description": "Название склада.",
+          "type": "string"
+        }
+      }
+    },
+    "PostingPostingFinancialData": {
+      "type": "object",
+      "description": "Финансовые данные.",
+      "properties": {
+        "cluster_from": {
+          "description": "Код региона, откуда отправляется заказ.",
+          "type": "string"
+        },
+        "cluster_to": {
+          "description": "Код региона, куда доставляется заказ.",
+          "type": "string"
+        },
+        "products": {
+          "description": "Список товаров в заказе.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PostingFinancialDataProduct"
+          }
+        }
+      }
+    },
+    "PostingFinancialDataProduct": {
+      "properties": {
+        "actions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Список акций."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта ваших цен. Cовпадает с валютой, которая установлена в настройках личного кабинета.\n\nВозможные значения: \n  - `RUB` — российский рубль,\n  - `BYN` — белорусский рубль,\n  - `KZT` — тенге,\n  - `EUR` — евро,\n  - `USD` — доллар США,\n  - `CNY` — юань.\n"
+        },
+        "commission_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Размер комиссии за товар."
+        },
+        "commission_percent": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Процент комиссии."
+        },
+        "commissions_currency_code": {
+          "type": "string",
+          "description": "Код валюты, в которой рассчитывались комиссии."
+        },
+        "old_price": {
+          "format": "double",
+          "type": "number",
+          "description": "Цена до учёта скидок. На карточке товара отображается зачёркнутой."
+        },
+        "payout": {
+          "format": "double",
+          "type": "number",
+          "description": "Выплата продавцу."
+        },
+        "price": {
+          "format": "double",
+          "type": "number",
+          "description": "Цена товара с учётом скидок — это значение показывается на карточке товара."
+        },
+        "product_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "quantity": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество товара в отправлении."
+        },
+        "total_discount_percent": {
+          "format": "double",
+          "type": "number",
+          "description": "Процент скидки."
+        },
+        "total_discount_value": {
+          "format": "double",
+          "type": "number",
+          "description": "Сумма скидки."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "PostingLegalInfo": {
+      "type": "object",
+      "description": "Юридическая информация о покупателе.",
+      "properties": {
+        "company_name": {
+          "description": "Название компании.",
+          "type": "string"
+        },
+        "inn": {
+          "description": "ИНН.",
+          "type": "string"
+        },
+        "kpp": {
+          "description": "КПП.",
+          "type": "string"
+        }
+      }
+    },
+    "PostingPostingProduct": {
+      "type": "object",
+      "properties": {
+        "currency_code": {
+          "description": "Валюта ваших цен. Cовпадает с валютой, которая установлена в настройках личного кабинета.\n\nВозможные значения:\n\n- `RUB` — российский рубль,\n- `BYN` — белорусский рубль,\n- `KZT` — тенге,\n- `EUR` — евро,\n- `USD` — доллар США,\n- `CNY` — юань.\n",
+          "type": "string"
+        },
+        "name": {
+          "description": "Название товара.",
+          "type": "string"
+        },
+        "offer_id": {
+          "description": "Идентификатор товара в системе продавца — артикул.",
+          "type": "string"
+        },
+        "price": {
+          "description": "Цена товара.",
+          "type": "string"
+        },
+        "required_qty_for_digital_code": {
+          "description": "Количество кодов цифровых товаров, которое нужно передать по товару в отправлении. Передайте коды цифровых товаров с помощью метода [/v1/posting/digital/codes/upload](#operation/UploadPostingCodes).",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "v1StocksImportRequest": {
+      "type": "object",
+      "properties": {
+        "stocks": {
+          "type": "array",
+          "description": "Данные об остатках.",
+          "items": {
+            "$ref": "#/components/schemas/StocksImportRequestItemStock"
+          }
+        }
+      }
+    },
+    "StocksImportRequestItemStock": {
+      "type": "object",
+      "required": [
+        "offer_id",
+        "stock"
+      ],
+      "properties": {
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "stock": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество товара в наличии."
+        }
+      }
+    },
+    "v1StocksImportResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "array",
+          "description": "Информация о товарах.",
+          "items": {
+            "$ref": "#/components/schemas/StocksImportResponseItemStatus"
+          }
+        }
+      }
+    },
+    "StocksImportResponseItemStatus": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Ошибки, которые возникли при обработке запроса.",
+          "items": {
+            "$ref": "#/components/schemas/ItemStatusError"
+          }
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "updated": {
+          "type": "boolean",
+          "description": "`true`, если запрос выполнен успешно и остатки обновлены.\n"
+        }
+      }
+    },
+    "ItemStatusError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Код ошибки.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Описание ошибки.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

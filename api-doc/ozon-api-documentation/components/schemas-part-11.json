@@ -1,0 +1,1665 @@
+{
+  "schemasCount": 69,
+  "schemas": {
+    "v1GetSupplierReturnsSummaryReportResponseRow": {
+      "type": "object",
+      "properties": {
+        "barcode": {
+          "description": "Штрихкод товара.",
+          "type": "string"
+        },
+        "box_barcode": {
+          "description": "Штрихкод коробки.",
+          "type": "string"
+        },
+        "box_height": {
+          "description": "Высота коробки в метрах.",
+          "type": "number",
+          "format": "double"
+        },
+        "box_id": {
+          "description": "Идентификатор коробки.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "box_length": {
+          "description": "Длина коробки в метрах.",
+          "type": "number",
+          "format": "double"
+        },
+        "box_state": {
+          "description": "Статус коробки:\n- `доступно к вывозу`;\n- `уже в заявке на вывоз`;\n- `подготовка к вывозу`;\n- `потеряна`;\n- `в пути`;\n- `компенсировано продавцу`;\n- `утилизирована`;\n- `собрано`;\n- `на СЦ`;\n- `у курьера`;\n- `неудачная попытка доставки`;\n- `получена`;\n- `отменено`;\n- `в процессе утилизации`;\n- `в пункте выдачи`;\n- `расформирована`.\n",
+          "type": "string"
+        },
+        "box_volume": {
+          "description": "Объём коробки в литрах.",
+          "type": "number",
+          "format": "double"
+        },
+        "box_weight": {
+          "description": "Вес коробки в килограммах.",
+          "type": "number",
+          "format": "double"
+        },
+        "box_width": {
+          "description": "Ширина коробки в метрах.",
+          "type": "number",
+          "format": "double"
+        },
+        "clearing_warehouse_name": {
+          "description": "Склад, на котором подготовили товары для вывоза.",
+          "type": "string"
+        },
+        "delivery_date": {
+          "description": "Дата доставки товара в ПВЗ, СЦ или курьером.",
+          "type": "string"
+        },
+        "delivery_type": {
+          "description": "Способ вывоза:\n- `самовывоз`;\n- `ПВЗ`;\n- `СЦ`;\n- `курьерская доставка`.\n",
+          "type": "string"
+        },
+        "destination_warehouse_address": {
+          "description": "Адрес склада назначения.",
+          "type": "string"
+        },
+        "destination_warehouse_name": {
+          "description": "Название склада назначения.",
+          "type": "string"
+        },
+        "given_out_date": {
+          "description": "Дата, когда продавец забрал товары самовывозом со склада Ozon.",
+          "type": "string"
+        },
+        "is_auto_return": {
+          "description": "Признак, что заявка на вывоз была создана автоматически.\n\n[Подробнее об автовывозе в Базе знаний продавца](https://seller-edu.ozon.ru/fbo/vozvraty-utilizaciya-izlishki/vyvoz-tovarov-so-sklada-ozon/avtovyvoz-tovarov-so-sklada-ozon)\n",
+          "type": "boolean"
+        },
+        "name": {
+          "description": "Название товара.",
+          "type": "string"
+        },
+        "offer_id": {
+          "description": "Артикул товара.",
+          "type": "string"
+        },
+        "preliminary_delivery_price": {
+          "description": "Предварительная стоимость вывоза товара со склада силами Ozon.",
+          "type": "number",
+          "format": "double"
+        },
+        "quant_count": {
+          "description": "Количество квантов в заявке на вывоз.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "quantity_for_return": {
+          "description": "Количество единиц товара в коробке или заявке на вывоз.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "return_created_at": {
+          "description": "Дата создания заявки на вывоз.",
+          "type": "string"
+        },
+        "return_id": {
+          "description": "Идентификатор заявки на вывоз.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "return_state": {
+          "description": "Статус заявки на вывоз.\n\nВозможные значения для самовывоза со стока:\n- `создана`;\n- `собирается на складе`;\n- `собрана складом`;\n- `завершена`;\n- `заполнение данных`;\n- `утилизирована`.\n\nВозможные значения для СЦ, ПВЗ и курьерской доставки со стока:\n- `создаётся`;\n- `собирается на складке`;\n- `передаём в логистику`;\n- `в пути`;\n- `завершено`;\n- `можно забирать часть`;\n- `можно забирать все`;\n- `утилизирована`.\n\nВозможные значения для вывоза с поставок:\n\n- `заполнение данных`;\n- `подготовка к выдаче`;\n- `выдача`;\n- `завершено`;\n- `отклонено складом`;\n- `готово к вывозу`;\n- `утилизировано`;\n- `обрабатывается`;\n- `собирается на складе`;\n- `передаётся в логистику`;\n- `в пути`;\n- `можно забрать часть`;\n- `можно забрать все`.\n",
+          "type": "string"
+        },
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "stock_type": {
+          "description": "Тип остатков для товаров стока:\n- `доступно к продаже`;\n- `маркируемые товары, ожидающие действий`;\n- `истекает срок годности`;\n- `брак, доступный к вывозу со стока`.\n\nТип остатков для товаров в коробках:\n- `брак`;\n- `опознанные излишки`;\n- `неопознанные излишки без SKU`.\n",
+          "type": "string"
+        },
+        "utilization_date": {
+          "description": "Дата утилизации.",
+          "type": "string"
+        }
+      }
+    },
+    "v1GetSupplierReturnsSummaryReportResponse": {
+      "type": "object",
+      "properties": {
+        "last_id": {
+          "description": "Идентификатор последнего значения на странице.",
+          "type": "string"
+        },
+        "returns_summary_report_rows": {
+          "description": "Информация о товарах.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1GetSupplierReturnsSummaryReportResponseRow"
+          }
+        }
+      }
+    },
+    "v1CommentCreateRequest": {
+      "type": "object",
+      "properties": {
+        "mark_review_as_processed": {
+          "description": "Обновление статуса у отзыва:\n- `true` — статус изменится на `Processed`.\n- `false` — статус не изменится.\n",
+          "type": "boolean"
+        },
+        "parent_comment_id": {
+          "description": "Идентификатор родительского комментария, на который вы отвечаете.",
+          "type": "string"
+        },
+        "review_id": {
+          "description": "Идентификатор отзыва.",
+          "type": "string"
+        },
+        "text": {
+          "description": "Текст комментария.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "review_id",
+        "text"
+      ]
+    },
+    "v1CommentCreateResponse": {
+      "type": "object",
+      "properties": {
+        "comment_id": {
+          "description": "Идентификатор комментария.",
+          "type": "string"
+        }
+      }
+    },
+    "v1CommentDeleteRequest": {
+      "type": "object",
+      "properties": {
+        "comment_id": {
+          "description": "Идентификатор комментария.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "comment_id"
+      ]
+    },
+    "v1CommentSort": {
+      "type": "string",
+      "default": "ASC",
+      "enum": [
+        "ASC",
+        "DESC"
+      ],
+      "description": "Направление сортировки:\n  - `ASC` — по возрастанию,\n  - `DESC` — по убыванию.\n"
+    },
+    "v1CommentListRequest": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "description": "Ограничение значений в ответе.\nМинимум — 20. Максимум — 100.\n",
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "description": "Количество элементов, которое будет пропущено с начала списка в ответе. Например, если `offset = 10`, то ответ начнётся с 11-го найденного элемента.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "review_id": {
+          "description": "Идентификатор отзыва.",
+          "type": "string"
+        },
+        "sort_dir": {
+          "$ref": "#/components/schemas/v1CommentSort"
+        }
+      },
+      "required": [
+        "review_id",
+        "limit"
+      ]
+    },
+    "CommentListResponseComment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Идентификатор комментария.",
+          "type": "string"
+        },
+        "is_official": {
+          "description": "`true`, если комментарий оставило официальное лицо, `false` — покупатель.\n",
+          "type": "boolean"
+        },
+        "is_owner": {
+          "description": "`true`, если комментарий оставил продавец, `false` — покупатель.\n",
+          "type": "boolean"
+        },
+        "parent_comment_id": {
+          "description": "Идентификатор родительского комментария, на который нужно ответить.",
+          "type": "string"
+        },
+        "published_at": {
+          "description": "Дата публикации комментария.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "text": {
+          "description": "Текст комментария.",
+          "type": "string"
+        }
+      }
+    },
+    "v1CommentListResponse": {
+      "type": "object",
+      "properties": {
+        "comments": {
+          "description": "Информация о комментарии.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CommentListResponseComment"
+          }
+        },
+        "offset": {
+          "description": "Количество элементов в выдаче.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1ReviewChangeStatusRequest": {
+      "type": "object",
+      "title": "ReviewChangeStatus",
+      "properties": {
+        "review_ids": {
+          "description": "Массив с идентификаторами отзывов от 1 до 100.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "description": "Статус отзыва:\n- `PROCESSED` — обработанный,\n- `UNPROCESSED` — необработанный.\n",
+          "type": "string"
+        }
+      },
+      "required": [
+        "review_ids",
+        "status"
+      ]
+    },
+    "v1ReviewCountResponse": {
+      "type": "object",
+      "properties": {
+        "processed": {
+          "description": "Количество обработанных отзывов.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "total": {
+          "description": "Количество всех отзывов.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "unprocessed": {
+          "description": "Количество необработанных отзывов.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1ReviewInfoRequest": {
+      "type": "object",
+      "title": "ReviewInfo",
+      "properties": {
+        "review_id": {
+          "description": "Идентификатор отзыва.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "review_id"
+      ]
+    },
+    "ReviewInfoResponsePhoto": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "description": "Высота.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "url": {
+          "description": "Ссылка на изображение.",
+          "type": "string"
+        },
+        "width": {
+          "description": "Ширина.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ReviewInfoResponseVideo": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "description": "Высота.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "preview_url": {
+          "description": "Ссылка на превью видео.",
+          "type": "string"
+        },
+        "short_video_preview_url": {
+          "description": "Ссылка на короткое видео.",
+          "type": "string"
+        },
+        "url": {
+          "description": "Ссылка на видео.",
+          "type": "string"
+        },
+        "width": {
+          "description": "Ширина.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1ReviewInfoResponse": {
+      "type": "object",
+      "properties": {
+        "comments_amount": {
+          "description": "Количество комментариев к отзыву.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "dislikes_amount": {
+          "description": "Количество дизлайков на отзыве.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "id": {
+          "description": "Идентификатор отзыва.",
+          "type": "string"
+        },
+        "is_rating_participant": {
+          "description": "`true`, если отзыв участвует в подсчёте рейтинга.\n",
+          "type": "boolean"
+        },
+        "likes_amount": {
+          "description": "Количество лайков на отзыве.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "order_status": {
+          "type": "string",
+          "description": "Статус заказа, на который покупатель оставил отзыв:\n- `DELIVERED` — доставлен,\n- `CANCELLED` — отменён.\n"
+        },
+        "photos": {
+          "type": "array",
+          "description": "Информация об изображении.",
+          "items": {
+            "$ref": "#/components/schemas/ReviewInfoResponsePhoto"
+          }
+        },
+        "photos_amount": {
+          "description": "Количество изображений у отзыва.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "published_at": {
+          "description": "Дата публикации отзыва.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "rating": {
+          "description": "Оценка отзыва.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "description": "Статус отзыва:\n- `UNPROCESSED` — не обработан,\n- `PROCESSED` — обработан.\n",
+          "type": "string"
+        },
+        "text": {
+          "description": "Текст отзыва.",
+          "type": "string"
+        },
+        "videos": {
+          "type": "array",
+          "description": "Информация о видео.",
+          "items": {
+            "$ref": "#/components/schemas/ReviewInfoResponseVideo"
+          }
+        },
+        "videos_amount": {
+          "description": "Количество видео у отзыва.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1ReviewListRequest": {
+      "type": "object",
+      "title": "ReviewList",
+      "properties": {
+        "last_id": {
+          "description": "Идентификатор последнего отзыва на странице.",
+          "type": "string"
+        },
+        "limit": {
+          "description": "Количество отзывов в ответе. Минимум — 20, максимум — 100.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort_dir": {
+          "description": "Направление сортировки:\n- `ASC` — по возрастанию,\n- `DESC` — по убыванию.\n",
+          "type": "string"
+        },
+        "status": {
+          "description": "Статусы отзывов:\n- `ALL` — все,\n- `UNPROCESSED` — необработанные,\n- `PROCESSED` — обработанные.\n",
+          "type": "string"
+        }
+      },
+      "required": [
+        "limit"
+      ]
+    },
+    "ReviewListResponseReview": {
+      "type": "object",
+      "properties": {
+        "comments_amount": {
+          "description": "Количество комментариев у отзыва.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "id": {
+          "description": "Идентификатор отзыва.",
+          "type": "string"
+        },
+        "is_rating_participant": {
+          "description": "`true`, если отзыв участвует в подсчёте рейтинга.\n",
+          "type": "boolean"
+        },
+        "order_status": {
+          "description": "Статус заказа, на который покупатель оставил отзыв:\n- `DELIVERED` — доставлен,\n- `CANCELLED` — отменён.\n",
+          "type": "string"
+        },
+        "photos_amount": {
+          "description": "Количество изображений у отзыва.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "published_at": {
+          "description": "Дата публикации отзыва.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "rating": {
+          "description": "Оценка отзыва.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "description": "Статус отзыва:\n- `UNPROCESSED` — не обработан,\n- `PROCESSED` — обработан.\n",
+          "type": "string"
+        },
+        "text": {
+          "description": "Текст отзыва.",
+          "type": "string"
+        },
+        "videos_amount": {
+          "description": "Количество видео у отзыва.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1ReviewListResponse": {
+      "type": "object",
+      "properties": {
+        "has_next": {
+          "description": "`true`, если в ответе вернули не все отзывы.\n",
+          "type": "boolean"
+        },
+        "last_id": {
+          "description": "Идентификатор последнего отзыва на странице.",
+          "type": "string"
+        },
+        "reviews": {
+          "description": "Информация об отзыве.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ReviewListResponseReview"
+          }
+        }
+      }
+    },
+    "ProductV1QuantListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "cursor": {
+          "type": "string",
+          "description": "Указатель для выборки следующих данных."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Максимальное количество элементов в ответе."
+        },
+        "visibility": {
+          "default": "ALL",
+          "enum": [
+            "ALL",
+            "VISIBLE",
+            "INVISIBLE",
+            "EMPTY_STOCK",
+            "NOT_MODERATED",
+            "MODERATED",
+            "DISABLED",
+            "STATE_FAILED",
+            "READY_TO_SUPPLY",
+            "VALIDATION_STATE_PENDING",
+            "VALIDATION_STATE_FAIL",
+            "VALIDATION_STATE_SUCCESS",
+            "TO_SUPPLY",
+            "IN_SALE",
+            "REMOVED_FROM_SALE",
+            "OVERPRICED",
+            "CRITICALLY_OVERPRICED",
+            "EMPTY_BARCODE",
+            "BARCODE_EXISTS",
+            "QUARANTINE",
+            "ARCHIVED",
+            "OVERPRICED_WITH_STOCK",
+            "PARTIAL_APPROVED"
+          ],
+          "type": "string",
+          "description": "Фильтр по видимости товара:\n- `ALL` — все товары, кроме архивных.\n- `VISIBLE` — товары, которые видны покупателям.\n- `INVISIBLE` — товары, которые не видны покупателям.\n- `EMPTY_STOCK` — товары, которых нет в наличии.\n- `NOT_MODERATED` — товары, которые не прошли модерацию.\n- `MODERATED` — товары, которые прошли модерацию.\n- `DISABLED` — товары, которые видны покупателям, но недоступны к покупке.\n- `STATE_FAILED` — товары, создание которых завершилось ошибкой.\n- `READY_TO_SUPPLY` — товары, готовые к поставке.\n- `VALIDATION_STATE_PENDING` — товары, которые проходят проверку валидатором на премодерации.\n- `VALIDATION_STATE_FAIL` — товары, которые не прошли проверку валидатором на премодерации.\n- `VALIDATION_STATE_SUCCESS` — товары, которые прошли проверку валидатором на премодерации.\n- `TO_SUPPLY` — товары, готовые к продаже.\n- `IN_SALE` — товары в продаже.\n- `REMOVED_FROM_SALE` — товары, скрытые от покупателей.\n- `OVERPRICED` — превышение цены.\n- `CRITICALLY_OVERPRICED` — критическое превышение цены.\n- `EMPTY_BARCODE` — пустой штрихкод.\n- `BARCODE_EXISTS` — штрихкод указан.\n- `QUARANTINE` — товар в карантине после изменения цены на 50% и больше.\n- `ARCHIVED` — товары в архиве.\n- `OVERPRICED_WITH_STOCK` — товары в продаже, цена которых выше, чем у конкурентов.\n- `PARTIAL_APPROVED` — товары в продаже, у которых пустое или неполное описание.\n"
+        }
+      }
+    },
+    "ProductV1QuantListResponseProductsQuants": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "quant_code": {
+          "type": "string",
+          "description": "Идентификатор кванта."
+        },
+        "quant_size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Размер кванта."
+        }
+      }
+    },
+    "ProductV1QuantListResponseProducts": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "quants": {
+          "description": "Список квантов товара.",
+          "items": {
+            "$ref": "#/components/schemas/ProductV1QuantListResponseProductsQuants"
+          }
+        }
+      }
+    },
+    "ProductV1QuantListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "cursor": {
+          "type": "string",
+          "description": "Указатель для выборки следующих данных."
+        },
+        "products": {
+          "description": "Эконом-товары.",
+          "items": {
+            "$ref": "#/components/schemas/ProductV1QuantListResponseProducts"
+          }
+        },
+        "total_items": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Остаток на всех складах, шт."
+        }
+      }
+    },
+    "ProductV1QuantInfoRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "quant_code": {
+          "minItems": 1,
+          "maxItems": 1000,
+          "description": "Список квантов с товарами.\n",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "quant_code"
+      ]
+    },
+    "ProductV1QuantInfoResponseResultItemsQuantInfoQuantsBarcodesExtended": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "barcode": {
+          "type": "string",
+          "description": "Штрихкод."
+        },
+        "error": {
+          "type": "string",
+          "description": "Ошибка получения штрихкода."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус штрихкода."
+        }
+      }
+    },
+    "ProductV1QuantInfoResponseResultItemsQuantInfoQuantsDimensions": {
+      "type": "object",
+      "title": "object",
+      "description": "Габариты.",
+      "properties": {
+        "depth": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Глубина, мм."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Высота, мм."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Вес, г."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Ширина, мм."
+        }
+      }
+    },
+    "ProductV1QuantInfoResponseResultItemsQuantInfoQuantsMarketingPrice": {
+      "type": "object",
+      "title": "object",
+      "description": "Цена на товар с учётом всех акций, которая будет указана на витрине Ozon, без учёта скидки по Ozon Карте.",
+      "properties": {
+        "price": {
+          "type": "string",
+          "description": "Цена продажи."
+        },
+        "seller_price": {
+          "type": "string",
+          "description": "Цена, которую указал продавец."
+        }
+      }
+    },
+    "ProductV1QuantInfoResponseResultItemsQuantInfoQuantsTexts": {
+      "type": "object",
+      "title": "object",
+      "description": "Описание статусов.",
+      "properties": {
+        "state_description": {
+          "type": "string",
+          "description": "Описание статуса."
+        },
+        "state_name": {
+          "type": "string",
+          "description": "Название статуса."
+        },
+        "state_sys_name": {
+          "type": "string",
+          "description": "Системное название статуса."
+        },
+        "state_tooltip": {
+          "type": "string",
+          "description": "Подсказка о текущем состоянии товара."
+        }
+      }
+    },
+    "ProductV1QuantInfoResponseResultItemsQuantInfoQuants": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "barcodes_extended": {
+          "description": "Информация о штрихкодах.",
+          "items": {
+            "$ref": "#/components/schemas/ProductV1QuantInfoResponseResultItemsQuantInfoQuantsBarcodesExtended"
+          }
+        },
+        "dimensions": {
+          "$ref": "#/components/schemas/ProductV1QuantInfoResponseResultItemsQuantInfoQuantsDimensions"
+        },
+        "marketing_price": {
+          "$ref": "#/components/schemas/ProductV1QuantInfoResponseResultItemsQuantInfoQuantsMarketingPrice"
+        },
+        "min_price": {
+          "type": "string",
+          "description": "Минимальная цена, указанная продавцом."
+        },
+        "old_price": {
+          "type": "string",
+          "description": "Зачёркнутая цена, указанная продавцом."
+        },
+        "price": {
+          "type": "string",
+          "description": "Цена продажи, указанная продавцом."
+        },
+        "quant_code": {
+          "type": "string",
+          "description": "Идентификатор эконом-товара."
+        },
+        "quant_sice": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Размер кванта."
+        },
+        "shipment_type": {
+          "type": "string",
+          "description": "Тип доставки товара."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "statuses": {
+          "$ref": "#/components/schemas/ProductV1QuantInfoResponseResultItemsQuantInfoQuantsTexts"
+        }
+      }
+    },
+    "ProductV1QuantInfoResponseResultItemsQuantInfo": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация о кванте.",
+      "properties": {
+        "quants": {
+          "description": "Список квантов.",
+          "items": {
+            "$ref": "#/components/schemas/ProductV1QuantInfoResponseResultItemsQuantInfoQuants"
+          }
+        }
+      }
+    },
+    "ProductV1QuantInfoResponseResultItems": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "quant_info": {
+          "$ref": "#/components/schemas/ProductV1QuantInfoResponseResultItemsQuantInfo"
+        }
+      }
+    },
+    "ProductV1QuantInfoResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Эконом-товары.",
+          "items": {
+            "$ref": "#/components/schemas/ProductV1QuantInfoResponseResultItems"
+          }
+        }
+      }
+    },
+    "v1QuestionAnswerCreateRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "description": "Идентификатор вопроса."
+        },
+        "sku": {
+          "type": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "text": {
+          "type": "string",
+          "description": "Текст ответа объёмом от 2 до 3000 символов."
+        }
+      },
+      "required": [
+        "question_id",
+        "sku",
+        "text"
+      ]
+    },
+    "v1QuestionAnswerCreateDefault": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "string",
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "v1QuestionAnswerCreateResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "answer_id": {
+          "type": "string",
+          "description": "Идентификатор ответа на вопрос."
+        }
+      }
+    },
+    "v1QuestionAnswerDeleteRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "answer_id": {
+          "type": "string",
+          "description": "Идентификатор ответа."
+        },
+        "sku": {
+          "type": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      },
+      "required": [
+        "answer_id",
+        "sku"
+      ]
+    },
+    "v1QuestionAnswerListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "last_id": {
+          "type": null,
+          "description": "Идентификатор последнего значения на странице. \n\nЕсли запрос первый, оставьте поле пустым. Для следующих значений указывайте `last_id` из ответа предыдущего запроса.\n"
+        },
+        "question_id": {
+          "type": "string",
+          "description": "Идентификатор вопроса."
+        },
+        "sku": {
+          "type": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      },
+      "required": [
+        "question_id",
+        "sku"
+      ]
+    },
+    "v1QuestionAnswerListResponseAnswers": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "author_name": {
+          "type": "string",
+          "description": "Автор ответа."
+        },
+        "id": {
+          "type": "string",
+          "description": "Идентификатор ответа."
+        },
+        "published_at": {
+          "type": "timestamp",
+          "description": "Дата публикации ответа."
+        },
+        "question_id": {
+          "type": "string",
+          "description": "Идентификатор вопроса."
+        },
+        "sku": {
+          "type": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "text": {
+          "type": "string",
+          "description": "Текст ответа."
+        }
+      }
+    },
+    "v1QuestionAnswerListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "answers": {
+          "description": "Ответы.",
+          "items": {
+            "$ref": "#/components/schemas/v1QuestionAnswerListResponseAnswers"
+          }
+        },
+        "last_id": {
+          "type": "string",
+          "description": "Идентификатор последнего значения на странице.\n\nЧтобы получить следующие значения, передайте полученное значение в следующем запросе в параметре `last_id`.\n"
+        }
+      }
+    },
+    "v1QuestionChangeStatusRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "question_ids": {
+          "items": {
+            "type": "string"
+          },
+          "description": "Идентификаторы вопросов."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статусы вопросов:\n  - `NEW` — новые,\n  - `VIEWED` — просмотренные,\n  - `PROCESSED` — обработанные.\n"
+        }
+      },
+      "required": [
+        "question_ids",
+        "status"
+      ]
+    },
+    "v1QuestionCountResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "all": {
+          "type": "int64",
+          "description": "Всего вопросов."
+        },
+        "new": {
+          "type": "int64",
+          "description": "Новые вопросы."
+        },
+        "processed": {
+          "type": "int64",
+          "description": "Обработанные вопросы."
+        },
+        "unprocessed": {
+          "type": "int64",
+          "description": "Необработанные вопросы."
+        },
+        "viewed": {
+          "type": "int64",
+          "description": "Просмотренные вопросы."
+        }
+      }
+    },
+    "v1QuestionInfoRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "description": "Идентификатор вопроса"
+        }
+      },
+      "required": [
+        "question_id"
+      ]
+    },
+    "v1QuestionInfoResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "answers_count": {
+          "type": "int64",
+          "description": "Количество ответов на вопрос."
+        },
+        "author_name": {
+          "type": "string",
+          "description": "Автор вопроса."
+        },
+        "id": {
+          "type": "string",
+          "description": "Идентификатор вопроса."
+        },
+        "product_url": {
+          "type": "string",
+          "description": "Ссылка на товар."
+        },
+        "published_at": {
+          "type": "timestamp",
+          "description": "Дата публикации вопроса."
+        },
+        "question_link": {
+          "type": "string",
+          "description": "Ссылка на вопрос."
+        },
+        "sku": {
+          "type": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "status": {
+          "type": "enum",
+          "description": "Статус вопроса:\n  - `NEW` — новый,\n  - `ALL` — все вопросы,\n  - `VIEWED` — просмотренный,\n  - `PROCESSED` — обработанный,\n  - `UNPROCESSED` — необработанный.\n"
+        },
+        "text": {
+          "type": "string",
+          "description": "Текст вопроса."
+        }
+      }
+    },
+    "v1QuestionListRequestFilter": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр.",
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Начало периода."
+        },
+        "date_to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Конец периода."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статусы вопроса:\n  - `NEW` — новый,\n  - `ALL` — все вопросы,\n  - `VIEWED` — просмотренный,\n  - `PROCESSED` — обработанный,\n  - `UNPROCESSED` — необработанный.\n"
+        }
+      }
+    },
+    "v1QuestionListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/components/schemas/v1QuestionListRequestFilter"
+        },
+        "last_id": {
+          "type": "string",
+          "description": "Идентификатор последнего значения на странице. \n\nОставьте это поле пустым при выполнении первого запроса. Чтобы получить следующие значения, укажите `last_id` из ответа предыдущего запроса.\n"
+        }
+      }
+    },
+    "v1QuestionListResponseQuestions": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "answers_count": {
+          "type": "int64",
+          "description": "Количество ответов на вопрос."
+        },
+        "author_name": {
+          "type": "string",
+          "description": "Имя автора вопроса."
+        },
+        "id": {
+          "type": "string",
+          "description": "Идентификатор вопроса."
+        },
+        "product_url": {
+          "type": "string",
+          "description": "Ссылка на товар."
+        },
+        "published_at": {
+          "type": "timestamp",
+          "description": "Дата публикации вопроса."
+        },
+        "question_link": {
+          "type": "string",
+          "description": "Ссылка на вопрос."
+        },
+        "sku": {
+          "type": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "status": {
+          "type": "enum",
+          "description": "Статусы вопроса:\n  - `NEW` — новый,\n  - `ALL` — все вопросы,\n  - `VIEWED` — просмотренный,\n  - `PROCESSED` — обработанный,\n  - `UNPROCESSED` — необработанный.\n"
+        },
+        "text": {
+          "type": "string",
+          "description": "Текст вопроса."
+        }
+      }
+    },
+    "v1QuestionListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "questions": {
+          "description": "Вопросы.",
+          "items": {
+            "$ref": "#/components/schemas/v1QuestionListResponseQuestions"
+          }
+        },
+        "last_id": {
+          "type": "string",
+          "description": "Идентификатор последнего значения на странице.\n\nЧтобы получить следующие значения, передайте полученное значение в следующем запросе в параметре `last_id`.\n"
+        }
+      }
+    },
+    "v1QuestionTopSkuRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "limit": {
+          "type": "int64",
+          "description": "Количество значений в ответе: максимум — 100, минимум — 1.\n"
+        }
+      },
+      "required": [
+        "limit"
+      ]
+    },
+    "v1QuestionTopSkuResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "sku": {
+          "description": "Список Идентификаторы товаров в системе Ozon — SKU.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "UploadPostingCodesRequestPostingLineExemplarInfo": {
+      "type": "object",
+      "required": [
+        "exemplar_qty",
+        "not_available_exemplar_qty",
+        "sku",
+        "posting_number"
+      ],
+      "properties": {
+        "exemplar_keys": {
+          "type": "array",
+          "description": "Список кодов цифрового товара. Количество кодов должно совпадать со значением параметра `exemplar_qty`.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exemplar_qty": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество кодов цифрового товара, которые вы передаёте покупателю. <br><br>  Сумма значений в параметрах `exemplar_qty ` и `not_available_exemplar_qty` должна равняться количеству кодов в заказе. Получите это значение в параметре `required_qty_for_digital_code` в ответе метода [/v1/posting/digital/list](#operation/ListPostingCodes)."
+        },
+        "not_available_exemplar_qty": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество кодов цифрового товара, которые вы не можете передать покупателю. <br><br> Сумма значений в параметрах `exemplar_qty ` и `not_available_exemplar_qty` должна равняться количеству кодов в заказе. Получите это значение в параметре `required_qty_for_digital_code` в ответе метода [/v1/posting/digital/list](#operation/ListPostingCodes)."
+        },
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1UploadPostingCodesRequest": {
+      "type": "object",
+      "properties": {
+        "exemplars_by_sku": {
+          "description": "Данные о кодах цифрового товара по SKU.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/UploadPostingCodesRequestPostingLineExemplarInfo"
+          }
+        },
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string"
+        }
+      }
+    },
+    "PostingExemplarInfoExemplarError": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Значение кода цифрового товара.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Текст ошибки.",
+          "type": "string"
+        }
+      }
+    },
+    "UploadPostingCodesResponsePostingExemplarInfo": {
+      "type": "object",
+      "properties": {
+        "failed_exemplars": {
+          "description": "Список кодов цифровых товаров с ошибками.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PostingExemplarInfoExemplarError"
+          }
+        },
+        "received_qty": {
+          "description": "Количество кодов цифрового товара, которые были приняты.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "rejected_qty": {
+          "description": "Количество кодов цифровых товаров, которые не были приняты или переданы.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1UploadPostingCodesResponse": {
+      "type": "object",
+      "properties": {
+        "exemplars_by_sku": {
+          "description": "Данные о кодах цифрового товара по SKU.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/UploadPostingCodesResponsePostingExemplarInfo"
+          }
+        }
+      }
+    },
+    "DirEnum": {
+      "type": "string",
+      "description": "Направление сортировки:\n- `ASC` — по возрастанию,\n- `DESC` — по убыванию.\n",
+      "enum": [
+        "ASC",
+        "DESC"
+      ]
+    },
+    "ListPostingCodesRequestFilter": {
+      "type": "object",
+      "description": "Фильтр для поиска отправлений.",
+      "properties": {
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "since": {
+          "description": "Начало периода в формате `YYYY-MM-DD`.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "description": "Конец периода в формате `YYYY-MM-DD`.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ListPostingCodesRequestWithParams": {
+      "type": "object",
+      "description": "Дополнительные поля, которые нужно добавить в ответ.",
+      "properties": {
+        "analytics_data": {
+          "description": "Передайте `true`, чтобы добавить в ответ данные аналитики.",
+          "type": "boolean"
+        },
+        "financial_data": {
+          "description": "Передайте `true`, чтобы добавить в ответ финансовые данные.",
+          "type": "boolean"
+        },
+        "legal_info": {
+          "description": "Передайте `true`, чтобы добавить в ответ юридическую информацию.",
+          "type": "boolean"
+        }
+      }
+    },
+    "v1ListPostingCodesRequest": {
+      "type": "object",
+      "properties": {
+        "dir": {
+          "$ref": "#/components/schemas/DirEnum"
+        },
+        "filter": {
+          "$ref": "#/components/schemas/ListPostingCodesRequestFilter"
+        },
+        "limit": {
+          "description": "Количество значений в ответе:\n - максимум — 1000,\n - минимум — 1.\n",
+          "type": "integer",
+          "format": "int64"
+        },
+        "offset": {
+          "description": "Количество элементов, которое будет пропущено в ответе. Например, если `offset = 10`, то ответ начнётся с 11-го найденного элемента. Максимальное значение — 20000.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "with": {
+          "$ref": "#/components/schemas/ListPostingCodesRequestWithParams"
+        }
+      }
+    },
+    "PostingAdditionalDataItem": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Ключ дополнительного параметра.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Значение дополнительного параметра.",
+          "type": "string"
+        }
+      }
+    },
+    "PostingPostingAnalyticsData": {
+      "type": "object",
+      "description": "Данные аналитики.",
+      "properties": {
+        "city": {
+          "description": "Город доставки. Только для отправлений rFBS и продавцов из СНГ.",
+          "type": "string"
+        },
+        "delivery_type": {
+          "description": "Способ доставки.",
+          "type": "string"
+        },
+        "is_legal": {
+          "description": "Признак, что получатель юридическое лицо:\n- `true` — юридическое лицо,\n- `false` — физическое лицо.\n",
+          "type": "boolean"
+        },
+        "is_premium": {
+          "description": "Наличие подписки Premium.",
+          "type": "boolean"
+        },
+        "payment_type_group_name": {
+          "description": "Способ оплаты:\n- `картой онлайн`,\n- `Ozon Карта`,\n- `автосписание с Ozon Карты при выдаче`,\n- `сохранённой картой при получении`,\n- `Система Быстрых Платежей`,\n- `Ozon Рассрочка`,\n- `оплата на расчётный счёт`,\n- `SberPay`.\n",
+          "type": "string"
+        },
+        "region": {
+          "type": "string",
+          "description": "Регион доставки. Только для отправлений rFBS."
+        },
+        "warehouse_id": {
+          "description": "Идентификатор склада.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "warehouse_name": {
+          "description": "Название склада.",
+          "type": "string"
+        }
+      }
+    },
+    "PostingPostingFinancialData": {
+      "type": "object",
+      "description": "Финансовые данные.",
+      "properties": {
+        "cluster_from": {
+          "description": "Код региона, откуда отправляется заказ.",
+          "type": "string"
+        },
+        "cluster_to": {
+          "description": "Код региона, куда доставляется заказ.",
+          "type": "string"
+        },
+        "products": {
+          "description": "Список товаров в заказе.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PostingFinancialDataProduct"
+          }
+        }
+      }
+    },
+    "PostingLegalInfo": {
+      "type": "object",
+      "description": "Юридическая информация о покупателе.",
+      "properties": {
+        "company_name": {
+          "description": "Название компании.",
+          "type": "string"
+        },
+        "inn": {
+          "description": "ИНН.",
+          "type": "string"
+        },
+        "kpp": {
+          "description": "КПП.",
+          "type": "string"
+        }
+      }
+    },
+    "PostingPostingProduct": {
+      "type": "object",
+      "properties": {
+        "currency_code": {
+          "description": "Валюта ваших цен. Cовпадает с валютой, которая установлена в настройках личного кабинета.\n\nВозможные значения:\n\n- `RUB` — российский рубль,\n- `BYN` — белорусский рубль,\n- `KZT` — тенге,\n- `EUR` — евро,\n- `USD` — доллар США,\n- `CNY` — юань.\n",
+          "type": "string"
+        },
+        "name": {
+          "description": "Название товара.",
+          "type": "string"
+        },
+        "offer_id": {
+          "description": "Идентификатор товара в системе продавца — артикул.",
+          "type": "string"
+        },
+        "price": {
+          "description": "Цена товара.",
+          "type": "string"
+        },
+        "required_qty_for_digital_code": {
+          "description": "Количество кодов цифровых товаров, которое нужно передать по товару в отправлении. Передайте коды цифровых товаров с помощью метода [/v1/posting/digital/codes/upload](#operation/UploadPostingCodes).",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ListPostingCodesResponsePosting": {
+      "type": "object",
+      "properties": {
+        "additional_data": {
+          "type": "array",
+          "description": "Дополнительные параметры.",
+          "items": {
+            "$ref": "#/components/schemas/PostingAdditionalDataItem"
+          }
+        },
+        "analytics_data": {
+          "$ref": "#/components/schemas/PostingPostingAnalyticsData"
+        },
+        "cancel_reason_id": {
+          "description": "Идентификатор причины отмены отправления.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "created_at": {
+          "description": "Дата и время создания отправления.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "financial_data": {
+          "$ref": "#/components/schemas/PostingPostingFinancialData"
+        },
+        "in_process_at": {
+          "description": "Дата и время начала обработки отправления.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "legal_info": {
+          "$ref": "#/components/schemas/PostingLegalInfo"
+        },
+        "order_id": {
+          "description": "Идентификатор заказа, к которому относится отправление.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_number": {
+          "description": "Номер заказа, к которому относится отправление.",
+          "type": "string"
+        },
+        "posting_number": {
+          "description": "Номер отправления.",
+          "type": "string"
+        },
+        "products": {
+          "description": "Список товаров в отправлении.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/PostingPostingProduct"
+          }
+        },
+        "status": {
+          "description": "Статус отправления: `awaiting_packaging` — ожидает упаковки.\n",
+          "type": "string"
+        },
+        "waiting_deadline_for_digital_code": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Время, до которого нужно передать коды цифровых товаров. Передайте коды цифровых товаров с помощью метода [/v1/posting/digital/codes/upload](#operation/UploadPostingCodes)."
+        }
+      }
+    },
+    "v1ListPostingCodesResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "Список отправлений.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ListPostingCodesResponsePosting"
+          }
+        }
+      }
+    },
+    "StocksImportRequestItemStock": {
+      "type": "object",
+      "required": [
+        "offer_id",
+        "stock"
+      ],
+      "properties": {
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "stock": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество товара в наличии."
+        }
+      }
+    },
+    "v1StocksImportRequest": {
+      "type": "object",
+      "properties": {
+        "stocks": {
+          "type": "array",
+          "description": "Данные об остатках.",
+          "items": {
+            "$ref": "#/components/schemas/StocksImportRequestItemStock"
+          }
+        }
+      }
+    },
+    "ItemStatusError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Код ошибки.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Описание ошибки.",
+          "type": "string"
+        }
+      }
+    },
+    "StocksImportResponseItemStatus": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Ошибки, которые возникли при обработке запроса.",
+          "items": {
+            "$ref": "#/components/schemas/ItemStatusError"
+          }
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "updated": {
+          "type": "boolean",
+          "description": "`true`, если запрос выполнен успешно и остатки обновлены.\n"
+        }
+      }
+    },
+    "v1StocksImportResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "array",
+          "description": "Информация о товарах.",
+          "items": {
+            "$ref": "#/components/schemas/StocksImportResponseItemStatus"
+          }
+        }
+      }
+    }
+  }
+}

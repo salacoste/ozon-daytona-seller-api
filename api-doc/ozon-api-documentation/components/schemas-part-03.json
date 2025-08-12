@@ -1,0 +1,1907 @@
+{
+  "schemasCount": 100,
+  "schemas": {
+    "v1GetStrategyListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "strategies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/GetStrategyListResponseStrategy"
+          },
+          "description": "Список стратегий."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Общее количество стратегий."
+        }
+      }
+    },
+    "v1Competitor": {
+      "required": [
+        "coefficient",
+        "competitor_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "coefficient": {
+          "type": "number",
+          "format": "float",
+          "description": "Коэффициент, на который будет умножаться минимальная цена среди конкурентов. Допустимый диапазон — от `0.5` до `1.2`."
+        },
+        "competitor_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор конкурента."
+        }
+      }
+    },
+    "v1CreatePricingStrategyRequest": {
+      "required": [
+        "competitors",
+        "strategy_name"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "competitors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1Competitor"
+          },
+          "description": "Список конкурентов."
+        },
+        "strategy_name": {
+          "type": "string",
+          "description": "Название стратегии."
+        }
+      }
+    },
+    "v1CreatePricingStrategyResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "strategy_id": {
+          "type": "string",
+          "description": "Идентификатор стратегии."
+        }
+      }
+    },
+    "v1CreatePricingStrategyResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1CreatePricingStrategyResponseResult"
+        }
+      }
+    },
+    "v1StrategyRequest": {
+      "required": [
+        "strategy_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "strategy_id": {
+          "type": "string",
+          "description": "Идентификатор стратегии."
+        }
+      }
+    },
+    "v1GetStrategyResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "competitors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1Competitor"
+          },
+          "description": "Список конкурентов."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Статус стратегии:\n- `true` — включена,\n- `false` — отключена.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Название стратегии."
+        },
+        "type": {
+          "type": "string",
+          "description": "Тип стратегии:\n- `MIN_EXT_PRICE` — системная стратегия,\n- `COMP_PRICE` — пользовательская стратегия.\n"
+        },
+        "update_type": {
+          "type": "string",
+          "description": "Тип последнего изменения стратегии:\n  - `strategyEnabled` — возобновлена,\n  - `strategyDisabled` — остановлена,\n  - `strategyChanged` — обновлена,\n  - `strategyCreated` — создана,\n  - `strategyItemsListChanged` — изменён набор товаров в стратегии.\n"
+        }
+      }
+    },
+    "v1GetStrategyResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1GetStrategyResponseResult"
+        }
+      }
+    },
+    "v1UpdatePricingStrategyRequest": {
+      "required": [
+        "competitors",
+        "strategy_id",
+        "strategy_name"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "competitors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1Competitor"
+          },
+          "description": "Список конкурентов."
+        },
+        "strategy_id": {
+          "type": "string",
+          "description": "Идентификатор стратегии."
+        },
+        "strategy_name": {
+          "type": "string",
+          "description": "Название стратегии."
+        }
+      }
+    },
+    "v1AddStrategyItemsRequest": {
+      "required": [
+        "product_id",
+        "strategy_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Список идентификаторов товаров в системе продавца — `product_id`. Максимальное количество — 50."
+        },
+        "strategy_id": {
+          "type": "string",
+          "description": "Идентификатор стратегии."
+        }
+      }
+    },
+    "AddStrategyItemsResponseError": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "error": {
+          "type": "string",
+          "description": "Текст ошибки."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        }
+      }
+    },
+    "v1AddStrategyItemsResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/AddStrategyItemsResponseError"
+          },
+          "description": "Товары с ошибками."
+        },
+        "failed_product_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товаров с ошибками."
+        }
+      }
+    },
+    "v1AddStrategyItemsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1AddStrategyItemsResponseResult"
+        }
+      }
+    },
+    "v1ItemIDsRequest": {
+      "required": [
+        "product_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Список идентификаторов товаров в системе продавца — `product_id`. Максимальное количество — 50."
+        }
+      }
+    },
+    "GetStrategyIDsByItemIDsResponseProductInfo": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "strategy_id": {
+          "type": "string",
+          "description": "Идентификатор стратегии, в которую добавлен товар."
+        }
+      }
+    },
+    "v1GetStrategyIDsByItemIDsResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "products_info": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/GetStrategyIDsByItemIDsResponseProductInfo"
+          },
+          "description": "Информация о товаре."
+        }
+      }
+    },
+    "v1GetStrategyIDsByItemIDsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1GetStrategyIDsByItemIDsResponseResult"
+        }
+      }
+    },
+    "v1GetStrategyItemsResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Список товаров.",
+      "properties": {
+        "product_id": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        }
+      }
+    },
+    "v1GetStrategyItemsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1GetStrategyItemsResponseResult"
+        }
+      }
+    },
+    "v1GetStrategyItemInfoRequest": {
+      "required": [
+        "product_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        }
+      }
+    },
+    "v1GetStrategyItemInfoResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "strategy_id": {
+          "type": "string",
+          "description": "Идентификатор стратегии."
+        },
+        "is_enabled": {
+          "type": "boolean",
+          "description": "`true`, если товар участвует в стратегии ценообразования.\n"
+        },
+        "strategy_product_price": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Цена по стратегии."
+        },
+        "price_downloaded_at": {
+          "type": "string",
+          "description": "Дата установки цены по стратегии."
+        },
+        "strategy_competitor_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор конкурента.",
+          "deprecated": true
+        },
+        "strategy_competitor_product_url": {
+          "type": "string",
+          "description": "Ссылка на товар конкурента."
+        }
+      }
+    },
+    "v1GetStrategyItemInfoResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1GetStrategyItemInfoResponseResult"
+        }
+      }
+    },
+    "v1DeleteStrategyItemsResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат работы метода.",
+      "properties": {
+        "failed_product_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товаров с ошибками."
+        }
+      }
+    },
+    "v1DeleteStrategyItemsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1DeleteStrategyItemsResponseResult"
+        }
+      }
+    },
+    "v1UpdateStatusStrategyRequest": {
+      "required": [
+        "strategy_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Статус стратегии:\n- `true` — включена,\n- `false` — отключена.\n"
+        },
+        "strategy_id": {
+          "type": "string",
+          "description": "Идентификатор стратегии."
+        }
+      }
+    },
+    "ArrivalPassListRequestFilter": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтры.",
+      "properties": {
+        "arrival_pass_ids": {
+          "type": "array",
+          "description": "Фильтр по идентификатору пропуска.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "arrival_reason": {
+          "type": "string",
+          "description": "Фильтр по цели въезда:\n- `FBS_DELIVERY` — отгрузка.\n- `FBS_RETURN` — вывоз возвратов.\n\nЕсли параметр не указан, учитываются обе цели.\n\nУказанная причина должна быть в списке причин в пропусках.\n"
+        },
+        "dropoff_point_ids": {
+          "type": "array",
+          "description": "Фильтр по точке отгрузки.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "only_active_passes": {
+          "type": "boolean",
+          "description": "`true`, чтобы получить только активные заявки на пропуск.\n"
+        },
+        "warehouse_ids": {
+          "type": "array",
+          "description": "Фильтр по складу продавца. Можно получить с помощью метода [/v1/warehouse/list](#operation/WarehouseAPI_WarehouseList).",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "arrivalpassArrivalPassListRequest": {
+      "required": [
+        "limit"
+      ],
+      "type": "object",
+      "properties": {
+        "cursor": {
+          "type": "string",
+          "description": "Указатель для выборки следующих данных."
+        },
+        "filter": {
+          "$ref": "#/components/schemas/ArrivalPassListRequestFilter"
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Ограничение по количеству записей в ответе.\nПо умолчанию — 1000. Максимум — 1000.\n",
+          "format": "int32"
+        }
+      }
+    },
+    "arrivalpassArrivalPassListResponseArrivalPass": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "arrival_pass_id": {
+          "type": "integer",
+          "description": "Идентификатор пропуска.",
+          "format": "int64"
+        },
+        "arrival_reasons": {
+          "type": "array",
+          "description": "Цель приезда.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "arrival_time": {
+          "type": "string",
+          "description": "Дата и время въезда в формате UTC.",
+          "format": "date-time"
+        },
+        "driver_name": {
+          "type": "string",
+          "description": "ФИО водителя."
+        },
+        "driver_phone": {
+          "type": "string",
+          "description": "Номер телефона водителя."
+        },
+        "dropoff_point_id": {
+          "type": "integer",
+          "description": "Идентификатор точки отгрузки.",
+          "format": "int64"
+        },
+        "is_active": {
+          "type": "boolean",
+          "description": "`true`, если заявка активна.\n"
+        },
+        "vehicle_license_plate": {
+          "type": "string",
+          "description": "Номер автомобиля."
+        },
+        "vehicle_model": {
+          "type": "string",
+          "description": "Модель автомобиля."
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "description": "Идентификатор склада продавца.",
+          "format": "int64"
+        }
+      }
+    },
+    "arrivalpassArrivalPassListResponse": {
+      "type": "object",
+      "properties": {
+        "arrival_passes": {
+          "type": "array",
+          "description": "Список пропусков для перевозки.",
+          "items": {
+            "$ref": "#/components/schemas/arrivalpassArrivalPassListResponseArrivalPass"
+          }
+        },
+        "cursor": {
+          "type": "string",
+          "description": "Указатель для выборки следующих данных.\nЕсли параметр пустой, данных больше нет.\n"
+        }
+      }
+    },
+    "sellerSellerAPIArrivalPassCreateRequestArrivalPass": {
+      "required": [
+        "driver_name",
+        "driver_phone",
+        "vehicle_license_plate",
+        "vehicle_model"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "driver_name": {
+          "type": "string",
+          "description": "ФИО водителя."
+        },
+        "driver_phone": {
+          "type": "string",
+          "description": "Номер телефона водителя."
+        },
+        "vehicle_license_plate": {
+          "type": "string",
+          "description": "Номер автомобиля."
+        },
+        "vehicle_model": {
+          "type": "string",
+          "description": "Модель автомобиля."
+        },
+        "with_returns": {
+          "type": "boolean",
+          "description": "`true`, если будете вывозить возвраты. По умолчанию — `false`.\n"
+        }
+      }
+    },
+    "sellerSellerAPIArrivalPassCreateRequest": {
+      "required": [
+        "arrival_passes",
+        "carriage_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "arrival_passes": {
+          "type": "array",
+          "description": "Список пропусков.",
+          "items": {
+            "$ref": "#/components/schemas/sellerSellerAPIArrivalPassCreateRequestArrivalPass"
+          }
+        },
+        "carriage_id": {
+          "type": "integer",
+          "description": "Идентификатор перевозки.",
+          "format": "int64"
+        }
+      }
+    },
+    "sellerSellerAPIArrivalPassCreateResponse": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса.",
+      "properties": {
+        "arrival_pass_ids": {
+          "type": "array",
+          "description": "Идентификаторы пропусков.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "sellerSellerAPIArrivalPassUpdateRequestArrivalPass": {
+      "required": [
+        "driver_name",
+        "driver_phone",
+        "id",
+        "vehicle_license_plate",
+        "vehicle_model"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "driver_name": {
+          "type": "string",
+          "description": "ФИО водителя."
+        },
+        "driver_phone": {
+          "type": "string",
+          "description": "Номер телефона водителя."
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор пропуска."
+        },
+        "vehicle_license_plate": {
+          "type": "string",
+          "description": "Номер автомобиля."
+        },
+        "vehicle_model": {
+          "type": "string",
+          "description": "Модель автомобиля."
+        },
+        "with_returns": {
+          "type": "boolean",
+          "description": "`true`, если будете вывозить возвраты. По умолчанию — `false`.\n"
+        }
+      }
+    },
+    "sellerSellerAPIArrivalPassUpdateRequest": {
+      "required": [
+        "arrival_passes",
+        "carriage_id"
+      ],
+      "type": "object",
+      "properties": {
+        "arrival_passes": {
+          "type": "array",
+          "description": "Список пропусков.",
+          "items": {
+            "$ref": "#/components/schemas/sellerSellerAPIArrivalPassUpdateRequestArrivalPass"
+          }
+        },
+        "carriage_id": {
+          "type": "integer",
+          "description": "Идентификатор перевозки.",
+          "format": "int64"
+        }
+      }
+    },
+    "sellerSellerAPIArrivalPassDeleteRequest": {
+      "required": [
+        "arrival_pass_ids",
+        "carriage_id"
+      ],
+      "type": "object",
+      "properties": {
+        "arrival_pass_ids": {
+          "type": "array",
+          "description": "Идентификаторы пропусков.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "carriage_id": {
+          "type": "integer",
+          "description": "Идентификатор перевозки.",
+          "format": "int64"
+        }
+      }
+    },
+    "arrivalpassArrivalPassCreateRequestArrivalPass": {
+      "required": [
+        "arrival_time",
+        "driver_name",
+        "driver_phone",
+        "dropoff_point_id",
+        "vehicle_license_plate",
+        "vehicle_model",
+        "warehouse_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "arrival_time": {
+          "type": "string",
+          "description": "Время прибытия в формате UTC. \nВ это время пропуск начнёт действовать.\n",
+          "format": "date-time"
+        },
+        "driver_name": {
+          "type": "string",
+          "description": "ФИО водителя."
+        },
+        "driver_phone": {
+          "type": "string",
+          "description": "Номер телефона водителя."
+        },
+        "dropoff_point_id": {
+          "type": "integer",
+          "description": "Идентификатор склада, на который оформляется пропуск.",
+          "format": "int64"
+        },
+        "vehicle_license_plate": {
+          "type": "string",
+          "description": "Номер автомобиля."
+        },
+        "vehicle_model": {
+          "type": "string",
+          "description": "Модель автомобиля."
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "description": "Идентификатор склада продавца. Можно получить с помощью метода [/v1/warehouse/list](#operation/WarehouseAPI_WarehouseList).",
+          "format": "int64"
+        }
+      }
+    },
+    "arrivalpassArrivalPassCreateRequest": {
+      "required": [
+        "arrival_passes"
+      ],
+      "type": "object",
+      "properties": {
+        "arrival_passes": {
+          "type": "array",
+          "description": "Список пропусков.",
+          "items": {
+            "$ref": "#/components/schemas/arrivalpassArrivalPassCreateRequestArrivalPass"
+          }
+        }
+      }
+    },
+    "arrivalpassArrivalPassCreateResponse": {
+      "type": "object",
+      "properties": {
+        "arrival_pass_ids": {
+          "type": "array",
+          "description": "Идентификаторы пропусков.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "arrivalpassArrivalPassUpdateRequestArrivalPass": {
+      "required": [
+        "arrival_pass_id",
+        "arrival_time",
+        "driver_name",
+        "driver_phone",
+        "vehicle_license_plate",
+        "vehicle_model"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "arrival_pass_id": {
+          "type": "integer",
+          "description": "Идентификатор пропуска.",
+          "format": "int64"
+        },
+        "arrival_time": {
+          "type": "string",
+          "description": "Время прибытия в формате UTC.\nВ это время начнёт действовать пропуск.\n\nЧтобы изменить время прибытия, используйте метод [/v1/carriage/pass/update](#operation/carriagePassUpdate).\n",
+          "format": "date-time"
+        },
+        "driver_name": {
+          "type": "string",
+          "description": "ФИО водителя."
+        },
+        "driver_phone": {
+          "type": "string",
+          "description": "Номер телефона водителя."
+        },
+        "vehicle_license_plate": {
+          "type": "string",
+          "description": "Номер автомобиля."
+        },
+        "vehicle_model": {
+          "type": "string",
+          "description": "Модель автомобиля."
+        }
+      }
+    },
+    "arrivalpassArrivalPassUpdateRequest": {
+      "required": [
+        "arrival_passes"
+      ],
+      "type": "object",
+      "properties": {
+        "arrival_passes": {
+          "type": "array",
+          "description": "Список пропусков.",
+          "items": {
+            "$ref": "#/components/schemas/arrivalpassArrivalPassUpdateRequestArrivalPass"
+          }
+        }
+      }
+    },
+    "arrivalpassArrivalPassDeleteRequest": {
+      "required": [
+        "arrival_pass_ids"
+      ],
+      "type": "object",
+      "properties": {
+        "arrival_pass_ids": {
+          "type": "array",
+          "description": "Идентификаторы пропусков.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "brandBrandCompanyCertificationListRequest": {
+      "required": [
+        "page",
+        "page_size"
+      ],
+      "properties": {
+        "page": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Номер страницы, возвращаемой в запросе."
+        },
+        "page_size": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество элементов на странице."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "BrandCompanyCertificationListResponseBrandCertification": {
+      "properties": {
+        "brand_name": {
+          "type": "string",
+          "description": "Название бренда."
+        },
+        "has_certificate": {
+          "type": "boolean",
+          "description": "Признак, что требуется сертификат:\n- `true` — требуется сертификат;\n- `false` — сертификат не нужен.\n"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "BrandCompanyCertificationListResponseBrandCertificationResult": {
+      "properties": {
+        "brand_certification": {
+          "items": {
+            "$ref": "#/components/schemas/BrandCompanyCertificationListResponseBrandCertification"
+          },
+          "type": "array",
+          "description": "Информация о сертифицируемых брендах."
+        },
+        "total": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Общее количество брендов."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса."
+    },
+    "brandBrandCompanyCertificationListResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/BrandCompanyCertificationListResponseBrandCertificationResult"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productProductCertificateAccordanceTypesResponseType": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название документа."
+        },
+        "value": {
+          "type": "string",
+          "description": "Значение справочника."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productProductCertificateAccordanceTypesResponse": {
+      "properties": {
+        "result": {
+          "items": {
+            "$ref": "#/components/schemas/productProductCertificateAccordanceTypesResponseType"
+          },
+          "type": "array",
+          "description": "Список типов и названий сертификатов."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "v2ProductCertificateAccordanceTypesResponseType": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код типа соответствия требованиям."
+        },
+        "title": {
+          "type": "string",
+          "description": "Описание типа соответствия требованиям."
+        }
+      }
+    },
+    "v2ProductCertificateAccordanceTypesResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "base": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v2ProductCertificateAccordanceTypesResponseType"
+          },
+          "description": "Основные типы соответствия требованиям."
+        },
+        "hazard": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v2ProductCertificateAccordanceTypesResponseType"
+          },
+          "description": "Типов соответствия требованиям, относящиеся к опасным товарам."
+        }
+      },
+      "description": "Список типов соответствия требованиям."
+    },
+    "v2ProductCertificateAccordanceTypesResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v2ProductCertificateAccordanceTypesResponseResult"
+        }
+      }
+    },
+    "productProductCertificateTypesResponseType": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название документа."
+        },
+        "value": {
+          "type": "string",
+          "description": "Значение справочника."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productProductCertificateTypesResponse": {
+      "properties": {
+        "result": {
+          "items": {
+            "$ref": "#/components/schemas/productProductCertificateTypesResponseType"
+          },
+          "type": "array",
+          "description": "Список типов и названий сертификатов."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v2ProductCertificationListRequest": {
+      "required": [
+        "page",
+        "page_size"
+      ],
+      "type": "object",
+      "properties": {
+        "page": {
+          "description": "Номер страницы.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "page_size": {
+          "description": "Количество элементов на странице.",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "maximum": 1000
+        }
+      }
+    },
+    "ProductCertificationListResponseCertificationv2": {
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "description": "Идентификатор сертифицируемой категории.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "category_name": {
+          "description": "Название сертифицируемой категории.",
+          "type": "string"
+        },
+        "is_required": {
+          "description": "Признак обязательной характеристики.",
+          "type": "boolean"
+        },
+        "type_id": {
+          "description": "Идентификатор типа сертифицируемой категории.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "type_name": {
+          "description": "Название типа сертифицируемой категории.",
+          "type": "string"
+        }
+      }
+    },
+    "v2ProductCertificationListResponse": {
+      "type": "object",
+      "properties": {
+        "certification": {
+          "description": "Информация о сертифицируемых категориях.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ProductCertificationListResponseCertificationv2"
+          }
+        },
+        "total": {
+          "description": "Всего категорий.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "productProductCertificationListRequest": {
+      "properties": {
+        "page": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Номер страницы, возвращаемой в запросе."
+        },
+        "page_size": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество элементов на странице."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "ProductCertificationListResponseCertification": {
+      "properties": {
+        "category_name": {
+          "type": "string",
+          "description": "Название сертифицируемой категории."
+        },
+        "is_required": {
+          "type": "boolean",
+          "description": "Признак обязательной характеристики."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "ProductCertificationListResponseCertificationResult": {
+      "properties": {
+        "certification": {
+          "items": {
+            "$ref": "#/components/schemas/ProductCertificationListResponseCertification"
+          },
+          "type": "array",
+          "description": "Информация о сертифицируемых категориях."
+        },
+        "total": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Всего категорий."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса."
+    },
+    "productProductCertificationListResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/ProductCertificationListResponseCertificationResult"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productProductCertificateBindRequest": {
+      "properties": {
+        "certificate_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор сертификата, который был присвоен при его загрузке."
+        },
+        "product_id": {
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": "array",
+          "description": "Массив идентификаторов товаров, к которым относится этот сертификат."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v1ProductCertificateDeleteRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "certificate_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор сертификата."
+        }
+      },
+      "required": [
+        "certificate_id"
+      ]
+    },
+    "v1ProductCertificateDeleteResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "is_delete": {
+          "type": "boolean",
+          "description": "Удалён ли сертификат:\n- `true` — удалён,\n- `false` — не удалён.\n"
+        },
+        "error_message": {
+          "type": "string",
+          "description": "Описание ошибок при удалении сертификата."
+        }
+      },
+      "description": "Результат удаления сертификата."
+    },
+    "v1ProductCertificateDeleteResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1ProductCertificateDeleteResponseResult"
+        }
+      }
+    },
+    "v1ProductCertificateInfoRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "certificate_number": {
+          "type": "string",
+          "description": "Идентификатор сертификата."
+        }
+      },
+      "required": [
+        "certificate_number"
+      ]
+    },
+    "v1Certificate": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "certificate_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор."
+        },
+        "certificate_number": {
+          "type": "string",
+          "description": "Номер."
+        },
+        "certificate_name": {
+          "type": "string",
+          "description": "Название."
+        },
+        "type_code": {
+          "type": "string",
+          "description": "Тип."
+        },
+        "status_code": {
+          "type": "string",
+          "description": "Статус."
+        },
+        "accordance_type_code": {
+          "type": "string",
+          "description": "Тип соответствия требованиям."
+        },
+        "rejection_reason_code": {
+          "type": "string",
+          "description": "Причина отклонения сертификата."
+        },
+        "verification_comment": {
+          "type": "string",
+          "description": "Комментарий модератора."
+        },
+        "issue_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата создания."
+        },
+        "expire_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата окончания действия."
+        },
+        "products_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товаров, привязанных к сертификату."
+        }
+      },
+      "description": "Информация о сертификате."
+    },
+    "v1ProductCertificateInfoResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1Certificate"
+        }
+      }
+    },
+    "v1ProductCertificateListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул, привязанный к сертификату. Передайте параметр, если нужны сертификаты, к которым привязаны определённые товары."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус сертификата. Передайте параметр, если нужны сертификаты с определённым статусом."
+        },
+        "type": {
+          "type": "string",
+          "description": "Тип сертификата. Передайте параметр, если нужны сертификаты с определённым типом."
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Страница, с которой следует выводить список. Минимальное значение — 1."
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество объектов на странице. Значение — от 1 до 1000."
+        }
+      },
+      "required": [
+        "page",
+        "page_size"
+      ]
+    },
+    "v1ProductCertificateListResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1Certificate"
+          },
+          "description": "Информация о сертификате."
+        },
+        "page_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество страниц."
+        }
+      },
+      "description": "Список сертификатов."
+    },
+    "v1ProductCertificateListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1ProductCertificateListResponseResult"
+        }
+      }
+    },
+    "v1ProductCertificateProductStatusListRequest": {
+      "type": "object",
+      "title": "object"
+    },
+    "v1StatusCodeNamePair": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код статуса товара при привязке к сертификату."
+        },
+        "name": {
+          "type": "string",
+          "description": "Описание статуса."
+        }
+      }
+    },
+    "v1ProductCertificateProductStatusListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1StatusCodeNamePair"
+          },
+          "description": "Список статусов товаров."
+        }
+      }
+    },
+    "v1ProductCertificateProductsListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "certificate_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор сертификата."
+        },
+        "product_status_code": {
+          "type": "string",
+          "description": "Статус проверки товара при привязке к сертификату."
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Номер страницы, с которой выводить список. Минимальное значение — 1."
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество объектов на странице. Значение — от 1 до 1000."
+        }
+      },
+      "required": [
+        "certificate_id",
+        "page",
+        "page_size"
+      ]
+    },
+    "ProductCertificateProductsListResponseProduct": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "product_status_code": {
+          "type": "string",
+          "description": "Статус обработки товара при привязке к сертификату."
+        }
+      }
+    },
+    "v1ProductCertificateProductsListResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ProductCertificateProductsListResponseProduct"
+          },
+          "description": "Список товаров."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество найденных товаров."
+        }
+      },
+      "description": "Товары, привязанные к сертификату."
+    },
+    "v1ProductCertificateProductsListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1ProductCertificateProductsListResponseResult"
+        }
+      }
+    },
+    "v1ProductCertificateUnbindRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "certificate_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор сертификата."
+        },
+        "product_id": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64",
+            "description": "Идентификатор товара в системе продавца — `product_id`."
+          },
+          "description": "Список идентификаторов товара, которые нужно отвязать от сертификата."
+        }
+      },
+      "required": [
+        "certificate_id",
+        "product_id"
+      ]
+    },
+    "ProductCertificateUnbindResponseItem": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Сообщение об ошибке при отвязывании товара."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "updated": {
+          "type": "boolean",
+          "description": "Был ли отвязан товар от сертификата:\n- `true` — отвязан,\n- `false` — не отвязан.\n"
+        }
+      }
+    },
+    "v1ProductCertificateUnbindResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ProductCertificateUnbindResponseItem"
+          },
+          "description": "Результат работы метода."
+        }
+      }
+    },
+    "v1ProductCertificateRejectionReasonsListRequest": {
+      "type": "object",
+      "title": "object"
+    },
+    "v1StatusCodeNamePairRejection": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код причины отклонения сертификата."
+        },
+        "name": {
+          "type": "string",
+          "description": "Описание причины отклонения сертификата."
+        }
+      }
+    },
+    "v1ProductCertificateRejectionReasonsListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1StatusCodeNamePairRejection"
+          },
+          "description": "Причины отклонения сертификата."
+        }
+      }
+    },
+    "v1ProductCertificateStatusListRequest": {
+      "type": "object",
+      "title": "object"
+    },
+    "v1StatusCodeNamePairStatuses": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код статуса сертификата."
+        },
+        "name": {
+          "type": "string",
+          "description": "Описание статуса."
+        }
+      }
+    },
+    "v1ProductCertificateStatusListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1StatusCodeNamePairStatuses"
+          },
+          "description": "Список возможных статусов сертификатов."
+        }
+      }
+    },
+    "WarehouseFirstMileType": {
+      "type": "object",
+      "title": "object",
+      "description": "Первая миля FBS.",
+      "properties": {
+        "dropoff_point_id": {
+          "type": "string",
+          "description": "Идентификатор DropOff-точки."
+        },
+        "dropoff_timeslot_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор временного слота для DropOff."
+        },
+        "first_mile_is_changing": {
+          "type": "boolean",
+          "description": "Признак, что настройки склада обновляются."
+        },
+        "first_mile_type": {
+          "type": "string",
+          "description": "Тип первой мили — `DropOff` или `Pickup`.",
+          "enum": [
+            "DropOff",
+            "Pickup"
+          ]
+        }
+      }
+    },
+    "WarehouseListResponseWarehouse": {
+      "properties": {
+        "has_entrusted_acceptance": {
+          "type": "boolean",
+          "description": "Признак доверительной приёмки. `true`, если доверительная приёмка включена на складе."
+        },
+        "is_rfbs": {
+          "type": "boolean",
+          "description": "Признак работы склада по схеме rFBS:\n- `true` — склад работает по схеме rFBS;\n- `false` — не работает по схеме rFBS.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Название склада."
+        },
+        "warehouse_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор склада."
+        },
+        "can_print_act_in_advance": {
+          "type": "boolean",
+          "description": "Возможность печати акта приёма-передачи заранее. `true`, если печатать заранее возможно."
+        },
+        "first_mile_type": {
+          "$ref": "#/components/schemas/WarehouseFirstMileType"
+        },
+        "has_postings_limit": {
+          "type": "boolean",
+          "description": "Признак наличия лимита минимального количества заказов. `true`, если лимит есть."
+        },
+        "is_karantin": {
+          "type": "boolean",
+          "description": "Признак, что склад не работает из-за карантина."
+        },
+        "is_kgt": {
+          "type": "boolean",
+          "description": "Признак, что склад принимает крупногабаритные товары."
+        },
+        "is_economy": {
+          "type": "boolean",
+          "description": "`true`, если склад работает с эконом-товарами.\n"
+        },
+        "is_timetable_editable": {
+          "type": "boolean",
+          "description": "Признак, что можно менять расписание работы складов."
+        },
+        "min_postings_limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Минимальное значение лимита — количество заказов, которые можно привезти в одной поставке."
+        },
+        "postings_limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение лимита. `-1`, если лимита нет."
+        },
+        "min_working_days": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество рабочих дней склада."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус склада.\n\nСоответствие статусов склада со статусами с личном кабинете:\n\n| Статус Seller&nbsp;API | Статус в личном кабинете |\n|---|---|\n| `new` | Активируется |\n| `created` | Активный |\n| `disabled` | В архиве |\n| `blocked` | Заблокирован |\n| `disabled_due_to_limit` | На паузе |\n| `error` | Ошибка |\n"
+        },
+        "working_days": {
+          "description": "Рабочие дни склада.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7"
+            ]
+          }
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "warehouseWarehouseListResponse": {
+      "properties": {
+        "result": {
+          "items": {
+            "$ref": "#/components/schemas/WarehouseListResponseWarehouse"
+          },
+          "type": "array",
+          "description": "Список складов."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "DeliveryMethodListRequestFilter": {
+      "properties": {
+        "provider_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор службы доставки."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус метода доставки:\n  - `NEW` — создан,\n  - `EDITED` — редактируется,\n  - `ACTIVE` — активный,\n  - `DISABLED` — неактивный.\n"
+        },
+        "warehouse_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор склада. Можно получить с помощью метода [/v1/warehouse/list ](#operation/WarehouseAPI_WarehouseList)."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр для поиска методов доставки."
+    },
+    "warehouseDeliveryMethodListRequest": {
+      "required": [
+        "limit"
+      ],
+      "properties": {
+        "filter": {
+          "$ref": "#/components/schemas/DeliveryMethodListRequestFilter"
+        },
+        "limit": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество элементов в ответе. Максимум — 50, минимум — 1."
+        },
+        "offset": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество элементов, которое будет пропущено в ответе. Например, если `offset = 10`, то ответ начнётся с 11-го найденного элемента."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "DeliveryMethodListResponseDeliveryMethod": {
+      "properties": {
+        "company_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор продавца."
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время создания метода доставки."
+        },
+        "cutoff": {
+          "type": "string",
+          "description": "Время, до которого продавцу нужно собрать заказ."
+        },
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор метода доставки."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название метода доставки."
+        },
+        "provider_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор службы доставки."
+        },
+        "sla_cut_in": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Минимальное время на сборку заказа в минутах в соответствии с настройками склада."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус метода доставки:\n  - `NEW` — создан,\n  - `EDITED` — редактируется,\n  - `ACTIVE` — активный,\n  - `DISABLED` — неактивный.\n"
+        },
+        "template_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор услуги по доставке заказа."
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время последнего обновления метода метода доставки."
+        },
+        "warehouse_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор склада."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "warehouseDeliveryMethodListResponse": {
+      "properties": {
+        "has_next": {
+          "type": "boolean",
+          "description": "Признак, что в запросе вернулась только часть методов доставки:\n- `true` — сделайте повторный запрос с новым параметром `offset` для получения остальных методов;\n- `false` — ответ содержит все методы доставки по запросу.\n"
+        },
+        "result": {
+          "items": {
+            "$ref": "#/components/schemas/DeliveryMethodListResponseDeliveryMethod"
+          },
+          "type": "array",
+          "description": "Результат запроса."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "polygonv1PolygonCreateRequest": {
+      "required": [
+        "coordinates"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "coordinates": {
+          "description": "Координаты полигона доставки в формате `[[[lat long]]]`.\n",
+          "type": "string"
+        }
+      }
+    },
+    "polygonv1PolygonCreateResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "polygon_id": {
+          "description": "Идентификатор полигона.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "rpcStatus_v1PolygonCreate": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Сообщение об ошибке:\n\n  - `coordinates not provided` — координаты не переданы;\n  - `invalid coordinates, must have two points in coordinate` — в какой-то точке передана только широта или долгота, нужно передать две точки;\n  - `the first and last points in loop must be same` — первая и последняя точка не совпадают (по стандартным правилам geojson точки должны совпадать);\n  - `non-full loops must have at least 4 unique vertices for polygons` — для полигона передано менее четырех точек.\n"
+        }
+      }
+    },
+    "PolygonBindRequestpolygon": {
+      "required": [
+        "polygon_id",
+        "time"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "polygon_id": {
+          "description": "Идентификатор полигона.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "time": {
+          "description": "Время в минутах, за которое доставят товар в этом полигоне.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "PolygonBindRequestwh_location": {
+      "required": [
+        "lat",
+        "lon"
+      ],
+      "type": "object",
+      "title": "object",
+      "description": "Расположение склада.",
+      "properties": {
+        "lat": {
+          "description": "Географическая широта расположения склада.",
+          "type": "string"
+        },
+        "lon": {
+          "description": "Географическая долгота расположения склада.",
+          "type": "string"
+        }
+      }
+    },
+    "polygonv1PolygonBindRequest": {
+      "required": [
+        "delivery_method_id",
+        "polygons",
+        "warehouse_location"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "delivery_method_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор метода доставки."
+        },
+        "polygons": {
+          "type": "array",
+          "description": "Список полигонов.",
+          "items": {
+            "$ref": "#/components/schemas/PolygonBindRequestpolygon"
+          }
+        },
+        "warehouse_location": {
+          "$ref": "#/components/schemas/PolygonBindRequestwh_location"
+        }
+      }
+    },
+    "polygonv1Empty": {
+      "type": "object",
+      "title": "object"
+    }
+  }
+}

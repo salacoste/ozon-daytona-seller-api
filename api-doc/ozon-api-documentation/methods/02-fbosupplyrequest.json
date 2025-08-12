@@ -1,0 +1,2839 @@
+{
+  "metadata": {
+    "tag": "FboSupplyRequest",
+    "name": "FboSupplyRequest",
+    "displayName": "Создание и управление заявками на поставку FBO",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 19,
+    "schemasCount": 107,
+    "generatedAt": "2025-08-09T16:28:42.332Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/cluster/list",
+      "method": "POST",
+      "operationId": "SupplyDraftAPI_DraftClusterList",
+      "summary": "Информация о кластерах и их складах",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FboSupplyRequest"
+        ],
+        "operationId": "SupplyDraftAPI_DraftClusterList",
+        "summary": "Информация о кластерах и их складах",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1DraftClusterListRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о кластерах",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1DraftClusterListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/warehouse/fbo/list",
+      "method": "POST",
+      "operationId": "SupplyDraftAPI_DraftGetWarehouseFboList",
+      "summary": "Поиск точек для отгрузки поставки",
+      "description": "Используйте метод, чтобы найти точки отгрузки для кросс-докинга и прямых поставок.\n\nВы можете посмотреть адреса всех точек на карте и в виде таблицы в [Базе знаний](https://seller-edu.ozon.ru/fbo/warehouses/adresa-skladov-fbo).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FboSupplyRequest"
+        ],
+        "operationId": "SupplyDraftAPI_DraftGetWarehouseFboList",
+        "summary": "Поиск точек для отгрузки поставки",
+        "description": "Используйте метод, чтобы найти точки отгрузки для кросс-докинга и прямых поставок.\n\nВы можете посмотреть адреса всех точек на карте и в виде таблицы в [Базе знаний](https://seller-edu.ozon.ru/fbo/warehouses/adresa-skladov-fbo).\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1DraftGetWarehouseFboListRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о складах",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1DraftGetWarehouseFboListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/draft/create",
+      "method": "POST",
+      "operationId": "SupplyDraftAPI_DraftCreate",
+      "summary": "Создать черновик заявки на поставку",
+      "description": "Создать черновик заявки на поставку — прямой или кросс-докинг, а также указать поставляемые товары.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FboSupplyRequest"
+        ],
+        "operationId": "SupplyDraftAPI_DraftCreate",
+        "summary": "Создать черновик заявки на поставку",
+        "description": "Создать черновик заявки на поставку — прямой или кросс-докинг, а также указать поставляемые товары.\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1DraftCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Черновик заявки создан",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1DraftCreateResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/draft/create/info",
+      "method": "POST",
+      "operationId": "SupplyDraftAPI_DraftCreateInfo",
+      "summary": "Информация о черновике заявки на поставку",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FboSupplyRequest"
+        ],
+        "operationId": "SupplyDraftAPI_DraftCreateInfo",
+        "summary": "Информация о черновике заявки на поставку",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1DraftCreateInfoRequest"
+              },
+              "example": {
+                "operation_id": "0191c1c8-041c-754f-bba1-05de7741f9cb"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о черновике заявки на поставку",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1DraftCreateInfoResponse"
+                },
+                "example": {
+                  "clusters": [
+                    {
+                      "cluster_id": 0,
+                      "cluster_name": "string",
+                      "warehouses": [
+                        {
+                          "bundle_ids": [
+                            {
+                              "bundle_id": "string",
+                              "is_docless": true
+                            }
+                          ],
+                          "restricted_bundle_id": "string",
+                          "status": {
+                            "invalid_reason": "WAREHOUSE_SCORING_INVALID_REASON_UNSPECIFIED",
+                            "is_available": true,
+                            "state": "WAREHOUSE_SCORING_STATUS_FULL_AVAILABLE"
+                          },
+                          "supply_warehouse": {
+                            "address": "string",
+                            "name": "string",
+                            "warehouse_id": 0
+                          },
+                          "total_rank": 0,
+                          "total_score": 0,
+                          "travel_time_days": 0
+                        }
+                      ]
+                    }
+                  ],
+                  "draft_id": 30957724,
+                  "errors": [
+                    {
+                      "error_message": "string",
+                      "items_validation": [
+                        {
+                          "reasons": [
+                            "string"
+                          ],
+                          "sku": 0
+                        }
+                      ],
+                      "unknown_cluster_ids": [
+                        "string"
+                      ]
+                    }
+                  ],
+                  "status": "CALCULATION_STATUS_FAILED"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/draft/timeslot/info",
+      "method": "POST",
+      "operationId": "SupplyDraftAPI_DraftTimeslotInfo",
+      "summary": "Доступные таймслоты",
+      "description": "Доступные таймслоты на конечных складах отгрузки.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FboSupplyRequest"
+        ],
+        "operationId": "SupplyDraftAPI_DraftTimeslotInfo",
+        "summary": "Доступные таймслоты",
+        "description": "Доступные таймслоты на конечных складах отгрузки.\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1DraftTimeslotInfoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Таймслоты",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1DraftTimeslotInfoResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/draft/supply/create",
+      "method": "POST",
+      "operationId": "SupplyDraftAPI_DraftSupplyCreate",
+      "summary": "Создать заявку на поставку по черновику",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FboSupplyRequest"
+        ],
+        "operationId": "SupplyDraftAPI_DraftSupplyCreate",
+        "summary": "Создать заявку на поставку по черновику",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1DraftSupplyCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Заявка создана",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1DraftSupplyCreateResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/draft/supply/create/status",
+      "method": "POST",
+      "operationId": "SupplyDraftAPI_DraftSupplyCreateStatus",
+      "summary": "Информация о создании заявки на поставку",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FboSupplyRequest"
+        ],
+        "operationId": "SupplyDraftAPI_DraftSupplyCreateStatus",
+        "summary": "Информация о создании заявки на поставку",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1DraftSupplyCreateStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о создании заявки на поставку",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1DraftSupplyCreateStatusResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/cargoes/create",
+      "method": "POST",
+      "operationId": "CargoesAPI_CargoesCreate",
+      "summary": "Установка грузомест",
+      "description": "Используйте метод, чтобы передать грузоместа и товарный состав в заявку на поставку.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Установка грузомест",
+        "description": "Используйте метод, чтобы передать грузоместа и товарный состав в заявку на поставку.\n",
+        "operationId": "CargoesAPI_CargoesCreate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CargoesCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Грузоместа установлены",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CargoesCreateResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FboSupplyRequest"
+        ]
+      }
+    },
+    {
+      "path": "/v1/cargoes/create/info",
+      "method": "POST",
+      "operationId": "CargoesAPI_CargoesCreateInfo",
+      "summary": "Получить информацию по установке грузомест",
+      "description": "Используйте метод, чтобы получить информацию по установленным грузоместам.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить информацию по установке грузомест",
+        "description": "Используйте метод, чтобы получить информацию по установленным грузоместам.\n",
+        "operationId": "CargoesAPI_CargoesCreateInfo",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CargoesCreateInfoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Результат запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CargoesCreateInfoResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FboSupplyRequest"
+        ]
+      }
+    },
+    {
+      "path": "/v1/cargoes/delete",
+      "method": "POST",
+      "operationId": "CargoesAPI_CargoesDelete",
+      "summary": "Удалить грузоместо в заявке на поставку",
+      "description": "Метод для удаления грузомест в заявке на поставку.\n\nЧтобы проверить статус удаления, используйте метод [/v1/cargoes/delete/status](#operation/CargoesAPI_CargoesDeleteStatus).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "description": "Метод для удаления грузомест в заявке на поставку.\n\nЧтобы проверить статус удаления, используйте метод [/v1/cargoes/delete/status](#operation/CargoesAPI_CargoesDeleteStatus).\n",
+        "tags": [
+          "FboSupplyRequest"
+        ],
+        "summary": "Удалить грузоместо в заявке на поставку",
+        "operationId": "CargoesAPI_CargoesDelete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CargoesDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Грузоместо удалено",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CargoesDeleteResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/cargoes/delete/status",
+      "method": "POST",
+      "operationId": "CargoesAPI_CargoesDeleteStatus",
+      "summary": "Информация о статусе удаления грузоместа",
+      "description": "Метод для получения статуса удаления грузомест в заявке на поставку.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "description": "Метод для получения статуса удаления грузомест в заявке на поставку.",
+        "tags": [
+          "FboSupplyRequest"
+        ],
+        "summary": "Информация о статусе удаления грузоместа",
+        "operationId": "CargoesAPI_CargoesDeleteStatus",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CargoesDeleteStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус удаления грузоместа",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CargoesDeleteStatusResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/cargoes/rules/get",
+      "method": "POST",
+      "operationId": "CargoesAPI_CargoesRulesGet",
+      "summary": "Чек-лист по установке грузомест FBO",
+      "description": "Метод для получения чек-листа с правилами по установке грузомест.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "description": "Метод для получения чек-листа с правилами по установке грузомест.",
+        "tags": [
+          "FboSupplyRequest"
+        ],
+        "summary": "Чек-лист по установке грузомест FBO",
+        "operationId": "CargoesAPI_CargoesRulesGet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CargoesRulesGetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Чек-лист по установке грузомест",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CargoesRulesGetResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/cargoes-label/create",
+      "method": "POST",
+      "operationId": "CargoesAPI_CargoesLabelCreate",
+      "summary": "Сгенерировать этикетки для грузомест",
+      "description": "Используйте метод, чтобы сгенерировать этикетки для грузомест из заявки на поставку.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Сгенерировать этикетки для грузомест",
+        "description": "Используйте метод, чтобы сгенерировать этикетки для грузомест из заявки на поставку.\n",
+        "operationId": "CargoesAPI_CargoesLabelCreate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CargoesLabelCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Результат запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CargoesLabelCreateResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FboSupplyRequest"
+        ]
+      }
+    },
+    {
+      "path": "/v1/cargoes-label/get",
+      "method": "POST",
+      "operationId": "CargoesAPI_CargoesLabelGet",
+      "summary": "Получить идентификатор этикетки для грузомест",
+      "description": "Используйте метод, чтобы получить статус формирования этикеток и идентификатор файла с ними.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить идентификатор этикетки для грузомест",
+        "description": "Используйте метод, чтобы получить статус формирования этикеток и идентификатор файла с ними.\n",
+        "operationId": "CargoesAPI_CargoesLabelGet",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CargoesLabelGetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Этикетка для грузомест",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CargoesLabelGetResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FboSupplyRequest"
+        ]
+      }
+    },
+    {
+      "path": "/v1/cargoes-label/file/{file_guid}",
+      "method": "GET",
+      "operationId": "CargoesAPI_CargoesLabelFile",
+      "summary": "Получить PDF с этикетками грузовых мест",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить PDF с этикетками грузовых мест",
+        "description": "",
+        "operationId": "CargoesAPI_CargoesLabelFile",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Этикетки грузовых мест"
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FboSupplyRequest"
+        ]
+      }
+    },
+    {
+      "path": "/v1/supply-order/cancel",
+      "method": "POST",
+      "operationId": "SupplyOrderAPI_SupplyOrderCancel",
+      "summary": "Отменить заявку на поставку",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FboSupplyRequest"
+        ],
+        "summary": "Отменить заявку на поставку",
+        "description": null,
+        "operationId": "SupplyOrderAPI_SupplyOrderCancel",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1SupplyOrderCancelRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Отмена заявки на поставку в процессе",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1SupplyOrderCancelResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/supply-order/cancel/status",
+      "method": "POST",
+      "operationId": "SupplyOrderAPI_SupplyOrderCancelStatus",
+      "summary": "Получить статус отмены заявки на поставку",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FboSupplyRequest"
+        ],
+        "summary": "Получить статус отмены заявки на поставку",
+        "description": null,
+        "operationId": "SupplyOrderAPI_SupplyOrderCancelStatus",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1SupplyOrderCancelStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус отмены заявки на поставку",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1SupplyOrderCancelStatusResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/supply-order/content/update",
+      "method": "POST",
+      "operationId": "SupplyOrderAPI_SupplyOrderContentUpdate",
+      "summary": "Редактирование товарного состава",
+      "description": "Метод для редактирования товарного состава в заявке на поставку.\n\nЧтобы проверить статус редактирования, используйте метод [/v1/supply-order/content/update/status](#operation/SupplyOrderAPI_SupplyOrderContentUpdateStatus).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "description": "Метод для редактирования товарного состава в заявке на поставку.\n\nЧтобы проверить статус редактирования, используйте метод [/v1/supply-order/content/update/status](#operation/SupplyOrderAPI_SupplyOrderContentUpdateStatus).\n",
+        "tags": [
+          "FboSupplyRequest"
+        ],
+        "summary": "Редактирование товарного состава",
+        "operationId": "SupplyOrderAPI_SupplyOrderContentUpdate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1SupplyOrderContentUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Товарный состав обновлён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1SupplyOrderContentUpdateResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/supply-order/content/update/status",
+      "method": "POST",
+      "operationId": "SupplyOrderAPI_SupplyOrderContentUpdateStatus",
+      "summary": "Информация о статусе редактирования товарного состава",
+      "description": "Метод для получения статуса редактирования товарного состава.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "description": "Метод для получения статуса редактирования товарного состава.",
+        "tags": [
+          "FboSupplyRequest"
+        ],
+        "summary": "Информация о статусе редактирования товарного состава",
+        "operationId": "SupplyOrderAPI_SupplyOrderContentUpdateStatus",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1SupplyOrderContentUpdateStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус редактирования",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1SupplyOrderContentUpdateStatusResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "v1DraftClusterListRequest": {
+      "type": "object",
+      "properties": {
+        "cluster_ids": {
+          "type": "array",
+          "description": "Идентификаторы кластеров.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "cluster_type": {
+          "$ref": "#/components/schemas/v1ClusterType"
+        }
+      },
+      "required": [
+        "cluster_type"
+      ]
+    },
+    "v1ClusterType": {
+      "type": "string",
+      "title": "DraftClusterList",
+      "description": "Тип кластера:\n- `CLUSTER_TYPE_OZON` — кластер в России,\n- `CLUSTER_TYPE_CIS` — кластер в СНГ.\n",
+      "enum": [
+        "CLUSTER_TYPE_OZON",
+        "CLUSTER_TYPE_CIS"
+      ]
+    },
+    "v1DraftClusterListResponse": {
+      "type": "object",
+      "properties": {
+        "clusters": {
+          "type": "array",
+          "description": "Кластеры.",
+          "items": {
+            "$ref": "#/components/schemas/v1DraftClusterListResponseCluster"
+          }
+        }
+      }
+    },
+    "v1DraftClusterListResponseCluster": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор кластера."
+        },
+        "logistic_clusters": {
+          "type": "array",
+          "description": "Информация о складах кластера.",
+          "items": {
+            "$ref": "#/components/schemas/DraftClusterListResponseLogisticCluster"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Название кластера."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "CLUSTER_TYPE_OZON",
+            "CLUSTER_TYPE_CIS"
+          ],
+          "description": "Тип кластера:\n- `CLUSTER_TYPE_OZON` — кластер в России,\n- `CLUSTER_TYPE_CIS` — кластер в СНГ.\n"
+        }
+      }
+    },
+    "DraftClusterListResponseLogisticCluster": {
+      "type": "object",
+      "properties": {
+        "warehouses": {
+          "type": "array",
+          "description": "Склады.",
+          "items": {
+            "$ref": "#/components/schemas/v1DraftClusterListResponseWarehouse"
+          }
+        }
+      }
+    },
+    "v1DraftClusterListResponseWarehouse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название склада."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "FULL_FILLMENT",
+            "EXPRESS_DARK_STORE",
+            "SORTING_CENTER",
+            "ORDERS_RECEIVING_POINT",
+            "CROSS_DOCK",
+            "DISTRIBUTION_CENTER"
+          ],
+          "description": "Тип склада:\n- `FULL_FILLMENT` — фулфилмент,\n- `EXPRESS_DARK_STORE` — даркстор,\n- `SORTING_CENTER` — сортировочный центр,\n- `ORDERS_RECEIVING_POINT` — пункт приёма заказов,\n- `CROSS_DOCK` — кросс-докинг,\n- `DISTRIBUTION_CENTER` — распределительный центр.\n"
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор склада."
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v1DraftGetWarehouseFboListRequest": {
+      "type": "object",
+      "title": "DraftGetWarehouseFboList",
+      "properties": {
+        "filter_by_supply_type": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1CreateType"
+          },
+          "description": "Тип поставки:\n- `CREATE_TYPE_CROSSDOCK` — кросс-докинг,\n- `CREATE_TYPE_DIRECT` — прямая.\n"
+        },
+        "search": {
+          "type": "string",
+          "required": true,
+          "description": "Поиск по названию склада. Для поиска пунктов выдачи заказов укажите полное название.",
+          "minLength": 4
+        }
+      },
+      "required": [
+        "filter_by_supply_type",
+        "search"
+      ]
+    },
+    "v1CreateType": {
+      "type": "string",
+      "enum": [
+        "CREATE_TYPE_CROSSDOCK",
+        "CREATE_TYPE_DIRECT"
+      ],
+      "description": "Тип поставки:\n- `CREATE_TYPE_CROSSDOCK` — кросс-докинг,\n- `CREATE_TYPE_DIRECT` — прямая.\n"
+    },
+    "v1DraftGetWarehouseFboListResponse": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "array",
+          "description": "Результат поиска складов.",
+          "items": {
+            "$ref": "#/components/schemas/DraftGetWarehouseFboListResponseSearch"
+          }
+        }
+      }
+    },
+    "DraftGetWarehouseFboListResponseSearch": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Адрес склада."
+        },
+        "coordinates": {
+          "$ref": "#/components/schemas/DraftGetWarehouseFboListResponseCoordinate"
+        },
+        "name": {
+          "type": "string",
+          "description": "Название склада."
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор склада, пункта выдачи заказов или сортировочного центра."
+        },
+        "warehouse_type": {
+          "$ref": "#/components/schemas/DraftGetWarehouseFboListResponseWarehouseType"
+        }
+      }
+    },
+    "DraftGetWarehouseFboListResponseCoordinate": {
+      "type": "object",
+      "description": "Координаты склада.",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "description": "Широта."
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "description": "Долгота."
+        }
+      }
+    },
+    "DraftGetWarehouseFboListResponseWarehouseType": {
+      "type": "string",
+      "description": "Тип склада, пункта выдачи заказов или сортировочного центра:\n- `WAREHOUSE_TYPE_DELIVERY_POINT` — пункт выдачи заказов,\n- `WAREHOUSE_TYPE_ORDERS_RECEIVING_POINT` — пункт приёма заказов,\n- `WAREHOUSE_TYPE_SORTING_CENTER` — сортировочный центр,\n- `WAREHOUSE_TYPE_FULL_FILLMENT` — фулфилмент,\n- `WAREHOUSE_TYPE_CROSS_DOCK` — кросс-докинг.\n",
+      "enum": [
+        "WAREHOUSE_TYPE_DELIVERY_POINT",
+        "WAREHOUSE_TYPE_ORDERS_RECEIVING_POINT",
+        "WAREHOUSE_TYPE_SORTING_CENTER",
+        "WAREHOUSE_TYPE_FULL_FILLMENT",
+        "WAREHOUSE_TYPE_CROSS_DOCK"
+      ]
+    },
+    "v1DraftCreateRequest": {
+      "type": "object",
+      "title": "DraftCreate messages",
+      "properties": {
+        "cluster_ids": {
+          "type": "array",
+          "description": "Идентификаторы кластеров. Можно получить с помощью метода [/v1/cluster/list](#operation/SupplyDraftAPI_DraftClusterList).",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "drop_off_point_warehouse_id": {
+          "type": "integer",
+          "format": "int64",
+          "title": "заполняется только для \"type\": \"crossdock\"",
+          "description": "Идентификатор точки отгрузки — пункта выдачи заказов или сортировочного центра. Можно получить с помощью метода [/v1/warehouse/fbo/list](#operation/SupplyDraftAPI_DraftGetWarehouseFboList).\nТолько для типа поставки `type = CREATE_TYPE_CROSSDOCK`.\n"
+        },
+        "items": {
+          "type": "array",
+          "description": "Товары.",
+          "maxItems": 5000,
+          "items": {
+            "$ref": "#/components/schemas/DraftCreateRequestItem"
+          }
+        },
+        "type": {
+          "$ref": "#/components/schemas/v1CreateType"
+        }
+      },
+      "required": [
+        "items",
+        "type"
+      ]
+    },
+    "DraftCreateRequestItem": {
+      "type": "object",
+      "properties": {
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товара."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      },
+      "required": [
+        "quantity",
+        "sku"
+      ]
+    },
+    "v1DraftCreateResponse": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "type": "string",
+          "description": "Идентификатор черновика заявки на поставку."
+        }
+      }
+    },
+    "v1DraftCreateInfoRequest": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "type": "string",
+          "description": "Уникальный идентификатор генерации черновика заявки на поставку.\n"
+        }
+      },
+      "required": [
+        "operation_id"
+      ]
+    },
+    "v1DraftCreateInfoResponse": {
+      "type": "object",
+      "properties": {
+        "clusters": {
+          "type": "array",
+          "description": "Кластеры.",
+          "items": {
+            "$ref": "#/components/schemas/draftv1Cluster"
+          }
+        },
+        "draft_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор черновика заявки на поставку."
+        },
+        "errors": {
+          "type": "array",
+          "description": "Ошибки.",
+          "items": {
+            "$ref": "#/components/schemas/v1CalculationError"
+          }
+        },
+        "status": {
+          "$ref": "#/components/schemas/v1CalculationStatus"
+        }
+      }
+    },
+    "draftv1Cluster": {
+      "type": "object",
+      "properties": {
+        "cluster_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор кластера."
+        },
+        "cluster_name": {
+          "type": "string",
+          "description": "Название кластера."
+        },
+        "warehouses": {
+          "type": "array",
+          "description": "Склады.",
+          "items": {
+            "$ref": "#/components/schemas/draftv1Warehouse"
+          }
+        }
+      }
+    },
+    "draftv1Warehouse": {
+      "type": "object",
+      "properties": {
+        "bundle_ids": {
+          "type": "array",
+          "description": "Товарный состав в виде комплекта.",
+          "items": {
+            "$ref": "#/components/schemas/v1BundleId"
+          }
+        },
+        "restricted_bundle_id": {
+          "type": "string",
+          "description": "Комплект товаров, которые не попадают в поставку. Используйте параметр в методе [/v1/supply-order/bundle](#operation/SupplyOrderBundle), чтобы получить подробную информацию.\n"
+        },
+        "status": {
+          "$ref": "#/components/schemas/v1WarehouseStatus"
+        },
+        "supply_warehouse": {
+          "$ref": "#/components/schemas/v1SupplyWarehouse"
+        },
+        "total_rank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Ранг склада в кластере."
+        },
+        "total_score": {
+          "type": "number",
+          "format": "double",
+          "description": "Рейтинг склада."
+        },
+        "travel_time_days": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Предполагаемый срок доставки.",
+          "nullable": true
+        }
+      }
+    },
+    "v1BundleId": {
+      "type": "object",
+      "properties": {
+        "bundle_id": {
+          "type": "string",
+          "description": "Идентификатор комплекта. Используйте параметр в методе [/v1/supply-order/bundle](#operation/SupplyOrderBundle), чтобы получить подробную информацию.\n"
+        },
+        "is_docless": {
+          "type": "boolean",
+          "description": "Признак необходимости передачи УПД:\n- `true` — документы не требуются,\n- `false` — требуются.\n"
+        }
+      }
+    },
+    "v1WarehouseStatus": {
+      "type": "object",
+      "description": "Доступность склада.",
+      "properties": {
+        "invalid_reason": {
+          "$ref": "#/components/schemas/v1WarehouseScoringInvalidReason"
+        },
+        "is_available": {
+          "type": "boolean",
+          "description": "Доступность склада:\n- `true` — доступен,\n- `false` — недоступен.\n"
+        },
+        "state": {
+          "$ref": "#/components/schemas/v1WarehouseScoringStatus"
+        }
+      }
+    },
+    "v1WarehouseScoringInvalidReason": {
+      "type": "string",
+      "default": "WAREHOUSE_SCORING_INVALID_REASON_UNSPECIFIED",
+      "enum": [
+        "WAREHOUSE_SCORING_INVALID_REASON_PARTIAL_MATRIX_AVAILABLE",
+        "WAREHOUSE_SCORING_INVALID_REASON_NOT_AVAILABLE_MATRIX",
+        "WAREHOUSE_SCORING_INVALID_REASON_NOT_AVAILABLE_RANK",
+        "WAREHOUSE_SCORING_INVALID_REASON_NOT_AVAILABLE_ROUTE",
+        "WAREHOUSE_SCORING_INVALID_REASON_NOT_AVAILABLE_TIMESLOT_FOR_DROP_OFF_POINT",
+        "WAREHOUSE_SCORING_INVALID_REASON_NOT_AVAILABLE_TIMESLOT_FOR_STORAGE_WAREHOUSE",
+        "WAREHOUSE_SCORING_INVALID_REASON_NOT_AVAILABLE_TIMESLOT_FOR_BOTH_WAREHOUSE"
+      ],
+      "description": "Причина недоступности склада:\n  - `WAREHOUSE_SCORING_INVALID_REASON_PARTIAL_MATRIX_AVAILABLE` — склад не может принять часть товаров;\n  - `WAREHOUSE_SCORING_INVALID_REASON_NOT_AVAILABLE_MATRIX` — склад не может принять все товары;\n  - `WAREHOUSE_SCORING_INVALID_REASON_NOT_AVAILABLE_RANK` — склад недоступен из-за рейтинга;\n  - `WAREHOUSE_SCORING_INVALID_REASON_NOT_AVAILABLE_ROUTE` — нет доступного маршрута;\n  - `WAREHOUSE_SCORING_INVALID_REASON_NOT_AVAILABLE_TIMESLOT_FOR_DROP_OFF_POINT` — нет таймслотов на точке отгрузки;\n  - `WAREHOUSE_SCORING_INVALID_REASON_NOT_AVAILABLE_TIMESLOT_FOR_STORAGE_WAREHOUSE` — нет таймслотов на складе поставки;\n  - `WAREHOUSE_SCORING_INVALID_REASON_NOT_AVAILABLE_TIMESLOT_FOR_BOTH_WAREHOUSE` — нет таймслотов на складах отгрузки и поставки.\n"
+    },
+    "v1WarehouseScoringStatus": {
+      "type": "string",
+      "default": "WAREHOUSE_SCORING_STATUS_FULL_AVAILABLE",
+      "enum": [
+        "WAREHOUSE_SCORING_STATUS_FULL_AVAILABLE",
+        "WAREHOUSE_SCORING_STATUS_PARTIAL_AVAILABLE",
+        "WAREHOUSE_SCORING_STATUS_NOT_AVAILABLE"
+      ],
+      "description": "Статус склада:\n- `WAREHOUSE_SCORING_STATUS_FULL_AVAILABLE` — доступен,\n- `WAREHOUSE_SCORING_STATUS_PARTIAL_AVAILABLE` —  частично доступен,\n- `WAREHOUSE_SCORING_STATUS_NOT_AVAILABLE` — недоступен.\n"
+    },
+    "v1SupplyWarehouse": {
+      "type": "object",
+      "description": "Склады для поставки.",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Адрес склада."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название склада."
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор склада."
+        }
+      }
+    },
+    "v1CalculationError": {
+      "type": "object",
+      "properties": {
+        "error_message": {
+          "type": "string",
+          "description": "Возможные ошибки:\n- `vdc_is_not_supported` — не поддерживается тип поставки вРЦ;\n- `drop_off_point_warehouse_is_required` — не передано значение `drop_off_point_warehouse_id`;\n- `empty_items_list` — передан пустой список `items`;\n- `items_count_more_than_max` — превышено количество `sku`;\n- `invalid_shipment_type` — неверный тип черновика;\n- `unknown_cluster_ids` — кластер с таким `id` не существует;\n- `items_validation` — ошибки валидации товарного состава;\n- `drop_off_point_does_not_exist` — точка отгрузки с таким `id` не существует;\n- `drop_off_point_has_no_timeslots` — нет доступных таймслотов на точке отгрузки;\n- `total_volume_in_litres_invalid` — объём поставляемых товаров слишком большой для этой точки;\n- `xdock_in_delivery_point_disabled_for_seller` — поставка кросс-докингом через пункт выдачи заказов недоступна для продавца.\n"
+        },
+        "items_validation": {
+          "type": "array",
+          "description": "Ошибки валидации.",
+          "items": {
+            "$ref": "#/components/schemas/v1ItemsValidation"
+          }
+        },
+        "unknown_cluster_ids": {
+          "type": "array",
+          "description": "Неизвестные идентификаторы кластеров.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1ItemsValidation": {
+      "type": "object",
+      "properties": {
+        "reasons": {
+          "type": "array",
+          "description": "Причины ошибки.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "v1CalculationStatus": {
+      "type": "string",
+      "default": "CALCULATION_STATUS_FAILED",
+      "enum": [
+        "CALCULATION_STATUS_FAILED",
+        "CALCULATION_STATUS_SUCCESS",
+        "CALCULATION_STATUS_IN_PROGRESS",
+        "CALCULATION_STATUS_EXPIRED"
+      ],
+      "description": "Статус создания черновика заявки на поставку:\n- `CALCULATION_STATUS_FAILED` — не удалось создать черновик,\n- `CALCULATION_STATUS_SUCCESS` — черновик создан,\n- `CALCULATION_STATUS_IN_PROGRESS` — черновик создаётся,\n- `CALCULATION_STATUS_EXPIRED` — истёк срок действия черновика.\n"
+    },
+    "v1DraftTimeslotInfoRequest": {
+      "type": "object",
+      "title": "DraftTimeslotInfo messages",
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата начала нужного периода доступных таймслотов."
+        },
+        "date_to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата окончания нужного периода доступных таймслотов.\n\nМаксимальный период — 28 дней с текущей даты.\n"
+        },
+        "draft_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор черновика заявки на поставку."
+        },
+        "warehouse_ids": {
+          "type": "array",
+          "description": "Идентификаторы складов, для которых нужно получить таймслоты.",
+          "maxItems": 10,
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      },
+      "required": [
+        "date_from",
+        "date_to",
+        "draft_id",
+        "warehouse_ids"
+      ]
+    },
+    "v1DraftTimeslotInfoResponse": {
+      "type": "object",
+      "properties": {
+        "drop_off_warehouse_timeslots": {
+          "type": "array",
+          "description": "Таймслоты складов.",
+          "items": {
+            "$ref": "#/components/schemas/v1DropOffWarehouse"
+          }
+        },
+        "requested_date_from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата начала интересующего периода."
+        },
+        "requested_date_to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата окончания интересующего периода."
+        }
+      }
+    },
+    "v1DropOffWarehouse": {
+      "type": "object",
+      "properties": {
+        "current_time_in_timezone": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Текущее время в часовом поясе склада."
+        },
+        "days": {
+          "type": "array",
+          "description": "Таймслоты по датам.",
+          "items": {
+            "$ref": "#/components/schemas/v1Day"
+          }
+        },
+        "drop_off_warehouse_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор склада."
+        },
+        "warehouse_timezone": {
+          "type": "string",
+          "description": "Часовой пояс склада."
+        }
+      }
+    },
+    "v1Day": {
+      "type": "object",
+      "properties": {
+        "date_in_timezone": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата таймслотов."
+        },
+        "timeslots": {
+          "type": "array",
+          "description": "Таймслоты.",
+          "items": {
+            "$ref": "#/components/schemas/v1DayTimeSlot"
+          }
+        }
+      }
+    },
+    "v1DayTimeSlot": {
+      "type": "object",
+      "description": "Таймслот поставки.",
+      "properties": {
+        "from_in_timezone": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Начало таймслота."
+        },
+        "to_in_timezone": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Конец таймслота."
+        }
+      }
+    },
+    "v1DraftSupplyCreateRequest": {
+      "type": "object",
+      "title": "DraftSupplyCreate",
+      "properties": {
+        "draft_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор черновика заявки на поставку."
+        },
+        "timeslot": {
+          "$ref": "#/components/schemas/v1DayTimeSlot"
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор склада размещения. Можно получить с помощью метода [/v1/draft/create/info](#operation/SupplyDraftAPI_DraftCreateInfo)."
+        }
+      },
+      "required": [
+        "draft_id",
+        "warehouse_id"
+      ]
+    },
+    "v1DraftSupplyCreateResponse": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "type": "string",
+          "description": "Идентификатор заявки на поставку."
+        }
+      }
+    },
+    "v1DraftSupplyCreateStatusRequest": {
+      "type": "object",
+      "title": "DraftSupplyCreateStatus",
+      "properties": {
+        "operation_id": {
+          "type": "string",
+          "description": "Идентификатор заявки на поставку."
+        }
+      },
+      "required": [
+        "operation_id"
+      ]
+    },
+    "v1DraftSupplyCreateStatusResponse": {
+      "type": "object",
+      "properties": {
+        "error_messages": {
+          "type": "array",
+          "description": "Ошибки создания заявок.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "result": {
+          "$ref": "#/components/schemas/DraftSupplyCreateStatusResponseResult"
+        },
+        "status": {
+          "$ref": "#/components/schemas/v1DraftSupplyCreateStatus"
+        }
+      }
+    },
+    "DraftSupplyCreateStatusResponseResult": {
+      "type": "object",
+      "description": "Идентификаторы заявок на поставку.",
+      "properties": {
+        "order_ids": {
+          "type": "array",
+          "description": "Идентификаторы заявок на поставку.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1DraftSupplyCreateStatus": {
+      "type": "string",
+      "default": "DraftSupplyCreateStatusUnknown",
+      "enum": [
+        "DraftSupplyCreateStatusUnknown",
+        "DraftSupplyCreateStatusSuccess",
+        "DraftSupplyCreateStatusFailed",
+        "DraftSupplyCreateStatusInProgress"
+      ],
+      "description": "Статус создания заявки на поставку:\n  - `DraftSupplyCreateStatusUnknown` — неизвестный,\n  - `DraftSupplyCreateStatusSuccess` — создана,\n  - `DraftSupplyCreateStatusFailed` — не создана,\n  - `DraftSupplyCreateStatusInProgress` — создаётся.\n"
+    },
+    "v1CargoesCreateRequest": {
+      "type": "object",
+      "required": [
+        "cargoes",
+        "supply_id"
+      ],
+      "properties": {
+        "cargoes": {
+          "description": "Информация о грузоместах. Вы можете передать не больше 40 палет или 30 коробок.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesCreateRequestCargo"
+          }
+        },
+        "delete_current_version": {
+          "description": "`true`, если нужно удалить предыдущие грузоместа.\n",
+          "type": "boolean"
+        },
+        "supply_id": {
+          "description": "Идентификатор поставки. Можно получить с помощью метода [/v2/supply-order/get](#operation/SupplyOrderAPI_GetSupplyOrdersV2). Нужное значение — в параметре ответа `orders.supplies.supply_id`.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CargoesCreateRequestCargo": {
+      "type": "object",
+      "required": [
+        "key",
+        "value"
+      ],
+      "properties": {
+        "key": {
+          "description": "Уникальный ключ для идентификации грузоместа.",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/components/schemas/v1CargoesCreateRequestCargoValue"
+        }
+      }
+    },
+    "v1CargoesCreateRequestCargoValue": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "description": "Информация о грузоместе.",
+      "properties": {
+        "items": {
+          "maxItems": 5000,
+          "description": "Информация о товарах в грузоместе.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ValueItem"
+          }
+        },
+        "type": {
+          "$ref": "#/components/schemas/ValueCargoType"
+        }
+      }
+    },
+    "ValueItem": {
+      "type": "object",
+      "properties": {
+        "barcode": {
+          "description": "Штрихкод товара.",
+          "type": "string"
+        },
+        "expires_at": {
+          "description": "Годен до.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "quant": {
+          "description": "Размер кванта.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "quantity": {
+          "description": "Количество товара.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ValueCargoType": {
+      "required": [
+        "type"
+      ],
+      "type": "string",
+      "description": "Тип грузоместа: \n   - `BOX` — коробка.\n   - `PALLET` — палета.\n",
+      "default": "BOX",
+      "enum": [
+        "BOX",
+        "PALLET"
+      ]
+    },
+    "v1CargoesCreateResponse": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        },
+        "errors": {
+          "$ref": "#/components/schemas/v1CargoesCreateErrors"
+        }
+      }
+    },
+    "v1CargoesCreateErrors": {
+      "type": "object",
+      "description": "Ошибки.",
+      "properties": {
+        "error_reasons": {
+          "description": "Причина ошибки:\n  - `INVALID_STATE` — недопустимое состояние поставки.\n  - `VALIDATION_FAILED` — ошибки валидации.\n  - `WAREHOUSE_LIMITS_EXCEED` — превышены лимиты склада.\n  - `SUPPLY_NOT_BELONG_CONTRACTOR` — поставка не относится к указанному контрагенту.\n  - `SUPPLY_NOT_BELONG_COMPANY` — поставка не относится к указанной компании.\n  - `IS_FINALIZED` — редактирование поставки недоступно.\n  - `SKU_DISTRIBUTION_DISABLED` — распределение состава недоступно.\n  - `SUPPLY_IS_NOT_EMPTY` — поставка содержит распределение состава.\n  - `OPERATION_NOT_FOUND` — операция не найдена.\n  - `OPERATION_FAILED` — ошибка при обработке операции.\n",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CargoesCreateErrorsErrorReason"
+          }
+        },
+        "items_validation": {
+          "description": "Ошибки валидации.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CargoesCreateErrorsItemValidation"
+          }
+        }
+      }
+    },
+    "CargoesCreateErrorsErrorReason": {
+      "type": "string",
+      "default": "INVALID_STATE",
+      "enum": [
+        "INVALID_STATE",
+        "VALIDATION_FAILED",
+        "WAREHOUSE_LIMITS_EXCEED",
+        "SUPPLY_NOT_BELONG_CONTRACTOR",
+        "SUPPLY_NOT_BELONG_COMPANY",
+        "IS_FINALIZED",
+        "SKU_DISTRIBUTION_DISABLED",
+        "SUPPLY_IS_NOT_EMPTY",
+        "OPERATION_NOT_FOUND",
+        "OPERATION_FAILED"
+      ]
+    },
+    "CargoesCreateErrorsItemValidation": {
+      "type": "object",
+      "properties": {
+        "barcode": {
+          "description": "Штрихкод товара.",
+          "type": "string"
+        },
+        "cargo_key": {
+          "description": "Ключ грузоместа.",
+          "type": "string"
+        },
+        "quant": {
+          "description": "Размер кванта.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "$ref": "#/components/schemas/ItemValidationErrorType"
+        }
+      }
+    },
+    "ItemValidationErrorType": {
+      "type": "string",
+      "description": "Тип ошибки:\n  - `SUPPLY_ITEM_NOT_FOUND` — товар не найден.\n  - `DUPLICATED_SUPPLY_ITEM` — найден дубликат товара.\n  - `BEFORE_DEADLINE` — некорректный срок годности.\n  - `SAME_BARCODES` — у разных SKU одинаковые штрихкоды.\n  - `SAME_ARTICLES` — у разных SKU одинаковые артикулы.\n  - `NOT_UNIQUE_SKU_BY_PRODUCT` — одинаковый SKU в грузоместе используется для разных товаров.\n  - `QUANTITY_NOT_DIVISIBLE_BY_QUANT` — количество SKU в грузоместе не кратно кванту.\n  - `NOT_SINGLE_PALLET_SKU_IN_PALLET_CARGO` — в грузоместе отсутствует палетная SKU.\n  - `NOT_ONE_QUANT_PALLET_SKU` — в квантовом палетном грузоместе должен быть только один квант.\n  - `NOT_ECONOM_SKU` — в эконом-поставке указан не эконом-SKU.\n  - `QUANTITY_LESS_ONE` — количество SKU в эконом-поставке меньше 1.\n  - `SUPPLY_ITEM_WITH_QUANT_NOT_FOUND` — товар не найден по артикулу, штрихкоду и размеру кванта.\n",
+      "default": "SUPPLY_ITEM_NOT_FOUND",
+      "enum": [
+        "SUPPLY_ITEM_NOT_FOUND",
+        "DUPLICATED_SUPPLY_ITEM",
+        "BEFORE_DEADLINE",
+        "SAME_BARCODES",
+        "SAME_ARTICLES",
+        "NOT_UNIQUE_SKU_BY_PRODUCT",
+        "QUANTITY_NOT_DIVISIBLE_BY_QUANT",
+        "NOT_SINGLE_PALLET_SKU_IN_PALLET_CARGO",
+        "NOT_ONE_QUANT_PALLET_SKU",
+        "NOT_ECONOM_SKU",
+        "QUANTITY_LESS_ONE",
+        "SUPPLY_ITEM_WITH_QUANT_NOT_FOUND"
+      ]
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "v1CargoesCreateInfoRequest": {
+      "required": [
+        "operation_id"
+      ],
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        }
+      }
+    },
+    "v1CargoesCreateInfoResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/CargoesCreateInfoResponseResult"
+        },
+        "status": {
+          "$ref": "#/components/schemas/v1CargoesCreateInfoResponseStatus"
+        },
+        "errors": {
+          "$ref": "#/components/schemas/v1CargoesCreateErrors"
+        }
+      }
+    },
+    "CargoesCreateInfoResponseResult": {
+      "type": "object",
+      "description": "Результат запроса.",
+      "properties": {
+        "cargoes": {
+          "description": "Информация о грузоместах.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CargoesCreateInfoResponseResultCargo"
+          }
+        }
+      }
+    },
+    "CargoesCreateInfoResponseResultCargo": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Ключ грузоместа.",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/components/schemas/CargoesCreateInfoResponseResultCargoValue"
+        }
+      }
+    },
+    "CargoesCreateInfoResponseResultCargoValue": {
+      "type": "object",
+      "description": "Информация о грузоместе.",
+      "properties": {
+        "cargo_id": {
+          "description": "Идентификатор грузоместа.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CargoesCreateInfoResponseStatus": {
+      "type": "string",
+      "description": "Статус формирования грузомест:\n  - `SUCCESS` — успешно.\n  - `IN_PROGRESS` — формируются.\n  - `FAILED` — при формировании грузомест произошла ошибка.\n",
+      "default": "SUCCESS",
+      "enum": [
+        "SUCCESS",
+        "IN_PROGRESS",
+        "FAILED"
+      ]
+    },
+    "v1CargoesDeleteRequest": {
+      "type": "object",
+      "properties": {
+        "cargo_ids": {
+          "type": "array",
+          "description": "Список идентификаторов грузомест, которые нужно удалить.\n\nМаксимум 70 значений.\n",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "supply_id": {
+          "description": "Идентификатор поставки.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CargoesDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "$ref": "#/components/schemas/v1CargoesDeleteResponseError"
+        },
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        }
+      }
+    },
+    "v1CargoesDeleteResponseError": {
+      "type": "object",
+      "description": "Список ошибок, которые возникли при удалении грузомест.",
+      "properties": {
+        "cargo_error_reasons": {
+          "type": "array",
+          "description": "Ошибки при удалении грузомест.",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesDeleteResponseErrorCargoErrorReason"
+          }
+        },
+        "supply_error_reasons": {
+          "type": "array",
+          "description": "Список ошибок поставки:\n- `SUPPLY_NOT_FOUND` — поставка не найдена,\n- `CANT_DELETE_ALL_CARGOES` — нельзя удалять все грузоместа,\n- `SUPPLY_DOES_NOT_BELONG_TO_THE_CONTRACTOR` — не принадлежит вашему юридическому лицу,\n- `SUPPLY_DOES_NOT_BELONG_TO_THE_COMPANY` — не принадлежит вашему кабинету,\n- `SUPPLY_CARGOES_IS_FINALIZED` — грузоместа поставки нельзя редактировать,\n- `SUPPLY_CARGOES_LOCKED` — другой процесс блокирует редактирование грузомест поставки,\n- `OPERATION_NOT_FOUND` — операция не найдена.\n",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesDeleteResponseErrorSupplyErrorReasonEnum"
+          }
+        }
+      }
+    },
+    "v1CargoesDeleteResponseErrorCargoErrorReason": {
+      "type": "object",
+      "properties": {
+        "cargo_id": {
+          "description": "Идентификатор грузоместа.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "error_reasons": {
+          "description": "Список ошибок грузоместа.\n\nЕсли значение `CARGO_NOT_FOUND`, грузоместо не найдено.\n",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesDeleteResponseErrorCargoErrorReasonErrorReasonEnum"
+          }
+        }
+      }
+    },
+    "v1CargoesDeleteResponseErrorCargoErrorReasonErrorReasonEnum": {
+      "type": "string",
+      "enum": [
+        "CARGO_NOT_FOUND"
+      ]
+    },
+    "v1CargoesDeleteResponseErrorSupplyErrorReasonEnum": {
+      "type": "string",
+      "enum": [
+        "SUPPLY_NOT_FOUND",
+        "CANT_DELETE_ALL_CARGOES",
+        "SUPPLY_DOES_NOT_BELONG_TO_THE_CONTRACTOR",
+        "SUPPLY_DOES_NOT_BELONG_TO_THE_COMPANY",
+        "SUPPLY_CARGOES_IS_FINALIZED",
+        "SUPPLY_CARGOES_LOCKED",
+        "OPERATION_NOT_FOUND"
+      ]
+    },
+    "v1CargoesDeleteStatusRequest": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        }
+      }
+    },
+    "v1CargoesDeleteStatusResponse": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "$ref": "#/components/schemas/v1CargoesDeleteStatusResponseError"
+        },
+        "status": {
+          "$ref": "#/components/schemas/CargoesDeleteStatusResponseStatusEnum"
+        }
+      }
+    },
+    "v1CargoesDeleteStatusResponseError": {
+      "type": "object",
+      "description": "Список ошибок, которые возникли при удалении грузомест.",
+      "properties": {
+        "cargo_error_reasons": {
+          "type": "array",
+          "description": "Ошибки при удалении грузомест.",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesDeleteStatusResponseErrorCargoErrorReason"
+          }
+        },
+        "supply_error_reasons": {
+          "type": "array",
+          "description": "Список ошибок поставки:\n- `SUPPLY_NOT_FOUND` — поставка не найдена,\n- `CANT_DELETE_ALL_CARGOES` — нельзя удалять все грузоместа,\n- `SUPPLY_DOES_NOT_BELONG_TO_THE_CONTRACTOR` — не принадлежит вашему юридическому лицу,\n- `SUPPLY_DOES_NOT_BELONG_TO_THE_COMPANY` — не принадлежит вашему кабинету,\n- `SUPPLY_CARGOES_IS_FINALIZED` — грузоместа поставки нельзя редактировать,\n- `SUPPLY_CARGOES_LOCKED` — другой процесс блокирует редактирование грузомест поставки,\n- `OPERATION_NOT_FOUND` — операция не найдена.\n",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesDeleteStatusResponseErrorSupplyErrorReasonEnum"
+          }
+        }
+      }
+    },
+    "v1CargoesDeleteStatusResponseErrorCargoErrorReason": {
+      "type": "object",
+      "properties": {
+        "cargo_id": {
+          "description": "Идентификатор грузоместа.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "error_reasons": {
+          "description": "Список ошибок грузоместа.\n\nЕсли значение `CARGO_NOT_FOUND`, грузоместо не найдено.\n",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesDeleteStatusResponseErrorCargoErrorReasonErrorReasonEnum"
+          }
+        }
+      }
+    },
+    "v1CargoesDeleteStatusResponseErrorCargoErrorReasonErrorReasonEnum": {
+      "type": "string",
+      "enum": [
+        "CARGO_NOT_FOUND"
+      ]
+    },
+    "v1CargoesDeleteStatusResponseErrorSupplyErrorReasonEnum": {
+      "type": "string",
+      "enum": [
+        "SUPPLY_NOT_FOUND",
+        "CANT_DELETE_ALL_CARGOES",
+        "SUPPLY_DOES_NOT_BELONG_TO_THE_CONTRACTOR",
+        "SUPPLY_DOES_NOT_BELONG_TO_THE_COMPANY",
+        "SUPPLY_CARGOES_IS_FINALIZED",
+        "SUPPLY_CARGOES_LOCKED",
+        "OPERATION_NOT_FOUND"
+      ]
+    },
+    "CargoesDeleteStatusResponseStatusEnum": {
+      "type": "string",
+      "description": "Статус удаления грузоместа.\n\nВозможные статусы:\n- `SUCCESS` — грузоместо удалено,\n- `IN_PROGRESS` — грузоместо в процессе удаления,\n- `ERROR` — возникла ошибка при удалении грузоместа.\n",
+      "enum": [
+        "SUCCESS",
+        "IN_PROGRESS",
+        "ERROR"
+      ]
+    },
+    "v1CargoesRulesGetRequest": {
+      "type": "object",
+      "properties": {
+        "supply_ids": {
+          "type": "array",
+          "description": "Список идентификаторов поставок в заявке.\n\nМаксимум 100 идентификаторов.\n",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1CargoesRulesGetResponse": {
+      "type": "object",
+      "properties": {
+        "supply_check_lists": {
+          "type": "array",
+          "description": "Список чек-листов с правилами заполнения грузомест по поставкам.",
+          "items": {
+            "$ref": "#/components/schemas/CargoesRulesGetResponseSupplyCheck"
+          }
+        }
+      }
+    },
+    "CargoesRulesGetResponseSupplyCheck": {
+      "type": "object",
+      "description": "Чек-лист правил заполнения грузомест.",
+      "properties": {
+        "cargoes_presents_rule": {
+          "$ref": "#/components/schemas/SupplyCheckCargoesPresentRule"
+        },
+        "edit_deadline_expire_rule": {
+          "$ref": "#/components/schemas/SupplyCheckEditDeadlineExpireRule"
+        },
+        "expire_dates_presented_rule": {
+          "$ref": "#/components/schemas/SupplyCheckExpireDatePresentedRule"
+        },
+        "is_valid_distribution_rule": {
+          "$ref": "#/components/schemas/SupplyCheckIsValidDistributionRule"
+        },
+        "package_units_with_distribution_rule": {
+          "$ref": "#/components/schemas/SupplyCheckPackageUnitWithDistributionRule"
+        },
+        "placement_zones_rule": {
+          "$ref": "#/components/schemas/SupplyCheckPlacementZoneRule"
+        },
+        "supply_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор поставки."
+        }
+      }
+    },
+    "SupplyCheckCargoesPresentRule": {
+      "type": "object",
+      "description": "Правило указания грузомест.",
+      "properties": {
+        "cargo_count_per_type": {
+          "type": "array",
+          "description": "Количество грузомест каждого типа.",
+          "items": {
+            "$ref": "#/components/schemas/CargoesPresentRuleCargoCountPerType"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Общее количество грузомест."
+        },
+        "satisfied": {
+          "type": "boolean",
+          "description": "`true`, если грузоместа указаны.\n"
+        }
+      }
+    },
+    "CargoesPresentRuleCargoCountPerType": {
+      "type": "object",
+      "title": "Количество грузомест каждого типа",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество грузомест."
+        },
+        "type": {
+          "$ref": "#/components/schemas/CargoesPresentRuleCargoCountPerTypeEnum"
+        }
+      }
+    },
+    "CargoesPresentRuleCargoCountPerTypeEnum": {
+      "type": "string",
+      "description": "Тип грузоместа:\n- `BOX` — коробка,\n- `PALLET` — палета.\n",
+      "enum": [
+        "BOX",
+        "PALLET"
+      ]
+    },
+    "SupplyCheckEditDeadlineExpireRule": {
+      "type": "object",
+      "description": "Правило крайнего срока редактирования грузомест.",
+      "properties": {
+        "is_applicable": {
+          "type": "boolean",
+          "description": "`true`, если правило применимо к текущей поставке.\n"
+        },
+        "is_required": {
+          "type": "boolean",
+          "description": "`true`, если правило обязательно для текущей поставки.\n"
+        },
+        "satisfied": {
+          "type": "boolean",
+          "description": "`true`, если крайний срок для редактирования не наступил.\n"
+        }
+      }
+    },
+    "SupplyCheckExpireDatePresentedRule": {
+      "type": "object",
+      "description": "Правило указания сроков годности для товаров.",
+      "properties": {
+        "count_sku_with_expiration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество SKU с корректным сроком годности."
+        },
+        "count_sku_with_expiration_filled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество SKU, для которых обязателен срок годности."
+        },
+        "is_applicable": {
+          "type": "boolean",
+          "description": "`true`, если правило применимо к текущей поставке.\n"
+        },
+        "is_required": {
+          "type": "boolean",
+          "description": "`true`, если правило обязательно для текущей поставки.\n"
+        },
+        "satisfied": {
+          "type": "boolean",
+          "description": "`true`, если сроки годности указаны корректно.\n"
+        }
+      }
+    },
+    "SupplyCheckIsValidDistributionRule": {
+      "type": "object",
+      "description": "Правило совпадения составов грузомест с составом поставки.",
+      "properties": {
+        "count_distributed_sku": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество SKU, которые совпадают с поставкой."
+        },
+        "count_sku_total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Общее количество SKU."
+        },
+        "is_applicable": {
+          "type": "boolean",
+          "description": "`true`, если правило применимо к текущей поставке.\n"
+        },
+        "percents_int": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Процент совпадения состава грузомест с составом поставки."
+        },
+        "satisfied": {
+          "type": "boolean",
+          "description": "`true`, если состав грузомест совпадает с составом поставки.\n"
+        }
+      }
+    },
+    "SupplyCheckPackageUnitWithDistributionRule": {
+      "type": "object",
+      "description": "Правило заполнения состава грузомест.",
+      "properties": {
+        "count_all": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Общее количество грузомест."
+        },
+        "count_with_distribution": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество заполненных грузомест."
+        },
+        "is_applicable": {
+          "type": "boolean",
+          "description": "`true`, если правило применимо к текущей поставке.\n"
+        },
+        "is_required": {
+          "type": "boolean",
+          "description": "`true`, если правило обязательно для текущей поставки.\n"
+        },
+        "satisfied": {
+          "type": "boolean",
+          "description": "`true`, если указаны составы для всех грузомест.\n"
+        }
+      }
+    },
+    "SupplyCheckPlacementZoneRule": {
+      "type": "object",
+      "description": "Правило распределения товаров в грузоместах по зонам размещения.",
+      "properties": {
+        "count_cargoes_all": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество грузомест."
+        },
+        "count_cargoes_with_mono_placement_zone": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество грузомест с распределением по зонам размещения."
+        },
+        "is_applicable": {
+          "type": "boolean",
+          "description": "`true`, если правило применимо к текущей поставке.\n"
+        },
+        "satisfied": {
+          "type": "boolean",
+          "description": "`true`, если товары во всех грузоместах распределены по зонам размещения.\n"
+        }
+      }
+    },
+    "v1CargoesLabelCreateRequest": {
+      "required": [
+        "supply_id"
+      ],
+      "type": "object",
+      "properties": {
+        "cargoes": {
+          "description": "Информация о грузоместах.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesLabelCreateRequestCargo"
+          }
+        },
+        "supply_id": {
+          "description": "Идентификатор поставки.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CargoesLabelCreateRequestCargo": {
+      "type": "object",
+      "properties": {
+        "cargo_id": {
+          "description": "Идентификатор грузоместа.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1CargoesLabelCreateResponse": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        },
+        "errors": {
+          "$ref": "#/components/schemas/v1CargoesLabelCreateErrors"
+        }
+      }
+    },
+    "v1CargoesLabelCreateErrors": {
+      "type": "object",
+      "description": "Ошибки.",
+      "properties": {
+        "error_reasons": {
+          "description": "Причина ошибки:\n   - `INVALID_STATE` — недопустимое состояние поставки.\n   - `OPERATION_NOT_FOUND` — операция не найдена.\n   - `OPERATION_FAILED` — операция завершилась с ошибкой.\n   - `SUPPLY_NOT_BELONG_CONTRACTOR` — контрагент не соответствует поставке.\n   - `SUPPLY_NOT_BELONG_COMPANY` — компания не соответствует поставке.\n   - `SUPPLY_IS_EMPTY` — поставка без грузомест.\n   - `CARGOES_NOT_FOUND` — грузоместа не найдены.\n",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1CargoesLabelCreateErrorsErrorReason"
+          }
+        }
+      }
+    },
+    "v1CargoesLabelCreateErrorsErrorReason": {
+      "type": "string",
+      "default": "INVALID_STATE",
+      "enum": [
+        "INVALID_STATE",
+        "OPERATION_NOT_FOUND",
+        "OPERATION_FAILED",
+        "SUPPLY_NOT_BELONG_CONTRACTOR",
+        "SUPPLY_NOT_BELONG_COMPANY",
+        "SUPPLY_IS_EMPTY",
+        "CARGOES_NOT_FOUND"
+      ]
+    },
+    "v1CargoesLabelGetRequest": {
+      "required": [
+        "operation_id"
+      ],
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        }
+      }
+    },
+    "v1CargoesLabelGetResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1CargoesLabelGetResponseResult"
+        },
+        "status": {
+          "$ref": "#/components/schemas/v1CargoesLabelGetResponseStatus"
+        },
+        "errors": {
+          "$ref": "#/components/schemas/v1CargoesLabelCreateErrors"
+        }
+      }
+    },
+    "v1CargoesLabelGetResponseResult": {
+      "type": "object",
+      "description": "Информация об этикетках.",
+      "properties": {
+        "file_guid": {
+          "description": "Идентификатор для получения файла с этикетками.",
+          "type": "string"
+        }
+      }
+    },
+    "v1CargoesLabelGetResponseStatus": {
+      "type": "string",
+      "description": "Статус формирования этикеток:\n- `SUCCESS` — готовы.\n- `IN_PROGRESS` — формируются.\n- `FAILED` — ошибка при формировании.\n",
+      "default": "SUCCESS",
+      "enum": [
+        "SUCCESS",
+        "IN_PROGRESS",
+        "FAILED"
+      ]
+    },
+    "v1SupplyOrderCancelRequest": {
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "description": "Идентификатор заявки на поставку.",
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "order_id"
+      ]
+    },
+    "v1SupplyOrderCancelResponse": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции на отмену заявки.",
+          "type": "string"
+        }
+      }
+    },
+    "v1SupplyOrderCancelStatusRequest": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции на отмену заявки на поставку.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation_id"
+      ]
+    },
+    "v1SupplyOrderCancelStatusResponse": {
+      "type": "object",
+      "properties": {
+        "error_reasons": {
+          "type": "array",
+          "description": "Причина, по которой не удалось отменить заявку на поставку:\n  - `INVALID_ORDER_STATE` — неверный статус заявки на поставку.\n  - `ORDER_IS_VIRTUAL` — заявка виртуальная. \n  - `ORDER_DOES_NOT_BELONG_TO_CONTRACTOR` —  заявка на поставку не принадлежит вашему юридическому лицу.\n  - `ORDER_DOES_NOT_BELONG_TO_COMPANY` — заявка на поставку не принадлежит продавцу. \n  - `OTHER_ASYNCHRONOUS_OPERATION_IN_PROGRESS` — заявка на поставку в процессе отмены.\n",
+          "items": {
+            "$ref": "#/components/schemas/SupplyOrderCancelStatusResponseCancelOrderError"
+          }
+        },
+        "result": {
+          "$ref": "#/components/schemas/SupplyOrderCancelStatusResponseResult"
+        },
+        "status": {
+          "$ref": "#/components/schemas/v1SupplyOrderCancelStatusResponseStatus"
+        }
+      }
+    },
+    "SupplyOrderCancelStatusResponseCancelOrderError": {
+      "type": "string",
+      "enum": [
+        "INVALID_ORDER_STATE",
+        "ORDER_IS_VIRTUAL",
+        "ORDER_DOES_NOT_BELONG_TO_CONTRACTOR",
+        "ORDER_DOES_NOT_BELONG_TO_COMPANY",
+        "OTHER_ASYNCHRONOUS_OPERATION_IN_PROGRESS"
+      ]
+    },
+    "SupplyOrderCancelStatusResponseResult": {
+      "type": "object",
+      "description": "Информация об отмене заявки на поставку.",
+      "properties": {
+        "is_order_cancelled": {
+          "description": "`true`, если заявка на поставку отменена.\n",
+          "type": "boolean"
+        },
+        "supplies": {
+          "description": "Список отменённых поставок.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/SupplyOrderCancelStatusResponseCancelSupplyResults"
+          }
+        }
+      }
+    },
+    "SupplyOrderCancelStatusResponseCancelSupplyResults": {
+      "type": "object",
+      "properties": {
+        "error_reasons": {
+          "description": "Причина, по которой не удалось отменить поставки:\n  - `INVALID_SUPPLY_STATE` — неверный статус поставки.\n  - `SUPPLY_DOES_NOT_BELONG_TO_CONTRACTOR` — поставка не принадлежит юридическому лицу.\n  - `SUPPLY_DOES_NOT_BELONG_TO_COMPANY` — поставка не принадлежит продавцу.\n  - `SUPPLY_DOES_NOT_BELONG_TO_ORDER` — поставка не принадлежит заявке на поставку.\n  - `SUPPLY_BELONGS_TO_VIRTUAL_ORDER` — поставка принадлежит виртуальной заявке на поставку.\n  - `OTHER_ASYNCHRONOUS_OPERATION_IN_PROGRESS` — поставка в процессе отмены.\n",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CancelSupplyResultsCancelSupplyError"
+          }
+        },
+        "is_supply_cancelled": {
+          "description": "`true`, если поставка отменена.\n",
+          "type": "boolean"
+        },
+        "supply_id": {
+          "description": "Идентификатор поставки.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "CancelSupplyResultsCancelSupplyError": {
+      "type": "string",
+      "enum": [
+        "INVALID_SUPPLY_STATE",
+        "SUPPLY_DOES_NOT_BELONG_TO_CONTRACTOR",
+        "SUPPLY_DOES_NOT_BELONG_TO_COMPANY",
+        "SUPPLY_DOES_NOT_BELONG_TO_ORDER",
+        "SUPPLY_BELONGS_TO_VIRTUAL_ORDER",
+        "OTHER_ASYNCHRONOUS_OPERATION_IN_PROGRESS"
+      ]
+    },
+    "v1SupplyOrderCancelStatusResponseStatus": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "IN_PROGRESS",
+        "ERROR"
+      ],
+      "description": "Статус отмены заявки на поставку. Возможные значения:\n- `SUCCESS` — заявка отменена.\n- `IN_PROGRESS` — заявки в процессе отмены.\n- `ERROR` — ошибка.\n"
+    },
+    "v1SupplyOrderContentUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Новый товарный состав заявки на поставку.\n\nМаксимум 5000 товаров.\n",
+          "items": {
+            "$ref": "#/components/schemas/v1SupplyOrderContentUpdateRequestItem"
+          }
+        },
+        "order_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заказа."
+        },
+        "supply_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор поставки."
+        }
+      }
+    },
+    "v1SupplyOrderContentUpdateRequestItem": {
+      "type": "object",
+      "properties": {
+        "quant": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Размер кванта."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товара."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "v1SupplyOrderContentUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Ошибки при редактировании товарного состава:\n- `INVALID_DRAFT_BUNDLE_ID`, `SOME_SERVICE_ERROR`, `ORDER_IS_NOT_FOUND`, `SUPPLY_IS_NOT_FOUND`, `SUPPLY_DOES_NOT_BELONGS_TO_ORDER` — ошибка при редактировании поставки.\n- `HAS_UTD`, `UTD_IS_UPLOADED` — документы в системе ЭДО не удалены. Аннулируйте документы в системе ЭДО. Когда отредактируете состав, сформируйте и подпишите новые документы.\n- `ORDER_SKU_LIMIT` — количество товаров в поставке должно быть меньше или равно 5000.\n- `SAME_SKU` — товарный состав поставки остался прежним.\n- `SUPPLY_LOCKED` — обновление товарного состава в процессе, попробуйте позже.\n- `INBOUND_NO_CAPACITY` — на складе недостаточно места для поставки.\n- `INBOUND_LOCK`, `ORDER_LOCKED`, `STORAGE_WAREHOUSE_IS_NOT_WMS` — нельзя редактировать товарный состав.\n- `SUPPLY_CONTENT_NOT_VALID` — в составе поставки есть товары, которые склад не может принять.\n- `SUPPLY_BELONG_TO_ANOTHER_CONTRACTOR`, `COMPANY_DOES_NOT_BELONGS_TO_CONTRACTOR`, `ORDER_DOES_NOT_BELONG_TO_CONTRACTOR` — заявка на поставку не принадлежит вашему юридическому лицу.\n- `SUPPLY_BELONG_TO_ANOTHER_COMPANY`, `ORDER_DOES_NOT_BELONGS_TO_COMPANY` — заявка на поставку не принадлежит вашему кабинету.\n- `INCORRECT_SUPPLY_STATE` — нельзя изменить поставку в этом статусе.\n- `INCORRECT_SUPPLY_SOURCE` — нельзя изменить поставку с этим источником данных.\n- `INCORRECT_STORAGE_WAREHOUSE` — нельзя изменить поставку с этим складом хранения.\n- `NO_SUPPLY_PRODUCT_BUNDLE_ID` — отсутствует идентификатор товарного состава поставки.\n- `ONLY_DOCLESS_ALLOWED` — нельзя редактировать поставку при наличии документов.\n- `INVALID_VOLUME` — некорректный объём поставки.\n- `SUPPLY_IS_VIRTUAL` — нельзя редактировать виртуальную поставку.\n- `DEADLINE` — нельзя изменить поставку за час до таймслота.\n- `INACTIVE_CONTRACT` — нельзя редактировать состав поставки с истекшим договором.\n- `QUANTITY_OUT_OF_RANGE_BOTTOM` — количество экземпляров каждого товара должно быть больше 0.\n- `QUANTITY_OUT_OF_RANGE_UPPER` — количество экземпляров каждого товара должно быть меньше или равно 1 000 000.\n- `EMPTY_CONTENT` — не сможем принять пустую поставку, добавьте товары.\n- `CONTRACT_IS_NOT_FOUND`, `CONTRACT_IS_NOT_VALID_FOR_HANDLING_ORDERS` — в этом личном кабинете нельзя изменить поставку.\n",
+          "items": {
+            "$ref": "#/components/schemas/v1SupplyOrderContentUpdateResponseErrorEnum"
+          }
+        },
+        "operation_id": {
+          "type": "string",
+          "description": "Идентификатор операции."
+        }
+      }
+    },
+    "v1SupplyOrderContentUpdateResponseErrorEnum": {
+      "type": "string",
+      "enum": [
+        "INVALID_DRAFT_BUNDLE_ID",
+        "SOME_SERVICE_ERROR",
+        "HAS_UTD",
+        "ORDER_SKU_LIMIT",
+        "SAME_SKU",
+        "SUPPLY_LOCKED",
+        "INBOUND_NO_CAPACITY",
+        "INBOUND_LOCK",
+        "SUPPLY_CONTENT_NOT_VALID",
+        "SUPPLY_BELONG_TO_ANOTHER_CONTRACTOR",
+        "SUPPLY_BELONG_TO_ANOTHER_COMPANY",
+        "INCORRECT_SUPPLY_STATE",
+        "INCORRECT_SUPPLY_SOURCE",
+        "INCORRECT_STORAGE_WAREHOUSE",
+        "DEADLINE",
+        "INACTIVE_CONTRACT",
+        "QUANTITY_OUT_OF_RANGE_BOTTOM",
+        "QUANTITY_OUT_OF_RANGE_UPPER",
+        "EMPTY_CONTENT",
+        "NO_SUPPLY_PRODUCT_BUNDLE_ID",
+        "ONLY_DOCLESS_ALLOWED",
+        "INVALID_VOLUME",
+        "SUPPLY_IS_VIRTUAL",
+        "ORDER_LOCKED",
+        "CONTRACT_IS_NOT_FOUND",
+        "COMPANY_DOES_NOT_BELONGS_TO_CONTRACTOR",
+        "ORDER_IS_NOT_FOUND",
+        "ORDER_DOES_NOT_BELONGS_TO_COMPANY",
+        "SUPPLY_IS_NOT_FOUND",
+        "SUPPLY_DOES_NOT_BELONGS_TO_ORDER",
+        "UTD_IS_UPLOADED",
+        "STORAGE_WAREHOUSE_IS_NOT_WMS",
+        "CONTRACT_IS_NOT_VALID_FOR_HANDLING_ORDERS",
+        "ORDER_DOES_NOT_BELONG_TO_CONTRACTOR"
+      ]
+    },
+    "v1SupplyOrderContentUpdateStatusRequest": {
+      "type": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        }
+      }
+    },
+    "v1SupplyOrderContentUpdateStatusResponse": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Список ошибок при редактировании товарного состава:\n- `INVALID_DRAFT_BUNDLE_ID`, `SOME_SERVICE_ERROR` — ошибка при редактировании поставки.\n- `HAS_UTD` — документы в системе ЭДО не удалены. Аннулируйте документы в системе ЭДО. Когда отредактируете состав, сформируйте и подпишите новые документы.\n- `ORDER_SKU_LIMIT` — количество товаров в поставке должно быть меньше или равно 5000.\n- `SAME_SKU` — товарный состав поставки остался прежним.\n- `SUPPLY_LOCKED` — обновление товарного состава в процессе, попробуйте позже.\n- `INBOUND_NO_CAPACITY` — на складе недостаточно места для поставки.\n- `INBOUND_LOCK`, `ORDER_LOCKED` — нельзя редактировать товарный состав.\n- `SUPPLY_CONTENT_NOT_VALID` — в составе поставки есть товары, которые склад не может принять.\n- `SUPPLY_BELONG_TO_ANOTHER_CONTRACTOR` — заявка на поставку не принадлежит вашему юридическому лицу.\n- `SUPPLY_BELONG_TO_ANOTHER_COMPANY` — заявка на поставку не принадлежит вашему кабинету.\n- `INCORRECT_SUPPLY_STATE` — нельзя изменить поставку в этом статусе.\n- `INCORRECT_SUPPLY_SOURCE` — нельзя изменить поставку с этим источником данных.\n- `INCORRECT_STORAGE_WAREHOUSE` — нельзя изменить поставку с этим складом хранения.\n- `NO_SUPPLY_PRODUCT_BUNDLE_ID` — отсутствует идентификатор товарного состава поставки.\n- `ONLY_DOCLESS_ALLOWED` — нельзя редактировать поставку при наличии документов.\n- `INVALID_VOLUME` — некорректный объём поставки.\n- `SUPPLY_IS_VIRTUAL` — нельзя редактировать виртуальную поставку.\n- `DEADLINE` — нельзя изменить поставку за час до таймслота.\n- `INACTIVE_CONTRACT` — нельзя редактировать состав поставки с истекшим договором.\n- `QUANTITY_OUT_OF_RANGE_BOTTOM` — количество экземпляров каждого товара должно быть больше 0.\n- `QUANTITY_OUT_OF_RANGE_UPPER` — количество экземпляров каждого товара должно быть меньше или равно 1 000 000.\n- `EMPTY_CONTENT` — не сможем принять пустую поставку, добавьте товары.\n",
+          "items": {
+            "$ref": "#/components/schemas/v1SupplyOrderContentUpdateStatusResponseErrorEnum"
+          }
+        },
+        "status": {
+          "$ref": "#/components/schemas/SupplyOrderContentUpdateStatusResponseStatusEnum"
+        }
+      }
+    },
+    "v1SupplyOrderContentUpdateStatusResponseErrorEnum": {
+      "type": "string",
+      "enum": [
+        "INVALID_DRAFT_BUNDLE_ID",
+        "SOME_SERVICE_ERROR",
+        "HAS_UTD",
+        "ORDER_SKU_LIMIT",
+        "SAME_SKU",
+        "SUPPLY_LOCKED",
+        "INBOUND_NO_CAPACITY",
+        "INBOUND_LOCK",
+        "SUPPLY_CONTENT_NOT_VALID",
+        "SUPPLY_BELONG_TO_ANOTHER_CONTRACTOR",
+        "SUPPLY_BELONG_TO_ANOTHER_COMPANY",
+        "INCORRECT_SUPPLY_STATE",
+        "INCORRECT_SUPPLY_SOURCE",
+        "INCORRECT_STORAGE_WAREHOUSE",
+        "DEADLINE",
+        "INACTIVE_CONTRACT",
+        "QUANTITY_OUT_OF_RANGE_BOTTOM",
+        "QUANTITY_OUT_OF_RANGE_UPPER",
+        "EMPTY_CONTENT",
+        "NO_SUPPLY_PRODUCT_BUNDLE_ID",
+        "ONLY_DOCLESS_ALLOWED",
+        "INVALID_VOLUME",
+        "SUPPLY_IS_VIRTUAL",
+        "ORDER_LOCKED"
+      ]
+    },
+    "SupplyOrderContentUpdateStatusResponseStatusEnum": {
+      "type": "string",
+      "description": "Статус редактирования товарного состава поставки.\n\nВозможные статусы:\n- `SUCCESS` — товарный состав изменён,\n- `IN_PROGRESS` — товарный состав в процессе изменения,\n- `ERROR` — возникла ошибка при изменении товарного состава.\n",
+      "enum": [
+        "SUCCESS",
+        "IN_PROGRESS",
+        "ERROR"
+      ]
+    }
+  }
+}

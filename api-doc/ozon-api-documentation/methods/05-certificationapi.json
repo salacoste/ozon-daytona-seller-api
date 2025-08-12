@@ -1,0 +1,1815 @@
+{
+  "metadata": {
+    "tag": "CertificationAPI",
+    "name": "CertificationAPI",
+    "displayName": "Сертификаты качества",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 15,
+    "schemasCount": 44,
+    "generatedAt": "2025-08-09T16:28:42.335Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/product/certificate/accordance-types",
+      "method": "GET",
+      "operationId": "ProductAPI_ProductCertificateAccordanceTypes",
+      "summary": "Список типов соответствия требованиям (версия 1)",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список типов соответствия требованиям (версия 1)",
+        "operationId": "ProductAPI_ProductCertificateAccordanceTypes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cправочник типов соответствия требованиям",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/productProductCertificateAccordanceTypesResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "name": "ГОСТ",
+                      "value": "gost"
+                    },
+                    {
+                      "name": "Технический регламент РФ",
+                      "value": "technical_regulations_rf"
+                    },
+                    {
+                      "name": "Технический регламент ТС",
+                      "value": "technical_regulations_cu"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CertificationAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v2/product/certificate/accordance-types/list",
+      "method": "GET",
+      "operationId": "CertificateAccordanceTypes",
+      "summary": "Список типов соответствия требованиям (версия 2)",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CertificationAPI"
+        ],
+        "operationId": "CertificateAccordanceTypes",
+        "summary": "Список типов соответствия требованиям (версия 2)",
+        "description": null,
+        "responses": {
+          "200": {
+            "description": "Список типов соответствия требованиям",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2ProductCertificateAccordanceTypesResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/product/certificate/types",
+      "method": "GET",
+      "operationId": "ProductAPI_ProductCertificateTypes",
+      "summary": "Справочник типов документов",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Справочник типов документов",
+        "operationId": "ProductAPI_ProductCertificateTypes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Справочник типов документов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/productProductCertificateTypesResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "name": "Сертификат соответствия",
+                      "value": "certificate_of_conformity"
+                    },
+                    {
+                      "name": "Декларация",
+                      "value": "declaration"
+                    },
+                    {
+                      "name": "Свидетельство о гос регистрации",
+                      "value": "certificate_of_registration"
+                    },
+                    {
+                      "name": "Регистрационное удостоверение",
+                      "value": "registration_certificate"
+                    },
+                    {
+                      "name": "Отказное письмо",
+                      "value": "refused_letter"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CertificationAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v2/product/certification/list",
+      "method": "POST",
+      "operationId": "ProductAPI_ProductCertificationList",
+      "summary": "Список сертифицируемых категорий",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список сертифицируемых категорий",
+        "operationId": "ProductAPI_ProductCertificationList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2ProductCertificationListRequest"
+              },
+              "example": {
+                "page": 1,
+                "page_size": 100
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список сертифицируемых категорий",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2ProductCertificationListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CertificationAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/product/certification/list",
+      "method": "POST",
+      "operationId": "ProductAPI_V1ProductCertificationList",
+      "summary": "Список сертифицируемых категорий",
+      "description": "<aside class=\"warning\">\n14 апреля 2025 года метод будет отключён. Переключитесь на <a href=\"#operation/ProductAPI_ProductCertificationList\">/v2/product/certification/list</a>.\n</aside>\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список сертифицируемых категорий",
+        "operationId": "ProductAPI_V1ProductCertificationList",
+        "description": "<aside class=\"warning\">\n14 апреля 2025 года метод будет отключён. Переключитесь на <a href=\"#operation/ProductAPI_ProductCertificationList\">/v2/product/certification/list</a>.\n</aside>\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/productProductCertificationListRequest"
+              },
+              "example": {
+                "page": 1,
+                "page_size": 100
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список сертифицируемых категорий",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/productProductCertificationListResponse"
+                },
+                "example": {
+                  "result": {
+                    "certification": [
+                      {
+                        "is_required": true,
+                        "category_name": "Витаминно-минеральные комплексы для взрослых"
+                      }
+                    ],
+                    "total": 1
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CertificationAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/product/certificate/create",
+      "method": "POST",
+      "operationId": "ProductAPI_ProductCertificateCreate",
+      "summary": "Добавить сертификаты для товаров",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Добавить сертификаты для товаров",
+        "operationId": "ProductAPI_ProductCertificateCreate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "files": {
+                    "description": "Массив сертификатов для товара. Допустимые расширения jpg, jpeg, png, pdf.",
+                    "type": "array",
+                    "items": {
+                      "type": "file"
+                    }
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Название сертификата. Максимум 100 символов."
+                  },
+                  "number": {
+                    "type": "string",
+                    "description": "Номер сертификата. Максимум 100 символов."
+                  },
+                  "type_code": {
+                    "type": "string",
+                    "description": "Тип сертификата. Чтобы получить доступные типы, используйте метод [GET /v1/product/certificate/types](#operation/ProductAPI_ProductCertificateTypes).",
+                    "enum": [
+                      "certificate_of_conformity",
+                      "declaration",
+                      "certificate_of_registration",
+                      "registration_certificate",
+                      "refused_letter"
+                    ]
+                  },
+                  "accordance_type_code": {
+                    "type": "string",
+                    "description": "Тип соответствия требованиям. Чтобы получить доступные типы, используйте метод [GET /v1/product/certificate/accordance-types](#operation/ProductAPI_ProductCertificateAccordanceTypes).",
+                    "enum": [
+                      "technical_regulations_rf",
+                      "technical_regulations_cu",
+                      "gost"
+                    ]
+                  },
+                  "issue_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "default": "2021-04-30T11:31:26Z",
+                    "description": "Дата начала действия сертификата."
+                  },
+                  "expire_date": {
+                    "description": "Дата окончания действия сертификата. Может быть пустым для бессрочных сертификатов.\n\nФормат: `2021-04-30T11:31:26Z`.\n",
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                },
+                "required": [
+                  "files",
+                  "name",
+                  "number",
+                  "type_code",
+                  "issue_date"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Идентификатор загруженного сертификата",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "example": {
+                    "id": 50058
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CertificationAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/product/certificate/bind",
+      "method": "POST",
+      "operationId": "ProductAPI_ProductCertificateBind",
+      "summary": "Привязать сертификат к товару",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Привязать сертификат к товару",
+        "operationId": "ProductAPI_ProductCertificateBind",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/productProductCertificateBindRequest"
+              },
+              "example": {
+                "certificate_id": 50058,
+                "product_id": [
+                  290
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Сертификат привязан к товару",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/productBooleanResponse"
+                },
+                "example": {
+                  "result": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CertificationAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/product/certificate/delete",
+      "method": "POST",
+      "operationId": "CertificateDelete",
+      "summary": "Удалить сертификат",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CertificationAPI"
+        ],
+        "operationId": "CertificateDelete",
+        "summary": "Удалить сертификат",
+        "description": null,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ProductCertificateDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Результат удаления сертификата",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ProductCertificateDeleteResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/product/certificate/info",
+      "method": "POST",
+      "operationId": "CertificateInfo",
+      "summary": "Информация о сертификате",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CertificationAPI"
+        ],
+        "operationId": "CertificateInfo",
+        "summary": "Информация о сертификате",
+        "description": null,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ProductCertificateInfoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о сертификате",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ProductCertificateInfoResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/product/certificate/list",
+      "method": "POST",
+      "operationId": "CertificateList",
+      "summary": "Список сертификатов",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CertificationAPI"
+        ],
+        "operationId": "CertificateList",
+        "summary": "Список сертификатов",
+        "description": null,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ProductCertificateListRequest"
+              },
+              "example": {
+                "offer_id": "string",
+                "status": "string",
+                "type": "string",
+                "page": 1,
+                "page_size": 50
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список сертификатов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ProductCertificateListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/product/certificate/product_status/list",
+      "method": "POST",
+      "operationId": "ProductStatusList",
+      "summary": "Список возможных статусов товаров",
+      "description": "Метод для получения списка возможных статусов товаров при их привязке к сертификату.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CertificationAPI"
+        ],
+        "operationId": "ProductStatusList",
+        "summary": "Список возможных статусов товаров",
+        "description": "Метод для получения списка возможных статусов товаров при их привязке к сертификату.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ProductCertificateProductStatusListRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список статусов товаров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ProductCertificateProductStatusListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/product/certificate/products/list",
+      "method": "POST",
+      "operationId": "CertificateProductsList",
+      "summary": "Список товаров, привязанных к сертификату",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CertificationAPI"
+        ],
+        "operationId": "CertificateProductsList",
+        "summary": "Список товаров, привязанных к сертификату",
+        "description": null,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ProductCertificateProductsListRequest"
+              },
+              "example": {
+                "certificate_id": 0,
+                "product_status_code": "string",
+                "page": 1,
+                "page_size": 50
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список товаров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ProductCertificateProductsListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/product/certificate/unbind",
+      "method": "POST",
+      "operationId": "CertificateUnbind",
+      "summary": "Отвязать товар от сертификата",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CertificationAPI"
+        ],
+        "operationId": "CertificateUnbind",
+        "summary": "Отвязать товар от сертификата",
+        "description": null,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ProductCertificateUnbindRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Товар отвязан от сертификата",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ProductCertificateUnbindResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/product/certificate/rejection_reasons/list",
+      "method": "POST",
+      "operationId": "RejectionReasonsList",
+      "summary": "Возможные причины отклонения сертификата",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CertificationAPI"
+        ],
+        "operationId": "RejectionReasonsList",
+        "summary": "Возможные причины отклонения сертификата",
+        "description": null,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ProductCertificateRejectionReasonsListRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Причины отклонения сертификата",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ProductCertificateRejectionReasonsListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/product/certificate/status/list",
+      "method": "POST",
+      "operationId": "CertificateStatusList",
+      "summary": "Возможные статусы сертификатов",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CertificationAPI"
+        ],
+        "operationId": "CertificateStatusList",
+        "summary": "Возможные статусы сертификатов",
+        "description": null,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ProductCertificateStatusListRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Возможные статусы сертификатов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ProductCertificateStatusListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "productProductCertificateAccordanceTypesResponse": {
+      "properties": {
+        "result": {
+          "items": {
+            "$ref": "#/components/schemas/productProductCertificateAccordanceTypesResponseType"
+          },
+          "type": "array",
+          "description": "Список типов и названий сертификатов."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productProductCertificateAccordanceTypesResponseType": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название документа."
+        },
+        "value": {
+          "type": "string",
+          "description": "Значение справочника."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v2ProductCertificateAccordanceTypesResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v2ProductCertificateAccordanceTypesResponseResult"
+        }
+      }
+    },
+    "v2ProductCertificateAccordanceTypesResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "base": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v2ProductCertificateAccordanceTypesResponseType"
+          },
+          "description": "Основные типы соответствия требованиям."
+        },
+        "hazard": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v2ProductCertificateAccordanceTypesResponseType"
+          },
+          "description": "Типов соответствия требованиям, относящиеся к опасным товарам."
+        }
+      },
+      "description": "Список типов соответствия требованиям."
+    },
+    "v2ProductCertificateAccordanceTypesResponseType": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код типа соответствия требованиям."
+        },
+        "title": {
+          "type": "string",
+          "description": "Описание типа соответствия требованиям."
+        }
+      }
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "productProductCertificateTypesResponse": {
+      "properties": {
+        "result": {
+          "items": {
+            "$ref": "#/components/schemas/productProductCertificateTypesResponseType"
+          },
+          "type": "array",
+          "description": "Список типов и названий сертификатов."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productProductCertificateTypesResponseType": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название документа."
+        },
+        "value": {
+          "type": "string",
+          "description": "Значение справочника."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v2ProductCertificationListRequest": {
+      "required": [
+        "page",
+        "page_size"
+      ],
+      "type": "object",
+      "properties": {
+        "page": {
+          "description": "Номер страницы.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "page_size": {
+          "description": "Количество элементов на странице.",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "maximum": 1000
+        }
+      }
+    },
+    "v2ProductCertificationListResponse": {
+      "type": "object",
+      "properties": {
+        "certification": {
+          "description": "Информация о сертифицируемых категориях.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ProductCertificationListResponseCertificationv2"
+          }
+        },
+        "total": {
+          "description": "Всего категорий.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ProductCertificationListResponseCertificationv2": {
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "description": "Идентификатор сертифицируемой категории.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "category_name": {
+          "description": "Название сертифицируемой категории.",
+          "type": "string"
+        },
+        "is_required": {
+          "description": "Признак обязательной характеристики.",
+          "type": "boolean"
+        },
+        "type_id": {
+          "description": "Идентификатор типа сертифицируемой категории.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "type_name": {
+          "description": "Название типа сертифицируемой категории.",
+          "type": "string"
+        }
+      }
+    },
+    "productProductCertificationListRequest": {
+      "properties": {
+        "page": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Номер страницы, возвращаемой в запросе."
+        },
+        "page_size": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество элементов на странице."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productProductCertificationListResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/ProductCertificationListResponseCertificationResult"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "ProductCertificationListResponseCertificationResult": {
+      "properties": {
+        "certification": {
+          "items": {
+            "$ref": "#/components/schemas/ProductCertificationListResponseCertification"
+          },
+          "type": "array",
+          "description": "Информация о сертифицируемых категориях."
+        },
+        "total": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Всего категорий."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса."
+    },
+    "ProductCertificationListResponseCertification": {
+      "properties": {
+        "category_name": {
+          "type": "string",
+          "description": "Название сертифицируемой категории."
+        },
+        "is_required": {
+          "type": "boolean",
+          "description": "Признак обязательной характеристики."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productProductCertificateBindRequest": {
+      "properties": {
+        "certificate_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор сертификата, который был присвоен при его загрузке."
+        },
+        "product_id": {
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "type": "array",
+          "description": "Массив идентификаторов товаров, к которым относится этот сертификат."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productBooleanResponse": {
+      "properties": {
+        "result": {
+          "type": "boolean",
+          "description": "Результат обработки запроса. `true`, если запрос выполнен без ошибок."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v1ProductCertificateDeleteRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "certificate_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор сертификата."
+        }
+      },
+      "required": [
+        "certificate_id"
+      ]
+    },
+    "v1ProductCertificateDeleteResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1ProductCertificateDeleteResponseResult"
+        }
+      }
+    },
+    "v1ProductCertificateDeleteResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "is_delete": {
+          "type": "boolean",
+          "description": "Удалён ли сертификат:\n- `true` — удалён,\n- `false` — не удалён.\n"
+        },
+        "error_message": {
+          "type": "string",
+          "description": "Описание ошибок при удалении сертификата."
+        }
+      },
+      "description": "Результат удаления сертификата."
+    },
+    "v1ProductCertificateInfoRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "certificate_number": {
+          "type": "string",
+          "description": "Идентификатор сертификата."
+        }
+      },
+      "required": [
+        "certificate_number"
+      ]
+    },
+    "v1ProductCertificateInfoResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1Certificate"
+        }
+      }
+    },
+    "v1Certificate": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "certificate_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор."
+        },
+        "certificate_number": {
+          "type": "string",
+          "description": "Номер."
+        },
+        "certificate_name": {
+          "type": "string",
+          "description": "Название."
+        },
+        "type_code": {
+          "type": "string",
+          "description": "Тип."
+        },
+        "status_code": {
+          "type": "string",
+          "description": "Статус."
+        },
+        "accordance_type_code": {
+          "type": "string",
+          "description": "Тип соответствия требованиям."
+        },
+        "rejection_reason_code": {
+          "type": "string",
+          "description": "Причина отклонения сертификата."
+        },
+        "verification_comment": {
+          "type": "string",
+          "description": "Комментарий модератора."
+        },
+        "issue_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата создания."
+        },
+        "expire_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата окончания действия."
+        },
+        "products_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товаров, привязанных к сертификату."
+        }
+      },
+      "description": "Информация о сертификате."
+    },
+    "v1ProductCertificateListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул, привязанный к сертификату. Передайте параметр, если нужны сертификаты, к которым привязаны определённые товары."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус сертификата. Передайте параметр, если нужны сертификаты с определённым статусом."
+        },
+        "type": {
+          "type": "string",
+          "description": "Тип сертификата. Передайте параметр, если нужны сертификаты с определённым типом."
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Страница, с которой следует выводить список. Минимальное значение — 1."
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество объектов на странице. Значение — от 1 до 1000."
+        }
+      },
+      "required": [
+        "page",
+        "page_size"
+      ]
+    },
+    "v1ProductCertificateListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1ProductCertificateListResponseResult"
+        }
+      }
+    },
+    "v1ProductCertificateListResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1Certificate"
+          },
+          "description": "Информация о сертификате."
+        },
+        "page_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество страниц."
+        }
+      },
+      "description": "Список сертификатов."
+    },
+    "v1ProductCertificateProductStatusListRequest": {
+      "type": "object",
+      "title": "object"
+    },
+    "v1ProductCertificateProductStatusListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1StatusCodeNamePair"
+          },
+          "description": "Список статусов товаров."
+        }
+      }
+    },
+    "v1StatusCodeNamePair": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код статуса товара при привязке к сертификату."
+        },
+        "name": {
+          "type": "string",
+          "description": "Описание статуса."
+        }
+      }
+    },
+    "v1ProductCertificateProductsListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "certificate_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор сертификата."
+        },
+        "product_status_code": {
+          "type": "string",
+          "description": "Статус проверки товара при привязке к сертификату."
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Номер страницы, с которой выводить список. Минимальное значение — 1."
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество объектов на странице. Значение — от 1 до 1000."
+        }
+      },
+      "required": [
+        "certificate_id",
+        "page",
+        "page_size"
+      ]
+    },
+    "v1ProductCertificateProductsListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1ProductCertificateProductsListResponseResult"
+        }
+      }
+    },
+    "v1ProductCertificateProductsListResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ProductCertificateProductsListResponseProduct"
+          },
+          "description": "Список товаров."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество найденных товаров."
+        }
+      },
+      "description": "Товары, привязанные к сертификату."
+    },
+    "ProductCertificateProductsListResponseProduct": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "product_status_code": {
+          "type": "string",
+          "description": "Статус обработки товара при привязке к сертификату."
+        }
+      }
+    },
+    "v1ProductCertificateUnbindRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "certificate_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор сертификата."
+        },
+        "product_id": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64",
+            "description": "Идентификатор товара в системе продавца — `product_id`."
+          },
+          "description": "Список идентификаторов товара, которые нужно отвязать от сертификата."
+        }
+      },
+      "required": [
+        "certificate_id",
+        "product_id"
+      ]
+    },
+    "v1ProductCertificateUnbindResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ProductCertificateUnbindResponseItem"
+          },
+          "description": "Результат работы метода."
+        }
+      }
+    },
+    "ProductCertificateUnbindResponseItem": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Сообщение об ошибке при отвязывании товара."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "updated": {
+          "type": "boolean",
+          "description": "Был ли отвязан товар от сертификата:\n- `true` — отвязан,\n- `false` — не отвязан.\n"
+        }
+      }
+    },
+    "v1ProductCertificateRejectionReasonsListRequest": {
+      "type": "object",
+      "title": "object"
+    },
+    "v1ProductCertificateRejectionReasonsListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1StatusCodeNamePairRejection"
+          },
+          "description": "Причины отклонения сертификата."
+        }
+      }
+    },
+    "v1StatusCodeNamePairRejection": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код причины отклонения сертификата."
+        },
+        "name": {
+          "type": "string",
+          "description": "Описание причины отклонения сертификата."
+        }
+      }
+    },
+    "v1ProductCertificateStatusListRequest": {
+      "type": "object",
+      "title": "object"
+    },
+    "v1ProductCertificateStatusListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1StatusCodeNamePairStatuses"
+          },
+          "description": "Список возможных статусов сертификатов."
+        }
+      }
+    },
+    "v1StatusCodeNamePairStatuses": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код статуса сертификата."
+        },
+        "name": {
+          "type": "string",
+          "description": "Описание статуса."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,475 @@
+{
+  "metadata": {
+    "tag": "Quants",
+    "name": "Quants",
+    "displayName": "Работа с квантами",
+    "description": "",
+    "externalDocs": null,
+    "directory": "beta",
+    "groupInfo": {
+      "groupName": "Бета-методы Seller API",
+      "groupIndex": 2,
+      "dataSelector": null
+    },
+    "endpointsCount": 2,
+    "schemasCount": 15,
+    "generatedAt": "2025-08-09T16:28:42.345Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/product/quant/list",
+      "method": "POST",
+      "operationId": "QuantProductList",
+      "summary": "Список эконом-товаров",
+      "description": "Вы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1084-Metody-po-tarifu-Ekonom) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список эконом-товаров",
+        "operationId": "QuantProductList",
+        "description": "Вы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1084-Metody-po-tarifu-Ekonom) в сообществе разработчиков Ozon for dev.\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductV1QuantListRequest"
+              },
+              "example": {
+                "cursor": "",
+                "limit": 1000,
+                "visibility": "ALL"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Эконом-товары",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductV1QuantListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Quants"
+        ]
+      }
+    },
+    {
+      "path": "/v1/product/quant/info",
+      "method": "POST",
+      "operationId": "QuantGetInfo",
+      "summary": "Информация об эконом-товаре",
+      "description": "Вы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1084-Metody-po-tarifu-Ekonom) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Информация об эконом-товаре",
+        "operationId": "QuantGetInfo",
+        "description": "Вы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1084-Metody-po-tarifu-Ekonom) в сообществе разработчиков Ozon for dev.\n",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductV1QuantInfoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация об эконом-товаре",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductV1QuantInfoResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Quants"
+        ]
+      }
+    }
+  ],
+  "schemas": {
+    "ProductV1QuantListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "cursor": {
+          "type": "string",
+          "description": "Указатель для выборки следующих данных."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Максимальное количество элементов в ответе."
+        },
+        "visibility": {
+          "default": "ALL",
+          "enum": [
+            "ALL",
+            "VISIBLE",
+            "INVISIBLE",
+            "EMPTY_STOCK",
+            "NOT_MODERATED",
+            "MODERATED",
+            "DISABLED",
+            "STATE_FAILED",
+            "READY_TO_SUPPLY",
+            "VALIDATION_STATE_PENDING",
+            "VALIDATION_STATE_FAIL",
+            "VALIDATION_STATE_SUCCESS",
+            "TO_SUPPLY",
+            "IN_SALE",
+            "REMOVED_FROM_SALE",
+            "OVERPRICED",
+            "CRITICALLY_OVERPRICED",
+            "EMPTY_BARCODE",
+            "BARCODE_EXISTS",
+            "QUARANTINE",
+            "ARCHIVED",
+            "OVERPRICED_WITH_STOCK",
+            "PARTIAL_APPROVED"
+          ],
+          "type": "string",
+          "description": "Фильтр по видимости товара:\n- `ALL` — все товары, кроме архивных.\n- `VISIBLE` — товары, которые видны покупателям.\n- `INVISIBLE` — товары, которые не видны покупателям.\n- `EMPTY_STOCK` — товары, которых нет в наличии.\n- `NOT_MODERATED` — товары, которые не прошли модерацию.\n- `MODERATED` — товары, которые прошли модерацию.\n- `DISABLED` — товары, которые видны покупателям, но недоступны к покупке.\n- `STATE_FAILED` — товары, создание которых завершилось ошибкой.\n- `READY_TO_SUPPLY` — товары, готовые к поставке.\n- `VALIDATION_STATE_PENDING` — товары, которые проходят проверку валидатором на премодерации.\n- `VALIDATION_STATE_FAIL` — товары, которые не прошли проверку валидатором на премодерации.\n- `VALIDATION_STATE_SUCCESS` — товары, которые прошли проверку валидатором на премодерации.\n- `TO_SUPPLY` — товары, готовые к продаже.\n- `IN_SALE` — товары в продаже.\n- `REMOVED_FROM_SALE` — товары, скрытые от покупателей.\n- `OVERPRICED` — превышение цены.\n- `CRITICALLY_OVERPRICED` — критическое превышение цены.\n- `EMPTY_BARCODE` — пустой штрихкод.\n- `BARCODE_EXISTS` — штрихкод указан.\n- `QUARANTINE` — товар в карантине после изменения цены на 50% и больше.\n- `ARCHIVED` — товары в архиве.\n- `OVERPRICED_WITH_STOCK` — товары в продаже, цена которых выше, чем у конкурентов.\n- `PARTIAL_APPROVED` — товары в продаже, у которых пустое или неполное описание.\n"
+        }
+      }
+    },
+    "ProductV1QuantListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "cursor": {
+          "type": "string",
+          "description": "Указатель для выборки следующих данных."
+        },
+        "products": {
+          "description": "Эконом-товары.",
+          "items": {
+            "$ref": "#/components/schemas/ProductV1QuantListResponseProducts"
+          }
+        },
+        "total_items": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Остаток на всех складах, шт."
+        }
+      }
+    },
+    "ProductV1QuantListResponseProducts": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "quants": {
+          "description": "Список квантов товара.",
+          "items": {
+            "$ref": "#/components/schemas/ProductV1QuantListResponseProductsQuants"
+          }
+        }
+      }
+    },
+    "ProductV1QuantListResponseProductsQuants": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "quant_code": {
+          "type": "string",
+          "description": "Идентификатор кванта."
+        },
+        "quant_size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Размер кванта."
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "ProductV1QuantInfoRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "quant_code": {
+          "minItems": 1,
+          "maxItems": 1000,
+          "description": "Список квантов с товарами.\n",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "quant_code"
+      ]
+    },
+    "ProductV1QuantInfoResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Эконом-товары.",
+          "items": {
+            "$ref": "#/components/schemas/ProductV1QuantInfoResponseResultItems"
+          }
+        }
+      }
+    },
+    "ProductV1QuantInfoResponseResultItems": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "quant_info": {
+          "$ref": "#/components/schemas/ProductV1QuantInfoResponseResultItemsQuantInfo"
+        }
+      }
+    },
+    "ProductV1QuantInfoResponseResultItemsQuantInfo": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация о кванте.",
+      "properties": {
+        "quants": {
+          "description": "Список квантов.",
+          "items": {
+            "$ref": "#/components/schemas/ProductV1QuantInfoResponseResultItemsQuantInfoQuants"
+          }
+        }
+      }
+    },
+    "ProductV1QuantInfoResponseResultItemsQuantInfoQuants": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "barcodes_extended": {
+          "description": "Информация о штрихкодах.",
+          "items": {
+            "$ref": "#/components/schemas/ProductV1QuantInfoResponseResultItemsQuantInfoQuantsBarcodesExtended"
+          }
+        },
+        "dimensions": {
+          "$ref": "#/components/schemas/ProductV1QuantInfoResponseResultItemsQuantInfoQuantsDimensions"
+        },
+        "marketing_price": {
+          "$ref": "#/components/schemas/ProductV1QuantInfoResponseResultItemsQuantInfoQuantsMarketingPrice"
+        },
+        "min_price": {
+          "type": "string",
+          "description": "Минимальная цена, указанная продавцом."
+        },
+        "old_price": {
+          "type": "string",
+          "description": "Зачёркнутая цена, указанная продавцом."
+        },
+        "price": {
+          "type": "string",
+          "description": "Цена продажи, указанная продавцом."
+        },
+        "quant_code": {
+          "type": "string",
+          "description": "Идентификатор эконом-товара."
+        },
+        "quant_sice": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Размер кванта."
+        },
+        "shipment_type": {
+          "type": "string",
+          "description": "Тип доставки товара."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "statuses": {
+          "$ref": "#/components/schemas/ProductV1QuantInfoResponseResultItemsQuantInfoQuantsTexts"
+        }
+      }
+    },
+    "ProductV1QuantInfoResponseResultItemsQuantInfoQuantsBarcodesExtended": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "barcode": {
+          "type": "string",
+          "description": "Штрихкод."
+        },
+        "error": {
+          "type": "string",
+          "description": "Ошибка получения штрихкода."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус штрихкода."
+        }
+      }
+    },
+    "ProductV1QuantInfoResponseResultItemsQuantInfoQuantsDimensions": {
+      "type": "object",
+      "title": "object",
+      "description": "Габариты.",
+      "properties": {
+        "depth": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Глубина, мм."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Высота, мм."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Вес, г."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Ширина, мм."
+        }
+      }
+    },
+    "ProductV1QuantInfoResponseResultItemsQuantInfoQuantsMarketingPrice": {
+      "type": "object",
+      "title": "object",
+      "description": "Цена на товар с учётом всех акций, которая будет указана на витрине Ozon, без учёта скидки по Ozon Карте.",
+      "properties": {
+        "price": {
+          "type": "string",
+          "description": "Цена продажи."
+        },
+        "seller_price": {
+          "type": "string",
+          "description": "Цена, которую указал продавец."
+        }
+      }
+    },
+    "ProductV1QuantInfoResponseResultItemsQuantInfoQuantsTexts": {
+      "type": "object",
+      "title": "object",
+      "description": "Описание статусов.",
+      "properties": {
+        "state_description": {
+          "type": "string",
+          "description": "Описание статуса."
+        },
+        "state_name": {
+          "type": "string",
+          "description": "Название статуса."
+        },
+        "state_sys_name": {
+          "type": "string",
+          "description": "Системное название статуса."
+        },
+        "state_tooltip": {
+          "type": "string",
+          "description": "Подсказка о текущем состоянии товара."
+        }
+      }
+    }
+  }
+}

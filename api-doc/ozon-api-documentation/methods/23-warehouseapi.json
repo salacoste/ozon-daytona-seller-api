@@ -1,0 +1,513 @@
+{
+  "metadata": {
+    "tag": "WarehouseAPI",
+    "name": "WarehouseAPI",
+    "displayName": "Склады",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 2,
+    "schemasCount": 9,
+    "generatedAt": "2025-08-09T16:28:42.342Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/warehouse/list",
+      "method": "POST",
+      "operationId": "WarehouseAPI_WarehouseList",
+      "summary": "Список складов",
+      "description": "Метод возвращает список складов FBS и rFBS. Чтобы получить список складов FBO, используйте метод [/v1/cluster/list](#operation/SupplyDraftAPI_DraftClusterList).",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список складов",
+        "description": "Метод возвращает список складов FBS и rFBS. Чтобы получить список складов FBO, используйте метод [/v1/cluster/list](#operation/SupplyDraftAPI_DraftClusterList).",
+        "operationId": "WarehouseAPI_WarehouseList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список складов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/warehouseWarehouseListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "WarehouseAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/delivery-method/list",
+      "method": "POST",
+      "operationId": "WarehouseAPI_DeliveryMethodList",
+      "summary": "Список методов доставки склада",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список методов доставки склада",
+        "description": null,
+        "operationId": "WarehouseAPI_DeliveryMethodList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/warehouseDeliveryMethodListRequest"
+              },
+              "example": {
+                "filter": {
+                  "provider_id": 424,
+                  "status": "ACTIVE",
+                  "warehouse_id": 15588127982000
+                },
+                "limit": 100,
+                "offset": 0
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список методов склада",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/warehouseDeliveryMethodListResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "id": 15588127982000,
+                      "company_id": 1,
+                      "name": "Ozon Логистика курьеру, Есипово",
+                      "status": "ACTIVE",
+                      "cutoff": "13:00",
+                      "provider_id": 24,
+                      "template_id": 0,
+                      "warehouse_id": 15588127982000,
+                      "created_at": "2019-04-04T15:22:31.048202Z",
+                      "updated_at": "2021-08-15T10:21:44.854209Z",
+                      "sla_cut_in": 1440
+                    }
+                  ],
+                  "has_next": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "WarehouseAPI"
+        ]
+      }
+    }
+  ],
+  "schemas": {
+    "warehouseWarehouseListResponse": {
+      "properties": {
+        "result": {
+          "items": {
+            "$ref": "#/components/schemas/WarehouseListResponseWarehouse"
+          },
+          "type": "array",
+          "description": "Список складов."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "WarehouseListResponseWarehouse": {
+      "properties": {
+        "has_entrusted_acceptance": {
+          "type": "boolean",
+          "description": "Признак доверительной приёмки. `true`, если доверительная приёмка включена на складе."
+        },
+        "is_rfbs": {
+          "type": "boolean",
+          "description": "Признак работы склада по схеме rFBS:\n- `true` — склад работает по схеме rFBS;\n- `false` — не работает по схеме rFBS.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Название склада."
+        },
+        "warehouse_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор склада."
+        },
+        "can_print_act_in_advance": {
+          "type": "boolean",
+          "description": "Возможность печати акта приёма-передачи заранее. `true`, если печатать заранее возможно."
+        },
+        "first_mile_type": {
+          "$ref": "#/components/schemas/WarehouseFirstMileType"
+        },
+        "has_postings_limit": {
+          "type": "boolean",
+          "description": "Признак наличия лимита минимального количества заказов. `true`, если лимит есть."
+        },
+        "is_karantin": {
+          "type": "boolean",
+          "description": "Признак, что склад не работает из-за карантина."
+        },
+        "is_kgt": {
+          "type": "boolean",
+          "description": "Признак, что склад принимает крупногабаритные товары."
+        },
+        "is_economy": {
+          "type": "boolean",
+          "description": "`true`, если склад работает с эконом-товарами.\n"
+        },
+        "is_timetable_editable": {
+          "type": "boolean",
+          "description": "Признак, что можно менять расписание работы складов."
+        },
+        "min_postings_limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Минимальное значение лимита — количество заказов, которые можно привезти в одной поставке."
+        },
+        "postings_limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Значение лимита. `-1`, если лимита нет."
+        },
+        "min_working_days": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество рабочих дней склада."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус склада.\n\nСоответствие статусов склада со статусами с личном кабинете:\n\n| Статус Seller&nbsp;API | Статус в личном кабинете |\n|---|---|\n| `new` | Активируется |\n| `created` | Активный |\n| `disabled` | В архиве |\n| `blocked` | Заблокирован |\n| `disabled_due_to_limit` | На паузе |\n| `error` | Ошибка |\n"
+        },
+        "working_days": {
+          "description": "Рабочие дни склада.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7"
+            ]
+          }
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "WarehouseFirstMileType": {
+      "type": "object",
+      "title": "object",
+      "description": "Первая миля FBS.",
+      "properties": {
+        "dropoff_point_id": {
+          "type": "string",
+          "description": "Идентификатор DropOff-точки."
+        },
+        "dropoff_timeslot_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор временного слота для DropOff."
+        },
+        "first_mile_is_changing": {
+          "type": "boolean",
+          "description": "Признак, что настройки склада обновляются."
+        },
+        "first_mile_type": {
+          "type": "string",
+          "description": "Тип первой мили — `DropOff` или `Pickup`.",
+          "enum": [
+            "DropOff",
+            "Pickup"
+          ]
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "warehouseDeliveryMethodListRequest": {
+      "required": [
+        "limit"
+      ],
+      "properties": {
+        "filter": {
+          "$ref": "#/components/schemas/DeliveryMethodListRequestFilter"
+        },
+        "limit": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество элементов в ответе. Максимум — 50, минимум — 1."
+        },
+        "offset": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество элементов, которое будет пропущено в ответе. Например, если `offset = 10`, то ответ начнётся с 11-го найденного элемента."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "DeliveryMethodListRequestFilter": {
+      "properties": {
+        "provider_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор службы доставки."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус метода доставки:\n  - `NEW` — создан,\n  - `EDITED` — редактируется,\n  - `ACTIVE` — активный,\n  - `DISABLED` — неактивный.\n"
+        },
+        "warehouse_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор склада. Можно получить с помощью метода [/v1/warehouse/list ](#operation/WarehouseAPI_WarehouseList)."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр для поиска методов доставки."
+    },
+    "warehouseDeliveryMethodListResponse": {
+      "properties": {
+        "has_next": {
+          "type": "boolean",
+          "description": "Признак, что в запросе вернулась только часть методов доставки:\n- `true` — сделайте повторный запрос с новым параметром `offset` для получения остальных методов;\n- `false` — ответ содержит все методы доставки по запросу.\n"
+        },
+        "result": {
+          "items": {
+            "$ref": "#/components/schemas/DeliveryMethodListResponseDeliveryMethod"
+          },
+          "type": "array",
+          "description": "Результат запроса."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "DeliveryMethodListResponseDeliveryMethod": {
+      "properties": {
+        "company_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор продавца."
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время создания метода доставки."
+        },
+        "cutoff": {
+          "type": "string",
+          "description": "Время, до которого продавцу нужно собрать заказ."
+        },
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор метода доставки."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название метода доставки."
+        },
+        "provider_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор службы доставки."
+        },
+        "sla_cut_in": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Минимальное время на сборку заказа в минутах в соответствии с настройками склада."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус метода доставки:\n  - `NEW` — создан,\n  - `EDITED` — редактируется,\n  - `ACTIVE` — активный,\n  - `DISABLED` — неактивный.\n"
+        },
+        "template_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор услуги по доставке заказа."
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время последнего обновления метода метода доставки."
+        },
+        "warehouse_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор склада."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    }
+  }
+}

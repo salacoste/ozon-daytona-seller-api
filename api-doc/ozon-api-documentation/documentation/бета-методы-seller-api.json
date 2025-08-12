@@ -1,0 +1,48 @@
+{
+  "category": "Бета-методы Seller API",
+  "tagsCount": 6,
+  "tags": [
+    {
+      "index": 35,
+      "name": "BetaIntro",
+      "displayName": "Бета-методы Seller API",
+      "description": "Бета-методы Seller API — раздел с методами, которые находятся на стадии тестирования.\nТакие методы могут работать нестабильно, а их запросы и ответы могут меняться.\nОб изменениях в работе бета-методов уведомляем за неделю в [сообществе разработчиков Ozon for dev](https://dev.ozon.ru/community?category_id=79).\nВ сообществе вы также можете оставить обратную связь по работе бета-методов и предложить свои идеи.\n\nБета-методы доступны по API-ключам в зависимости от вашей роли.",
+      "externalDocs": null
+    },
+    {
+      "index": 36,
+      "name": "BetaMethod",
+      "displayName": "Прочие методы",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 37,
+      "name": "Digital",
+      "displayName": "Работа с цифровыми товарами",
+      "description": "[Подробнее о цифровых товарах в Базе знаний](https://seller-edu.ozon.ru/policies/restrictions/need-access/cifrovye-tovary)",
+      "externalDocs": null
+    },
+    {
+      "index": 38,
+      "name": "Quants",
+      "displayName": "Работа с квантами",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 39,
+      "name": "Questions&Answers",
+      "displayName": "Работа с вопросами и ответами",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 40,
+      "name": "ReviewAPI",
+      "displayName": "Работа с отзывами",
+      "description": "",
+      "externalDocs": null
+    }
+  ]
+}

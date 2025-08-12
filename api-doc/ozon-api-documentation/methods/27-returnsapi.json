@@ -1,0 +1,738 @@
+{
+  "metadata": {
+    "tag": "ReturnsAPI",
+    "name": "ReturnsAPI",
+    "displayName": "Возвраты товаров FBO и FBS",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 1,
+    "schemasCount": 23,
+    "generatedAt": "2025-08-09T16:28:42.343Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/returns/list",
+      "method": "POST",
+      "operationId": "returnsList",
+      "summary": "Информация о возвратах FBO и FBS",
+      "description": "Метод для получения информации о возвратах FBO и FBS.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "ReturnsAPI"
+        ],
+        "summary": "Информация о возвратах FBO и FBS",
+        "description": "Метод для получения информации о возвратах FBO и FBS.",
+        "operationId": "returnsList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetReturnsListRequest"
+              },
+              "example": {
+                "filter": {
+                  "logistic_return_date": {
+                    "time_from": "2019-08-24T14:15:22Z",
+                    "time_to": "2019-08-24T14:15:22Z"
+                  },
+                  "storage_tariffication_start_date": {
+                    "time_from": "2019-08-24T14:15:22Z",
+                    "time_to": "2019-08-24T14:15:22Z"
+                  },
+                  "visual_status_change_moment": {
+                    "time_from": "2019-08-24T14:15:22Z",
+                    "time_to": "2019-08-24T14:15:22Z"
+                  },
+                  "order_id": "0",
+                  "posting_numbers": [
+                    "string"
+                  ],
+                  "product_name": "string",
+                  "offer_id": "string",
+                  "visual_status_name": "string",
+                  "warehouse_id": "911",
+                  "barcode": "string",
+                  "return_schema": "FBO"
+                },
+                "limit": 500,
+                "last_id": 0
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация по возвратам",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetReturnsListResponse"
+                },
+                "example": {
+                  "returns": [
+                    {
+                      "exemplars": [
+                        {
+                          "id": "1019562967545956"
+                        }
+                      ],
+                      "id": "1000015552",
+                      "company_id": "3058",
+                      "return_reason_name": "Покупатель отказался при вручении: недоволен качеством товара",
+                      "type": "FullReturn",
+                      "schema": "Fbs",
+                      "order_id": "24540784250",
+                      "order_number": "58544282-0057",
+                      "place": {
+                        "id": "23869688194000",
+                        "name": "СЦ_Львовский_Возвраты",
+                        "address": "Россия, обл. Московская, г. Подольск, промышленная зона Львовский, ул. Московская, д. 69, стр. 5"
+                      },
+                      "target_place": {
+                        "id": "23869688194000",
+                        "name": "СЦ_Львовский_Возвраты",
+                        "address": "Россия, обл. Московская, г. Подольск, промышленная зона Львовский, ул. Московская, д. 69, стр. 5"
+                      },
+                      "storage": {
+                        "sum": {
+                          "currency_code": "RUB",
+                          "price": "1231"
+                        },
+                        "tariffication_first_date": "2024-07-30T06:15:48.998146Z",
+                        "tariffication_start_date": "2024-07-29T06:15:48.998146Z",
+                        "arrived_moment": "2024-07-29T06:15:48.998146Z",
+                        "days": "0",
+                        "utilization_sum": {
+                          "currency_code": "RUB",
+                          "price": "1231"
+                        },
+                        "utilization_forecast_date": "2024-07-29T06:15:48.998146Z"
+                      },
+                      "product": {
+                        "sku": "1100526203",
+                        "offer_id": "81451",
+                        "name": "Кукла Дотти Плачущий младенец Cry Babies Dressy Dotty",
+                        "price": {
+                          "currency_code": "RUB",
+                          "price": "3318"
+                        },
+                        "price_without_commission": {
+                          "currency_code": "RUB",
+                          "price": "3318"
+                        },
+                        "commission_percent": "1.2",
+                        "commission": {
+                          "currency_code": "RUB",
+                          "price": "2312"
+                        },
+                        "quantity": 1
+                      },
+                      "logistic": {
+                        "technical_return_moment": "2024-07-29T06:15:48.998146Z",
+                        "final_moment": "2024-07-29T06:15:48.998146Z",
+                        "cancelled_with_compensation_moment": "2024-07-29T06:15:48.998146Z",
+                        "return_date": "2024-07-29T06:15:48.998146Z",
+                        "barcode": "ii5275210303"
+                      },
+                      "visual": {
+                        "status": {
+                          "id": 3,
+                          "display_name": "В пункте выдачи",
+                          "sys_name": "ArrivedAtReturnPlace"
+                        },
+                        "change_moment": "2024-07-29T06:15:48.998146Z"
+                      },
+                      "additional_info": {
+                        "is_opened": true,
+                        "is_super_econom": false
+                      },
+                      "source_id": "90426223",
+                      "posting_number": "58544282-0057-1",
+                      "clearing_id": "21190893156000",
+                      "return_clearing_id": null
+                    }
+                  ],
+                  "has_next": false
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "v1GetReturnsListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/components/schemas/GetReturnsListRequestFilter"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество подгружаемых возвратов. Максимальное значение — 500."
+        },
+        "last_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор последнего подгруженного возврата."
+        }
+      },
+      "required": [
+        "limit"
+      ]
+    },
+    "GetReturnsListRequestFilter": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтры. Используйте только один фильтр в запросе: `logistic_return_date`, `storage_tariffication_start_date` или `visual_status_change_moment`, иначе вернётся ошибка.\n",
+      "properties": {
+        "logistic_return_date": {
+          "$ref": "#/components/schemas/v1TimeRange_return_date"
+        },
+        "storage_tariffication_start_date": {
+          "$ref": "#/components/schemas/v1TimeRange_storage_tariffication"
+        },
+        "visual_status_change_moment": {
+          "$ref": "#/components/schemas/v1TimeRange_visual_status"
+        },
+        "order_id": {
+          "type": "integer",
+          "description": "Фильтр по идентификатору заказа.",
+          "format": "int64"
+        },
+        "posting_numbers": {
+          "type": "array",
+          "description": "Фильтр по номеру отправления. Передавайте не больше 50 постингов.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "product_name": {
+          "type": "string",
+          "description": "Фильтр по названию товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Фильтр по артикулу товара."
+        },
+        "visual_status_name": {
+          "type": "string",
+          "description": "Фильтр по статусу возврата:\n- `DisputeOpened` — открыт спор с покупателем;\n- `OnSellerApproval` — на согласовании у продавца;\n- `ArrivedAtReturnPlace` — в пункте выдачи;\n- `OnSellerClarification` — на уточнении у продавца;\n- `OnSellerClarificationAfterPartialCompensation` — на уточнении у продавца после частичной компенсации;\n- `OfferedPartialCompensation` — предложена частичная компенсация;\n- `ReturnMoneyApproved` — одобрен возврат денег;\n- `PartialCompensationReturned` — вернули часть денег;\n- `CancelledDisputeNotOpen` — возврат отклонён, спор не открыт;\n- `Rejected` — заявка отклонена;\n- `CrmRejected` — заявка отклонена Ozon;\n- `Cancelled` — заявка отменена;\n- `Approved` — заявка одобрена продавцом;\n- `ApprovedByOzon` — заявка одобрена Ozon;\n- `ReceivedBySeller` — продавец получил возврат;\n- `MovingToSeller` — возврат на пути к продавцу;\n- `ReturnCompensated` — продавец получил компенсацию;\n- `ReturningToSellerByCourier` — курьер везёт возврат продавцу;\n- `Utilizing` — на утилизации;\n- `Utilized` — утилизирован;\n- `MoneyReturned` — покупателю вернули всю сумму;\n- `PartialCompensationInProcess` — одобрен частичный возврат денег;\n- `DisputeYouOpened` — продавец открыл спор;\n- `CompensationRejected` — отказано в компенсации;\n- `DisputeOpening` — обращение в поддержку отправлено;\n- `CompensationOffered` — ожидает вашего решения по компенсации;\n- `WaitingCompensation` — ожидает компенсации;\n- `SendingError` — ошибка при отправке обращения в поддержку;\n- `CompensationRejectedBySla` — истёк срок решения;\n- `CompensationRejectedBySeller` — продавец отказался от компенсации;\n- `MovingToOzon` — едет на склад Ozon;\n- `ReturnedToOzon` — на складе Ozon;\n- `MoneyReturnedBySystem` — быстрый возврат;\n- `WaitingShipment` — ожидает отправки.\n"
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "description": "Фильтр по идентификатору склада. Можно получить с помощью метода [/v1/warehouse/list](#operation/WarehouseAPI_WarehouseList).",
+          "format": "int64"
+        },
+        "barcode": {
+          "type": "string",
+          "description": "Фильтр по штрихкоду возвратной этикетки."
+        },
+        "return_schema": {
+          "type": "string",
+          "description": "Фильтр по схеме доставки: `FBS` или `FBO`.\n"
+        }
+      }
+    },
+    "v1TimeRange_return_date": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр по дате создания возврата.",
+      "properties": {
+        "time_from": {
+          "type": "string",
+          "description": "Начало периода.",
+          "format": "date-time"
+        },
+        "time_to": {
+          "type": "string",
+          "description": "Окончание периода.",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1TimeRange_storage_tariffication": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр по дате начала тарификации.",
+      "properties": {
+        "time_from": {
+          "type": "string",
+          "description": "Начало периода.",
+          "format": "date-time"
+        },
+        "time_to": {
+          "type": "string",
+          "description": "Окончание периода.",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1TimeRange_visual_status": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр по дате изменения статуса возврата.",
+      "properties": {
+        "time_from": {
+          "type": "string",
+          "description": "Начало периода.",
+          "format": "date-time"
+        },
+        "time_to": {
+          "type": "string",
+          "description": "Окончание периода.",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1GetReturnsListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "returns": {
+          "type": "array",
+          "description": "Информация о возвратах.",
+          "items": {
+            "$ref": "#/components/schemas/GetReturnsListResponseReturnsItem"
+          }
+        },
+        "has_next": {
+          "type": "boolean",
+          "description": "`true`, если у продавца есть другие возвраты.\n"
+        }
+      }
+    },
+    "GetReturnsListResponseReturnsItem": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "exemplars": {
+          "type": "array",
+          "description": "Информация об экземплярах.",
+          "items": {
+            "$ref": "#/components/schemas/GetReturnsListResponseExemplar"
+          }
+        },
+        "id": {
+          "type": "integer",
+          "description": "Идентификатор возврата.",
+          "format": "int64"
+        },
+        "company_id": {
+          "type": "integer",
+          "description": "Идентификатор продавца.",
+          "format": "int64"
+        },
+        "return_reason_name": {
+          "type": "string",
+          "description": "Причина возврата или отмены."
+        },
+        "type": {
+          "type": "string",
+          "description": "Тип возврата: \n`Cancellation` - отмена (до вручения);\n`FullReturn` - полный отказ при вручении;\n`PartialReturn` - частичный отказ при вручении;\n`ClientReturn` - клиентский возврат (после вручения);\n`Unknown` - технический возврат.\n"
+        },
+        "schema": {
+          "type": "string",
+          "description": "Схема возврата:\n`FBS`;\n`FBO`.\n"
+        },
+        "order_id": {
+          "type": "integer",
+          "description": "Идентификатор заказа.",
+          "format": "int64"
+        },
+        "order_number": {
+          "type": "string",
+          "description": "Номер заказа."
+        },
+        "place": {
+          "$ref": "#/components/schemas/GetReturnsListResponsePlace_now"
+        },
+        "target_place": {
+          "$ref": "#/components/schemas/GetReturnsListResponsePlace_target"
+        },
+        "storage": {
+          "$ref": "#/components/schemas/GetReturnsListResponseStorage"
+        },
+        "product": {
+          "$ref": "#/components/schemas/GetReturnsListResponseProduct"
+        },
+        "logistic": {
+          "$ref": "#/components/schemas/GetReturnsListResponseLogistic"
+        },
+        "visual": {
+          "$ref": "#/components/schemas/GetReturnsListResponseVisual"
+        },
+        "additional_info": {
+          "$ref": "#/components/schemas/GetReturnsListResponseAdditionalInfo"
+        },
+        "source_id": {
+          "type": "integer",
+          "description": "Предыдущий идентификатор возврата.",
+          "format": "int64"
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "clearing_id": {
+          "type": "integer",
+          "description": "Штрихкод изначального отправления.",
+          "format": "int64"
+        },
+        "return_clearing_id": {
+          "type": "integer",
+          "description": "Возвратный штрихкод изначального отправления.",
+          "format": "int64"
+        }
+      }
+    },
+    "GetReturnsListResponseExemplar": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Идентификатор экземпляра.",
+          "format": "int64"
+        }
+      }
+    },
+    "GetReturnsListResponsePlace_now": {
+      "type": "object",
+      "title": "object",
+      "description": "Склад, где находится возврат.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Идентификатор склада.",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "description": "Название."
+        },
+        "address": {
+          "type": "string",
+          "description": "Адрес."
+        }
+      }
+    },
+    "GetReturnsListResponsePlace_target": {
+      "type": "object",
+      "title": "object",
+      "description": "Склад, куда едет возврат.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Идентификатор склада.",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "description": "Название."
+        },
+        "address": {
+          "type": "string",
+          "description": "Адрес."
+        }
+      }
+    },
+    "GetReturnsListResponseStorage": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация о хранении.",
+      "properties": {
+        "sum": {
+          "$ref": "#/components/schemas/seller_returnsv1Money_storage"
+        },
+        "tariffication_first_date": {
+          "type": "string",
+          "description": "Первый день тарификации за хранение.",
+          "format": "date-time"
+        },
+        "tariffication_start_date": {
+          "type": "string",
+          "description": "Дата старта тарификации за хранение.",
+          "format": "date-time"
+        },
+        "arrived_moment": {
+          "type": "string",
+          "description": "Дата, когда возврат был готов к выдаче.",
+          "format": "date-time"
+        },
+        "days": {
+          "type": "integer",
+          "description": "Сколько дней возврат ожидает выдачи продавцу.",
+          "format": "int64"
+        },
+        "utilization_sum": {
+          "format": "date-time",
+          "$ref": "#/components/schemas/seller_returnsv1Money_utilization"
+        },
+        "utilization_forecast_date": {
+          "type": "string",
+          "description": "Планируемая дата утилизации."
+        }
+      }
+    },
+    "seller_returnsv1Money_storage": {
+      "type": "object",
+      "title": "object",
+      "description": "Стоимость хранения.",
+      "properties": {
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта."
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Стоимость хранения."
+        }
+      }
+    },
+    "seller_returnsv1Money_utilization": {
+      "type": "object",
+      "title": "object",
+      "description": "Стоимость утилизации.",
+      "properties": {
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта."
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Стоимость утилизации."
+        }
+      }
+    },
+    "GetReturnsListResponseProduct": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация о товаре.",
+      "properties": {
+        "sku": {
+          "type": "integer",
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "format": "int64"
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "price": {
+          "$ref": "#/components/schemas/seller_returnsv1Money_product"
+        },
+        "price_without_commission": {
+          "$ref": "#/components/schemas/seller_returnsv1Money_without_commission"
+        },
+        "commission_percent": {
+          "type": "number",
+          "description": "Процент комиссии.",
+          "format": "double"
+        },
+        "commission": {
+          "$ref": "#/components/schemas/seller_returnsv1Money_commission"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товара."
+        }
+      }
+    },
+    "seller_returnsv1Money_product": {
+      "type": "object",
+      "title": "object",
+      "description": "Стоимость товара.",
+      "properties": {
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта."
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Стоимость товара."
+        }
+      }
+    },
+    "seller_returnsv1Money_without_commission": {
+      "type": "object",
+      "title": "object",
+      "description": "Стоимость товара без комиссии.",
+      "properties": {
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта."
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Стоимость товара без комиссии."
+        }
+      }
+    },
+    "seller_returnsv1Money_commission": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация о комиссии.",
+      "properties": {
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта."
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Размер комиссии."
+        }
+      }
+    },
+    "GetReturnsListResponseLogistic": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация о возврате.",
+      "properties": {
+        "technical_return_moment": {
+          "type": "string",
+          "description": "Дата, когда заказ поставили на технический возврат.",
+          "format": "date-time"
+        },
+        "final_moment": {
+          "type": "string",
+          "description": "Дата, когда возврат прибыл на фулфилмент или выдан продавцу.",
+          "format": "date-time"
+        },
+        "cancelled_with_compensation_moment": {
+          "type": "string",
+          "description": "Дата, когда продавцу компенсировали возврат.",
+          "format": "date-time"
+        },
+        "return_date": {
+          "type": "string",
+          "description": "Дата, когда покупатель вернул товар.",
+          "format": "date-time"
+        },
+        "barcode": {
+          "type": "string",
+          "description": "Штрихкод этикетки возврата."
+        }
+      }
+    },
+    "GetReturnsListResponseVisual": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация о статусе возврата.",
+      "properties": {
+        "status": {
+          "$ref": "#/components/schemas/GetReturnsListResponseVisualStatus"
+        },
+        "change_moment": {
+          "type": "string",
+          "description": "Дата изменения статуса возврата.",
+          "format": "date-time"
+        }
+      }
+    },
+    "GetReturnsListResponseVisualStatus": {
+      "type": "object",
+      "title": "object",
+      "description": "Статус возврата.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Идентификатор статуса возврата.",
+          "format": "int32"
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Название статуса возврата."
+        },
+        "sys_name": {
+          "type": "string",
+          "description": "Системное название статуса возврата."
+        }
+      }
+    },
+    "GetReturnsListResponseAdditionalInfo": {
+      "type": "object",
+      "title": "object",
+      "description": "Дополнительная информация.",
+      "properties": {
+        "is_opened": {
+          "type": "boolean",
+          "description": "`true`, если возврат вскрыт.\n"
+        },
+        "is_super_econom": {
+          "type": "boolean",
+          "description": "`true`, если возврат относится к товарам «Суперэконом».\n"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    }
+  }
+}

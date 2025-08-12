@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "Client-Id": {
+      "description": "Идентификатор клиента.",
+      "in": "header",
+      "name": "Client-Id",
+      "required": true,
+      "schema": {
+        "type": "string"
+      }
+    },
+    "Api-Key": {
+      "description": "API-ключ.",
+      "in": "header",
+      "name": "Api-Key",
+      "required": true,
+      "schema": {
+        "type": "string"
+      }
+    }
+  },
+  "requestBodies": {
+    "v1StrategyRequest": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/v1StrategyRequest"
+          }
+        }
+      },
+      "required": true
+    },
+    "v1ItemIDsRequest": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/v1ItemIDsRequest"
+          }
+        }
+      },
+      "required": true
+    },
+    "v1PostingFbsSplitRequest": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/v1PostingFbsSplitRequest"
+          }
+        }
+      },
+      "required": true
+    },
+    "v2ConditionalCancellationMoveV2Request": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/v2ConditionalCancellationMoveV2Request"
+          }
+        }
+      },
+      "required": true
+    },
+    "QuestionAPI_GetQuestionCountBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object"
+          }
+        }
+      },
+      "required": true
+    }
+  }
+}

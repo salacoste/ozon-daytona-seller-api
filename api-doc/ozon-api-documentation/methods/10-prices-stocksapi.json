@@ -1,0 +1,2051 @@
+{
+  "metadata": {
+    "tag": "Prices&StocksAPI",
+    "name": "Prices&StocksAPI",
+    "displayName": "Цены и остатки товаров",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 9,
+    "schemasCount": 46,
+    "generatedAt": "2025-08-09T16:28:42.337Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v2/products/stocks",
+      "method": "POST",
+      "operationId": "ProductAPI_ProductsStocksV2",
+      "summary": "Обновить количество товаров на складах",
+      "description": "Позволяет изменить информацию о количестве товара в наличии.\n\n<aside class=\"warning\">\nПереданный остаток — количество товара в наличии без учёта зарезервированных товаров. Перед обновлением остатков проверьте количество зарезервированных товаров с помощью метода <a href=\"#operation/ProductAPI_ProductStocksByWarehouseFbs\">/v1/product/info/stocks-by-warehouse/fbs</a>.\n</aside>\n\nЗа один запрос можно изменить наличие для 100 пар товар-склад. С одного аккаунта продавца можно отправить до 80 запросов в минуту.\n\n<aside class=\"warning\">Обновлять остатки у одной пары товар-склад можно только 1 раз в 30 секунд, иначе в параметре <code>result.errors</code> в ответе будет ошибка <code>TOO_MANY_REQUESTS</code>.</aside>\n\nВы можете задать наличие товара только после того, как его статус сменится на `price_sent`.\n\nОстатки крупногабаритных товаров можно обновлять только на предназначенных для них складах.\n\nЕсли запрос содержит оба параметра — `offer_id` и `product_id`, изменения применятся к товару с `offer_id`. Для избежания неоднозначности используйте только один из параметров.\n\n<aside class=\"warning\">\n26 июня 2025 параметры <tt>stocks.quant_size</tt> в запросе метода и <tt>result.quant_size</tt> в ответе метода будут отключены.\n</aside>\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Обновить количество товаров на складах",
+        "description": "Позволяет изменить информацию о количестве товара в наличии.\n\n<aside class=\"warning\">\nПереданный остаток — количество товара в наличии без учёта зарезервированных товаров. Перед обновлением остатков проверьте количество зарезервированных товаров с помощью метода <a href=\"#operation/ProductAPI_ProductStocksByWarehouseFbs\">/v1/product/info/stocks-by-warehouse/fbs</a>.\n</aside>\n\nЗа один запрос можно изменить наличие для 100 пар товар-склад. С одного аккаунта продавца можно отправить до 80 запросов в минуту.\n\n<aside class=\"warning\">Обновлять остатки у одной пары товар-склад можно только 1 раз в 30 секунд, иначе в параметре <code>result.errors</code> в ответе будет ошибка <code>TOO_MANY_REQUESTS</code>.</aside>\n\nВы можете задать наличие товара только после того, как его статус сменится на `price_sent`.\n\nОстатки крупногабаритных товаров можно обновлять только на предназначенных для них складах.\n\nЕсли запрос содержит оба параметра — `offer_id` и `product_id`, изменения применятся к товару с `offer_id`. Для избежания неоднозначности используйте только один из параметров.\n\n<aside class=\"warning\">\n26 июня 2025 параметры <tt>stocks.quant_size</tt> в запросе метода и <tt>result.quant_size</tt> в ответе метода будут отключены.\n</aside>\n",
+        "operationId": "ProductAPI_ProductsStocksV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/productv2ProductsStocksRequest"
+              },
+              "example": {
+                "stocks": [
+                  {
+                    "offer_id": "PH11042",
+                    "product_id": 313455276,
+                    "stock": 100,
+                    "warehouse_id": 22142605386000
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Количество товаров обновлено",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/productv2ProductsStocksResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "warehouse_id": 22142605386000,
+                      "product_id": 118597312,
+                      "offer_id": "PH11042",
+                      "updated": true,
+                      "errors": []
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Prices&StocksAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v4/product/info/stocks",
+      "method": "POST",
+      "operationId": "ProductAPI_GetProductInfoStocks",
+      "summary": "Информация о количестве товаров",
+      "description": "Возвращает информацию о ĸоличестве товаров по схемам FBS и rFBS:\n  - сĸольĸо единиц есть в наличии,\n  - сĸольĸо зарезервировано поĸупателями.\n\nЧтобы получить информацию об остатках по схеме FBO, используйте метод [v1/analytics/manage/stocks](#operation/AnalyticsAPI_ManageStocks).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Информация о количестве товаров",
+        "description": "Возвращает информацию о ĸоличестве товаров по схемам FBS и rFBS:\n  - сĸольĸо единиц есть в наличии,\n  - сĸольĸо зарезервировано поĸупателями.\n\nЧтобы получить информацию об остатках по схеме FBO, используйте метод [v1/analytics/manage/stocks](#operation/AnalyticsAPI_ManageStocks).\n",
+        "operationId": "ProductAPI_GetProductInfoStocks",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v4GetProductInfoStocksRequest"
+              },
+              "example": {
+                "cursor": "",
+                "filter": {
+                  "offer_id": [
+                    "string"
+                  ],
+                  "product_id": [
+                    "313455276"
+                  ],
+                  "visibility": "ALL",
+                  "with_quant": {
+                    "created": true,
+                    "exists": true
+                  }
+                },
+                "limit": 100
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Количество товара",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v4GetProductInfoStocksResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Prices&StocksAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/product/info/stocks-by-warehouse/fbs",
+      "method": "POST",
+      "operationId": "ProductAPI_ProductStocksByWarehouseFbs",
+      "summary": "Информация об остатках на складах продавца (FBS и rFBS)",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Информация об остатках на складах продавца (FBS и rFBS)",
+        "operationId": "ProductAPI_ProductStocksByWarehouseFbs",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/productsv1GetProductInfoStocksByWarehouseFbsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Количество товаров на складах FBS и rFBS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/productsv1GetProductInfoStocksByWarehouseFbsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Prices&StocksAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/product/import/prices",
+      "method": "POST",
+      "operationId": "ProductAPI_ImportProductsPrices",
+      "summary": "Обновить цену",
+      "description": "Позволяет изменить цену одного или нескольких товаров.\nЦену каждого товара можно обновлять не больше 10 раз в час.\nЧтобы сбросить `old_price`, поставьте `0` у этого параметра. \n\nЕсли у товара установлена минимальная цена и включено автоприменение в акции, отключите его и обновите \nминимальную цену, иначе вернётся ошибка `action_price_enabled_min_price_missing`.\n\nЕсли запрос содержит оба параметра — `offer_id` и `product_id`, изменения применятся к товару с `offer_id`. Для избежания неоднозначности используйте только один из параметров.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Обновить цену",
+        "description": "Позволяет изменить цену одного или нескольких товаров.\nЦену каждого товара можно обновлять не больше 10 раз в час.\nЧтобы сбросить `old_price`, поставьте `0` у этого параметра. \n\nЕсли у товара установлена минимальная цена и включено автоприменение в акции, отключите его и обновите \nминимальную цену, иначе вернётся ошибка `action_price_enabled_min_price_missing`.\n\nЕсли запрос содержит оба параметра — `offer_id` и `product_id`, изменения применятся к товару с `offer_id`. Для избежания неоднозначности используйте только один из параметров.\n",
+        "operationId": "ProductAPI_ImportProductsPrices",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/productImportProductsPricesRequest"
+              },
+              "example": {
+                "prices": [
+                  {
+                    "auto_action_enabled": "UNKNOWN",
+                    "auto_add_to_ozon_actions_list_enabled": "UNKNOWN",
+                    "currency_code": "RUB",
+                    "min_price": "800",
+                    "min_price_for_auto_actions_enabled": true,
+                    "net_price": "650",
+                    "offer_id": "",
+                    "old_price": "0",
+                    "price": "1448",
+                    "price_strategy_enabled": "UNKNOWN",
+                    "product_id": 1386,
+                    "quant_size": 1,
+                    "vat": "0.1"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Цена обновлена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/productImportProductsPricesResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "product_id": 1386,
+                      "offer_id": "PH8865",
+                      "updated": true,
+                      "errors": []
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Prices&StocksAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/product/action/timer/update",
+      "method": "POST",
+      "operationId": "ProductAPI_ActionTimerUpdate",
+      "summary": "Обновление таймера актуальности минимальной цены",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Обновление таймера актуальности минимальной цены",
+        "operationId": "ProductAPI_ActionTimerUpdate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ProductActionTimerUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Обновлено",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ProductActionTimerUpdateResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Prices&StocksAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/product/action/timer/status",
+      "method": "POST",
+      "operationId": "ProductAPI_ActionTimerStatus",
+      "summary": "Получить статус установленного таймера",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить статус установленного таймера",
+        "operationId": "ProductAPI_ActionTimerStatus",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ProductActionTimerStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статусы",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ProductActionTimerStatusResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Prices&StocksAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v5/product/info/prices",
+      "method": "POST",
+      "operationId": "ProductAPI_GetProductInfoPrices",
+      "summary": "Получить информацию о цене товара",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить информацию о цене товара",
+        "operationId": "ProductAPI_GetProductInfoPrices",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/productv5GetProductInfoPricesV5Request"
+              },
+              "example": {
+                "cursor": "",
+                "filter": {
+                  "offer_id": [
+                    "356792"
+                  ],
+                  "product_id": [
+                    "243686911"
+                  ],
+                  "visibility": "ALL"
+                },
+                "limit": 100
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о цене товара",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/productv5GetProductInfoPricesV5Response"
+                },
+                "example": {
+                  "cursor": "string",
+                  "items": [
+                    {
+                      "acquiring": 0,
+                      "commissions": {
+                        "fbo_deliv_to_customer_amount": 14.75,
+                        "fbo_direct_flow_trans_max_amount": 46.5,
+                        "fbo_direct_flow_trans_min_amount": 31,
+                        "fbo_return_flow_amount": 50,
+                        "fbs_deliv_to_customer_amount": 60,
+                        "fbs_direct_flow_trans_max_amount": 61.5,
+                        "fbs_direct_flow_trans_min_amount": 41,
+                        "fbs_first_mile_max_amount": 25,
+                        "fbs_first_mile_min_amount": 0,
+                        "fbs_return_flow_amount": 40,
+                        "sales_percent_fbo": 15,
+                        "sales_percent_fbs": 0
+                      },
+                      "marketing_actions": {
+                        "actions": [
+                          {
+                            "date_from": "2024-12-13T06:49:37.591Z",
+                            "date_to": "2024-12-13T06:49:37.591Z",
+                            "title": "string",
+                            "value": 0
+                          }
+                        ],
+                        "current_period_from": "2024-12-13T06:49:37.591Z",
+                        "current_period_to": "2024-12-13T06:49:37.591Z",
+                        "ozon_actions_exist": true
+                      },
+                      "offer_id": "356792",
+                      "price": {
+                        "auto_action_enabled": true,
+                        "auto_add_to_ozon_actions_list_enabled": true,
+                        "currency_code": "RUB",
+                        "marketing_price": 0,
+                        "marketing_seller_price": 0,
+                        "min_price": 0,
+                        "net_price": 0,
+                        "old_price": 579,
+                        "price": 499,
+                        "retail_price": 0,
+                        "vat": 0.2
+                      },
+                      "price_indexes": {
+                        "color_index": "WITHOUT_INDEX",
+                        "external_index_data": {
+                          "min_price": 0,
+                          "min_price_currency": "string",
+                          "price_index_value": 0
+                        },
+                        "ozon_index_data": {
+                          "min_price": 0,
+                          "min_price_currency": "string",
+                          "price_index_value": 0
+                        },
+                        "self_marketplaces_index_data": {
+                          "min_price": 0,
+                          "min_price_currency": "string",
+                          "price_index_value": 0
+                        }
+                      },
+                      "product_id": 243686911,
+                      "volume_weight": 0
+                    }
+                  ],
+                  "total": 0
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Prices&StocksAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/product/info/discounted",
+      "method": "POST",
+      "operationId": "ProductAPI_GetProductInfoDiscounted",
+      "summary": "Узнать информацию об уценке и основном товаре по SKU уценённого товара",
+      "description": "Метод для получения информации о состоянии и дефектах уценённого товара по его SKU. Работает только с уценёнными товарами по схеме FBO. Также метод возвращает SKU основного товара.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Узнать информацию об уценке и основном товаре по SKU уценённого товара",
+        "description": "Метод для получения информации о состоянии и дефектах уценённого товара по его SKU. Работает только с уценёнными товарами по схеме FBO. Также метод возвращает SKU основного товара.",
+        "operationId": "ProductAPI_GetProductInfoDiscounted",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetProductInfoDiscountedRequest"
+              },
+              "example": {
+                "discounted_skus": [
+                  "635548518"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация об уценке и основном товаре",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetProductInfoDiscountedResponse"
+                },
+                "example": {
+                  "items": [
+                    {
+                      "discounted_sku": 635548518,
+                      "sku": 320067758,
+                      "condition_estimation": "4",
+                      "packaging_violation": "",
+                      "warranty_type": "",
+                      "reason_damaged": "Механическое повреждение",
+                      "comment_reason_damaged": "повреждена заводская упаковка",
+                      "defects": "",
+                      "mechanical_damage": "",
+                      "package_damage": "",
+                      "shortage": "",
+                      "repair": "",
+                      "condition": ""
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Prices&StocksAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/product/update/discount",
+      "method": "POST",
+      "operationId": "ProductAPI_ProductUpdateDiscount",
+      "summary": "Установить скидку на уценённый товар",
+      "description": "Метод для установки размера скидки на уценённые товары, продающиеся по схеме FBS.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Установить скидку на уценённый товар",
+        "description": "Метод для установки размера скидки на уценённые товары, продающиеся по схеме FBS.",
+        "operationId": "ProductAPI_ProductUpdateDiscount",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ProductUpdateDiscountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ProductUpdateDiscountResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Prices&StocksAPI"
+        ]
+      }
+    }
+  ],
+  "schemas": {
+    "productv2ProductsStocksRequest": {
+      "required": [
+        "stocks"
+      ],
+      "properties": {
+        "stocks": {
+          "items": {
+            "$ref": "#/components/schemas/productv2ProductsStocksRequestStock"
+          },
+          "type": "array",
+          "description": "Информация о товарах на складах."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productv2ProductsStocksRequestStock": {
+      "required": [
+        "product_id",
+        "quant_size",
+        "stock",
+        "warehouse_id"
+      ],
+      "properties": {
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "product_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "stock": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество товара в наличии без учёта зарезервированных товаров."
+        },
+        "warehouse_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор склада, полученный из метода [/v1/warehouse/list](#operation/WarehouseAPI_WarehouseList)."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productv2ProductsStocksResponse": {
+      "description": "Результаты запроса.",
+      "properties": {
+        "result": {
+          "items": {
+            "$ref": "#/components/schemas/productv2ProductsStocksResponseResult"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productv2ProductsStocksResponseResult": {
+      "properties": {
+        "errors": {
+          "items": {
+            "$ref": "#/components/schemas/productv2ProductsStocksResponseError"
+          },
+          "type": "array",
+          "description": "Массив ошибок, которые возникли при обработке запроса."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "product_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "updated": {
+          "type": "boolean",
+          "description": "Если запрос выполнен успешно и остатки обновлены — `true`."
+        },
+        "warehouse_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор склада."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productv2ProductsStocksResponseError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "message": {
+          "type": "string",
+          "description": "Причина ошибки."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v4GetProductInfoStocksRequest": {
+      "required": [
+        "limit",
+        "filter"
+      ],
+      "type": "object",
+      "properties": {
+        "cursor": {
+          "description": "Указатель для выборки следующих данных.",
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/components/schemas/v4GetProductInfoStocksRequestFilter"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество значений на странице. Минимум — 1, максимум — 1000."
+        }
+      }
+    },
+    "v4GetProductInfoStocksRequestFilter": {
+      "type": "object",
+      "description": "Фильтр по товарам.",
+      "properties": {
+        "offer_id": {
+          "description": "Фильтр по параметру `offer_id`. Можно передавать список значений.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "product_id": {
+          "description": "Фильтр по параметру `product_id`. Можно передавать список значений.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "visibility": {
+          "$ref": "#/components/schemas/v4Visibility"
+        },
+        "with_quant": {
+          "$ref": "#/components/schemas/FilterWithQuant"
+        }
+      }
+    },
+    "v4Visibility": {
+      "type": "string",
+      "default": "ALL",
+      "enum": [
+        "ALL",
+        "VISIBLE",
+        "INVISIBLE",
+        "EMPTY_STOCK",
+        "NOT_MODERATED",
+        "MODERATED",
+        "DISABLED",
+        "STATE_FAILED",
+        "READY_TO_SUPPLY",
+        "VALIDATION_STATE_PENDING",
+        "VALIDATION_STATE_FAIL",
+        "VALIDATION_STATE_SUCCESS",
+        "TO_SUPPLY",
+        "IN_SALE",
+        "REMOVED_FROM_SALE",
+        "BANNED",
+        "OVERPRICED",
+        "CRITICALLY_OVERPRICED",
+        "EMPTY_BARCODE",
+        "BARCODE_EXISTS",
+        "QUARANTINE",
+        "ARCHIVED",
+        "OVERPRICED_WITH_STOCK",
+        "PARTIAL_APPROVED"
+      ],
+      "description": "Фильтр по видимости товара:\n  - `ALL` — все товары.\n  - `VISIBLE` — товары, которые видны покупателям.\n  - `INVISIBLE` — товары, которые не видны покупателям.\n  - `EMPTY_STOCK` — товары, у которых не указано наличие.\n  - `NOT_MODERATED` — товары, которые не прошли модерацию.\n  - `MODERATED` — товары, которые прошли модерацию.\n  - `DISABLED` — товары, которые видны покупателям, но недоступны к покупке.\n  - `STATE_FAILED` — товары, создание которых завершилось ошибкой.\n  - `READY_TO_SUPPLY` — товары, готовые к поставке.\n  - `VALIDATION_STATE_PENDING` — товары, которые проходят проверку валидатором на премодерации.\n  - `VALIDATION_STATE_FAIL` — товары, которые не прошли проверку валидатором на премодерации.\n  - `VALIDATION_STATE_SUCCESS` — товары, которые прошли проверку валидатором на премодерации.\n  - `TO_SUPPLY` — товары, готовые к продаже.\n  - `IN_SALE` — товары в продаже.\n  - `REMOVED_FROM_SALE` — товары, скрытые от покупателей.\n  - `BANNED` — заблокированные товары.\n  - `OVERPRICED` — товары с завышенной ценой.\n  - `CRITICALLY_OVERPRICED` — товары со слишком завышенной ценой.\n  - `EMPTY_BARCODE` — товары без штрихкода.\n  - `BARCODE_EXISTS` — товары со штрихкодом.\n  - `QUARANTINE` — товары на карантине после изменения цены более чем на 50%.\n  - `ARCHIVED` — товары в архиве.\n  - `OVERPRICED_WITH_STOCK` — товары в продаже со стоимостью выше, чем у конкурентов.\n  - `PARTIAL_APPROVED` — товары в продаже с пустым или неполным описанием.\n"
+    },
+    "FilterWithQuant": {
+      "type": "object",
+      "description": "Товары по тарифу «Эконом».",
+      "properties": {
+        "created": {
+          "description": "Активные эконом-товары.",
+          "type": "boolean"
+        },
+        "exists": {
+          "description": "Эконом-товары во всех статусах.",
+          "type": "boolean"
+        }
+      }
+    },
+    "v4GetProductInfoStocksResponse": {
+      "type": "object",
+      "properties": {
+        "cursor": {
+          "description": "Указатель для выборки следующих данных.",
+          "type": "string"
+        },
+        "items": {
+          "description": "Информация о товарах.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v4GetProductInfoStocksResponseItem"
+          }
+        },
+        "total": {
+          "description": "Количество уникальных товаров, для которых выводится информация об остатках.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v4GetProductInfoStocksResponseItem": {
+      "type": "object",
+      "properties": {
+        "offer_id": {
+          "description": "Идентификатор товара в системе продавца — артикул.",
+          "type": "string"
+        },
+        "product_id": {
+          "description": "Идентификатор товара в системе продавца — `product_id`.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "stocks": {
+          "description": "Информация об остатках.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/GetProductInfoStocksResponseStock"
+          }
+        }
+      }
+    },
+    "GetProductInfoStocksResponseStock": {
+      "type": "object",
+      "properties": {
+        "present": {
+          "description": "Сейчас на складе.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "reserved": {
+          "description": "Зарезервировано.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "shipment_type": {
+          "$ref": "#/components/schemas/StockShipmentType"
+        },
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "description": "Тип склада.",
+          "type": "string"
+        },
+        "warehouse_ids": {
+          "type": "array",
+          "description": "Идентификаторы складов, на которых хранился или хранится товар.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "StockShipmentType": {
+      "type": "string",
+      "default": "SHIPMENT_TYPE_GENERAL",
+      "enum": [
+        "SHIPMENT_TYPE_GENERAL",
+        "SHIPMENT_TYPE_BOX",
+        "SHIPMENT_TYPE_PALLET"
+      ],
+      "description": "Тип упаковки:\n- `SHIPMENT_TYPE_GENERAL` — обычный товар;\n- `SHIPMENT_TYPE_BOX` — коробка;\n- `SHIPMENT_TYPE_PALLET` — палета.\n"
+    },
+    "productsv1GetProductInfoStocksByWarehouseFbsRequest": {
+      "required": [
+        "sku"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "productsv1GetProductInfoStocksByWarehouseFbsResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "description": "Результат работы метода.",
+          "items": {
+            "$ref": "#/components/schemas/productsv1GetProductInfoStocksByWarehouseFbsResponseResult"
+          }
+        }
+      }
+    },
+    "productsv1GetProductInfoStocksByWarehouseFbsResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "sku": {
+          "description": "Идентификатор товара в системе Ozon — SKU.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "present": {
+          "description": "Общее количество товара на складе.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "product_id": {
+          "description": "Идентификатор товара в системе продавца — артикул.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "reserved": {
+          "description": "Количество зарезервированных товаров на складе.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "warehouse_id": {
+          "description": "Идентификатор склада.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "warehouse_name": {
+          "description": "Название склада.",
+          "type": "string"
+        }
+      }
+    },
+    "productImportProductsPricesRequest": {
+      "properties": {
+        "prices": {
+          "maxItems": 1000,
+          "items": {
+            "$ref": "#/components/schemas/productImportProductsPricesRequestPrice"
+          },
+          "type": "array",
+          "description": "Информация о ценах товаров."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productImportProductsPricesRequestPrice": {
+      "properties": {
+        "auto_action_enabled": {
+          "type": "string",
+          "description": "Атрибут для включения и выключения автоматического применения к товару доступных акций Ozon:\n- `ENABLED` — включить;\n- `DISABLED` — выключить;\n- `UNKNOWN` — ничего не менять, передаётся по умолчанию.\n\nНапример, если ранее вы включили автодобавление и не хотите выключать его, передавайте `UNKNOWN`.\n\nЕсли вы передаёте `ENABLED` в этом параметре, установите значение минимальной цены в параметре `min_price`. Цена не опустится ниже минимальной.\n",
+          "default": "UNKNOWN",
+          "enum": [
+            "UNKNOWN",
+            "ENABLED",
+            "DISABLED"
+          ]
+        },
+        "auto_add_to_ozon_actions_list_enabled": {
+          "type": "string",
+          "description": "Атрибут для включения и выключения автодобавления товара в акции:\n- `ENABLED` — включить;\n- `DISABLED` — выключить;\n- `UNKNOWN` — ничего не менять, передаётся по умолчанию.\n\nНапример, если ранее вы включили автодобавление товара в акции и не хотите выключать его, передавайте `UNKNOWN`.\n",
+          "default": "UNKNOWN",
+          "enum": [
+            "UNKNOWN",
+            "ENABLED",
+            "DISABLED"
+          ]
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта ваших цен. Переданное значение должно совпадать с валютой, которая установлена в настройках личного кабинета. По умолчанию передаётся `RUB` — российский рубль.\n\nНапример, если у вас установлена валюта взаиморасчётов юань, передавайте значение `CNY`, иначе вернётся ошибка.\n\nВозможные значения: \n  - `RUB` — российский рубль,\n  - `BYN` — белорусский рубль,\n  - `KZT` — тенге,\n  - `EUR` — евро,\n  - `USD` — доллар США,\n  - `CNY` — юань.\n"
+        },
+        "min_price": {
+          "type": "string",
+          "description": "Минимальная цена товара после применения акций."
+        },
+        "min_price_for_auto_actions_enabled": {
+          "type": "boolean",
+          "description": "`true`, если Ozon учитывает минимальную цену при добавлении в акции. Если ничего не передать, изменений в статусе учёта цены не будет.\n"
+        },
+        "net_price": {
+          "type": "string",
+          "description": "Себестоимость товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "old_price": {
+          "type": "string",
+          "description": "Цена до скидок (зачеркнута на карточке товара). Указывается в рублях. Разделитель дробной части — точка, до двух знаков после точки.\n\nЕсли на товар нет скидок, укажите значение `0` в этом поле, а текущую цену передайте в поле `price`.\n"
+        },
+        "price": {
+          "type": "string",
+          "description": "Цена товара с учётом скидок, отображается на карточке товара.\n\nЕсли значение параметра `old_price` больше 0, между `price` и `old_price` должна быть определённая разница.\nОна зависит от значения `price`.\n\n| Значение `price` | Минимальная разница |\n|---|---|\n| < 400 | 20 рублей |\n| 400–10 000 | 5% |\n| > 10 000 | 500 рублей |\n"
+        },
+        "price_strategy_enabled": {
+          "type": "string",
+          "description": "Атрибут для автоприменения стратегий цены:\n- `ENABLED` — включить;\n- `DISABLED` — выключить;\n- `UNKNOWN` — ничего не менять, передаётся по умолчанию.\n\nЕсли ранее вы включили автоприменение стратегий цены и не хотите выключать его, передавайте `UNKNOWN` в следующих запросах.\n\nЕсли вы передаёте `ENABLED` в этом параметре, установите значение минимальной цены в параметре `min_price`.\n\nЕсли вы передаёте `DISABLED` в этом параметре, товар удаляется из стратегии.\n",
+          "default": "UNKNOWN",
+          "enum": [
+            "UNKNOWN",
+            "ENABLED",
+            "DISABLED"
+          ]
+        },
+        "product_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "quant_size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Используйте параметр, если у обычного и эконом-товара совпадает артикул — `offer_id = quant_id`. Чтобы обновить цену:\n- обычного товара — передайте значение `1`;\n- эконом-товара — передайте размер его кванта.\n\nЕсли у обычного и эконом-товара разные артикулы, не передавайте параметр.\n"
+        },
+        "vat": {
+          "type": "string",
+          "description": "Ставка НДС для товара:\n  - `0` — не облагается НДС,\n  - `0.05` — 5%,\n  - `0.07` — 7%,\n  - `0.1` — 10%,\n  - `0.2` — 20%.\n\nПередавайте значение ставки, актуальное на данный момент.\n"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productImportProductsPricesResponse": {
+      "properties": {
+        "result": {
+          "items": {
+            "$ref": "#/components/schemas/productImportProductsPricesResponseProcessResult"
+          },
+          "type": "array",
+          "description": "Результаты запроса."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productImportProductsPricesResponseProcessResult": {
+      "properties": {
+        "errors": {
+          "items": {
+            "$ref": "#/components/schemas/productImportProductsPricesResponseError"
+          },
+          "type": "array",
+          "description": "Массив ошибок, которые возникли при обработке запроса."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "product_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "updated": {
+          "type": "boolean",
+          "description": "Если информации о товаре успешно обновлена — `true`."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "productImportProductsPricesResponseError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "message": {
+          "type": "string",
+          "description": "Причина ошибки."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v1ProductActionTimerUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "product_ids": {
+          "description": "Список идентификаторов товаров в системе продавца — `product_id`.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1ProductActionTimerUpdateResponse": {
+      "type": "object",
+      "title": "object"
+    },
+    "v1ProductActionTimerStatusRequest": {
+      "type": "object",
+      "properties": {
+        "product_ids": {
+          "description": "Список идентификаторов товаров в системе продавца — `product_id`.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1ProductActionTimerStatusResponse": {
+      "type": "object",
+      "properties": {
+        "statuses": {
+          "items": {
+            "$ref": "#/components/schemas/v1ProductActionTimerStatusResponseStatuses"
+          }
+        }
+      }
+    },
+    "v1ProductActionTimerStatusResponseStatuses": {
+      "type": "object",
+      "properties": {
+        "expired_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Время окончания таймера."
+        },
+        "min_price_for_auto_actions_enabled": {
+          "type": "boolean",
+          "description": "`true`, если Ozon учитывает минимальную цену при добавлении в акции.\n"
+        },
+        "product_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        }
+      }
+    },
+    "productv5GetProductInfoPricesV5Request": {
+      "required": [
+        "limit",
+        "filter"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "cursor": {
+          "type": "string",
+          "description": "Указатель для выборки следующих данных."
+        },
+        "filter": {
+          "$ref": "#/components/schemas/productv5Filter"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1000,
+          "description": "Количество значений на странице."
+        }
+      }
+    },
+    "productv5Filter": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр по товарам.",
+      "properties": {
+        "offer_id": {
+          "description": "Фильтр по параметру `offer_id`. Можно передавать до 1000 значений.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "product_id": {
+          "description": "Фильтр по параметру `product_id`. Можно передавать до 1000 значений.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "visibility": {
+          "$ref": "#/components/schemas/productv5GetProductListRequestFilterFilterVisibility"
+        }
+      }
+    },
+    "productv5GetProductListRequestFilterFilterVisibility": {
+      "default": "ALL",
+      "enum": [
+        "ALL",
+        "VISIBLE",
+        "INVISIBLE",
+        "EMPTY_STOCK",
+        "NOT_MODERATED",
+        "MODERATED",
+        "DISABLED",
+        "STATE_FAILED",
+        "READY_TO_SUPPLY",
+        "VALIDATION_STATE_PENDING",
+        "VALIDATION_STATE_FAIL",
+        "VALIDATION_STATE_SUCCESS",
+        "TO_SUPPLY",
+        "IN_SALE",
+        "REMOVED_FROM_SALE",
+        "OVERPRICED",
+        "CRITICALLY_OVERPRICED",
+        "EMPTY_BARCODE",
+        "BARCODE_EXISTS",
+        "QUARANTINE",
+        "ARCHIVED",
+        "OVERPRICED_WITH_STOCK",
+        "PARTIAL_APPROVED"
+      ],
+      "type": "string",
+      "title": "string",
+      "description": "Фильтр по видимости товара:\n  - `ALL` — все товары.\n  - `VISIBLE` — товары, которые видны покупателям.\n  - `INVISIBLE` — товары, которые не видны покупателям.\n  - `EMPTY_STOCK` — товары, у которых не указано наличие.\n  - `NOT_MODERATED` — товары, которые не прошли модерацию.\n  - `MODERATED` — товары, которые прошли модерацию.\n  - `DISABLED` — товары, которые видны покупателям, но недоступны к покупке.\n  - `STATE_FAILED` — товары, создание которых завершилось ошибкой.\n  - `READY_TO_SUPPLY` — товары, готовые к поставке.\n  - `VALIDATION_STATE_PENDING` — товары, которые проходят проверку валидатором на премодерации.\n  - `VALIDATION_STATE_FAIL` — товары, которые не прошли проверку валидатором на премодерации.\n  - `VALIDATION_STATE_SUCCESS` — товары, которые прошли проверку валидатором на премодерации.\n  - `TO_SUPPLY` — товары, готовые к продаже.\n  - `IN_SALE` — товары в продаже.\n  - `REMOVED_FROM_SALE` — товары, скрытые от покупателей.\n  - `OVERPRICED` — товары с завышенной ценой.\n  - `CRITICALLY_OVERPRICED` — товары со слишком завышенной ценой.\n  - `EMPTY_BARCODE` — товары без штрихкода.\n  - `BARCODE_EXISTS` — товары со штрихкодом.\n  - `QUARANTINE` — товары на карантине после изменения цены более чем на 50%.\n  - `ARCHIVED` — товары в архиве.\n  - `OVERPRICED_WITH_STOCK` — товары в продаже со стоимостью выше, чем у конкурентов.\n  - `PARTIAL_APPROVED` — товары в продаже с пустым или неполным описанием.\n"
+    },
+    "productv5GetProductInfoPricesV5Response": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "cursor": {
+          "type": "string",
+          "description": "Указатель для выборки следующих данных."
+        },
+        "items": {
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/productGetProductInfoPricesV5ResponseItem"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товаров в списке."
+        }
+      }
+    },
+    "productGetProductInfoPricesV5ResponseItem": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "acquiring": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Максимальная комиссия за эквайринг.\n\n[Подробнее об эквайринге в Базе знаний продавца](https://seller-edu.ozon.ru/commissions-tariffs/commissions-tariffs-ozon/rashody-na-dop-uslugi#экваиринг)\n"
+        },
+        "commissions": {
+          "$ref": "#/components/schemas/ItemCommissionsv5"
+        },
+        "marketing_actions": {
+          "$ref": "#/components/schemas/ItemMarketing",
+          "description": "Маркетинговые акции продавца."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "price": {
+          "$ref": "#/components/schemas/ItemPricev5"
+        },
+        "price_indexes": {
+          "$ref": "#/components/schemas/GetProductInfoPricesResponseItemPriceIndexes"
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "volume_weight": {
+          "type": "number",
+          "format": "double",
+          "description": "Объёмный вес товара."
+        }
+      }
+    },
+    "ItemCommissionsv5": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация о комиссиях.",
+      "properties": {
+        "fbo_deliv_to_customer_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Последняя миля (FBO)."
+        },
+        "fbo_direct_flow_trans_max_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Магистраль до (FBO)."
+        },
+        "fbo_direct_flow_trans_min_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Магистраль от (FBO)."
+        },
+        "fbo_return_flow_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Комиссия за возврат и отмену (FBO)."
+        },
+        "fbs_deliv_to_customer_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Последняя миля (FBS)."
+        },
+        "fbs_direct_flow_trans_max_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Магистраль до (FBS)."
+        },
+        "fbs_direct_flow_trans_min_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Магистраль от (FBS)."
+        },
+        "fbs_first_mile_max_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Максимальная комиссия за обработку отправления (FBS).\n\n[Подробнее о тарифах в Базе знаний продавца](https://seller-edu.ozon.ru/commissions-tariffs/commissions-tariffs-ozon/rashody-na-dop-uslugi#выезд-транспортного-средства-по-адресу-продавца-для-забора-отправлении-(pick-up))\n"
+        },
+        "fbs_first_mile_min_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Минимальная комиссия за обработку отправления (FBS).\n\n[Подробнее о тарифах в Базе знаний продавца](https://seller-edu.ozon.ru/commissions-tariffs/commissions-tariffs-ozon/rashody-na-dop-uslugi#выезд-транспортного-средства-по-адресу-продавца-для-забора-отправлении-(pick-up))\n"
+        },
+        "fbs_return_flow_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Комиссия за возврат и отмену, обработка отправления (FBS)."
+        },
+        "sales_percent_fbo": {
+          "format": "double",
+          "type": "number",
+          "description": "Процент комиссии за продажу (FBO)."
+        },
+        "sales_percent_fbs": {
+          "format": "double",
+          "type": "number",
+          "description": "Процент комиссии за продажу (FBS)."
+        }
+      }
+    },
+    "ItemMarketing": {
+      "properties": {
+        "actions": {
+          "items": {
+            "$ref": "#/components/schemas/MarketingAction"
+          },
+          "type": "array",
+          "description": "Маркетинговые акции продавца. Параметры `date_from`, `date_to`, `title` и `value` указываются для каждой акции продавца."
+        },
+        "current_period_from": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время начала текущего периода по всем действующим акциям."
+        },
+        "current_period_to": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время окончания текущего периода по всем действующим акциям."
+        },
+        "ozon_actions_exist": {
+          "type": "boolean",
+          "description": "`true`, если к товару можно применить акцию за счёт Ozon.\n"
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Маркетинговые акции продавца."
+    },
+    "MarketingAction": {
+      "properties": {
+        "date_from": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время начала акции продавца."
+        },
+        "date_to": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время окончания акции продавца."
+        },
+        "title": {
+          "type": "string",
+          "description": "Название акции продавца."
+        },
+        "value": {
+          "type": "string",
+          "description": "Скидка по акции продавца."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "ItemPricev5": {
+      "type": "object",
+      "title": "object",
+      "description": "Цена товара.",
+      "properties": {
+        "auto_action_enabled": {
+          "type": "boolean",
+          "description": "`true`, если автоприменение акций у товара включено.\n"
+        },
+        "auto_add_to_ozon_actions_list_enabled": {
+          "type": "boolean",
+          "description": "`true`, если автодобавление товара в акции включено.\n"
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта ваших цен. Совпадает с валютой, которая установлена в настройках личного кабинета.\n\nВозможные значения: \n  - `RUB` — российский рубль,\n  - `BYN` — белорусский рубль,\n  - `KZT` — тенге,\n  - `EUR` — евро,\n  - `USD` — доллар США,\n  - `CNY` — юань.\n"
+        },
+        "marketing_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена на товар с учётом всех акций, которая будет указана на витрине Ozon, без учёта скидки по Ozon Карте."
+        },
+        "marketing_seller_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена на товар с учётом акций продавца."
+        },
+        "min_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Минимальная цена товара после применения всех скидок."
+        },
+        "net_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Себестоимость товара."
+        },
+        "old_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена до учёта скидок. На карточке товара отображается зачёркнутой."
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена товара с учётом скидок — это значение показывается на карточке товара."
+        },
+        "retail_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена поставщика."
+        },
+        "vat": {
+          "type": "number",
+          "format": "double",
+          "description": "Ставка НДС для товара."
+        }
+      }
+    },
+    "GetProductInfoPricesResponseItemPriceIndexes": {
+      "type": "object",
+      "title": "object",
+      "description": "Индексы цены товара.\n\n[Подробнее об индексе цен в Базе знаний продавца](https://seller-edu.ozon.ru/seller-rating/metrics/price-index)\n",
+      "properties": {
+        "color_index": {
+          "description": "Итоговый индекс цены товара:\n- `WITHOUT_INDEX` — нет индекса, \n- `GREEN` — выгодный,\n- `YELLOW` — умеренный, \n- `RED` — невыгодный.\n",
+          "type": "string",
+          "enum": [
+            "WITHOUT_INDEX",
+            "GREEN",
+            "YELLOW",
+            "RED"
+          ],
+          "default": "WITHOUT_INDEX"
+        },
+        "external_index_data": {
+          "$ref": "#/components/schemas/PriceIndexesIndexExternalData"
+        },
+        "ozon_index_data": {
+          "$ref": "#/components/schemas/PriceIndexesIndexOzonData"
+        },
+        "self_marketplaces_index_data": {
+          "$ref": "#/components/schemas/PriceIndexesIndexSelfData"
+        }
+      }
+    },
+    "PriceIndexesIndexExternalData": {
+      "type": "object",
+      "title": "object",
+      "description": "Цена товара у конкурентов на других площадках.",
+      "properties": {
+        "min_price": {
+          "type": "string",
+          "description": "Минимальная цена товара у конкурентов на другой площадке."
+        },
+        "min_price_currency": {
+          "type": "string",
+          "description": "Валюта цены."
+        },
+        "price_index_value": {
+          "type": "number",
+          "format": "double",
+          "description": "Значение индекса цены."
+        }
+      }
+    },
+    "PriceIndexesIndexOzonData": {
+      "type": "object",
+      "title": "object",
+      "description": "Цена товара у конкурентов на Ozon.",
+      "properties": {
+        "min_price": {
+          "type": "string",
+          "description": "Минимальная цена товара у конкурентов на Ozon."
+        },
+        "min_price_currency": {
+          "type": "string",
+          "description": "Валюта цены."
+        },
+        "price_index_value": {
+          "type": "number",
+          "format": "double",
+          "description": "Значение индекса цены."
+        }
+      }
+    },
+    "PriceIndexesIndexSelfData": {
+      "type": "object",
+      "title": "object",
+      "description": "Цена вашего товара на других площадках.",
+      "properties": {
+        "min_price": {
+          "type": "string",
+          "description": "Минимальная цена вашего товара на других площадках."
+        },
+        "min_price_currency": {
+          "type": "string",
+          "description": "Валюта цены."
+        },
+        "price_index_value": {
+          "type": "number",
+          "format": "double",
+          "description": "Значение индекса цены."
+        }
+      }
+    },
+    "v1GetProductInfoDiscountedRequest": {
+      "required": [
+        "discounted_skus"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "discounted_skus": {
+          "description": "Список SKU уценённых товаров.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v1GetProductInfoDiscountedResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "items": {
+          "description": "Информация об уценке и основном товаре.",
+          "items": {
+            "$ref": "#/components/schemas/v1GetProductInfoDiscountedResponseItem"
+          }
+        }
+      }
+    },
+    "v1GetProductInfoDiscountedResponseItem": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "comment_reason_damaged": {
+          "type": "string",
+          "description": "Комментарий к причине повреждения."
+        },
+        "condition": {
+          "type": "string",
+          "description": "Состояние товара — новый или Б/У."
+        },
+        "condition_estimation": {
+          "type": "string",
+          "description": "Состояние товара по шкале от 1 до 7:\n- 1 — удовлетворительное,\n- 2 — хорошее,\n- 3 — очень хорошее,\n- 4 — отличное,\n- 5–7 — как новый.\n"
+        },
+        "defects": {
+          "type": "string",
+          "description": "Дефекты товара."
+        },
+        "discounted_sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "SKU уценённого товара."
+        },
+        "mechanical_damage": {
+          "type": "string",
+          "description": "Описание механического повреждения."
+        },
+        "package_damage": {
+          "type": "string",
+          "description": "Описание повреждения упаковки."
+        },
+        "packaging_violation": {
+          "type": "string",
+          "description": "Признак нарушения целостности упаковки."
+        },
+        "reason_damaged": {
+          "type": "string",
+          "description": "Причина повреждения."
+        },
+        "repair": {
+          "type": "string",
+          "description": "Признак, что товар отремонтирован."
+        },
+        "shortage": {
+          "type": "string",
+          "description": "Признак, что товар некомплектный."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "SKU основного товара."
+        },
+        "warranty_type": {
+          "type": "string",
+          "description": "Наличие у товара действующей гарантии."
+        }
+      }
+    },
+    "v1ProductUpdateDiscountRequest": {
+      "required": [
+        "discount",
+        "product_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "discount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Размер скидки: от 3 до 99 процентов.\n"
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        }
+      }
+    },
+    "v1ProductUpdateDiscountResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "boolean",
+          "description": "Результат работы метода. `true`, если запрос выполнен без ошибок."
+        }
+      }
+    }
+  }
+}

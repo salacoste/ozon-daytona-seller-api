@@ -1,0 +1,1282 @@
+{
+  "metadata": {
+    "tag": "RFBSReturnsAPI",
+    "name": "RFBSReturnsAPI",
+    "displayName": "Возвраты товаров rFBS",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 8,
+    "schemasCount": 24,
+    "generatedAt": "2025-08-09T16:28:42.338Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v2/returns/rfbs/list",
+      "method": "POST",
+      "operationId": "RFBSReturnsAPI_ReturnsRfbsListV2",
+      "summary": "Список заявок на возврат",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "RFBSReturnsAPI"
+        ],
+        "summary": "Список заявок на возврат",
+        "operationId": "RFBSReturnsAPI_ReturnsRfbsListV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2ReturnsRfbsListRequest"
+              },
+              "example": {
+                "filter": {
+                  "offer_id": "string",
+                  "posting_number": "string",
+                  "group_state": [
+                    "ALL"
+                  ],
+                  "created_at": {
+                    "from": "2019-08-24T14:15:22Z",
+                    "to": "2019-08-24T14:15:22Z"
+                  }
+                },
+                "last_id": 0,
+                "limit": 1000
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список заявок на возврат",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2ReturnsRfbsListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/returns/rfbs/get",
+      "method": "POST",
+      "operationId": "RFBSReturnsAPI_ReturnsRfbsGetV2",
+      "summary": "Информация о заявке на возврат",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "RFBSReturnsAPI"
+        ],
+        "summary": "Информация о заявке на возврат",
+        "operationId": "RFBSReturnsAPI_ReturnsRfbsGetV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2ReturnsRfbsGetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о заявке",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2ReturnsRfbsGetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/returns/rfbs/reject",
+      "method": "POST",
+      "operationId": "RFBSReturnsAPI_ReturnsRfbsRejectV2",
+      "summary": "Отклонить заявку на возврат",
+      "description": "<aside class=\"warning\">\nВ будущем метод будет отключён. Переключитесь на <a href=\"#operation/ReturnsAPI_ReturnsRfbsActionSet\">/v1/returns/rfbs/action/set</a>.\n</aside>\n\nМетод позволяет отклонить заявку на возврат rFBS-заказа. Вы можете объяснить своё решение в параметре `comment`.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "RFBSReturnsAPI"
+        ],
+        "summary": "Отклонить заявку на возврат",
+        "description": "<aside class=\"warning\">\nВ будущем метод будет отключён. Переключитесь на <a href=\"#operation/ReturnsAPI_ReturnsRfbsActionSet\">/v1/returns/rfbs/action/set</a>.\n</aside>\n\nМетод позволяет отклонить заявку на возврат rFBS-заказа. Вы можете объяснить своё решение в параметре `comment`.\n",
+        "operationId": "RFBSReturnsAPI_ReturnsRfbsRejectV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2ReturnsRfbsRejectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Заявка отклонена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1Empty"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/returns/rfbs/compensate",
+      "method": "POST",
+      "operationId": "RFBSReturnsAPI_ReturnsRfbsCompensateV2",
+      "summary": "Вернуть часть стоимости товара",
+      "description": "<aside class=\"warning\">\nВ будущем метод будет отключён. Переключитесь на <a href=\"#operation/ReturnsAPI_ReturnsRfbsActionSet\">/v1/returns/rfbs/action/set</a>.\n</aside>\n\nМетод для частичной компенсации стоимости товара: вы возвращаете часть денег покупателю, товар остаётся у него.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "RFBSReturnsAPI"
+        ],
+        "summary": "Вернуть часть стоимости товара",
+        "description": "<aside class=\"warning\">\nВ будущем метод будет отключён. Переключитесь на <a href=\"#operation/ReturnsAPI_ReturnsRfbsActionSet\">/v1/returns/rfbs/action/set</a>.\n</aside>\n\nМетод для частичной компенсации стоимости товара: вы возвращаете часть денег покупателю, товар остаётся у него.\n",
+        "operationId": "RFBSReturnsAPI_ReturnsRfbsCompensateV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2ReturnsRfbsCompensateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Частичная компенсация подтверждена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1Empty"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/returns/rfbs/verify",
+      "method": "POST",
+      "operationId": "RFBSReturnsAPI_ReturnsRfbsVerifyV2",
+      "summary": "Одобрить заявку на возврат",
+      "description": "<aside class=\"warning\">\nВ будущем метод будет отключён. Переключитесь на <a href=\"#operation/ReturnsAPI_ReturnsRfbsActionSet\">/v1/returns/rfbs/action/set</a>.\n</aside>\n\nМетод позволяет одобрить заявку и согласиться на получение товара для проверки.\n\nПодтвердите получение товара с помощью метода [/v2/returns/rfbs/receive-return](#operation/RFBSReturnsAPI_ReturnsRfbsReceiveReturnV2).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "RFBSReturnsAPI"
+        ],
+        "summary": "Одобрить заявку на возврат",
+        "description": "<aside class=\"warning\">\nВ будущем метод будет отключён. Переключитесь на <a href=\"#operation/ReturnsAPI_ReturnsRfbsActionSet\">/v1/returns/rfbs/action/set</a>.\n</aside>\n\nМетод позволяет одобрить заявку и согласиться на получение товара для проверки.\n\nПодтвердите получение товара с помощью метода [/v2/returns/rfbs/receive-return](#operation/RFBSReturnsAPI_ReturnsRfbsReceiveReturnV2).\n",
+        "operationId": "RFBSReturnsAPI_ReturnsRfbsVerifyV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2ReturnsRfbsVerifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Заявка одобрена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1Empty"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/returns/rfbs/receive-return",
+      "method": "POST",
+      "operationId": "RFBSReturnsAPI_ReturnsRfbsReceiveReturnV2",
+      "summary": "Подтвердить получение товара на проверку",
+      "description": "<aside class=\"warning\">\n  В будущем метод будет отключён. Переключитесь на <a href=\"#operation/ReturnsAPI_ReturnsRfbsActionSet\">/v1/returns/rfbs/action/set</a>.\n</aside>\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "RFBSReturnsAPI"
+        ],
+        "summary": "Подтвердить получение товара на проверку",
+        "description": "<aside class=\"warning\">\n  В будущем метод будет отключён. Переключитесь на <a href=\"#operation/ReturnsAPI_ReturnsRfbsActionSet\">/v1/returns/rfbs/action/set</a>.\n</aside>\n",
+        "operationId": "RFBSReturnsAPI_ReturnsRfbsReceiveReturnV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2ReturnsRfbsReceiveReturnRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Получение подтверждено",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1Empty"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/returns/rfbs/return-money",
+      "method": "POST",
+      "operationId": "RFBSReturnsAPI_ReturnsRfbsReturnMoneyV2",
+      "summary": "Вернуть деньги покупателю",
+      "description": "<aside class=\"warning\">\nВ будущем метод будет отключён. Переключитесь на <a href=\"#operation/ReturnsAPI_ReturnsRfbsActionSet\">/v1/returns/rfbs/action/set</a>.\n</aside>\n\nМетод подтверждает возврат полной стоимости товара.\nИспользуйте метод, если согласны:\n- сразу вернуть стоимость товара и оставить его покупателю;\n- вернуть стоимость после получения и проверки товара.\n\nЕсли товар оказался ненадлежащего качества или с браком, вы возмещаете покупателю стоимость пересылки товара.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "RFBSReturnsAPI"
+        ],
+        "summary": "Вернуть деньги покупателю",
+        "description": "<aside class=\"warning\">\nВ будущем метод будет отключён. Переключитесь на <a href=\"#operation/ReturnsAPI_ReturnsRfbsActionSet\">/v1/returns/rfbs/action/set</a>.\n</aside>\n\nМетод подтверждает возврат полной стоимости товара.\nИспользуйте метод, если согласны:\n- сразу вернуть стоимость товара и оставить его покупателю;\n- вернуть стоимость после получения и проверки товара.\n\nЕсли товар оказался ненадлежащего качества или с браком, вы возмещаете покупателю стоимость пересылки товара.\n",
+        "operationId": "RFBSReturnsAPI_ReturnsRfbsReturnMoneyV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2ReturnsRfbsReturnMoneyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Возврат денег подтверждён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1Empty"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/returns/rfbs/action/set",
+      "method": "POST",
+      "operationId": "ReturnsAPI_ReturnsRfbsActionSet",
+      "summary": "Передать доступные действия для rFBS возвратов",
+      "description": "Метод для передачи действий для возврата rFBS.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "description": "Метод для передачи действий для возврата rFBS.",
+        "tags": [
+          "RFBSReturnsAPI"
+        ],
+        "summary": "Передать доступные действия для rFBS возвратов",
+        "operationId": "ReturnsAPI_ReturnsRfbsActionSet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ReturnsRfbsActionSetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Действие передано"
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "v2ReturnsRfbsListRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/components/schemas/v2ReturnsRfbsFilter"
+        },
+        "last_id": {
+          "description": "Идентификатор последнего значения на странице. Оставьте это поле пустым при выполнении первого запроса.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "description": "Количество значений в ответе.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "limit"
+      ]
+    },
+    "v2ReturnsRfbsFilter": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр.",
+      "properties": {
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "group_state": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Фильтр по статусам заявок:\n- `All` — все заявки.\n- `New` — новые.\n- `Delivering` — в пути.\n- `Checkout` — на проверке.\n- `Arbitration` — спорные.\n- `Approved` — согласованные.\n- `Rejected` — отклонённые.\n"
+        },
+        "created_at": {
+          "$ref": "#/components/schemas/CreatedAt"
+        }
+      }
+    },
+    "CreatedAt": {
+      "type": "object",
+      "title": "object",
+      "description": "Период создания заявки.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата начала периода."
+        },
+        "to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата окончания периода."
+        }
+      }
+    },
+    "v2ReturnsRfbsListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "returns": {
+          "$ref": "#/components/schemas/ReturnsRfbsListResponseReturns"
+        }
+      }
+    },
+    "ReturnsRfbsListResponseReturns": {
+      "type": "object",
+      "title": "object",
+      "description": "Данные о заявках.",
+      "properties": {
+        "client_name": {
+          "type": "string",
+          "description": "Имя покупателя."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата создания заявки."
+        },
+        "order_number": {
+          "type": "string",
+          "description": "Номер заказа."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "product": {
+          "$ref": "#/components/schemas/v2Product"
+        },
+        "return_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заявки на возврат."
+        },
+        "return_number": {
+          "type": "string",
+          "description": "Номер заявки на возврат."
+        },
+        "state": {
+          "$ref": "#/components/schemas/v2ReturnsRfbsListV2ResponseState"
+        }
+      }
+    },
+    "v2Product": {
+      "type": "object",
+      "title": "object",
+      "description": "Данные о товаре.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта ваших цен. Cовпадает с валютой, которая установлена в настройках личного кабинета.\n\nВозможные значения: \n  - `RUB` — российский рубль,\n  - `BYN` — белорусский рубль,\n  - `KZT` — тенге,\n  - `EUR` — евро,\n  - `USD` — доллар США,\n  - `CNY` — юань.\n"
+        },
+        "price": {
+          "type": "string",
+          "description": "Цена товара."
+        },
+        "sku": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "v2ReturnsRfbsListV2ResponseState": {
+      "type": "object",
+      "title": "object",
+      "description": "Статусы заявки и возврата денег.",
+      "properties": {
+        "group_state": {
+          "type": "string",
+          "description": "Статус заявки по применённому фильтру."
+        },
+        "money_return_state_name": {
+          "type": "string",
+          "description": "Статус возврата денег."
+        },
+        "state": {
+          "type": "string",
+          "description": "Статус заявки."
+        },
+        "state_name": {
+          "type": "string",
+          "description": "Название статуса заявки на русском."
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v2ReturnsRfbsGetRequest": {
+      "type": "object",
+      "title": "object",
+      "description": null,
+      "properties": {
+        "return_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заявки."
+        }
+      },
+      "required": [
+        "return_id"
+      ]
+    },
+    "v2ReturnsRfbsGetResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "returns": {
+          "$ref": "#/components/schemas/ReturnsRfbsGetResponseReturns"
+        }
+      }
+    },
+    "ReturnsRfbsGetResponseReturns": {
+      "type": "object",
+      "title": "object",
+      "description": "Данные о заявке.",
+      "properties": {
+        "available_actions": {
+          "type": "array",
+          "description": "Данные о доступных действиях с заявкой.",
+          "items": {
+            "$ref": "#/components/schemas/ReturnsRfbsGetV2ResponseAvailableAction"
+          }
+        },
+        "client_name": {
+          "type": "string",
+          "description": "Имя покупателя."
+        },
+        "client_photo": {
+          "type": "array",
+          "description": "Ссылки на фотографии товара.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "client_return_method_type": {
+          "$ref": "#/components/schemas/ReturnsRfbsGetV2ResponseClientReturnMethodType"
+        },
+        "comment": {
+          "type": "string",
+          "description": "Комментарий покупателя."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата создания заявки."
+        },
+        "order_number": {
+          "type": "string",
+          "description": "Номер заказа."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "product": {
+          "$ref": "#/components/schemas/v2Product"
+        },
+        "rejection_comment": {
+          "type": "string",
+          "description": "Комментарий об отклонении заявки."
+        },
+        "rejection_reason": {
+          "type": "array",
+          "description": "Данные о причине отклонения заявки.",
+          "items": {
+            "$ref": "#/components/schemas/ReturnsRfbsGetV2ResponseRejectionReason"
+          }
+        },
+        "return_method_description": {
+          "type": "string",
+          "description": "Способ возврата товара."
+        },
+        "return_number": {
+          "type": "string",
+          "description": "Номер заявки на возврат."
+        },
+        "return_reason": {
+          "$ref": "#/components/schemas/ReturnsRfbsGetV2ResponseReturnReason"
+        },
+        "ru_post_tracking_number": {
+          "type": "string",
+          "description": "Трек-номер почтового отправления."
+        },
+        "state": {
+          "$ref": "#/components/schemas/v2ReturnsRfbsGetV2ResponseState"
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор склада."
+        }
+      }
+    },
+    "ReturnsRfbsGetV2ResponseAvailableAction": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор действия."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название действия."
+        }
+      }
+    },
+    "ReturnsRfbsGetV2ResponseClientReturnMethodType": {
+      "type": "object",
+      "title": "object",
+      "description": "Данные о способе возврата.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название."
+        }
+      }
+    },
+    "ReturnsRfbsGetV2ResponseRejectionReason": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "hint": {
+          "type": "string",
+          "description": "Подсказка о дальнейших действиях с возвратом."
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор причины."
+        },
+        "is_comment_required": {
+          "type": "boolean",
+          "description": "Признак, нужно ли прикладывать комментарий."
+        },
+        "name": {
+          "type": "string",
+          "description": "Описание причины."
+        }
+      }
+    },
+    "ReturnsRfbsGetV2ResponseReturnReason": {
+      "type": "object",
+      "title": "object",
+      "description": "Данные о причине возврата.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор причины."
+        },
+        "is_defect": {
+          "type": "boolean",
+          "description": "Признак, является ли товар бракованным."
+        },
+        "name": {
+          "type": "string",
+          "description": "Описание причины."
+        }
+      }
+    },
+    "v2ReturnsRfbsGetV2ResponseState": {
+      "type": "object",
+      "title": "object",
+      "description": "Данные о статусе возврата.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "Статус."
+        },
+        "state_name": {
+          "type": "string",
+          "description": "Название статуса на русском."
+        }
+      }
+    },
+    "v2ReturnsRfbsRejectRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "return_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заявки на возврат."
+        },
+        "comment": {
+          "type": "string",
+          "description": "Комментарий.\n\nПередайте комментарий, если в ответе метода [/v2/returns/rfbs/get](#operation/RFBSReturnsAPI_ReturnsRfbsGetV2) параметр `rejection_reason.is_comment_required` — `true`.\n"
+        },
+        "rejection_reason_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор причины отмены.\n\nПередайте идентификатор из списка причин, полученного в ответе метода [/v2/returns/rfbs/get](#operation/RFBSReturnsAPI_ReturnsRfbsGetV2) в параметре `rejection_reason`.\n"
+        }
+      },
+      "required": [
+        "return_id",
+        "rejection_reason_id"
+      ]
+    },
+    "v1Empty": {
+      "type": "object",
+      "title": "object"
+    },
+    "v2ReturnsRfbsCompensateRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "compensation_amount": {
+          "type": "string",
+          "description": "Сумма компенсации."
+        },
+        "return_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заявки на возврат."
+        }
+      },
+      "required": [
+        "return_id"
+      ]
+    },
+    "v2ReturnsRfbsVerifyRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "return_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заявки на возврат."
+        },
+        "return_method_description": {
+          "type": "string",
+          "description": "Способ возврата товара."
+        }
+      },
+      "required": [
+        "return_id"
+      ]
+    },
+    "v2ReturnsRfbsReceiveReturnRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "return_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заявки на возврат."
+        }
+      },
+      "required": [
+        "return_id"
+      ]
+    },
+    "v2ReturnsRfbsReturnMoneyRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "return_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заявки на возврат."
+        },
+        "return_for_back_way": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Сумма, возмещаемая покупателю за пересылку товара."
+        }
+      },
+      "required": [
+        "return_id"
+      ]
+    },
+    "v1ReturnsRfbsActionSetRequest": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "type": "string",
+          "description": "Комментарий продавца.\n\nОбязателен для `id: -1` и `id: -10`.\n"
+        },
+        "compensation_amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма компенсации.\n\nОбязательна для `id: 1020`.\n"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор действия. \n\nПолучите доступные действия `returns.available_actions` методом [/v2/returns/rfbs/get](#operation/RFBSReturnsAPI_ReturnsRfbsGetV2).\n"
+        },
+        "rejection_reason_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор причины отмены.\n\nОбязателен для `id: -1` и `id: -10`.\n\nПолучите возможные причины отмены `returns.rejection_reason` методом [/v2/returns/rfbs/get](#operation/RFBSReturnsAPI_ReturnsRfbsGetV2).\n"
+        },
+        "return_for_back_way": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма, возмещаемая покупателю за пересылку товара.\n\nОтрицательные значения приравниваются к `0`.\n"
+        },
+        "return_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заявки на возврат."
+        }
+      }
+    }
+  }
+}

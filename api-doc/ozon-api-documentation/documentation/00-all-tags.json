@@ -1,0 +1,373 @@
+{
+  "totalTags": 46,
+  "tags": [
+    {
+      "index": 1,
+      "name": "Introduction",
+      "displayName": "Введение",
+      "category": "Общее описание",
+      "hasDescription": true,
+      "descriptionLength": 1690
+    },
+    {
+      "index": 2,
+      "name": "Getting started",
+      "displayName": "Начало работы",
+      "category": "Общее описание",
+      "hasDescription": true,
+      "descriptionLength": 1441
+    },
+    {
+      "index": 3,
+      "name": "Auth",
+      "displayName": "Авторизация",
+      "category": "Общее описание",
+      "hasDescription": true,
+      "descriptionLength": 1821
+    },
+    {
+      "index": 4,
+      "name": "Environment",
+      "displayName": "Рабочая среда",
+      "category": "Общее описание",
+      "hasDescription": true,
+      "descriptionLength": 646
+    },
+    {
+      "index": 5,
+      "name": "Process",
+      "displayName": "Порядок работы с методами",
+      "category": "Общее описание",
+      "hasDescription": true,
+      "descriptionLength": 72083
+    },
+    {
+      "index": 6,
+      "name": "CategoryAPI",
+      "displayName": "Атрибуты и характеристики Ozon",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 7,
+      "name": "ProductAPI",
+      "displayName": "Загрузка и обновление товаров",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 8,
+      "name": "BarcodeAPI",
+      "displayName": "Штрихкоды товаров",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 9,
+      "name": "Prices&StocksAPI",
+      "displayName": "Цены и остатки товаров",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 10,
+      "name": "Promos",
+      "displayName": "Акции",
+      "category": "Методы Seller API",
+      "hasDescription": true,
+      "descriptionLength": 203
+    },
+    {
+      "index": 11,
+      "name": "PricingStrategyAPI",
+      "displayName": "Стратегии ценообразования",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 12,
+      "name": "BrandAPI",
+      "displayName": "Сертификаты брендов",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 13,
+      "name": "CertificationAPI",
+      "displayName": "Сертификаты качества",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 14,
+      "name": "WarehouseAPI",
+      "displayName": "Склады",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 15,
+      "name": "FBS",
+      "displayName": "Обработка заказов FBS и rFBS",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 16,
+      "name": "FBO",
+      "displayName": "Доставка FBO",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 17,
+      "name": "FboSupplyRequest",
+      "displayName": "Создание и управление заявками на поставку FBO",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 18,
+      "name": "FBS&rFBSMarks",
+      "displayName": "Управление кодами маркировки и сборкой заказов для FBS/rFBS",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 19,
+      "name": "DeliveryFBS",
+      "displayName": "Доставка FBS",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 20,
+      "name": "DeliveryrFBS",
+      "displayName": "Доставка rFBS",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 21,
+      "name": "Pass",
+      "displayName": "Пропуски",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 22,
+      "name": "ReturnsAPI",
+      "displayName": "Возвраты товаров FBO и FBS",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 23,
+      "name": "RFBSReturnsAPI",
+      "displayName": "Возвраты товаров rFBS",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 24,
+      "name": "ReturnAPI",
+      "displayName": "Возвратные отгрузки",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 25,
+      "name": "CancellationAPI",
+      "displayName": "Отмены заказов",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 26,
+      "name": "PolygonAPI",
+      "displayName": "Полигоны",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 27,
+      "name": "ChatAPI",
+      "displayName": "Чаты с покупателями",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 28,
+      "name": "SupplierAPI",
+      "displayName": "Накладные",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 29,
+      "name": "ReportAPI",
+      "displayName": "Отчёты",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 30,
+      "name": "AnalyticsAPI",
+      "displayName": "Аналитические отчёты",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 31,
+      "name": "FinanceAPI",
+      "displayName": "Финансовые отчёты",
+      "category": "Методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 32,
+      "name": "AccessTokenAPI",
+      "displayName": "Токен для API",
+      "category": "Другое",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 33,
+      "name": "SellerRating",
+      "displayName": "Рейтинг продавца",
+      "category": "Методы Seller API",
+      "hasDescription": true,
+      "descriptionLength": 352
+    },
+    {
+      "index": 34,
+      "name": "News",
+      "displayName": "Обновления",
+      "category": "Обновления",
+      "hasDescription": true,
+      "descriptionLength": 399643
+    },
+    {
+      "index": 35,
+      "name": "BetaIntro",
+      "displayName": "Бета-методы Seller API",
+      "category": "Бета-методы Seller API",
+      "hasDescription": true,
+      "descriptionLength": 475
+    },
+    {
+      "index": 36,
+      "name": "BetaMethod",
+      "displayName": "Прочие методы",
+      "category": "Бета-методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 37,
+      "name": "Digital",
+      "displayName": "Работа с цифровыми товарами",
+      "category": "Бета-методы Seller API",
+      "hasDescription": true,
+      "descriptionLength": 122
+    },
+    {
+      "index": 38,
+      "name": "Quants",
+      "displayName": "Работа с квантами",
+      "category": "Бета-методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 39,
+      "name": "Questions&Answers",
+      "displayName": "Работа с вопросами и ответами",
+      "category": "Бета-методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 40,
+      "name": "ReviewAPI",
+      "displayName": "Работа с отзывами",
+      "category": "Бета-методы Seller API",
+      "hasDescription": false,
+      "descriptionLength": 0
+    },
+    {
+      "index": 41,
+      "name": "Errors",
+      "displayName": "Частые ошибки",
+      "category": "Приложения",
+      "hasDescription": true,
+      "descriptionLength": 30023
+    },
+    {
+      "index": 42,
+      "name": "push_intro",
+      "displayName": "Введение",
+      "category": "Пуш-уведомления",
+      "hasDescription": true,
+      "descriptionLength": 376
+    },
+    {
+      "index": 43,
+      "name": "push_start",
+      "displayName": "Как подключить",
+      "category": "Пуш-уведомления",
+      "hasDescription": true,
+      "descriptionLength": 7339
+    },
+    {
+      "index": 44,
+      "name": "push_resending",
+      "displayName": "Повторная отправка уведомлений",
+      "category": "Пуш-уведомления",
+      "hasDescription": true,
+      "descriptionLength": 815
+    },
+    {
+      "index": 45,
+      "name": "push_types",
+      "displayName": "Уведомления, которые отправляет Ozon",
+      "category": "Пуш-уведомления",
+      "hasDescription": true,
+      "descriptionLength": 39855
+    },
+    {
+      "index": 46,
+      "name": "service_response",
+      "displayName": "Ответ вашего сервиса",
+      "category": "Пуш-уведомления",
+      "hasDescription": true,
+      "descriptionLength": 2282
+    }
+  ]
+}

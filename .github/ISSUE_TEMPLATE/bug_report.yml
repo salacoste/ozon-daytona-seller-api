@@ -1,0 +1,146 @@
+name: Bug Report
+description: Create a report to help us improve the Ozon Seller API SDK
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+assignees:
+  - salacoste
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please provide as much detail as possible.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe what happened...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Initialize client with...
+        2. Call method...
+        3. See error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen
+      placeholder: Describe what you expected...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened
+      placeholder: Describe what actually happened...
+    validations:
+      required: true
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Code Sample
+      description: Minimal code sample that reproduces the issue
+      render: typescript
+      placeholder: |
+        import { OzonClient } from '@ozon/sdk';
+        
+        const client = new OzonClient({
+          clientId: 'your-client-id',
+          apiKey: 'your-api-key'
+        });
+        
+        // Your code here...
+
+  - type: textarea
+    id: error
+    attributes:
+      label: Error Message/Stack Trace
+      description: Full error message and stack trace
+      render: text
+      placeholder: Paste the error message here...
+
+  - type: dropdown
+    id: api-group
+    attributes:
+      label: API Group
+      description: Which API group is affected?
+      options:
+        - FBS
+        - FBO
+        - ProductAPI
+        - PricesStocks
+        - Warehouse
+        - Analytics
+        - Reports
+        - Finance
+        - Category
+        - Supplier
+        - Chat
+        - Cancellation
+        - Returns
+        - DeliveryFBS
+        - Barcode
+        - Polygon
+        - SellerRating
+        - BrandAPI
+        - Promos
+        - Pass
+        - ReviewAPI (Beta)
+        - Digital (Beta)
+        - Quants (Beta)
+        - BetaMethod (Beta)
+        - Questions&Answers (Beta)
+        - Other
+
+  - type: input
+    id: version
+    attributes:
+      label: SDK Version
+      description: What version of the SDK are you using?
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: node-version
+    attributes:
+      label: Node.js Version
+      description: What version of Node.js are you using?
+      placeholder: "18.0.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: Where are you running the SDK?
+      options:
+        - Node.js
+        - Browser
+        - Edge Runtime (Vercel, Cloudflare Workers, etc.)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Any other context about the problem
+      placeholder: Add any other context, logs, or screenshots...

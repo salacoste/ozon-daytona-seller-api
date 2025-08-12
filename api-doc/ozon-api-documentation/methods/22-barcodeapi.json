@@ -1,0 +1,281 @@
+{
+  "metadata": {
+    "tag": "BarcodeAPI",
+    "name": "BarcodeAPI",
+    "displayName": "Штрихкоды товаров",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 2,
+    "schemasCount": 9,
+    "generatedAt": "2025-08-09T16:28:42.342Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/barcode/add",
+      "method": "POST",
+      "operationId": "add-barcode",
+      "summary": "Привязать штрихкод к товару",
+      "description": "Если у товара есть штрихкод, который не указан в системе Ozon, привяжите его с помощью этого метода.\nЕсли штрихкода нет, вы можете создать его через метод [/v1/barcode/generate](#operation/generate-barcode).\n\nЗа один запрос вы можете назначить штрихкод не больше чем на 100 товаров. \nНа одном товаре может быть до 100 штрихкодов. \nС одного аккаунта продавца можно использовать метод не больше 20 раз в минуту.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Привязать штрихкод к товару",
+        "description": "Если у товара есть штрихкод, который не указан в системе Ozon, привяжите его с помощью этого метода.\nЕсли штрихкода нет, вы можете создать его через метод [/v1/barcode/generate](#operation/generate-barcode).\n\nЗа один запрос вы можете назначить штрихкод не больше чем на 100 товаров. \nНа одном товаре может быть до 100 штрихкодов. \nС одного аккаунта продавца можно использовать метод не больше 20 раз в минуту.\n",
+        "tags": [
+          "BarcodeAPI"
+        ],
+        "operationId": "add-barcode",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1AddBarcodeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Штрихкод привязан",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1AddBarcodeResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/barcode/generate",
+      "method": "POST",
+      "operationId": "generate-barcode",
+      "summary": "Создать штрихкод для товара",
+      "description": "Если у товара нет штрихкода, вы можете создать его с помощью этого метода.\nЕсли штрихкод уже есть, но он не указан в системе Ozon, вы можете привязать его через метод [/v1/barcode/add](#operation/add-barcode).\n\nЗа один запрос вы можете создать штрихкоды не больше чем для 100 товаров.\nС одного аккаунта продавца можно использовать метод не больше 20 раз в минуту.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Создать штрихкод для товара",
+        "description": "Если у товара нет штрихкода, вы можете создать его с помощью этого метода.\nЕсли штрихкод уже есть, но он не указан в системе Ozon, вы можете привязать его через метод [/v1/barcode/add](#operation/add-barcode).\n\nЗа один запрос вы можете создать штрихкоды не больше чем для 100 товаров.\nС одного аккаунта продавца можно использовать метод не больше 20 раз в минуту.\n",
+        "tags": [
+          "BarcodeAPI"
+        ],
+        "operationId": "generate-barcode",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GenerateBarcodeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Штрихкод создан",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GenerateBarcodeResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "v1AddBarcodeRequest": {
+      "required": [
+        "barcodes"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "barcodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1Barcode"
+          },
+          "description": "Список штрихкодов и товаров."
+        }
+      }
+    },
+    "v1Barcode": {
+      "required": [
+        "barcode",
+        "sku"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "barcode": {
+          "type": "string",
+          "description": "Значение штрихкода. Не больше 100 символов."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      }
+    },
+    "v1AddBarcodeResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1AddBarcodeResult"
+          },
+          "description": "Список ошибок."
+        }
+      }
+    },
+    "v1AddBarcodeResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "error": {
+          "type": "string",
+          "description": "Описание ошибки."
+        },
+        "barcode": {
+          "type": "string",
+          "description": "Штрихкод, который не удалось привязать."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара, к которому не удалось привязать штрихкод."
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v1GenerateBarcodeRequest": {
+      "required": [
+        "product_ids"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Идентификаторы товаров, для которых нужно создать штрихкод."
+        }
+      }
+    },
+    "v1GenerateBarcodeResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1GenerateBarcodeResult"
+          },
+          "description": "Ошибки при создании штрихкода."
+        }
+      }
+    },
+    "v1GenerateBarcodeResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Код ошибки."
+        },
+        "error": {
+          "type": "string",
+          "description": "Описание ошибки."
+        },
+        "barcode": {
+          "type": "string",
+          "description": "Штрихкод, при создании которого произошла ошибка."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара, для которого не удалось создать штрихкод."
+        }
+      }
+    }
+  }
+}

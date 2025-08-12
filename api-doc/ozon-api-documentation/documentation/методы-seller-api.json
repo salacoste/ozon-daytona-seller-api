@@ -1,0 +1,195 @@
+{
+  "category": "Методы Seller API",
+  "tagsCount": 27,
+  "tags": [
+    {
+      "index": 6,
+      "name": "CategoryAPI",
+      "displayName": "Атрибуты и характеристики Ozon",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 7,
+      "name": "ProductAPI",
+      "displayName": "Загрузка и обновление товаров",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 8,
+      "name": "BarcodeAPI",
+      "displayName": "Штрихкоды товаров",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 9,
+      "name": "Prices&StocksAPI",
+      "displayName": "Цены и остатки товаров",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 10,
+      "name": "Promos",
+      "displayName": "Акции",
+      "description": "Для продвижения товаров участвуйте в акциях, которые Ozon проводит для покупателей.\nПодробнее об акциях в [Базе знаний продавца](https://seller-edu.ozon.ru/docs/how-to-sell-effectively/promo/promo.html).",
+      "externalDocs": null
+    },
+    {
+      "index": 11,
+      "name": "PricingStrategyAPI",
+      "displayName": "Стратегии ценообразования",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 12,
+      "name": "BrandAPI",
+      "displayName": "Сертификаты брендов",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 13,
+      "name": "CertificationAPI",
+      "displayName": "Сертификаты качества",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 14,
+      "name": "WarehouseAPI",
+      "displayName": "Склады",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 15,
+      "name": "FBS",
+      "displayName": "Обработка заказов FBS и rFBS",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 16,
+      "name": "FBO",
+      "displayName": "Доставка FBO",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 17,
+      "name": "FboSupplyRequest",
+      "displayName": "Создание и управление заявками на поставку FBO",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 18,
+      "name": "FBS&rFBSMarks",
+      "displayName": "Управление кодами маркировки и сборкой заказов для FBS/rFBS",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 19,
+      "name": "DeliveryFBS",
+      "displayName": "Доставка FBS",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 20,
+      "name": "DeliveryrFBS",
+      "displayName": "Доставка rFBS",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 21,
+      "name": "Pass",
+      "displayName": "Пропуски",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 22,
+      "name": "ReturnsAPI",
+      "displayName": "Возвраты товаров FBO и FBS",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 23,
+      "name": "RFBSReturnsAPI",
+      "displayName": "Возвраты товаров rFBS",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 24,
+      "name": "ReturnAPI",
+      "displayName": "Возвратные отгрузки",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 25,
+      "name": "CancellationAPI",
+      "displayName": "Отмены заказов",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 26,
+      "name": "PolygonAPI",
+      "displayName": "Полигоны",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 27,
+      "name": "ChatAPI",
+      "displayName": "Чаты с покупателями",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 28,
+      "name": "SupplierAPI",
+      "displayName": "Накладные",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 29,
+      "name": "ReportAPI",
+      "displayName": "Отчёты",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 30,
+      "name": "AnalyticsAPI",
+      "displayName": "Аналитические отчёты",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 31,
+      "name": "FinanceAPI",
+      "displayName": "Финансовые отчёты",
+      "description": "",
+      "externalDocs": null
+    },
+    {
+      "index": 33,
+      "name": "SellerRating",
+      "displayName": "Рейтинг продавца",
+      "description": "Работая с Ozon, продавцы должны соблюдать требования по качеству обслуживания, срокам доставки и общению с клиентами. Система рейтингов отражает качество сервиса продавца, а некоторые показатели видны покупателям — это рейтинг товаров и индекс цен.\n\n[Подробнее о системе рейтингов в Базе знаний продавца](https://seller-edu.ozon.ru/docs/seller-rating/)",
+      "externalDocs": null
+    }
+  ]
+}

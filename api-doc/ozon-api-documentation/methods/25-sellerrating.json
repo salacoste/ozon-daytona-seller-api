@@ -1,0 +1,436 @@
+{
+  "metadata": {
+    "tag": "SellerRating",
+    "name": "SellerRating",
+    "displayName": "Рейтинг продавца",
+    "description": "Работая с Ozon, продавцы должны соблюдать требования по качеству обслуживания, срокам доставки и общению с клиентами. Система рейтингов отражает качество сервиса продавца, а некоторые показатели видны покупателям — это рейтинг товаров и индекс цен.\n\n[Подробнее о системе рейтингов в Базе знаний продавца](https://seller-edu.ozon.ru/docs/seller-rating/)",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 2,
+    "schemasCount": 15,
+    "generatedAt": "2025-08-09T16:28:42.343Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/rating/summary",
+      "method": "POST",
+      "operationId": "RatingAPI_RatingSummaryV1",
+      "summary": "Получить информацию о текущих рейтингах продавца",
+      "description": "Рейтинг продавца по следующим показателям: индекс цен, доставки вовремя, процент отмен, жалобы и другие.\nСоответствует разделу **Рейтинги → Рейтинги продавца** в личном кабинете.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "SellerRating"
+        ],
+        "summary": "Получить информацию о текущих рейтингах продавца",
+        "description": "Рейтинг продавца по следующим показателям: индекс цен, доставки вовремя, процент отмен, жалобы и другие.\nСоответствует разделу **Рейтинги → Рейтинги продавца** в личном кабинете.\n",
+        "operationId": "RatingAPI_RatingSummaryV1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о рейтингах",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1RatingSummaryV1Response"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/rating/history",
+      "method": "POST",
+      "operationId": "RatingAPI_RatingHistoryV1",
+      "summary": "Получить информацию о рейтингах продавца за период",
+      "description": "Информация о рейтингах за заданный период и с фильтром по нужному рейтингу.\nСоответствует разделу **Рейтинги → Рейтинги продавца** в личном кабинете.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "SellerRating"
+        ],
+        "summary": "Получить информацию о рейтингах продавца за период",
+        "description": "Информация о рейтингах за заданный период и с фильтром по нужному рейтингу.\nСоответствует разделу **Рейтинги → Рейтинги продавца** в личном кабинете.\n",
+        "operationId": "RatingAPI_RatingHistoryV1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1RatingHistoryV1Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о рейтингах",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1RatingHistoryV1Response"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "v1Empty": {
+      "type": "object",
+      "title": "object"
+    },
+    "v1RatingSummaryV1Response": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "groups": {
+          "description": "Список с группами рейтингов.",
+          "items": {
+            "$ref": "#/components/schemas/RatingSummaryV1ResponseGroup"
+          }
+        },
+        "localization_index": {
+          "description": "Данные по индексу локализации. Если за последние 14 дней у вас не было продаж, поля параметра будут пустыми.",
+          "items": {
+            "$ref": "#/components/schemas/RatingSummaryV1ResponseLocalIndex"
+          }
+        },
+        "penalty_score_exceeded": {
+          "description": "Признак, что баланс штрафных баллов превышен.",
+          "type": "boolean"
+        },
+        "premium": {
+          "description": "Признак наличия подписки [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program).",
+          "type": "boolean"
+        },
+        "premium_plus": {
+          "description": "Признак наличия подписки [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).",
+          "type": "boolean"
+        }
+      }
+    },
+    "RatingSummaryV1ResponseGroup": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "group_name": {
+          "description": "Название группы рейтингов.",
+          "type": "string"
+        },
+        "items": {
+          "description": "Список рейтингов.",
+          "items": {
+            "$ref": "#/components/schemas/v1RatingItem"
+          }
+        }
+      }
+    },
+    "v1RatingItem": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "change": {
+          "$ref": "#/components/schemas/RatingItemChange"
+        },
+        "current_value": {
+          "description": "Текущее значение рейтинга.",
+          "type": "number",
+          "format": "double"
+        },
+        "name": {
+          "description": "Название рейтинга.",
+          "type": "string"
+        },
+        "past_value": {
+          "description": "Предыдущее значение рейтинга.",
+          "type": "number",
+          "format": "double"
+        },
+        "rating": {
+          "description": "Название рейтинга в системе.",
+          "type": "string"
+        },
+        "rating_direction": {
+          "description": "Каким должно быть значение рейтинга, чтобы оно считалось хорошим:\n- `UNKNOWN_DIRECTION` — не определено.\n- `NEUTRAL` — неважно.\n- `HIGHER_IS_BETTER` — чем выше, тем лучше.\n- `LOWER_IS_BETTER` — чем ниже, тем лучше.\n",
+          "type": "string"
+        },
+        "status": {
+          "description": "Статус рейтинга:\n- `UNKNOWN_STATUS` — не определён.\n- `OK` — все хорошо.\n- `WARNING` — показатели требуют внимания.\n- `CRITICAL` — критичный рейтинг.\n",
+          "type": "string"
+        },
+        "value_type": {
+          "description": "Тип значения:\n- `UNKNOWN_VALUE` — не определён.\n- `INDEX` — индекс.\n- `PERCENT` — процент.\n- `TIME` — время.\n- `RATIO` — коэффициент.\n- `REVIEW_SCORE` — оценка.\n- `COUNT` — счёт.\n",
+          "type": "string"
+        }
+      }
+    },
+    "RatingItemChange": {
+      "type": "object",
+      "title": "object",
+      "description": "Изменение рейтинга: отношение предыдущего значения к текущему.\n",
+      "properties": {
+        "direction": {
+          "description": "Как изменилось значение рейтинга:\n- `DIRECTION_UNKNOWN` — не определено.\n- `DIRECTION_NONE` — не изменилось.\n- `DIRECTION_RISE` — выросло.\n- `DIRECTION_FALL` — упало.\n",
+          "type": "string"
+        },
+        "meaning": {
+          "description": "Что означает изменение:\n- `MEANING_UNKNOWN` — неизвестно.\n- `MEANING_NONE` — нейтрально.\n- `MEANING_GOOD` — показатель улучшается, всё хорошо.\n- `MEANING_BAD` — показатель падает, нужно что-то сделать.\n",
+          "type": "string"
+        }
+      }
+    },
+    "RatingSummaryV1ResponseLocalIndex": {
+      "type": "object",
+      "properties": {
+        "calculation_date": {
+          "description": "Дата расчёта индекса локализации.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "localization_percentage": {
+          "description": "Значение индекса локализации.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v1RatingHistoryV1Request": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "date_from": {
+          "description": "Начало периода.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "date_to": {
+          "description": "Конец периода.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "ratings": {
+          "description": "Фильтр по рейтингу.\n\nРейтинги, по которым нужно получить значение за период:\n\n- `rating_on_time` — процент заказов, выполненных вовремя за последние 30 дней.\n- `rating_review_avg_score_total` — средняя оценка всех товаров.\n- `rating_price` — индекс цен: отношение стоимости ваших товаров к самой низкой цене на такой же товар на других площадках.\n- `rating_order_cancellation` — процент отмен FBS-отправлений по вашей вине за последние 7 дней. Текущий и предыдущий день не учитываются.\n- `rating_shipment_delay` — процент FBS-отправлений, которые за последние 7 дней не были переданы в доставку по вашей вине. Текущий и предыдущий день не учитываются.\n- `rating_ssl` — оценка работы по FBO. Учитывает `rating_on_time_supply_delivery`, `rating_on_time_supply_cancellation` и `rating_order_accuracy`.\n- `rating_on_time_supply_delivery` — процент поставок, которые вы привезли на склад в выбранный временной интервал за последние 60 дней.\n- `rating_order_accuracy` — процент поставок без излишков, недостач, пересорта и брака за последние 60 дней.\n- `rating_on_time_supply_cancellation` — процент заявок на поставку, которые завершились или были отменены без опоздания за последние 60 дней.\n- `rating_reaction_time` — время, в течение которого покупатели в среднем ждали ответа на своё первое сообщение в чате за последние 30 дней.\n- `rating_average_response_time` — время, в течение которого покупатели в среднем ждали вашего ответа за последние 30 дней.\n- `rating_replied_dialogs_ratio` — доля диалогов хотя бы с одним вашим ответом в течение 24 часов за последние 30 дней.\n\nЕсли вы хотите получить информацию по начисленным штрафным баллам для рейтингов `rating_on_time` и `rating_review_avg_score_total`,\nпередайте значения нужных рейтингов в этом параметре и `with_premium_scores=true`.\n",
+          "items": {
+            "type": "string"
+          }
+        },
+        "with_premium_scores": {
+          "description": "Признак, что в ответе нужно вернуть информацию о штрафных баллах в Premium-программе.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "ratings",
+        "date_from",
+        "date_to"
+      ]
+    },
+    "v1RatingHistoryV1Response": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "premium_scores": {
+          "description": "Информация о штрафных баллах в Premium-программе.",
+          "items": {
+            "$ref": "#/components/schemas/v1PremiumScores"
+          }
+        },
+        "ratings": {
+          "description": "Информация о рейтингах продавца.",
+          "items": {
+            "$ref": "#/components/schemas/v1Rating"
+          }
+        }
+      }
+    },
+    "v1PremiumScores": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "rating": {
+          "description": "Название рейтинга.",
+          "type": "string"
+        },
+        "scores": {
+          "description": "Информация о штрафных баллах.",
+          "items": {
+            "$ref": "#/components/schemas/PremiumScoresScore"
+          }
+        }
+      }
+    },
+    "PremiumScoresScore": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата, когда были начислены штрафные баллы."
+        },
+        "rating_value": {
+          "type": "number",
+          "format": "double",
+          "description": "Значение рейтинга, за которое были начислены штрафные баллы."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество начисленных штрафных баллов."
+        }
+      }
+    },
+    "v1Rating": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "danger_threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Пороговое значение рейтинга, после которого продажи будут заблокированы."
+        },
+        "premium_threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Пороговое значение рейтинга для участия в Premium-программе."
+        },
+        "rating": {
+          "type": "string",
+          "description": "Системное название рейтинга."
+        },
+        "values": {
+          "description": "Список значений рейтинга.",
+          "items": {
+            "$ref": "#/components/schemas/RatingValue"
+          }
+        },
+        "warning_threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Пороговое значение рейтинга, после которого появится предупреждение о возможной блокировке."
+        }
+      }
+    },
+    "RatingValue": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата начала подсчёта рейтинга."
+        },
+        "date_to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата конца подсчёта рейтинга."
+        },
+        "status": {
+          "$ref": "#/components/schemas/v1RatingStatus"
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Значение рейтинга."
+        }
+      }
+    },
+    "v1RatingStatus": {
+      "type": "object",
+      "title": "object",
+      "description": "Статус рейтинга.",
+      "properties": {
+        "danger": {
+          "type": "boolean",
+          "description": "Признак, превышено ли пороговое значение рейтинга для блокировки."
+        },
+        "premium": {
+          "type": "boolean",
+          "description": "Признак, достигнуто ли пороговое значение для участия в Premium-программе."
+        },
+        "warning": {
+          "type": "boolean",
+          "description": "Признак наличия предупреждения о возможном превышении порогового значения для блокировки."
+        }
+      }
+    }
+  }
+}

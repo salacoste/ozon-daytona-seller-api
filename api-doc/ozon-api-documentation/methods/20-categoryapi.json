@@ -1,0 +1,697 @@
+{
+  "metadata": {
+    "tag": "CategoryAPI",
+    "name": "CategoryAPI",
+    "displayName": "Атрибуты и характеристики Ozon",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 4,
+    "schemasCount": 15,
+    "generatedAt": "2025-08-09T16:28:42.341Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/description-category/tree",
+      "method": "POST",
+      "operationId": "DescriptionCategoryAPI_GetTree",
+      "summary": "Дерево категорий и типов товаров",
+      "description": "Возвращает категории и типы для товаров в виде дерева.\n\nСоздание товаров доступно только в категориях последнего уровня, сравните именно их с категориями на своей площадке.\nКатегории не создаются по запросу пользователя.\n\n<aside class=\"warning\">\n  Внимательно выбирайте категорию для товара: для разных категорий применяется разный размер комиссии.\n</aside>\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CategoryAPI"
+        ],
+        "summary": "Дерево категорий и типов товаров",
+        "description": "Возвращает категории и типы для товаров в виде дерева.\n\nСоздание товаров доступно только в категориях последнего уровня, сравните именно их с категориями на своей площадке.\nКатегории не создаются по запросу пользователя.\n\n<aside class=\"warning\">\n  Внимательно выбирайте категорию для товара: для разных категорий применяется разный размер комиссии.\n</aside>\n",
+        "operationId": "DescriptionCategoryAPI_GetTree",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetTreeRequest"
+              },
+              "example": {
+                "language": "DEFAULT"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Дерево категорий",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetTreeResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "description_category_id": 17027492,
+                      "category_name": "Канцелярские товары",
+                      "disabled": false,
+                      "children": [
+                        {
+                          "description_category_id": 17029016,
+                          "category_name": "Печати и штампы",
+                          "disabled": false,
+                          "children": [
+                            {
+                              "type_name": "Пистолет-маркиратор",
+                              "type_id": 970778135,
+                              "disabled": false,
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/description-category/attribute",
+      "method": "POST",
+      "operationId": "DescriptionCategoryAPI_GetAttributes",
+      "summary": "Список характеристик категории",
+      "description": "Получение характеристик для указанных категории и типа товара.\n\nЕсли у `dictionary_id` значение `0`, у атрибута нет вложенных справочников.\nЕсли значение другое, то справочники есть. Запросите их методом [/v1/description-category/attribute/values](#operation/DescriptionCategoryAPI_GetAttributeValues).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CategoryAPI"
+        ],
+        "summary": "Список характеристик категории",
+        "description": "Получение характеристик для указанных категории и типа товара.\n\nЕсли у `dictionary_id` значение `0`, у атрибута нет вложенных справочников.\nЕсли значение другое, то справочники есть. Запросите их методом [/v1/description-category/attribute/values](#operation/DescriptionCategoryAPI_GetAttributeValues).\n",
+        "operationId": "DescriptionCategoryAPI_GetAttributes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetAttributesRequest"
+              },
+              "example": {
+                "description_category_id": 200000933,
+                "language": "DEFAULT",
+                "type_id": 93080
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Характеристики категории",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetAttributesResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "id": 31,
+                      "attribute_complex_id": 0,
+                      "name": "Бренд в одежде и обуви",
+                      "description": "Укажите наименование бренда, под которым произведён товар. Если товар не имеет бренда, используйте значение \"Нет бренда\"",
+                      "type": "string",
+                      "is_collection": false,
+                      "is_required": true,
+                      "is_aspect": false,
+                      "max_value_count": 0,
+                      "group_name": "",
+                      "group_id": 0,
+                      "dictionary_id": 28732849,
+                      "category_dependent": true,
+                      "complex_is_collection": true
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/description-category/attribute/values",
+      "method": "POST",
+      "operationId": "DescriptionCategoryAPI_GetAttributeValues",
+      "summary": "Справочник значений характеристики",
+      "description": "Возвращает справочник значений характеристики.\n\nУзнать, есть ли вложенный справочник, можно через метод [/v1/description-category/attribute](#operation/DescriptionCategoryAPI_GetAttributes). \n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CategoryAPI"
+        ],
+        "summary": "Справочник значений характеристики",
+        "description": "Возвращает справочник значений характеристики.\n\nУзнать, есть ли вложенный справочник, можно через метод [/v1/description-category/attribute](#operation/DescriptionCategoryAPI_GetAttributes). \n",
+        "operationId": "DescriptionCategoryAPI_GetAttributeValues",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetAttributeValuesRequest"
+              },
+              "example": {
+                "attribute_id": 85,
+                "description_category_id": 17054869,
+                "language": "DEFAULT",
+                "last_value_id": 0,
+                "limit": 100,
+                "type_id": 97311
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Справочник характеристик",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetAttributeValuesResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "id": 5055881,
+                      "value": "Sunshine",
+                      "info": "",
+                      "picture": "https://cdn1.ozone.ru/s3/multimedia-i/6010930878.jpg"
+                    },
+                    {
+                      "id": 5056737,
+                      "value": "Essence",
+                      "info": "Красота и здоровье",
+                      "picture": "https://cdn1.ozone.ru/s3/multimedia-v/6088253599.jpg"
+                    }
+                  ],
+                  "has_next": true
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/description-category/attribute/values/search",
+      "method": "POST",
+      "operationId": "DescriptionCategoryAPI_SearchAttributeValues",
+      "summary": "Поиск по справочным значениям характеристики",
+      "description": "Возвращает справочные значения характеристики по заданному значению `value` в запросе.\n\nУзнать, есть ли вложенный справочник, можно через метод [/v1/description-category/attribute](#operation/DescriptionCategoryAPI_GetAttributes).\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "CategoryAPI"
+        ],
+        "summary": "Поиск по справочным значениям характеристики",
+        "description": "Возвращает справочные значения характеристики по заданному значению `value` в запросе.\n\nУзнать, есть ли вложенный справочник, можно через метод [/v1/description-category/attribute](#operation/DescriptionCategoryAPI_GetAttributes).\n",
+        "operationId": "DescriptionCategoryAPI_SearchAttributeValues",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1SearchAttributeValuesRequest"
+              },
+              "example": {
+                "attribute_id": 85,
+                "description_category_id": 17054869,
+                "limit": 100,
+                "type_id": 97311,
+                "value": "Name"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Справочные значения характеристики.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1SearchAttributeValuesResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "v1GetTreeRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "language": {
+          "$ref": "#/components/schemas/languageLanguage"
+        }
+      }
+    },
+    "languageLanguage": {
+      "default": "DEFAULT",
+      "enum": [
+        "DEFAULT",
+        "RU",
+        "EN",
+        "TR",
+        "ZH_HANS"
+      ],
+      "description": "Язык в ответе:\n- `EN` — английский,\n- `RU` — русский,\n- `TR` — турецкий,\n- `ZH_HANS` — китайский.\n\nПо умолчанию используется русский язык.\n",
+      "type": "string",
+      "title": "object"
+    },
+    "v1GetTreeResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "description": "Список категорий.",
+          "items": {
+            "$ref": "#/components/schemas/v1GetTreeResponseItem"
+          }
+        }
+      }
+    },
+    "v1GetTreeResponseItem": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "description_category_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор категории."
+        },
+        "category_name": {
+          "type": "string",
+          "description": "Название категории."
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1GetTreeResponseItem"
+          },
+          "description": "Дерево подкатегорий."
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "`true`, если в категории нельзя создавать товары. `false`, если можно.\n"
+        },
+        "type_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор типа товара."
+        },
+        "type_name": {
+          "type": "string",
+          "description": "Название типа товара."
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "v1GetAttributesRequest": {
+      "required": [
+        "description_category_id",
+        "type_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "description_category_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор категории. Можно получить с помощью метода [/v1/description-category/tree](#operation/DescriptionCategoryAPI_GetTree)."
+        },
+        "language": {
+          "$ref": "#/components/schemas/languageLanguage"
+        },
+        "type_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор типа товара. Можно получить с помощью метода [/v1/description-category/tree](#operation/DescriptionCategoryAPI_GetTree)."
+        }
+      }
+    },
+    "v1GetAttributesResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "description": "Результат запроса.",
+          "items": {
+            "$ref": "#/components/schemas/v1GetAttributesResponseAttribute"
+          }
+        }
+      }
+    },
+    "v1GetAttributesResponseAttribute": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "category_dependent": {
+          "type": "boolean",
+          "description": "Признак, что значения словарного атрибута зависят от категории:\n- `true` — у атрибута разные значения для каждой категории.\n- `false` — у атрибута одинаковые значения для всех категорий.\n"
+        },
+        "description": {
+          "type": "string",
+          "description": "Описание характеристики."
+        },
+        "dictionary_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор справочника."
+        },
+        "group_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор группы характеристик."
+        },
+        "group_name": {
+          "type": "string",
+          "description": "Название группы характеристик."
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор характеристики."
+        },
+        "is_aspect": {
+          "type": "boolean",
+          "description": "Признак аспектного атрибута. Аспектный атрибут — характеристика, по которой отличаются товары одной модели. \n\nНапример, у одежды и обуви одной модели могут быть разные расцветки и размеры. То есть цвет и размер — это аспектные атрибуты.\n\nЗначения поля:\n  - `true` — атрибут аспектный и его нельзя изменить после поставки товара на склад или продажи со своего склада.\n  - `false` — атрибут не аспектный, можно изменить в любое время.\n"
+        },
+        "is_collection": {
+          "type": "boolean",
+          "description": "- `true`, если характеристика — набор значений.\n- `false`, если характеристика — одно значение.\n"
+        },
+        "is_required": {
+          "type": "boolean",
+          "description": "Признак обязательной характеристики:\n  - `true` — обязательная характеристика,\n  - `false` — характеристику можно не указывать.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Название."
+        },
+        "type": {
+          "type": "string",
+          "description": "Тип характеристики."
+        },
+        "attribute_complex_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор комплексного атрибута."
+        },
+        "max_value_count": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Максимальное количество значений для атрибута."
+        },
+        "complex_is_collection": {
+          "type": "boolean",
+          "description": "Признак, что комплексная характеристика — набор значений:\n- `true`, если комплексная характеристика — набор значений,\n- `false`, если комплексная характеристика — одно значение.\n"
+        }
+      }
+    },
+    "v1GetAttributeValuesRequest": {
+      "required": [
+        "attribute_id",
+        "description_category_id",
+        "limit",
+        "type_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "attribute_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор характеристики. Можно получить с помощью метода [/v1/description-category/attribute](#operation/DescriptionCategoryAPI_GetAttributes)."
+        },
+        "description_category_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор категории. Можно получить с помощью метода [/v1/description-category/tree](#operation/DescriptionCategoryAPI_GetTree)."
+        },
+        "language": {
+          "$ref": "#/components/schemas/languageLanguage"
+        },
+        "last_value_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор справочника, с которого нужно начать ответ. Если `last_value_id` — 10, то в ответе будут справочники, начиная с одиннадцатого."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество значений в ответе:\n- максимум — 2000,\n- минимум — 1.\n"
+        },
+        "type_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор типа товара. Можно получить с помощью метода [/v1/description-category/tree](#operation/DescriptionCategoryAPI_GetTree)."
+        }
+      }
+    },
+    "v1GetAttributeValuesResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "has_next": {
+          "type": "boolean",
+          "description": "Признак, что в ответе вернулась только часть значений характеристики:\n- `true` — сделайте повторный запрос с новым параметром `last_value_id` для получения остальных значений;\n- `false` — ответ содержит все значения характеристики.\n"
+        },
+        "result": {
+          "type": "array",
+          "description": "Значения характеристики.",
+          "items": {
+            "$ref": "#/components/schemas/v1GetAttributeValuesResponseDictionaryValue"
+          }
+        }
+      }
+    },
+    "v1GetAttributeValuesResponseDictionaryValue": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор значения характеристики."
+        },
+        "info": {
+          "type": "string",
+          "description": "Дополнительное описание."
+        },
+        "picture": {
+          "type": "string",
+          "description": "Ссылка на изображение."
+        },
+        "value": {
+          "type": "string",
+          "description": "Значение характеристики товара."
+        }
+      }
+    },
+    "v1SearchAttributeValuesRequest": {
+      "required": [
+        "attribute_id",
+        "description_category_id",
+        "limit",
+        "type_id",
+        "value"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "attribute_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор характеристики. Можно получить с помощью метода [/v1/description-category/attribute](#operation/DescriptionCategoryAPI_GetAttributes)."
+        },
+        "description_category_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор категории. Можно получить с помощью метода [/v1/description-category/tree](#operation/DescriptionCategoryAPI_GetTree)."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество значений в ответе:\n- максимум — 100,\n- минимум — 1.\n"
+        },
+        "type_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор типа товара. Можно получить с помощью метода [/v1/description-category/tree](#operation/DescriptionCategoryAPI_GetTree)."
+        },
+        "value": {
+          "type": "string",
+          "description": "Значение, по которому система будет искать справочные значения. Минимум — 2 символа."
+        }
+      }
+    },
+    "v1SearchAttributeValuesResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "description": "Значения характеристики.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/SearchAttributeValuesResponseValue"
+          }
+        }
+      }
+    },
+    "SearchAttributeValuesResponseValue": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор значения характеристики."
+        },
+        "info": {
+          "type": "string",
+          "description": "Дополнительная информация."
+        },
+        "picture": {
+          "type": "string",
+          "description": "Ссылка на изображение."
+        },
+        "value": {
+          "type": "string",
+          "description": "Значение характеристики товара."
+        }
+      }
+    }
+  }
+}

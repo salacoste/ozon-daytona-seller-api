@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+SuperClaude
+src old
+
 # Logs
 *.log
 npm-debug.log*

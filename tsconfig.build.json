@@ -1,0 +1,39 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    // Override for build
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "declarationDir": "./dist/types",
+    
+    // Emit settings for production build
+    "removeComments": true,
+    "sourceMap": false,
+    "declarationMap": false,
+    "inlineSourceMap": false,
+    "inlineSources": false,
+    
+    // Module settings (will be overridden by build scripts)
+    "module": "ES2020",
+    "target": "ES2020",
+    
+    // Ensure strict builds
+    "noEmitOnError": true,
+    "incremental": false,
+    
+    // Tree shaking friendly
+    "preserveConstEnums": false,
+    "importsNotUsedAsValues": "remove"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+    "tests/**/*",
+    "scripts/**/*",
+    "node_modules",
+    "dist"
+  ]
+}

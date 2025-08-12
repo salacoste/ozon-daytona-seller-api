@@ -1,0 +1,407 @@
+{
+  "metadata": {
+    "tag": "PolygonAPI",
+    "name": "PolygonAPI",
+    "displayName": "Полигоны",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 2,
+    "schemasCount": 10,
+    "generatedAt": "2025-08-09T16:28:42.342Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/polygon/create",
+      "method": "POST",
+      "operationId": "PolygonAPI_CreatePolygon",
+      "summary": "Создайте полигон доставки",
+      "description": "Вы можете добавить полигон к методу доставки.\n\nСоздайте полигон, получив его координаты на https://geojson.io: отметьте на карте минимум 3 точки и соедините их линиями.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Создайте полигон доставки",
+        "description": "Вы можете добавить полигон к методу доставки.\n\nСоздайте полигон, получив его координаты на https://geojson.io: отметьте на карте минимум 3 точки и соедините их линиями.\n",
+        "operationId": "PolygonAPI_CreatePolygon",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/polygonv1PolygonCreateRequest"
+              },
+              "example": {
+                "coordinates": "[[[30.149574279785153,59.86550435303646],[30.21205902099609,59.846884387977326],[30.255661010742184,59.86240174913176],[30.149574279785153,59.86550435303646]]]"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Полигон создан",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/polygonv1PolygonCreateResponse"
+                },
+                "example": {
+                  "polygonId": "1323"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus_v1PolygonCreate"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "PolygonAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/polygon/bind",
+      "method": "POST",
+      "operationId": "PolygonAPI_BindPolygon",
+      "summary": "Свяжите метод доставки с полигоном доставки",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Свяжите метод доставки с полигоном доставки",
+        "operationId": "PolygonAPI_BindPolygon",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/polygonv1PolygonBindRequest"
+              },
+              "example": {
+                "delivery_method_id": 0,
+                "polygons": [
+                  {
+                    "polygon_id": "1323",
+                    "time": "30"
+                  }
+                ],
+                "warehouse_location": {
+                  "lat": "58.52391272075821",
+                  "lon": "31.236791610717773"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Успешно",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/polygonv1Empty"
+                },
+                "example": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus_v1PolygonBind"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "PolygonAPI"
+        ]
+      }
+    }
+  ],
+  "schemas": {
+    "polygonv1PolygonCreateRequest": {
+      "required": [
+        "coordinates"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "coordinates": {
+          "description": "Координаты полигона доставки в формате `[[[lat long]]]`.\n",
+          "type": "string"
+        }
+      }
+    },
+    "polygonv1PolygonCreateResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "polygon_id": {
+          "description": "Идентификатор полигона.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "rpcStatus_v1PolygonCreate": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Сообщение об ошибке:\n\n  - `coordinates not provided` — координаты не переданы;\n  - `invalid coordinates, must have two points in coordinate` — в какой-то точке передана только широта или долгота, нужно передать две точки;\n  - `the first and last points in loop must be same` — первая и последняя точка не совпадают (по стандартным правилам geojson точки должны совпадать);\n  - `non-full loops must have at least 4 unique vertices for polygons` — для полигона передано менее четырех точек.\n"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "polygonv1PolygonBindRequest": {
+      "required": [
+        "delivery_method_id",
+        "polygons",
+        "warehouse_location"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "delivery_method_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Идентификатор метода доставки."
+        },
+        "polygons": {
+          "type": "array",
+          "description": "Список полигонов.",
+          "items": {
+            "$ref": "#/components/schemas/PolygonBindRequestpolygon"
+          }
+        },
+        "warehouse_location": {
+          "$ref": "#/components/schemas/PolygonBindRequestwh_location"
+        }
+      }
+    },
+    "PolygonBindRequestpolygon": {
+      "required": [
+        "polygon_id",
+        "time"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "polygon_id": {
+          "description": "Идентификатор полигона.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "time": {
+          "description": "Время в минутах, за которое доставят товар в этом полигоне.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "PolygonBindRequestwh_location": {
+      "required": [
+        "lat",
+        "lon"
+      ],
+      "type": "object",
+      "title": "object",
+      "description": "Расположение склада.",
+      "properties": {
+        "lat": {
+          "description": "Географическая широта расположения склада.",
+          "type": "string"
+        },
+        "lon": {
+          "description": "Географическая долгота расположения склада.",
+          "type": "string"
+        }
+      }
+    },
+    "polygonv1Empty": {
+      "type": "object",
+      "title": "object"
+    },
+    "rpcStatus_v1PolygonBind": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "Сообщение об ошибке:\n\n  - **delivery target polygons not provided** — полигоны не переданы;\n  - **no delivery method id provided** — delivery_method_id не передан;\n  - **no warehouse points provided** — не передана координата склада;\n  - **polygon id .... not found** — переданы ID полигонов, которые не найдены в базе данных;\n  - **not found polygon for warehouse point** — точка склада не принадлежит ни одному переданному полигону.\n"
+        }
+      }
+    }
+  }
+}

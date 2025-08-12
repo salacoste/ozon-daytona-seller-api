@@ -1,0 +1,234 @@
+{
+  "metadata": {
+    "tag": "BrandAPI",
+    "name": "BrandAPI",
+    "displayName": "Сертификаты брендов",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 1,
+    "schemasCount": 6,
+    "generatedAt": "2025-08-09T16:28:42.343Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/brand/company-certification/list",
+      "method": "POST",
+      "operationId": "BrandAPI_BrandCompanyCertificationList",
+      "summary": "Список сертифицируемых брендов",
+      "description": "Метод для получения списка брендов, для которых требуется предоставить сертификат. Ответ содержит список брендов,\nтовары которых есть в вашем личном кабинете.\n\nСписок брендов может изменяться, если Ozon получит требование от бренда предоставлять сертификат.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список сертифицируемых брендов",
+        "description": "Метод для получения списка брендов, для которых требуется предоставить сертификат. Ответ содержит список брендов,\nтовары которых есть в вашем личном кабинете.\n\nСписок брендов может изменяться, если Ozon получит требование от бренда предоставлять сертификат.\n",
+        "operationId": "BrandAPI_BrandCompanyCertificationList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/brandBrandCompanyCertificationListRequest"
+              },
+              "example": {
+                "page": 1,
+                "page_size": 50
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список брендов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/brandBrandCompanyCertificationListResponse"
+                },
+                "example": {
+                  "result": {
+                    "brand_certification": [
+                      {
+                        "brand_id": 135476863,
+                        "brand_name": "Sea of Spa",
+                        "has_certificate": false
+                      }
+                    ],
+                    "total": 1
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BrandAPI"
+        ]
+      }
+    }
+  ],
+  "schemas": {
+    "brandBrandCompanyCertificationListRequest": {
+      "required": [
+        "page",
+        "page_size"
+      ],
+      "properties": {
+        "page": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Номер страницы, возвращаемой в запросе."
+        },
+        "page_size": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество элементов на странице."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "brandBrandCompanyCertificationListResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/BrandCompanyCertificationListResponseBrandCertificationResult"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "BrandCompanyCertificationListResponseBrandCertificationResult": {
+      "properties": {
+        "brand_certification": {
+          "items": {
+            "$ref": "#/components/schemas/BrandCompanyCertificationListResponseBrandCertification"
+          },
+          "type": "array",
+          "description": "Информация о сертифицируемых брендах."
+        },
+        "total": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Общее количество брендов."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса."
+    },
+    "BrandCompanyCertificationListResponseBrandCertification": {
+      "properties": {
+        "brand_name": {
+          "type": "string",
+          "description": "Название бренда."
+        },
+        "has_certificate": {
+          "type": "boolean",
+          "description": "Признак, что требуется сертификат:\n- `true` — требуется сертификат;\n- `false` — сертификат не нужен.\n"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    }
+  }
+}

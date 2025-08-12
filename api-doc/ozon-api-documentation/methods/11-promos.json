@@ -1,0 +1,1279 @@
+{
+  "metadata": {
+    "tag": "Promos",
+    "name": "Promos",
+    "displayName": "Акции",
+    "description": "Для продвижения товаров участвуйте в акциях, которые Ozon проводит для покупателей.\nПодробнее об акциях в [Базе знаний продавца](https://seller-edu.ozon.ru/docs/how-to-sell-effectively/promo/promo.html).",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 8,
+    "schemasCount": 28,
+    "generatedAt": "2025-08-09T16:28:42.338Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/actions",
+      "method": "GET",
+      "operationId": "Promos",
+      "summary": "Список акций",
+      "description": "Метод для получения списка акций Ozon, в которых можно участвовать.\n\n[Подробнее об акциях Ozon](https://seller-edu.ozon.ru/ceny-i-akcii/akcii-skidki-i-kupony/promo)\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Promos"
+        ],
+        "operationId": "Promos",
+        "summary": "Список акций",
+        "description": "Метод для получения списка акций Ozon, в которых можно участвовать.\n\n[Подробнее об акциях Ozon](https://seller-edu.ozon.ru/ceny-i-akcii/akcii-skidki-i-kupony/promo)\n",
+        "responses": {
+          "200": {
+            "description": "Список акций",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/seller_apiGetSellerActionsV1Response"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "id": 71342,
+                      "title": "test voucher #2",
+                      "date_start": "2021-11-22T09:46:38Z",
+                      "date_end": "2021-11-30T20:59:59Z",
+                      "potential_products_count": 0,
+                      "is_participating": true,
+                      "participating_products_count": 5,
+                      "description": "",
+                      "action_type": "DISCOUNT",
+                      "banned_products_count": 0,
+                      "with_targeting": false,
+                      "discount_type": "UNKNOWN",
+                      "discount_value": 0,
+                      "order_amount": 0,
+                      "freeze_date": "",
+                      "is_voucher_action": true
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/actions/candidates",
+      "method": "POST",
+      "operationId": "PromosCandidates",
+      "summary": "Список доступных для акции товаров",
+      "description": "Метод для получения списка товаров, которые могут участвовать в акции, по её идентификатору.\n<br> \n<aside class=\"warning\">\nС 5 мая 2025 параметр пагинации <tt>offset<tt> будет отключён. Переключитесь на параметр <tt>last_id<tt>.\n</aside>\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Promos"
+        ],
+        "summary": "Список доступных для акции товаров",
+        "description": "Метод для получения списка товаров, которые могут участвовать в акции, по её идентификатору.\n<br> \n<aside class=\"warning\">\nС 5 мая 2025 параметр пагинации <tt>offset<tt> будет отключён. Переключитесь на параметр <tt>last_id<tt>.\n</aside>\n",
+        "operationId": "PromosCandidates",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/seller_apiGetSellerProductV1Request"
+              },
+              "example": {
+                "action_id": 63337,
+                "limit": 10,
+                "offset": 0,
+                "last_id": "bnVсbA=="
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Список товаров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/seller_apiGetSellerProductV1Response"
+                },
+                "example": {
+                  "result": {
+                    "products": [
+                      {
+                        "id": 226,
+                        "price": 250,
+                        "action_price": 0,
+                        "alert_max_action_price_failed": true,
+                        "alert_max_action_price": 31,
+                        "max_action_price": 175,
+                        "add_mode": "NOT_SET",
+                        "stock": 0,
+                        "min_stock": 0
+                      },
+                      {
+                        "id": 1366,
+                        "price": 2300,
+                        "action_price": 630,
+                        "alert_max_action_price_failed": true,
+                        "alert_max_action_price": 31,
+                        "max_action_price": 770,
+                        "add_mode": "MANUAL",
+                        "stock": 0,
+                        "min_stock": 0
+                      }
+                    ],
+                    "total": 2,
+                    "last_id": "bnVсbA=="
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/actions/products",
+      "method": "POST",
+      "operationId": "PromosProducts",
+      "summary": "Список участвующих в акции товаров",
+      "description": "Метод для получения списка товаров, участвующих в акции, по её идентификатору.\n<br> \n<aside class=\"warning\">\nС 5 мая 2025 параметр пагинации <tt>offset<tt> будет отключён. Переключитесь на параметр <tt>last_id<tt>.\n</aside>\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Promos"
+        ],
+        "summary": "Список участвующих в акции товаров",
+        "description": "Метод для получения списка товаров, участвующих в акции, по её идентификатору.\n<br> \n<aside class=\"warning\">\nС 5 мая 2025 параметр пагинации <tt>offset<tt> будет отключён. Переключитесь на параметр <tt>last_id<tt>.\n</aside>\n",
+        "operationId": "PromosProducts",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/seller_apiGetSellerProductV1Request"
+              },
+              "example": {
+                "action_id": 66011,
+                "limit": 10,
+                "offset": 0,
+                "last_id": "bnVсbA=="
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Список товаров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/seller_apiGetSellerProductV1Response"
+                },
+                "example": {
+                  "result": {
+                    "products": [
+                      {
+                        "id": 28745,
+                        "price": 99,
+                        "action_price": 50,
+                        "alert_max_action_price_failed": true,
+                        "alert_max_action_price": 31,
+                        "max_action_price": 32,
+                        "add_mode": "MANUAL",
+                        "stock": 20,
+                        "min_stock": 0
+                      }
+                    ],
+                    "total": 263,
+                    "last_id": "bnVсbA=="
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/actions/products/activate",
+      "method": "POST",
+      "operationId": "PromosProductsActivate",
+      "summary": "Добавить товар в акцию",
+      "description": "Метод для добавления товаров в доступную акцию.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Promos"
+        ],
+        "summary": "Добавить товар в акцию",
+        "description": "Метод для добавления товаров в доступную акцию.",
+        "operationId": "PromosProductsActivate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/seller_apiActivateProductV1Request"
+              },
+              "example": {
+                "action_id": 60564,
+                "products": [
+                  {
+                    "action_price": 356,
+                    "product_id": 1389,
+                    "stock": 10
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Товар добавлен в акцию",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/seller_apiProductV1Response"
+                },
+                "example": {
+                  "result": {
+                    "product_ids": [
+                      1389
+                    ],
+                    "rejected": []
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/actions/products/deactivate",
+      "method": "POST",
+      "operationId": "PromosProductsDeactivate",
+      "summary": "Удалить товары из акции",
+      "description": "Метод для удаления товаров из акции.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Promos"
+        ],
+        "summary": "Удалить товары из акции",
+        "description": "Метод для удаления товаров из акции.",
+        "operationId": "PromosProductsDeactivate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/seller_apiProductIDsV1Request"
+              },
+              "example": {
+                "action_id": 66011,
+                "product_ids": [
+                  14975
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Товары удалены из акции",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/seller_apiProductV1ResponseDeactivate"
+                },
+                "example": {
+                  "result": {
+                    "product_ids": [
+                      14975
+                    ],
+                    "rejected": []
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/actions/discounts-task/list",
+      "method": "POST",
+      "operationId": "promos_task_list",
+      "summary": "Список заявок на скидку",
+      "description": "Метод для получения списка товаров, которые покупатели хотят купить со скидкой.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Promos"
+        ],
+        "summary": "Список заявок на скидку",
+        "description": "Метод для получения списка товаров, которые покупатели хотят купить со скидкой.",
+        "operationId": "promos_task_list",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetDiscountTaskListRequest"
+              },
+              "example": {
+                "status": "UNKNOWN",
+                "page": 1,
+                "limit": 50
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список заявок",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetDiscountTaskListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/actions/discounts-task/approve",
+      "method": "POST",
+      "operationId": "promos_task_approve",
+      "summary": "Согласовать заявку на скидку",
+      "description": "Вы можете согласовывать заявки в статусах: `NEW` — новые, `SEEN` — просмотренные.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Promos"
+        ],
+        "summary": "Согласовать заявку на скидку",
+        "description": "Вы можете согласовывать заявки в статусах: `NEW` — новые, `SEEN` — просмотренные.\n",
+        "operationId": "promos_task_approve",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1ApproveDiscountTasksRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Заявки согласованы",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ApproveDeclineDiscountTasksResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/actions/discounts-task/decline",
+      "method": "POST",
+      "operationId": "promos_task_decline",
+      "summary": "Отклонить заявку на скидку",
+      "description": "Вы можете отклонить заявки в статусах: `NEW` — новые, `SEEN` — просмотренные.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "Promos"
+        ],
+        "summary": "Отклонить заявку на скидку",
+        "description": "Вы можете отклонить заявки в статусах: `NEW` — новые, `SEEN` — просмотренные.\n",
+        "operationId": "promos_task_decline",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1DeclineDiscountTasksRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Заявки отклонены",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ApproveDeclineDiscountTasksResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "seller_apiGetSellerActionsV1Response": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/GetSellerActionsV1ResponseAction"
+          },
+          "description": "Результаты запроса."
+        }
+      }
+    },
+    "GetSellerActionsV1ResponseAction": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double",
+          "description": "Идентификатор акции."
+        },
+        "title": {
+          "type": "string",
+          "description": "Название акции."
+        },
+        "action_type": {
+          "type": "string",
+          "description": "Тип акции."
+        },
+        "description": {
+          "type": "string",
+          "description": "Описание акции."
+        },
+        "date_start": {
+          "type": "string",
+          "description": "Дата начала акции."
+        },
+        "date_end": {
+          "type": "string",
+          "description": "Дата окончания акции."
+        },
+        "freeze_date": {
+          "type": "string",
+          "description": "Дата приостановки акции.\n\nЕсли поле заполнено, продавец не может повышать цены, изменять список товаров и уменьшать количество единиц товаров в акции.\n\nПродавец может понижать цены и увеличивать количество единиц товара в акции.\n"
+        },
+        "potential_products_count": {
+          "type": "number",
+          "format": "double",
+          "description": "Количество товаров, доступных для акции."
+        },
+        "participating_products_count": {
+          "type": "number",
+          "format": "double",
+          "description": "Количество товаров, которые участвуют в акции."
+        },
+        "is_participating": {
+          "type": "boolean",
+          "description": "Участвуете вы в этой акции или нет."
+        },
+        "is_voucher_action": {
+          "type": "boolean",
+          "description": "Признак, что для участия в акции покупателям нужен промокод."
+        },
+        "banned_products_count": {
+          "type": "number",
+          "format": "double",
+          "description": "Количество заблокированных товаров."
+        },
+        "with_targeting": {
+          "type": "boolean",
+          "description": "Признак, что акция с целевой аудиторией."
+        },
+        "order_amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Сумма заказа."
+        },
+        "discount_type": {
+          "type": "string",
+          "description": "Тип скидки."
+        },
+        "discount_value": {
+          "type": "number",
+          "format": "double",
+          "description": "Размер скидки."
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "seller_apiGetSellerProductV1Request": {
+      "required": [
+        "action_id",
+        "offset"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "action_id": {
+          "type": "number",
+          "format": "double",
+          "description": "Идентификатор акции. Можно получить с помощью метода [/v1/actions](#operation/Promos)."
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "Количество ответов на странице. По умолчанию — 100."
+        },
+        "offset": {
+          "type": "number",
+          "format": "double",
+          "description": "Количество элементов, которое будет пропущено в ответе. Например, если `offset=10`, ответ начнётся с 11-го найденного элемента.",
+          "deprecated": true
+        },
+        "last_id": {
+          "type": "number",
+          "format": "double",
+          "description": "Идентификатор последнего значения на странице. При первом запросе оставьте это поле пустым."
+        }
+      },
+      "description": "Список товаров."
+    },
+    "seller_apiGetSellerProductV1Response": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/seller_apiGetSellerProductV1ResponseResult"
+        }
+      }
+    },
+    "seller_apiGetSellerProductV1ResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/seller_apiProduct"
+          },
+          "description": "Список товаров."
+        },
+        "total": {
+          "type": "number",
+          "format": "double",
+          "description": "Общее количество товаров, которое доступно для акции."
+        },
+        "last_id": {
+          "type": "number",
+          "format": "double",
+          "description": "Идентификатор последнего значения на странице. Чтобы получить следующие значения, передайте полученное значение в следующем запросе в параметре `last_id`."
+        }
+      },
+      "description": "Результаты запроса."
+    },
+    "seller_apiProduct": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "Текущая цена товара без скидки."
+        },
+        "action_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена товара по акции."
+        },
+        "alert_max_action_price_failed": {
+          "type": "boolean",
+          "description": "`true`, если цена товара выше рекомендуемой. Товар отмечен красным и может быть исключён из акции.\n"
+        },
+        "alert_max_action_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Рекомендуемая цена товара по акции."
+        },
+        "max_action_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Максимально возможная цена товара по акции."
+        },
+        "add_mode": {
+          "type": "string",
+          "description": "Тип добавления товара в акцию: автоматически или вручную продавцом.\n"
+        },
+        "min_stock": {
+          "type": "number",
+          "format": "double",
+          "description": "Минимальное число единиц товара в акции типа «Скидка на сток»."
+        },
+        "stock": {
+          "type": "number",
+          "format": "double",
+          "description": "Число единиц товара в акции типа «Скидка на сток»."
+        }
+      }
+    },
+    "seller_apiActivateProductV1Request": {
+      "required": [
+        "action_id",
+        "products"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "action_id": {
+          "type": "number",
+          "format": "double",
+          "description": "Идентификатор акции. Можно получить с помощью метода [/v1/actions](#operation/Promos)."
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/seller_apiProductPrice"
+          },
+          "description": "Список товаров."
+        }
+      }
+    },
+    "seller_apiProductPrice": {
+      "required": [
+        "product_id",
+        "action_price"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "number",
+          "format": "double",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "action_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена товара по акции."
+        },
+        "stock": {
+          "type": "number",
+          "format": "double",
+          "description": "Количество единиц товара в акции типа «Скидка на сток»."
+        }
+      }
+    },
+    "seller_apiProductV1Response": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/seller_apiProductV1ResponseResult"
+        }
+      }
+    },
+    "seller_apiProductV1ResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_ids": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "description": "Список идентификаторов товаров, которые добавлены в акцию."
+        },
+        "rejected": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/seller_apiProductV1ResponseProduct"
+          },
+          "description": "Список товаров, которые не удалось добавить в акцию."
+        }
+      },
+      "description": "Результаты запроса."
+    },
+    "seller_apiProductV1ResponseProduct": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "number",
+          "format": "double",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Причина, почему товар не добавлен в акцию."
+        }
+      }
+    },
+    "seller_apiProductIDsV1Request": {
+      "required": [
+        "action_id",
+        "product_ids"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "action_id": {
+          "type": "number",
+          "format": "double",
+          "description": "Идентификатор акции. Можно получить с помощью метода [/v1/actions](#operation/Promos)."
+        },
+        "product_ids": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "description": "Список идентификаторов товаров в системе продавца — `product_id`."
+        }
+      }
+    },
+    "seller_apiProductV1ResponseDeactivate": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/seller_apiProductV1ResponseResultDeactivate"
+        }
+      }
+    },
+    "seller_apiProductV1ResponseResultDeactivate": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_ids": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "description": "Список идентификаторов товаров, которые удалены из акции."
+        },
+        "rejected": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/seller_apiProductV1ResponseProductDeactivate"
+          },
+          "description": "Список товаров, которые не удалось удалить из акции."
+        }
+      },
+      "description": "Результаты запроса."
+    },
+    "seller_apiProductV1ResponseProductDeactivate": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "product_id": {
+          "type": "number",
+          "format": "double",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Причина, почему товар не удалён из акции."
+        }
+      }
+    },
+    "v1GetDiscountTaskListRequest": {
+      "required": [
+        "status",
+        "limit"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/components/schemas/v1DiscountTaskStatus"
+        },
+        "page": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Страница, с которой нужно выгрузить список заявок на скидку."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Максимальное количество заявок на странице."
+        }
+      }
+    },
+    "v1DiscountTaskStatus": {
+      "type": "string",
+      "default": "UNKNOWN",
+      "enum": [
+        "NEW",
+        "SEEN",
+        "APPROVED",
+        "PARTLY_APPROVED",
+        "DECLINED",
+        "AUTO_DECLINED",
+        "DECLINED_BY_USER",
+        "COUPON",
+        "PURCHASED"
+      ],
+      "description": "Статус заявки на скидку:\n- `NEW` — новая,\n- `SEEN` — просмотренная,\n- `APPROVED` — одобренная,\n- `PARTLY_APPROVED` — одобренная частично,\n- `DECLINED` — отклонённая,\n- `AUTO_DECLINED` — отклонена автоматически,\n- `DECLINED_BY_USER` — отклонена покупателем,\n- `COUPON` — скидка по купону,\n- `PURCHASED` — купленная.\n"
+    },
+    "v1GetDiscountTaskListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1GetDiscountTaskListResponseTask"
+          },
+          "description": "Список заявок."
+        }
+      }
+    },
+    "v1GetDiscountTaskListResponseTask": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор заявки."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата создания заявки."
+        },
+        "end_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Время окончания действия заявки."
+        },
+        "edited_till": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Время для изменения решения."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус заявки."
+        },
+        "customer_name": {
+          "type": "string",
+          "description": "Имя покупателя."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "user_comment": {
+          "type": "string",
+          "description": "Комментарий покупателя к заявке."
+        },
+        "seller_comment": {
+          "type": "string",
+          "description": "Комментарий продавца к заявке."
+        },
+        "requested_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена по заявке."
+        },
+        "approved_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Одобренная цена."
+        },
+        "original_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена товара до всех скидок."
+        },
+        "discount": {
+          "type": "number",
+          "format": "double",
+          "description": "Скидка в рублях."
+        },
+        "discount_percent": {
+          "type": "number",
+          "format": "double",
+          "description": "Скидка в процентах."
+        },
+        "base_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Базовая цена, по которой товар продаётся на Ozon, если не участвует в акции."
+        },
+        "min_auto_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Минимальное значение цены после автоприменения скидок и акций."
+        },
+        "prev_task_id": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор предыдущей заявки от покупателя по этому товару."
+        },
+        "is_damaged": {
+          "type": "boolean",
+          "description": "Является ли товар уценённым. `true`, если уценённый."
+        },
+        "moderated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата модерации: просмотра, одобрения или отклонения заявки.\n"
+        },
+        "approved_discount": {
+          "type": "number",
+          "format": "double",
+          "description": "Скидка в рублях, которую одобрил продавец. Передайте значение `0`, если продавец не одобрял заявку."
+        },
+        "approved_discount_percent": {
+          "type": "number",
+          "format": "double",
+          "description": "Скидка в процентах, которую одобрил продавец. Передайте значение `0`, если продавец не одобрял заявку."
+        },
+        "is_purchased": {
+          "type": "boolean",
+          "description": "Покупал ли пользователь товар. `true`, если покупал."
+        },
+        "is_auto_moderated": {
+          "type": "boolean",
+          "description": "Была ли заявка промодерирована автоматически. `true`, если модерация была автоматической."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "email": {
+          "type": "string",
+          "description": "Электронный адрес сотрудника продавца, который обработал заявку."
+        },
+        "last_name": {
+          "type": "string",
+          "description": "Фамилия сотрудника продавца, который обработал заявку."
+        },
+        "first_name": {
+          "type": "string",
+          "description": "Имя сотрудника продавца, который обработал заявку."
+        },
+        "patronymic": {
+          "type": "string",
+          "description": "Отчество сотрудника продавца, который обработал заявку."
+        },
+        "approved_quantity_min": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Минимальное одобренное количество товаров."
+        },
+        "approved_quantity_max": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Максимальное одобренное количество товаров."
+        },
+        "requested_quantity_min": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Запрошенное минимальное количество товаров."
+        },
+        "requested_quantity_max": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Запрошенное максимальное количество товаров."
+        },
+        "requested_price_with_fee": {
+          "type": "number",
+          "format": "double",
+          "description": "Цена по заявке c региональной наценкой."
+        },
+        "approved_price_with_fee": {
+          "type": "number",
+          "format": "double",
+          "description": "Одобренная цена с региональной наценкой."
+        },
+        "approved_price_fee_percent": {
+          "type": "number",
+          "format": "double",
+          "description": "Региональная наценка в процентах."
+        }
+      }
+    },
+    "v1ApproveDiscountTasksRequest": {
+      "required": [
+        "tasks"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1ApproveDiscountTasksRequestTask"
+          },
+          "description": "Список заявок."
+        }
+      }
+    },
+    "v1ApproveDiscountTasksRequestTask": {
+      "required": [
+        "id",
+        "approved_price",
+        "approved_quantity_min",
+        "approved_quantity_max"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор заявки. Можно получить с помощью метода [/v1/actions/discounts-task/list](#operation/promos_task_list)."
+        },
+        "approved_price": {
+          "type": "number",
+          "format": "double",
+          "description": "Согласованная цена."
+        },
+        "seller_comment": {
+          "type": "string",
+          "description": "Комментарий продавца к заявке."
+        },
+        "approved_quantity_min": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Одобренное минимальное количество товаров."
+        },
+        "approved_quantity_max": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Одобренное максимальное количество товаров."
+        }
+      }
+    },
+    "v1ApproveDeclineDiscountTasksResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v1ApproveDeclineDiscountTasksResponseResult"
+        }
+      }
+    },
+    "v1ApproveDeclineDiscountTasksResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "fail_details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ApproveDeclineDiscountTasksResponseFailDetail"
+          },
+          "description": "Ошибки при создании заявки."
+        },
+        "success_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество заявок с успешной сменой статуса."
+        },
+        "fail_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество заявок, у которых не удалось сменить статус."
+        }
+      },
+      "description": "Результат работы метода."
+    },
+    "ApproveDeclineDiscountTasksResponseFailDetail": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "task_id": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор заявки."
+        },
+        "error_for_user": {
+          "type": "string",
+          "description": "Текст ошибки."
+        }
+      }
+    },
+    "v1DeclineDiscountTasksRequest": {
+      "required": [
+        "tasks"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1DeclineDiscountTasksRequestTask"
+          },
+          "description": "Список заявок."
+        }
+      }
+    },
+    "v1DeclineDiscountTasksRequestTask": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Идентификатор заявки."
+        },
+        "seller_comment": {
+          "type": "string",
+          "description": "Комментарий продавца к заявке."
+        }
+      }
+    }
+  }
+}

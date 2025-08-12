@@ -1,0 +1,1316 @@
+{
+  "metadata": {
+    "tag": "AnalyticsAPI",
+    "name": "AnalyticsAPI",
+    "displayName": "Аналитические отчёты",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 5,
+    "schemasCount": 33,
+    "generatedAt": "2025-08-09T16:28:42.340Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v1/analytics/data",
+      "method": "POST",
+      "operationId": "AnalyticsAPI_AnalyticsGetData",
+      "summary": "Данные аналитики",
+      "description": "Уĸажите период и метриĸи, ĸоторые нужно посчитать. В ответе будет аналитиĸа, сгруппированная по параметру `dimensions`.\n\nДля продавцов без подписки [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus):\n- доступны данные за последние 3 месяца,\n- есть ограничения по способам группировки данных и метрикам.\n\nДля продавцов с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus) ограничений нет.\n\nМетод можно использовать не больше 1 раза в минуту.\nСоответствует разделу **Аналитика → Графики** в личном кабинете.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Данные аналитики",
+        "description": "Уĸажите период и метриĸи, ĸоторые нужно посчитать. В ответе будет аналитиĸа, сгруппированная по параметру `dimensions`.\n\nДля продавцов без подписки [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus):\n- доступны данные за последние 3 месяца,\n- есть ограничения по способам группировки данных и метрикам.\n\nДля продавцов с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus) ограничений нет.\n\nМетод можно использовать не больше 1 раза в минуту.\nСоответствует разделу **Аналитика → Графики** в личном кабинете.\n",
+        "operationId": "AnalyticsAPI_AnalyticsGetData",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/analyticsAnalyticsGetDataRequest"
+              },
+              "example": {
+                "date_from": "2020-09-01",
+                "date_to": "2021-10-15",
+                "metrics": [
+                  "hits_view_search"
+                ],
+                "dimension": [
+                  "sku",
+                  "day"
+                ],
+                "filters": [],
+                "sort": [
+                  {
+                    "key": "hits_view_search",
+                    "order": "DESC"
+                  }
+                ],
+                "limit": 1000,
+                "offset": 0
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Данные аналитики",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/analyticsAnalyticsGetDataResponse"
+                },
+                "example": {
+                  "result": {
+                    "data": [],
+                    "totals": [
+                      0
+                    ]
+                  },
+                  "timestamp": "2021-11-25 15:19:21"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "AnalyticsAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v2/analytics/stock_on_warehouses",
+      "method": "POST",
+      "operationId": "AnalyticsAPI_AnalyticsGetStockOnWarehousesV2",
+      "summary": "Отчёт по остаткам и товарам",
+      "description": "\n<aside class=\"warning\">\nВ будущем метод будет отключён. Переключитесь на <a href=\"#operation/AnalyticsAPI_AnalyticsStocks\">/v1/analytics/stocks</a>.\n</aside>\n\nМетод для получения отчёта по остаткам и товарам в перемещении по складам Ozon.\n\n<aside class=\"warning\">\nОтличается от отчёта в разделе <b>Аналитика → Отчёты → Отчёт по остаткам и товарам в пути на склады Ozon</b> в личном кабинете.\n</aside>\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Отчёт по остаткам и товарам",
+        "description": "\n<aside class=\"warning\">\nВ будущем метод будет отключён. Переключитесь на <a href=\"#operation/AnalyticsAPI_AnalyticsStocks\">/v1/analytics/stocks</a>.\n</aside>\n\nМетод для получения отчёта по остаткам и товарам в перемещении по складам Ozon.\n\n<aside class=\"warning\">\nОтличается от отчёта в разделе <b>Аналитика → Отчёты → Отчёт по остаткам и товарам в пути на склады Ozon</b> в личном кабинете.\n</aside>\n",
+        "operationId": "AnalyticsAPI_AnalyticsGetStockOnWarehousesV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/analyticsStockOnWarehouseRequest"
+              },
+              "example": {
+                "limit": 1000,
+                "offset": 0,
+                "warehouse_type": "ALL"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Отчёт по остаткам и товарам",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/analyticsStockOnWarehouseResponse"
+                },
+                "example": {
+                  "result": {
+                    "rows": [
+                      {
+                        "free_to_sell_amount": 0,
+                        "item_code": "string",
+                        "item_name": "string",
+                        "promised_amount": 0,
+                        "reserved_amount": 0,
+                        "sku": 0,
+                        "warehouse_name": "string"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "AnalyticsAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/analytics/turnover/stocks",
+      "method": "POST",
+      "operationId": "AnalyticsAPI_StocksTurnover",
+      "summary": "Оборачиваемость товара",
+      "description": "Используйте метод, чтобы узнать оборачиваемость товара и количество дней, на которое хватит текущего остатка. \nМетод соответствует разделу [**FBO -> Управление остатками**](https://seller.ozon.ru/app/supply/stocks-management) в личном кабинете.\nВы можете делать не больше 1 запроса в минуту по одному кабинету `Client-Id`.\n    \nЕсли вы запрашиваете список товаров по `sku`, параметры `limit` и `offset` необязательны.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Оборачиваемость товара",
+        "description": "Используйте метод, чтобы узнать оборачиваемость товара и количество дней, на которое хватит текущего остатка. \nМетод соответствует разделу [**FBO -> Управление остатками**](https://seller.ozon.ru/app/supply/stocks-management) в личном кабинете.\nВы можете делать не больше 1 запроса в минуту по одному кабинету `Client-Id`.\n    \nЕсли вы запрашиваете список товаров по `sku`, параметры `limit` и `offset` необязательны.\n",
+        "operationId": "AnalyticsAPI_StocksTurnover",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1AnalyticsTurnoverStocksRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация об оборачиваемости",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1AnalyticsTurnoverStocksResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "AnalyticsAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/analytics/product-queries",
+      "method": "POST",
+      "operationId": "AnalyticsAPI_AnalyticsProductQueries",
+      "summary": "Получить информацию о запросах моих товаров",
+      "description": "Используйте метод, чтобы получить данные о запросах ваших товаров. Полная аналитика доступна с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus). Без подписки вы можете посмотреть часть показателей. Метод аналогичен вкладке **Товары в поиске → Запросы моего товара** в личном кабинете.\n\nАналитику по запросам можно проверить за определённые даты. Для этого укажите интервал в полях `date_from` и `date_to`. Данные за последний месяц доступны в любом интервале, кроме трёх дней от текущей даты — в эти дни происходит расчёт. Аналитика за даты позже, чем месяц назад, доступна только с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus) и только по неделям — в запросе укажите параметр `date_from`.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить информацию о запросах моих товаров",
+        "description": "Используйте метод, чтобы получить данные о запросах ваших товаров. Полная аналитика доступна с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus). Без подписки вы можете посмотреть часть показателей. Метод аналогичен вкладке **Товары в поиске → Запросы моего товара** в личном кабинете.\n\nАналитику по запросам можно проверить за определённые даты. Для этого укажите интервал в полях `date_from` и `date_to`. Данные за последний месяц доступны в любом интервале, кроме трёх дней от текущей даты — в эти дни происходит расчёт. Аналитика за даты позже, чем месяц назад, доступна только с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus) и только по неделям — в запросе укажите параметр `date_from`.\n",
+        "operationId": "AnalyticsAPI_AnalyticsProductQueries",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1AnalyticsProductQueriesRequest"
+              },
+              "example": {
+                "date_from": "2019-08-24T14:15:22Z",
+                "date_to": "2019-08-24T14:15:22Z",
+                "page": 1,
+                "page_size": 1000,
+                "skus": [
+                  "string"
+                ],
+                "sort_by": "BY_SEARCHES",
+                "sort_dir": "DESCENDING"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о запросах моих товаров",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1AnalyticsProductQueriesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "AnalyticsAPI"
+        ]
+      }
+    },
+    {
+      "path": "/v1/analytics/product-queries/details",
+      "method": "POST",
+      "operationId": "AnalyticsAPI_AnalyticsProductQueriesDetails",
+      "summary": "Получить детализацию запросов по товару",
+      "description": "Используйте метод, чтобы получить данные по запросам на конкретный товар. Полная аналитика доступна с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus). Без подписки вы можете посмотреть часть показателей. Метод аналогичен просмотру данных по товару на вкладке **Товары в поиске → Запросы моего товара** в личном кабинете.\n\nАналитику по запросам можно проверить за определённые даты. Для этого укажите интервал в полях `date_from` и `date_to`. Данные за последний месяц доступны в любом интервале, кроме трёх дней от текущей даты — в эти дни происходит расчёт. Аналитика за даты позже, чем месяц назад, доступна только с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus) и только по неделям — в запросе укажите параметр `date_from`.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Получить детализацию запросов по товару",
+        "description": "Используйте метод, чтобы получить данные по запросам на конкретный товар. Полная аналитика доступна с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus). Без подписки вы можете посмотреть часть показателей. Метод аналогичен просмотру данных по товару на вкладке **Товары в поиске → Запросы моего товара** в личном кабинете.\n\nАналитику по запросам можно проверить за определённые даты. Для этого укажите интервал в полях `date_from` и `date_to`. Данные за последний месяц доступны в любом интервале, кроме трёх дней от текущей даты — в эти дни происходит расчёт. Аналитика за даты позже, чем месяц назад, доступна только с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus) и только по неделям — в запросе укажите параметр `date_from`.\n",
+        "operationId": "AnalyticsAPI_AnalyticsProductQueriesDetails",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1AnalyticsProductQueriesDetailsRequest"
+              },
+              "example": {
+                "date_from": "2019-08-24T14:15:22Z",
+                "date_to": "2019-08-24T14:15:22Z",
+                "limit_by_sku": 0,
+                "page": 1,
+                "page_size": 1000,
+                "skus": [
+                  "string"
+                ],
+                "sort_by": "BY_SEARCHES",
+                "sort_dir": "DESCENDING"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о запросах по конкретному товару",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1AnalyticsProductQueriesDetailsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "403": {
+              "description": "Доступ запрещён",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "../../components/schemas/rpcStatus.yaml"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Ответ не найден",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "../../components/schemas/rpcStatus.yaml"
+                  }
+                }
+              }
+            },
+            "409": {
+              "description": "Конфликт запроса",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "../../components/schemas/rpcStatus.yaml"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Внутренняя ошибка сервера",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "../../components/schemas/rpcStatus.yaml"
+                  }
+                }
+              }
+            },
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "AnalyticsAPI"
+        ]
+      }
+    }
+  ],
+  "schemas": {
+    "analyticsAnalyticsGetDataRequest": {
+      "required": [
+        "date_from",
+        "date_to",
+        "dimension",
+        "metrics",
+        "limit"
+      ],
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "description": "Дата, с которой будут данные в отчёте.\n\nЕсли у вас нет Premium-подписки, укажите дату в пределах последних трёх месяцев.\n"
+        },
+        "date_to": {
+          "type": "string",
+          "description": "Дата, по которую будут данные в отчёте."
+        },
+        "dimension": {
+          "items": {
+            "$ref": "#/components/schemas/seller_serviceanalyticsDimension"
+          },
+          "type": "array",
+          "description": "Группировка данных в отчёте.\n\nСпособы группировки, доступные всем продавцам:\n  - `unknownDimension` — неизвестное измерение,\n  - `sku` — идентификатор товара,\n  - `spu` — идентификатор товара,\n  - `day` — день,\n  - `week` — неделя,\n  - `month` — месяц.\n\nСпособы группировки, доступные только продавцам с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus):\n  - `year` — год,\n  - `category1` — категория первого уровня,\n  - `category2` — категория второго уровня,\n  - `category3` — категория третьего уровня,\n  - `category4` — категория четвертого уровня,\n  - `brand` — бренд,\n  - `modelID` — модель.\n"
+        },
+        "filters": {
+          "items": {
+            "$ref": "#/components/schemas/analyticsFilter"
+          },
+          "type": "array",
+          "description": "Фильтры."
+        },
+        "limit": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество значений в ответе:\n  - максимум — 1000,\n  - минимум — 1.\n"
+        },
+        "metrics": {
+          "items": {
+            "$ref": "#/components/schemas/analyticsMetric"
+          },
+          "type": "array",
+          "description": "Укажите до 14 метрик. Если их будет больше, вы получите ошибку с кодом `InvalidArgument`.\n\nСписок метриĸ, по ĸоторым будет сформирован отчёт.\n\nМетрики, доступные всем продавцам:\n  - `revenue` — заказано на сумму,\n  - `ordered_units` — заказано товаров.\n\nМетрики, доступные только продавцам с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus):\n  - `unknown_metric` — неизвестная метрика.\n  - `hits_view_search` — показы в поиске и в категории.\n  - `hits_view_pdp` — показы на карточке товара.\n  - `hits_view` — всего показов.\n  - `hits_tocart_search` — в корзину из поиска или категории.\n  - `hits_tocart_pdp` — в корзину из карточки товара.\n  - `hits_tocart` — всего добавлено в корзину.\n  - `session_view_search` — сессии с показом в поиске или в каталоге. Считаются уникальные посетители с просмотром в поиске или каталоге.\n  - `session_view_pdp` — сессии с показом на карточке товара. Считаются уникальные посетители, которые просмотрели карточку товара.\n  - `session_view` — всего сессий. Считаются уникальные посетители.\n  - `conv_tocart_search` — конверсия в корзину из поиска или категории.\n  - `conv_tocart_pdp` — конверсия в корзину из карточки товара.\n  - `conv_tocart` — общая конверсия в корзину.\n  - `returns` — возвращено товаров.\n  - `cancellations` — отменено товаров.\n  - `delivered_units` — доставлено товаров.\n  - `position_category` — позиция в поиске и категории.\n"
+        },
+        "offset": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество элементов, которое будет пропущено в ответе. Например, если `offset = 10`, то ответ начнётся с 11-го найденного элемента."
+        },
+        "sort": {
+          "items": {
+            "$ref": "#/components/schemas/analyticsSorting"
+          },
+          "type": "array",
+          "description": "Настройки сортировки отчёта."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "seller_serviceanalyticsDimension": {
+      "default": "unknownDimension",
+      "enum": null,
+      "type": "string",
+      "title": "string"
+    },
+    "analyticsFilter": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Параметр сортировки. Можно передать любой атрибут из параметров `dimension` и `metric`, кроме атрибута `brand`."
+        },
+        "op": {
+          "$ref": "#/components/schemas/FilterOp"
+        },
+        "value": {
+          "type": "string",
+          "description": "Значение для сравнения."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "FilterOp": {
+      "default": "EQ",
+      "enum": null,
+      "type": "string",
+      "title": "string",
+      "description": "<br>\n\nОперация сравнения:\n  - `EQ` — равно,\n  - `GT` — больше,\n  - `GTE` — больше или равно,\n  - `LT` — меньше,\n  - `LTE` — меньше или равно.\n"
+    },
+    "analyticsMetric": {
+      "default": "unknown_metric",
+      "enum": null,
+      "type": "string",
+      "title": "string"
+    },
+    "analyticsSorting": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Метрика, по которой будет отсортирован результат запроса."
+        },
+        "order": {
+          "$ref": "#/components/schemas/SortingOrder"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "SortingOrder": {
+      "default": "ASC",
+      "enum": null,
+      "type": "string",
+      "title": "string",
+      "description": "Вид сортировки:\n  - `ASC` — по возрастанию,\n  - `DESC` — по убыванию.\n"
+    },
+    "analyticsAnalyticsGetDataResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/AnalyticsGetDataResponseResult"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Время создания отчёта."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "AnalyticsGetDataResponseResult": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/components/schemas/analyticsDataRow"
+          },
+          "type": "array",
+          "description": "Массив данных."
+        },
+        "totals": {
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "type": "array",
+          "description": "Итоговые и средние значения метрик."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результаты запроса."
+    },
+    "analyticsDataRow": {
+      "properties": {
+        "dimensions": {
+          "items": {
+            "$ref": "#/components/schemas/analyticsDataRowDimension"
+          },
+          "type": "array",
+          "description": "Группировка данных в отчёте."
+        },
+        "metrics": {
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "type": "array",
+          "description": "Список значений метрики."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "analyticsDataRowDimension": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "name": {
+          "type": "string",
+          "description": "Наименование."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "analyticsStockOnWarehouseRequest": {
+      "required": [
+        "limit"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество ответов на странице. По умолчанию — 100."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество элементов, которое будет пропущено в ответе. Например, если `offset = 10`, то ответ начнётся с 11-го найденного элемента."
+        },
+        "warehouse_type": {
+          "$ref": "#/components/schemas/AnalyticsGetStockOnWarehousesRequestWarehouseType"
+        }
+      }
+    },
+    "AnalyticsGetStockOnWarehousesRequestWarehouseType": {
+      "default": "ALL",
+      "enum": [
+        "ALL",
+        "EXPRESS_DARK_STORE",
+        "NOT_EXPRESS_DARK_STORE"
+      ],
+      "description": "Фильтр по типу склада:\n  - `EXPRESS_DARK_STORE` — склады Ozon с доставкой Fresh.\n  - `NOT_EXPRESS_DARK_STORE` — склады Ozon без доставки Fresh.\n  - `ALL` — все склады Ozon.\n",
+      "type": "string"
+    },
+    "analyticsStockOnWarehouseResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/analyticsStockOnWarehouseResponseResult"
+        }
+      }
+    },
+    "analyticsStockOnWarehouseResponseResult": {
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса.",
+      "properties": {
+        "rows": {
+          "type": "array",
+          "description": "Информация о товарах и остатках.",
+          "items": {
+            "$ref": "#/components/schemas/analyticsStockOnWarehouseResultRows"
+          }
+        }
+      }
+    },
+    "analyticsStockOnWarehouseResultRows": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "item_code": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "item_name": {
+          "type": "string",
+          "description": "Название товара в системе Ozon."
+        },
+        "free_to_sell_amount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество товара, доступное к продаже на Ozon."
+        },
+        "promised_amount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество товара, указанное в подтверждённых будущих поставках."
+        },
+        "reserved_amount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество товара, зарезервированное для покупки, возврата и перевозки между складами."
+        },
+        "warehouse_name": {
+          "type": "string",
+          "description": "Название склада, где находится товар."
+        }
+      }
+    },
+    "v1AnalyticsTurnoverStocksRequest": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1000,
+          "description": "Количество значений в ответе.\n"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество элементов, которое будет пропущено в ответе.\n\nНапример, если `offset = 10`, ответ начнётся с 11-го найденного элемента.\n"
+        },
+        "sku": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "description": "Идентификаторы товаров в системе Ozon — SKU."
+        }
+      }
+    },
+    "v1AnalyticsTurnoverStocksResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Товары.",
+          "items": {
+            "$ref": "#/components/schemas/v1AnalyticsTurnoverStocksResponseItem"
+          }
+        }
+      }
+    },
+    "v1AnalyticsTurnoverStocksResponseItem": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "ads": {
+          "type": "number",
+          "format": "double",
+          "description": "Среднесуточное количество проданных единиц товара за последние 60 дней."
+        },
+        "current_stock": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Остаток товара, шт."
+        },
+        "idc": {
+          "type": "number",
+          "format": "double",
+          "description": "На сколько дней хватит остатка товара с учётом среднесуточных продаж."
+        },
+        "idc_grade": {
+          "type": "string",
+          "enum": [
+            "GRADES_NONE",
+            "GRADES_NOSALES",
+            "GRADES_GREEN",
+            "GRADES_YELLOW",
+            "GRADES_RED",
+            "GRADES_CRITICAL"
+          ],
+          "default": "GRADES_NONE",
+          "description": "Уровень остатка товара:\n- `GRADES_NONE` — ожидаются поставки;\n- `GRADES_NOSALES` — нет продаж;\n- `GRADES_GREEN` — зелёный, «хороший»;\n- `GRADES_YELLOW` — жёлтый, «средний»;\n- `GRADES_RED` — красный, «плохой»;\n- `GRADES_CRITICAL` — критический.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "turnover": {
+          "type": "number",
+          "format": "double",
+          "description": "Фактическая оборачиваемость в днях."
+        },
+        "turnover_grade": {
+          "type": "string",
+          "enum": [
+            "GRADES_NONE",
+            "GRADES_NOSALES",
+            "GRADES_GREEN",
+            "GRADES_YELLOW",
+            "GRADES_RED",
+            "GRADES_CRITICAL"
+          ],
+          "default": "GRADES_NONE",
+          "description": "Уровень оборачиваемости:\n- `GRADES_NONE` — ожидаются поставки;\n- `GRADES_NOSALES` — нет продаж;\n- `GRADES_GREEN` — зелёный, «хороший»;\n- `GRADES_YELLOW` — жёлтый, «средний»;\n- `GRADES_RED` — красный, «плохой»;\n- `GRADES_CRITICAL` — критический.\n"
+        }
+      }
+    },
+    "v1AnalyticsProductQueriesRequest": {
+      "type": "object",
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата начала формирования аналитики."
+        },
+        "date_to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата окончания формирования аналитики."
+        },
+        "page": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Номер страницы, возвращаемой в запросе."
+        },
+        "page_size": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество элементов на странице."
+        },
+        "skus": {
+          "type": "array",
+          "description": "Список SKU, идентификаторов товара в системе Ozon. По ним вернётся аналитика по запросам. Максимум — 1000 SKU.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "sort_by": {
+          "$ref": "#/components/schemas/AnalyticsProductQueriesRequestSortBy"
+        },
+        "sort_dir": {
+          "$ref": "#/components/schemas/AnalyticsProductQueriesRequestSortDir"
+        }
+      },
+      "required": [
+        "page_size",
+        "date_from",
+        "skus"
+      ]
+    },
+    "AnalyticsProductQueriesRequestSortBy": {
+      "type": "string",
+      "description": "Параметр, по которому товары будут отсортированы. Возможные значения: \n- `BY_SEARCHES` — по количеству запросов;\n- `BY_VIEWS` — по количеству просмотров;\n- `BY_POSITION` — по средней позиции товара;\n- `BY_CONVERSION` — по значению конверсии;\n- `BY_GMV` — по объёму продаж по запросам.\n",
+      "default": "BY_SEARCHES",
+      "enum": [
+        "BY_SEARCHES",
+        "BY_VIEWS",
+        "BY_POSITION",
+        "BY_CONVERSION",
+        "BY_GMV"
+      ]
+    },
+    "AnalyticsProductQueriesRequestSortDir": {
+      "type": "string",
+      "default": "DESCENDING",
+      "description": "Направление сортировки:\n- `DESCENDING` — по убыванию;\n- `ASCENDING` — по возрастанию.\n",
+      "enum": [
+        "DESCENDING",
+        "ASCENDING"
+      ]
+    },
+    "v1AnalyticsProductQueriesResponse": {
+      "type": "object",
+      "properties": {
+        "analytics_period": {
+          "$ref": "#/components/schemas/AnalyticsProductQueriesResponseAnalyticsPeriod"
+        },
+        "items": {
+          "type": "array",
+          "description": "Список товаров.",
+          "items": {
+            "$ref": "#/components/schemas/v1AnalyticsProductQueriesResponseItem"
+          }
+        },
+        "page_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество страниц."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Общее количество запросов."
+        }
+      }
+    },
+    "AnalyticsProductQueriesResponseAnalyticsPeriod": {
+      "type": "object",
+      "description": "Период, за который формируется аналитика.",
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "description": "Дата начала формирования аналитики."
+        },
+        "date_to": {
+          "type": "string",
+          "description": "Дата окончания формирования аналитики."
+        }
+      }
+    },
+    "v1AnalyticsProductQueriesResponseItem": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Название категории."
+        },
+        "currency": {
+          "type": "string",
+          "description": "Валюта."
+        },
+        "gmv": {
+          "type": "number",
+          "format": "float",
+          "description": "Продажи по запросам."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "position": {
+          "type": "number",
+          "format": "float",
+          "description": "Средняя позиция товара. Доступно только с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus), иначе поле вернётся пустым."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "unique_search_users": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество покупателей, которые искали ваш товар на Ozon."
+        },
+        "unique_view_users": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество покупателей, которые увидели ваш товар на Ozon. Доступно только с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus), иначе поле вернётся пустым."
+        },
+        "view_conversion": {
+          "type": "number",
+          "format": "float",
+          "description": "Конверсия из просмотра товара. Доступно только с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus), иначе поле вернётся пустым."
+        }
+      }
+    },
+    "v1AnalyticsProductQueriesDetailsRequest": {
+      "type": "object",
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата начала формирования аналитики."
+        },
+        "date_to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата окончания формирования аналитики."
+        },
+        "limit_by_sku": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Лимит числа запросов по одному SKU. Максимум — 15 запросов."
+        },
+        "page": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Номер страницы, возвращаемой в запросе. Минимум — 0."
+        },
+        "page_size": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Количество элементов на странице. Максимум — 100."
+        },
+        "skus": {
+          "type": "array",
+          "description": "Список SKU, идентификаторов товара в системе Ozon. По ним вернётся аналитика по запросам. Максимум — 1000 SKU.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "sort_by": {
+          "$ref": "#/components/schemas/v1AnalyticsProductQueriesDetailsRequestSortBy"
+        },
+        "sort_dir": {
+          "$ref": "#/components/schemas/v1AnalyticsProductQueriesDetailsRequestSortDir"
+        }
+      },
+      "required": [
+        "page_size",
+        "date_from",
+        "skus",
+        "limit_by_sku"
+      ]
+    },
+    "v1AnalyticsProductQueriesDetailsRequestSortBy": {
+      "type": "string",
+      "description": "Параметр, по которому товары будут отсортированы. Возможные значения: \n- `BY_SEARCHES` — по количеству запросов;\n- `BY_VIEWS` — по количеству просмотров;\n- `BY_POSITION` — по средней позиции товара;\n- `BY_CONVERSION` — по значению конверсии;\n- `BY_GMV` — по объёму продаж по запросам.\n\nСортировка по параметрам `BY_VIEWS`, `BY_POSITION` и `BY_CONVERSION` доступна только с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus).\n",
+      "default": "BY_SEARCHES",
+      "enum": [
+        "BY_SEARCHES",
+        "BY_VIEWS",
+        "BY_POSITION",
+        "BY_CONVERSION",
+        "BY_GMV"
+      ]
+    },
+    "v1AnalyticsProductQueriesDetailsRequestSortDir": {
+      "type": "string",
+      "default": "DESCENDING",
+      "description": "Направление сортировки:\n- `DESCENDING` — по убыванию;\n- `ASCENDING` — по возрастанию.\n",
+      "enum": [
+        "DESCENDING",
+        "ASCENDING"
+      ]
+    },
+    "v1AnalyticsProductQueriesDetailsResponse": {
+      "type": "object",
+      "properties": {
+        "analytics_period": {
+          "$ref": "#/components/schemas/v1AnalyticsProductQueriesDetailsResponseAnalyticsPeriod"
+        },
+        "page_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество страниц."
+        },
+        "queries": {
+          "type": "array",
+          "description": "Список запросов.",
+          "items": {
+            "$ref": "#/components/schemas/AnalyticsProductQueriesDetailsResponseQuery"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Общее количество запросов."
+        }
+      }
+    },
+    "v1AnalyticsProductQueriesDetailsResponseAnalyticsPeriod": {
+      "type": "object",
+      "description": "Период, за который формируется аналитика.",
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "description": "Дата начала формирования аналитики."
+        },
+        "date_to": {
+          "type": "string",
+          "description": "Дата окончания формирования аналитики."
+        }
+      }
+    },
+    "AnalyticsProductQueriesDetailsResponseQuery": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "Валюта."
+        },
+        "gmv": {
+          "type": "number",
+          "format": "float",
+          "description": "Продажи по запросам."
+        },
+        "order_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество заказов по запросу."
+        },
+        "position": {
+          "type": "number",
+          "format": "float",
+          "description": "Средняя позиция товара. Доступно только с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus), иначе поле вернётся пустым."
+        },
+        "query": {
+          "type": "string",
+          "description": "Текст запроса."
+        },
+        "query_index": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Порядковый номер запроса."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "unique_search_users": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество покупателей, которые искали ваш товар на Ozon."
+        },
+        "unique_view_users": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Количество покупателей, которые увидели ваш товар на Ozon. Доступно только с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus), иначе поле вернётся пустым."
+        },
+        "view_conversion": {
+          "type": "number",
+          "format": "float",
+          "description": "Конверсия из просмотра товара. Доступно только с подпиской [Premium](https://seller-edu.ozon.ru/seller-rating/about-rating/premium-program) или [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus), иначе поле вернётся пустым."
+        }
+      }
+    }
+  }
+}

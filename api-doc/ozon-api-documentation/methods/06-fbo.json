@@ -1,0 +1,2513 @@
+{
+  "metadata": {
+    "tag": "FBO",
+    "name": "FBO",
+    "displayName": "Доставка FBO",
+    "description": "",
+    "externalDocs": null,
+    "directory": "methods",
+    "groupInfo": {
+      "groupName": "Методы Seller API",
+      "groupIndex": 1,
+      "dataSelector": null
+    },
+    "endpointsCount": 13,
+    "schemasCount": 69,
+    "generatedAt": "2025-08-09T16:28:42.335Z"
+  },
+  "endpoints": [
+    {
+      "path": "/v2/posting/fbo/list",
+      "method": "POST",
+      "operationId": "PostingAPI_GetFboPostingList",
+      "summary": "Список отправлений",
+      "description": "Возвращает список отправлений за указанный период времени.\n Если период больше года, вернётся ошибка `PERIOD_IS_TOO_LONG`.\n \n Дополнительно можно отфильтровать отправления по их статусу.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список отправлений",
+        "description": "Возвращает список отправлений за указанный период времени.\n Если период больше года, вернётся ошибка `PERIOD_IS_TOO_LONG`.\n \n Дополнительно можно отфильтровать отправления по их статусу.\n",
+        "operationId": "PostingAPI_GetFboPostingList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingGetFboPostingListRequest"
+              },
+              "example": {
+                "dir": "ASC",
+                "filter": {
+                  "since": "2021-09-01T00:00:00.000Z",
+                  "status": "",
+                  "to": "2021-11-17T10:44:12.828Z"
+                },
+                "limit": 5,
+                "offset": 0,
+                "translit": true,
+                "with": {
+                  "analytics_data": true,
+                  "financial_data": true,
+                  "legal_info": false
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список отправлений",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2FboPostingListResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "order_id": 354680487,
+                      "order_number": "16965409-0014",
+                      "posting_number": "16965409-0014-1",
+                      "status": "delivered",
+                      "cancel_reason_id": 0,
+                      "created_at": "2021-09-01T00:23:45.607000Z",
+                      "in_process_at": "2021-09-01T00:25:30.120000Z",
+                      "legal_info": {
+                        "company_name": "string",
+                        "inn": "string",
+                        "kpp": "string"
+                      },
+                      "products": [
+                        {
+                          "sku": 160249683,
+                          "name": "Так говорил Омар Хайям. Жизнеописание. Афоризмы и рубайят. Классика в словах и картинках",
+                          "quantity": 1,
+                          "offer_id": "978-5-906864-56-7",
+                          "price": "81.00",
+                          "is_marketplace_buyout": true,
+                          "digital_codes": [],
+                          "currency_code": "RUB"
+                        }
+                      ],
+                      "analytics_data": {
+                        "city": "",
+                        "delivery_type": "PVZ",
+                        "is_premium": false,
+                        "payment_type_group_name": "Карты оплаты",
+                        "warehouse_id": 17717042026000,
+                        "warehouse_name": "РОСТОВ-НА-ДОНУ_РФЦ",
+                        "is_legal": false
+                      },
+                      "financial_data": {
+                        "products": [
+                          {
+                            "commission_amount": 12.15,
+                            "commission_percent": 15,
+                            "payout": 68.85,
+                            "product_id": 160249683,
+                            "currency_code": "RUB",
+                            "old_price": 115,
+                            "price": 81,
+                            "total_discount_value": 34,
+                            "total_discount_percent": 29.57,
+                            "actions": [
+                              "Системная виртуальная скидка селлера"
+                            ],
+                            "quantity": 0
+                          }
+                        ]
+                      },
+                      "additional_data": []
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBO"
+        ]
+      }
+    },
+    {
+      "path": "/v2/posting/fbo/get",
+      "method": "POST",
+      "operationId": "PostingAPI_GetFboPosting",
+      "summary": "Информация об отправлении",
+      "description": "Возвращает информацию об отправлении по его идентификатору.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Информация об отправлении",
+        "description": "Возвращает информацию об отправлении по его идентификатору.",
+        "operationId": "PostingAPI_GetFboPosting",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postingGetFboPostingRequest"
+              },
+              "example": {
+                "posting_number": "50520644-0012-7",
+                "translit": true,
+                "with": {
+                  "analytics_data": true,
+                  "financial_data": true,
+                  "legal_info": false
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация об отправлении",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2FboPostingResponse"
+                },
+                "example": {
+                  "result": {
+                    "order_id": 354679434,
+                    "order_number": "50520644-0012",
+                    "posting_number": "50520644-0012-7",
+                    "status": "delivered",
+                    "cancel_reason_id": 0,
+                    "created_at": "2021-09-01T00:34:56.563Z",
+                    "in_process_at": "2021-09-01T00:34:56.103Z",
+                    "legal_info": {
+                      "company_name": "string",
+                      "inn": "string",
+                      "kpp": "string"
+                    },
+                    "products": [
+                      {
+                        "sku": 254665483,
+                        "name": "Мочалка натуральная из люфы с деревянной ручкой",
+                        "quantity": 1,
+                        "offer_id": "PS1033",
+                        "price": "137.00",
+                        "is_marketplace_buyout": true,
+                        "digital_codes": [],
+                        "currency_code": "RUB"
+                      }
+                    ],
+                    "analytics_data": {
+                      "city": "",
+                      "delivery_type": "Courier",
+                      "is_premium": false,
+                      "payment_type_group_name": "Карты оплаты",
+                      "warehouse_id": 15431806189000,
+                      "warehouse_name": "ХОРУГВИНО_РФЦ",
+                      "is_legal": false
+                    },
+                    "financial_data": {
+                      "products": [
+                        {
+                          "commission_amount": 13.7,
+                          "commission_percent": 10,
+                          "payout": 123.3,
+                          "product_id": 254665483,
+                          "currency_code": "RUB",
+                          "old_price": 198,
+                          "price": 137,
+                          "total_discount_value": 61,
+                          "total_discount_percent": 30.81,
+                          "actions": [
+                            "Системная виртуальная скидка селлера"
+                          ],
+                          "quantity": 0
+                        }
+                      ]
+                    },
+                    "additional_data": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Неверный параметр",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Доступ запрещён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ответ не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Конфликт запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Внутренняя ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBO"
+        ]
+      }
+    },
+    {
+      "path": "/v1/posting/fbo/cancel-reason/list",
+      "method": "POST",
+      "operationId": "PostingAPI_GetPostingFboCancelReasonList",
+      "summary": "Причины отмены отправлений по схеме FBO",
+      "description": "Возвращает список причин отмены для всех FBO-отправлений.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Причины отмены отправлений по схеме FBO",
+        "description": "Возвращает список причин отмены для всех FBO-отправлений.",
+        "operationId": "PostingAPI_GetPostingFboCancelReasonList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Причины отмены отправлений",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CancelReasonListResponse"
+                },
+                "example": {
+                  "result": [
+                    {
+                      "id": 352,
+                      "title": "Товар закончился на складе продавца",
+                      "type_id": "seller",
+                      "is_available_for_cancellation": true
+                    },
+                    {
+                      "id": 401,
+                      "title": "Продавец отклонил арбитраж",
+                      "type_id": "seller",
+                      "is_available_for_cancellation": false
+                    },
+                    {
+                      "id": 402,
+                      "title": "Другое (вина продавца)",
+                      "type_id": "seller",
+                      "is_available_for_cancellation": true
+                    },
+                    {
+                      "id": 666,
+                      "title": "Возврат из службы доставки: нет доставки в указанный регион",
+                      "type_id": "seller",
+                      "is_available_for_cancellation": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "FBO"
+        ]
+      }
+    },
+    {
+      "path": "/v1/supply-order/status/counter",
+      "method": "POST",
+      "operationId": "SupplyOrderAPI_SupplyOrderStatusCounter",
+      "summary": "Количество заявок по статусам",
+      "description": "Возвращает количество заявок в конкретном статусе.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Количество заявок по статусам",
+        "description": "Возвращает количество заявок в конкретном статусе.",
+        "tags": [
+          "FBO"
+        ],
+        "operationId": "SupplyOrderAPI_SupplyOrderStatusCounter",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/commonEmpty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус заявки и количество заявок в этом статусе",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1SupplyOrderStatusCounterResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/supply-order/bundle",
+      "method": "POST",
+      "operationId": "SupplyOrderBundle",
+      "summary": "Состав поставки или заявки на поставку",
+      "description": "Используйте метод, чтобы получить товарный состав поставки или черновика заявки на поставку.\nОдним вызовом метода можно получить состав одной поставки или черновика заявки.\n",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "tags": [
+          "FBO"
+        ],
+        "summary": "Состав поставки или заявки на поставку",
+        "operationId": "SupplyOrderBundle",
+        "description": "Используйте метод, чтобы получить товарный состав поставки или черновика заявки на поставку.\nОдним вызовом метода можно получить состав одной поставки или черновика заявки.\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetSupplyOrderBundleRequest"
+              },
+              "example": {
+                "bundle_ids": [
+                  "string"
+                ],
+                "is_asc": true,
+                "limit": 100,
+                "query": "string",
+                "sort_field": "UNSPECIFIED"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Состав поставки",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetSupplyOrderBundleResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/supply-order/list",
+      "method": "POST",
+      "operationId": "SupplyOrderAPI_GetSupplyOrdersListV2",
+      "summary": "Список заявок на поставку на склад Ozon",
+      "description": "Учитываются заявки с поставкой на конкретный склад и через [виртуальный распределительный центр (вРЦ)](https://seller-edu.ozon.ru/fbo/scheme-of-work/about#чем-отличаются-процессы-при-заявках-через-врц-и-напрямую-на-склад).",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Список заявок на поставку на склад Ozon",
+        "description": "Учитываются заявки с поставкой на конкретный склад и через [виртуальный распределительный центр (вРЦ)](https://seller-edu.ozon.ru/fbo/scheme-of-work/about#чем-отличаются-процессы-при-заявках-через-врц-и-напрямую-на-склад).",
+        "tags": [
+          "FBO"
+        ],
+        "operationId": "SupplyOrderAPI_GetSupplyOrdersListV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetSupplyOrdersListRequest"
+              },
+              "example": {
+                "filter": {
+                  "states": [
+                    "ORDER_STATE_COMPLETED",
+                    "ORDER_STATE_DATA_FILLING"
+                  ]
+                },
+                "paging": {
+                  "from_supply_order_id": 0,
+                  "limit": 100
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список заявок на поставку",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetSupplyOrdersListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v2/supply-order/get",
+      "method": "POST",
+      "operationId": "SupplyOrderAPI_GetSupplyOrdersV2",
+      "summary": "Информация о заявке на поставку",
+      "description": "Учитываются заявки с поставкой на конкретный склад и через [виртуальный распределительный центр (вРЦ)](https://seller-edu.ozon.ru/fbo/scheme-of-work/about#чем-отличаются-процессы-при-заявках-через-врц-и-напрямую-на-склад).",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Информация о заявке на поставку",
+        "description": "Учитываются заявки с поставкой на конкретный склад и через [виртуальный распределительный центр (вРЦ)](https://seller-edu.ozon.ru/fbo/scheme-of-work/about#чем-отличаются-процессы-при-заявках-через-врц-и-напрямую-на-склад).",
+        "tags": [
+          "FBO"
+        ],
+        "operationId": "SupplyOrderAPI_GetSupplyOrdersV2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v2GetSupplyOrdersRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Информация о заявке",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2GetSupplyOrdersResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/supply-order/timeslot/get",
+      "method": "POST",
+      "operationId": "SupplyOrderAPI_GetSupplyOrderTimeslots",
+      "summary": "Интервалы поставки",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Интервалы поставки",
+        "tags": [
+          "FBO"
+        ],
+        "operationId": "SupplyOrderAPI_GetSupplyOrderTimeslots",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetSupplyOrderTimeslotsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Список интервалов поставки",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetSupplyOrderTimeslotsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/supply-order/timeslot/update",
+      "method": "POST",
+      "operationId": "SupplyOrderAPI_UpdateSupplyOrderTimeslot",
+      "summary": "Обновить интервал поставки",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Обновить интервал поставки",
+        "tags": [
+          "FBO"
+        ],
+        "operationId": "SupplyOrderAPI_UpdateSupplyOrderTimeslot",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1UpdateSupplyOrderTimeslotRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Интервал обновлён",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1UpdateSupplyOrderTimeslotResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/supply-order/timeslot/status",
+      "method": "POST",
+      "operationId": "SupplyOrderAPI_GetSupplyOrderTimeslotStatus",
+      "summary": "Статус интервала поставки",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Статус интервала поставки",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "tags": [
+          "FBO"
+        ],
+        "operationId": "SupplyOrderAPI_GetSupplyOrderTimeslotStatus",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1GetSupplyOrderTimeslotStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус данных",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetSupplyOrderTimeslotStatusResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/supply-order/pass/create",
+      "method": "POST",
+      "operationId": "SupplyOrderAPI_SupplyOrderPassCreate",
+      "summary": "Указать данные о водителе и автомобиле",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Указать данные о водителе и автомобиле",
+        "tags": [
+          "FBO"
+        ],
+        "operationId": "SupplyOrderAPI_SupplyOrderPassCreate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1SupplyOrderPassCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Данные указаны",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1SupplyOrderPassCreateResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/supply-order/pass/status",
+      "method": "POST",
+      "operationId": "SupplyOrderAPI_SupplyOrderPassStatus",
+      "summary": "Статус ввода данных о водителе и автомобиле",
+      "description": null,
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Статус ввода данных о водителе и автомобиле",
+        "tags": [
+          "FBO"
+        ],
+        "operationId": "SupplyOrderAPI_SupplyOrderPassStatus",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1SupplyOrderPassStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Статус",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1SupplyOrderPassStatusResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/googlerpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "/v1/supplier/available_warehouses",
+      "method": "GET",
+      "operationId": "SupplierAPI_SupplierAvailableWarehouses",
+      "summary": "Загруженность складов Ozon",
+      "description": "Метод возвращает список активных складов Ozon с информацией об их средней загруженности на ближайшее время.",
+      "deprecated": false,
+      "security": null,
+      "operation": {
+        "summary": "Загруженность складов Ozon",
+        "description": "Метод возвращает список активных складов Ozon с информацией об их средней загруженности на ближайшее время.",
+        "tags": [
+          "FBO"
+        ],
+        "operationId": "SupplierAPI_SupplierAvailableWarehouses",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Client-Id"
+          },
+          {
+            "$ref": "#/components/parameters/Api-Key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Информация о загруженности складов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1SupplierAvailableWarehousesResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Ошибка",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "postingGetFboPostingListRequest": {
+      "required": [
+        "limit",
+        "filter"
+      ],
+      "properties": {
+        "dir": {
+          "type": "string",
+          "description": "Направление сортировки:\n  - `asc` — по возрастанию,\n  - `desc` — по убыванию.\n"
+        },
+        "filter": {
+          "$ref": "#/components/schemas/postingGetFboPostingListRequestFilter"
+        },
+        "limit": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество значений в ответе:\n  - максимум — 1000,\n  - минимум — 1.\n"
+        },
+        "offset": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество элементов, которое будет пропущено в ответе. Например, если `offset = 10`, то ответ начнётся с 11-го найденного элемента. Максимальное значение — 20000."
+        },
+        "translit": {
+          "type": "boolean",
+          "description": "Если включена транслитерация адреса из кириллицы в латиницу — `true`."
+        },
+        "with": {
+          "$ref": "#/components/schemas/postingFboPostingWithParams"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "postingGetFboPostingListRequestFilter": {
+      "required": [
+        "since",
+        "to"
+      ],
+      "properties": {
+        "since": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Начало периода в формате YYYY-MM-DD."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус отправления.\n- `awaiting_packaging` — ожидает упаковки,\n- `awaiting_deliver` — ожидает отгрузки,\n- `delivering` — доставляется,\n- `delivered` — доставлено,\n- `cancelled` — отменено.\n"
+        },
+        "to": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Конец периода в формате YYYY-MM-DD."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр для поиска отправлений."
+    },
+    "postingFboPostingWithParams": {
+      "properties": {
+        "analytics_data": {
+          "type": "boolean",
+          "description": "Передайте `true`, чтобы добавить в ответ данные аналитики."
+        },
+        "financial_data": {
+          "type": "boolean",
+          "description": "Передайте `true`, чтобы добавить в ответ финансовые данные."
+        },
+        "legal_info": {
+          "type": "boolean",
+          "description": "Передайте `true`, чтобы добавить в ответ юридическую информацию."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Дополнительные поля, которые нужно добавить в ответ."
+    },
+    "v2FboPostingListResponse": {
+      "properties": {
+        "result": {
+          "items": {
+            "$ref": "#/components/schemas/v2FboPosting"
+          },
+          "type": "array",
+          "description": "Массив отправлений."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v2FboPosting": {
+      "properties": {
+        "additional_data": {
+          "items": {
+            "$ref": "#/components/schemas/v2AdditionalDataItem"
+          },
+          "type": "array"
+        },
+        "analytics_data": {
+          "$ref": "#/components/schemas/FboPostingFboPostingAnalyticsData"
+        },
+        "cancel_reason_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор причины отмены отправления."
+        },
+        "created_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время создания отправления."
+        },
+        "financial_data": {
+          "$ref": "#/components/schemas/v2PostingFinancialData"
+        },
+        "in_process_at": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Дата и время начала обработки отправления."
+        },
+        "legal_info": {
+          "$ref": "#/components/schemas/v2FboSinglePostingLegalInfo"
+        },
+        "order_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор заказа, к которому относится отправление."
+        },
+        "order_number": {
+          "type": "string",
+          "description": "Номер заказа, к которому относится отправление."
+        },
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "products": {
+          "items": {
+            "$ref": "#/components/schemas/v2PostingProduct"
+          },
+          "type": "array",
+          "description": "Список товаров в отправлении."
+        },
+        "status": {
+          "type": "string",
+          "description": "Статус отправления:\n  - `awaiting_packaging` — ожидает упаковки,\n  - `awaiting_deliver` — ожидает отгрузки,\n  - `delivering` — доставляется,\n  - `delivered` — доставлено,\n  - `cancelled` — отменено.\n"
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Результат запроса."
+    },
+    "v2AdditionalDataItem": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": null
+        },
+        "value": {
+          "type": "string",
+          "description": null
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Дополнительная информация."
+    },
+    "FboPostingFboPostingAnalyticsData": {
+      "properties": {
+        "city": {
+          "type": "string",
+          "description": "Город доставки. Только для продавцов из СНГ."
+        },
+        "delivery_type": {
+          "type": "string",
+          "description": "Способ доставки."
+        },
+        "is_legal": {
+          "type": "boolean",
+          "description": "Получатель юридическое лицо:\n  - `true` — юридическое лицо,\n  - `false` — физическое лицо.\n"
+        },
+        "is_premium": {
+          "type": "boolean",
+          "description": "Наличие подписки Premium."
+        },
+        "payment_type_group_name": {
+          "type": "string",
+          "description": "Способ оплаты: \n- `картой онлайн`,\n- `Ozon Карта`,\n- `автосписание с Ozon Карты при выдаче`,\n- `сохранённой картой при получении`,\n- `Система Быстрых Платежей`, \n- `Ozon Рассрочка`, \n- `оплата на расчётный счёт`,\n- `SberPay`.\n"
+        },
+        "warehouse_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор склада."
+        },
+        "warehouse_name": {
+          "type": "string",
+          "description": "Название склада отправки заказа."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Данные аналитики."
+    },
+    "v2PostingFinancialData": {
+      "properties": {
+        "cluster_from": {
+          "type": "string",
+          "description": "Код региона, откуда отправляется заказ."
+        },
+        "cluster_to": {
+          "type": "string",
+          "description": "Код региона, куда доставляется заказ."
+        },
+        "products": {
+          "items": {
+            "$ref": "#/components/schemas/PostingFinancialDataProduct"
+          },
+          "type": "array",
+          "description": "Список товаров в заказе."
+        }
+      },
+      "type": "object",
+      "title": "object",
+      "description": "Финансовые данные."
+    },
+    "PostingFinancialDataProduct": {
+      "properties": {
+        "actions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Список акций."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта ваших цен. Cовпадает с валютой, которая установлена в настройках личного кабинета.\n\nВозможные значения: \n  - `RUB` — российский рубль,\n  - `BYN` — белорусский рубль,\n  - `KZT` — тенге,\n  - `EUR` — евро,\n  - `USD` — доллар США,\n  - `CNY` — юань.\n"
+        },
+        "commission_amount": {
+          "format": "double",
+          "type": "number",
+          "description": "Размер комиссии за товар."
+        },
+        "commission_percent": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Процент комиссии."
+        },
+        "commissions_currency_code": {
+          "type": "string",
+          "description": "Код валюты, в которой рассчитывались комиссии."
+        },
+        "old_price": {
+          "format": "double",
+          "type": "number",
+          "description": "Цена до учёта скидок. На карточке товара отображается зачёркнутой."
+        },
+        "payout": {
+          "format": "double",
+          "type": "number",
+          "description": "Выплата продавцу."
+        },
+        "price": {
+          "format": "double",
+          "type": "number",
+          "description": "Цена товара с учётом скидок — это значение показывается на карточке товара."
+        },
+        "product_id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "quantity": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество товара в отправлении."
+        },
+        "total_discount_percent": {
+          "format": "double",
+          "type": "number",
+          "description": "Процент скидки."
+        },
+        "total_discount_value": {
+          "format": "double",
+          "type": "number",
+          "description": "Сумма скидки."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v2FboSinglePostingLegalInfo": {
+      "type": "object",
+      "description": "Юридическая информация о покупателе.",
+      "properties": {
+        "company_name": {
+          "type": "string",
+          "description": "Название компании."
+        },
+        "inn": {
+          "type": "string",
+          "description": "ИНН."
+        },
+        "kpp": {
+          "type": "string",
+          "description": "КПП."
+        }
+      }
+    },
+    "v2PostingProduct": {
+      "properties": {
+        "digital_codes": {
+          "items": {
+            "type": "string"
+          },
+          "description": "Коды активации для услуг и цифровых товаров."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "offer_id": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Валюта ваших цен. Cовпадает с валютой, которая установлена в настройках личного кабинета.\n\nВозможные значения: \n  - `RUB` — российский рубль,\n  - `BYN` — белорусский рубль,\n  - `KZT` — тенге,\n  - `EUR` — евро,\n  - `USD` — доллар США,\n  - `CNY` — юань.\n"
+        },
+        "price": {
+          "type": "string",
+          "description": "Цена товара."
+        },
+        "is_marketplace_buyout": {
+          "type": "boolean",
+          "description": "Признак выкупа товара."
+        },
+        "quantity": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Количество товара в отправлении."
+        },
+        "sku": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "rpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string",
+          "description": "Тип протокола передачи данных."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "description": "Значение ошибки."
+        }
+      }
+    },
+    "postingGetFboPostingRequest": {
+      "required": [
+        "posting_number"
+      ],
+      "properties": {
+        "posting_number": {
+          "type": "string",
+          "description": "Номер отправления."
+        },
+        "translit": {
+          "type": "boolean",
+          "description": "Если включена транслитерация адреса из кириллицы в латиницу — `true`."
+        },
+        "with": {
+          "$ref": "#/components/schemas/postingFboPostingWithParams"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v2FboPostingResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/components/schemas/v2FboPosting"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "v1CancelReasonListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "description": "Результат работы метода.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CancelReasonListResponseCancelReason"
+          }
+        }
+      }
+    },
+    "CancelReasonListResponseCancelReason": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Идентификатор причины отмены."
+        },
+        "is_available_for_cancellation": {
+          "type": "boolean",
+          "description": "Результат отмены отправления. `true`, если запрос доступен для отмены."
+        },
+        "title": {
+          "type": "string",
+          "description": "Название категории."
+        },
+        "type_id": {
+          "type": "string",
+          "description": "Инициатор отмены отправления:\n- `buyer` — покупатель,\n- `seller` — продавец.\n"
+        }
+      },
+      "type": "object",
+      "title": "object"
+    },
+    "commonEmpty": {
+      "type": "object",
+      "title": "object"
+    },
+    "v1SupplyOrderStatusCounterResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1SupplyOrderStatusCounterResponseItem"
+          }
+        }
+      }
+    },
+    "v1SupplyOrderStatusCounterResponseItem": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "count": {
+          "description": "Количество заявок в статусе.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "order_state": {
+          "description": null,
+          "$ref": "#/components/schemas/v1OrderState"
+        }
+      }
+    },
+    "v1OrderState": {
+      "type": "string",
+      "title": "SupplyOrderStatusCounter",
+      "default": "ORDER_STATE_UNSPECIFIED",
+      "enum": [
+        "ORDER_STATE_UNSPECIFIED",
+        "ORDER_STATE_DATA_FILLING",
+        "ORDER_STATE_READY_TO_SUPPLY",
+        "ORDER_STATE_ACCEPTED_AT_SUPPLY_WAREHOUSE",
+        "ORDER_STATE_IN_TRANSIT",
+        "ORDER_STATE_ACCEPTANCE_AT_STORAGE_WAREHOUSE",
+        "ORDER_STATE_REPORTS_CONFIRMATION_AWAITING",
+        "ORDER_STATE_REPORT_REJECTED",
+        "ORDER_STATE_COMPLETED",
+        "ORDER_STATE_REJECTED_AT_SUPPLY_WAREHOUSE",
+        "ORDER_STATE_CANCELLED"
+      ],
+      "description": "Статус поставки:\n- `UNSPECIFIED` — статус не указан;\n- `DATA_FILLING` — заполнение данных;\n- `READY_TO_SUPPLY` — готова к отгрузке;\n- `ACCEPTED_AT_SUPPLY_WAREHOUSE` — принята на точке отгрузки;\n- `IN_TRANSIT` — в пути;\n- `ACCEPTANCE_AT_STORAGE_WAREHOUSE` — приёмка на складе;\n- `REPORTS_CONFIRMATION_AWAITING` — согласование актов;\n- `REPORT_REJECTED` — спор;\n- `COMPLETED` — завершена;\n- `REJECTED_AT_SUPPLY_WAREHOUSE` — отказано в приёмке;\n- `CANCELLED` — отменена.\n"
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Код ошибки."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "description": "Дополнительная информация об ошибке."
+        },
+        "message": {
+          "type": "string",
+          "description": "Описание ошибки."
+        }
+      }
+    },
+    "v1GetSupplyOrderBundleRequest": {
+      "required": [
+        "bundle_ids",
+        "limit"
+      ],
+      "type": "object",
+      "properties": {
+        "bundle_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "description": "Идентификаторы товарного состава поставки. Можно получить в методе [/v2/supply-order/get](#operation/SupplyOrderAPI_GetSupplyOrdersV2).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_asc": {
+          "type": "boolean",
+          "description": "`true`, чтобы сортировать по возрастанию.\n"
+        },
+        "item_tags_calculation": {
+          "$ref": "#/components/schemas/GetSupplyOrderBundleRequestItemTagsCalculation"
+        },
+        "last_id": {
+          "type": "string",
+          "description": "Идентификатор последнего значения SKU на странице."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 100,
+          "description": "Количество товаров на странице."
+        },
+        "query": {
+          "type": "string",
+          "description": "Поисковый запрос, например: по названию, артикулу или SKU.\n"
+        },
+        "sort_field": {
+          "$ref": "#/components/schemas/v1ItemSortField"
+        }
+      }
+    },
+    "GetSupplyOrderBundleRequestItemTagsCalculation": {
+      "type": "object",
+      "title": "object",
+      "description": "Список складов для расчёта товарных тегов.",
+      "properties": {
+        "dropoff_warehouse_id": {
+          "description": "Идентификатор склада отгрузки поставки.",
+          "type": "string"
+        },
+        "storage_warehouse_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Список идентификаторов складов поставки, не больше 25 значений."
+        }
+      },
+      "required": [
+        "dropoff_warehouse_id",
+        "storage_warehouse_ids"
+      ]
+    },
+    "v1ItemSortField": {
+      "type": "string",
+      "title": "string",
+      "default": "UNSPECIFIED",
+      "enum": [
+        "UNSPECIFIED",
+        "SKU",
+        "NAME",
+        "QUANTITY",
+        "TOTAL_VOLUME_IN_LITRES"
+      ],
+      "description": "Сортировка по параметрам:\n- `SKU` — SKU;\n- `NAME` — названию товара;\n- `QUANTITY` — количеству;\n- `TOTAL_VOLUME_IN_LITRES` — объёму в литрах.\n"
+    },
+    "v1GetSupplyOrderBundleResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1ItemResponse"
+          },
+          "description": "Список товаров в заявке на поставку."
+        },
+        "total_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товаров в заявке."
+        },
+        "has_next": {
+          "type": "boolean",
+          "description": "Признак, что в ответе вернули не все товары:\n- `true` — сделайте повторный запрос с другим значением `page` и `page_size`, чтобы получить информацию об остальных товарах;\n- `false` — ответ содержит все товары из заявки.\n"
+        },
+        "last_id": {
+          "type": "string",
+          "description": "Идентификатор последнего значения на странице."
+        }
+      }
+    },
+    "v1ItemResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "icon_path": {
+          "type": "string",
+          "description": "Ссылка на изображение товара."
+        },
+        "sku": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе Ozon — SKU."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название товара."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товара."
+        },
+        "barcode": {
+          "type": "string",
+          "description": "Штрихкод товара."
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор товара в системе продавца — `product_id`."
+        },
+        "quant": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Количество товаров в одной упаковке."
+        },
+        "is_quant_editable": {
+          "type": "boolean",
+          "description": "`true`, если количество товаров в одной упаковке можно изменить.\n"
+        },
+        "volume_in_litres": {
+          "type": "number",
+          "format": "double",
+          "description": "Объём товара в литрах."
+        },
+        "total_volume_in_litres": {
+          "type": "number",
+          "format": "double",
+          "description": "Объём всех товаров в литрах."
+        },
+        "contractor_item_code": {
+          "type": "string",
+          "description": "Идентификатор товара в системе продавца — артикул."
+        },
+        "sfbo_attribute": {
+          "$ref": "#/components/schemas/v1ItemSfboAttribute"
+        },
+        "shipment_type": {
+          "$ref": "#/components/schemas/v1BundleItemShipmentType"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Теги товаров из поставки или заявки на поставку.\n\nВозможные значения:\n- `EVSD_REQUIRED` — товар с сертификацией «Меркурий»;\n- `MARKING_REQUIRED` — товар с обязательной маркировкой «Честный ЗНАК»;\n- `MARKING_POSSIBLE` — товар с возможной маркировкой «Честный ЗНАК»;\n- `JEWELRY` — товар с признаком ювелирного изделия;\n- `TRACEABLE` — товар с признаком прослеживаемости;\n- `ETTN_REQUIRED` — товар с признаком прослеживаемости, для которого необходима электронная ТТН;\n- `UNDEFINED` — неизвестный тег.\n",
+          "items": {
+            "type": "string",
+            "enum": [
+              "EVSD_REQUIRED",
+              "MARKING_REQUIRED",
+              "MARKING_POSSIBLE",
+              "JEWELRY",
+              "TRACEABLE",
+              "ETTN_REQUIRED",
+              "UNDEFINED"
+            ]
+          }
+        },
+        "placement_zone": {
+          "type": "string",
+          "default": "UNSPECIFIED",
+          "enum": [
+            "UNSPECIFIED",
+            "CLOSED_ZONE",
+            "DANGEROUS_GOODS",
+            "PRODUCTS",
+            "SORT",
+            "NON_SORT",
+            "OVERSIZE",
+            "JEWELRY",
+            "UNRESOLVED"
+          ],
+          "description": "Зона размещения товара.\n\nВозможные значения:\n- `UNSPECIFIED` — зона не указана;\n- `CLOSED_ZONE` — закрытая зона;\n- `DANGEROUS_GOODS` — товар 2–4 класса опасности;\n- `PRODUCTS` — продукты;\n- `SORT` — сортируемый товар;\n- `NON_SORT` — несортируемый товар;\n- `OVERSIZE` — крупногабаритный товар;\n- `JEWELRY` — ювелирные изделия;\n- `UNRESOLVED` — неизвестная зона.\n"
+        }
+      }
+    },
+    "v1ItemSfboAttribute": {
+      "type": "string",
+      "title": "string",
+      "default": "ITEM_SFBO_ATTRIBUTE_UNSPECIFIED",
+      "enum": [
+        "ITEM_SFBO_ATTRIBUTE_NONE",
+        "ITEM_SFBO_ATTRIBUTE_SUPER_FBO",
+        "ITEM_SFBO_ATTRIBUTE_ANTI_FBO"
+      ],
+      "description": "Метка Super-товара:\n- `ITEM_SFBO_ATTRIBUTE_NONE` — без метки;\n- `ITEM_SFBO_ATTRIBUTE_SUPER_FBO` — Super-товар;\n- `ITEM_SFBO_ATTRIBUTE_ANTI_FBO` — неходовой товар.\n"
+    },
+    "v1BundleItemShipmentType": {
+      "type": "string",
+      "title": "string",
+      "default": "BUNDLE_ITEM_SHIPMENT_TYPE_UNSPECIFIED",
+      "enum": [
+        "BUNDLE_ITEM_SHIPMENT_TYPE_GENERAL",
+        "BUNDLE_ITEM_SHIPMENT_TYPE_BOX",
+        "BUNDLE_ITEM_SHIPMENT_TYPE_PALLET"
+      ],
+      "description": "Тип упаковки:\n- `BUNDLE_ITEM_SHIPMENT_TYPE_GENERAL` — обычный товар;\n- `BUNDLE_ITEM_SHIPMENT_TYPE_BOX` — коробка;\n- `BUNDLE_ITEM_SHIPMENT_TYPE_PALLET` — палета.\n"
+    },
+    "v2GetSupplyOrdersListRequest": {
+      "required": [
+        "paging"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/components/schemas/GetSupplyOrdersListRequestFilter"
+        },
+        "paging": {
+          "$ref": "#/components/schemas/GetSupplyOrdersListRequestPaging"
+        }
+      }
+    },
+    "GetSupplyOrdersListRequestFilter": {
+      "type": "object",
+      "title": "object",
+      "description": "Фильтр.",
+      "properties": {
+        "states": {
+          "description": "Фильтр по статусу поставки:\n- `ORDER_STATE_DATA_FILLING` — заполнение данных;\n- `ORDER_STATE_READY_TO_SUPPLY` — готова к отгрузке;\n- `ORDER_STATE_ACCEPTED_AT_SUPPLY_WAREHOUSE` — принята на точке отгрузки;\n- `ORDER_STATE_IN_TRANSIT` — в пути;\n- `ORDER_STATE_ACCEPTANCE_AT_STORAGE_WAREHOUSE` — приёмка на складе;\n- `ORDER_STATE_REPORTS_CONFIRMATION_AWAITING` — согласование актов;\n- `ORDER_STATE_REPORT_REJECTED` — спор;\n- `ORDER_STATE_COMPLETED` — завершена;\n- `ORDER_STATE_REJECTED_AT_SUPPLY_WAREHOUSE` — отказано в приёмке;\n- `ORDER_STATE_CANCELLED` — отменена.\n",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ORDER_STATE_DATA_FILLING",
+              "ORDER_STATE_READY_TO_SUPPLY",
+              "ORDER_STATE_ACCEPTED_AT_SUPPLY_WAREHOUSE",
+              "ORDER_STATE_IN_TRANSIT",
+              "ORDER_STATE_ACCEPTANCE_AT_STORAGE_WAREHOUSE",
+              "ORDER_STATE_REPORTS_CONFIRMATION_AWAITING",
+              "ORDER_STATE_REPORT_REJECTED",
+              "ORDER_STATE_COMPLETED",
+              "ORDER_STATE_REJECTED_AT_SUPPLY_WAREHOUSE",
+              "ORDER_STATE_CANCELLED"
+            ]
+          }
+        }
+      }
+    },
+    "GetSupplyOrdersListRequestPaging": {
+      "type": "object",
+      "title": "object",
+      "description": "Настройка отображения списка заявок.",
+      "properties": {
+        "from_supply_order_id": {
+          "description": "Номер поставки, с которой отобразится список заявок.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "limit": {
+          "description": "Количество значений в ответе:\n  - максимум — 100,\n  - минимум — 1.\n",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "limit"
+      ]
+    },
+    "v2GetSupplyOrdersListResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "last_supply_order_id": {
+          "description": "Идентификатор заявки на поставку, который вы запрашивали в прошлый раз.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "supply_order_id": {
+          "description": "Идентификатор заявки на поставку.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v2GetSupplyOrdersRequest": {
+      "required": [
+        "order_ids"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "order_ids": {
+          "description": "Идентификатор заявки на поставку в системе Ozon.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "v2GetSupplyOrdersResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "orders": {
+          "description": "Информация о заявке на поставку.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v2Order"
+          }
+        },
+        "warehouses": {
+          "description": "Информация о складе.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v2Warehouse"
+          }
+        }
+      }
+    },
+    "v2Order": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "can_cancel": {
+          "description": "`true`, если заявку можно отменить.\n",
+          "type": "boolean"
+        },
+        "creation_date": {
+          "description": "Дата создания заявки на поставку.",
+          "type": "string"
+        },
+        "data_filling_deadline_utc": {
+          "description": "Время в секундах, оставшееся на заполнение данных по поставке. Только для заявок с вРЦ.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "dropoff_warehouse_id": {
+          "description": "Идентификатор склада поставки.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "is_econom": {
+          "description": "`true`, если заявка на поставку относится к товарам «Суперэконом».\n",
+          "type": "boolean"
+        },
+        "is_super_fbo": {
+          "description": "`true`, если продавец подключен к Super-поставкам.\n",
+          "type": "boolean"
+        },
+        "is_virtual": {
+          "description": "`true`, если заявка на поставку виртуальная.\n",
+          "type": "boolean"
+        },
+        "product_super_fbo": {
+          "description": "`true`, если заявка на поставку относится к Super-товарам.\n",
+          "type": "boolean"
+        },
+        "state": {
+          "$ref": "#/components/schemas/v2State"
+        },
+        "supplies": {
+          "description": "Состав заявки на поставку.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v2OrderSupply"
+          }
+        },
+        "supply_order_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор заявки на поставку."
+        },
+        "supply_order_number": {
+          "type": "string",
+          "description": "Номер заявки."
+        },
+        "timeslot": {
+          "$ref": "#/components/schemas/v2OrderTimeslot"
+        },
+        "vehicle": {
+          "$ref": "#/components/schemas/v2OrderVehicle"
+        }
+      }
+    },
+    "v2State": {
+      "type": "string",
+      "description": "Статус поставки:\n- `ORDER_STATE_UNSPECIFIED` — статус не указан;\n- `ORDER_STATE_DATA_FILLING` — заполнение данных;\n- `ORDER_STATE_READY_TO_SUPPLY` — готова к отгрузке;\n- `ORDER_STATE_ACCEPTED_AT_SUPPLY_WAREHOUSE` — принята на точке отгрузки;\n- `ORDER_STATE_IN_TRANSIT` — в пути;\n- `ORDER_STATE_ACCEPTANCE_AT_STORAGE_WAREHOUSE` — приёмка на складе;\n- `ORDER_STATE_REPORTS_CONFIRMATION_AWAITING` — согласование актов;\n- `ORDER_STATE_REPORT_REJECTED` — спор;\n- `ORDER_STATE_COMPLETED` — завершена;\n- `ORDER_STATE_REJECTED_AT_SUPPLY_WAREHOUSE` — отказано в приёмке;\n- `ORDER_STATE_CANCELLED` — отменена.\n",
+      "enum": [
+        "ORDER_STATE_UNSPECIFIED",
+        "ORDER_STATE_DATA_FILLING",
+        "ORDER_STATE_READY_TO_SUPPLY",
+        "ORDER_STATE_ACCEPTED_AT_SUPPLY_WAREHOUSE",
+        "ORDER_STATE_IN_TRANSIT",
+        "ORDER_STATE_ACCEPTANCE_AT_STORAGE_WAREHOUSE",
+        "ORDER_STATE_REPORTS_CONFIRMATION_AWAITING",
+        "ORDER_STATE_REPORT_REJECTED",
+        "ORDER_STATE_COMPLETED",
+        "ORDER_STATE_REJECTED_AT_SUPPLY_WAREHOUSE",
+        "ORDER_STATE_CANCELLED"
+      ]
+    },
+    "v2OrderSupply": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "bundle_id": {
+          "type": "string",
+          "description": "Идентификатор состава поставки. Используется в методе [/v1/supply-order/bundle](#operation/SupplyOrderBundle)."
+        },
+        "storage_warehouse_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор склада хранения."
+        },
+        "supply_id": {
+          "description": "Идентификатор поставки.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "supply_state": {
+          "$ref": "#/components/schemas/v2Supply_state"
+        },
+        "supply_tags": {
+          "description": "Метки товаров в заявке на поставку.",
+          "items": {
+            "$ref": "#/components/schemas/v2OrderSupplySupplyTags"
+          }
+        }
+      }
+    },
+    "v2Supply_state": {
+      "type": "string",
+      "description": "Статус поставки:\n- `SUPPLY_STATE_UNSPECIFIED` — статус не указан;\n- `SUPPLY_STATE_DATA_FILLING` — заполнение данных;\n- `SUPPLY_STATE_READY_TO_SUPPLY` — готова к отгрузке;\n- `SUPPLY_STATE_ACCEPTED_AT_SUPPLY_WAREHOUSE` — принята на точке отгрузки;\n- `SUPPLY_STATE_IN_TRANSIT` — в пути;\n- `SUPPLY_STATE_ACCEPTANCE_AT_STORAGE_WAREHOUSE` — приёмка на складе;\n- `SUPPLY_STATE_REPORTS_CONFIRMATION_AWAITING` — согласование актов;\n- `SUPPLY_STATE_REPORT_REJECTED` — спор;\n- `SUPPLY_STATE_COMPLETED` — завершена;\n- `SUPPLY_STATE_REJECTED_AT_SUPPLY_WAREHOUSE` — отказано в приёмке;\n- `SUPPLY_STATE_CANCELLED` — отменена;\n- `SUPPLY_STATE_OVERDUE` — просрочена.\n",
+      "enum": [
+        "SUPPLY_STATE_UNSPECIFIED",
+        "SUPPLY_STATE_DATA_FILLING",
+        "SUPPLY_STATE_READY_TO_SUPPLY",
+        "SUPPLY_STATE_ACCEPTED_AT_SUPPLY_WAREHOUSE",
+        "SUPPLY_STATE_IN_TRANSIT",
+        "SUPPLY_STATE_ACCEPTANCE_AT_STORAGE_WAREHOUSE",
+        "SUPPLY_STATE_REPORTS_CONFIRMATION_AWAITING",
+        "SUPPLY_STATE_REPORT_REJECTED",
+        "SUPPLY_STATE_COMPLETED",
+        "SUPPLY_STATE_REJECTED_AT_SUPPLY_WAREHOUSE",
+        "SUPPLY_STATE_CANCELLED",
+        "SUPPLY_STATE_OVERDUE"
+      ]
+    },
+    "v2OrderSupplySupplyTags": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "is_ettn_required": {
+          "type": "boolean",
+          "description": "Признак, что для поставки нужна электронная ТТН."
+        },
+        "is_evsd_required": {
+          "description": "`true`, если в поставке есть товары с сертификацией в системе «Меркурий».\n",
+          "type": "boolean"
+        },
+        "is_jewelry": {
+          "type": "boolean",
+          "description": "`true`, если в поставке есть ювелирные товары.\n"
+        },
+        "is_marking_possible": {
+          "type": "boolean",
+          "description": "`true`, если в поставке есть товары, для которых возможна маркировка.\n"
+        },
+        "is_marking_required": {
+          "type": "boolean",
+          "description": "`true`, если в поставке есть товары, для которых маркировка обязательна.\n"
+        },
+        "is_traceable": {
+          "type": "boolean",
+          "description": "Признак, что поставка содержит прослеживаемые товары."
+        }
+      }
+    },
+    "v2OrderTimeslot": {
+      "type": "object",
+      "title": "object",
+      "description": "Интервал поставки.",
+      "properties": {
+        "can_not_set_reasons": {
+          "description": "Причина, по которой не получается выбрать интервал поставки.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "can_set": {
+          "description": "`true`, если интервал поставки можно выбрать или изменить.\n",
+          "type": "boolean"
+        },
+        "is_required": {
+          "type": "boolean",
+          "description": "`true`, если характеристику указывать обязательно.\n"
+        },
+        "value": {
+          "$ref": "#/components/schemas/v2TimeslotZonedMessage"
+        }
+      }
+    },
+    "v2TimeslotZonedMessage": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "timeslot": {
+          "description": "Интервал поставки по местному времени.",
+          "items": {
+            "$ref": "#/components/schemas/v2Timeslot"
+          }
+        },
+        "timezone_info": {
+          "description": "Часовой пояс.",
+          "items": {
+            "$ref": "#/components/schemas/v2Timezone"
+          }
+        }
+      }
+    },
+    "v2Timeslot": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Начало интервала.",
+          "format": "date-time"
+        },
+        "to": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Конец интервала."
+        }
+      }
+    },
+    "v2Timezone": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "iana_name": {
+          "description": "Название часового пояса.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "Смещение часового пояса от UTC-0 в секундах.",
+          "type": "string"
+        }
+      }
+    },
+    "v2OrderVehicle": {
+      "type": "object",
+      "title": "object",
+      "description": "Информация о водителе и автомобиле.",
+      "properties": {
+        "can_not_set_reasons": {
+          "description": "Причина, по которой не получается указать или изменить данные водителя и автомобиля.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "can_set": {
+          "type": "boolean",
+          "description": "`true`, если можно указать или изменить данные водителя и автомобиля.\n"
+        },
+        "is_required": {
+          "type": "boolean",
+          "description": "`true`, если характеристику указывать обязательно.\n"
+        },
+        "value": {
+          "description": "Данные водителя и автомобиля.",
+          "items": {
+            "$ref": "#/components/schemas/v2VehicleInfo"
+          }
+        }
+      }
+    },
+    "v2VehicleInfo": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "driver_name": {
+          "type": "string",
+          "description": "Имя водителя."
+        },
+        "driver_phone": {
+          "type": "string",
+          "description": "Телефон водителя."
+        },
+        "vehicle_model": {
+          "type": "string",
+          "description": "Модель автомобиля."
+        },
+        "vehicle_number": {
+          "type": "string",
+          "description": "Номер автомобиля."
+        }
+      }
+    },
+    "v2Warehouse": {
+      "type": "object",
+      "title": "object",
+      "description": "Склад поставки.",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Адрес склада."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название склада."
+        },
+        "warehouse_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Идентификатор склада."
+        }
+      }
+    },
+    "v1GetSupplyOrderTimeslotsRequest": {
+      "required": [
+        "supply_order_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "supply_order_id": {
+          "description": "Идентификатор заявки на поставку.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1GetSupplyOrderTimeslotsResponse": {
+      "type": "object",
+      "properties": {
+        "timeslots": {
+          "description": "Интервалы поставки.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1SupplyOrderTimeslot"
+          }
+        },
+        "timezone": {
+          "description": "Часовой пояс.",
+          "items": {
+            "$ref": "#/components/schemas/v1Timezone"
+          }
+        }
+      }
+    },
+    "v1SupplyOrderTimeslot": {
+      "required": [
+        "from",
+        "to"
+      ],
+      "type": "object",
+      "title": "object",
+      "description": "Время интервала поставки.",
+      "properties": {
+        "from": {
+          "description": "Начало интервала по местному времени.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "description": "Конец интервала по местному времени.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1Timezone": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "iana_name": {
+          "description": "Название часового пояса.",
+          "type": "string"
+        },
+        "offset": {
+          "description": "Смещение часового пояса от UTC-0 в секундах.",
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateSupplyOrderTimeslotRequest": {
+      "required": [
+        "supply_order_id",
+        "timeslot"
+      ],
+      "type": "object",
+      "properties": {
+        "supply_order_id": {
+          "description": "Идентификатор заявки на поставку.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "timeslot": {
+          "$ref": "#/components/schemas/v1SupplyOrderTimeslot"
+        }
+      }
+    },
+    "v1UpdateSupplyOrderTimeslotResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1UpdateTimeslotError"
+          },
+          "description": "Возможные ошибки: \n  - `UNSPECIFIED` — статус не указан;\n  - `INVALID_ORDER_STATE` — неверный статус заказа;\n  - `INCOMPATIBLE_ORDER_FLOW` — неверный статус интервала поставки;\n  - `SET_TIMESLOT_DEADLINE_EXCEED` — заявка на поставку просрочена;\n  - `OUT_OF_ALLOWED_RANGE` — вы ввели некорректное значение интервала поставки;\n  - `ORDER_NOT_BELONG_CONTRACTOR` — заявка создана другим юридическим лицом, работать с ней не получится;\n  - `ORDER_NOT_BELONG_COMPANY` — заявка не принадлежит вашему кабинету, работать с ней не получится.\n"
+        },
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateTimeslotError": {
+      "type": "string",
+      "default": "UPDATE_TIMESLOT_ERROR_UNSPECIFIED",
+      "enum": [
+        "UPDATE_TIMESLOT_ERROR_UNSPECIFIED",
+        "UPDATE_TIMESLOT_ERROR_INVALID_ORDER_STATE",
+        "UPDATE_TIMESLOT_ERROR_INCOMPATIBLE_ORDER_FLOW",
+        "UPDATE_TIMESLOT_ERROR_SET_TIMESLOT_DEADLINE_EXCEED",
+        "UPDATE_TIMESLOT_ERROR_OUT_OF_ALLOWED_RANGE",
+        "UPDATE_TIMESLOT_ERROR_ORDER_NOT_BELONG_CONTRACTOR",
+        "UPDATE_TIMESLOT_ERROR_ORDER_NOT_BELONG_COMPANY"
+      ]
+    },
+    "v1GetSupplyOrderTimeslotStatusRequest": {
+      "required": [
+        "operation_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        }
+      }
+    },
+    "v1GetSupplyOrderTimeslotStatusResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "errors": {
+          "description": "Возможные ошибки: \n  - `UNSPECIFIED` — статус не указан;\n  - `INVALID_ORDER_STATE` — неверный статус заказа;\n  - `INCOMPATIBLE_ORDER_FLOW` — неверный статус интервала поставки;\n  - `SET_TIMESLOT_DEADLINE_EXCEED` — заявка на поставку просрочена;\n  - `OUT_OF_ALLOWED_RANGE` — вы ввели некорректное значение интервала поставки;\n  - `ORDER_NOT_BELONG_CONTRACTOR` — заявка создана другим юридическом лицом, работать с ней не получится;\n  - `ORDER_NOT_BELONG_COMPANY` — заявка не принадлежит вашему кабинету, работать с ней не получится.\n",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1UpdateTimeslotError"
+          }
+        },
+        "status": {
+          "$ref": "#/components/schemas/v1GetSupplyOrderTimeslotStatusResponseStatus"
+        }
+      }
+    },
+    "v1GetSupplyOrderTimeslotStatusResponseStatus": {
+      "type": "string",
+      "title": "object",
+      "default": "STATUS_UNSPECIFIED",
+      "enum": [
+        "STATUS_UNSPECIFIED",
+        "STATUS_ERROR",
+        "STATUS_IN_PROGRESS",
+        "STATUS_SUCCESS"
+      ],
+      "description": "Статус данных: \n  - `UNSPECIFIED` — не указан;\n  - `ERROR` — ошибка;\n  - `IN_PROGRESS` — устанавливается;\n  - `SUCCESS` — установлен.\n"
+    },
+    "v1SupplyOrderPassCreateRequest": {
+      "required": [
+        "supply_order_id",
+        "vehicle"
+      ],
+      "type": "object",
+      "properties": {
+        "supply_order_id": {
+          "description": "Идентификатор заявки на поставку.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "vehicle": {
+          "$ref": "#/components/schemas/v1VehicleInfo"
+        }
+      }
+    },
+    "v1VehicleInfo": {
+      "required": [
+        "driver_name",
+        "driver_phone",
+        "vehicle_model",
+        "vehicle_number"
+      ],
+      "type": "object",
+      "title": "object",
+      "description": "Информация о водителе и автомобиле.",
+      "properties": {
+        "driver_name": {
+          "type": "string",
+          "description": "Имя водителя."
+        },
+        "driver_phone": {
+          "type": "string",
+          "description": "Телефон водителя."
+        },
+        "vehicle_model": {
+          "type": "string",
+          "description": "Модель автомобиля."
+        },
+        "vehicle_number": {
+          "type": "string",
+          "description": "Номер автомобиля."
+        }
+      }
+    },
+    "v1SupplyOrderPassCreateResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "error_reasons": {
+          "description": "Причина ошибки:\n  - `UNSPECIFIED` — статус заявки не указан;\n  - `INVALID_ORDER_STATE` — неверный статус заявки;\n  - `VEHICLE_NOT_REQUIRED` — указывать данные автомобиля необязательно;\n  - `ORDER_NOT_BELONG_CONTRACTOR` — заявка создана другим юридическом лицом, работать с ней не получится;\n  - `ORDER_NOT_BELONG_COMPANY` — заявка не принадлежит вашему кабинету, работать с ней не получится.\n",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1SetVehicleError"
+          }
+        },
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        }
+      }
+    },
+    "v1SetVehicleError": {
+      "title": "object",
+      "default": "SET_VEHICLE_ERROR_UNSPECIFIED",
+      "enum": [
+        "SET_VEHICLE_ERROR_UNSPECIFIED",
+        "SET_VEHICLE_ERROR_INVALID_ORDER_STATE",
+        "SET_VEHICLE_ERROR_VEHICLE_NOT_REQUIRED",
+        "SET_VEHICLE_ERROR_ORDER_NOT_BELONG_CONTRACTOR",
+        "SET_VEHICLE_ERROR_ORDER_NOT_BELONG_COMPANY"
+      ],
+      "type": "string"
+    },
+    "v1SupplyOrderPassStatusRequest": {
+      "required": [
+        "operation_id"
+      ],
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "operation_id": {
+          "description": "Идентификатор операции.",
+          "type": "string"
+        }
+      }
+    },
+    "v1SupplyOrderPassStatusResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "errors": {
+          "description": "Причина ошибки:\n- `UNSPECIFIED` — статус не указан;\n- `INVALID_ORDER_STATE` — неверный статус заявки;\n- `VEHICLE_NOT_REQUIRED` — указывать данные автомобиля необязательно;\n- `ORDER_NOT_BELONG_CONTRACTOR` — заявка создана другим юридическом лицом, работать с ней не получится;\n- `ORDER_NOT_BELONG_COMPANY` — заявка не принадлежит вашему кабинету, работать с ней не получится.\n",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/v1SetVehicleError"
+          }
+        },
+        "result": {
+          "$ref": "#/components/schemas/v1SupplyOrderPassStatusResponseStatus"
+        }
+      }
+    },
+    "v1SupplyOrderPassStatusResponseStatus": {
+      "type": "string",
+      "title": "object",
+      "default": "Unknown",
+      "enum": [
+        "Unknown",
+        "Success",
+        "InProgress",
+        "Failed"
+      ],
+      "description": "Статус ввода данных о водителе и автомобиле:\n- `Unknown` — статус неизвестен;\n- `Success` — данные указаны;\n- `InProgress` — данные обрабатываются;\n- `Failed` — не удалось обработать данные.\n"
+    },
+    "v1SupplierAvailableWarehousesResponse": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "result": {
+          "description": "Результат работы метода.",
+          "items": {
+            "$ref": "#/components/schemas/SupplierAvailableWarehousesResponseResult"
+          }
+        }
+      }
+    },
+    "SupplierAvailableWarehousesResponseResult": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "schedule": {
+          "$ref": "#/components/schemas/SupplierAvailableWarehousesResponseSchedule"
+        },
+        "warehouse": {
+          "$ref": "#/components/schemas/SupplierAvailableWarehousesResponseWarehouse"
+        }
+      }
+    },
+    "SupplierAvailableWarehousesResponseSchedule": {
+      "type": "object",
+      "title": "object",
+      "description": "Загруженность.",
+      "properties": {
+        "capacity": {
+          "description": "Данные о количестве поставляемых на склад товаров.",
+          "items": {
+            "$ref": "#/components/schemas/SupplierAvailableWarehousesResponseCapacity"
+          }
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Ближайшая доступная дата для записи на поставку по местному времени."
+        }
+      }
+    },
+    "SupplierAvailableWarehousesResponseCapacity": {
+      "type": "object",
+      "title": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Начало периода по местному времени."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Конец периода по местному времени."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Среднее количество товаров, которые склад может принять в день за период."
+        }
+      }
+    },
+    "SupplierAvailableWarehousesResponseWarehouse": {
+      "type": "object",
+      "title": "object",
+      "description": "Склад.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Идентификатор склада."
+        },
+        "name": {
+          "type": "string",
+          "description": "Название склада."
+        }
+      }
+    }
+  }
+}
