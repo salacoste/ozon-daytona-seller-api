@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OZON Seller API TypeScript SDK | DAYTONA</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Complete TypeScript SDK for OZON Seller API with 278 methods across 33 categories. Production-ready with comprehensive documentation and framework integrations.">
+    <meta name="keywords" content="ozon api, typescript, sdk, ozon seller, marketplace, ecommerce, api client, nodejs, javascript">
+    <meta name="author" content="DAYTONA">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="OZON Seller API TypeScript SDK | DAYTONA">
+    <meta property="og:description" content="Complete TypeScript SDK for OZON Seller API with 278 methods across 33 categories">
+    <meta property="og:image" content="./daytona-ozon-api-docs/image.png">
+    <meta property="og:url" content="https://salacoste.github.io/ozon-daytona-seller-api">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OZON Seller API TypeScript SDK | DAYTONA">
+    <meta name="twitter:description" content="Complete TypeScript SDK for OZON Seller API with 278 methods across 33 categories">
+    <meta name="twitter:image" content="./daytona-ozon-api-docs/image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./daytona-ozon-api-docs/image.png">
+    
+    <!-- Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            padding: 60px 0;
+        }
+        
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .title {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .badges {
+            margin-bottom: 30px;
+        }
+        
+        .badges img {
+            margin: 5px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #333;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .content {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-top: 50px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #007bff;
+        }
+        
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 3em;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .documentation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .doc-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .doc-card:hover {
+            border-color: #007bff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .doc-card h4 {
+            color: #007bff;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 50px 0;
+            color: white;
+            margin-top: 50px;
+        }
+        
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer a:hover {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 30px 20px;
+                margin: 20px 10px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+                text-align: center;
+            }
+        }
+        
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            line-height: 1.5;
+        }
+        
+        .highlight {
+            color: #68d391;
+        }
+        
+        .string {
+            color: #fbb6ce;
+        }
+        
+        .comment {
+            color: #a0aec0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <img src="./daytona-ozon-api-docs/image.png" alt="DAYTONA OZON API Logo" class="logo">
+            <h1 class="title">OZON Seller API SDK</h1>
+            <p class="subtitle">Complete TypeScript SDK | DAYTONA</p>
+            
+            <div class="badges">
+                <img src="https://img.shields.io/npm/v/ozon-daytona-seller-api.svg" alt="NPM Version">
+                <img src="https://img.shields.io/badge/TypeScript-100%25-blue.svg" alt="TypeScript">
+                <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License">
+                <img src="https://img.shields.io/npm/dm/ozon-daytona-seller-api.svg" alt="Downloads">
+                <img src="https://img.shields.io/github/stars/salacoste/ozon-daytona-seller-api.svg" alt="GitHub Stars">
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="./daytona-ozon-api-docs/QUICK-START.html" class="btn btn-primary">🚀 Быстрый старт</a>
+                <a href="./daytona-ozon-api-docs/README.html" class="btn btn-secondary">📖 Документация</a>
+                <a href="https://github.com/salacoste/ozon-daytona-seller-api" class="btn btn-secondary">⭐ GitHub</a>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <h2 style="text-align: center; margin-bottom: 40px; font-size: 2.5em; color: #333;">
+                Почему выбирают DAYTONA OZON SDK?
+            </h2>
+            
+            <!-- Features Grid -->
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Полное покрытие API</h3>
+                    <p>278 endpoints в 33 категориях с полной типизацией TypeScript и нулевыми breaking changes</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Production Ready</h3>
+                    <p>Enterprise-уровень безопасности, 95%+ тест-покрытие и высокая производительность</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📚</div>
+                    <h3>Лучшая документация</h3>
+                    <p>40+ файлов документации с примерами для React, Vue, Express, NestJS, AWS Lambda</p>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">278</span>
+                    <span>API методов</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">33</span>
+                    <span>API категории</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">95%+</span>
+                    <span>Тест-покрытие</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">40+</span>
+                    <span>Файлов документации</span>
+                </div>
+            </div>
+            
+            <!-- Code Example -->
+            <div class="code-example">
+<span class="comment">// Быстрый старт за 30 секунд</span>
+<span class="highlight">import</span> { <span class="highlight">OzonSellerAPI</span> } <span class="highlight">from</span> <span class="string">'ozon-daytona-seller-api'</span>;
+
+<span class="comment">// Инициализация SDK</span>
+<span class="highlight">const</span> api = <span class="highlight">new</span> <span class="highlight">OzonSellerAPI</span>({
+  clientId: <span class="string">'your-client-id'</span>,
+  apiKey: <span class="string">'your-api-key'</span>
+});
+
+<span class="comment">// Получить список товаров</span>
+<span class="highlight">const</span> products = <span class="highlight">await</span> api.product.getList({ limit: <span class="string">10</span> });
+
+<span class="comment">// Обработать заказы FBS</span>
+<span class="highlight">const</span> orders = <span class="highlight">await</span> api.fbs.getOrdersList({
+  filter: { status: <span class="string">'awaiting_packaging'</span> }
+});
+            </div>
+            
+            <h2 style="text-align: center; margin: 50px 0 30px; font-size: 2em; color: #333;">
+                📖 Документация
+            </h2>
+            
+            <!-- Documentation Grid -->
+            <div class="documentation-grid">
+                <a href="./daytona-ozon-api-docs/QUICK-START.html" class="doc-card">
+                    <h4>🚀 Быстрый старт</h4>
+                    <p>Начните работу за 5 минут с пошаговым руководством</p>
+                </a>
+                
+                <a href="./daytona-ozon-api-docs/README.html" class="doc-card">
+                    <h4>📖 Полное руководство</h4>
+                    <p>Исчерпывающая документация со всеми возможностями</p>
+                </a>
+                
+                <a href="./daytona-ozon-api-docs/FUNCTIONAL-INDEX.html" class="doc-card">
+                    <h4>🔍 Поиск по функциям</h4>
+                    <p>Найдите нужный API метод по задаче</p>
+                </a>
+                
+                <a href="./daytona-ozon-api-docs/API-INDEX.html" class="doc-card">
+                    <h4>📑 Алфавитный индекс</h4>
+                    <p>Все 278 методов в алфавитном порядке</p>
+                </a>
+                
+                <a href="./daytona-ozon-api-docs/FRAMEWORK-INTEGRATION.html" class="doc-card">
+                    <h4>⚙️ Интеграция</h4>
+                    <p>Примеры для React, Vue, Express, NestJS, AWS Lambda</p>
+                </a>
+                
+                <a href="./daytona-ozon-api-docs/FAQ.html" class="doc-card">
+                    <h4>❓ FAQ</h4>
+                    <p>Ответы на частые вопросы и решение проблем</p>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>Made with ❤️ for OZON Marketplace developers</p>
+            <div style="margin-top: 20px;">
+                <a href="https://github.com/salacoste/ozon-daytona-seller-api">GitHub</a>
+                <a href="https://www.npmjs.com/package/ozon-daytona-seller-api">NPM</a>
+                <a href="./daytona-ozon-api-docs/README.html">Документация</a>
+                <a href="./daytona-ozon-api-docs/FAQ.html">Поддержка</a>
+            </div>
+            <p style="margin-top: 20px; opacity: 0.7; font-size: 0.9em;">
+                MIT License • OZON Seller API TypeScript SDK | DAYTONA
+            </p>
+        </div>
+    </div>
+    
+    <!-- Analytics (optional) -->
+    <script>
+        // Google Analytics или другая аналитика
+        console.log('OZON Seller API SDK | DAYTONA - Documentation loaded');
+    </script>
+</body>
+</html>

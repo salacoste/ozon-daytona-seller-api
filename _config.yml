@@ -1,0 +1,78 @@
+# GitHub Pages Configuration
+title: "OZON Seller API TypeScript SDK | DAYTONA"
+description: "Complete TypeScript SDK for OZON Seller API with 278 methods across 33 categories. Production-ready with comprehensive documentation and framework integrations."
+url: "https://salacoste.github.io"
+baseurl: "/ozon-daytona-seller-api"
+author: "DAYTONA"
+
+# Theme
+theme: minima
+
+# SEO
+lang: ru
+timezone: Europe/Moscow
+
+# Social
+github_username: salacoste
+repository: salacoste/ozon-daytona-seller-api
+
+# Navigation
+header_pages:
+  - daytona-ozon-api-docs/README.md
+  - daytona-ozon-api-docs/QUICK-START.md
+  - daytona-ozon-api-docs/API-INDEX.md
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Markdown
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+  - scope:
+      path: "daytona-ozon-api-docs"
+      type: "pages"
+    values:
+      layout: "page"
+
+# Exclude
+exclude:
+  - src/
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - tsconfig.json
+  - .eslintrc.cjs
+  - .prettierrc.json
+  - tests/
+  - scripts/
+  - coverage/
+  - .tsbuildinfo
+  - .github/
+  - .gitignore
+  - LICENSE
+  - CHANGELOG.md
