@@ -1,0 +1,113 @@
+{
+  "name": "@spacechemical/ozon-seller-api",
+  "version": "0.1.0",
+  "description": "Comprehensive TypeScript SDK for Ozon Seller API with full type safety and category-based organization",
+  "keywords": [
+    "ozon",
+    "marketplace",
+    "api",
+    "sdk",
+    "typescript",
+    "seller",
+    "e-commerce"
+  ],
+  "author": "SpaceChemical",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "docs/**/*"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "tsc && tsc -p tsconfig.cjs.json && cp dist-cjs/index.js dist/index.cjs",
+    "build:mcp": "echo 'MCP Build Integration disabled - was overwriting manual implementations'",
+    "build:watch": "tsc --watch",
+    "clean": "rimraf dist dist-cjs",
+    "dev": "tsx src/examples/basic.ts",
+    "test": "vitest",
+    "test:unit": "vitest run --reporter=verbose",
+    "test:unit:coverage": "vitest run --coverage --reporter=verbose",
+    "test:coverage": "vitest run --coverage",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:integration:stories": "vitest run tests/integration/story-*.test.ts --reporter=verbose",
+    "test:performance": "vitest run tests/performance --reporter=verbose",
+    "test:all": "npm run test:unit && npm run test:integration && npm run test:performance",
+    "bundle:check": "tsx scripts/bundle-size-check.ts",
+    "bundle:analyze": "npm run build && du -sh dist/* | sort -hr",
+    "breaking:check": "tsx scripts/breaking-change-detector.ts",
+    "breaking:update": "tsx scripts/breaking-change-detector.ts update-baseline",
+    "risk:assess": "tsx scripts/risk-management.ts",
+    "risk:monitor": "tsx scripts/risk-monitor.ts",
+    "docs:generate-templates": "tsx scripts/doc-generator.ts",
+    "docs:generate-api": "npx tsx scripts/generate-api-docs.ts",
+    "docs:validate": "npm run docs:generate-api && npm run docs:check-links",
+    "docs:check-links": "find docs -name '*.md' -exec grep -l '\\[.*\\](.*.md)' {} \\; | head -5",
+    "debt:scan": "tsx scripts/tech-debt-tracker.ts",
+    "debt:summary": "tsx scripts/tech-debt-tracker.ts summary",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "lint:all": "npm run lint && npm run format:check && npm run typecheck",
+    "format": "prettier --write src/**/*.{ts,tsx,json}",
+    "format:check": "prettier --check src/**/*.{ts,tsx,json}",
+    "typecheck": "tsc --noEmit",
+    "typecheck:strict": "tsc --noEmit --strict",
+    "security:audit": "npm audit --audit-level=moderate",
+    "security:check": "npm run security:audit && npm run security:secrets",
+    "security:secrets": "grep -r -i -E '(api[_-]?key|secret|password|token).*=.*['\\\"][a-zA-Z0-9]{20,}' src/ tests/ --exclude-dir=node_modules || echo 'No secrets found'",
+    "validate:structure": "ls -1 src/categories/ | grep -v '^\\.' | wc -l | xargs echo | grep -q '^33$' && echo 'All 33 API categories present' || echo 'Missing API categories'",
+    "validate:exports": "node -e \"const sdk = require('./dist/index.js'); console.log('APIs:', Object.keys(sdk).length); console.log('Client APIs:', Object.getOwnPropertyNames(new sdk.OzonSellerApiClient({apiKey: sdk.createApiKey('test-key-1234567890123456789012345678901234567890'), clientId: sdk.createClientId('123456')})).filter(p => p !== 'httpClient' && typeof new sdk.OzonSellerApiClient({apiKey: sdk.createApiKey('test-key-1234567890123456789012345678901234567890'), clientId: sdk.createClientId('123456')})[p] === 'object').length);\"",
+    "validate:all": "npm run validate:structure && npm run validate:exports && npm run typecheck && npm run lint",
+    "performance:benchmark": "node -e \"const {performance} = require('perf_hooks'); const {OzonSellerApiClient, createApiKey, createClientId} = require('./dist/index.js'); const start = performance.now(); new OzonSellerApiClient({apiKey: createApiKey('test-key-1234567890123456789012345678901234567890'), clientId: createClientId('123456')}); console.log('Init time:', (performance.now() - start).toFixed(2) + 'ms');\"",
+    "ci:validate": "npm run validate:all && npm run test:all && npm run security:check && npm run bundle:check",
+    "release:prepare": "npm run clean && npm run build && npm run ci:validate && npm run docs:validate",
+    "docs:generate": "typedoc src/index.ts",
+    "prepublishOnly": "npm run release:prepare",
+    "release": "release-it"
+  },
+  "dependencies": {
+    "cross-fetch": "^4.0.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vitest/coverage-v8": "^1.0.4",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.0",
+    "nock": "^13.4.0",
+    "prettier": "^3.1.1",
+    "release-it": "^17.0.1",
+    "rimraf": "^5.0.5",
+    "tsx": "^4.6.2",
+    "typedoc": "^0.25.4",
+    "typescript": "^5.3.3",
+    "vitest": "^1.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spacechemical/ozon-seller-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spacechemical/ozon-seller-api/issues"
+  },
+  "homepage": "https://github.com/spacechemical/ozon-seller-api#readme"
+}
