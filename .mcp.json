@@ -1,0 +1,19 @@
+{
+    "mcpServers": {
+      "ozon-api-docs": {
+        "command": "node",
+        "args": [
+          "/Users/r2d2/Documents/Code_Projects/spacechemical-nextjs/bmad-ozon-seller-api/mcp-ozon-docs/dist/index.js"
+        ],
+        "env": {
+          "OZON_MD_ROOT": "/Users/r2d2/Documents/Code_Projects/spacechemical-nextjs/bmad-ozon-seller-api/ozon-api-md"
+        },
+        "cwd": "/Users/r2d2/Documents/Code_Projects/spacechemical-nextjs/bmad-ozon-seller-api/mcp-ozon-docs"
+      },
+      "context7": {
+        "command": "npx",
+        "args": ["-y", "@upstash/context7-mcp"]
+      }
+    }
+  }
+  

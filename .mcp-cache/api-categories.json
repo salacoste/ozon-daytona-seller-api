@@ -1,0 +1,67 @@
+{
+  "timestamp": "2025-01-21T00:00:00.000Z",
+  "version": "1.0.0",
+  "categories": [
+    {
+      "name": "product",
+      "tags": ["Product API"],
+      "operations": [
+        {
+          "operationId": "getProductList",
+          "method": "post",
+          "path": "/v3/product/list",
+          "summary": "Get list of products",
+          "description": "Retrieve a paginated list of products with optional filtering",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "filter": { "type": "object" },
+                    "last_id": { "type": "string" },
+                    "limit": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "List of products",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "result": {
+                        "type": "object",
+                        "properties": {
+                          "items": { "type": "array" },
+                          "last_id": { "type": "string" },
+                          "total": { "type": "integer" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "finance",
+      "tags": ["Finance API"],
+      "operations": []
+    },
+    {
+      "name": "analytics",
+      "tags": ["Analytics API"],
+      "operations": []
+    }
+  ]
+}

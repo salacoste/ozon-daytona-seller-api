@@ -14,17 +14,17 @@
 
 ### npm
 ```bash
-npm install bmad-ozon-seller-api
+npm install daytona-ozon-seller-api
 ```
 
 ### yarn
 ```bash
-yarn add bmad-ozon-seller-api
+yarn add daytona-ozon-seller-api
 ```
 
 ### pnpm
 ```bash
-pnpm add bmad-ozon-seller-api
+pnpm add daytona-ozon-seller-api
 ```
 
 ## 🔑 Первоначальная настройка
@@ -39,7 +39,7 @@ pnpm add bmad-ozon-seller-api
 ### 2. Инициализация SDK
 
 ```typescript
-import { OzonSellerAPI } from 'bmad-ozon-seller-api';
+import { OzonSellerAPI } from 'daytona-ozon-seller-api';
 
 // Базовая инициализация
 const api = new OzonSellerAPI({

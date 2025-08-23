@@ -1,0 +1,15 @@
+---
+alwaysApply: true
+---
+# Cursor Rule: OZON SDK code style
+- Всегда генерируй код под tsconfig (strict, ESM).
+- Для HTTP используй только src/core/httpClient.ts.
+- Типы/схемы — Zod + TS, в categories/*/schema.ts.
+- Любой метод обязан иметь тесты (успех/ошибки/ретраи).
+- Пагинация через utils/paginate.ts, не вшивать в методы.
+- Не использовать any, отключать implicit any.
+- Писать JSDoc с примерами.
+# Cursor Rule: MCP usage
+- Перед началом категории запрашивай из ozon-api-docs: список методов, параметры, примеры, ошибки.
+- Запрашивай у context7 чек-лист best practices (ретраи, идемпотентность, лимитирование).
+- В PR добавляй краткий MCP отчёт (что запросили, какие контракты применены).

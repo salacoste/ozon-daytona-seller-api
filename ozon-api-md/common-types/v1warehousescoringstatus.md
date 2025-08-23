@@ -1,0 +1,21 @@
+# v1WarehouseScoringStatus
+
+Статус склада:
+- `WAREHOUSE_SCORING_STATUS_FULL_AVAILABLE` — доступен,
+- `WAREHOUSE_SCORING_STATUS_PARTIAL_AVAILABLE` —  частично доступен,
+- `WAREHOUSE_SCORING_STATUS_NOT_AVAILABLE` — недоступен.
+
+
+## Full schema (JSON)
+```json
+{
+  "type": "string",
+  "default": "WAREHOUSE_SCORING_STATUS_FULL_AVAILABLE",
+  "enum": [
+    "WAREHOUSE_SCORING_STATUS_FULL_AVAILABLE",
+    "WAREHOUSE_SCORING_STATUS_PARTIAL_AVAILABLE",
+    "WAREHOUSE_SCORING_STATUS_NOT_AVAILABLE"
+  ],
+  "description": "Статус склада:\n- `WAREHOUSE_SCORING_STATUS_FULL_AVAILABLE` — доступен,\n- `WAREHOUSE_SCORING_STATUS_PARTIAL_AVAILABLE` —  частично доступен,\n- `WAREHOUSE_SCORING_STATUS_NOT_AVAILABLE` — недоступен.\n"
+}
+```

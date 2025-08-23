@@ -1,17 +1,25 @@
 {
-  "name": "@spacechemical/ozon-seller-api",
-  "version": "0.1.0",
-  "description": "Comprehensive TypeScript SDK for Ozon Seller API with full type safety and category-based organization",
+  "name": "daytona-ozon-seller-api",
+  "version": "2.0.0",
+  "description": "Complete TypeScript SDK for OZON Seller API with 278 methods across 33 categories. Production-ready with comprehensive documentation and enterprise-grade architecture.",
   "keywords": [
-    "ozon",
-    "marketplace",
-    "api",
-    "sdk",
+    "ozon-api",
     "typescript",
-    "seller",
-    "e-commerce"
+    "sdk",
+    "ozon-seller",
+    "marketplace",
+    "ecommerce",
+    "api-client",
+    "nodejs",
+    "javascript",
+    "ozon-marketplace",
+    "seller-api",
+    "daytona",
+    "integration",
+    "typescript-sdk",
+    "ozon-integration"
   ],
-  "author": "SpaceChemical",
+  "author": "DAYTONA",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -104,10 +112,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/spacechemical/ozon-seller-api.git"
+    "url": "https://github.com/salacoste/ozon-daytona-seller-api.git"
   },
   "bugs": {
-    "url": "https://github.com/spacechemical/ozon-seller-api/issues"
+    "url": "https://github.com/salacoste/ozon-daytona-seller-api/issues"
   },
-  "homepage": "https://github.com/spacechemical/ozon-seller-api#readme"
+  "homepage": "https://salacoste.github.io/ozon-daytona-seller-api"
 }

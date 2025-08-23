@@ -1,0 +1,439 @@
+#!/usr/bin/env tsx
+/* eslint-disable no-console */
+
+/**
+ * MCP Build Integration Script - DISABLED
+ * 
+ * ❌ THIS SCRIPT HAS BEEN DISABLED ❌
+ * 
+ * Reason: This script was automatically overwriting manually implemented
+ * API code with empty stubs, causing loss of working implementations.
+ * 
+ * The script was designed to generate TypeScript types and API implementations
+ * from MCP ozon-api-docs server, but it was destructively replacing
+ * functional code with placeholder templates.
+ * 
+ * Original purpose: Connect to MCP ozon-api-docs server during build time to generate
+ * static TypeScript types and Zod schemas for all 32 API categories.
+ * 
+ * Status: Moved to scripts/disabled/ and removed from build process in package.json
+ * 
+ * If you need to re-enable this functionality, ensure it:
+ * 1. Only generates missing files, not existing ones
+ * 2. Has a flag to skip overwriting existing implementations
+ * 3. Creates backups before overwriting
+ * 4. Has proper conflict resolution for manual vs generated code
+ */
+
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
+import { join, dirname } from 'path';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+
+const execAsync = promisify(exec);
+
+interface McpParameter {
+  name: string;
+  in: string;
+  required?: boolean;
+  schema?: Record<string, unknown>;
+}
+
+interface McpRequestBody {
+  required?: boolean;
+  content?: Record<string, unknown>;
+}
+
+interface McpResponse {
+  description: string;
+  content?: Record<string, unknown>;
+}
+
+interface McpApiCategory {
+  name: string;
+  tags: string[];
+  operations: McpOperation[];
+}
+
+interface McpOperation {
+  operationId: string;
+  method: string;
+  path: string;
+  summary: string;
+  description?: string;
+  parameters?: McpParameter[];
+  requestBody?: McpRequestBody;
+  responses?: Record<string, McpResponse>;
+}
+
+interface GenerationResult {
+  success: boolean;
+  categoriesGenerated: number;
+  errors: string[];
+  warnings: string[];
+}
+
+class McpBuildIntegration {
+  private readonly projectRoot: string;
+  private readonly srcPath: string;
+  private readonly cacheDir: string;
+  private readonly generatedDir: string;
+
+  constructor() {
+    this.projectRoot = process.cwd();
+    this.srcPath = join(this.projectRoot, 'src');
+    this.cacheDir = join(this.projectRoot, '.mcp-cache');
+    this.generatedDir = join(this.srcPath, 'generated');
+    
+    console.log('🚀 MCP Build Integration initialized');
+    console.log(`📂 Project root: ${this.projectRoot}`);
+    console.log(`📁 Source path: ${this.srcPath}`);
+  }
+
+  /**
+   * Main entry point for MCP integration during build
+   */
+  async run(): Promise<GenerationResult> {
+    const result: GenerationResult = {
+      success: false,
+      categoriesGenerated: 0,
+      errors: [],
+      warnings: []
+    };
+
+    try {
+      console.log('\n🔍 Starting MCP integration process...');
+      
+      // Ensure required directories exist
+      this.ensureDirectories();
+      
+      // Check MCP server availability
+      const serverAvailable = await this.checkMcpServerAvailability();
+      
+      if (!serverAvailable) {
+        const fallbackUsed = await this.useCachedDocumentation();
+        if (!fallbackUsed) {
+          throw new Error('MCP server unavailable and no cached documentation found');
+        }
+        result.warnings.push('Using cached documentation - MCP server unavailable');
+      }
+
+      // Get API categories from MCP server or cache
+      const categories = serverAvailable 
+        ? await this.fetchApiCategoriesFromMcp()
+        : await this.loadCachedCategories();
+
+      console.log(`📊 Found ${categories.length} API categories to process`);
+
+      // Generate types and schemas for each category
+      for (const category of categories) {
+        try {
+          await this.generateCategoryFiles(category);
+          result.categoriesGenerated++;
+          console.log(`✅ Generated files for category: ${category.name}`);
+        } catch (error) {
+          const errorMsg = `Failed to generate category ${category.name}: ${error}`;
+          result.errors.push(errorMsg);
+          console.error(`❌ ${errorMsg}`);
+        }
+      }
+
+      // Cache the successful documentation
+      if (serverAvailable) {
+        await this.cacheDocumentation(categories);
+      }
+
+      // Update barrel exports
+      await this.updateBarrelExports(categories);
+
+      result.success = result.errors.length === 0;
+      
+      console.log(`\n🎉 MCP integration completed!`);
+      console.log(`📈 Categories generated: ${result.categoriesGenerated}`);
+      console.log(`⚠️  Warnings: ${result.warnings.length}`);
+      console.log(`❌ Errors: ${result.errors.length}`);
+
+      return result;
+
+    } catch (error) {
+      const errorMsg = `MCP integration failed: ${error}`;
+      result.errors.push(errorMsg);
+      console.error(`💥 ${errorMsg}`);
+      return result;
+    }
+  }
+
+  /**
+   * Ensure required directories exist
+   */
+  private ensureDirectories(): void {
+    const dirs = [
+      this.cacheDir,
+      this.generatedDir,
+      join(this.srcPath, 'types', 'requests'),
+      join(this.srcPath, 'types', 'responses'),
+      join(this.srcPath, 'categories')
+    ];
+
+    for (const dir of dirs) {
+      if (!existsSync(dir)) {
+        mkdirSync(dir, { recursive: true });
+        console.log(`📁 Created directory: ${dir}`);
+      }
+    }
+  }
+
+  /**
+   * Check if MCP server is available
+   */
+  private async checkMcpServerAvailability(): Promise<boolean> {
+    try {
+      console.log('🔌 Checking MCP server availability...');
+      
+      // Try to connect to MCP server
+      // This would use the actual MCP client connection
+      // For now, we'll simulate the check
+      const { stdout } = await execAsync('docker ps | grep mcp-ozon-docs || true');
+      
+      if (stdout.includes('mcp-ozon-docs')) {
+        console.log('✅ MCP server is running');
+        return true;
+      } else {
+        console.log('⚠️  MCP server not found');
+        return false;
+      }
+    } catch (error) {
+      console.log(`❌ MCP server check failed: ${error}`);
+      return false;
+    }
+  }
+
+  /**
+   * Fetch API categories from MCP server
+   */
+  private async fetchApiCategoriesFromMcp(): Promise<McpApiCategory[]> {
+    console.log('📡 Fetching API categories from MCP server...');
+    
+    // This would use the actual MCP client to fetch categories
+    // For now, we'll return a mock structure
+    const mockCategories: McpApiCategory[] = [
+      {
+        name: 'product',
+        tags: ['Product API'],
+        operations: []
+      },
+      {
+        name: 'finance',
+        tags: ['Finance API'],
+        operations: []
+      },
+      {
+        name: 'analytics',
+        tags: ['Analytics API'],
+        operations: []
+      }
+      // ... additional categories would be fetched from MCP
+    ];
+
+    return mockCategories;
+  }
+
+  /**
+   * Load cached categories when MCP server is unavailable
+   */
+  private async loadCachedCategories(): Promise<McpApiCategory[]> {
+    const cacheFile = join(this.cacheDir, 'api-categories.json');
+    
+    if (!existsSync(cacheFile)) {
+      throw new Error('No cached API documentation found');
+    }
+
+    console.log('📄 Loading cached API categories...');
+    const cached = JSON.parse(readFileSync(cacheFile, 'utf-8'));
+    return cached.categories;
+  }
+
+  /**
+   * Use cached documentation when MCP server is unavailable
+   */
+  private async useCachedDocumentation(): Promise<boolean> {
+    const cacheFile = join(this.cacheDir, 'api-categories.json');
+    return existsSync(cacheFile);
+  }
+
+  /**
+   * Cache documentation for future use
+   */
+  private async cacheDocumentation(categories: McpApiCategory[]): Promise<void> {
+    const cacheFile = join(this.cacheDir, 'api-categories.json');
+    const cacheData = {
+      timestamp: new Date().toISOString(),
+      version: '1.0.0',
+      categories
+    };
+
+    writeFileSync(cacheFile, JSON.stringify(cacheData, null, 2));
+    console.log('💾 Cached API documentation for future builds');
+  }
+
+  /**
+   * Generate TypeScript files for a category
+   */
+  private async generateCategoryFiles(category: McpApiCategory): Promise<void> {
+    // Generate request types
+    await this.generateRequestTypes(category);
+    
+    // Generate response types
+    await this.generateResponseTypes(category);
+    
+    // Generate Zod schemas
+    await this.generateZodSchemas(category);
+    
+    // Generate category implementation
+    await this.generateCategoryImplementation(category);
+  }
+
+  /**
+   * Generate request type definitions
+   */
+  private async generateRequestTypes(category: McpApiCategory): Promise<void> {
+    const requestTypesPath = join(this.srcPath, 'types', 'requests', `${category.name}.ts`);
+    
+    // This would generate TypeScript interfaces based on MCP API specs
+    const content = `/**
+ * Generated request types for ${category.name} API
+ * Generated by MCP Build Integration
+ * Do not edit manually
+ */
+
+// Request types for ${category.name} API will be generated here
+export interface ${toPascalCase(category.name)}Request {
+  // Generated from MCP API specifications
+}
+`;
+
+    writeFileSync(requestTypesPath, content);
+  }
+
+  /**
+   * Generate response type definitions
+   */
+  private async generateResponseTypes(category: McpApiCategory): Promise<void> {
+    const responseTypesPath = join(this.srcPath, 'types', 'responses', `${category.name}.ts`);
+    
+    const content = `/**
+ * Generated response types for ${category.name} API
+ * Generated by MCP Build Integration
+ * Do not edit manually
+ */
+
+// Response types for ${category.name} API will be generated here
+export interface ${toPascalCase(category.name)}Response {
+  // Generated from MCP API specifications
+}
+`;
+
+    writeFileSync(responseTypesPath, content);
+  }
+
+  /**
+   * Generate Zod schemas
+   */
+  private async generateZodSchemas(category: McpApiCategory): Promise<void> {
+    const schemasPath = join(this.srcPath, 'types', 'schemas', `${category.name}.ts`);
+    
+    // Ensure schemas directory exists
+    const schemasDir = dirname(schemasPath);
+    if (!existsSync(schemasDir)) {
+      mkdirSync(schemasDir, { recursive: true });
+    }
+
+    const content = `/**
+ * Generated Zod schemas for ${category.name} API
+ * Generated by MCP Build Integration
+ * Do not edit manually
+ */
+
+import { z } from 'zod';
+
+// Zod schemas for ${category.name} API will be generated here
+export const ${toPascalCase(category.name)}RequestSchema = z.object({
+  // Generated from MCP API specifications
+});
+
+export const ${toPascalCase(category.name)}ResponseSchema = z.object({
+  // Generated from MCP API specifications
+});
+`;
+
+    writeFileSync(schemasPath, content);
+  }
+
+  /**
+   * Generate category implementation
+   */
+  private async generateCategoryImplementation(category: McpApiCategory): Promise<void> {
+    const implementationPath = join(this.srcPath, 'categories', category.name, 'index.ts');
+    
+    // Ensure category directory exists
+    const categoryDir = dirname(implementationPath);
+    if (!existsSync(categoryDir)) {
+      mkdirSync(categoryDir, { recursive: true });
+    }
+
+    const content = `/**
+ * Generated ${category.name} API implementation
+ * Generated by MCP Build Integration
+ * Do not edit manually
+ */
+
+import { HttpClient } from '../../core/http.js';
+import type { RequestOptions } from '../../core/types.js';
+
+export class ${toPascalCase(category.name)}Api {
+  constructor(private readonly httpClient: HttpClient) {}
+
+  // API methods for ${category.name} will be generated here
+}
+`;
+
+    writeFileSync(implementationPath, content);
+  }
+
+  /**
+   * Update barrel exports in main index.ts
+   */
+  private async updateBarrelExports(categories: McpApiCategory[]): Promise<void> {
+    // This would update the main index.ts file to export all generated categories
+    console.log('📝 Updating barrel exports...');
+    
+    // For now, we'll just log the categories that would be exported
+    const categoryExports = categories.map(cat => 
+      `export { ${toPascalCase(cat.name)}Api } from './categories/${cat.name}/index.js';`
+    ).join('\n');
+    
+    console.log('Generated exports:', categoryExports);
+  }
+}
+
+/**
+ * Convert string to PascalCase
+ */
+function toPascalCase(str: string): string {
+  return str.replace(/(?:^|[-_])([a-z])/g, (_, char) => char.toUpperCase());
+}
+
+/**
+ * Main execution
+ */
+const integration = new McpBuildIntegration();
+integration.run().then(result => {
+  if (!result.success) {
+    console.error('\n💥 MCP integration failed!');
+    process.exit(1);
+  }
+  console.log('\n🎉 MCP integration completed successfully!');
+}).catch(error => {
+  console.error('\n💥 Unexpected error during MCP integration:', error);
+  process.exit(1);
+});
