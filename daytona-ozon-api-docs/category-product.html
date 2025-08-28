@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product API - OZON Seller API SDK</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .method {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .method-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .method-name {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #007bff;
+        }
+        
+        .http-method {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-left: 15px;
+        }
+        
+        .endpoint {
+            font-family: monospace;
+            background: #f1f3f4;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        
+        .type-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        
+        .type-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .type-title {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .type-name {
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 30px;
+            transition: background 0.3s;
+        }
+        
+        .back-link:hover {
+            background: #0056b3;
+        }
+        
+        @media (max-width: 768px) {
+            .type-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .method-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .http-method {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="./api-categories-index.html">← Все категории API</a>
+        </div>
+        
+        <div class="header">
+            <h1>Product API</h1>
+            <p>API методы для работы с товары</p>
+            <p><strong>23</strong> методов в категории</p>
+        </div>
+        
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">archive</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Product API implementation</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">ProductArchiveRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">ProductBooleanResponse</div>
+                </div>
+            </div>
+            
+            
+            <div class="example">* ```typescript
+ * // Получить список товаров
+ * const products = await productApi.getList({
+ *   filter: {
+ *     visibility: &#039;VISIBLE&#039;
+ *   },
+ *   limit: 100
+ * });
+ * 
+ * // Архивировать товары
+ * await productApi.archive({
+ *   product_id: [123, 456]
+ * });
+ * ```</div>
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">unarchive</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Разархивировать товары</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">ProductUnarchiveRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">ProductBooleanResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getList</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить список товаров</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">void</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetProductListResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">updateAttributes</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Обновить атрибуты товаров</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">ProductUpdateAttributesRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">ProductBooleanResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">importBySku</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Создать товар по SKU</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">ImportProductsBySKURequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">ImportProductsResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getImportInfo</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить статус импорта товара</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">GetProductInfoRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">ImportProductsStatusResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getInfo</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить информацию о товаре</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">GetProductInfoByIdRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetProductListResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getStocks</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить остатки товаров</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">void</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetProductStocksResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getPrices</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить цены товаров</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">void</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetProductPricesResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getAttributes</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить атрибуты товаров</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">void</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetProductAttributesResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getCertificateTypes</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить типы сертификатов</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">void</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetCertificateTypesResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getDiscountedInfo</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить информацию о товарах со скидкой</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">void</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetDiscountedProductsResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getProductDescription</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить описание товара</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">GetProductInfoDescriptionRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetProductInfoDescriptionResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getProductSubscription</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить количество подписавшихся на товар</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">GetProductInfoSubscriptionRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetProductInfoSubscriptionResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">importPictures</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Импорт изображений товара</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">ProductImportPicturesRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">ProductImportPicturesResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getPictures</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить изображения товаров</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">GetProductPicturesRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetProductPicturesResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getProductRating</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить контент-рейтинг товаров по SKU</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">GetProductRatingBySkuRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetProductRatingBySkuResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getRelatedSKU</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить связанные SKU</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">GetRelatedSKURequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetRelatedSKUResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">updateOfferID</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Обновить артикулы товаров</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">UpdateOfferIdRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">UpdateOfferIdResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">deleteProducts</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Удалить товары без SKU</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">DeleteProductsRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">DeleteProductsResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">importProducts</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Создать или обновить товар v3</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">ImportProductsV3Request</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">ImportProductsV3Response</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getProductInfoListV3</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить информацию о товарах v3</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">GetProductInfoListV3Request</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetProductInfoListV3Response</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getUploadQuota</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить лимиты на ассортимент</p>
+            
+            <div class="endpoint">/v1/product/archive</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">void</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetUploadQuotaResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        
+        <a href="./api-categories-index.html" class="back-link">← Вернуться к списку категорий</a>
+    </div>
+</body>
+</html>

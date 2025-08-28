@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FBS&rFBSMarks API - OZON Seller API SDK</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .method {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .method-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .method-name {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #007bff;
+        }
+        
+        .http-method {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-left: 15px;
+        }
+        
+        .endpoint {
+            font-family: monospace;
+            background: #f1f3f4;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        
+        .type-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        
+        .type-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .type-title {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .type-name {
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 30px;
+            transition: background 0.3s;
+        }
+        
+        .back-link:hover {
+            background: #0056b3;
+        }
+        
+        @media (max-width: 768px) {
+            .type-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .method-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .http-method {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="./api-categories-index.html">← Все категории API</a>
+        </div>
+        
+        <div class="header">
+            <h1>FBS&rFBSMarks API</h1>
+            <p>API методы для работы с маркировка fbs/rfbs</p>
+            <p><strong>13</strong> методов в категории</p>
+        </div>
+        
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">createProductExemplar</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>FBS&rFBSMarks API implementation</p>
+            
+            <div class="endpoint">/v1/product/exemplar/create</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">FbsRfbsMarksProductExemplarCreateRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">FbsRfbsMarksProductExemplarCreateResponse</div>
+                </div>
+            </div>
+            
+            
+            <div class="example">* ```typescript
+ * import { OzonSellerAPI } from &#039;bmad-ozon-seller-api&#039;;
+ * 
+ * const api = new OzonSellerAPI({
+ *   clientId: &#039;your-client-id&#039;,
+ *   apiKey: &#039;your-api-key&#039;
+ * });
+ * 
+ * // Upload marking exemplar
+ * const uploadResult = await api.fbsRfbsMarks.createProductExemplar({
+ *   product_id: 123456,
+ *   file: &#039;base64EncodedPdfContent&#039;,
+ *   file_name: &#039;marking_exemplar.pdf&#039;
+ * });
+ * 
+ * // Upload marking codes for posting
+ * const codesResult = await api.fbsRfbsMarks.uploadPostingCodes({
+ *   posting_number: &#039;FBS-123456789&#039;,
+ *   codes: [
+ *     { sku: &#039;SKU123&#039;, gtd: &#039;marking_code_1&#039;, quantity: 1 },
+ *     { sku: &#039;SKU456&#039;, gtd: &#039;marking_code_2&#039;, quantity: 2 }
+ *   ]
+ * });
+ * ```</div>
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getProductExemplarInfo</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить информацию о загруженном образце маркировки</p>
+            
+            <div class="endpoint">/v1/product/exemplar/create</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">FbsRfbsMarksProductExemplarInfoRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">FbsRfbsMarksProductExemplarInfoResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getProductExemplarList</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить список образцов маркировки товара</p>
+            
+            <div class="endpoint">/v1/product/exemplar/create</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">FbsRfbsMarksProductExemplarListRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">FbsRfbsMarksProductExemplarListResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">deleteProductExemplar</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Удалить образец маркировки</p>
+            
+            <div class="endpoint">/v1/product/exemplar/create</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">FbsRfbsMarksProductExemplarDeleteRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">FbsRfbsMarksProductExemplarDeleteResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getProductExemplarDeleteStatus</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить статус удаления образца маркировки</p>
+            
+            <div class="endpoint">/v1/product/exemplar/create</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">FbsRfbsMarksProductExemplarDeleteStatusRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">FbsRfbsMarksProductExemplarDeleteStatusResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">validateProductExemplar</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Валидировать образец маркировки</p>
+            
+            <div class="endpoint">/v1/product/exemplar/create</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">FbsRfbsMarksProductExemplarValidateRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">FbsRfbsMarksProductExemplarValidateResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getProductExemplarValidateStatus</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить статус валидации образца маркировки</p>
+            
+            <div class="endpoint">/v1/product/exemplar/create</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">FbsRfbsMarksProductExemplarValidateStatusRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">FbsRfbsMarksProductExemplarValidateStatusResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">uploadPostingCodes</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Загрузить коды маркировки для отправления</p>
+            
+            <div class="endpoint">/v1/product/exemplar/create</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">FbsRfbsMarksPostingCodesUploadRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">FbsRfbsMarksPostingCodesUploadResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getPostingCodesUploadStatus</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить статус загрузки кодов маркировки</p>
+            
+            <div class="endpoint">/v1/product/exemplar/create</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">FbsRfbsMarksPostingCodesUploadStatusRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">FbsRfbsMarksPostingCodesUploadStatusResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">validatePostingCodes</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Проверить коды маркировки отправления</p>
+            
+            <div class="endpoint">/v1/product/exemplar/create</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">FbsRfbsMarksPostingCodesValidateRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">FbsRfbsMarksPostingCodesValidateResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getPostingCodesValidateStatus</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить статус проверки кодов маркировки</p>
+            
+            <div class="endpoint">/v1/product/exemplar/create</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">FbsRfbsMarksPostingCodesValidateStatusRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">FbsRfbsMarksPostingCodesValidateStatusResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getPostingCodesInfo</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить информацию о кодах маркировки отправления</p>
+            
+            <div class="endpoint">/v1/product/exemplar/create</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">FbsRfbsMarksPostingCodesInfoRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">FbsRfbsMarksPostingCodesInfoResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getPostingList</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить список отправлений с обязательной маркировкой</p>
+            
+            <div class="endpoint">/v1/product/exemplar/create</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">FbsRfbsMarksPostingListRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">FbsRfbsMarksPostingListResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        
+        <a href="./api-categories-index.html" class="back-link">← Вернуться к списку категорий</a>
+    </div>
+</body>
+</html>

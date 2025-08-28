@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SellerRating API - OZON Seller API SDK</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .method {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .method-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .method-name {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #007bff;
+        }
+        
+        .http-method {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-left: 15px;
+        }
+        
+        .endpoint {
+            font-family: monospace;
+            background: #f1f3f4;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        
+        .type-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        
+        .type-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .type-title {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .type-name {
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 30px;
+            transition: background 0.3s;
+        }
+        
+        .back-link:hover {
+            background: #0056b3;
+        }
+        
+        @media (max-width: 768px) {
+            .type-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .method-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .http-method {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="./api-categories-index.html">← Все категории API</a>
+        </div>
+        
+        <div class="header">
+            <h1>SellerRating API</h1>
+            <p>API методы для работы с рейтинг продавца</p>
+            <p><strong>2</strong> методов в категории</p>
+        </div>
+        
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getCurrentRatings</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>SellerRating API implementation</p>
+            
+            <div class="endpoint">/v1/rating/history</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">void</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">SellerRatingSummaryResponse</div>
+                </div>
+            </div>
+            
+            
+            <div class="example">* ```typescript
+ * // Получить текущие рейтинги продавца
+ * const currentRatings = await sellerRatingApi.getCurrentRatings();
+ * 
+ * // Получить историю рейтингов за месяц
+ * const ratingHistory = await sellerRatingApi.getRatingHistory({
+ *   date_from: &#039;2024-01-01T00:00:00Z&#039;,
+ *   date_to: &#039;2024-01-31T23:59:59Z&#039;,
+ *   ratings: [&#039;rating_on_time&#039;, &#039;rating_review_avg_score_total&#039;],
+ *   with_premium_scores: true
+ * });
+ * ```</div>
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getRatingHistory</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить историю рейтингов продавца за период</p>
+            
+            <div class="endpoint">/v1/rating/history</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">SellerRatingHistoryRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">SellerRatingHistoryResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        
+        <a href="./api-categories-index.html" class="back-link">← Вернуться к списку категорий</a>
+    </div>
+</body>
+</html>

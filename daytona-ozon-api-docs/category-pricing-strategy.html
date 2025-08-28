@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Strategy API - OZON Seller API SDK</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .method {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .method-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .method-name {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #007bff;
+        }
+        
+        .http-method {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-left: 15px;
+        }
+        
+        .endpoint {
+            font-family: monospace;
+            background: #f1f3f4;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        
+        .type-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        
+        .type-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .type-title {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .type-name {
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 30px;
+            transition: background 0.3s;
+        }
+        
+        .back-link:hover {
+            background: #0056b3;
+        }
+        
+        @media (max-width: 768px) {
+            .type-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .method-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .http-method {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="./api-categories-index.html">← Все категории API</a>
+        </div>
+        
+        <div class="header">
+            <h1>Pricing Strategy API</h1>
+            <p>API методы для работы с стратегии цен</p>
+            <p><strong>12</strong> методов в категории</p>
+        </div>
+        
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getCompetitors</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Pricing Strategy API implementation</p>
+            
+            <div class="endpoint">/v1/pricing-strategy/competitors/list</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">GetCompetitorsRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetCompetitorsResponse</div>
+                </div>
+            </div>
+            
+            
+            <div class="example">* ```typescript
+ * // Создать новую стратегию ценообразования
+ * const strategy = await pricingApi.createStrategy({
+ *   name: &#039;Конкурентная стратегия&#039;,
+ *   description: &#039;Автоматическое ценообразование на основе цен конкурентов&#039;,
+ *   strategy_type: &#039;COMPETITIVE&#039;
+ * });
+ * 
+ * // Добавить товары в стратегию
+ * await pricingApi.addItemsToStrategy({
+ *   strategy_id: strategy.result.strategy_id,
+ *   items: [{ sku: &#039;123456789&#039; }, { sku: &#039;987654321&#039; }]
+ * });
+ * 
+ * // Получить список конкурентов
+ * const competitors = await pricingApi.getCompetitors({
+ *   sku: [&#039;123456789&#039;],
+ *   limit: 10
+ * });
+ * ```</div>
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">createStrategy</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Создать стратегию</p>
+            
+            <div class="endpoint">/v1/pricing-strategy/competitors/list</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">CreatePricingStrategyRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">CreatePricingStrategyResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">deleteStrategy</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Удалить стратегию</p>
+            
+            <div class="endpoint">/v1/pricing-strategy/competitors/list</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">DeletePricingStrategyRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">EmptyResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getStrategyInfo</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Информация о стратегии</p>
+            
+            <div class="endpoint">/v1/pricing-strategy/competitors/list</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">GetStrategyInfoRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetStrategyResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getStrategiesList</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Список стратегий</p>
+            
+            <div class="endpoint">/v1/pricing-strategy/competitors/list</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">GetStrategyListRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetStrategyListResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getStrategyItemInfo</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Цена товара у конкурента</p>
+            
+            <div class="endpoint">/v1/pricing-strategy/competitors/list</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">GetStrategyItemInfoRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetStrategyItemInfoResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">addItemsToStrategy</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Добавить товары в стратегию</p>
+            
+            <div class="endpoint">/v1/pricing-strategy/competitors/list</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">AddStrategyItemsRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">AddStrategyItemsResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">removeItemsFromStrategy</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Удалить товары из стратегии</p>
+            
+            <div class="endpoint">/v1/pricing-strategy/competitors/list</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">DeleteStrategyItemsRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">DeleteStrategyItemsResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getStrategyItems</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Список товаров в стратегии</p>
+            
+            <div class="endpoint">/v1/pricing-strategy/competitors/list</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">GetStrategyItemsRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetStrategyItemsResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">updateStrategyStatus</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Изменить статус стратегии</p>
+            
+            <div class="endpoint">/v1/pricing-strategy/competitors/list</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">UpdateStatusStrategyRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">EmptyResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getStrategyIDsByItemIDs</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Список идентификаторов стратегий</p>
+            
+            <div class="endpoint">/v1/pricing-strategy/competitors/list</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">GetStrategyIDsByItemIDsRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">GetStrategyIDsByItemIDsResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">updateStrategy</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Обновить стратегию</p>
+            
+            <div class="endpoint">/v1/pricing-strategy/competitors/list</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">UpdatePricingStrategyRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">EmptyResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        
+        <a href="./api-categories-index.html" class="back-link">← Вернуться к списку категорий</a>
+    </div>
+</body>
+</html>

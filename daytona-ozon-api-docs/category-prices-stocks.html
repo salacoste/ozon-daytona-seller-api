@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цены и остатки API - OZON Seller API SDK</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .method {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .method-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .method-name {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #007bff;
+        }
+        
+        .http-method {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-left: 15px;
+        }
+        
+        .endpoint {
+            font-family: monospace;
+            background: #f1f3f4;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        
+        .type-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        
+        .type-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .type-title {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .type-name {
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 30px;
+            transition: background 0.3s;
+        }
+        
+        .back-link:hover {
+            background: #0056b3;
+        }
+        
+        @media (max-width: 768px) {
+            .type-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .method-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .http-method {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="./api-categories-index.html">← Все категории API</a>
+        </div>
+        
+        <div class="header">
+            <h1>Цены и остатки API</h1>
+            <p>API методы для работы с цены и остатки</p>
+            <p><strong>9</strong> методов в категории</p>
+        </div>
+        
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getActionTimerStatus</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Prices&StocksAPI implementation</p>
+            
+            <div class="endpoint">/v1/product/action/timer/status</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">PricesStocksActionTimerStatusRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">PricesStocksActionTimerStatusResponse</div>
+                </div>
+            </div>
+            
+            
+            <div class="example">* ```typescript
+ * // Обновить цены товаров
+ * const priceUpdate = await pricesStocksApi.updatePrices({
+ *   prices: [{
+ *     offer_id: &#039;ITEM001&#039;,
+ *     price: &#039;1000&#039;,
+ *     old_price: &#039;1200&#039;,
+ *     currency_code: &#039;RUB&#039;
+ *   }]
+ * });
+ * 
+ * // Обновить остатки товаров
+ * const stockUpdate = await pricesStocksApi.updateStocks({
+ *   stocks: [{
+ *     offer_id: &#039;ITEM001&#039;,
+ *     stock: 50,
+ *     warehouse_id: 12345
+ *   }]
+ * });
+ * 
+ * // Получить информацию о ценах
+ * const prices = await pricesStocksApi.getPrices({
+ *   filter: { offer_id: [&#039;ITEM001&#039;, &#039;ITEM002&#039;] },
+ *   limit: 100
+ * });
+ * ```</div>
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">updateActionTimer</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Обновление таймера актуальности минимальной цены</p>
+            
+            <div class="endpoint">/v1/product/action/timer/status</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">PricesStocksActionTimerUpdateRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">void</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">updatePrices</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Обновить цену товаров</p>
+            
+            <div class="endpoint">/v1/product/action/timer/status</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">PricesStocksImportPricesRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">PricesStocksImportPricesResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getDiscountedProductInfo</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Узнать информацию об уценке и основном товаре по SKU уценённого товара</p>
+            
+            <div class="endpoint">/v1/product/action/timer/status</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">PricesStocksGetDiscountedInfoRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">PricesStocksGetDiscountedInfoResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getStocksByWarehouseFbs</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Информация об остатках на складах продавца (FBS и rFBS)</p>
+            
+            <div class="endpoint">/v1/product/action/timer/status</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">PricesStocksGetStocksByWarehouseFbsRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">PricesStocksGetStocksByWarehouseFbsResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">updateDiscountedProductDiscount</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Установить скидку на уценённый товар</p>
+            
+            <div class="endpoint">/v1/product/action/timer/status</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">PricesStocksUpdateDiscountRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">PricesStocksUpdateDiscountResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">updateStocks</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Обновить количество товаров на складах</p>
+            
+            <div class="endpoint">/v1/product/action/timer/status</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">PricesStocksUpdateStocksRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">PricesStocksUpdateStocksResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getStocks</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Информация о количестве товаров</p>
+            
+            <div class="endpoint">/v1/product/action/timer/status</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">PricesStocksGetStocksRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">PricesStocksGetStocksResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-name">getPrices</div>
+                <div class="http-method">POST</div>
+            </div>
+            
+            <p>Получить информацию о цене товара</p>
+            
+            <div class="endpoint">/v1/product/action/timer/status</div>
+            
+            <div class="type-info">
+                <div class="type-box">
+                    <div class="type-title">📥 Входные данные</div>
+                    <div class="type-name">PricesStocksGetPricesRequest</div>
+                </div>
+                <div class="type-box">
+                    <div class="type-title">📤 Ответ</div>
+                    <div class="type-name">PricesStocksGetPricesResponse</div>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        
+        <a href="./api-categories-index.html" class="back-link">← Вернуться к списку категорий</a>
+    </div>
+</body>
+</html>
