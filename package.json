@@ -1,6 +1,6 @@
 {
   "name": "@spacechemical/ozon-seller-api",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Comprehensive TypeScript SDK for Ozon Seller API with full type safety and category-based organization",
   "keywords": [
     "ozon",

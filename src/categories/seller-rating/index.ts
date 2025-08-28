@@ -88,7 +88,7 @@ export class SellerRatingApi {
    * }
    * 
    * // Найти критичные рейтинги
-   * const criticalRatings: any[] = [];
+   * const criticalRatings: RatingItem[] = [];
    * currentRatings.groups?.forEach(group => {
    *   group.items?.forEach(item => {
    *     if (item.status === 'CRITICAL') {
