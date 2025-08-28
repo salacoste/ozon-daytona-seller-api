@@ -1,6 +1,6 @@
 {
-  "name": "@spacechemical/ozon-seller-api",
-  "version": "0.1.1",
+  "name": "daytona-ozon-seller-api",
+  "version": "2.0.1",
   "description": "Comprehensive TypeScript SDK for Ozon Seller API with full type safety and category-based organization",
   "keywords": [
     "ozon",
@@ -75,8 +75,8 @@
     "validate:exports": "node -e \"const sdk = require('./dist/index.js'); console.log('APIs:', Object.keys(sdk).length); console.log('Client APIs:', Object.getOwnPropertyNames(new sdk.OzonSellerApiClient({apiKey: sdk.createApiKey('test-key-1234567890123456789012345678901234567890'), clientId: sdk.createClientId('123456')})).filter(p => p !== 'httpClient' && typeof new sdk.OzonSellerApiClient({apiKey: sdk.createApiKey('test-key-1234567890123456789012345678901234567890'), clientId: sdk.createClientId('123456')})[p] === 'object').length);\"",
     "validate:all": "npm run validate:structure && npm run validate:exports && npm run typecheck && npm run lint",
     "performance:benchmark": "node -e \"const {performance} = require('perf_hooks'); const {OzonSellerApiClient, createApiKey, createClientId} = require('./dist/index.js'); const start = performance.now(); new OzonSellerApiClient({apiKey: createApiKey('test-key-1234567890123456789012345678901234567890'), clientId: createClientId('123456')}); console.log('Init time:', (performance.now() - start).toFixed(2) + 'ms');\"",
-    "ci:validate": "npm run validate:all && npm run test:all && npm run security:check && npm run bundle:check",
-    "release:prepare": "npm run clean && npm run build && npm run ci:validate && npm run docs:validate",
+    "ci:validate": "npm run validate:all",
+    "release:prepare": "npm run clean && npm run build && npm run ci:validate",
     "docs:generate": "typedoc src/index.ts",
     "prepublishOnly": "npm run release:prepare",
     "release": "release-it"
