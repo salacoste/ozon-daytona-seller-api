@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📑 Алфавитный индекс API | OZON Seller API SDK | DAYTONA</title>
+    
+    <meta name="description" content="Справочник всех 278 endpoints OZON Seller API, организованных по категориям">
+    <meta name="keywords" content="ozon api, индекс, справочник, endpoints, методы">
+    
+    <link rel="icon" type="image/png" href="./image.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .nav-links a {
+            display: inline-block;
+            margin: 5px 15px;
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .category-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #007bff;
+        }
+        
+        .category-card h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .category-card .method-count {
+            background: #007bff;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .category-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .category-card ul li {
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 6px;
+            font-size: 0.9em;
+            border-left: 3px solid #007bff;
+        }
+        
+        .category-card ul li strong {
+            color: #007bff;
+        }
+        
+        .search-box {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .search-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        
+        .premium-tag {
+            background: #ffc107;
+            color: #212529;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .beta-tag {
+            background: #17a2b8;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📑 Алфавитный индекс API</h1>
+            <p>Справочник всех 278 endpoints | DAYTONA</p>
+        </div>
+        
+        <div class="nav-links">
+            <a href="./QUICK-START.html">🚀 Быстрый старт</a>
+            <a href="./README.html">📖 Полное руководство</a>
+            <a href="./FUNCTIONAL-INDEX.html">🔍 Поиск по функциям</a>
+            <a href="./FAQ.html">❓ FAQ</a>
+            <a href="../index.html">🏠 Главная</a>
+        </div>
+        
+        <div class="content">
+            <div class="search-box">
+                <h3 style="margin-bottom: 15px; color: #333;">🔍 Поиск по методам</h3>
+                <input type="text" class="search-input" placeholder="Найти API метод..." id="searchInput" onkeyup="searchMethods()">
+                <p style="margin-top: 10px; color: #6c757d; font-size: 0.9em;">Введите название API или метода для быстрого поиска</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">33</span>
+                    <span class="stat-label">Категорий API</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">278</span>
+                    <span class="stat-label">Методов API</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">15</span>
+                    <span class="stat-label">Premium Plus</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">9</span>
+                    <span class="stat-label">Экспериментальных</span>
+                </div>
+            </div>
+            
+            <h2 style="text-align: center; margin: 40px 0 30px; color: #333;">📚 Категории API</h2>
+            
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Popular APIs -->
+                <div class="category-card">
+                    <h3>📦 Product API</h3>
+                    <span class="method-count">18 методов</span>
+                    <ul>
+                        <li><strong>getList()</strong> - Список товаров</li>
+                        <li><strong>getInfo()</strong> - Информация о товаре</li>
+                        <li><strong>create()</strong> - Создание товара</li>
+                        <li><strong>update()</strong> - Обновление товара</li>
+                        <li><strong>archive()</strong> - Архивация товара</li>
+                        <li>+ 13 дополнительных методов</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>🛒 FBS API</h3>
+                    <span class="method-count">25 методов</span>
+                    <ul>
+                        <li><strong>getOrdersList()</strong> - Список заказов</li>
+                        <li><strong>getOrder()</strong> - Информация о заказе</li>
+                        <li><strong>shipOrder()</strong> - Отгрузка заказа</li>
+                        <li><strong>cancelOrder()</strong> - Отмена заказа</li>
+                        <li><strong>packOrder()</strong> - Упаковка заказа</li>
+                        <li>+ 20 дополнительных методов</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>💰 Finance API</h3>
+                    <span class="method-count">12 методов</span>
+                    <ul>
+                        <li><strong>getTransactionsList()</strong> - Список транзакций</li>
+                        <li><strong>getBalance()</strong> - Баланс счета</li>
+                        <li><strong>getRealizationReport()</strong> - Отчет реализации</li>
+                        <li><strong>getCompensationReport()</strong> - Компенсации</li>
+                        <li><strong>createDocumentReport()</strong> - Документы</li>
+                        <li>+ 7 дополнительных методов</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>📈 Analytics API</h3>
+                    <span class="method-count">2 метода</span>
+                    <ul>
+                        <li><strong>getStockOnWarehouses()</strong> - Остатки на складах</li>
+                        <li><strong>getStocksTurnover()</strong> - Оборачиваемость</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>🎯 Pricing Strategy API</h3>
+                    <span class="method-count">11 методов</span>
+                    <ul>
+                        <li><strong>createStrategy()</strong> - Создание стратегии</li>
+                        <li><strong>getCompetitors()</strong> - Анализ конкурентов</li>
+                        <li><strong>updatePrices()</strong> - Обновление цен</li>
+                        <li><strong>getStrategiesList()</strong> - Список стратегий</li>
+                        <li>+ 7 дополнительных методов</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>⭐ Review API</h3>
+                    <span class="method-count">8 методов</span>
+                    <span class="premium-tag">Premium+</span>
+                    <ul>
+                        <li><strong>getList()</strong> - Список отзывов</li>
+                        <li><strong>getInfo()</strong> - Информация об отзыве</li>
+                        <li><strong>createComment()</strong> - Ответ на отзыв</li>
+                        <li><strong>changeStatus()</strong> - Изменение статуса</li>
+                        <li>+ 4 дополнительных метода</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>❓ Questions Answers API</h3>
+                    <span class="method-count">8 методов</span>
+                    <span class="premium-tag">Premium+</span>
+                    <ul>
+                        <li><strong>getQuestionList()</strong> - Список вопросов</li>
+                        <li><strong>createAnswer()</strong> - Создание ответа</li>
+                        <li><strong>deleteAnswer()</strong> - Удаление ответа</li>
+                        <li><strong>getQuestionCount()</strong> - Количество вопросов</li>
+                        <li>+ 4 дополнительных метода</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>💬 Chat API</h3>
+                    <span class="method-count">8 методов</span>
+                    <span class="premium-tag">Premium+</span>
+                    <ul>
+                        <li><strong>getChatList()</strong> - Список чатов</li>
+                        <li><strong>sendMessage()</strong> - Отправка сообщения</li>
+                        <li><strong>sendFile()</strong> - Отправка файла</li>
+                        <li><strong>getChatHistory()</strong> - История чата</li>
+                        <li>+ 4 дополнительных метода</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>🔥 FBO API</h3>
+                    <span class="method-count">12 методов</span>
+                    <ul>
+                        <li><strong>getOrdersList()</strong> - Список заказов FBO</li>
+                        <li><strong>getOrder()</strong> - Информация о заказе</li>
+                        <li><strong>getSupplyOrdersList()</strong> - Поставки</li>
+                        <li><strong>createSupplyOrder()</strong> - Создание поставки</li>
+                        <li>+ 8 дополнительных методов</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>🏭 Warehouse API</h3>
+                    <span class="method-count">2 метода</span>
+                    <ul>
+                        <li><strong>getWarehousesList()</strong> - Список складов</li>
+                        <li><strong>getDeliveryMethods()</strong> - Способы доставки</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>🎭 Specialized APIs</h3>
+                    <span class="method-count">+150 методов</span>
+                    <ul>
+                        <li><strong>Barcode API</strong> - Штрих-коды (2)</li>
+                        <li><strong>Category API</strong> - Категории (6)</li>
+                        <li><strong>Certification API</strong> - Сертификаты (12)</li>
+                        <li><strong>Delivery APIs</strong> - Доставка (35)</li>
+                        <li><strong>Returns API</strong> - Возвраты (15)</li>
+                        <li>+ 21 дополнительная категория</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>🧪 Beta Method API</h3>
+                    <span class="method-count">9 методов</span>
+                    <span class="beta-tag">Beta</span>
+                    <ul>
+                        <li><strong>getProductRatingBySku()</strong> - Рейтинг v4</li>
+                        <li><strong>getProductStocksV4()</strong> - Остатки v4</li>
+                        <li><strong>updatePricesV4()</strong> - Цены v4</li>
+                        <li><strong>getCampaignProducts()</strong> - Кампании</li>
+                        <li>+ 5 дополнительных методов</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="background: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; padding: 20px; border-radius: 12px; margin: 30px 0;">
+                <h3 style="margin-bottom: 15px;">💡 Как использовать индекс</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>🔍 Поиск:</strong> Используйте поле поиска для быстрого нахождения нужного API</li>
+                    <li><strong>📂 Категории:</strong> Методы организованы по функциональным категориям</li>
+                    <li><strong>🏷️ Теги:</strong> Premium+ требует подписку, Beta - экспериментальные</li>
+                    <li><strong>📖 Документация:</strong> Кликните на название API для подробной документации</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>278 API методов в 33 категориях</strong> - Полное покрытие OZON Seller API</p>
+            <div>
+                <a href="./QUICK-START.html">🚀 Быстрый старт</a>
+                <a href="./README.html">📖 Руководство</a>
+                <a href="./FUNCTIONAL-INDEX.html">🔍 По функциям</a>
+                <a href="../index.html">🏠 Главная</a>
+            </div>
+            <p>Made with ❤️ for OZON Marketplace developers | DAYTONA</p>
+        </div>
+    </div>
+    
+    <script>
+        function searchMethods() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const grid = document.getElementById('categoriesGrid');
+            const cards = grid.getElementsByClassName('category-card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const text = card.textContent || card.innerText;
+                
+                if (text.toUpperCase().indexOf(filter) > -1) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

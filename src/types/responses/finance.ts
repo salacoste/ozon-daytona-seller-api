@@ -93,7 +93,7 @@ export interface GetRealizationReportPostingResponse {
 }
 
 export interface RealizationReportV2Result {
-  header?: any;
+  header?: Record<string, unknown>;
   data?: RealizationReportRow[];
 }
 

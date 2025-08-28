@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❓ FAQ - Часто задаваемые вопросы | OZON Seller API SDK | DAYTONA</title>
+    
+    <meta name="description" content="Ответы на наиболее частые вопросы при работе с OZON Seller API SDK">
+    <meta name="keywords" content="ozon api, faq, помощь, проблемы, решения">
+    
+    <link rel="icon" type="image/png" href="./image.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .nav-links a {
+            display: inline-block;
+            margin: 5px 15px;
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .search-box {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .search-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        
+        .faq-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .faq-category {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #007bff;
+        }
+        
+        .faq-category h3 {
+            color: #007bff;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .faq-category h3 .emoji {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .faq-question {
+            background: #007bff;
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #0056b3;
+        }
+        
+        .faq-question .toggle {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active .toggle {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-answer.active {
+            padding: 20px;
+            max-height: 1000px;
+        }
+        
+        .faq-answer p {
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer ul {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .faq-answer li {
+            margin: 5px 0;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        .highlight {
+            color: #68d391;
+            font-weight: bold;
+        }
+        
+        .string {
+            color: #fbb6ce;
+        }
+        
+        .comment {
+            color: #a0aec0;
+            font-style: italic;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>❓ FAQ</h1>
+            <p>Часто задаваемые вопросы | DAYTONA</p>
+        </div>
+        
+        <div class="nav-links">
+            <a href="./QUICK-START.html">🚀 Быстрый старт</a>
+            <a href="./README.html">📖 Полное руководство</a>
+            <a href="./API-INDEX.html">📑 Индекс API</a>
+            <a href="./FUNCTIONAL-INDEX.html">🔍 Поиск по функциям</a>
+            <a href="../index.html">🏠 Главная</a>
+        </div>
+        
+        <div class="content">
+            <div class="search-box">
+                <h3 style="margin-bottom: 15px; color: #333;">🔍 Поиск по вопросам</h3>
+                <input type="text" class="search-input" placeholder="Поиск по FAQ..." id="searchInput" onkeyup="searchFAQ()">
+                <p style="margin-top: 10px; color: #6c757d; font-size: 0.9em;">Найдите ответ на ваш вопрос</p>
+            </div>
+            
+            <div class="info">
+                <strong>💡 Совет:</strong> Кликните на вопрос, чтобы увидеть подробный ответ с примерами кода
+            </div>
+            
+            <div class="faq-categories" id="faqGrid">
+                
+                <!-- Authentication -->
+                <div class="faq-category">
+                    <h3><span class="emoji">🔑</span>Аутентификация и доступ</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            Как получить API ключи?
+                            <span class="toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Шаги для получения ключей:</strong></p>
+                            <ol>
+                                <li>Войдите в <a href="https://seller.ozon.ru/" target="_blank">личный кабинет продавца OZON</a></li>
+                                <li>Перейдите в <strong>Настройки → API ключи</strong></li>
+                                <li>Нажмите <strong>"Создать ключ"</strong></li>
+                                <li>Выберите необходимые права доступа</li>
+                                <li>Скопируйте <strong>Client ID</strong> и <strong>API Key</strong></li>
+                            </ol>
+                            <div class="code-block">
+                                <code><span class="highlight">const</span> api = <span class="highlight">new</span> <span class="highlight">OzonSellerAPI</span>({
+  clientId: <span class="string">'your-client-id'</span>, <span class="comment">// Client-Id из кабинета</span>
+  apiKey: <span class="string">'your-api-key'</span>      <span class="comment">// Api-Key из кабинета</span>
+});</code>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            Ошибка 401 Unauthorized
+                            <span class="toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Причины и решения:</strong></p>
+                            <ul>
+                                <li><strong>Неверные ключи</strong> - проверьте Client ID и API Key</li>
+                                <li><strong>Лишние символы</strong> - уберите пробелы в начале/конце</li>
+                                <li><strong>Истек срок действия</strong> - создайте новые ключи</li>
+                                <li><strong>Недостаточно прав</strong> - проверьте права доступа ключа</li>
+                            </ul>
+                            <div class="code-block">
+                                <code><span class="comment">// Правильная инициализация</span>
+<span class="highlight">const</span> api = <span class="highlight">new</span> <span class="highlight">OzonSellerAPI</span>({
+  clientId: process.env.OZON_CLIENT_ID?.trim(),
+  apiKey: process.env.OZON_API_KEY?.trim()
+});</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- API Errors -->
+                <div class="faq-category">
+                    <h3><span class="emoji">⚠️</span>Ошибки API</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            Ошибка 429 - превышен лимит запросов
+                            <span class="toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>OZON API лимиты:</strong></p>
+                            <ul>
+                                <li>1000 запросов в минуту</li>
+                                <li>Некоторые методы имеют отдельные лимиты</li>
+                                <li>Превышение приводит к блокировке на 1-10 минут</li>
+                            </ul>
+                            <div class="code-block">
+                                <code><span class="comment">// Добавьте задержки между запросами</span>
+<span class="highlight">await</span> <span class="highlight">new</span> Promise(resolve => setTimeout(resolve, <span class="string">100</span>));
+
+<span class="comment">// Или используйте батчи</span>
+<span class="highlight">const</span> batches = chunk(items, <span class="string">100</span>);
+<span class="highlight">for</span> (<span class="highlight">const</span> batch <span class="highlight">of</span> batches) {
+  <span class="highlight">await</span> api.product.updatePrices(batch);
+  <span class="highlight">await</span> delay(<span class="string">1000</span>); <span class="comment">// Пауза 1 сек</span>
+}</code>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            Ошибки валидации данных
+                            <span class="toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Частые ошибки:</strong></p>
+                            <ul>
+                                <li><strong>Неверный формат цены</strong> - используйте строку "1234.56"</li>
+                                <li><strong>Отсутствуют обязательные поля</strong> - проверьте схему</li>
+                                <li><strong>Некорректные ID</strong> - убедитесь в правильности идентификаторов</li>
+                            </ul>
+                            <div class="warning">
+                                <strong>⚠️ Важно:</strong> Всегда проверяйте ответы API на наличие ошибок и обрабатывайте их соответствующим образом.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Performance -->
+                <div class="faq-category">
+                    <h3><span class="emoji">🚀</span>Производительность</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            Как ускорить работу с API?
+                            <span class="toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Рекомендации по оптимизации:</strong></p>
+                            <ul>
+                                <li><strong>Батчинг</strong> - объединяйте запросы в группы</li>
+                                <li><strong>Кеширование</strong> - сохраняйте данные локально</li>
+                                <li><strong>Параллельные запросы</strong> - используйте Promise.all()</li>
+                                <li><strong>Фильтрация</strong> - запрашивайте только нужные данные</li>
+                            </ul>
+                            <div class="code-block">
+                                <code><span class="comment">// Параллельные запросы</span>
+<span class="highlight">const</span> [products, orders, finance] = <span class="highlight">await</span> Promise.all([
+  api.product.getList({ limit: <span class="string">100</span> }),
+  api.fbs.getOrdersList({ limit: <span class="string">50</span> }),
+  api.finance.getTransactionsList({ limit: <span class="string">20</span> })
+]);
+
+<span class="comment">// Батч обновление</span>
+<span class="highlight">const</span> priceUpdates = products.map(<span class="highlight">p</span> => ({
+  product_id: p.id,
+  price: calculateNewPrice(p)
+}));
+
+<span class="highlight">await</span> api.pricesStocks.updatePrices(priceUpdates);</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Products -->
+                <div class="faq-category">
+                    <h3><span class="emoji">📦</span>Управление товарами</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            Как создать новый товар?
+                            <span class="toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Базовый пример создания товара:</strong></p>
+                            <div class="code-block">
+                                <code><span class="highlight">const</span> newProduct = <span class="highlight">await</span> api.product.create([{
+  name: <span class="string">'Название товара'</span>,
+  offer_id: <span class="string">'UNIQUE-OFFER-ID'</span>,
+  category_id: <span class="string">17028922</span>,
+  price: <span class="string">'999.00'</span>,
+  old_price: <span class="string">'1299.00'</span>,
+  vat: <span class="string">'0.20'</span>,
+  height: <span class="string">10</span>,
+  depth: <span class="string">15</span>, 
+  width: <span class="string">20</span>,
+  weight: <span class="string">500</span>,
+  images: [<span class="string">'https://example.com/image1.jpg'</span>],
+  attributes: [{
+    complex_id: <span class="string">0</span>,
+    id: <span class="string">85</span>,
+    values: [{ value: <span class="string">'Значение атрибута'</span> }]
+  }]
+}]);
+
+console.log(<span class="string">'Товар создан:'</span>, newProduct.result[<span class="string">0</span>].product_id);</code>
+                            </div>
+                            <div class="warning">
+                                <strong>⚠️ Важно:</strong> Обязательно укажите корректные категорию, атрибуты и изображения
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            Как массово обновить цены?
+                            <span class="toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="code-block">
+                                <code><span class="comment">// Получаем товары</span>
+<span class="highlight">const</span> products = <span class="highlight">await</span> api.product.getList({ limit: <span class="string">1000</span> });
+
+<span class="comment">// Подготавливаем обновления (скидка 10%)</span>
+<span class="highlight">const</span> priceUpdates = products.result.items
+  .map(<span class="highlight">p</span> => ({
+    product_id: p.id,
+    price: (parseFloat(p.marketing_price) * <span class="string">0.9</span>).toFixed(<span class="string">2</span>)
+  }));
+
+<span class="comment">// Обновляем батчами по 1000 товаров</span>
+<span class="highlight">await</span> api.pricesStocks.updatePrices(priceUpdates);
+
+console.log(<span class="string">`Обновлено цен: ${priceUpdates.length}`</span>);</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Orders -->
+                <div class="faq-category">
+                    <h3><span class="emoji">🚚</span>Заказы и логистика</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            Как обработать заказы FBS?
+                            <span class="toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="code-block">
+                                <code><span class="comment">// Получаем новые заказы</span>
+<span class="highlight">const</span> orders = <span class="highlight">await</span> api.fbs.getOrdersList({
+  filter: { 
+    status: <span class="string">'awaiting_packaging'</span>,
+    since: <span class="string">'2024-01-01T00:00:00Z'</span>
+  },
+  limit: <span class="string">50</span>
+});
+
+<span class="comment">// Обрабатываем каждый заказ</span>
+<span class="highlight">for</span> (<span class="highlight">const</span> order <span class="highlight">of</span> orders.result) {
+  <span class="comment">// Упаковываем заказ</span>
+  <span class="highlight">await</span> api.fbs.packOrder({
+    posting_number: order.posting_number,
+    packages: [{
+      products: order.products.map(<span class="highlight">p</span> => ({
+        product_id: p.product_id,
+        quantity: p.quantity
+      }))
+    }]
+  });
+  
+  <span class="comment">// Отгружаем заказ</span>
+  <span class="highlight">await</span> api.fbs.shipOrder({
+    posting_number: order.posting_number,
+    tracking_number: <span class="string">`TRACK${Date.now()}`</span>
+  });
+}</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Technical -->
+                <div class="faq-category">
+                    <h3><span class="emoji">🛠️</span>Технические вопросы</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            Какие версии Node.js поддерживаются?
+                            <span class="toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Системные требования:</strong></p>
+                            <ul>
+                                <li><strong>Node.js:</strong> 18.0+ (рекомендуется LTS)</li>
+                                <li><strong>TypeScript:</strong> 4.5+ (опционально)</li>
+                                <li><strong>Browser:</strong> ES2020+ для браузеров</li>
+                            </ul>
+                            <div class="success">
+                                <strong>✅ Совместимость:</strong> SDK работает в Node.js, браузерах и edge-функциях (Vercel, AWS Lambda, Cloudflare Workers)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            Как настроить логирование?
+                            <span class="toggle">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="code-block">
+                                <code><span class="highlight">const</span> api = <span class="highlight">new</span> <span class="highlight">OzonSellerAPI</span>({
+  clientId: <span class="string">'your-client-id'</span>,
+  apiKey: <span class="string">'your-api-key'</span>,
+  debug: <span class="string">true</span>, <span class="comment">// Включить логи</span>
+  onRequest: (config) => {
+    console.log(<span class="string">'📤 Request:'</span>, config.method, config.url);
+  },
+  onResponse: (response) => {
+    console.log(<span class="string">'📥 Response:'</span>, response.status, response.statusText);
+  },
+  onError: (error) => {
+    console.error(<span class="string">'❌ Error:'</span>, error.message);
+  }
+});</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="success">
+                <h3 style="margin-bottom: 15px;">🎯 Не нашли ответ?</h3>
+                <p><strong>Дополнительные ресурсы:</strong></p>
+                <ul style="margin: 10px 0 10px 20px;">
+                    <li><a href="./QUICK-START.html">🚀 Быстрый старт</a> - пошаговое руководство</li>
+                    <li><a href="https://docs.ozon.ru/api/seller/" target="_blank">📘 Официальная документация OZON</a></li>
+                    <li><a href="https://github.com/salacoste/ozon-daytona-seller-api/issues" target="_blank">🐛 GitHub Issues</a> - сообщить о проблеме</li>
+                    <li><a href="https://t.me/ozon_api_chat" target="_blank">💬 Сообщество разработчиков</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>FAQ</strong> - Ответы на частые вопросы по OZON Seller API</p>
+            <div>
+                <a href="./QUICK-START.html">🚀 Быстрый старт</a>
+                <a href="./README.html">📖 Руководство</a>
+                <a href="./API-INDEX.html">📑 Индекс API</a>
+                <a href="../index.html">🏠 Главная</a>
+            </div>
+            <p>Made with ❤️ for OZON Marketplace developers | DAYTONA</p>
+        </div>
+    </div>
+    
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            
+            // Закрываем все остальные
+            document.querySelectorAll('.faq-answer.active').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelectorAll('.faq-question.active').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Переключаем текущий
+            if (!isActive) {
+                answer.classList.add('active');
+                element.classList.add('active');
+            }
+        }
+        
+        function searchFAQ() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const grid = document.getElementById('faqGrid');
+            const categories = grid.getElementsByClassName('faq-category');
+            
+            for (let i = 0; i < categories.length; i++) {
+                const category = categories[i];
+                const text = category.textContent || category.innerText;
+                
+                if (text.toUpperCase().indexOf(filter) > -1) {
+                    category.style.display = '';
+                } else {
+                    category.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

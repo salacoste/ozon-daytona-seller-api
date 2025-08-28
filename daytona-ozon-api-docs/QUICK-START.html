@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Быстрый старт с OZON Seller API SDK | DAYTONA</title>
+    
+    <meta name="description" content="Руководство для быстрого начала работы с OZON Seller API SDK всего за 5 минут">
+    <meta name="keywords" content="ozon api, быстрый старт, quick start, typescript, sdk">
+    
+    <link rel="icon" type="image/png" href="./image.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .nav-links a {
+            display: inline-block;
+            margin: 5px 15px;
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .content h2 {
+            color: #007bff;
+            margin: 40px 0 20px 0;
+            font-size: 1.8em;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        
+        .content h3 {
+            color: #333;
+            margin: 30px 0 15px 0;
+            font-size: 1.3em;
+        }
+        
+        .content ul {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .content ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        .content li {
+            margin: 8px 0;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            line-height: 1.5;
+        }
+        
+        .code-block code {
+            font-size: 0.9em;
+        }
+        
+        .highlight {
+            color: #68d391;
+            font-weight: bold;
+        }
+        
+        .string {
+            color: #fbb6ce;
+        }
+        
+        .comment {
+            color: #a0aec0;
+            font-style: italic;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .toc h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        
+        .toc ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .toc ul li {
+            margin: 8px 0;
+        }
+        
+        .toc ul li a {
+            color: #007bff;
+            text-decoration: none;
+            padding: 5px 0;
+            display: block;
+        }
+        
+        .toc ul li a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+            margin-top: 40px;
+        }
+        
+        .footer p {
+            color: #6c757d;
+            margin: 10px 0;
+        }
+        
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Быстрый старт</h1>
+            <p>OZON Seller API SDK | DAYTONA</p>
+        </div>
+        
+        <div class="nav-links">
+            <a href="./README.html">📖 Полное руководство</a>
+            <a href="./API-INDEX.html">📑 Индекс API</a>
+            <a href="./FRAMEWORK-INTEGRATION.html">⚙️ Интеграция</a>
+            <a href="./FAQ.html">❓ FAQ</a>
+            <a href="../index.html">🏠 Главная</a>
+        </div>
+        
+        <div class="content">
+            <div class="info">
+                <strong>💡 Цель:</strong> Начать работу с OZON Seller API SDK всего за 5 минут
+            </div>
+            
+            <div class="toc">
+                <h3>📋 Содержание</h3>
+                <ul>
+                    <li><a href="#installation">🛠️ Установка</a></li>
+                    <li><a href="#setup">🔑 Первоначальная настройка</a></li>
+                    <li><a href="#basic-operations">🎯 Базовые операции</a></li>
+                    <li><a href="#scenarios">🎭 Типовые сценарии</a></li>
+                    <li><a href="#next-steps">🎓 Следующие шаги</a></li>
+                </ul>
+            </div>
+            
+            <h2 id="installation">🛠️ Установка</h2>
+            
+            <h3>npm</h3>
+            <div class="code-block">
+                <code>npm install daytona-ozon-seller-api</code>
+            </div>
+            
+            <h3>yarn</h3>
+            <div class="code-block">
+                <code>yarn add daytona-ozon-seller-api</code>
+            </div>
+            
+            <h3>pnpm</h3>
+            <div class="code-block">
+                <code>pnpm add daytona-ozon-seller-api</code>
+            </div>
+            
+            <h2 id="setup">🔑 Первоначальная настройка</h2>
+            
+            <h3>1. Получение API ключей</h3>
+            <ol>
+                <li>Войдите в <a href="https://seller.ozon.ru/" target="_blank">личный кабинет продавца OZON</a></li>
+                <li>Перейдите в <strong>Настройки</strong> → <strong>API ключи</strong></li>
+                <li>Создайте новый API ключ</li>
+                <li>Скопируйте <strong>Client ID</strong> и <strong>API Key</strong></li>
+            </ol>
+            
+            <h3>2. Инициализация SDK</h3>
+            <div class="code-block">
+                <code><span class="highlight">import</span> { <span class="highlight">OzonSellerAPI</span> } <span class="highlight">from</span> <span class="string">'daytona-ozon-seller-api'</span>;
+
+<span class="comment">// Базовая инициализация</span>
+<span class="highlight">const</span> api = <span class="highlight">new</span> <span class="highlight">OzonSellerAPI</span>({
+  clientId: <span class="string">'your-client-id'</span>,
+  apiKey: <span class="string">'your-api-key'</span>
+});
+
+<span class="comment">// С дополнительными настройками</span>
+<span class="highlight">const</span> api = <span class="highlight">new</span> <span class="highlight">OzonSellerAPI</span>({
+  clientId: <span class="string">'your-client-id'</span>,
+  apiKey: <span class="string">'your-api-key'</span>,
+  baseURL: <span class="string">'https://api-seller.ozon.ru'</span>, <span class="comment">// По умолчанию</span>
+  timeout: <span class="string">30000</span>, <span class="comment">// 30 секунд</span>
+  debug: <span class="string">false</span> <span class="comment">// Включить логи для отладки</span>
+});</code>
+            </div>
+            
+            <h3>3. Проверка подключения</h3>
+            <div class="code-block">
+                <code><span class="highlight">async function</span> testConnection() {
+  <span class="highlight">try</span> {
+    <span class="comment">// Получаем первые 5 товаров</span>
+    <span class="highlight">const</span> products = <span class="highlight">await</span> api.product.getList({ limit: <span class="string">5</span> });
+    console.log(<span class="string">'✅ Подключение успешно!'</span>);
+    console.log(<span class="string">`📦 Найдено товаров: ${products.result?.items?.length || 0}`</span>);
+    
+  } <span class="highlight">catch</span> (error) {
+    console.error(<span class="string">'❌ Ошибка подключения:'</span>, error.message);
+  }
+}
+
+testConnection();</code>
+            </div>
+            
+            <h2 id="basic-operations">🎯 Базовые операции</h2>
+            
+            <h3>Работа с товарами</h3>
+            <div class="code-block">
+                <code><span class="comment">// 1. Получение списка товаров</span>
+<span class="highlight">const</span> products = <span class="highlight">await</span> api.product.getList({
+  limit: <span class="string">20</span>,
+  filter: {
+    visibility: <span class="string">'ALL'</span>
+  }
+});
+
+console.log(<span class="string">'Товары:'</span>, products.result?.items?.length);
+
+<span class="comment">// 2. Получение информации о товаре</span>
+<span class="highlight">const</span> productInfo = <span class="highlight">await</span> api.product.getInfo({
+  product_id: <span class="string">123456789</span>
+});
+
+console.log(<span class="string">'Название:'</span>, productInfo.result?.name);
+
+<span class="comment">// 3. Обновление цены товара</span>
+<span class="highlight">await</span> api.pricesStocks.updatePrices([{
+  product_id: <span class="string">123456789</span>,
+  price: <span class="string">'1500.00'</span>
+}]);
+
+console.log(<span class="string">'💰 Цена обновлена'</span>);</code>
+            </div>
+            
+            <h3>Работа с заказами FBS</h3>
+            <div class="code-block">
+                <code><span class="comment">// 1. Получение новых заказов</span>
+<span class="highlight">const</span> orders = <span class="highlight">await</span> api.fbs.getOrdersList({
+  filter: {
+    since: <span class="string">'2024-01-01T00:00:00Z'</span>,
+    to: <span class="string">'2024-01-31T23:59:59Z'</span>,
+    status: <span class="string">'awaiting_packaging'</span>
+  },
+  limit: <span class="string">50</span>
+});
+
+console.log(<span class="string">'📋 Новых заказов:'</span>, orders.result?.length || 0);
+
+<span class="comment">// 2. Обработка заказа</span>
+<span class="highlight">for</span> (<span class="highlight">const</span> order <span class="highlight">of</span> orders.result || []) {
+  console.log(<span class="string">`🔄 Обработка заказа: ${order.posting_number}`</span>);
+  
+  <span class="comment">// Отгрузка заказа</span>
+  <span class="highlight">await</span> api.fbs.shipOrder({
+    posting_number: order.posting_number,
+    tracking_number: <span class="string">`TRACK${Date.now()}`</span>
+  });
+  
+  console.log(<span class="string">'🚚 Заказ отгружен'</span>);
+}</code>
+            </div>
+            
+            <h2 id="scenarios">🎭 Типовые сценарии</h2>
+            
+            <h3>Сценарий 1: Массовое обновление цен</h3>
+            <div class="code-block">
+                <code><span class="highlight">async function</span> updatePricesBulk() {
+  <span class="highlight">try</span> {
+    <span class="comment">// 1. Получаем товары</span>
+    <span class="highlight">const</span> products = <span class="highlight">await</span> api.product.getList({ limit: <span class="string">100</span> });
+    
+    <span class="comment">// 2. Подготавливаем обновления цен (скидка 10%)</span>
+    <span class="highlight">const</span> priceUpdates = products.result?.items
+      ?.map(<span class="highlight">p</span> => ({
+        product_id: p.id,
+        price: (parseFloat(p.marketing_price || <span class="string">'0'</span>) * <span class="string">0.9</span>).toFixed(<span class="string">2</span>)
+      }));
+    
+    <span class="highlight">if</span> (priceUpdates && priceUpdates.length > <span class="string">0</span>) {
+      <span class="comment">// 3. Обновляем цены</span>
+      <span class="highlight">await</span> api.pricesStocks.updatePrices(priceUpdates);
+      console.log(<span class="string">'✅ Все цены обновлены!'</span>);
+    }
+    
+  } <span class="highlight">catch</span> (error) {
+    console.error(<span class="string">'❌ Ошибка обновления цен:'</span>, error.message);
+  }
+}
+
+updatePricesBulk();</code>
+            </div>
+            
+            <h2 id="next-steps">🎓 Следующие шаги</h2>
+            
+            <h3>1. Изучите документацию API</h3>
+            <ul>
+                <li><a href="./README.html">📖 Полное README</a> - Обзор всех возможностей</li>
+                <li><a href="./API-INDEX.html">📑 Индекс API</a> - Справочник всех 278 методов</li>
+                <li><a href="./FRAMEWORK-INTEGRATION.html">⚙️ Интеграция</a> - Примеры для фреймворков</li>
+            </ul>
+            
+            <h3>2. Ключевые API для изучения</h3>
+            <div class="success">
+                <strong>Новичкам рекомендуем:</strong>
+                <ul>
+                    <li>Product API - Управление товарами</li>
+                    <li>Prices Stocks API - Цены и остатки</li>
+                    <li>FBS API - Заказы FBS</li>
+                </ul>
+            </div>
+            
+            <h3>3. Настройте обработку ошибок</h3>
+            <div class="code-block">
+                <code><span class="comment">// Универсальная функция с повторными попытками</span>
+<span class="highlight">async function</span> withRetry&lt;T&gt;(
+  operation: () => Promise&lt;T&gt;,
+  maxRetries: <span class="highlight">number</span> = <span class="string">3</span>
+): Promise&lt;T&gt; {
+  <span class="highlight">for</span> (<span class="highlight">let</span> attempt = <span class="string">1</span>; attempt <= maxRetries; attempt++) {
+    <span class="highlight">try</span> {
+      <span class="highlight">return</span> <span class="highlight">await</span> operation();
+    } <span class="highlight">catch</span> (error) {
+      <span class="highlight">if</span> (attempt === maxRetries) {
+        <span class="highlight">throw</span> error;
+      }
+      
+      <span class="comment">// Задержка перед повторной попыткой</span>
+      <span class="highlight">const</span> delay = Math.pow(<span class="string">2</span>, attempt) * <span class="string">1000</span>;
+      <span class="highlight">await</span> <span class="highlight">new</span> Promise(<span class="highlight">resolve</span> => setTimeout(resolve, delay));
+    }
+  }
+}
+
+<span class="comment">// Использование</span>
+<span class="highlight">const</span> products = <span class="highlight">await</span> withRetry(() => 
+  api.product.getList({ limit: <span class="string">100</span> })
+);</code>
+            </div>
+            
+            <div class="success">
+                <strong>🎉 Поздравляем!</strong> Теперь вы готовы к работе с OZON Seller API. Начните с простых операций и постепенно изучайте более сложные возможности системы.
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Нужна помощь?</strong> Обратитесь к подробной документации или сообществу разработчиков.</p>
+            <div>
+                <a href="./README.html">📖 Полная документация</a>
+                <a href="./FAQ.html">❓ FAQ</a>
+                <a href="https://github.com/salacoste/ozon-daytona-seller-api">⭐ GitHub</a>
+                <a href="../index.html">🏠 Главная страница</a>
+            </div>
+            <p>Made with ❤️ for OZON Marketplace developers | DAYTONA</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -28,7 +28,7 @@ export interface CreatePricingStrategyRequest {
   /** Тип стратегии */
   strategy_type?: string;
   /** Настройки стратегии */
-  settings?: Record<string, any>;
+  settings?: Record<string, unknown>;
   readonly [key: string]: unknown;
 }
 
@@ -84,7 +84,7 @@ export interface StrategyItemToAdd {
   /** SKU товара */
   sku: string;
   /** Дополнительные настройки товара */
-  settings?: Record<string, any>;
+  settings?: Record<string, unknown>;
 }
 
 /**
@@ -159,6 +159,6 @@ export interface UpdatePricingStrategyRequest {
   /** Новое описание стратегии */
   description?: string;
   /** Новые настройки стратегии */
-  settings?: Record<string, any>;
+  settings?: Record<string, unknown>;
   readonly [key: string]: unknown;
 }

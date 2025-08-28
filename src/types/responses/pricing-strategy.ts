@@ -86,7 +86,7 @@ export interface PricingStrategy {
   /** Дата последнего обновления */
   updated_at?: string;
   /** Настройки стратегии */
-  settings?: Record<string, any>;
+  settings?: Record<string, unknown>;
 }
 
 /**

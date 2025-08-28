@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 Полное руководство | OZON Seller API SDK | DAYTONA</title>
+    
+    <meta name="description" content="Полная документация для SDK OZON Seller API с 278 endpoints в 33 категориях">
+    <meta name="keywords" content="ozon api, документация, sdk, typescript, руководство">
+    
+    <link rel="icon" type="image/png" href="./image.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .nav-links a {
+            display: inline-block;
+            margin: 5px 15px;
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .content h2 {
+            color: #007bff;
+            margin: 40px 0 20px 0;
+            font-size: 1.8em;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        
+        .content h3 {
+            color: #333;
+            margin: 30px 0 15px 0;
+            font-size: 1.3em;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #007bff;
+        }
+        
+        .feature-card h4 {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .feature-card ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .feature-card ul li {
+            margin: 5px 0;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            line-height: 1.5;
+        }
+        
+        .highlight {
+            color: #68d391;
+            font-weight: bold;
+        }
+        
+        .string {
+            color: #fbb6ce;
+        }
+        
+        .comment {
+            color: #a0aec0;
+            font-style: italic;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📖 Полное руководство</h1>
+            <p>OZON Seller API SDK | DAYTONA</p>
+        </div>
+        
+        <div class="nav-links">
+            <a href="./QUICK-START.html">🚀 Быстрый старт</a>
+            <a href="./API-INDEX.html">📑 Индекс API</a>
+            <a href="./FRAMEWORK-INTEGRATION.html">⚙️ Интеграция</a>
+            <a href="./FAQ.html">❓ FAQ</a>
+            <a href="../index.html">🏠 Главная</a>
+        </div>
+        
+        <div class="content">
+            <div class="info">
+                <strong>📚 Обзор:</strong> Полная документация для SDK OZON Seller API с 278 endpoints в 33 категориях. Этот SDK предоставляет полный доступ к API OZON для продавцов.
+            </div>
+            
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">278</span>
+                    <span class="stat-label">API методов</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">33</span>
+                    <span class="stat-label">Категорий API</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">TypeScript</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">95%+</span>
+                    <span class="stat-label">Тест-покрытие</span>
+                </div>
+            </div>
+            
+            <h2>🎯 Основные возможности</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>📦 Управление товарами</h4>
+                    <ul>
+                        <li>Создание и редактирование товаров</li>
+                        <li>Управление остатками и ценами</li>
+                        <li>Импорт и экспорт каталогов</li>
+                        <li>Работа с изображениями</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🛒 Обработка заказов</h4>
+                    <ul>
+                        <li>FBO/FBS заказы</li>
+                        <li>Доставка и отслеживание</li>
+                        <li>Управление возвратами</li>
+                        <li>Печать этикеток</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🏭 Складская логистика</h4>
+                    <ul>
+                        <li>Управление складами</li>
+                        <li>Поставки и приемка</li>
+                        <li>Инвентаризация</li>
+                        <li>Логистические схемы</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>💰 Финансовая отчетность</h4>
+                    <ul>
+                        <li>Транзакции и выплаты</li>
+                        <li>Комиссии и сборы</li>
+                        <li>Реализационные отчеты</li>
+                        <li>Налоговые документы</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>📈 Маркетинг и аналитика</h4>
+                    <ul>
+                        <li>Акции и скидки</li>
+                        <li>Продвижение товаров</li>
+                        <li>Аналитика продаж</li>
+                        <li>Отчеты по эффективности</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>👥 Взаимодействие с клиентами</h4>
+                    <ul>
+                        <li>Отзывы и рейтинги</li>
+                        <li>Вопросы и ответы</li>
+                        <li>Чат поддержка</li>
+                        <li>Управление репутацией</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>🚀 Быстрый старт</h2>
+            
+            <h3>Установка</h3>
+            <div class="code-block">
+                <code>npm install daytona-ozon-seller-api</code>
+            </div>
+            
+            <h3>Инициализация</h3>
+            <div class="code-block">
+                <code><span class="highlight">import</span> { <span class="highlight">OzonSellerAPI</span> } <span class="highlight">from</span> <span class="string">'daytona-ozon-seller-api'</span>;
+
+<span class="highlight">const</span> api = <span class="highlight">new</span> <span class="highlight">OzonSellerAPI</span>({
+  clientId: <span class="string">'your-client-id'</span>,
+  apiKey: <span class="string">'your-api-key'</span>
+});</code>
+            </div>
+            
+            <h3>Первый запрос</h3>
+            <div class="code-block">
+                <code><span class="comment">// Получить список товаров</span>
+<span class="highlight">const</span> products = <span class="highlight">await</span> api.product.getList({ limit: <span class="string">10</span> });
+console.log(<span class="string">`Найдено товаров: ${products.result?.items?.length || 0}`</span>);
+
+<span class="comment">// Получить информацию о заказах FBS</span>
+<span class="highlight">const</span> orders = <span class="highlight">await</span> api.fbs.getOrdersList({
+  filter: { status: <span class="string">'awaiting_packaging'</span> },
+  limit: <span class="string">20</span>
+});
+
+console.log(<span class="string">`Заказов к обработке: ${orders.result?.length || 0}`</span>);</code>
+            </div>
+            
+            <h2>📖 Основные категории API</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>🔥 Популярные API</h4>
+                    <ul>
+                        <li><strong>Product API</strong> - Управление товарами</li>
+                        <li><strong>FBS API</strong> - Заказы с доставкой</li>
+                        <li><strong>Finance API</strong> - Финансы и отчеты</li>
+                        <li><strong>Analytics API</strong> - Аналитика продаж</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🛍️ Продажи и маркетинг</h4>
+                    <ul>
+                        <li><strong>Pricing Strategy API</strong> - Стратегии цен</li>
+                        <li><strong>Promos API</strong> - Акции и скидки</li>
+                        <li><strong>Review API</strong> - Отзывы покупателей</li>
+                        <li><strong>Questions Answers API</strong> - Вопросы</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>📊 Аналитика и отчеты</h4>
+                    <ul>
+                        <li><strong>Report API</strong> - Отчеты и статистика</li>
+                        <li><strong>Seller Rating API</strong> - Рейтинг продавца</li>
+                        <li><strong>Premium API</strong> - Премиум сервисы</li>
+                        <li><strong>Chat API</strong> - Коммуникации</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🚚 Логистика и доставка</h4>
+                    <ul>
+                        <li><strong>Delivery FBS/RFBS API</strong> - Доставка</li>
+                        <li><strong>Warehouse API</strong> - Склады</li>
+                        <li><strong>Returns API</strong> - Возвраты</li>
+                        <li><strong>Supplier API</strong> - Поставщики</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>📚 Документация и ресурсы</h2>
+            
+            <div class="warning">
+                <strong>⚠️ Важно:</strong> Для доступа к некоторым API требуется подписка Premium Plus на OZON. Проверьте требования для конкретных методов в документации.
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>📖 Руководства</h4>
+                    <ul>
+                        <li><a href="./QUICK-START.html">🚀 Быстрый старт</a></li>
+                        <li><a href="./FRAMEWORK-INTEGRATION.html">⚙️ Интеграция фреймворков</a></li>
+                        <li><a href="./INTEGRATION-PATTERNS.html">🔗 Паттерны интеграции</a></li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>📑 Справочники</h4>
+                    <ul>
+                        <li><a href="./API-INDEX.html">📋 Алфавитный индекс API</a></li>
+                        <li><a href="./FUNCTIONAL-INDEX.html">🔍 Поиск по функциям</a></li>
+                        <li><a href="./FAQ.html">❓ Частые вопросы</a></li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🔗 Полезные ссылки</h4>
+                    <ul>
+                        <li><a href="https://github.com/salacoste/ozon-daytona-seller-api" target="_blank">⭐ GitHub репозиторий</a></li>
+                        <li><a href="https://docs.ozon.ru/api/seller/" target="_blank">📘 Официальная документация OZON</a></li>
+                        <li><a href="https://www.npmjs.com/package/daytona-ozon-seller-api" target="_blank">📦 NPM пакет</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>🎯 Примеры использования</h2>
+            
+            <h3>Пример: Полный цикл обработки заказа</h3>
+            <div class="code-block">
+                <code><span class="highlight">async function</span> processOrder(orderNumber: <span class="highlight">string</span>) {
+  <span class="comment">// 1. Получаем информацию о заказе</span>
+  <span class="highlight">const</span> order = <span class="highlight">await</span> api.fbs.getOrder({ posting_number: orderNumber });
+  
+  <span class="comment">// 2. Проверяем наличие товаров на складе</span>
+  <span class="highlight">for</span> (<span class="highlight">const</span> product <span class="highlight">of</span> order.products) {
+    <span class="highlight">const</span> stock = <span class="highlight">await</span> api.product.getStocks({
+      product_id: product.product_id
+    });
+    
+    <span class="highlight">if</span> (stock.present < product.quantity) {
+      <span class="highlight">throw</span> <span class="highlight">new</span> Error(<span class="string">`Недостаточно товара ${product.name}`</span>);
+    }
+  }
+  
+  <span class="comment">// 3. Упаковываем заказ</span>
+  <span class="highlight">await</span> api.fbs.packOrder({
+    posting_number: orderNumber,
+    packages: [{ products: order.products }]
+  });
+  
+  <span class="comment">// 4. Отгружаем заказ</span>
+  <span class="highlight">await</span> api.fbs.shipOrder({
+    posting_number: orderNumber,
+    tracking_number: <span class="string">`TRACK${Date.now()}`</span>
+  });
+  
+  console.log(<span class="string">`✅ Заказ ${orderNumber} успешно обработан`</span>);
+}</code>
+            </div>
+            
+            <div class="info">
+                <strong>💡 Совет:</strong> Начните с изучения <a href="./QUICK-START.html">Быстрого старта</a> для освоения основных операций, затем переходите к специализированным API в зависимости от ваших потребностей.
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>OZON Seller API SDK | DAYTONA</strong> - Полнофункциональный TypeScript SDK</p>
+            <div>
+                <a href="./QUICK-START.html">🚀 Быстрый старт</a>
+                <a href="./API-INDEX.html">📑 Индекс API</a>
+                <a href="./FAQ.html">❓ FAQ</a>
+                <a href="https://github.com/salacoste/ozon-daytona-seller-api">⭐ GitHub</a>
+                <a href="../index.html">🏠 Главная страница</a>
+            </div>
+            <p>Made with ❤️ for OZON Marketplace developers</p>
+        </div>
+    </div>
+</body>
+</html>
