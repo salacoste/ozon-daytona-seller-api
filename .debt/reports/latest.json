@@ -1,0 +1,712 @@
+{
+  "projectName": "@spacechemical/ozon-seller-api",
+  "reportDate": "2025-08-21T14:13:40.936Z",
+  "metrics": {
+    "totalItems": 39,
+    "byType": {
+      "code-smell": 10,
+      "performance": 26,
+      "security": 3
+    },
+    "bySeverity": {
+      "MEDIUM": 36,
+      "HIGH": 3
+    },
+    "estimatedEffort": {
+      "total": 110,
+      "byType": {
+        "code-smell": 20,
+        "performance": 78,
+        "security": 12
+      }
+    },
+    "trends": {
+      "weeklyChange": 0,
+      "monthlyChange": 0,
+      "categories": [
+        "code-smell",
+        "performance",
+        "security"
+      ]
+    }
+  },
+  "items": [
+    {
+      "id": "debt-1755785620934-tbe2h1dtl",
+      "type": "code-smell",
+      "severity": "MEDIUM",
+      "description": "Code smell detected: Long line (>120 characters)",
+      "location": {
+        "file": "src/categories/product/index.ts",
+        "line": 170
+      },
+      "estimatedEffort": "2h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.934Z",
+      "tags": [
+        "code-quality"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-sok1eobs8",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/auth.ts",
+        "line": 2
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-2yhxa5xt8",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/auth.ts",
+        "line": 22
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-me3tcxrqc",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/auth.ts",
+        "line": 32
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-us1wja4d0",
+      "type": "security",
+      "severity": "HIGH",
+      "description": "Security concern: Potential API key exposure",
+      "location": {
+        "file": "src/core/auth.ts",
+        "line": 35
+      },
+      "estimatedEffort": "4h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "security"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-f9k0c0gle",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/auth.ts",
+        "line": 43
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-jbf5d5tqa",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/auth.ts",
+        "line": 48
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-952l54mdz",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/auth.ts",
+        "line": 55
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-y0x8y7zsu",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/auth.ts",
+        "line": 67
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-xgbcgcwea",
+      "type": "code-smell",
+      "severity": "MEDIUM",
+      "description": "Code smell detected: Long line (>120 characters)",
+      "location": {
+        "file": "src/core/auth.ts",
+        "line": 72
+      },
+      "estimatedEffort": "2h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "code-quality"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-2pgjgyquk",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/client.ts",
+        "line": 79
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-inkb512gz",
+      "type": "code-smell",
+      "severity": "MEDIUM",
+      "description": "Code smell detected: Complex condition",
+      "location": {
+        "file": "src/core/client.ts",
+        "line": 140
+      },
+      "estimatedEffort": "2h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "code-quality"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-m1mq2yajf",
+      "type": "code-smell",
+      "severity": "MEDIUM",
+      "description": "Code smell detected: Complex condition",
+      "location": {
+        "file": "src/core/client.ts",
+        "line": 144
+      },
+      "estimatedEffort": "2h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "code-quality"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-n61mp10ml",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/client.ts",
+        "line": 150
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-0dyduegbr",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/errors.ts",
+        "line": 2
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-gusqxs95q",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/errors.ts",
+        "line": 20
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-algwnj54h",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/errors.ts",
+        "line": 56
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-igx7hhov5",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/errors.ts",
+        "line": 207
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-ny0jwq84c",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/http.ts",
+        "line": 2
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-x31lj9nwj",
+      "type": "code-smell",
+      "severity": "MEDIUM",
+      "description": "Code smell detected: Complex condition",
+      "location": {
+        "file": "src/core/http.ts",
+        "line": 147
+      },
+      "estimatedEffort": "2h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "code-quality"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-nn2rtpyfj",
+      "type": "code-smell",
+      "severity": "MEDIUM",
+      "description": "Code smell detected: Long line (>120 characters)",
+      "location": {
+        "file": "src/core/http.ts",
+        "line": 242
+      },
+      "estimatedEffort": "2h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "code-quality"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-5i3vghkqn",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/http.ts",
+        "line": 271
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-u3cruaggn",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/http.ts",
+        "line": 278
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-oc05yejjg",
+      "type": "code-smell",
+      "severity": "MEDIUM",
+      "description": "Code smell detected: Complex condition",
+      "location": {
+        "file": "src/core/http.ts",
+        "line": 296
+      },
+      "estimatedEffort": "2h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "code-quality"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-pdfa4zbay",
+      "type": "code-smell",
+      "severity": "MEDIUM",
+      "description": "Code smell detected: Complex condition",
+      "location": {
+        "file": "src/core/http.ts",
+        "line": 300
+      },
+      "estimatedEffort": "2h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "code-quality"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-ir6117f69",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/types.ts",
+        "line": 2
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-b6hnmpe8e",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/core/types.ts",
+        "line": 5
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620935-8qp8srmz8",
+      "type": "security",
+      "severity": "HIGH",
+      "description": "Security concern: Potential API key exposure",
+      "location": {
+        "file": "src/core/types.ts",
+        "line": 6
+      },
+      "estimatedEffort": "4h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.935Z",
+      "tags": [
+        "security"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620936-v1jfh3aog",
+      "type": "security",
+      "severity": "HIGH",
+      "description": "Security concern: Potential API key exposure",
+      "location": {
+        "file": "src/core/types.ts",
+        "line": 90
+      },
+      "estimatedEffort": "4h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.936Z",
+      "tags": [
+        "security"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620936-6lg81qbgm",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/examples/basic.ts",
+        "line": 2
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.936Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620936-v4trs4vtg",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/examples/basic.ts",
+        "line": 36
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.936Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620936-x8fs3c8k4",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/examples/basic.ts",
+        "line": 136
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.936Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620936-ux16c24xr",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/index.ts",
+        "line": 4
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.936Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620936-c7jdymt3q",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/index.ts",
+        "line": 64
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.936Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620936-s9m2xe2ci",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/index.ts",
+        "line": 66
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.936Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620936-jphwwpafk",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/types/common/base.ts",
+        "line": 2
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.936Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620936-42ts395u8",
+      "type": "performance",
+      "severity": "MEDIUM",
+      "description": "Performance issue: Nested loops detected",
+      "location": {
+        "file": "src/types/common/base.ts",
+        "line": 23
+      },
+      "estimatedEffort": "3h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.936Z",
+      "tags": [
+        "performance"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620936-pw1df2sm3",
+      "type": "code-smell",
+      "severity": "MEDIUM",
+      "description": "Code smell detected: Long line (>120 characters)",
+      "location": {
+        "file": "src/types/requests/product.ts",
+        "line": 11
+      },
+      "estimatedEffort": "2h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.936Z",
+      "tags": [
+        "code-quality"
+      ],
+      "relatedIssues": []
+    },
+    {
+      "id": "debt-1755785620936-n44jqru29",
+      "type": "code-smell",
+      "severity": "MEDIUM",
+      "description": "Code smell detected: Long line (>120 characters)",
+      "location": {
+        "file": "src/types/requests/product.ts",
+        "line": 17
+      },
+      "estimatedEffort": "2h",
+      "impact": "Low impact on maintainability",
+      "createdDate": "2025-08-21T14:13:40.936Z",
+      "tags": [
+        "code-quality"
+      ],
+      "relatedIssues": []
+    }
+  ],
+  "recommendations": [
+    "⏱️  110.0h of technical debt requires dedicated sprint planning",
+    "🛡️  Security-related technical debt should be prioritized",
+    "⚡ Multiple performance issues detected - consider performance review",
+    "📊 Consider implementing automated debt prevention measures"
+  ],
+  "actionItems": [
+    "Create GitHub issues for all critical and high-severity debt items",
+    "Assign owners for urgent technical debt resolution",
+    "Schedule security review for identified security debt",
+    "Run performance benchmarks to quantify impact",
+    "Implement pre-commit hooks to prevent new technical debt",
+    "Schedule regular technical debt review meetings"
+  ]
+}

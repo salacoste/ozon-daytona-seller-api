@@ -1,0 +1,569 @@
+name: Performance Monitoring
+
+on:
+  schedule:
+    # Run performance tests daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      test-type:
+        description: 'Type of performance test to run'
+        required: true
+        type: choice
+        options:
+          - 'full'
+          - 'client-only'
+          - 'api-specific'
+        default: 'full'
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  # Job 1: Client Performance Benchmarks
+  client-performance:
+    name: Client Performance Benchmarks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Client initialization benchmark
+        run: |
+          echo "⚡ Testing client initialization performance..."
+          
+          node -e "
+            const { performance } = require('perf_hooks');
+            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+            
+            console.log('🔄 Running client initialization benchmark...');
+            
+            const iterations = 1000;
+            const times = [];
+            
+            for (let i = 0; i < iterations; i++) {
+              const startTime = performance.now();
+              
+              const client = new OzonSellerApiClient({
+                apiKey: createApiKey('test-key-1234567890123456789012345678901234567890'),
+                clientId: createClientId('123456')
+              });
+              
+              const endTime = performance.now();
+              times.push(endTime - startTime);
+            }
+            
+            const avgTime = times.reduce((sum, time) => sum + time, 0) / times.length;
+            const minTime = Math.min(...times);
+            const maxTime = Math.max(...times);
+            const p95Time = times.sort((a, b) => a - b)[Math.floor(times.length * 0.95)];
+            
+            console.log(\`📊 Client Initialization Benchmark (\${iterations} iterations):\`);
+            console.log(\`   Average: \${avgTime.toFixed(2)}ms\`);
+            console.log(\`   Minimum: \${minTime.toFixed(2)}ms\`);
+            console.log(\`   Maximum: \${maxTime.toFixed(2)}ms\`);
+            console.log(\`   95th percentile: \${p95Time.toFixed(2)}ms\`);
+            
+            // Performance thresholds
+            const thresholds = {
+              average: 10,     // 10ms average
+              p95: 20,         // 20ms 95th percentile
+              maximum: 50      // 50ms maximum
+            };
+            
+            let failed = false;
+            
+            if (avgTime > thresholds.average) {
+              console.log(\`❌ Average initialization time (\${avgTime.toFixed(2)}ms) exceeds threshold (\${thresholds.average}ms)\`);
+              failed = true;
+            }
+            
+            if (p95Time > thresholds.p95) {
+              console.log(\`❌ 95th percentile initialization time (\${p95Time.toFixed(2)}ms) exceeds threshold (\${thresholds.p95}ms)\`);
+              failed = true;
+            }
+            
+            if (maxTime > thresholds.maximum) {
+              console.log(\`❌ Maximum initialization time (\${maxTime.toFixed(2)}ms) exceeds threshold (\${thresholds.maximum}ms)\`);
+              failed = true;
+            }
+            
+            if (!failed) {
+              console.log('✅ All performance thresholds met');
+            } else {
+              process.exit(1);
+            }
+          "
+
+      - name: API access performance benchmark
+        run: |
+          echo "⚡ Testing API access performance..."
+          
+          node -e "
+            const { performance } = require('perf_hooks');
+            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+            
+            console.log('🔄 Running API access benchmark...');
+            
+            const client = new OzonSellerApiClient({
+              apiKey: createApiKey('test-key-1234567890123456789012345678901234567890'),
+              clientId: createClientId('123456')
+            });
+            
+            const apis = [
+              'analytics', 'finance', 'product', 'pricingStrategy', 'returns', 'return',
+              'quants', 'review', 'chat', 'questionsAnswers', 'brand', 'certification',
+              'fbs', 'deliveryFbs', 'deliveryRfbs', 'fbo', 'fbsRfbsMarks', 'rfbsReturns',
+              'supplier', 'warehouse', 'fboSupplyRequest', 'report', 'premium',
+              'pricesStocks', 'betaMethod', 'promos', 'pass', 'cancellation', 'category',
+              'digital', 'barcode', 'polygon', 'sellerRating'
+            ];
+            
+            const iterations = 10000;
+            let totalTime = 0;
+            
+            const startTime = performance.now();
+            
+            for (let i = 0; i < iterations; i++) {
+              // Randomly access different APIs
+              const randomApi = apis[Math.floor(Math.random() * apis.length)];
+              const api = client[randomApi];
+              
+              // Just access the API object (no method calls)
+              if (!api) {
+                console.error(\`❌ Failed to access \${randomApi} API\`);
+                process.exit(1);
+              }
+            }
+            
+            const endTime = performance.now();
+            totalTime = endTime - startTime;
+            
+            const avgAccessTime = totalTime / iterations;
+            
+            console.log(\`📊 API Access Benchmark (\${iterations} iterations):\`);
+            console.log(\`   Total time: \${totalTime.toFixed(2)}ms\`);
+            console.log(\`   Average access time: \${avgAccessTime.toFixed(4)}ms\`);
+            console.log(\`   Operations per second: \${(iterations / (totalTime / 1000)).toFixed(0)}\`);
+            
+            if (avgAccessTime > 0.01) {  // 0.01ms threshold
+              console.log(\`❌ Average API access time (\${avgAccessTime.toFixed(4)}ms) exceeds threshold (0.01ms)\`);
+              process.exit(1);
+            }
+            
+            console.log('✅ API access performance acceptable');
+          "
+
+  # Job 2: Memory Usage Analysis
+  memory-analysis:
+    name: Memory Usage Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Memory usage benchmark
+        run: |
+          echo "🧠 Testing memory usage..."
+          
+          node -e "
+            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+            
+            console.log('🔄 Running memory usage analysis...');
+            
+            // Measure initial memory usage
+            const initialMemory = process.memoryUsage();
+            console.log('📊 Initial memory usage:');
+            console.log(\`   RSS: \${(initialMemory.rss / 1024 / 1024).toFixed(2)} MB\`);
+            console.log(\`   Heap Used: \${(initialMemory.heapUsed / 1024 / 1024).toFixed(2)} MB\`);
+            console.log(\`   Heap Total: \${(initialMemory.heapTotal / 1024 / 1024).toFixed(2)} MB\`);
+            
+            // Create multiple client instances to test memory scaling
+            const clients = [];
+            const clientCount = 100;
+            
+            for (let i = 0; i < clientCount; i++) {
+              clients.push(new OzonSellerApiClient({
+                apiKey: createApiKey('test-key-1234567890123456789012345678901234567890'),
+                clientId: createClientId('123456')
+              }));
+            }
+            
+            // Force garbage collection if available
+            if (global.gc) {
+              global.gc();
+            }
+            
+            const afterClientsMemory = process.memoryUsage();
+            console.log(\`📊 Memory usage after creating \${clientCount} clients:\`);
+            console.log(\`   RSS: \${(afterClientsMemory.rss / 1024 / 1024).toFixed(2)} MB\`);
+            console.log(\`   Heap Used: \${(afterClientsMemory.heapUsed / 1024 / 1024).toFixed(2)} MB\`);
+            console.log(\`   Heap Total: \${(afterClientsMemory.heapTotal / 1024 / 1024).toFixed(2)} MB\`);
+            
+            const memoryIncrease = afterClientsMemory.heapUsed - initialMemory.heapUsed;
+            const memoryPerClient = memoryIncrease / clientCount;
+            
+            console.log(\`📈 Memory increase: \${(memoryIncrease / 1024 / 1024).toFixed(2)} MB\`);
+            console.log(\`📦 Memory per client: \${(memoryPerClient / 1024).toFixed(2)} KB\`);
+            
+            // Memory thresholds
+            const maxMemoryPerClient = 50 * 1024; // 50KB per client
+            const maxTotalMemory = 100 * 1024 * 1024; // 100MB total
+            
+            if (memoryPerClient > maxMemoryPerClient) {
+              console.log(\`❌ Memory per client (\${(memoryPerClient / 1024).toFixed(2)} KB) exceeds threshold (\${maxMemoryPerClient / 1024} KB)\`);
+              process.exit(1);
+            }
+            
+            if (afterClientsMemory.heapUsed > maxTotalMemory) {
+              console.log(\`❌ Total memory usage (\${(afterClientsMemory.heapUsed / 1024 / 1024).toFixed(2)} MB) exceeds threshold (\${maxTotalMemory / 1024 / 1024} MB)\`);
+              process.exit(1);
+            }
+            
+            console.log('✅ Memory usage within acceptable limits');
+          " --expose-gc
+
+  # Job 3: Bundle Size Analysis
+  bundle-analysis:
+    name: Bundle Size Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Analyze bundle sizes
+        run: |
+          echo "📦 Analyzing bundle sizes..."
+          
+          # Calculate total build size
+          total_size=$(du -sb dist/ | cut -f1)
+          echo "📊 Total build size: $((total_size / 1024))KB"
+          
+          # Analyze individual components
+          echo "📋 Component sizes:"
+          
+          # Main entry point
+          main_size=$(stat -f%z dist/index.js 2>/dev/null || stat -c%s dist/index.js)
+          echo "   Main bundle: $((main_size / 1024))KB"
+          
+          # Core components
+          if [ -f "dist/core/client.js" ]; then
+            client_size=$(stat -f%z dist/core/client.js 2>/dev/null || stat -c%s dist/core/client.js)
+            echo "   Client: $((client_size / 1024))KB"
+          fi
+          
+          if [ -f "dist/core/http.js" ]; then
+            http_size=$(stat -f%z dist/core/http.js 2>/dev/null || stat -c%s dist/core/http.js)
+            echo "   HTTP Client: $((http_size / 1024))KB"
+          fi
+          
+          # API categories total
+          categories_size=$(du -sb dist/categories/ | cut -f1)
+          echo "   All API Categories: $((categories_size / 1024))KB"
+          
+          # Largest API categories
+          echo "📈 Largest API categories:"
+          find dist/categories -name "index.js" -exec stat -f"%z %N" {} \; 2>/dev/null | \
+            sort -nr | head -5 | while read size file; do
+              category=$(basename $(dirname "$file"))
+              echo "   $category: $((size / 1024))KB"
+            done
+          
+          # Bundle size thresholds
+          max_total_size=$((2 * 1024 * 1024))  # 2MB
+          max_main_size=$((500 * 1024))        # 500KB
+          
+          if [ $total_size -gt $max_total_size ]; then
+            echo "❌ Total bundle size ($((total_size / 1024 / 1024))MB) exceeds threshold ($((max_total_size / 1024 / 1024))MB)"
+            exit 1
+          fi
+          
+          if [ $main_size -gt $max_main_size ]; then
+            echo "❌ Main bundle size ($((main_size / 1024))KB) exceeds threshold ($((max_main_size / 1024))KB)"
+            exit 1
+          fi
+          
+          echo "✅ Bundle sizes within acceptable limits"
+
+      - name: Check for dead code
+        run: |
+          echo "🔍 Checking for potential dead code..."
+          
+          # Look for unused exports (basic check)
+          echo "📋 Checking exports usage..."
+          
+          # This is a simplified check - in a real scenario you might use tools like webpack-bundle-analyzer
+          npm run build 2>&1 | grep -i "warning\|unused" || echo "No obvious dead code warnings found"
+          
+          echo "✅ Dead code analysis completed"
+
+  # Job 4: API-Specific Performance Tests
+  api-performance:
+    name: API-Specific Performance Tests
+    runs-on: ubuntu-latest
+    if: github.event.inputs.test-type == 'api-specific' || github.event.inputs.test-type == 'full' || github.event_name == 'schedule'
+    strategy:
+      matrix:
+        api-group: [
+          "high-usage",     # product, analytics, finance
+          "fulfillment",    # fbs, fbo, delivery
+          "marketing"       # promos, report, premium
+        ]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Test ${{ matrix.api-group }} API performance
+        run: |
+          echo "⚡ Testing ${{ matrix.api-group }} API performance..."
+          
+          node -e "
+            const { performance } = require('perf_hooks');
+            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+            
+            const client = new OzonSellerApiClient({
+              apiKey: createApiKey('test-key-1234567890123456789012345678901234567890'),
+              clientId: createClientId('123456')
+            });
+            
+            const apiGroups = {
+              'high-usage': ['product', 'analytics', 'finance'],
+              'fulfillment': ['fbs', 'fbo', 'deliveryFbs'],
+              'marketing': ['promos', 'report', 'premium']
+            };
+            
+            const apis = apiGroups['${{ matrix.api-group }}'];
+            const iterations = 1000;
+            
+            console.log(\`🔄 Testing \${apis.join(', ')} APIs (\${iterations} iterations each)...\`);
+            
+            for (const apiName of apis) {
+              const times = [];
+              
+              for (let i = 0; i < iterations; i++) {
+                const startTime = performance.now();
+                
+                // Access API and get method names (simulates real usage pattern)
+                const api = client[apiName];
+                const methods = Object.getOwnPropertyNames(Object.getPrototypeOf(api))
+                  .filter(name => name !== 'constructor');
+                
+                const endTime = performance.now();
+                times.push(endTime - startTime);
+              }
+              
+              const avgTime = times.reduce((sum, time) => sum + time, 0) / times.length;
+              const p95Time = times.sort((a, b) => a - b)[Math.floor(times.length * 0.95)];
+              
+              console.log(\`📊 \${apiName} API (\${Object.getOwnPropertyNames(Object.getPrototypeOf(client[apiName])).filter(n => n !== 'constructor').length} methods):\`);
+              console.log(\`   Average access: \${avgTime.toFixed(4)}ms\`);
+              console.log(\`   95th percentile: \${p95Time.toFixed(4)}ms\`);
+              
+              if (avgTime > 0.1) {
+                console.log(\`❌ \${apiName} average access time exceeds threshold\`);
+                process.exit(1);
+              }
+            }
+            
+            console.log('✅ All API performance tests passed');
+          "
+
+  # Job 5: Performance Regression Detection
+  regression-detection:
+    name: Performance Regression Detection
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run regression benchmarks
+        run: |
+          echo "📈 Running performance regression detection..."
+          
+          # Create baseline performance data file if it doesn't exist
+          if [ ! -f "performance-baseline.json" ]; then
+            echo "📋 Creating performance baseline..."
+            
+            node -e "
+              const { performance } = require('perf_hooks');
+              const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+              
+              const iterations = 1000;
+              const times = [];
+              
+              for (let i = 0; i < iterations; i++) {
+                const startTime = performance.now();
+                
+                const client = new OzonSellerApiClient({
+                  apiKey: createApiKey('test-key-1234567890123456789012345678901234567890'),
+                  clientId: createClientId('123456')
+                });
+                
+                const endTime = performance.now();
+                times.push(endTime - startTime);
+              }
+              
+              const baseline = {
+                client_init_avg: times.reduce((sum, time) => sum + time, 0) / times.length,
+                client_init_p95: times.sort((a, b) => a - b)[Math.floor(times.length * 0.95)],
+                timestamp: new Date().toISOString(),
+                version: require('./package.json').version
+              };
+              
+              require('fs').writeFileSync('performance-baseline.json', JSON.stringify(baseline, null, 2));
+              console.log('✅ Baseline created:', JSON.stringify(baseline, null, 2));
+            "
+          fi
+          
+          # Compare current performance against baseline
+          node -e "
+            const fs = require('fs');
+            const { performance } = require('perf_hooks');
+            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+            
+            const baseline = JSON.parse(fs.readFileSync('performance-baseline.json', 'utf8'));
+            console.log('📊 Baseline performance:', baseline);
+            
+            const iterations = 1000;
+            const times = [];
+            
+            for (let i = 0; i < iterations; i++) {
+              const startTime = performance.now();
+              
+              const client = new OzonSellerApiClient({
+                apiKey: createApiKey('test-key-1234567890123456789012345678901234567890'),
+                clientId: createClientId('123456')
+              });
+              
+              const endTime = performance.now();
+              times.push(endTime - startTime);
+            }
+            
+            const current = {
+              client_init_avg: times.reduce((sum, time) => sum + time, 0) / times.length,
+              client_init_p95: times.sort((a, b) => a - b)[Math.floor(times.length * 0.95)]
+            };
+            
+            console.log('📊 Current performance:', current);
+            
+            const regressionThreshold = 1.2; // 20% regression threshold
+            
+            const avgRegression = current.client_init_avg / baseline.client_init_avg;
+            const p95Regression = current.client_init_p95 / baseline.client_init_p95;
+            
+            console.log(\`📈 Performance comparison:\`);
+            console.log(\`   Average: \${(avgRegression * 100).toFixed(1)}% of baseline\`);
+            console.log(\`   P95: \${(p95Regression * 100).toFixed(1)}% of baseline\`);
+            
+            if (avgRegression > regressionThreshold) {
+              console.log(\`❌ Performance regression detected in average time: \${(avgRegression * 100).toFixed(1)}% > \${regressionThreshold * 100}%\`);
+              process.exit(1);
+            }
+            
+            if (p95Regression > regressionThreshold) {
+              console.log(\`❌ Performance regression detected in P95 time: \${(p95Regression * 100).toFixed(1)}% > \${regressionThreshold * 100}%\`);
+              process.exit(1);
+            }
+            
+            console.log('✅ No performance regression detected');
+          "
+
+  # Job 6: Performance Report
+  performance-report:
+    name: Generate Performance Report
+    runs-on: ubuntu-latest
+    needs: [client-performance, memory-analysis, bundle-analysis, api-performance]
+    if: always()
+    steps:
+      - name: Generate performance summary
+        run: |
+          echo "📊 Performance Monitoring Report"
+          echo "================================"
+          echo "Date: $(date -u +"%Y-%m-%d %H:%M:%S UTC")"
+          echo "Node.js: ${{ env.NODE_VERSION }}"
+          echo ""
+          echo "🎯 Test Results:"
+          echo "- Client Performance: ${{ needs.client-performance.result }}"
+          echo "- Memory Analysis: ${{ needs.memory-analysis.result }}"
+          echo "- Bundle Analysis: ${{ needs.bundle-analysis.result }}"
+          echo "- API Performance: ${{ needs.api-performance.result }}"
+          echo ""
+          
+          if [ "${{ needs.client-performance.result }}" = "success" ] && \
+             [ "${{ needs.memory-analysis.result }}" = "success" ] && \
+             [ "${{ needs.bundle-analysis.result }}" = "success" ] && \
+             [ "${{ needs.api-performance.result }}" = "success" ]; then
+            echo "✅ All performance tests passed"
+            echo "🚀 OZON Seller API SDK performance is optimal"
+          else
+            echo "❌ Some performance tests failed"
+            echo "⚠️  Performance degradation detected - investigation required"
+          fi
+          
+          echo ""
+          echo "📈 Performance Targets:"
+          echo "- Client init: <10ms average, <20ms P95"
+          echo "- Memory per client: <50KB"
+          echo "- Bundle size: <2MB total, <500KB main"
+          echo "- API access: <0.1ms average"

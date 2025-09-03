@@ -1,0 +1,90 @@
+[
+  {
+    "procedureId": "ROLLBACK-001",
+    "name": "Breaking Change Emergency Rollback",
+    "triggerConditions": [
+      "Breaking change detected in production",
+      "Existing API tests failing",
+      "Customer integration broken"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "action": "Stop deployment pipeline",
+        "validation": "Deployment stopped within 30 seconds",
+        "timeout": "30s"
+      },
+      {
+        "order": 2,
+        "action": "Revert to last known good version",
+        "command": "git revert HEAD && npm run build && npm run breaking:check",
+        "validation": "Breaking change check passes",
+        "timeout": "5m"
+      },
+      {
+        "order": 3,
+        "action": "Run full test suite",
+        "command": "npm run test:unit && npm run test:integration",
+        "validation": "All tests pass",
+        "timeout": "10m"
+      },
+      {
+        "order": 4,
+        "action": "Deploy rollback version",
+        "validation": "Deployment successful and healthy",
+        "timeout": "15m"
+      }
+    ],
+    "estimatedTime": "30 minutes",
+    "requiredApprovals": [
+      "Tech Lead",
+      "Product Owner"
+    ],
+    "communicationPlan": [
+      "Notify all stakeholders within 5 minutes",
+      "Update status page immediately",
+      "Communicate resolution timeline"
+    ]
+  },
+  {
+    "procedureId": "ROLLBACK-002",
+    "name": "Performance Regression Rollback",
+    "triggerConditions": [
+      "Response times >200ms sustained",
+      "Memory usage >2x baseline",
+      "Error rate >1%"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "action": "Identify performance baseline",
+        "command": "npm run test:performance",
+        "validation": "Baseline performance metrics available",
+        "timeout": "5m"
+      },
+      {
+        "order": 2,
+        "action": "Revert performance-critical changes",
+        "validation": "Performance tests pass",
+        "timeout": "10m"
+      },
+      {
+        "order": 3,
+        "action": "Validate performance recovery",
+        "command": "npm run test:performance",
+        "validation": "Response times <200ms",
+        "timeout": "15m"
+      }
+    ],
+    "estimatedTime": "30 minutes",
+    "requiredApprovals": [
+      "Performance Engineer",
+      "Tech Lead"
+    ],
+    "communicationPlan": [
+      "Alert performance team immediately",
+      "Update monitoring dashboards",
+      "Document performance impact"
+    ]
+  }
+]

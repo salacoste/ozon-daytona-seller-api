@@ -1,0 +1,227 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test & Quality Checks
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Unit tests with coverage
+        run: npm run test:coverage
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage/lcov.info
+
+  build:
+    name: Build & Bundle Size Check
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Check bundle size
+        run: |
+          # Check that dist folder exists and has expected files
+          if [ ! -f "dist/index.js" ]; then
+            echo "❌ ESM build missing"
+            exit 1
+          fi
+          if [ ! -f "dist/index.cjs" ]; then
+            echo "❌ CommonJS build missing"  
+            exit 1
+          fi
+          if [ ! -f "dist/index.d.ts" ]; then
+            echo "❌ TypeScript definitions missing"
+            exit 1
+          fi
+          
+          # Check bundle sizes (basic validation)
+          ESM_SIZE=$(wc -c < dist/index.js)
+          CJS_SIZE=$(wc -c < dist/index.cjs)
+          
+          echo "📦 Bundle Sizes:"
+          echo "   ESM: $ESM_SIZE bytes"
+          echo "   CommonJS: $CJS_SIZE bytes"
+          
+          # Basic size limits (adjust as needed)
+          if [ $ESM_SIZE -gt 500000 ]; then
+            echo "⚠️  ESM bundle larger than 500KB"
+          fi
+
+      - name: Test build installation
+        run: |
+          # Test that the built package can be imported
+          cd dist
+          node -e "
+            const sdk = require('./index.cjs');
+            console.log('✅ CommonJS import successful');
+            console.log('Available exports:', Object.keys(sdk));
+          "
+
+  performance:
+    name: Performance & Regression Tests  
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Performance baseline test
+        run: |
+          echo "🔍 Running performance baseline tests..."
+          
+          # Build time monitoring (NFR4: <50% increase)
+          BUILD_START=$(date +%s%N)
+          npm run build > /dev/null 2>&1
+          BUILD_END=$(date +%s%N)
+          BUILD_TIME=$(( (BUILD_END - BUILD_START) / 1000000 ))
+          
+          echo "⏱️  Build time: ${BUILD_TIME}ms"
+          
+          # Store build time for comparison (in real implementation, compare with baseline)
+          if [ $BUILD_TIME -gt 30000 ]; then
+            echo "⚠️  Build time exceeds 30 seconds"
+          else  
+            echo "✅ Build time within acceptable limits"
+          fi
+          
+          # Type checking performance
+          TYPECHECK_START=$(date +%s%N)
+          npm run typecheck > /dev/null 2>&1
+          TYPECHECK_END=$(date +%s%N)
+          TYPECHECK_TIME=$(( (TYPECHECK_END - TYPECHECK_START) / 1000000 ))
+          
+          echo "⏱️  Type check time: ${TYPECHECK_TIME}ms"
+
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Security audit
+        run: npm audit --audit-level=moderate
+
+      - name: Check for secrets in code
+        run: |
+          echo "🔍 Checking for potential secrets..."
+          
+          # Basic secret detection patterns
+          if grep -r -i "api[_-]key.*=.*['\"][a-zA-Z0-9]" src/ || \
+             grep -r -i "secret.*=.*['\"][a-zA-Z0-9]" src/ || \
+             grep -r -i "password.*=.*['\"][a-zA-Z0-9]" src/; then
+            echo "❌ Potential hardcoded secrets found!"
+            exit 1
+          else
+            echo "✅ No hardcoded secrets detected"
+          fi
+
+  publish-check:
+    name: Publish Readiness Check
+    runs-on: ubuntu-latest
+    needs: [test, build, performance, security]
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run prepublishOnly script
+        run: npm run prepublishOnly
+
+      - name: Dry run publish
+        run: npm publish --dry-run
+
+      - name: Package size check
+        run: |
+          # Check final package size
+          npm pack
+          PACKAGE_SIZE=$(wc -c < *.tgz)
+          echo "📦 Package size: $PACKAGE_SIZE bytes"
+          
+          if [ $PACKAGE_SIZE -gt 5000000 ]; then
+            echo "⚠️  Package larger than 5MB"
+          else
+            echo "✅ Package size acceptable"
+          fi

@@ -1,0 +1,199 @@
+[
+  {
+    "riskId": "RISK-001",
+    "category": "Breaking Changes",
+    "description": "Existing Product API compatibility broken during brownfield expansion",
+    "metrics": {
+      "severity": "MEDIUM",
+      "probability": 0.1,
+      "impact": 0.9,
+      "riskScore": 0.09000000000000001
+    },
+    "mitigations": [
+      "Automated breaking change detection",
+      "API baseline comparison",
+      "Comprehensive integration tests",
+      "Semantic versioning enforcement"
+    ],
+    "rollbackTriggers": [
+      "Breaking change detection fails",
+      "Existing tests fail",
+      "API contract violations",
+      "Performance degradation >30%"
+    ],
+    "automatedChecks": [
+      "npm run breaking:check",
+      "npm run test:integration",
+      "npm run test:performance"
+    ],
+    "lastAssessed": "2025-08-21T14:10:09.533Z"
+  },
+  {
+    "riskId": "RISK-002",
+    "category": "Performance Regression",
+    "description": "API response times exceed 200ms after expansion",
+    "metrics": {
+      "severity": "HIGH",
+      "probability": 0.2,
+      "impact": 0.8,
+      "riskScore": 0.16000000000000003
+    },
+    "mitigations": [
+      "Performance baseline monitoring",
+      "Load testing automation",
+      "Bundle size limits",
+      "Memory usage monitoring"
+    ],
+    "rollbackTriggers": [
+      "Response time >200ms",
+      "Memory usage >2x baseline",
+      "Bundle size >500KB increase",
+      "CPU usage >50% increase"
+    ],
+    "automatedChecks": [
+      "npm run test:performance",
+      "npm run bundle:check"
+    ],
+    "lastAssessed": "2025-08-21T14:10:09.534Z"
+  },
+  {
+    "riskId": "RISK-003",
+    "category": "Security Vulnerabilities",
+    "description": "New API endpoints introduce security vulnerabilities",
+    "metrics": {
+      "severity": "CRITICAL",
+      "probability": 0.4,
+      "impact": 1,
+      "riskScore": 0.4
+    },
+    "mitigations": [
+      "Security audit automation",
+      "Dependency vulnerability scanning",
+      "Input validation enforcement",
+      "API key protection validation"
+    ],
+    "rollbackTriggers": [
+      "Security audit failures",
+      "Vulnerability scanner alerts",
+      "API key exposure detected",
+      "Input validation bypassed"
+    ],
+    "automatedChecks": [
+      "npm audit --audit-level=moderate",
+      "Security code scanning"
+    ],
+    "lastAssessed": "2025-08-21T14:10:09.534Z"
+  },
+  {
+    "riskId": "RISK-004",
+    "category": "Dependency Management",
+    "description": "Dependency conflicts or vulnerabilities introduced",
+    "metrics": {
+      "severity": "MEDIUM",
+      "probability": 0.3,
+      "impact": 0.6,
+      "riskScore": 0.18
+    },
+    "mitigations": [
+      "Dependency pinning",
+      "Automated security updates",
+      "Compatibility testing",
+      "License compliance checking"
+    ],
+    "rollbackTriggers": [
+      "Dependency security alerts",
+      "Version conflicts detected",
+      "Build failures from dependencies",
+      "License violations"
+    ],
+    "automatedChecks": [
+      "npm audit",
+      "npm outdated"
+    ],
+    "lastAssessed": "2025-08-21T14:10:09.534Z"
+  },
+  {
+    "riskId": "RISK-005",
+    "category": "Build System",
+    "description": "Build system failures preventing deployment",
+    "metrics": {
+      "severity": "HIGH",
+      "probability": 0.2,
+      "impact": 0.8,
+      "riskScore": 0.16
+    },
+    "mitigations": [
+      "Build validation in CI/CD",
+      "Multiple build targets testing",
+      "Build time monitoring",
+      "Artifact validation"
+    ],
+    "rollbackTriggers": [
+      "Build failures",
+      "Build time >2x baseline",
+      "Invalid artifacts generated",
+      "TypeScript compilation errors"
+    ],
+    "automatedChecks": [
+      "npm run build",
+      "npm run typecheck",
+      "npm run lint"
+    ],
+    "lastAssessed": "2025-08-21T14:10:09.534Z"
+  },
+  {
+    "riskId": "RISK-006",
+    "category": "Test Coverage",
+    "description": "Insufficient test coverage for new functionality",
+    "metrics": {
+      "severity": "HIGH",
+      "probability": 0.5,
+      "impact": 0.7,
+      "riskScore": 0.35
+    },
+    "mitigations": [
+      "95% coverage requirement",
+      "Integration test automation",
+      "E2E test coverage",
+      "Coverage trend monitoring"
+    ],
+    "rollbackTriggers": [
+      "Coverage drops below 95%",
+      "Critical paths untested",
+      "Integration tests failing",
+      "E2E tests failing"
+    ],
+    "automatedChecks": [
+      "npm run test:coverage",
+      "npm run test:integration"
+    ],
+    "lastAssessed": "2025-08-21T14:10:09.534Z"
+  },
+  {
+    "riskId": "RISK-007",
+    "category": "Documentation",
+    "description": "Inadequate documentation for new API categories",
+    "metrics": {
+      "severity": "MEDIUM",
+      "probability": 0.6,
+      "impact": 0.4,
+      "riskScore": 0.24
+    },
+    "mitigations": [
+      "Automated API documentation",
+      "Migration guide maintenance",
+      "Example code validation",
+      "Documentation testing"
+    ],
+    "rollbackTriggers": [
+      "Documentation build failures",
+      "Missing API documentation",
+      "Broken examples",
+      "Migration guide outdated"
+    ],
+    "automatedChecks": [
+      "npm run docs:generate"
+    ],
+    "lastAssessed": "2025-08-21T14:10:09.534Z"
+  }
+]

@@ -1,0 +1,16 @@
+# CancelSupplyResultsCancelSupplyError
+
+## Full schema (JSON)
+```json
+{
+  "type": "string",
+  "enum": [
+    "INVALID_SUPPLY_STATE",
+    "SUPPLY_DOES_NOT_BELONG_TO_CONTRACTOR",
+    "SUPPLY_DOES_NOT_BELONG_TO_COMPANY",
+    "SUPPLY_DOES_NOT_BELONG_TO_ORDER",
+    "SUPPLY_BELONGS_TO_VIRTUAL_ORDER",
+    "OTHER_ASYNCHRONOUS_OPERATION_IN_PROGRESS"
+  ]
+}
+```

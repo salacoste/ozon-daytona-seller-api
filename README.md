@@ -2,10 +2,10 @@
 
 ![DAYTONA OZON API](./daytona-ozon-api-docs/image.png)
 
-[![npm version](https://img.shields.io/npm/v/ozon-daytona-seller-api.svg)](https://www.npmjs.com/package/ozon-daytona-seller-api)
+[![npm version](https://img.shields.io/npm/v/daytona-ozon-seller-api.svg)](https://www.npmjs.com/package/daytona-ozon-seller-api)
 [![TypeScript](https://img.shields.io/badge/TypeScript-100%25-blue.svg)](https://typescript.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Downloads](https://img.shields.io/npm/dm/ozon-daytona-seller-api.svg)](https://www.npmjs.com/package/ozon-daytona-seller-api)
+[![Downloads](https://img.shields.io/npm/dm/daytona-ozon-seller-api.svg)](https://www.npmjs.com/package/daytona-ozon-seller-api)
 [![GitHub stars](https://img.shields.io/github/stars/salacoste/ozon-daytona-seller-api.svg)](https://github.com/salacoste/ozon-daytona-seller-api)
 
 > **Полный TypeScript SDK для OZON Seller API** — 278 методов в 33 категориях с полной типизацией и нулевыми breaking changes
@@ -37,17 +37,17 @@
 ### Установка
 
 ```bash
-npm install ozon-daytona-seller-api
+npm install daytona-ozon-seller-api
 # или
-yarn add ozon-daytona-seller-api
+yarn add daytona-ozon-seller-api
 # или
-pnpm add ozon-daytona-seller-api
+pnpm add daytona-ozon-seller-api
 ```
 
 ### Первые шаги
 
 ```typescript
-import { OzonSellerAPI } from 'ozon-daytona-seller-api';
+import { OzonSellerAPI } from 'daytona-ozon-seller-api';
 
 // Инициализация SDK
 const api = new OzonSellerAPI({
@@ -349,7 +349,7 @@ const api = new OzonSellerAPI({
 
 ### 1️⃣ **Установка пакета**
 ```bash
-npm install ozon-daytona-seller-api
+npm install daytona-ozon-seller-api
 ```
 
 ### 2️⃣ **Получение API ключей**
@@ -360,7 +360,7 @@ npm install ozon-daytona-seller-api
 
 ### 3️⃣ **Первый запрос**
 ```typescript
-import { OzonSellerAPI } from 'ozon-daytona-seller-api';
+import { OzonSellerAPI } from 'daytona-ozon-seller-api';
 
 const api = new OzonSellerAPI({
   clientId: 'your-client-id',
@@ -395,7 +395,7 @@ console.log('🎉 Подключение успешно!', info.name);
 ### 📱 **Следите за обновлениями**
 - 🔔 **Watch** репозиторий для получения уведомлений
 - 📢 **[Changelog](./CHANGELOG.md)** — история изменений
-- 📦 **[NPM](https://www.npmjs.com/package/ozon-daytona-seller-api)** — стабильные релизы
+- 📦 **[NPM](https://www.npmjs.com/package/daytona-ozon-seller-api)** — стабильные релизы
 
 ## 📄 Лицензия и правовая информация
 
@@ -408,7 +408,7 @@ console.log('🎉 Подключение успешно!', info.name);
 ## 🎯 Готовы начать?
 
 ```bash
-npm install ozon-daytona-seller-api
+npm install daytona-ozon-seller-api
 ```
 
 **🚀 [Быстрый старт за 5 минут](./daytona-ozon-api-docs/QUICK-START.md)**

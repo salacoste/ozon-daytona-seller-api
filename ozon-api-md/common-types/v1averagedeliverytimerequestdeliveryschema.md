@@ -1,0 +1,23 @@
+# v1AverageDeliveryTimeRequestDeliverySchema
+
+Схема доставки:
+- `ALL` — все;
+- `FBO` — доставка со склада Ozon;
+- `FBS` — доставка со своего склада;
+- `UNKNOWN` — неизвестное значение.
+
+
+## Full schema (JSON)
+```json
+{
+  "type": "string",
+  "default": "All",
+  "description": "Схема доставки:\n- `ALL` — все;\n- `FBO` — доставка со склада Ozon;\n- `FBS` — доставка со своего склада;\n- `UNKNOWN` — неизвестное значение.\n",
+  "enum": [
+    "All",
+    "FBO",
+    "FBS",
+    "UNKNOWN"
+  ]
+}
+```

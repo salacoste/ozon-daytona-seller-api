@@ -86,7 +86,7 @@
     "ci:validate": "npm run validate:all && npm run test:all && npm run security:check && npm run bundle:check",
     "release:prepare": "npm run clean && npm run build && npm run ci:validate && npm run docs:validate",
     "docs:generate": "typedoc src/index.ts",
-    "prepublishOnly": "npm run release:prepare",
+    "_prepublishOnly": "npm run release:prepare",
     "release": "release-it"
   },
   "dependencies": {

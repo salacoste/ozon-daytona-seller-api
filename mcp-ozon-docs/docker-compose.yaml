@@ -1,0 +1,12 @@
+services:
+  mcp-ozon-docs:
+    build: .
+    container_name: mcp-ozon-docs
+    restart: unless-stopped
+    environment:
+      OZON_MD_ROOT: /data/ozon-api-md
+      HTTP_PORT: "8088"
+    volumes:
+      - /Users/r2d2/Documents/Code_Projects/spacechemical-nextjs/bmad-ozon-seller-api/ozon-api-md:/data/ozon-api-md:ro
+    ports:
+      - "8088:8088"

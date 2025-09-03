@@ -1,0 +1,103 @@
+[
+  {
+    "name": "index",
+    "methods": [],
+    "exports": [
+      "OzonSellerApiClient",
+      "HttpClient",
+      "AuthManager",
+      "Language",
+      "Currency",
+      "createApiKey",
+      "createClientId",
+      "createRequestId",
+      "",
+      "OzonError",
+      "ApiError",
+      "BadRequestError",
+      "AuthenticationError",
+      "PermissionError",
+      "NotFoundError",
+      "ValidationError",
+      "RateLimitError",
+      "InternalServerError",
+      "ConnectionError",
+      "TimeoutError",
+      "ConfigurationError",
+      "SDKError",
+      "isRetryableError",
+      "getRetryDelay",
+      "",
+      "ProductApi",
+      "createOzonSellerApiClient"
+    ]
+  },
+  {
+    "name": "ProductApi",
+    "methods": [
+      {
+        "name": "archive",
+        "signature": "archive(request: ProductArchiveRequest, options?: RequestOptions): Promise<ProductBooleanResponse>;",
+        "returnType": "Promise<ProductBooleanResponse>"
+      },
+      {
+        "name": "unarchive",
+        "signature": "unarchive(request: ProductUnarchiveRequest, options?: RequestOptions): Promise<ProductBooleanResponse>;",
+        "returnType": "Promise<ProductBooleanResponse>"
+      },
+      {
+        "name": "getList",
+        "signature": "getList(request?: GetProductListRequest, options?: RequestOptions): Promise<GetProductListResponse>;",
+        "returnType": "Promise<GetProductListResponse>"
+      },
+      {
+        "name": "updateAttributes",
+        "signature": "updateAttributes(request: ProductUpdateAttributesRequest, options?: RequestOptions): Promise<ProductBooleanResponse>;",
+        "returnType": "Promise<ProductBooleanResponse>"
+      },
+      {
+        "name": "importBySku",
+        "signature": "importBySku(request: ImportProductsBySKURequest, options?: RequestOptions): Promise<ImportProductsResponse>;",
+        "returnType": "Promise<ImportProductsResponse>"
+      },
+      {
+        "name": "getImportInfo",
+        "signature": "getImportInfo(request: {\n        task_id: number;\n    }, options?: RequestOptions): Promise<ImportProductsStatusResponse>;",
+        "returnType": "Promise<ImportProductsStatusResponse>"
+      },
+      {
+        "name": "getInfo",
+        "signature": "getInfo(request: GetProductInfoRequest, options?: RequestOptions): Promise<GetProductAttributesResponse>;",
+        "returnType": "Promise<GetProductAttributesResponse>"
+      },
+      {
+        "name": "getStocks",
+        "signature": "getStocks(request: {\n        filter?: {\n            offer_id?: readonly string[];\n            product_id?: readonly number[];\n            visibility?: string;\n        };\n    }, options?: RequestOptions): Promise<GetProductStocksResponse>;",
+        "returnType": "Promise<GetProductStocksResponse>"
+      },
+      {
+        "name": "getPrices",
+        "signature": "getPrices(request: {\n        filter?: {\n            offer_id?: readonly string[];\n            product_id?: readonly number[];\n            visibility?: string;\n        };\n    }, options?: RequestOptions): Promise<GetProductPricesResponse>;",
+        "returnType": "Promise<GetProductPricesResponse>"
+      },
+      {
+        "name": "getAttributes",
+        "signature": "getAttributes(request: {\n        filter?: {\n            offer_id?: readonly string[];\n            product_id?: readonly number[];\n        };\n        limit?: number;\n        last_id?: string;\n    }, options?: RequestOptions): Promise<GetProductAttributesResponse>;",
+        "returnType": "Promise<GetProductAttributesResponse>"
+      },
+      {
+        "name": "getCertificateTypes",
+        "signature": "getCertificateTypes(options?: RequestOptions): Promise<GetCertificateTypesResponse>;",
+        "returnType": "Promise<GetCertificateTypesResponse>"
+      },
+      {
+        "name": "getDiscountedInfo",
+        "signature": "getDiscountedInfo(request: {\n        discounted_skus?: readonly string[];\n    }, options?: RequestOptions): Promise<{\n        result: {\n            discounted_skus: readonly {\n                sku: string;",
+        "returnType": "Promise<{\n        result: {\n            discounted_skus: readonly {\n                sku: string"
+      }
+    ],
+    "exports": [
+      "ProductApi"
+    ]
+  }
+]

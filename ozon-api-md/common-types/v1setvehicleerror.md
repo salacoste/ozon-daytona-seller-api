@@ -1,0 +1,17 @@
+# v1SetVehicleError
+
+## Full schema (JSON)
+```json
+{
+  "title": "object",
+  "default": "SET_VEHICLE_ERROR_UNSPECIFIED",
+  "enum": [
+    "SET_VEHICLE_ERROR_UNSPECIFIED",
+    "SET_VEHICLE_ERROR_INVALID_ORDER_STATE",
+    "SET_VEHICLE_ERROR_VEHICLE_NOT_REQUIRED",
+    "SET_VEHICLE_ERROR_ORDER_NOT_BELONG_CONTRACTOR",
+    "SET_VEHICLE_ERROR_ORDER_NOT_BELONG_COMPANY"
+  ],
+  "type": "string"
+}
+```
