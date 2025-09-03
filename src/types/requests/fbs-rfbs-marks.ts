@@ -1,136 +1,14 @@
 /**
  * Request types for FBS&rFBSMarks API
- * Generated from OZON API documentation
- * FBS&rFBSMarks - Product marking and exemplar management
+ * Generated from MCP documentation: categories/fbs-rfbsmarks
+ * FBS&rFBSMarks - Product exemplar management and marking codes
  */
 
 /**
- * Запрос на загрузку PDF файла маркировки
- * Request for uploading marking PDF file
+ * Запрос обновления данных экземпляров
+ * Request for updating exemplar data
  */
-export interface FbsRfbsMarksProductExemplarCreateRequest {
-  /** 
-   * Идентификатор товара
-   * Product ID
-   */
-  product_id?: number;
-  
-  /** 
-   * Файл маркировки в формате base64
-   * Marking file in base64 format
-   */
-  file?: string;
-  
-  /** 
-   * Название файла
-   * File name
-   */
-  file_name?: string;
-  
-  readonly [key: string]: unknown;
-}
-
-/**
- * Запрос информации о загруженном файле маркировки
- * Request for uploaded marking file information
- */
-export interface FbsRfbsMarksProductExemplarInfoRequest {
-  /** 
-   * Идентификатор задачи загрузки
-   * Upload task ID
-   */
-  task_id?: string;
-  
-  readonly [key: string]: unknown;
-}
-
-/**
- * Запрос на получение списка образцов
- * Request for exemplar list
- */
-export interface FbsRfbsMarksProductExemplarListRequest {
-  /** 
-   * Идентификатор товара
-   * Product ID
-   */
-  product_id?: number;
-  
-  /** 
-   * Лимит записей
-   * Record limit
-   */
-  limit?: number;
-  
-  /** 
-   * Смещение для пагинации
-   * Pagination offset
-   */
-  offset?: number;
-  
-  readonly [key: string]: unknown;
-}
-
-/**
- * Запрос на удаление образца маркировки
- * Request for marking exemplar deletion
- */
-export interface FbsRfbsMarksProductExemplarDeleteRequest {
-  /** 
-   * Идентификатор образца маркировки
-   * Marking exemplar ID
-   */
-  exemplar_id?: string;
-  
-  readonly [key: string]: unknown;
-}
-
-/**
- * Запрос на получение статуса удаления образца
- * Request for exemplar deletion status
- */
-export interface FbsRfbsMarksProductExemplarDeleteStatusRequest {
-  /** 
-   * Идентификатор задачи удаления
-   * Deletion task ID
-   */
-  task_id?: string;
-  
-  readonly [key: string]: unknown;
-}
-
-/**
- * Запрос на валидацию образца маркировки
- * Request for marking exemplar validation
- */
-export interface FbsRfbsMarksProductExemplarValidateRequest {
-  /** 
-   * Идентификатор образца маркировки
-   * Marking exemplar ID
-   */
-  exemplar_id?: string;
-  
-  readonly [key: string]: unknown;
-}
-
-/**
- * Запрос статуса валидации образца
- * Request for exemplar validation status
- */
-export interface FbsRfbsMarksProductExemplarValidateStatusRequest {
-  /** 
-   * Идентификатор задачи валидации
-   * Validation task ID
-   */
-  task_id?: string;
-  
-  readonly [key: string]: unknown;
-}
-
-/**
- * Запрос на загрузку кодов маркировки для отправления
- * Request for uploading marking codes for posting
- */
-export interface FbsRfbsMarksPostingCodesUploadRequest {
+export interface FbsRfbsMarksProductExemplarUpdateRequest {
   /** 
    * Номер отправления
    * Posting number
@@ -138,16 +16,336 @@ export interface FbsRfbsMarksPostingCodesUploadRequest {
   posting_number?: string;
   
   /** 
-   * Коды маркировки
-   * Marking codes
+   * Данные экземпляров для обновления
+   * Exemplar data for update
    */
-  codes?: Array<{
-    /** SKU товара */
-    sku?: string;
-    /** Код маркировки */
-    gtd?: string;
+  products?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
+    /** Экземпляры товара */
+    exemplars?: Array<{
+      /** Идентификатор экземпляра */
+      exemplar_id?: string;
+      /** Код маркировки */
+      marking_code?: string;
+      /** ГТД (при наличии) */
+      gtd?: string;
+    }>;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Запрос проверки и сохранения данных экземпляров (v4)
+ * Request for checking and saving exemplar data (v4)
+ */
+export interface FbsRfbsMarksProductExemplarSetV4Request {
+  /** 
+   * Номер отправления
+   * Posting number
+   */
+  posting_number?: string;
+  
+  /** 
+   * Товары с экземплярами
+   * Products with exemplars
+   */
+  products?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
+    /** Экземпляры товара */
+    exemplars?: Array<{
+      /** Код маркировки */
+      marking_code?: string;
+      /** ГТД (номер грузовой таможенной декларации) */
+      gtd?: string;
+      /** Признак отсутствия ГТД */
+      is_gtd_absent?: boolean;
+    }>;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Запрос статуса добавления экземпляров (v4)
+ * Request for exemplar addition status (v4)
+ */
+export interface FbsRfbsMarksProductExemplarStatusV4Request {
+  /** 
+   * Номер отправления
+   * Posting number
+   */
+  posting_number?: string;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Запрос валидации кодов маркировки (v4)
+ * Request for marking codes validation (v4)
+ */
+export interface FbsRfbsMarksProductExemplarValidateV4Request {
+  /** 
+   * Номер отправления
+   * Posting number
+   */
+  posting_number?: string;
+  
+  /** 
+   * Товары с кодами для валидации
+   * Products with codes for validation
+   */
+  products?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
+    /** Коды маркировки */
+    exemplars?: Array<{
+      /** Код маркировки */
+      marking_code?: string;
+      /** ГТД (при наличии) */
+      gtd?: string;
+      /** Признак отсутствия ГТД */
+      is_gtd_absent?: boolean;
+    }>;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Запрос сборки заказа (v4)
+ * Request for order assembly (v4)
+ */
+export interface FbsRfbsMarksPostingShipV4Request {
+  /** 
+   * Номер отправления
+   * Posting number
+   */
+  posting_number?: string;
+  
+  /** 
+   * Упаковки с товарами
+   * Packages with products
+   */
+  packages?: Array<{
+    /** Товары в упаковке */
+    products?: Array<{
+      /** Идентификатор товара */
+      product_id?: number;
+      /** Количество */
+      quantity?: number;
+    }>;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Запрос частичной сборки отправления (v4)
+ * Request for partial posting assembly (v4)
+ */
+export interface FbsRfbsMarksPostingShipPackageV4Request {
+  /** 
+   * Номер отправления
+   * Posting number
+   */
+  posting_number?: string;
+  
+  /** 
+   * Товары для частичной сборки
+   * Products for partial assembly
+   */
+  products?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
     /** Количество */
     quantity?: number;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+// ============ V5 API Methods ============
+
+/**
+ * Запрос получения информации об экземплярах (v5)
+ * Request for exemplar information (v5)
+ */
+export interface FbsRfbsMarksProductExemplarCreateOrGetV5Request {
+  /** 
+   * Номер отправления
+   * Posting number
+   */
+  posting_number?: string;
+  
+  /** 
+   * Товары для получения экземпляров
+   * Products for exemplar retrieval
+   */
+  products?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
+    /** Количество экземпляров */
+    quantity?: number;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Запрос проверки и сохранения данных экземпляров (v5)
+ * Request for checking and saving exemplar data (v5)
+ */
+export interface FbsRfbsMarksProductExemplarSetV5Request {
+  /** 
+   * Номер отправления
+   * Posting number
+   */
+  posting_number?: string;
+  
+  /** 
+   * Товары с экземплярами
+   * Products with exemplars
+   */
+  products?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
+    /** Экземпляры товара */
+    exemplars?: Array<{
+      /** Код маркировки */
+      marking_code?: string;
+      /** ГТД (номер грузовой таможенной декларации) */
+      gtd?: string;
+      /** Признак отсутствия ГТД */
+      is_gtd_absent?: boolean;
+      /** Дополнительная информация */
+      additional_info?: {
+        /** Серийный номер */
+        serial_number?: string;
+        /** Дата производства */
+        production_date?: string;
+        /** Код EAN */
+        ean_code?: string;
+      };
+    }>;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Запрос статуса добавления экземпляров (v5)
+ * Request for exemplar addition status (v5)
+ */
+export interface FbsRfbsMarksProductExemplarStatusV5Request {
+  /** 
+   * Номер отправления
+   * Posting number
+   */
+  posting_number?: string;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Запрос валидации кодов маркировки (v5)
+ * Request for marking codes validation (v5)
+ */
+export interface FbsRfbsMarksProductExemplarValidateV5Request {
+  /** 
+   * Номер отправления
+   * Posting number
+   */
+  posting_number?: string;
+  
+  /** 
+   * Товары с кодами для валидации
+   * Products with codes for validation
+   */
+  products?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
+    /** Коды маркировки */
+    exemplars?: Array<{
+      /** Код маркировки */
+      marking_code?: string;
+      /** ГТД (при наличии) */
+      gtd?: string;
+      /** Признак отсутствия ГТД */
+      is_gtd_absent?: boolean;
+    }>;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+// ============ V6 API Methods ============
+
+/**
+ * Запрос получения данных созданных экземпляров (v6)
+ * Request for created exemplar data (v6)
+ */
+export interface FbsRfbsMarksProductExemplarCreateOrGetV6Request {
+  /** 
+   * Номер отправления
+   * Posting number
+   */
+  posting_number?: string;
+  
+  /** 
+   * Товары для получения экземпляров
+   * Products for exemplar retrieval
+   */
+  products?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
+    /** Количество экземпляров */
+    quantity?: number;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Запрос проверки и сохранения данных экземпляров (v6)
+ * Request for checking and saving exemplar data (v6)
+ */
+export interface FbsRfbsMarksProductExemplarSetV6Request {
+  /** 
+   * Номер отправления
+   * Posting number
+   */
+  posting_number?: string;
+  
+  /** 
+   * Товары с экземплярами
+   * Products with exemplars
+   */
+  products?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
+    /** Экземпляры товара */
+    exemplars?: Array<{
+      /** Код маркировки */
+      marking_code?: string;
+      /** ГТД (при наличии) */
+      gtd?: string;
+      /** Признак отсутствия ГТД */
+      is_gtd_absent?: boolean;
+      /** Расширенные данные экземпляра */
+      extended_data?: {
+        /** Серийный номер */
+        serial_number?: string;
+        /** Дата производства */
+        production_date?: string;
+        /** Код EAN/GTIN */
+        ean_code?: string;
+        /** Дополнительные атрибуты */
+        attributes?: Record<string, unknown>;
+      };
+    }>;
   }>;
   
   readonly [key: string]: unknown;

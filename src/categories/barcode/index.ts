@@ -31,10 +31,10 @@ import type {
  * // Привязать существующие штрихкоды к товарам
  * const addResult = await barcodeApi.addBarcodes({
  *   barcodes: [{
- *     sku: 123456789,
+ *     sku: '123456789',
  *     barcode: '4600051000057'
  *   }, {
- *     sku: 987654321,
+ *     sku: '987654321',
  *     barcode: '4600051000064'
  *   }]
  * });
@@ -61,15 +61,15 @@ export class BarcodeApi {
    * const addResult = await barcodeApi.addBarcodes({
    *   barcodes: [
    *     {
-   *       sku: 123456789,
+   *       sku: '123456789',
    *       barcode: '4600051000057' // EAN-13 штрихкод
    *     },
    *     {
-   *       sku: 987654321,
+   *       sku: '987654321',
    *       barcode: '123456789012' // UPC-A штрихкод
    *     },
    *     {
-   *       sku: 555666777,
+   *       sku: '555666777',
    *       barcode: 'CUSTOM_BARCODE_001' // Пользовательский штрихкод
    *     }
    *   ]

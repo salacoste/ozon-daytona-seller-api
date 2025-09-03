@@ -72,6 +72,15 @@ export class BrandApi {
     request: BrandCertificationListRequest,
     options?: RequestOptions
   ): Promise<BrandCertificationListResponse> {
+    // Валидация параметров согласно API
+    if (!request.page || request.page < 1) {
+      throw new Error('Parameter "page" is required and must be >= 1');
+    }
+
+    if (!request.page_size || request.page_size < 1) {
+      throw new Error('Parameter "page_size" is required and must be >= 1');
+    }
+
     return this.httpClient.request<BrandCertificationListRequest, BrandCertificationListResponse>(
       'POST',
       '/v1/brand/company-certification/list',

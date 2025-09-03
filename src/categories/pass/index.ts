@@ -43,8 +43,9 @@ import type {
  * const passList = await passApi.getPassList({
  *   limit: 100,
  *   filter: {
- *     carriage_id: 12345,
- *     status: 'ACTIVE'
+ *     arrival_reason: 'FBS_DELIVERY',
+ *     only_active_passes: true,
+ *     warehouse_ids: ['12345']
  *   }
  * });
  * 

@@ -31,8 +31,8 @@ import type {
  * Chat API для управления чатами и сообщениями
  * Chat API for chat and message management
  * 
- * Доступно для продавцов с подпиской Premium Plus.
- * Available for sellers with Premium Plus subscription.
+ * ⚠️ **ТРЕБУЕТ ПОДПИСКУ PREMIUM PLUS** - Все методы доступны только для продавцов с подпиской Premium Plus.
+ * ⚠️ **REQUIRES PREMIUM PLUS SUBSCRIPTION** - All methods are available only for sellers with Premium Plus subscription.
  * 
  * @example
  * ```typescript
@@ -50,6 +50,8 @@ import type {
  */
 export class ChatApi {
   constructor(private readonly httpClient: HttpClient) {}
+
+
 
   /**
    * Создать новый чат
@@ -165,6 +167,7 @@ export class ChatApi {
     );
   }
 
+
   /**
    * Отметить сообщения как прочитанные
    * Mark messages as read
@@ -201,7 +204,7 @@ export class ChatApi {
    * Получить историю чата (v2)
    * Get chat history v2
    * 
-   * ⚠️ Этот метод устаревает. Используйте getChatHistoryV3.
+   * @deprecated 13 июля 2025 года метод будет отключён
    * 
    * Возвращает историю сообщений чата. По умолчанию от самого нового сообщения к старым.
    * 
@@ -233,6 +236,7 @@ export class ChatApi {
       options
     );
   }
+
 
   /**
    * Получить историю чата (v3)
@@ -276,7 +280,7 @@ export class ChatApi {
    * Получить список чатов (v2)
    * Get chat list v2
    * 
-   * ⚠️ Этот метод устаревает. Используйте getChatListV3.
+   * @deprecated Метод устаревает, используйте getChatListV3
    * 
    * Возвращает информацию о чатах по указанным фильтрам.
    * 

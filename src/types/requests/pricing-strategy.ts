@@ -9,10 +9,18 @@
  * Competitors list request
  */
 export interface GetCompetitorsRequest {
-  /** Список SKU товаров для поиска конкурентов */
-  sku?: string[];
-  /** Лимит результатов */
-  limit?: number;
+  /** 
+   * Страница списка, с которой нужно выгрузить конкурентов
+   * Page number for competitors list (minimum 1)
+   */
+  page: number;
+  
+  /** 
+   * Максимальное количество конкурентов на странице (1-50)
+   * Maximum number of competitors per page (1-50)
+   */
+  limit: number;
+  
   readonly [key: string]: unknown;
 }
 
@@ -20,15 +28,27 @@ export interface GetCompetitorsRequest {
  * Запрос создания стратегии ценообразования
  * Create pricing strategy request
  */
+/**
+ * Информация о конкуренте
+ * Competitor information
+ */
+export interface PricingStrategyCompetitor {
+  readonly [key: string]: unknown;
+}
+
 export interface CreatePricingStrategyRequest {
-  /** Название стратегии */
-  name: string;
-  /** Описание стратегии */
-  description?: string;
-  /** Тип стратегии */
-  strategy_type?: string;
-  /** Настройки стратегии */
-  settings?: Record<string, unknown>;
+  /** 
+   * Название стратегии
+   * Strategy name
+   */
+  strategy_name: string;
+  
+  /** 
+   * Список конкурентов
+   * List of competitors
+   */
+  competitors: PricingStrategyCompetitor[];
+  
   readonly [key: string]: unknown;
 }
 
@@ -57,10 +77,18 @@ export interface GetStrategyInfoRequest {
  * Get strategy list request
  */
 export interface GetStrategyListRequest {
-  /** Лимит результатов */
-  limit?: number;
-  /** Смещение для пагинации */
-  offset?: number;
+  /** 
+   * Страница списка, с которой нужно выгрузить стратегии
+   * Page number for strategies list (minimum 1)
+   */
+  page: number;
+  
+  /** 
+   * Максимальное количество стратегий на странице (1-50)
+   * Maximum number of strategies per page (1-50)
+   */
+  limit: number;
+  
   readonly [key: string]: unknown;
 }
 
@@ -69,33 +97,33 @@ export interface GetStrategyListRequest {
  * Get strategy item info request
  */
 export interface GetStrategyItemInfoRequest {
-  /** Идентификатор стратегии */
-  strategy_id: string;
-  /** SKU товара */
-  sku: string;
+  /** 
+   * Идентификатор товара в системе продавца
+   * Product identifier in seller system
+   */
+  product_id: number;
+  
   readonly [key: string]: unknown;
 }
 
-/**
- * Товар для добавления в стратегию
- * Strategy item to add
- */
-export interface StrategyItemToAdd {
-  /** SKU товара */
-  sku: string;
-  /** Дополнительные настройки товара */
-  settings?: Record<string, unknown>;
-}
 
 /**
  * Запрос добавления товаров в стратегию
  * Add strategy items request
  */
 export interface AddStrategyItemsRequest {
-  /** Идентификатор стратегии */
+  /** 
+   * Идентификатор стратегии
+   * Strategy identifier
+   */
   strategy_id: string;
-  /** Список товаров для добавления */
-  items: StrategyItemToAdd[];
+  
+  /** 
+   * Список идентификаторов товаров в системе продавца (максимум 50)
+   * List of product identifiers in seller system (maximum 50)
+   */
+  product_id: string[];
+  
   readonly [key: string]: unknown;
 }
 
@@ -104,10 +132,18 @@ export interface AddStrategyItemsRequest {
  * Delete strategy items request
  */
 export interface DeleteStrategyItemsRequest {
-  /** Идентификатор стратегии */
+  /** 
+   * Идентификатор стратегии
+   * Strategy identifier
+   */
   strategy_id: string;
-  /** Список SKU товаров для удаления */
-  sku: string[];
+  
+  /** 
+   * Список идентификаторов товаров в системе продавца (максимум 50)
+   * List of product identifiers in seller system (maximum 50)
+   */
+  product_id: string[];
+  
   readonly [key: string]: unknown;
 }
 
@@ -130,10 +166,18 @@ export interface GetStrategyItemsRequest {
  * Update strategy status request
  */
 export interface UpdateStatusStrategyRequest {
-  /** Идентификатор стратегии */
+  /** 
+   * Идентификатор стратегии
+   * Strategy identifier
+   */
   strategy_id: string;
-  /** Новый статус стратегии */
-  status: 'ACTIVE' | 'INACTIVE' | 'PAUSED';
+  
+  /** 
+   * Статус стратегии: true - включена, false - отключена
+   * Strategy status: true - enabled, false - disabled
+   */
+  enabled?: boolean;
+  
   readonly [key: string]: unknown;
 }
 
@@ -142,8 +186,12 @@ export interface UpdateStatusStrategyRequest {
  * Get strategy IDs by product IDs request
  */
 export interface GetStrategyIDsByItemIDsRequest {
-  /** Список SKU товаров */
-  sku: string[];
+  /** 
+   * Список идентификаторов товаров в системе продавца
+   * List of product identifiers in seller system
+   */
+  product_id: string[];
+  
   readonly [key: string]: unknown;
 }
 
@@ -152,13 +200,23 @@ export interface GetStrategyIDsByItemIDsRequest {
  * Update pricing strategy request
  */
 export interface UpdatePricingStrategyRequest {
-  /** Идентификатор стратегии */
+  /** 
+   * Идентификатор стратегии
+   * Strategy identifier
+   */
   strategy_id: string;
-  /** Новое название стратегии */
-  name?: string;
-  /** Новое описание стратегии */
-  description?: string;
-  /** Новые настройки стратегии */
-  settings?: Record<string, unknown>;
+  
+  /** 
+   * Название стратегии
+   * Strategy name
+   */
+  strategy_name: string;
+  
+  /** 
+   * Список конкурентов
+   * List of competitors
+   */
+  competitors: PricingStrategyCompetitor[];
+  
   readonly [key: string]: unknown;
 }

@@ -534,3 +534,317 @@ export interface FbsRfbsMarksPostingListResponse {
   
   readonly [key: string]: unknown;
 }
+
+// ============ V4 API Methods ============
+
+/**
+ * Ответ на обновление данных экземпляров
+ * Response for exemplar data update
+ */
+export interface FbsRfbsMarksProductExemplarUpdateResponse {
+  /** 
+   * Результат операции
+   * Operation result
+   */
+  result?: string;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Ответ на проверку и сохранение данных экземпляров (v4)
+ * Response for checking and saving exemplar data (v4)
+ */
+export interface FbsRfbsMarksProductExemplarSetV4Response {
+  /** 
+   * Результат операции
+   * Operation result
+   */
+  result?: string;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Ответ статуса добавления экземпляров (v4)
+ * Response for exemplar addition status (v4)
+ */
+export interface FbsRfbsMarksProductExemplarStatusV4Response {
+  /** 
+   * Статус добавления экземпляров
+   * Exemplar addition status
+   */
+  status?: 'pending' | 'processing' | 'completed' | 'error';
+  
+  /** 
+   * Данные экземпляров
+   * Exemplar data
+   */
+  exemplars?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
+    /** Экземпляры товара */
+    exemplar_data?: Array<{
+      /** Идентификатор экземпляра */
+      exemplar_id?: string;
+      /** Код маркировки */
+      marking_code?: string;
+      /** ГТД */
+      gtd?: string;
+      /** Статус экземпляра */
+      status?: 'valid' | 'invalid' | 'pending';
+    }>;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Ответ валидации кодов маркировки (v4)
+ * Response for marking codes validation (v4)
+ */
+export interface FbsRfbsMarksProductExemplarValidateV4Response {
+  /** 
+   * Результат валидации
+   * Validation result
+   */
+  result?: string;
+  
+  /** 
+   * Ошибки валидации
+   * Validation errors
+   */
+  validation_errors?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
+    /** Код маркировки с ошибкой */
+    marking_code?: string;
+    /** Описание ошибки */
+    error?: string;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Ответ на сборку заказа (v4)
+ * Response for order assembly (v4)
+ */
+export interface FbsRfbsMarksPostingShipV4Response {
+  /** 
+   * Результат операции
+   * Operation result
+   */
+  result?: string;
+  
+  /** 
+   * Созданные отправления
+   * Created postings
+   */
+  postings?: Array<{
+    /** Номер отправления */
+    posting_number?: string;
+    /** Статус отправления */
+    status?: string;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Ответ на частичную сборку отправления (v4)
+ * Response for partial posting assembly (v4)
+ */
+export interface FbsRfbsMarksPostingShipPackageV4Response {
+  /** 
+   * Результат операции
+   * Operation result
+   */
+  result?: string;
+  
+  /** 
+   * Информация о разделенном отправлении
+   * Split posting information
+   */
+  split_posting?: {
+    /** Номер исходного отправления */
+    original_posting_number?: string;
+    /** Новые номера отправлений */
+    new_posting_numbers?: string[];
+  };
+  
+  readonly [key: string]: unknown;
+}
+
+// ============ V5 API Methods ============
+
+/**
+ * Ответ на получение информации об экземплярах (v5)
+ * Response for exemplar information (v5)
+ */
+export interface FbsRfbsMarksProductExemplarCreateOrGetV5Response {
+  /** 
+   * Результат операции
+   * Operation result
+   */
+  result?: string;
+  
+  /** 
+   * Информация об экземплярах
+   * Exemplar information
+   */
+  exemplars?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
+    /** Данные экземпляров */
+    exemplar_data?: Array<{
+      /** Идентификатор экземпляра */
+      exemplar_id?: string;
+      /** Количество экземпляров */
+      quantity?: number;
+    }>;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Ответ на проверку и сохранение данных экземпляров (v5)
+ * Response for checking and saving exemplar data (v5)
+ */
+export interface FbsRfbsMarksProductExemplarSetV5Response {
+  /** 
+   * Результат операции
+   * Operation result
+   */
+  result?: string;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Ответ статуса добавления экземпляров (v5)
+ * Response for exemplar addition status (v5)
+ */
+export interface FbsRfbsMarksProductExemplarStatusV5Response {
+  /** 
+   * Статус добавления экземпляров
+   * Exemplar addition status
+   */
+  status?: 'pending' | 'processing' | 'completed' | 'error';
+  
+  /** 
+   * Данные экземпляров с расширенной информацией
+   * Exemplar data with extended information
+   */
+  exemplars?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
+    /** Экземпляры товара */
+    exemplar_data?: Array<{
+      /** Идентификатор экземпляра */
+      exemplar_id?: string;
+      /** Код маркировки */
+      marking_code?: string;
+      /** ГТД */
+      gtd?: string;
+      /** Дополнительная информация */
+      additional_info?: {
+        /** Серийный номер */
+        serial_number?: string;
+        /** Дата производства */
+        production_date?: string;
+        /** Код EAN */
+        ean_code?: string;
+      };
+      /** Статус экземпляра */
+      status?: 'valid' | 'invalid' | 'pending';
+    }>;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Ответ валидации кодов маркировки (v5)
+ * Response for marking codes validation (v5)
+ */
+export interface FbsRfbsMarksProductExemplarValidateV5Response {
+  /** 
+   * Результат валидации
+   * Validation result
+   */
+  result?: string;
+  
+  /** 
+   * Ошибки валидации
+   * Validation errors
+   */
+  validation_errors?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
+    /** Код маркировки с ошибкой */
+    marking_code?: string;
+    /** Описание ошибки */
+    error?: string;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+// ============ V6 API Methods ============
+
+/**
+ * Ответ на получение данных созданных экземпляров (v6)
+ * Response for created exemplar data (v6)
+ */
+export interface FbsRfbsMarksProductExemplarCreateOrGetV6Response {
+  /** 
+   * Результат операции
+   * Operation result
+   */
+  result?: string;
+  
+  /** 
+   * Информация об экземплярах с расширенными данными
+   * Exemplar information with extended data
+   */
+  exemplars?: Array<{
+    /** Идентификатор товара */
+    product_id?: number;
+    /** Данные экземпляров */
+    exemplar_data?: Array<{
+      /** Идентификатор экземпляра */
+      exemplar_id?: string;
+      /** Количество экземпляров */
+      quantity?: number;
+      /** Расширенные данные экземпляра */
+      extended_data?: {
+        /** Серийный номер */
+        serial_number?: string;
+        /** Дата производства */
+        production_date?: string;
+        /** Код EAN/GTIN */
+        ean_code?: string;
+        /** Дополнительные атрибуты */
+        attributes?: Record<string, unknown>;
+      };
+    }>;
+  }>;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Ответ на проверку и сохранение данных экземпляров (v6)
+ * Response for checking and saving exemplar data (v6)
+ */
+export interface FbsRfbsMarksProductExemplarSetV6Response {
+  /** 
+   * Результат операции
+   * Operation result
+   */
+  result?: string;
+  
+  readonly [key: string]: unknown;
+}

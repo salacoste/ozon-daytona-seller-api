@@ -12,6 +12,7 @@ import type {
   SellerRatingHistoryResponse,
   SellerRatingSummaryResponse
 } from '../../types/responses/seller-rating.js';
+import type { EmptyRequest } from '../../types/common/base.js';
 
 /**
  * SellerRating API для получения информации о рейтингах продавца
@@ -108,7 +109,7 @@ export class SellerRatingApi {
   async getCurrentRatings(
     options?: RequestOptions
   ): Promise<SellerRatingSummaryResponse> {
-    return this.httpClient.request<Record<string, never>, SellerRatingSummaryResponse>(
+    return this.httpClient.request<EmptyRequest, SellerRatingSummaryResponse>(
       'POST',
       '/v1/rating/summary',
       {},

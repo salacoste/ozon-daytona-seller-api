@@ -28,6 +28,7 @@ import type {
   DeleteProductsRequest,
   ImportProductsV3Request,
   GetProductInfoListV3Request,
+  GetProductListV3Request,
   GetUploadQuotaRequest,
 } from '../../types/requests/product.js';
 import type {
@@ -50,6 +51,7 @@ import type {
   DeleteProductsResponse,
   ImportProductsV3Response,
   GetProductInfoListV3Response,
+  GetProductListV3Response,
   GetUploadQuotaResponse,
 } from '../../types/responses/product.js';
 import type { ProductBooleanResponse } from '../../types/common/base.js';
@@ -136,7 +138,13 @@ export class ProductApi {
    * Получить список товаров
    * Get product list
    * 
-   * Метод для получения списка товаров с фильтрацией и пагинацией.
+   * Метод для получения списка всех товаров.
+   * 
+   * Если вы используете фильтр по идентификатору offer_id или product_id, 
+   * остальные параметры заполнять не обязательно.
+   * За один раз вы можете использовать только одну группу идентификаторов, не больше 1000 товаров.
+   * 
+   * Если вы не используете для отображения идентификаторы, укажите limit и last_id в следующих запросах.
    * 
    * @param request - Параметры запроса списка товаров
    * @param options - Дополнительные опции запроса
@@ -144,12 +152,19 @@ export class ProductApi {
    * 
    * @example
    * ```typescript
+   * // Получить список товаров с фильтрацией
    * const products = await productApi.getList({
    *   filter: {
-   *     visibility: 'VISIBLE',
-   *     offer_id: ['PRODUCT-001', 'PRODUCT-002']
+   *     visibility: 'ALL',
+   *     offer_id: ['136748']
    *   },
-   *   limit: 50
+   *   limit: 100
+   * });
+   * 
+   * // Получить все товары с пагинацией
+   * const allProducts = await productApi.getList({
+   *   limit: 100,
+   *   last_id: ""  // При первом запросе пустое значение
    * });
    * 
    * products.result?.items?.forEach(product => {
@@ -158,13 +173,26 @@ export class ProductApi {
    * ```
    */
   async getList(
-    request?: GetProductListRequest,
+    request: GetProductListRequest = {},
     options?: RequestOptions
   ): Promise<GetProductListResponse> {
+    // Валидация согласно API документации
+    if (request.filter?.offer_id && request.filter.offer_id.length > 1000) {
+      throw new Error('Maximum 1000 offer_id items allowed');
+    }
+    
+    if (request.filter?.product_id && request.filter.product_id.length > 1000) {
+      throw new Error('Maximum 1000 product_id items allowed');
+    }
+    
+    if (request.limit && (request.limit < 1 || request.limit > 1000)) {
+      throw new Error('Limit must be between 1 and 1000');
+    }
+
     return this.httpClient.request<GetProductListRequest, GetProductListResponse>(
       'POST',
       '/v3/product/list',
-      request ?? {},
+      request,
       options
     );
   }
@@ -317,7 +345,7 @@ export class ProductApi {
   ): Promise<GetProductAttributesResponse> {
     return this.httpClient.request<GetProductAttributesRequest, GetProductAttributesResponse>(
       'POST',
-      '/v3/product/info/attributes',
+      '/v4/product/info/attributes',
       request ?? {},
       options
     );
@@ -344,23 +372,30 @@ export class ProductApi {
   }
 
   /**
-   * Получить информацию о товарах со скидкой
+   * Получить информацию об уценке и основном товаре по SKU уценённого товара
    * Get discounted products info
    * 
-   * Метод для получения информации о товарах, участвующих в акциях и скидках.
+   * Метод для получения информации об уценке и основном товаре по SKU уценённого товара.
    * 
    * @param request - Параметры запроса товаров со скидкой
    * @param options - Дополнительные опции запроса
    * @returns Информация о товарах со скидкой
+   * 
+   * @example
+   * ```typescript
+   * const discountedInfo = await productApi.getDiscountedInfo({
+   *   discounted_skus: ['123456789', '987654321']
+   * });
+   * ```
    */
   async getDiscountedInfo(
-    request?: GetDiscountedProductsRequest,
+    request: GetDiscountedProductsRequest,
     options?: RequestOptions
   ): Promise<GetDiscountedProductsResponse> {
     return this.httpClient.request<GetDiscountedProductsRequest, GetDiscountedProductsResponse>(
       'POST',
       '/v1/product/info/discounted',
-      request ?? {},
+      request,
       options
     );
   }
@@ -447,7 +482,7 @@ export class ProductApi {
   ): Promise<GetProductPicturesResponse> {
     return this.httpClient.request<GetProductPicturesRequest, GetProductPicturesResponse>(
       'POST',
-      '/v1/product/pictures/info',
+      '/v2/product/pictures/info',
       request,
       options
     );
@@ -491,7 +526,7 @@ export class ProductApi {
   ): Promise<GetRelatedSKUResponse> {
     return this.httpClient.request<GetRelatedSKURequest, GetRelatedSKUResponse>(
       'POST',
-      '/v1/product/related-sku',
+      '/v1/product/related-sku/get',
       request,
       options
     );
@@ -535,7 +570,7 @@ export class ProductApi {
   ): Promise<DeleteProductsResponse> {
     return this.httpClient.request<DeleteProductsRequest, DeleteProductsResponse>(
       'POST',
-      '/v1/product/delete',
+      '/v2/products/delete',
       request,
       options
     );
@@ -546,6 +581,15 @@ export class ProductApi {
    * Create or update product v3
    * 
    * Основной метод для создания и обновления товаров с полным набором атрибутов.
+   * Поддерживает загрузку изображений, видео, видеообложек и таблиц размеров.
+   * В сутки есть лимит на количество создаваемых/обновляемых товаров.
+   * В одном запросе можно передать до 100 товаров.
+   * 
+   * Особенности:
+   * - Загрузка до 15 изображений (включая главное)
+   * - Поддержка видео через complex_attributes
+   * - Добавление таблиц размеров в формате JSON
+   * - Указанная валюта должна совпадать с настройками личного кабинета
    * 
    * @param request - Параметры создания/обновления товара
    * @param options - Дополнительные опции запроса
@@ -561,7 +605,12 @@ export class ProductApi {
    *     category_id: 123,
    *     price: '1000.00',
    *     currency_code: 'RUB',
-   *     images: ['https://example.com/image1.jpg']
+   *     images: ['https://example.com/image1.jpg'],
+   *     primary_image: 'https://example.com/main.jpg',
+   *     attributes: [{
+   *       id: 4180,
+   *       values: [{ value: 'Красный' }]
+   *     }]
    *   }]
    * });
    * ```
@@ -601,6 +650,29 @@ export class ProductApi {
   }
 
   /**
+   * Получить список товаров v3
+   * Get product list v3
+   * 
+   * Метод для получения списка всех товаров с расширенной информацией.
+   * Поддерживает фильтрацию и пагинацию. До 1000 товаров в одном запросе.
+   * 
+   * @param request - Параметры запроса списка товаров
+   * @param options - Дополнительные опции запроса
+   * @returns Список товаров с расширенной информацией
+   */
+  async getListV3(
+    request?: GetProductListV3Request,
+    options?: RequestOptions
+  ): Promise<GetProductListV3Response> {
+    return this.httpClient.request<GetProductListV3Request, GetProductListV3Response>(
+      'POST',
+      '/v3/product/list',
+      request ?? {},
+      options
+    );
+  }
+
+  /**
    * Получить лимиты на ассортимент
    * Get upload quota
    * 
@@ -616,8 +688,91 @@ export class ProductApi {
   ): Promise<GetUploadQuotaResponse> {
     return this.httpClient.request<GetUploadQuotaRequest, GetUploadQuotaResponse>(
       'POST',
-      '/v1/product/info/upload-quota',
+      '/v4/product/info/limit',
       request ?? {},
+      options
+    );
+  }
+
+  /**
+   * Получить описание товара
+   * Get product description
+   * 
+   * Метод для получения подробного описания товара по его идентификатору.
+   * Возвращает расширенное описание товара, которое используется на странице товара.
+   * 
+   * ⚠️ Отличается от getInfo тем, что возвращает именно описание товара,
+   * а не общую информацию о карточке товара.
+   * 
+   * @param request - Параметры запроса описания товара (offer_id ИЛИ product_id)
+   * @param options - Дополнительные опции запроса
+   * @returns Описание товара
+   * 
+   * @example
+   * ```typescript
+   * // Получить описание по артикулу
+   * const description = await productApi.getDescription({
+   *   offer_id: 'ITEM001'
+   * });
+   * 
+   * // Получить описание по product_id
+   * const description = await productApi.getDescription({
+   *   product_id: 123456
+   * });
+   * 
+   * console.log('Описание:', description.result?.description);
+   * console.log('Rich content:', description.result?.rich_text_description);
+   * ```
+   */
+  async getDescription(
+    request: GetProductInfoDescriptionRequest,
+    options?: RequestOptions
+  ): Promise<GetProductInfoDescriptionResponse> {
+    return this.httpClient.request<GetProductInfoDescriptionRequest, GetProductInfoDescriptionResponse>(
+      'POST',
+      '/v1/product/info/description',
+      request,
+      options
+    );
+  }
+
+  /**
+   * Количество подписавшихся на товар пользователей
+   * Get product subscription count
+   * 
+   * Метод для получения количества пользователей, которые нажали "Узнать о поступлении"
+   * на странице товара. Полезно для понимания спроса на товары, которых нет в наличии.
+   * 
+   * Вы можете передать несколько товаров в одном запросе для массовой проверки.
+   * 
+   * ⚠️ Работает только с товарами, у которых есть функция "Узнать о поступлении".
+   * 
+   * @param request - Параметры запроса подписок (список SKU)
+   * @param options - Дополнительные опции запроса
+   * @returns Количество подписавшихся пользователей по каждому SKU
+   * 
+   * @example
+   * ```typescript
+   * const subscriptions = await productApi.getSubscription({
+   *   skus: ['123456789', '987654321', '555444333']
+   * });
+   * 
+   * subscriptions.result?.forEach(item => {
+   *   console.log(`SKU ${item.sku}: ${item.count} подписчиков`);
+   *   if (item.count > 0) {
+   *     console.log('Высокий спрос! Рекомендуем пополнить остатки.');
+   *   }
+   * });
+   * ```
+   */
+  async getSubscription(
+    request: GetProductInfoSubscriptionRequest,
+    options?: RequestOptions
+  ): Promise<GetProductInfoSubscriptionResponse> {
+    return this.httpClient.request<GetProductInfoSubscriptionRequest, GetProductInfoSubscriptionResponse>(
+      'POST',
+      '/v1/product/info/subscription',
+      request,
       options
     );
   }

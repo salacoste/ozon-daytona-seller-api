@@ -41,14 +41,14 @@ export interface CertificateBindRequest {
 export interface CertificateCreateRequest {
   /** Название сертификата */
   name: string;
-  /** Тип сертификата */
-  type: string;
+  /** Код типа сертификата */
+  type_code: string;
   /** Номер сертификата */
-  number?: string;
-  /** Дата окончания действия */
-  expire_date?: string;
+  number: string;
+  /** Дата выдачи сертификата */
+  issue_date: string;
   /** Файлы сертификата */
-  file?: string[];
+  files: any[];
   readonly [key: string]: unknown;
 }
 
@@ -63,16 +63,34 @@ export interface CertificateDeleteRequest {
 }
 
 /**
- * Запрос информации о товарах, привязанных к сертификату
- * Certificate info from list request
+ * Запрос информации о сертификате
+ * Certificate info request
  */
-export interface CertificateInfoFromListRequest {
+export interface CertificateInfoRequest {
+  /** Идентификатор сертификата */
+  certificate_id: number;
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Запрос списка товаров, привязанных к сертификату
+ * Certificate products list request
+ */
+export interface CertificateProductsListRequest {
   /** Идентификатор сертификата */
   certificate_id: number;
   /** Номер страницы */
   page: number;
   /** Количество элементов на странице */
   page_size: number;
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Запрос списка возможных статусов товаров
+ * Product status list request
+ */
+export interface ProductStatusListRequest {
   readonly [key: string]: unknown;
 }
 

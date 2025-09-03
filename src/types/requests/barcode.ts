@@ -13,7 +13,7 @@ export interface BarcodeInfo {
    * Идентификатор товара в системе Ozon — SKU
    * Product identifier in Ozon system — SKU
    */
-  sku: number;
+  sku: string;
   
   /** 
    * Значение штрихкода (не более 100 символов)

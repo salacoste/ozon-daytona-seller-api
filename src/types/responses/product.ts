@@ -719,6 +719,86 @@ export interface TotalQuota {
 }
 
 /**
+ * Товар в списке v3
+ * Product in list v3
+ */
+export interface ProductListItemV3 {
+  /** Идентификатор товара в системе Ozon */
+  product_id?: ProductId;
+  /** Идентификатор товара в системе продавца */
+  offer_id?: string;
+  /** Название товара */
+  name?: string;
+  /** Описание товара */
+  description?: string;
+  /** Категория */
+  category_id?: number;
+  /** Статус товара */
+  state?: string;
+  /** Название статуса */
+  state_name?: string;
+  /** Видимость для FBO */
+  is_fbo_visible?: boolean;
+  /** Видимость для FBS */
+  is_fbs_visible?: boolean;
+  /** Архивность */
+  archived?: boolean;
+  /** Цена */
+  price?: string;
+  /** Старая цена */
+  old_price?: string;
+  /** Валюта */
+  currency_code?: string;
+  /** Штрихкод */
+  barcode?: string;
+  /** Вес */
+  weight?: number;
+  /** Размеры */
+  dimensions?: {
+    width?: number;
+    height?: number;
+    depth?: number;
+  };
+  /** Атрибуты */
+  attributes?: Array<{
+    attribute_id?: number;
+    complex_id?: number;
+    values?: Array<{
+      dictionary_value_id?: number;
+      value?: string;
+    }>;
+  }>;
+  /** Изображения */
+  images?: Array<{
+    file_name?: string;
+    index?: number;
+  }>;
+  /** SKU товара */
+  sku?: number;
+  /** Дата создания */
+  created_at?: string;
+  /** Дата обновления */
+  updated_at?: string;
+}
+
+/**
+ * Ответ списка товаров v3
+ * Get product list v3 response
+ */
+export interface GetProductListV3Response {
+  /** Результат запроса */
+  result?: {
+    /** Список товаров */
+    items?: ProductListItemV3[];
+    /** Идентификатор последнего элемента */
+    last_id?: string;
+    /** Общее количество */
+    total?: number;
+  };
+  readonly [key: string]: unknown;
+}
+
+/**
  * Ответ получения лимитов на ассортимент
  * Get upload quota response
  */
@@ -731,3 +811,4 @@ export interface GetUploadQuotaResponse {
   total?: TotalQuota;
   readonly [key: string]: unknown;
 }
+

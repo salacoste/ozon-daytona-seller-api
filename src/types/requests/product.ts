@@ -166,8 +166,8 @@ export interface GetProductPricesRequest {
 }
 
 /**
- * Запрос атрибутов товаров
- * Get product attributes request
+ * Запрос атрибутов товаров v4
+ * Get product attributes v4 request
  */
 export interface GetProductAttributesRequest {
   /** Фильтр */
@@ -176,30 +176,29 @@ export interface GetProductAttributesRequest {
     offer_id?: string[];
     /** Идентификаторы товаров в системе Ozon */
     product_id?: ProductId[];
+    /** SKU товаров */
+    sku?: string[];
     /** Статус товара */
     visibility?: 'ALL' | 'VISIBLE' | 'INVISIBLE';
   };
   /** Идентификатор последней записи */
   last_id?: string;
-  /** Количество записей в ответе */
+  /** Количество записей в ответе (1-1000) */
   limit?: number;
+  /** Параметр сортировки: sku, offer_id, id, title */
+  sort_by?: 'sku' | 'offer_id' | 'id' | 'title';
+  /** Направление сортировки: asc, desc */
+  sort_dir?: 'asc' | 'desc';
   readonly [key: string]: unknown;
 }
 
 /**
- * Запрос информации о товарах со скидкой
+ * Запрос информации об уценке и основном товаре по SKU уценённого товара
  * Get discounted products info request
  */
 export interface GetDiscountedProductsRequest {
-  /** Фильтр */
-  filter?: {
-    /** Дискаунт-сервис */
-    discount_type?: 'DISCOUNT_TYPE_PROMOTION' | 'DISCOUNT_TYPE_PREMIUM_PRICE' | 'DISCOUNT_TYPE_EXTERNAL_PRICE';
-  };
-  /** Идентификатор последней записи */
-  last_id?: string;
-  /** Количество записей в ответе */
-  limit?: number;
+  /** Список SKU уценённых товаров */
+  discounted_skus: string[];
   readonly [key: string]: unknown;
 }
 
@@ -387,7 +386,28 @@ export interface GetProductInfoListV3Request {
   /** Идентификаторы товаров в системе Ozon */
   product_id?: ProductId[];
   /** SKU товаров */
-  sku?: number[];
+  sku?: string[];
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Запрос списка товаров v3
+ * Get product list v3 request
+ */
+export interface GetProductListV3Request {
+  /** Фильтр */
+  filter?: {
+    /** Идентификаторы товаров в системе продавца */
+    offer_id?: string[];
+    /** Идентификаторы товаров в системе Ozon */
+    product_id?: ProductId[];
+    /** Статус товара */
+    visibility?: 'ALL' | 'VISIBLE' | 'INVISIBLE' | 'EMPTY_STOCK' | 'NOT_MODERATED' | 'MODERATED' | 'DISABLED' | 'STATE_FAILED_MODERATION' | 'READY_TO_SUPPLY' | 'VALIDATION_STATE_PENDING' | 'VALIDATION_STATE_FAIL' | 'VALIDATION_STATE_SUCCESS' | 'TO_SUPPLY' | 'IN_SALE' | 'REMOVED_FROM_SALE' | 'BANNED' | 'OVERPRICED' | 'CRITICALLY_OVERPRICED' | 'EMPTY_BARCODE' | 'BARCODE_EXISTS' | 'QUARANTINE' | 'ARCHIVED' | 'OVERPRICED_WITH_STOCK' | 'PARTIAL_APPROVED' | 'IMAGE_ABSENT' | 'MODERATION_BLOCK';
+  };
+  /** Идентификатор последней записи на странице (для пагинации) */
+  last_id?: string;
+  /** Количество записей в ответе (максимум 1000) */
+  limit?: number;
   readonly [key: string]: unknown;
 }
 
@@ -398,3 +418,4 @@ export interface GetProductInfoListV3Request {
 export interface GetUploadQuotaRequest {
   readonly [key: string]: unknown;
 }
+

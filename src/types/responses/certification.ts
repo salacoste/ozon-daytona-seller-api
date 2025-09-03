@@ -79,7 +79,7 @@ export interface CertificateBindResponse extends BaseResponse {
  */
 export interface CertificateCreateResponse extends BaseResponse {
   /** Идентификатор созданного сертификата */
-  certificate_id?: number;
+  id?: number;
   readonly [key: string]: unknown;
 }
 
@@ -133,12 +133,64 @@ export interface CertificateInfoFromListResult {
 }
 
 /**
- * Ответ информации о товарах, привязанных к сертификату
- * Certificate info from list response
+ * Ответ информации о сертификате
+ * Certificate info response
  */
-export interface CertificateInfoFromListResponse extends BaseResponse {
+export interface CertificateInfoResponse extends BaseResponse {
+  /** Результат запроса */
+  result?: CertificateInfo;
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Ответ списка товаров, привязанных к сертификату
+ * Certificate products list response
+ */
+export interface CertificateProductsListResponse extends BaseResponse {
   /** Результат запроса */
   result?: CertificateInfoFromListResult;
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Статус товара при привязке к сертификату
+ * Product status for certificate binding
+ */
+export interface ProductStatus {
+  /** Код статуса */
+  code: string;
+  /** Название статуса */
+  name: string;
+}
+
+/**
+ * Ответ списка возможных статусов товаров
+ * Product status list response
+ */
+export interface ProductStatusListResponse extends BaseResponse {
+  /** Список возможных статусов товаров */
+  result?: ProductStatus[];
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Тип соответствия требованиям (v1)
+ * Certificate accordance type v1
+ */
+export interface CertificateAccordanceTypeV1 {
+  /** Код типа */
+  code: string;
+  /** Название типа */
+  name: string;
+}
+
+/**
+ * Ответ списка типов соответствия требованиям (v1)
+ * Certificate accordance types response v1
+ */
+export interface CertificateAccordanceTypesV1Response extends BaseResponse {
+  /** Список типов соответствия */
+  result?: CertificateAccordanceTypeV1[];
   readonly [key: string]: unknown;
 }
 

@@ -11,20 +11,29 @@
  *   apiKey: 'your-api-key'
  * });
  * 
- * // Upload marking exemplar
- * const uploadResult = await api.fbsRfbsMarks.createProductExemplar({
- *   product_id: 123456,
- *   file: 'base64EncodedPdfContent',
- *   file_name: 'marking_exemplar.pdf'
+ * // Update exemplar data
+ * const updateResult = await api.fbsRfbsMarks.updateProductExemplar({
+ *   posting_number: 'FBS-123456789',
+ *   products: [{
+ *     product_id: 123456,
+ *     exemplars: [{
+ *       exemplar_id: 'exemplar_123',
+ *       marking_code: 'marking_code_123',
+ *       gtd: 'GTD123456'
+ *     }]
+ *   }]
  * });
  * 
- * // Upload marking codes for posting
- * const codesResult = await api.fbsRfbsMarks.uploadPostingCodes({
+ * // Set exemplar data (v4)
+ * const setResult = await api.fbsRfbsMarks.setProductExemplarV4({
  *   posting_number: 'FBS-123456789',
- *   codes: [
- *     { sku: 'SKU123', gtd: 'marking_code_1', quantity: 1 },
- *     { sku: 'SKU456', gtd: 'marking_code_2', quantity: 2 }
- *   ]
+ *   products: [{
+ *     product_id: 123456,
+ *     exemplars: [{
+ *       marking_code: 'marking_code_123',
+ *       gtd: 'GTD123456'
+ *     }]
+ *   }]
  * });
  * ```
  */
@@ -34,37 +43,45 @@ import type { RequestOptions } from '../../core/types.js';
 
 // Request types
 import {
-  FbsRfbsMarksProductExemplarCreateRequest,
-  FbsRfbsMarksProductExemplarInfoRequest,
-  FbsRfbsMarksProductExemplarListRequest,
-  FbsRfbsMarksProductExemplarDeleteRequest,
-  FbsRfbsMarksProductExemplarDeleteStatusRequest,
-  FbsRfbsMarksProductExemplarValidateRequest,
-  FbsRfbsMarksProductExemplarValidateStatusRequest,
-  FbsRfbsMarksPostingCodesUploadRequest,
+  FbsRfbsMarksProductExemplarUpdateRequest,
+  FbsRfbsMarksProductExemplarSetV4Request,
+  FbsRfbsMarksProductExemplarStatusV4Request,
+  FbsRfbsMarksProductExemplarValidateV4Request,
+  FbsRfbsMarksPostingShipV4Request,
+  FbsRfbsMarksPostingShipPackageV4Request,
+  FbsRfbsMarksProductExemplarCreateOrGetV5Request,
+  FbsRfbsMarksProductExemplarSetV5Request,
+  FbsRfbsMarksProductExemplarStatusV5Request,
+  FbsRfbsMarksProductExemplarValidateV5Request,
+  FbsRfbsMarksProductExemplarCreateOrGetV6Request,
+  FbsRfbsMarksProductExemplarSetV6Request,
   FbsRfbsMarksPostingCodesUploadStatusRequest,
   FbsRfbsMarksPostingCodesValidateRequest,
   FbsRfbsMarksPostingCodesValidateStatusRequest,
   FbsRfbsMarksPostingCodesInfoRequest,
   FbsRfbsMarksPostingListRequest,
-} from '../../types/requests/fbs-rfbs-marks';
+} from '../../types/requests/fbs-rfbs-marks.js';
 
 // Response types
 import {
-  FbsRfbsMarksProductExemplarCreateResponse,
-  FbsRfbsMarksProductExemplarInfoResponse,
-  FbsRfbsMarksProductExemplarListResponse,
-  FbsRfbsMarksProductExemplarDeleteResponse,
-  FbsRfbsMarksProductExemplarDeleteStatusResponse,
-  FbsRfbsMarksProductExemplarValidateResponse,
-  FbsRfbsMarksProductExemplarValidateStatusResponse,
-  FbsRfbsMarksPostingCodesUploadResponse,
+  FbsRfbsMarksProductExemplarUpdateResponse,
+  FbsRfbsMarksProductExemplarSetV4Response,
+  FbsRfbsMarksProductExemplarStatusV4Response,
+  FbsRfbsMarksProductExemplarValidateV4Response,
+  FbsRfbsMarksPostingShipV4Response,
+  FbsRfbsMarksPostingShipPackageV4Response,
+  FbsRfbsMarksProductExemplarCreateOrGetV5Response,
+  FbsRfbsMarksProductExemplarSetV5Response,
+  FbsRfbsMarksProductExemplarStatusV5Response,
+  FbsRfbsMarksProductExemplarValidateV5Response,
+  FbsRfbsMarksProductExemplarCreateOrGetV6Response,
+  FbsRfbsMarksProductExemplarSetV6Response,
   FbsRfbsMarksPostingCodesUploadStatusResponse,
   FbsRfbsMarksPostingCodesValidateResponse,
   FbsRfbsMarksPostingCodesValidateStatusResponse,
   FbsRfbsMarksPostingCodesInfoResponse,
   FbsRfbsMarksPostingListResponse,
-} from '../../types/responses/fbs-rfbs-marks';
+} from '../../types/responses/fbs-rfbs-marks.js';
 
 /**
  * FBS&rFBSMarks API class
@@ -72,262 +89,472 @@ import {
  */
 export class FbsRfbsMarksApi {
   constructor(private readonly httpClient: HttpClient) {}
+
+  // ============ V1 API Methods ============
+
   /**
-   * Загрузить образец маркировки товара
-   * Upload product marking exemplar
+   * Обновить данные экземпляров
+   * Update exemplar data
    * 
-   * @param request - Product exemplar upload request
+   * @param request - Exemplar update request
    * @param options - Request options
-   * @returns Promise with upload task information
+   * @returns Promise with operation result
    * 
    * @example
    * ```typescript
-   * const result = await api.fbsRfbsMarks.createProductExemplar({
-   *   product_id: 123456,
-   *   file: 'base64EncodedPdfContent',
-   *   file_name: 'marking_exemplar.pdf'
+   * const result = await api.fbsRfbsMarks.updateProductExemplar({
+   *   posting_number: 'FBS-123456789',
+   *   products: [{
+   *     product_id: 123456,
+   *     exemplars: [{
+   *       exemplar_id: 'exemplar_123',
+   *       marking_code: 'marking_code_123',
+   *       gtd: 'GTD123456'
+   *     }]
+   *   }]
    * });
-   * console.log('Upload task ID:', result.task_id);
+   * console.log('Update result:', result.result);
    * ```
    */
-  async createProductExemplar(
-    request: FbsRfbsMarksProductExemplarCreateRequest,
+  async updateProductExemplar(
+    request: FbsRfbsMarksProductExemplarUpdateRequest,
     options?: RequestOptions
-  ): Promise<FbsRfbsMarksProductExemplarCreateResponse> {
+  ): Promise<FbsRfbsMarksProductExemplarUpdateResponse> {
     return this.httpClient.request<
-      FbsRfbsMarksProductExemplarCreateRequest,
-      FbsRfbsMarksProductExemplarCreateResponse
+      FbsRfbsMarksProductExemplarUpdateRequest,
+      FbsRfbsMarksProductExemplarUpdateResponse
     >(
       'POST',
-      '/v1/product/exemplar/create',
+      '/v1/fbs/posting/product/exemplar/update',
+      request,
+      options
+    );
+  }
+
+  // ============ V4 API Methods ============
+
+  /**
+   * Проверить и сохранить данные экземпляров (v4)
+   * Check and save exemplar data (v4)
+   * 
+   * @param request - Exemplar set request v4
+   * @param options - Request options
+   * @returns Promise with operation result
+   * 
+   * @deprecated В будущем метод будет отключён. Используйте /v5/fbs/posting/product/exemplar/set
+   * 
+   * @example
+   * ```typescript
+   * const result = await api.fbsRfbsMarks.setProductExemplarV4({
+   *   posting_number: 'FBS-123456789',
+   *   products: [{
+   *     product_id: 123456,
+   *     exemplars: [{
+   *       marking_code: 'marking_code_123',
+   *       gtd: 'GTD123456',
+   *       is_gtd_absent: false
+   *     }]
+   *   }]
+   * });
+   * console.log('Set result:', result.result);
+   * ```
+   */
+  async setProductExemplarV4(
+    request: FbsRfbsMarksProductExemplarSetV4Request,
+    options?: RequestOptions
+  ): Promise<FbsRfbsMarksProductExemplarSetV4Response> {
+    return this.httpClient.request<
+      FbsRfbsMarksProductExemplarSetV4Request,
+      FbsRfbsMarksProductExemplarSetV4Response
+    >(
+      'POST',
+      '/v4/fbs/posting/product/exemplar/set',
       request,
       options
     );
   }
 
   /**
-   * Получить информацию о загруженном образце маркировки
-   * Get uploaded marking exemplar information
+   * Получить статус добавления экземпляров (v4)
+   * Get exemplar addition status (v4)
    * 
-   * @param request - Exemplar info request
+   * @param request - Exemplar status request v4
+   * @param options - Request options
+   * @returns Promise with exemplar status and data
+   * 
+   * @example
+   * ```typescript
+   * const status = await api.fbsRfbsMarks.getProductExemplarStatusV4({
+   *   posting_number: 'FBS-123456789'
+   * });
+   * console.log('Status:', status.status);
+   * console.log('Exemplars:', status.exemplars);
+   * ```
+   */
+  async getProductExemplarStatusV4(
+    request: FbsRfbsMarksProductExemplarStatusV4Request,
+    options?: RequestOptions
+  ): Promise<FbsRfbsMarksProductExemplarStatusV4Response> {
+    return this.httpClient.request<
+      FbsRfbsMarksProductExemplarStatusV4Request,
+      FbsRfbsMarksProductExemplarStatusV4Response
+    >(
+      'POST',
+      '/v4/fbs/posting/product/exemplar/status',
+      request,
+      options
+    );
+  }
+
+  /**
+   * Валидация кодов маркировки (v4)
+   * Validate marking codes (v4)
+   * 
+   * @param request - Exemplar validate request v4
+   * @param options - Request options
+   * @returns Promise with validation result
+   * 
+   * @example
+   * ```typescript
+   * const result = await api.fbsRfbsMarks.validateProductExemplarV4({
+   *   posting_number: 'FBS-123456789',
+   *   products: [{
+   *     product_id: 123456,
+   *     exemplars: [{
+   *       marking_code: 'marking_code_123',
+   *       gtd: 'GTD123456'
+   *     }]
+   *   }]
+   * });
+   * console.log('Validation result:', result.result);
+   * ```
+   */
+  async validateProductExemplarV4(
+    request: FbsRfbsMarksProductExemplarValidateV4Request,
+    options?: RequestOptions
+  ): Promise<FbsRfbsMarksProductExemplarValidateV4Response> {
+    return this.httpClient.request<
+      FbsRfbsMarksProductExemplarValidateV4Request,
+      FbsRfbsMarksProductExemplarValidateV4Response
+    >(
+      'POST',
+      '/v4/fbs/posting/product/exemplar/validate',
+      request,
+      options
+    );
+  }
+
+  /**
+   * Собрать заказ (v4)
+   * Ship order (v4)
+   * 
+   * @param request - Posting ship request v4
+   * @param options - Request options
+   * @returns Promise with ship result
+   * 
+   * @example
+   * ```typescript
+   * const result = await api.fbsRfbsMarks.shipPostingV4({
+   *   posting_number: 'FBS-123456789',
+   *   packages: [{
+   *     products: [{
+   *       product_id: 123456,
+   *       quantity: 2
+   *     }]
+   *   }]
+   * });
+   * console.log('Ship result:', result.result);
+   * ```
+   */
+  async shipPostingV4(
+    request: FbsRfbsMarksPostingShipV4Request,
+    options?: RequestOptions
+  ): Promise<FbsRfbsMarksPostingShipV4Response> {
+    return this.httpClient.request<
+      FbsRfbsMarksPostingShipV4Request,
+      FbsRfbsMarksPostingShipV4Response
+    >(
+      'POST',
+      '/v4/posting/fbs/ship',
+      request,
+      options
+    );
+  }
+
+  /**
+   * Частичная сборка отправления (v4)
+   * Partial posting assembly (v4)
+   * 
+   * @param request - Posting ship package request v4
+   * @param options - Request options
+   * @returns Promise with ship package result
+   * 
+   * @example
+   * ```typescript
+   * const result = await api.fbsRfbsMarks.shipPostingPackageV4({
+   *   posting_number: 'FBS-123456789',
+   *   products: [{
+   *     product_id: 123456,
+   *     quantity: 1
+   *   }]
+   * });
+   * console.log('Ship package result:', result.result);
+   * ```
+   */
+  async shipPostingPackageV4(
+    request: FbsRfbsMarksPostingShipPackageV4Request,
+    options?: RequestOptions
+  ): Promise<FbsRfbsMarksPostingShipPackageV4Response> {
+    return this.httpClient.request<
+      FbsRfbsMarksPostingShipPackageV4Request,
+      FbsRfbsMarksPostingShipPackageV4Response
+    >(
+      'POST',
+      '/v4/posting/fbs/ship/package',
+      request,
+      options
+    );
+  }
+
+  // ============ V5 API Methods ============
+
+  /**
+   * Получить информацию об экземплярах (v5)
+   * Get exemplar information (v5)
+   * 
+   * @param request - Exemplar create or get request v5
    * @param options - Request options
    * @returns Promise with exemplar information
    * 
    * @example
    * ```typescript
-   * const info = await api.fbsRfbsMarks.getProductExemplarInfo({
-   *   task_id: 'upload_task_123'
-   * });
-   * console.log('Exemplar status:', info.status);
-   * ```
-   */
-  async getProductExemplarInfo(
-    request: FbsRfbsMarksProductExemplarInfoRequest,
-    options?: RequestOptions
-  ): Promise<FbsRfbsMarksProductExemplarInfoResponse> {
-    return this.httpClient.request<
-      FbsRfbsMarksProductExemplarInfoRequest,
-      FbsRfbsMarksProductExemplarInfoResponse
-    >(
-      'POST',
-      '/v1/product/exemplar/info',
-      request,
-      options
-    );
-  }
-
-  /**
-   * Получить список образцов маркировки товара
-   * Get product marking exemplars list
-   * 
-   * @param request - Exemplars list request
-   * @param options - Request options
-   * @returns Promise with exemplars list
-   * 
-   * @example
-   * ```typescript
-   * const exemplars = await api.fbsRfbsMarks.getProductExemplarList({
-   *   product_id: 123456,
-   *   limit: 20,
-   *   offset: 0
-   * });
-   * console.log('Found exemplars:', exemplars.total);
-   * ```
-   */
-  async getProductExemplarList(
-    request: FbsRfbsMarksProductExemplarListRequest,
-    options?: RequestOptions
-  ): Promise<FbsRfbsMarksProductExemplarListResponse> {
-    return this.httpClient.request<
-      FbsRfbsMarksProductExemplarListRequest,
-      FbsRfbsMarksProductExemplarListResponse
-    >(
-      'POST',
-      '/v1/product/exemplar/list',
-      request,
-      options
-    );
-  }
-
-  /**
-   * Удалить образец маркировки
-   * Delete marking exemplar
-   * 
-   * @param request - Exemplar deletion request
-   * @param options - Request options
-   * @returns Promise with deletion task information
-   * 
-   * @example
-   * ```typescript
-   * const result = await api.fbsRfbsMarks.deleteProductExemplar({
-   *   exemplar_id: 'exemplar_123'
-   * });
-   * console.log('Deletion task ID:', result.task_id);
-   * ```
-   */
-  async deleteProductExemplar(
-    request: FbsRfbsMarksProductExemplarDeleteRequest,
-    options?: RequestOptions
-  ): Promise<FbsRfbsMarksProductExemplarDeleteResponse> {
-    return this.httpClient.request<
-      FbsRfbsMarksProductExemplarDeleteRequest,
-      FbsRfbsMarksProductExemplarDeleteResponse
-    >(
-      'POST',
-      '/v1/product/exemplar/delete',
-      request,
-      options
-    );
-  }
-
-  /**
-   * Получить статус удаления образца маркировки
-   * Get marking exemplar deletion status
-   * 
-   * @param request - Deletion status request
-   * @param options - Request options
-   * @returns Promise with deletion status
-   * 
-   * @example
-   * ```typescript
-   * const status = await api.fbsRfbsMarks.getProductExemplarDeleteStatus({
-   *   task_id: 'deletion_task_123'
-   * });
-   * console.log('Deletion completed:', status.success);
-   * ```
-   */
-  async getProductExemplarDeleteStatus(
-    request: FbsRfbsMarksProductExemplarDeleteStatusRequest,
-    options?: RequestOptions
-  ): Promise<FbsRfbsMarksProductExemplarDeleteStatusResponse> {
-    return this.httpClient.request<
-      FbsRfbsMarksProductExemplarDeleteStatusRequest,
-      FbsRfbsMarksProductExemplarDeleteStatusResponse
-    >(
-      'POST',
-      '/v1/product/exemplar/delete/status',
-      request,
-      options
-    );
-  }
-
-  /**
-   * Валидировать образец маркировки
-   * Validate marking exemplar
-   * 
-   * @param request - Exemplar validation request
-   * @param options - Request options
-   * @returns Promise with validation task information
-   * 
-   * @example
-   * ```typescript
-   * const result = await api.fbsRfbsMarks.validateProductExemplar({
-   *   exemplar_id: 'exemplar_123'
-   * });
-   * console.log('Validation task ID:', result.task_id);
-   * ```
-   */
-  async validateProductExemplar(
-    request: FbsRfbsMarksProductExemplarValidateRequest,
-    options?: RequestOptions
-  ): Promise<FbsRfbsMarksProductExemplarValidateResponse> {
-    return this.httpClient.request<
-      FbsRfbsMarksProductExemplarValidateRequest,
-      FbsRfbsMarksProductExemplarValidateResponse
-    >(
-      'POST',
-      '/v1/product/exemplar/validate',
-      request,
-      options
-    );
-  }
-
-  /**
-   * Получить статус валидации образца маркировки
-   * Get marking exemplar validation status
-   * 
-   * @param request - Validation status request
-   * @param options - Request options
-   * @returns Promise with validation status and details
-   * 
-   * @example
-   * ```typescript
-   * const status = await api.fbsRfbsMarks.getProductExemplarValidateStatus({
-   *   task_id: 'validation_task_123'
-   * });
-   * console.log('Is valid:', status.is_valid);
-   * console.log('Quality check:', status.validation_details?.quality_valid);
-   * ```
-   */
-  async getProductExemplarValidateStatus(
-    request: FbsRfbsMarksProductExemplarValidateStatusRequest,
-    options?: RequestOptions
-  ): Promise<FbsRfbsMarksProductExemplarValidateStatusResponse> {
-    return this.httpClient.request<
-      FbsRfbsMarksProductExemplarValidateStatusRequest,
-      FbsRfbsMarksProductExemplarValidateStatusResponse
-    >(
-      'POST',
-      '/v1/product/exemplar/validate/status',
-      request,
-      options
-    );
-  }
-
-  /**
-   * Загрузить коды маркировки для отправления
-   * Upload marking codes for posting
-   * 
-   * @param request - Codes upload request
-   * @param options - Request options
-   * @returns Promise with upload task information
-   * 
-   * @example
-   * ```typescript
-   * const result = await api.fbsRfbsMarks.uploadPostingCodes({
+   * const result = await api.fbsRfbsMarks.createOrGetProductExemplarV5({
    *   posting_number: 'FBS-123456789',
-   *   codes: [
-   *     { sku: 'SKU123', gtd: 'marking_code_1', quantity: 1 },
-   *     { sku: 'SKU456', gtd: 'marking_code_2', quantity: 2 }
-   *   ]
+   *   products: [{
+   *     product_id: 123456,
+   *     quantity: 2
+   *   }]
    * });
-   * console.log('Upload task ID:', result.task_id);
+   * console.log('Exemplars:', result.exemplars);
    * ```
    */
-  async uploadPostingCodes(
-    request: FbsRfbsMarksPostingCodesUploadRequest,
+  async createOrGetProductExemplarV5(
+    request: FbsRfbsMarksProductExemplarCreateOrGetV5Request,
     options?: RequestOptions
-  ): Promise<FbsRfbsMarksPostingCodesUploadResponse> {
+  ): Promise<FbsRfbsMarksProductExemplarCreateOrGetV5Response> {
     return this.httpClient.request<
-      FbsRfbsMarksPostingCodesUploadRequest,
-      FbsRfbsMarksPostingCodesUploadResponse
+      FbsRfbsMarksProductExemplarCreateOrGetV5Request,
+      FbsRfbsMarksProductExemplarCreateOrGetV5Response
     >(
       'POST',
-      '/v1/posting/fbs/rfbs/upload-marking-codes',
+      '/v5/fbs/posting/product/exemplar/create-or-get',
       request,
       options
     );
   }
+
+  /**
+   * Проверить и сохранить данные экземпляров (v5)
+   * Check and save exemplar data (v5)
+   * 
+   * @param request - Exemplar set request v5
+   * @param options - Request options
+   * @returns Promise with operation result
+   * 
+   * @example
+   * ```typescript
+   * const result = await api.fbsRfbsMarks.setProductExemplarV5({
+   *   posting_number: 'FBS-123456789',
+   *   products: [{
+   *     product_id: 123456,
+   *     exemplars: [{
+   *       marking_code: 'marking_code_123',
+   *       gtd: 'GTD123456',
+   *       is_gtd_absent: false,
+   *       additional_info: {
+   *         serial_number: 'SN123',
+   *         production_date: '2024-01-01',
+   *         ean_code: '1234567890123'
+   *       }
+   *     }]
+   *   }]
+   * });
+   * console.log('Set result:', result.result);
+   * ```
+   */
+  async setProductExemplarV5(
+    request: FbsRfbsMarksProductExemplarSetV5Request,
+    options?: RequestOptions
+  ): Promise<FbsRfbsMarksProductExemplarSetV5Response> {
+    return this.httpClient.request<
+      FbsRfbsMarksProductExemplarSetV5Request,
+      FbsRfbsMarksProductExemplarSetV5Response
+    >(
+      'POST',
+      '/v5/fbs/posting/product/exemplar/set',
+      request,
+      options
+    );
+  }
+
+  /**
+   * Получить статус добавления экземпляров (v5)
+   * Get exemplar addition status (v5)
+   * 
+   * @param request - Exemplar status request v5
+   * @param options - Request options
+   * @returns Promise with exemplar status and data
+   * 
+   * @example
+   * ```typescript
+   * const status = await api.fbsRfbsMarks.getProductExemplarStatusV5({
+   *   posting_number: 'FBS-123456789'
+   * });
+   * console.log('Status:', status.status);
+   * console.log('Exemplars:', status.exemplars);
+   * ```
+   */
+  async getProductExemplarStatusV5(
+    request: FbsRfbsMarksProductExemplarStatusV5Request,
+    options?: RequestOptions
+  ): Promise<FbsRfbsMarksProductExemplarStatusV5Response> {
+    return this.httpClient.request<
+      FbsRfbsMarksProductExemplarStatusV5Request,
+      FbsRfbsMarksProductExemplarStatusV5Response
+    >(
+      'POST',
+      '/v5/fbs/posting/product/exemplar/status',
+      request,
+      options
+    );
+  }
+
+  /**
+   * Валидация кодов маркировки (v5)
+   * Validate marking codes (v5)
+   * 
+   * @param request - Exemplar validate request v5
+   * @param options - Request options
+   * @returns Promise with validation result
+   * 
+   * @example
+   * ```typescript
+   * const result = await api.fbsRfbsMarks.validateProductExemplarV5({
+   *   posting_number: 'FBS-123456789',
+   *   products: [{
+   *     product_id: 123456,
+   *     exemplars: [{
+   *       marking_code: 'marking_code_123',
+   *       gtd: 'GTD123456',
+   *       is_gtd_absent: false
+   *     }]
+   *   }]
+   * });
+   * console.log('Validation result:', result.result);
+   * ```
+   */
+  async validateProductExemplarV5(
+    request: FbsRfbsMarksProductExemplarValidateV5Request,
+    options?: RequestOptions
+  ): Promise<FbsRfbsMarksProductExemplarValidateV5Response> {
+    return this.httpClient.request<
+      FbsRfbsMarksProductExemplarValidateV5Request,
+      FbsRfbsMarksProductExemplarValidateV5Response
+    >(
+      'POST',
+      '/v5/fbs/posting/product/exemplar/validate',
+      request,
+      options
+    );
+  }
+
+  // ============ V6 API Methods ============
+
+  /**
+   * Получить данные созданных экземпляров (v6)
+   * Get created exemplar data (v6)
+   * 
+   * @param request - Exemplar create or get request v6
+   * @param options - Request options
+   * @returns Promise with exemplar information
+   * 
+   * @example
+   * ```typescript
+   * const result = await api.fbsRfbsMarks.createOrGetProductExemplarV6({
+   *   posting_number: 'FBS-123456789',
+   *   products: [{
+   *     product_id: 123456,
+   *     quantity: 2
+   *   }]
+   * });
+   * console.log('Exemplars:', result.exemplars);
+   * ```
+   */
+  async createOrGetProductExemplarV6(
+    request: FbsRfbsMarksProductExemplarCreateOrGetV6Request,
+    options?: RequestOptions
+  ): Promise<FbsRfbsMarksProductExemplarCreateOrGetV6Response> {
+    return this.httpClient.request<
+      FbsRfbsMarksProductExemplarCreateOrGetV6Request,
+      FbsRfbsMarksProductExemplarCreateOrGetV6Response
+    >(
+      'POST',
+      '/v6/fbs/posting/product/exemplar/create-or-get',
+      request,
+      options
+    );
+  }
+
+  /**
+   * Проверить и сохранить данные экземпляров (v6)
+   * Check and save exemplar data (v6)
+   * 
+   * @param request - Exemplar set request v6
+   * @param options - Request options
+   * @returns Promise with operation result
+   * 
+   * @example
+   * ```typescript
+   * const result = await api.fbsRfbsMarks.setProductExemplarV6({
+   *   posting_number: 'FBS-123456789',
+   *   products: [{
+   *     product_id: 123456,
+   *     exemplars: [{
+   *       marking_code: 'marking_code_123',
+   *       gtd: 'GTD123456',
+   *       is_gtd_absent: false,
+   *       extended_data: {
+   *         serial_number: 'SN123',
+   *         production_date: '2024-01-01',
+   *         ean_code: '1234567890123',
+   *         attributes: {
+   *           custom_field: 'custom_value'
+   *         }
+   *       }
+   *     }]
+   *   }]
+   * });
+   * console.log('Set result:', result.result);
+   * ```
+   */
+  async setProductExemplarV6(
+    request: FbsRfbsMarksProductExemplarSetV6Request,
+    options?: RequestOptions
+  ): Promise<FbsRfbsMarksProductExemplarSetV6Response> {
+    return this.httpClient.request<
+      FbsRfbsMarksProductExemplarSetV6Request,
+      FbsRfbsMarksProductExemplarSetV6Response
+    >(
+      'POST',
+      '/v6/fbs/posting/product/exemplar/set',
+      request,
+      options
+    );
+  }
+
+  // ============ Additional Methods (if exist) ============
+  // Note: I notice from MCP docs there might be some additional methods
+  // Let me check if there are any other methods I missed in the chunks
 
   /**
    * Получить статус загрузки кодов маркировки
@@ -335,15 +562,14 @@ export class FbsRfbsMarksApi {
    * 
    * @param request - Upload status request
    * @param options - Request options
-   * @returns Promise with upload status and results
+   * @returns Promise with upload status
    * 
    * @example
    * ```typescript
    * const status = await api.fbsRfbsMarks.getPostingCodesUploadStatus({
    *   task_id: 'upload_task_123'
    * });
-   * console.log('Valid codes:', status.upload_result?.valid_codes);
-   * console.log('Invalid codes:', status.upload_result?.invalid_codes);
+   * console.log('Upload status:', status.status);
    * ```
    */
   async getPostingCodesUploadStatus(

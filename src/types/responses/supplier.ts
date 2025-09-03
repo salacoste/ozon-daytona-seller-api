@@ -10,16 +10,10 @@
  */
 export interface SupplierInvoiceDeleteResponse {
   /** 
-   * Результат операции
-   * Operation result
+   * Результат работы метода
+   * Method execution result
    */
-  result?: 'success' | 'error';
-  
-  /** 
-   * Сообщение об ошибке
-   * Error message
-   */
-  error?: string;
+  result?: boolean;
   
   readonly [key: string]: unknown;
 }
@@ -30,34 +24,10 @@ export interface SupplierInvoiceDeleteResponse {
  */
 export interface SupplierInvoiceFileUploadResponse {
   /** 
-   * Идентификатор загруженного файла
-   * Uploaded file ID
+   * Ссылка на счёт-фактуру
+   * Invoice URL
    */
-  file_id?: string;
-  
-  /** 
-   * Название файла
-   * File name
-   */
-  file_name?: string;
-  
-  /** 
-   * Размер файла
-   * File size
-   */
-  file_size?: number;
-  
-  /** 
-   * Статус загрузки
-   * Upload status
-   */
-  status?: 'uploaded' | 'processing' | 'completed' | 'error';
-  
-  /** 
-   * Ссылка на файл
-   * File URL
-   */
-  file_url?: string;
+  url?: string;
   
   readonly [key: string]: unknown;
 }
@@ -204,10 +174,77 @@ export interface SupplierInvoice {
  */
 export interface SupplierInvoiceCreateOrUpdateResponse {
   /** 
-   * Информация о счёт-фактуре
-   * Invoice information
+   * Результат работы метода
+   * Method execution result
    */
-  invoice?: SupplierInvoice;
+  result?: boolean;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * HS-код товара в ответе
+ * HS code in response
+ */
+export interface SupplierResponseHsCode {
+  /** HS-код */
+  code?: string;
+  
+  readonly [key: string]: unknown;
+}
+
+/**
+ * Информация о счёт-фактуре из ответа
+ * Invoice information from response
+ */
+export interface SupplierInvoiceInfo {
+  /** 
+   * Дата загрузки счёт-фактуры
+   * Invoice upload date
+   */
+  date?: string;
+  
+  /** 
+   * Ссылка на счёт-фактуру
+   * Invoice URL
+   */
+  file_url?: string;
+  
+  /** 
+   * HS-коды товаров
+   * Product HS codes
+   */
+  hs_codes?: SupplierResponseHsCode[];
+  
+  /** 
+   * Номер счёт-фактуры
+   * Invoice number
+   */
+  number?: string;
+  
+  /** 
+   * Стоимость, указанная в счёт-фактуре
+   * Price specified in invoice
+   * 
+   * Разделитель дробной части — точка, до двух знаков после точки.
+   * Пример: 199.99
+   */
+  price?: number;
+  
+  /** 
+   * Валюта счёт-фактуры
+   * Invoice currency
+   * 
+   * - `USD` — доллар
+   * - `EUR` — евро
+   * - `TRY` — турецкая лира
+   * - `CNY` — юань
+   * - `RUB` — рубль
+   * - `GBP` — фунт стерлингов
+   * 
+   * Значение по умолчанию — `USD`.
+   */
+  price_currency?: 'USD' | 'EUR' | 'TRY' | 'CNY' | 'RUB' | 'GBP';
   
   readonly [key: string]: unknown;
 }
@@ -221,7 +258,7 @@ export interface SupplierInvoiceGetResponse {
    * Информация о счёт-фактуре
    * Invoice information
    */
-  invoice?: SupplierInvoice;
+  result?: SupplierInvoiceInfo;
   
   readonly [key: string]: unknown;
 }

@@ -31,7 +31,7 @@ export interface BarcodeAddError {
    * Идентификатор товара, к которому не удалось привязать штрихкод
    * Product identifier that failed to bind barcode
    */
-  sku?: number;
+  sku?: string;
   
   readonly [key: string]: unknown;
 }
@@ -77,7 +77,7 @@ export interface BarcodeGenerateError {
    * Идентификатор товара, для которого не удалось создать штрихкод
    * Product identifier that failed to generate barcode
    */
-  product_id?: number;
+  product_id?: string;
   
   readonly [key: string]: unknown;
 }

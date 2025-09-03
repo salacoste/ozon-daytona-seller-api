@@ -10,10 +10,10 @@
  */
 export interface SupplierInvoiceDeleteRequest {
   /** 
-   * Идентификатор счёт-фактуры
-   * Invoice ID
+   * Номер отправления
+   * Posting number
    */
-  invoice_id?: string;
+  posting_number: string;
   
   readonly [key: string]: unknown;
 }
@@ -21,25 +21,32 @@ export interface SupplierInvoiceDeleteRequest {
 /**
  * Запрос на загрузку счёт-фактуры
  * Request for invoice file upload
+ * 
+ * Доступные форматы: JPEG и PDF. Максимальный размер файла: 10 МБ.
  */
 export interface SupplierInvoiceFileUploadRequest {
   /** 
-   * Файл счёт-фактуры в формате base64
-   * Invoice file in base64 format
+   * Счёт-фактура в кодировке Base64
+   * Invoice file in Base64 encoding
    */
-  file?: string;
+  base64_content: string;
   
   /** 
-   * Название файла
-   * File name
+   * Номер отправления
+   * Posting number
    */
-  file_name?: string;
+  posting_number: string;
   
-  /** 
-   * Тип документа
-   * Document type
-   */
-  document_type?: 'invoice' | 'customs_declaration';
+  readonly [key: string]: unknown;
+}
+
+/**
+ * HS-код товара
+ * HS code for product
+ */
+export interface SupplierHsCode {
+  /** HS-код */
+  code?: string;
   
   readonly [key: string]: unknown;
 }
@@ -47,68 +54,66 @@ export interface SupplierInvoiceFileUploadRequest {
 /**
  * Запрос на создание или изменение счёт-фактуры
  * Request to create or update invoice
+ * 
+ * Создание или изменение таможенного счёта-фактуры для возврата НДС продавцам из Турции.
  */
 export interface SupplierInvoiceCreateOrUpdateRequest {
-  /** 
-   * Идентификатор счёт-фактуры (для обновления)
-   * Invoice ID (for update)
-   */
-  invoice_id?: string;
-  
-  /** 
-   * Номер счёт-фактуры
-   * Invoice number
-   */
-  invoice_number?: string;
-  
   /** 
    * Дата счёт-фактуры
    * Invoice date
    */
-  invoice_date?: string;
+  date: string;
   
   /** 
-   * Идентификатор файла
-   * File ID
+   * Номер отправления
+   * Posting number
    */
-  file_id?: string;
+  posting_number: string;
   
   /** 
-   * Сумма счёт-фактуры
-   * Invoice amount
+   * Ссылка на счёт-фактуру
+   * Invoice URL
+   * 
+   * Чтобы создать ссылку, используйте метод /v1/invoice/file/upload
    */
-  total_amount?: number;
+  url: string;
   
   /** 
-   * Валюта
-   * Currency
+   * Номер счёт-фактуры
+   * Invoice number
+   * 
+   * Номер может содержать буквы и цифры, максимальная длина — 50 символов.
    */
-  currency?: string;
+  number?: string;
   
   /** 
-   * НДС
-   * VAT amount
+   * Стоимость, указанная в счёте-фактуре
+   * Price specified in the invoice
+   * 
+   * Разделитель дробной части — точка, до двух знаков после точки.
    */
-  vat_amount?: number;
+  price?: number;
   
   /** 
-   * Товары в счёт-фактуре
-   * Items in invoice
+   * Валюта счёта-фактуры
+   * Invoice currency
+   * 
+   * - `USD` — доллар
+   * - `EUR` — евро
+   * - `TRY` — турецкая лира
+   * - `CNY` — юань
+   * - `RUB` — рубль
+   * - `GBP` — фунт стерлингов
+   * 
+   * Значение по умолчанию — `USD`.
    */
-  items?: Array<{
-    /** SKU товара */
-    sku?: string;
-    /** Название товара */
-    name?: string;
-    /** Количество */
-    quantity?: number;
-    /** Цена за единицу */
-    unit_price?: number;
-    /** Общая стоимость */
-    total_price?: number;
-    /** НДС по товару */
-    vat_rate?: number;
-  }>;
+  price_currency?: 'USD' | 'EUR' | 'TRY' | 'CNY' | 'RUB' | 'GBP';
+  
+  /** 
+   * HS-коды товаров
+   * Product HS codes
+   */
+  hs_codes?: SupplierHsCode[];
   
   readonly [key: string]: unknown;
 }
@@ -119,10 +124,10 @@ export interface SupplierInvoiceCreateOrUpdateRequest {
  */
 export interface SupplierInvoiceGetRequest {
   /** 
-   * Идентификатор счёт-фактуры
-   * Invoice ID
+   * Номер отправления
+   * Posting number
    */
-  invoice_id?: string;
+  posting_number: string;
   
   readonly [key: string]: unknown;
 }

@@ -167,7 +167,7 @@ export type {
   UpdateStatusStrategyRequest,
   GetStrategyIDsByItemIDsRequest,
   UpdatePricingStrategyRequest,
-  StrategyItemToAdd,
+  PricingStrategyCompetitor,
 } from './types/requests/pricing-strategy.js';
 
 export type {
@@ -323,7 +323,6 @@ export type {
   CertificateBindRequest,
   CertificateCreateRequest,
   CertificateDeleteRequest,
-  CertificateInfoFromListRequest,
   CertificateRejectionReasonsListRequest,
   CertificateStatusListRequest,
   CertificateUnbindRequest,
@@ -336,7 +335,6 @@ export type {
   CertificateBindResponse,
   CertificateCreateResponse,
   CertificateDeleteResponse,
-  CertificateInfoFromListResponse,
   CertificateRejectionReasonsListResponse,
   CertificateStatusListResponse,
   ProductCertificateTypesResponse,
@@ -519,14 +517,11 @@ export type {
 
 // FBS&rFBSMarks API types
 export type {
-  FbsRfbsMarksProductExemplarCreateRequest,
-  FbsRfbsMarksProductExemplarInfoRequest,
-  FbsRfbsMarksProductExemplarListRequest,
-  FbsRfbsMarksProductExemplarDeleteRequest,
-  FbsRfbsMarksProductExemplarDeleteStatusRequest,
-  FbsRfbsMarksProductExemplarValidateRequest,
-  FbsRfbsMarksProductExemplarValidateStatusRequest,
-  FbsRfbsMarksPostingCodesUploadRequest,
+  FbsRfbsMarksProductExemplarUpdateRequest,
+  FbsRfbsMarksProductExemplarSetV4Request,
+  FbsRfbsMarksPostingShipV4Request,
+  FbsRfbsMarksProductExemplarCreateOrGetV5Request,
+  FbsRfbsMarksProductExemplarSetV6Request,
   FbsRfbsMarksPostingCodesUploadStatusRequest,
   FbsRfbsMarksPostingCodesValidateRequest,
   FbsRfbsMarksPostingCodesValidateStatusRequest,
@@ -535,16 +530,10 @@ export type {
 } from './types/requests/fbs-rfbs-marks';
 
 export type {
-  FbsRfbsMarksProductExemplarCreateResponse,
-  FbsRfbsMarksProductExemplar,
-  FbsRfbsMarksProductExemplarInfoResponse,
-  FbsRfbsMarksProductExemplarListResponse,
-  FbsRfbsMarksProductExemplarDeleteResponse,
-  FbsRfbsMarksProductExemplarDeleteStatusResponse,
-  FbsRfbsMarksProductExemplarValidateResponse,
-  FbsRfbsMarksProductExemplarValidateStatusResponse,
-  FbsRfbsMarksProductCodes,
-  FbsRfbsMarksPostingCodesUploadResponse,
+  FbsRfbsMarksProductExemplarSetV4Response,
+  FbsRfbsMarksPostingShipV4Response,
+  FbsRfbsMarksProductExemplarCreateOrGetV5Response,
+  FbsRfbsMarksProductExemplarSetV6Response,
   FbsRfbsMarksPostingCodesUploadStatusResponse,
   FbsRfbsMarksPostingCodesValidateResponse,
   FbsRfbsMarksPostingCodesValidateStatusResponse,

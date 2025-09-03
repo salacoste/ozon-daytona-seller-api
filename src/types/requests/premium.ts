@@ -343,7 +343,7 @@ export interface PremiumChatReadRequest {
    * Идентификатор сообщения до которого отмечать как прочитанные
    * Message ID up to which to mark as read
    */
-  message_id: string;
+  from_message_id?: number;
   
   readonly [key: string]: unknown;
 }
@@ -352,6 +352,12 @@ export interface PremiumChatReadRequest {
  * Запрос истории чата (Premium Plus)
  * Chat history request (Premium Plus)
  */
+/**
+ * Направление сортировки истории чата
+ * Chat history sort direction
+ */
+export type PremiumChatHistoryDirection = 'Forward' | 'Backward';
+
 export interface PremiumChatHistoryRequest {
   /** 
    * Идентификатор чата
@@ -360,16 +366,22 @@ export interface PremiumChatHistoryRequest {
   chat_id: string;
   
   /** 
-   * Количество сообщений (максимум 100)
-   * Number of messages (maximum 100)
+   * Направление сортировки сообщений
+   * Messages sorting direction
+   */
+  direction?: PremiumChatHistoryDirection;
+  
+  /** 
+   * Количество сообщений (максимум 1000)
+   * Number of messages (maximum 1000)
    */
   limit?: number;
   
   /** 
-   * Идентификатор сообщения для пагинации
-   * Message ID for pagination
+   * Идентификатор сообщения, с которого начать вывод истории чата
+   * Message ID from which to start chat history output
    */
-  offset_message_id?: string;
+  from_message_id?: number;
   
   readonly [key: string]: unknown;
 }

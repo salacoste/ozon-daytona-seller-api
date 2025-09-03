@@ -256,6 +256,11 @@ export class CategoryApi {
     request: CategoryGetAttributeValuesRequest,
     options?: RequestOptions
   ): Promise<CategoryGetAttributeValuesResponse> {
+    // Валидация параметров согласно API
+    if (!request.limit || request.limit < 1 || request.limit > 2000) {
+      throw new Error('Parameter "limit" must be between 1 and 2000');
+    }
+
     return this.httpClient.request<CategoryGetAttributeValuesRequest, CategoryGetAttributeValuesResponse>(
       'POST',
       '/v1/description-category/attribute/values',
@@ -320,6 +325,15 @@ export class CategoryApi {
     request: CategorySearchAttributeValuesRequest,
     options?: RequestOptions
   ): Promise<CategorySearchAttributeValuesResponse> {
+    // Валидация параметров согласно API
+    if (!request.limit || request.limit < 1 || request.limit > 100) {
+      throw new Error('Parameter "limit" must be between 1 and 100');
+    }
+
+    if (!request.value || request.value.length < 2) {
+      throw new Error('Parameter "value" must be at least 2 characters long');
+    }
+
     return this.httpClient.request<CategorySearchAttributeValuesRequest, CategorySearchAttributeValuesResponse>(
       'POST',
       '/v1/description-category/attribute/values/search',

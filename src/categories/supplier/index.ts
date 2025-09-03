@@ -2,6 +2,9 @@
  * SupplierAPI implementation
  * Supplier integration and management
  * 
+ * 📄 **Управление таможенными счёт-фактурами для возврата НДС продавцам из Турции**
+ * 📄 **Customs invoice management for VAT refund to Turkish sellers**
+ * 
  * @example
  * ```typescript
  * import { OzonSellerAPI } from 'bmad-ozon-seller-api';
@@ -11,31 +14,33 @@
  *   apiKey: 'your-api-key'
  * });
  * 
- * // Upload invoice file
+ * // Upload invoice file (JPEG or PDF, max 10MB)
  * const uploadResult = await api.supplier.uploadInvoiceFile({
- *   file: 'base64EncodedPdfContent',
- *   file_name: 'invoice_001.pdf',
- *   document_type: 'invoice'
+ *   base64_content: 'base64EncodedPdfContent',
+ *   posting_number: '0001-1234567-0000001'
  * });
  * 
  * // Create or update invoice
  * const invoice = await api.supplier.createOrUpdateInvoice({
- *   invoice_number: 'INV-2024-001',
- *   invoice_date: '2024-01-15',
- *   file_id: uploadResult.file_id,
- *   total_amount: 10000.00,
- *   currency: 'RUB',
- *   vat_amount: 1000.00,
- *   items: [
- *     {
- *       sku: 'SKU123',
- *       name: 'Product Name',
- *       quantity: 10,
- *       unit_price: 900.00,
- *       total_price: 9000.00,
- *       vat_rate: 20
- *     }
+ *   date: '2024-01-15T10:00:00Z',
+ *   posting_number: '0001-1234567-0000001',
+ *   url: uploadResult.url!,
+ *   number: 'INV-2024-001',
+ *   price: 10000.50,
+ *   price_currency: 'TRY',
+ *   hs_codes: [
+ *     { code: '1234567890' }
  *   ]
+ * });
+ * 
+ * // Get invoice information
+ * const invoiceInfo = await api.supplier.getInvoice({
+ *   posting_number: '0001-1234567-0000001'
+ * });
+ * 
+ * // Delete invoice reference
+ * const deleteResult = await api.supplier.deleteInvoice({
+ *   posting_number: '0001-1234567-0000001'
  * });
  * ```
  */
@@ -76,7 +81,7 @@ export class SupplierApi {
    * @example
    * ```typescript
    * const result = await api.supplier.deleteInvoice({
-   *   invoice_id: 'invoice_123'
+   *   posting_number: '0001-1234567-0000001'
    * });
    * console.log('Deletion result:', result.result);
    * ```
@@ -107,13 +112,10 @@ export class SupplierApi {
    * @example
    * ```typescript
    * const result = await api.supplier.uploadInvoiceFile({
-   *   file: 'base64EncodedPdfContent',
-   *   file_name: 'invoice_001.pdf',
-   *   document_type: 'invoice'
+   *   base64_content: 'base64EncodedPdfContent',
+   *   posting_number: '0001-1234567-0000001'
    * });
-   * console.log('File ID:', result.file_id);
-   * console.log('Upload status:', result.status);
-   * console.log('File URL:', result.file_url);
+   * console.log('Invoice URL:', result.url);
    * ```
    */
   async uploadInvoiceFile(
@@ -141,36 +143,20 @@ export class SupplierApi {
    * 
    * @example
    * ```typescript
-   * // Create new invoice
-   * const newInvoice = await api.supplier.createOrUpdateInvoice({
-   *   invoice_number: 'INV-2024-001',
-   *   invoice_date: '2024-01-15',
-   *   file_id: 'uploaded_file_id',
-   *   total_amount: 10000.00,
-   *   currency: 'RUB',
-   *   vat_amount: 1000.00,
-   *   items: [
-   *     {
-   *       sku: 'SKU123',
-   *       name: 'Product Name',
-   *       quantity: 10,
-   *       unit_price: 900.00,
-   *       total_price: 9000.00,
-   *       vat_rate: 20
-   *     }
+   * const result = await api.supplier.createOrUpdateInvoice({
+   *   date: '2024-01-15T10:00:00Z',
+   *   posting_number: '0001-1234567-0000001',
+   *   url: 'https://ozon.ru/invoice/abc123',
+   *   number: 'INV-2024-001',
+   *   price: 10000.50,
+   *   price_currency: 'USD',
+   *   hs_codes: [
+   *     { code: '1234567890' },
+   *     { code: '0987654321' }
    *   ]
    * });
    * 
-   * // Update existing invoice
-   * const updatedInvoice = await api.supplier.createOrUpdateInvoice({
-   *   invoice_id: 'existing_invoice_id',
-   *   invoice_number: 'INV-2024-001-UPDATED',
-   *   total_amount: 12000.00,
-   *   vat_amount: 1200.00
-   * });
-   * 
-   * console.log('Invoice ID:', newInvoice.invoice?.invoice_id);
-   * console.log('Status:', newInvoice.invoice?.status);
+   * console.log('Creation result:', result.result);
    * ```
    */
   async createOrUpdateInvoice(
@@ -199,22 +185,18 @@ export class SupplierApi {
    * @example
    * ```typescript
    * const invoiceInfo = await api.supplier.getInvoice({
-   *   invoice_id: 'invoice_123'
+   *   posting_number: '0001-1234567-0000001'
    * });
    * 
-   * const invoice = invoiceInfo.invoice;
-   * console.log('Invoice number:', invoice?.invoice_number);
-   * console.log('Status:', invoice?.status);
-   * console.log('Total amount:', invoice?.total_amount, invoice?.currency);
-   * console.log('Items count:', invoice?.items?.length);
+   * const invoice = invoiceInfo.result;
+   * console.log('Invoice number:', invoice?.number);
+   * console.log('Date:', invoice?.date);
+   * console.log('Price:', invoice?.price, invoice?.price_currency);
+   * console.log('File URL:', invoice?.file_url);
    * 
-   * invoice?.items?.forEach(item => {
-   *   console.log(`${item.name}: ${item.quantity} x ${item.unit_price} = ${item.total_price}`);
+   * invoice?.hs_codes?.forEach(hsCode => {
+   *   console.log('HS Code:', hsCode.code);
    * });
-   * 
-   * if (invoice?.status === 'rejected') {
-   *   console.log('Rejection reason:', invoice.rejection_reason);
-   * }
    * ```
    */
   async getInvoice(

@@ -1,6 +1,6 @@
 /**
  * Chat API request types
- * Generated from MCP documentation: chatapi--chunk-001.md and premium--chunk-002.md
+ * Generated from MCP documentation: premium--chunk-001.md and premium--chunk-002.md
  * Ready for manual editing and enhancements
  */
 
@@ -27,20 +27,6 @@ export interface ChatSendMessageRequest {
 }
 
 /**
- * Запрос отправки файла в чат
- * Chat send file request
- */
-export interface ChatSendFileRequest {
-  /** Идентификатор чата */
-  chat_id: string;
-  /** Файл в виде строки base64 */
-  base64_content?: string;
-  /** Название файла с расширением */
-  name?: string;
-  readonly [key: string]: unknown;
-}
-
-/**
  * Запрос отметки сообщений как прочитанных
  * Chat read request
  */
@@ -48,33 +34,6 @@ export interface ChatReadRequest {
   /** Идентификатор чата */
   chat_id: string;
   /** Идентификатор сообщения */
-  from_message_id?: number;
-  readonly [key: string]: unknown;
-}
-
-/**
- * Направление сортировки сообщений
- * Chat message direction
- */
-export type ChatDirection = 'Forward' | 'Backward';
-
-/**
- * Запрос истории чата (v2)
- * Chat history request v2
- */
-export interface ChatHistoryV2Request {
-  /** Идентификатор чата */
-  chat_id: string;
-  /** Количество сообщений в ответе. По умолчанию — 50. Максимальное значение — 1000 */
-  limit: number;
-  /** 
-   * Направление сортировки сообщений:
-   * - `Forward` — от старых к новым.
-   * - `Backward` — от новых к старым.
-   * Значение по умолчанию — `Backward`.
-   */
-  direction?: ChatDirection;
-  /** Идентификатор сообщения, с которого начать вывод истории чата */
   from_message_id?: number;
   readonly [key: string]: unknown;
 }
@@ -111,6 +70,51 @@ export interface ChatHistoryV3Request {
   readonly [key: string]: unknown;
 }
 
+
+/**
+ * Запрос отправки файла в чат
+ * Chat send file request
+ */
+export interface ChatSendFileRequest {
+  /** Идентификатор чата */
+  chat_id: string;
+  /** Файл в виде строки base64 */
+  base64_content?: string;
+  /** Название файла с расширением */
+  name?: string;
+  readonly [key: string]: unknown;
+}
+
+
+/**
+ * Направление сортировки сообщений
+ * Chat message direction
+ */
+export type ChatDirection = 'Forward' | 'Backward';
+
+/**
+ * Запрос истории чата (v2) - УСТАРЕЛ
+ * Chat history request v2 - DEPRECATED
+ * @deprecated Отключается 13 июля 2025 года
+ */
+export interface ChatHistoryV2Request {
+  /** Идентификатор чата */
+  chat_id: string;
+  /** Количество сообщений в ответе. По умолчанию — 50. Максимальное значение — 1000 */
+  limit: number;
+  /** 
+   * Направление сортировки сообщений:
+   * - `Forward` — от старых к новым.
+   * - `Backward` — от новых к старым.
+   * Значение по умолчанию — `Backward`.
+   */
+  direction?: ChatDirection;
+  /** Идентификатор сообщения, с которого начать вывод истории чата */
+  from_message_id?: number;
+  readonly [key: string]: unknown;
+}
+
+
 /**
  * Фильтр для списка чатов v2
  * Chat list filter v2
@@ -121,8 +125,9 @@ export interface ChatListRequestFilter {
 }
 
 /**
- * Запрос списка чатов (v2)
- * Chat list request v2
+ * Запрос списка чатов (v2) - УСТАРЕЛ
+ * Chat list request v2 - DEPRECATED
+ * @deprecated Метод устаревает, используйте ChatListV3Request
  */
 export interface ChatListV2Request {
   /** Количество значений в ответе. Значение по умолчанию — 30. Максимальное значение — 1000 */

@@ -88,18 +88,18 @@ export interface FinanceTransactionDateFilter {
 }
 
 /**
- * Фильтр для списка транзакций
- * Transaction list filter
+ * Фильтр для списка транзакций (строгий по MCP - либо date либо posting_number обязательны)
+ * Transaction list filter (strict per MCP - either date or posting_number required)
  */
 export interface FinanceTransactionListFilter {
-  /** Период дат для фильтра */
+  /** Период дат для фильтра (обязательно если нет posting_number) */
   date?: FinanceTransactionDateFilter;
-  /** Номер отправления */
+  /** Номер отправления (обязательно если нет date) */
   posting_number?: string;
-  /** Тип операции */
-  operation_type?: string[];
+  /** Тип операции (строгий перечень из MCP документации) */
+  operation_type?: OperationType[];
   /** Тип транзакции */
-  transaction_type?: string;
+  transaction_type?: TransactionType;
 }
 
 /**
@@ -117,8 +117,52 @@ export interface FinanceTransactionListV3Request {
 }
 
 /**
- * Типы транзакций для итогов
- * Transaction types for totals
+ * Типы операций из MCP документации
+ * Operation types from MCP documentation
+ */
+export type OperationType = 
+  | 'ClientReturnAgentOperation'
+  | 'MarketplaceMarketingActionCostOperation'
+  | 'MarketplaceSaleReviewsOperation'
+  | 'MarketplaceSellerCompensationOperation'
+  | 'OperationAgentDeliveredToCustomer'
+  | 'OperationAgentDeliveredToCustomerCanceled'
+  | 'OperationAgentStornoDeliveredToCustomer'
+  | 'OperationClaim'
+  | 'OperationCorrectionSeller'
+  | 'OperationDefectiveWriteOff'
+  | 'OperationItemReturn'
+  | 'OperationLackWriteOff'
+  | 'OperationMarketplaceCrossDockServiceWriteOff'
+  | 'OperationMarketplaceServiceStorage'
+  | 'OperationSetOff'
+  | 'MarketplaceSellerReexposureDeliveryReturnOperation'
+  | 'OperationReturnGoodsFBSofRMS'
+  | 'ReturnAgentOperationRFBS'
+  | 'ItemAgentServiceStarsMembership'
+  | 'MarketplaceSellerShippingCompensationReturnOperation'
+  | 'OperationMarketplaceServicePremiumCashback'
+  | 'MarketplaceServicePremiumPromotion'
+  | 'MarketplaceRedistributionOfAcquiringOperation'
+  | 'MarketplaceReturnStorageServiceAtThePickupPointFbsItem'
+  | 'MarketplaceReturnStorageServiceInTheWarehouseFbsItem'
+  | 'MarketplaceServiceItemDeliveryKGT'
+  | 'MarketplaceServiceItemDirectFlowLogistic'
+  | 'MarketplaceServiceItemReturnFlowLogistic'
+  | 'MarketplaceServicePremiumCashbackIndividualPoints'
+  | 'OperationMarketplaceWithHoldingForUndeliverableGoods'
+  | 'MarketplaceServiceItemDirectFlowLogisticVDC'
+  | 'MarketplaceServiceItemDropoffPPZ'
+  | 'MarketplaceServicePremiumCashback'
+  | 'MarketplaceServiceItemRedistributionReturnsPVZ'
+  | 'OperationElectronicServiceStencil'
+  | 'OperationElectronicServicesPromotionInSearch'
+  | 'OperationMarketplaceServiceItemElectronicServicesBrandShelf'
+  | 'OperationSubscriptionPremium';
+
+/**
+ * Типы транзакций для итогов (строгие по MCP документации)
+ * Transaction types for totals (strict per MCP documentation)
  */
 export type TransactionType = 'all' | 'orders' | 'returns' | 'services' | 'compensation' | 'transferDelivery' | 'other';
 

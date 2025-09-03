@@ -43,19 +43,19 @@ export interface PassCarriagePassInfo {
 }
 
 /**
- * Запрос создания пропуска для перевозки
- * Create carriage pass request
+ * Запрос создания пропуска для перевозки (строго по MCP документации)
+ * Create carriage pass request (strict per MCP documentation)
  */
 export interface PassCreateCarriagePassRequest {
   /** 
-   * Идентификатор перевозки
-   * Carriage identifier
+   * Идентификатор перевозки (обязательно)
+   * Carriage identifier (required)
    */
   carriage_id: number;
   
   /** 
-   * Список пропусков
-   * Passes list
+   * Список пропусков (обязательно)
+   * Passes list (required)
    */
   arrival_passes: PassCarriagePassInfo[];
   
@@ -147,33 +147,45 @@ export interface PassUpdateCarriagePassRequest {
 }
 
 /**
- * Фильтр для списка пропусков
- * Filter for passes list
+ * Причина въезда для фильтра (строго по MCP документации)
+ * Arrival reason for filter (strict per MCP documentation)
+ */
+export type PassArrivalReason = 'FBS_DELIVERY' | 'FBS_RETURN';
+
+/**
+ * Фильтр для списка пропусков (строго по MCP документации)
+ * Filter for passes list (strict per MCP documentation)
  */
 export interface PassListFilter {
   /** 
-   * Идентификатор перевозки
-   * Carriage identifier
+   * Фильтр по идентификатору пропуска
+   * Filter by pass identifier
    */
-  carriage_id?: number;
+  arrival_pass_ids?: string[];
   
   /** 
-   * Статус пропуска
-   * Pass status
+   * Фильтр по цели въезда (FBS_DELIVERY - отгрузка, FBS_RETURN - вывоз возвратов)
+   * Filter by arrival reason (FBS_DELIVERY - shipment, FBS_RETURN - returns)
    */
-  status?: string;
+  arrival_reason?: PassArrivalReason;
   
   /** 
-   * Дата начала периода
-   * Period start date
+   * Фильтр по точке отгрузки
+   * Filter by dropoff point
    */
-  date_from?: string;
+  dropoff_point_ids?: string[];
   
   /** 
-   * Дата окончания периода
-   * Period end date
+   * true, чтобы получить только активные заявки на пропуск
+   * true to get only active pass requests
    */
-  date_to?: string;
+  only_active_passes?: boolean;
+  
+  /** 
+   * Фильтр по складу продавца
+   * Filter by seller warehouse
+   */
+  warehouse_ids?: string[];
   
   readonly [key: string]: unknown;
 }
