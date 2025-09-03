@@ -163,7 +163,7 @@ export class ProductApi {
   ): Promise<GetProductListResponse> {
     return this.httpClient.request<GetProductListRequest, GetProductListResponse>(
       'POST',
-      '/v3/product/info/list',
+      '/v3/product/list',
       request ?? {},
       options
     );
