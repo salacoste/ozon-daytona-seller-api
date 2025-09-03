@@ -459,7 +459,7 @@ describe('ProductApi', () => {
       expect(result).toEqual(expectedResponse);
       expect(mockHttpClient.request).toHaveBeenCalledWith(
         'POST',
-        '/v3/product/info/attributes',
+        '/v4/product/info/attributes',
         request,
         undefined
       );
@@ -680,7 +680,7 @@ describe('ProductApi', () => {
       expect(result).toEqual(expectedResponse);
       expect(mockHttpClient.request).toHaveBeenCalledWith(
         'POST',
-        '/v1/product/pictures/info',
+        '/v2/product/pictures/info',
         request,
         undefined
       );
@@ -748,7 +748,7 @@ describe('ProductApi', () => {
       expect(result).toEqual(expectedResponse);
       expect(mockHttpClient.request).toHaveBeenCalledWith(
         'POST',
-        '/v1/product/related-sku',
+        '/v1/product/related-sku/get',
         request,
         undefined
       );
@@ -814,7 +814,7 @@ describe('ProductApi', () => {
       expect(result).toEqual(expectedResponse);
       expect(mockHttpClient.request).toHaveBeenCalledWith(
         'POST',
-        '/v1/product/delete',
+        '/v2/products/delete',
         request,
         undefined
       );
@@ -913,7 +913,7 @@ describe('ProductApi', () => {
       expect(result).toEqual(expectedResponse);
       expect(mockHttpClient.request).toHaveBeenCalledWith(
         'POST',
-        '/v3/product/list',
+        '/v3/product/info/list',
         request,
         undefined
       );
@@ -948,7 +948,7 @@ describe('ProductApi', () => {
       expect(result).toEqual(expectedResponse);
       expect(mockHttpClient.request).toHaveBeenCalledWith(
         'POST',
-        '/v1/product/info/upload-quota',
+        '/v4/product/info/limit',
         {},
         undefined
       );
@@ -970,7 +970,7 @@ describe('ProductApi', () => {
       expect(result).toEqual(expectedResponse);
       expect(mockHttpClient.request).toHaveBeenCalledWith(
         'POST',
-        '/v1/product/info/upload-quota',
+        '/v4/product/info/limit',
         {},
         undefined
       );

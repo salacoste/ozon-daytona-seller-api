@@ -288,7 +288,7 @@ describe('CertificationApi', () => {
 
       expect(mockHttpClient.request).toHaveBeenCalledWith(
         'POST',
-        '/v1/product/certificate/info/from_list',
+        '/v1/product/certificate/products/list',
         request,
         undefined
       );
