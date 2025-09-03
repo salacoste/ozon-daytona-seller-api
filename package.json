@@ -1,6 +1,6 @@
 {
   "name": "daytona-ozon-seller-api",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Complete TypeScript SDK for OZON Seller API with 278 methods across 33 categories. Production-ready with comprehensive documentation and enterprise-grade architecture.",
   "keywords": [
     "ozon-api",
@@ -86,7 +86,7 @@
     "ci:validate": "npm run validate:all && npm run test:all && npm run security:check && npm run bundle:check",
     "release:prepare": "npm run clean && npm run build && npm run ci:validate && npm run docs:validate",
     "docs:generate": "typedoc src/index.ts",
-    "_prepublishOnly": "npm run release:prepare",
+    "prepublishOnly": "npm run release:prepare",
     "release": "release-it"
   },
   "dependencies": {
