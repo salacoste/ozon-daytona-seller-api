@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Поиск по функциям | OZON Seller API SDK | DAYTONA</title>
+    
+    <meta name="description" content="Навигация по 278 методам OZON API, сгруппированных по функциональности">
+    <meta name="keywords" content="ozon api, функции, поиск, navigation, methods">
+    
+    <link rel="icon" type="image/png" href="./image.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .nav-links a {
+            display: inline-block;
+            margin: 5px 15px;
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .search-box {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .search-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        
+        .function-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .function-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .function-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #007bff;
+        }
+        
+        .function-card h3 {
+            color: #007bff;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .function-card h3 .emoji {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .function-section {
+            margin-bottom: 20px;
+        }
+        
+        .function-section h4 {
+            color: #333;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .function-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .function-section ul li {
+            margin: 6px 0;
+            padding: 6px 12px;
+            background: white;
+            border-radius: 6px;
+            font-size: 0.9em;
+            border-left: 3px solid #007bff;
+            transition: all 0.2s ease;
+        }
+        
+        .function-section ul li:hover {
+            background: #e7f3ff;
+        }
+        
+        .function-section ul li strong {
+            color: #007bff;
+            font-family: 'Monaco', monospace;
+            font-size: 0.85em;
+        }
+        
+        .premium-indicator {
+            background: #ffc107;
+            color: #212529;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.7em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .beta-indicator {
+            background: #17a2b8;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.7em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .quick-access {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .quick-access h3 {
+            margin-bottom: 15px;
+            color: #0c5460;
+        }
+        
+        .quick-access-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .quick-link {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+        
+        .quick-link:hover {
+            background: #e7f3ff;
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Поиск по функциям</h1>
+            <p>Навигация по 278 методам API | DAYTONA</p>
+        </div>
+        
+        <div class="nav-links">
+            <a href="./QUICK-START.html">🚀 Быстрый старт</a>
+            <a href="./README.html">📖 Полное руководство</a>
+            <a href="./API-INDEX.html">📑 Алфавитный индекс</a>
+            <a href="./FAQ.html">❓ FAQ</a>
+            <a href="../index.html">🏠 Главная</a>
+        </div>
+        
+        <div class="content">
+            <div class="search-box">
+                <h3 style="margin-bottom: 15px; color: #333;">🎯 Найти нужную функцию</h3>
+                <input type="text" class="search-input" placeholder="Что вы хотите сделать? (например: создать товар, обновить цену...)" id="searchInput" onkeyup="searchFunctions()">
+                <p style="margin-top: 10px; color: #6c757d; font-size: 0.9em;">Методы организованы по функциональности для быстрого поиска решений</p>
+            </div>
+            
+            <div class="quick-access">
+                <h3>⚡ Быстрый доступ к популярным функциям</h3>
+                <div class="quick-access-grid">
+                    <a href="#products" class="quick-link">📦 Товары</a>
+                    <a href="#orders" class="quick-link">🛒 Заказы</a>
+                    <a href="#finance" class="quick-link">💰 Финансы</a>
+                    <a href="#analytics" class="quick-link">📊 Аналитика</a>
+                    <a href="#customer-service" class="quick-link">👥 Клиенты</a>
+                    <a href="#logistics" class="quick-link">🚚 Логистика</a>
+                </div>
+            </div>
+            
+            <div class="function-categories" id="functionsGrid">
+                
+                <!-- Products Management -->
+                <div class="function-card" id="products">
+                    <h3><span class="emoji">📦</span>Управление товарами</h3>
+                    
+                    <div class="function-section">
+                        <h4>Создание и редактирование</h4>
+                        <ul>
+                            <li><strong>product.create()</strong> - Создание новых товаров</li>
+                            <li><strong>product.update()</strong> - Обновление товара</li>
+                            <li><strong>product.importBySku()</strong> - Импорт по SKU</li>
+                            <li><strong>product.archive()</strong> - Архивация товара</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="function-section">
+                        <h4>Получение информации</h4>
+                        <ul>
+                            <li><strong>product.getList()</strong> - Список товаров</li>
+                            <li><strong>product.getInfo()</strong> - Подробная информация</li>
+                            <li><strong>product.getAttributes()</strong> - Атрибуты товара</li>
+                            <li><strong>product.getPictures()</strong> - Изображения</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="function-section">
+                        <h4>Цены и остатки</h4>
+                        <ul>
+                            <li><strong>pricesStocks.updatePrices()</strong> - Обновить цены</li>
+                            <li><strong>pricesStocks.updateStocks()</strong> - Обновить остатки</li>
+                            <li><strong>product.getPrices()</strong> - Получить цены</li>
+                            <li><strong>product.getStocks()</strong> - Получить остатки</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Orders Management -->
+                <div class="function-card" id="orders">
+                    <h3><span class="emoji">🛒</span>Управление заказами</h3>
+                    
+                    <div class="function-section">
+                        <h4>Заказы FBS (с доставкой)</h4>
+                        <ul>
+                            <li><strong>fbs.getOrdersList()</strong> - Список заказов FBS</li>
+                            <li><strong>fbs.getOrder()</strong> - Информация о заказе</li>
+                            <li><strong>fbs.shipOrder()</strong> - Отгрузка заказа</li>
+                            <li><strong>fbs.cancelOrder()</strong> - Отмена заказа</li>
+                            <li><strong>fbs.packageLabel()</strong> - Печать этикетки</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="function-section">
+                        <h4>Заказы FBO (склад OZON)</h4>
+                        <ul>
+                            <li><strong>fbo.getOrdersList()</strong> - Список заказов FBO</li>
+                            <li><strong>fbo.getOrder()</strong> - Информация о заказе</li>
+                            <li><strong>fbo.getSupplyOrdersList()</strong> - Поставки</li>
+                            <li><strong>fbo.cancelOrder()</strong> - Отмена заказа FBO</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="function-section">
+                        <h4>Возвраты и отмены</h4>
+                        <ul>
+                            <li><strong>returns.getList()</strong> - Список возвратов</li>
+                            <li><strong>return.getGiveoutInfo()</strong> - Возврат товара</li>
+                            <li><strong>cancellation.getCancelReasons()</strong> - Причины отмен</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Finance -->
+                <div class="function-card" id="finance">
+                    <h3><span class="emoji">💰</span>Финансы и отчеты</h3>
+                    
+                    <div class="function-section">
+                        <h4>Транзакции и баланс</h4>
+                        <ul>
+                            <li><strong>finance.getTransactionsList()</strong> - Список транзакций</li>
+                            <li><strong>finance.getTransactionTotals()</strong> - Итоги транзакций</li>
+                            <li><strong>finance.getBalance()</strong> - Баланс счета</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="function-section">
+                        <h4>Отчетность</h4>
+                        <ul>
+                            <li><strong>finance.getRealizationReport()</strong> - Отчет реализации</li>
+                            <li><strong>finance.getCompensationReport()</strong> - Компенсации</li>
+                            <li><strong>finance.getProductsBuyout()</strong> - Выкуп товаров</li>
+                            <li><strong>report.createReport()</strong> - Создание отчетов</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Analytics -->
+                <div class="function-card" id="analytics">
+                    <h3><span class="emoji">📊</span>Аналитика и статистика</h3>
+                    
+                    <div class="function-section">
+                        <h4>Аналитика товаров</h4>
+                        <ul>
+                            <li><strong>analytics.getStocksTurnover()</strong> - Оборачиваемость</li>
+                            <li><strong>analytics.getStockOnWarehouses()</strong> - Остатки на складах</li>
+                            <li><strong>product.getProductRating()</strong> - Рейтинг товара</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="function-section">
+                        <h4>Продвижение и конкуренты</h4>
+                        <ul>
+                            <li><strong>pricingStrategy.getCompetitors()</strong> - Анализ конкурентов</li>
+                            <li><strong>pricingStrategy.createStrategy()</strong> - Стратегии цен</li>
+                            <li><strong>premium.getPromotionStatus()</strong> - Статус продвижения</li>
+                            <li><strong>promos.getActivePromos()</strong> - Активные акции</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Customer Service -->
+                <div class="function-card" id="customer-service">
+                    <h3><span class="emoji">👥</span>Работа с клиентами</h3>
+                    
+                    <div class="function-section">
+                        <h4>Отзывы и рейтинги</h4>
+                        <span class="premium-indicator">Premium+</span>
+                        <ul>
+                            <li><strong>review.getList()</strong> - Список отзывов</li>
+                            <li><strong>review.getInfo()</strong> - Информация об отзыве</li>
+                            <li><strong>review.createComment()</strong> - Ответ на отзыв</li>
+                            <li><strong>review.changeStatus()</strong> - Изменить статус</li>
+                            <li><strong>sellerRating.getRating()</strong> - Рейтинг продавца</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="function-section">
+                        <h4>Вопросы и ответы</h4>
+                        <span class="premium-indicator">Premium+</span>
+                        <ul>
+                            <li><strong>questionsAnswers.getQuestionList()</strong> - Список вопросов</li>
+                            <li><strong>questionsAnswers.createAnswer()</strong> - Создать ответ</li>
+                            <li><strong>questionsAnswers.deleteAnswer()</strong> - Удалить ответ</li>
+                            <li><strong>questionsAnswers.getTopQuestionedProducts()</strong> - Топ вопросов</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="function-section">
+                        <h4>Коммуникации</h4>
+                        <span class="premium-indicator">Premium+</span>
+                        <ul>
+                            <li><strong>chat.getChatList()</strong> - Список чатов</li>
+                            <li><strong>chat.sendMessage()</strong> - Отправить сообщение</li>
+                            <li><strong>chat.getChatHistory()</strong> - История чата</li>
+                            <li><strong>chat.sendFile()</strong> - Отправить файл</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Logistics -->
+                <div class="function-card" id="logistics">
+                    <h3><span class="emoji">🚚</span>Логистика и склады</h3>
+                    
+                    <div class="function-section">
+                        <h4>Управление складами</h4>
+                        <ul>
+                            <li><strong>warehouse.getWarehousesList()</strong> - Список складов</li>
+                            <li><strong>warehouse.getDeliveryMethods()</strong> - Способы доставки</li>
+                            <li><strong>supplier.getSupplierInfo()</strong> - Информация о поставщике</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="function-section">
+                        <h4>Доставка FBS/RFBS</h4>
+                        <ul>
+                            <li><strong>deliveryFbs.createCarriage()</strong> - Создание перевозки</li>
+                            <li><strong>deliveryRfbs.setTrackingNumber()</strong> - Трек-номер</li>
+                            <li><strong>deliveryFbs.getCarriageInfo()</strong> - Информация о перевозке</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="function-section">
+                        <h4>Маркировка товаров</h4>
+                        <ul>
+                            <li><strong>fbsRfbsMarks.createProductExemplar()</strong> - Создание экземпляра</li>
+                            <li><strong>fbsRfbsMarks.getProductExemplarList()</strong> - Список экземпляров</li>
+                            <li><strong>fbsRfbsMarks.uploadPostingCodes()</strong> - Загрузка кодов</li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div style="background: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 20px; border-radius: 12px; margin: 30px 0;">
+                <h3 style="margin-bottom: 15px;">💡 Советы по использованию</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Начинающим:</strong> Начните с Product API и FBS API для базовых операций</li>
+                    <li><strong>Premium Plus:</strong> Методы с желтым тегом требуют подписку Premium Plus</li>
+                    <li><strong>Поиск:</strong> Используйте поле поиска для быстрого нахождения нужной функции</li>
+                    <li><strong>Документация:</strong> Каждый метод имеет подробную документацию с примерами</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Функциональная навигация</strong> - Найдите нужный API метод по задаче</p>
+            <div>
+                <a href="./QUICK-START.html">🚀 Быстрый старт</a>
+                <a href="./README.html">📖 Руководство</a>
+                <a href="./API-INDEX.html">📑 Алфавитный индекс</a>
+                <a href="../index.html">🏠 Главная</a>
+            </div>
+            <p>Made with ❤️ for OZON Marketplace developers | DAYTONA</p>
+        </div>
+    </div>
+    
+    <script>
+        function searchFunctions() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const grid = document.getElementById('functionsGrid');
+            const cards = grid.getElementsByClassName('function-card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const text = card.textContent || card.innerText;
+                
+                if (text.toUpperCase().indexOf(filter) > -1) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🗂️ Category API - Управление категориями и характеристиками</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .folder-icon {
+            font-size: 4rem;
+            animation: folderBounce 2s ease-in-out infinite;
+            display: inline-block;
+            margin-right: 20px;
+            filter: drop-shadow(0 5px 15px rgba(102, 126, 234, 0.3));
+        }
+
+        @keyframes folderBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .endpoints-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .endpoint-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid;
+        }
+
+        .endpoint-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+        }
+
+        .endpoint-card.tree { border-left-color: #27ae60; }
+        .endpoint-card.attributes { border-left-color: #3498db; }
+        .endpoint-card.values { border-left-color: #e74c3c; }
+        .endpoint-card.search { border-left-color: #f39c12; }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .workflow-step {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .workflow-step:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .workflow-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 15px;
+        }
+
+        .tree-visualization {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border-left: 5px solid #27ae60;
+        }
+
+        .tree-node {
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #27ae60;
+            font-family: monospace;
+            position: relative;
+        }
+
+        .tree-node.disabled {
+            opacity: 0.5;
+            border-left-color: #e74c3c;
+        }
+
+        .tree-node.leaf {
+            border-left-color: #3498db;
+            font-weight: bold;
+        }
+
+        .attributes-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .attribute-stat {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .attribute-stat:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .validation-example {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border-left: 5px solid #27ae60;
+        }
+
+        .validation-result {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .validation-result.success {
+            border-left: 4px solid #27ae60;
+        }
+
+        .validation-result.error {
+            border-left: 4px solid #e74c3c;
+        }
+
+        .validation-result.warning {
+            border-left: 4px solid #f39c12;
+        }
+
+        pre[class*="language-"] {
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .code-block {
+            position: relative;
+        }
+
+        .code-block::before {
+            content: 'TypeScript';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            z-index: 10;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        .nav-button {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            color: white;
+        }
+
+        .nav-button.next {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        .limitations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .limitation-item {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #f39c12;
+            transition: all 0.3s ease;
+        }
+
+        .limitation-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(243, 156, 18, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header .folder-icon {
+                font-size: 2.5rem;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .workflow-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><span class="folder-icon">🗂️</span>Category API</h1>
+            <p class="subtitle">Управление категориями и характеристиками товаров OZON</p>
+            <div class="endpoints-grid">
+                <div class="endpoint-card tree">
+                    <h3>🌳 getCategoryTree</h3>
+                    <p>Полное дерево категорий и типов товаров</p>
+                    <code>/v1/description-category/tree</code>
+                </div>
+                <div class="endpoint-card attributes">
+                    <h3>📋 getCategoryAttributes</h3>
+                    <p>Характеристики категории</p>
+                    <code>/v1/description-category/attribute</code>
+                </div>
+                <div class="endpoint-card values">
+                    <h3>📖 getCategoryAttributeValues</h3>
+                    <p>Значения характеристики с пагинацией</p>
+                    <code>/v1/description-category/attribute/values</code>
+                </div>
+                <div class="endpoint-card search">
+                    <h3>🔍 searchCategoryAttributeValues</h3>
+                    <p>Поиск значений характеристики</p>
+                    <code>/v1/description-category/attribute/values/search</code>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Start -->
+        <div class="content-section">
+            <h2>🚀 Быстрый старт</h2>
+            
+            <div class="workflow-steps">
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <h3>Получить дерево</h3>
+                    <p>Загрузить полную структуру категорий OZON</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <h3>Найти категорию</h3>
+                    <p>Выбрать конечную категорию для товара</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <h3>Получить атрибуты</h3>
+                    <p>Изучить характеристики категории</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">4</div>
+                    <h3>Валидировать товар</h3>
+                    <p>Проверить обязательные поля</p>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <pre><code class="language-typescript">import { OzonSellerAPI } from 'daytona-ozon-seller-api';
+
+const client = new OzonSellerAPI({
+  clientId: 'your-client-id',
+  apiKey: 'your-api-key'
+});
+
+// Базовый workflow работы с категориями
+try {
+  // 1. Получить дерево категорий
+  const categoryTree = await client.category.getCategoryTree({
+    language: 'RU'
+  });
+
+  console.log('🌳 Дерево категорий загружено');
+
+  // 2. Найти категории для создания товаров (конечные узлы)
+  const findLeafCategories = (items: any[]): any[] => {
+    const leafCategories: any[] = [];
+    items.forEach(item => {
+      if ((!item.children || item.children.length === 0) && !item.disabled) {
+        leafCategories.push(item);
+      } else if (item.children) {
+        leafCategories.push(...findLeafCategories(item.children));
+      }
+    });
+    return leafCategories;
+  };
+
+  const leafCategories = findLeafCategories(categoryTree.result || []);
+  console.log(`📂 Доступно категорий для создания товаров: ${leafCategories.length}`);
+
+  if (leafCategories.length > 0) {
+    const selectedCategory = leafCategories[0];
+    console.log(`\n🎯 Выбрана категория: ${selectedCategory.category_name}`);
+    console.log(`   ID категории: ${selectedCategory.description_category_id}`);
+    console.log(`   ID типа: ${selectedCategory.type_id}`);
+
+    // 3. Получить характеристики категории
+    const attributes = await client.category.getCategoryAttributes({
+      description_category_id: selectedCategory.description_category_id,
+      type_id: selectedCategory.type_id,
+      language: 'RU'
+    });
+
+    console.log(`\n📋 Характеристик в категории: ${attributes.result?.length || 0}`);
+
+    // 4. Найти характеристики со справочниками значений
+    const dictionaryAttributes = attributes.result?.filter(attr => 
+      attr.dictionary_id && attr.dictionary_id > 0
+    ) || [];
+
+    console.log(`📖 Характеристик со справочниками: ${dictionaryAttributes.length}`);
+  }
+
+} catch (error) {
+  console.error('❌ Ошибка работы с категориями:', error);
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- Category Tree Visualization -->
+        <div class="content-section">
+            <h2>🌳 Структура дерева категорий</h2>
+            
+            <div class="tree-visualization">
+                <h3>Пример структуры категорий</h3>
+                <div class="tree-node">📂 Одежда, обувь и аксессуары</div>
+                <div class="tree-node" style="margin-left: 20px;">📂 Женская одежда</div>
+                <div class="tree-node leaf" style="margin-left: 40px;">👗 Платья (ID: 15621)</div>
+                <div class="tree-node leaf" style="margin-left: 40px;">👚 Блузы и рубашки (ID: 15623)</div>
+                <div class="tree-node disabled" style="margin-left: 40px;">❌ Винтажная одежда (отключена)</div>
+                <div class="tree-node" style="margin-left: 20px;">📂 Мужская одежда</div>
+                <div class="tree-node leaf" style="margin-left: 40px;">👔 Рубашки (ID: 15641)</div>
+            </div>
+
+            <div class="attributes-dashboard">
+                <div class="attribute-stat">
+                    <div class="stat-value">15,000+</div>
+                    <div class="stat-label">Всего категорий</div>
+                </div>
+                <div class="attribute-stat">
+                    <div class="stat-value">8,500+</div>
+                    <div class="stat-label">Конечных категорий</div>
+                </div>
+                <div class="attribute-stat">
+                    <div class="stat-value">7,200+</div>
+                    <div class="stat-label">Доступно для товаров</div>
+                </div>
+                <div class="attribute-stat">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">Максимальная глубина</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attributes Analysis -->
+        <div class="content-section">
+            <h2>📋 Анализ характеристик категории</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🔴 Обязательные</h3>
+                    <p>Характеристики, которые должны быть заполнены при создании товара. Отмечены флагом <code>is_required: true</code></p>
+                </div>
+                <div class="feature-card">
+                    <h3>📖 Справочники</h3>
+                    <p>Характеристики с предопределенными значениями. <code>dictionary_id > 0</code> указывает на наличие справочника</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🏷️ Аспектные</h3>
+                    <p>Используются для фильтрации товаров на сайте. Отмечены флагом <code>is_aspect: true</code></p>
+                </div>
+                <div class="feature-card">
+                    <h3>📦 Коллекции</h3>
+                    <p>Могут содержать несколько значений одновременно. <code>is_collection: true</code></p>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <pre><code class="language-typescript">// Анализ характеристик категории
+const analyzeCategoryAttributes = async (categoryId: number, typeId: number) => {
+  try {
+    const attributes = await client.category.getCategoryAttributes({
+      description_category_id: categoryId,
+      type_id: typeId,
+      language: 'RU'
+    });
+    
+    const analysis = {
+      total: attributes.result?.length || 0,
+      required: 0,
+      optional: 0,
+      collections: 0,
+      aspects: 0,
+      withDictionary: 0,
+      withoutDictionary: 0,
+      groups: new Set<string>()
+    };
+    
+    const requiredAttributes: any[] = [];
+    const dictionaryAttributes: any[] = [];
+    
+    attributes.result?.forEach(attr => {
+      // Базовая статистика
+      if (attr.is_required) {
+        analysis.required++;
+        requiredAttributes.push(attr);
+      } else {
+        analysis.optional++;
+      }
+      
+      if (attr.is_collection) analysis.collections++;
+      if (attr.is_aspect) analysis.aspects++;
+      
+      // Справочники
+      if (attr.dictionary_id && attr.dictionary_id > 0) {
+        analysis.withDictionary++;
+        dictionaryAttributes.push(attr);
+      } else {
+        analysis.withoutDictionary++;
+      }
+      
+      // Группы
+      if (attr.group_name) {
+        analysis.groups.add(attr.group_name);
+      }
+    });
+    
+    console.log('📊 Анализ характеристик категории:');
+    console.log(`   Всего характеристик: ${analysis.total}`);
+    console.log(`   Обязательных: ${analysis.required}`);
+    console.log(`   Необязательных: ${analysis.optional}`);
+    console.log(`   Со справочником: ${analysis.withDictionary}`);
+    console.log(`   Групп характеристик: ${analysis.groups.size}`);
+    
+    return { analysis, requiredAttributes, dictionaryAttributes };
+    
+  } catch (error) {
+    console.error('❌ Ошибка анализа характеристик:', error);
+  }
+};</code></pre>
+            </div>
+        </div>
+
+        <!-- Validation Example -->
+        <div class="content-section">
+            <h2>✅ Валидация товара</h2>
+            
+            <div class="validation-example">
+                <h3>Пример валидации товара для категории</h3>
+                <div class="validation-result success">
+                    <span>✅</span>
+                    <div>
+                        <strong>Валидация успешна</strong><br>
+                        Все обязательные характеристики заполнены корректно
+                    </div>
+                </div>
+                <div class="validation-result error">
+                    <span>❌</span>
+                    <div>
+                        <strong>Ошибка валидации</strong><br>
+                        Отсутствует обязательная характеристика: "Цвет"
+                    </div>
+                </div>
+                <div class="validation-result warning">
+                    <span>⚠️</span>
+                    <div>
+                        <strong>Предупреждение</strong><br>
+                        Значение "темно-синий" не найдено в справочнике цветов
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <pre><code class="language-typescript">// Валидация товара по категории
+const validateProductForCategory = async (categoryId: number, typeId: number, productData: any) => {
+  try {
+    const attributes = await client.category.getCategoryAttributes({
+      description_category_id: categoryId,
+      type_id: typeId,
+      language: 'RU'
+    });
+    
+    const requiredAttributes = attributes.result?.filter(attr => attr.is_required) || [];
+    const errors: string[] = [];
+    const warnings: string[] = [];
+    
+    console.log(`🔍 Валидация товара для категории ${categoryId}...`);
+    
+    // Проверка обязательных характеристик
+    for (const attr of requiredAttributes) {
+      const value = productData[attr.name] || productData[attr.id];
+      
+      if (!value) {
+        errors.push(`Отсутствует обязательная характеристика: ${attr.name}`);
+      } else if (attr.dictionary_id && attr.dictionary_id > 0) {
+        // Проверка значения из справочника
+        try {
+          const searchResult = await client.category.searchCategoryAttributeValues({
+            attribute_id: attr.id,
+            description_category_id: categoryId,
+            type_id: typeId,
+            value: value.toString(),
+            limit: 1
+          });
+          
+          const exactMatch = searchResult.result?.find(v => 
+            v.value?.toLowerCase() === value.toString().toLowerCase()
+          );
+          
+          if (!exactMatch) {
+            warnings.push(`Значение "${value}" не найдено в справочнике для "${attr.name}"`);
+          }
+        } catch (error) {
+          warnings.push(`Не удалось проверить значение для "${attr.name}"`);
+        }
+      }
+    }
+    
+    const isValid = errors.length === 0;
+    
+    console.log(`${isValid ? '✅' : '❌'} Валидация завершена:`);
+    console.log(`   Ошибок: ${errors.length}`);
+    console.log(`   Предупреждений: ${warnings.length}`);
+    
+    return { isValid, errors, warnings, requiredAttributesCount: requiredAttributes.length };
+    
+  } catch (error) {
+    console.error('❌ Ошибка валидации товара:', error);
+    return {
+      isValid: false,
+      errors: [`Ошибка валидации: ${error.message}`],
+      warnings: [],
+      requiredAttributesCount: 0
+    };
+  }
+};</code></pre>
+            </div>
+        </div>
+
+        <!-- Limitations -->
+        <div class="content-section">
+            <h2>⚠️ Ограничения и особенности</h2>
+            
+            <div class="limitations-grid">
+                <div class="limitation-item">
+                    <h3>🌳 Дерево категорий</h3>
+                    <ul>
+                        <li>Создание товаров только в конечных категориях</li>
+                        <li>Отключенные категории помечены флагом <code>disabled</code></li>
+                        <li>Разные размеры комиссии OZON</li>
+                    </ul>
+                </div>
+                <div class="limitation-item">
+                    <h3>📋 Характеристики</h3>
+                    <ul>
+                        <li>Обязательные должны быть заполнены</li>
+                        <li>Справочники: <code>dictionary_id > 0</code></li>
+                        <li>Аспектные для фильтрации на сайте</li>
+                        <li>Коллекции содержат несколько значений</li>
+                    </ul>
+                </div>
+                <div class="limitation-item">
+                    <h3>📄 Лимиты и пагинация</h3>
+                    <ul>
+                        <li>Значения характеристик: максимум 2000 за запрос</li>
+                        <li>Поиск значений: максимум 100 результатов</li>
+                        <li>Минимум 2 символа в поисковом запросе</li>
+                        <li>Пагинация через <code>last_value_id</code></li>
+                    </ul>
+                </div>
+                <div class="limitation-item">
+                    <h3>🌍 Языки и локализация</h3>
+                    <ul>
+                        <li>🇷🇺 RU: русский (по умолчанию)</li>
+                        <li>🇬🇧 EN: английский</li>
+                        <li>🇹🇷 TR: турецкий</li>
+                        <li>🇨🇳 ZH_HANS: китайский упрощенный</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <a href="10-brand.html" class="nav-button prev">
+                ← Предыдущая: Brand API
+            </a>
+            <a href="12-certification.html" class="nav-button next">
+                Следующая: Certification API →
+            </a>
+        </div>
+
+        <div style="text-align:center; margin: 20px 0;">
+            <a href="../api-categories-index.html" style="display:inline-block;padding:10px 16px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">📚 Категории</a>
+            <a href="../API-INDEX.html" style="display:inline-block;padding:10px 16px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">📑 Индекс API</a>
+            <a href="../QUICK-START.html" style="display:inline-block;padding:10px 16px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">🚀 Быстрый старт</a>
+            <a href="../FAQ.html" style="display:inline-block;padding:10px 16px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">❓ FAQ</a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    
+    <script>
+        // Add line numbers to all code blocks
+        document.querySelectorAll('pre[class*="language-"]').forEach(pre => {
+            pre.classList.add('line-numbers');
+        });
+
+        // Category tree interactive exploration
+        const treeNodes = document.querySelectorAll('.tree-node');
+        treeNodes.forEach(node => {
+            node.addEventListener('click', function() {
+                if (this.classList.contains('leaf')) {
+                    this.style.background = 'linear-gradient(135deg, #e8f5e8, #d4edda)';
+                    this.style.transform = 'scale(1.02)';
+                    
+                    setTimeout(() => {
+                        this.style.background = 'white';
+                        this.style.transform = 'scale(1)';
+                    }, 500);
+                }
+            });
+        });
+
+        // Animate statistics on scroll
+        const observeStats = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statValue = entry.target.querySelector('.stat-value');
+                    if (statValue && !statValue.hasAttribute('data-animated')) {
+                        const finalValue = statValue.textContent;
+                        const numValue = parseInt(finalValue.replace(/[^\d]/g, ''));
+                        let currentValue = 0;
+                        const increment = numValue / 30;
+                        
+                        const timer = setInterval(() => {
+                            currentValue += increment;
+                            if (currentValue >= numValue) {
+                                statValue.textContent = finalValue;
+                                clearInterval(timer);
+                            } else {
+                                statValue.textContent = Math.floor(currentValue).toLocaleString() + (finalValue.includes('+') ? '+' : '');
+                            }
+                        }, 50);
+                        
+                        statValue.setAttribute('data-animated', 'true');
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.attribute-stat').forEach(stat => {
+            observeStats.observe(stat);
+        });
+
+        // Enhanced folder icon animation
+        const folderIcon = document.querySelector('.folder-icon');
+        folderIcon.addEventListener('mouseenter', function() {
+            this.style.transform = 'rotateY(180deg) scale(1.1)';
+            this.style.transition = 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        });
+        
+        folderIcon.addEventListener('mouseleave', function() {
+            this.style.transform = 'rotateY(0deg) scale(1)';
+        });
+    </script>
+</body>
+</html>

@@ -40,7 +40,7 @@ src/
 ### Конфигурация клиента
 ```typescript
 // src/lib/ozon-client.ts
-import { OzonSellerAPI } from 'bmad-ozon-seller-api';
+import { OzonSellerAPI } from 'daytona-ozon-seller-api';
 
 const api = new OzonSellerAPI({
   clientId: process.env.OZON_CLIENT_ID!,
@@ -226,7 +226,7 @@ src/
 ### Сервис для OZON API
 ```typescript
 // src/services/ozonService.ts
-import { OzonSellerAPI } from 'bmad-ozon-seller-api';
+import { OzonSellerAPI } from 'daytona-ozon-seller-api';
 
 class OzonService {
   private api: OzonSellerAPI;
@@ -448,7 +448,7 @@ export class OzonModule {}
 // src/ozon/ozon.service.ts
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { OzonSellerAPI } from 'bmad-ozon-seller-api';
+import { OzonSellerAPI } from 'daytona-ozon-seller-api';
 
 @Injectable()
 export class OzonService {
@@ -664,7 +664,7 @@ custom:
 ```typescript
 // src/handlers/products.ts
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
-import { OzonSellerAPI } from 'bmad-ozon-seller-api';
+import { OzonSellerAPI } from 'daytona-ozon-seller-api';
 
 const api = new OzonSellerAPI({
   clientId: process.env.OZON_CLIENT_ID!,
@@ -763,7 +763,7 @@ export const updatePrices = async (
 ```typescript
 // src/handlers/orders.ts
 import { ScheduledEvent, APIGatewayProxyEventV2 } from 'aws-lambda';
-import { OzonSellerAPI } from 'bmad-ozon-seller-api';
+import { OzonSellerAPI } from 'daytona-ozon-seller-api';
 
 const api = new OzonSellerAPI({
   clientId: process.env.OZON_CLIENT_ID!,
@@ -1148,7 +1148,17 @@ export class OzonAPILogger {
 - ✅ **Масштабируемость** - архитектура для роста проекта
 - ✅ **Безопасность** - лучшие практики защиты API
 
+## 📚 Дополнительная информация
+
 Для дополнительной информации обратитесь к:
-- **[Быстрый старт](./QUICK-START.md)** - основы работы с SDK
+- **[Быстрый старт](./QUICK-START.md)** - основы работы с SDK  
 - **[Интеграционные паттерны](./INTEGRATION-PATTERNS.md)** - архитектурные решения
 - **[API документация](./README.md)** - полное руководство по API
+- **[GitHub репозиторий](https://github.com/salacoste/ozon-daytona-seller-api)** - исходный код и Issues
+- **[NPM пакет](https://www.npmjs.com/package/daytona-ozon-seller-api)** - установка и обновления
+
+## 🔗 Поддержка
+
+- **Issues**: https://github.com/salacoste/ozon-daytona-seller-api/issues  
+- **Discussions**: https://github.com/salacoste/ozon-daytona-seller-api/discussions
+- **Pull Requests**: https://github.com/salacoste/ozon-daytona-seller-api/pulls

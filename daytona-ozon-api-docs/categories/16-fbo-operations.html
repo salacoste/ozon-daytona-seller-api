@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FBO Operations — Склады и постинги | OZON Seller API SDK | DAYTONA</title>
+  <meta name="description" content="FBO Operations — доступность складов OZON и операции с FBO постингами: получение постинга и списка постингов, причины отмены">
+  <link rel="icon" type="image/png" href="../image.png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f8f9fa}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .header{background:linear-gradient(135deg,#2c3e50 0%,#3498db 100%);color:#fff;text-align:center;padding:30px 0;margin-bottom:30px;border-radius:15px}
+    .breadcrumb{margin-bottom:15px}
+    .breadcrumb a{color:rgba(255,255,255,.85);text-decoration:none}
+    .content{background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+    .method-table{width:100%;border-collapse:collapse;margin:16px 0 28px;border:2px solid #e9ecef;border-radius:10px;overflow:hidden}
+    .method-table th{background:#3498db;color:#fff;padding:10px 12px;text-align:left}
+    .method-table td{padding:9px 12px;border-bottom:1px solid #e9ecef}
+    .method-table tr:hover{background:#f8f9fa}
+    .code-block{background:#2d3748;color:#e2e8f0;padding:16px;border-radius:8px;margin:15px 0;overflow-x:auto;font-family:Monaco,Consolas,ui-monospace,monospace;font-size:.92em}
+    .links{margin:20px 0 10px}
+    .links a{display:inline-block;margin:6px 8px 0 0;padding:8px 14px;background:#ecf5ff;color:#1565c0;border-radius:18px;text-decoration:none}
+    .links a:hover{background:#d7ebff}
+    .nav-links{text-align:center;margin-top:30px}
+    .nav-btn{display:inline-block;padding:10px 18px;margin:0 6px;background:#3498db;color:#fff;text-decoration:none;border-radius:20px;font-weight:500}
+    .nav-btn.secondary{background:#6c757d}
+    .nav-btn:hover{background:#2a80b9;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="breadcrumb">
+        <a href="../../index.html">🏠 Главная</a> /
+        <a href="../README.html">📖 Документация</a> /
+        <a href="../api-categories-index.html">📚 Категории</a> /
+        <a href="16-fbo.html">🏢 FBO</a> /
+        <span>Operations</span>
+      </div>
+      <h1>🏭 FBO — Склады и постинги</h1>
+      <p>Доступность складов и операции с постингами FBO</p>
+    </div>
+
+    <div class="content">
+      <div class="links">
+        <a href="16-fbo.html">Обзор FBO</a>
+        <a href="16-fbo-supply.html">FBO Supply</a>
+        <a href="16-fbo-timeslot.html">Timeslot & Logistics</a>
+      </div>
+
+      <h2>📋 Методы (4)</h2>
+      <table class="method-table">
+        <thead><tr><th>Метод</th><th>Endpoint</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><code>getWarehouseAvailability</code></td><td><code>/v1/fbo/warehouse/availability</code></td><td>Доступность и ёмкость складов</td></tr>
+          <tr><td><code>getPosting</code></td><td><code>/v1/fbo/posting/get</code></td><td>Детали постинга FBO</td></tr>
+          <tr><td><code>getPostingsList</code></td><td><code>/v1/fbo/posting/list</code></td><td>Список постингов FBO</td></tr>
+          <tr><td><code>getCancelReasons</code></td><td><code>/v1/fbo/posting/cancel-reasons</code></td><td>Причины отмены</td></tr>
+        </tbody>
+      </table>
+
+      <h2>🚀 Пример</h2>
+      <div class="code-block"><pre><code>// Получить доступные склады и список постингов
+const wa = await api.fbo.getWarehouseAvailability();
+const posts = await api.fbo.getPostingsList({
+  since: '2024-01-01T00:00:00Z',
+  to: '2024-01-31T23:59:59Z',
+  filter: { status: ['shipped','delivered'] },
+  limit: 100
+});
+</code></pre></div>
+
+      <div class="nav-links">
+        <a class="nav-btn secondary" href="../api-categories-index.html">📚 Все категории</a>
+        <a class="nav-btn" href="16-fbo-supply.html">📦 FBO Supply</a>
+        <a class="nav-btn" href="16-fbo-timeslot.html">⏰ Timeslot & Logistics</a>
+        <a class="nav-btn" href="17-fbo-supply-request.html">➡️ 17. FBO Supply Request</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

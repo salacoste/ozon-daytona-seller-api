@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚙️ Интеграция с фреймворками | OZON Seller API SDK | DAYTONA</title>
+    
+    <meta name="description" content="Готовые примеры интеграции OZON Seller API SDK с популярными фреймворками">
+    <meta name="keywords" content="ozon api, интеграция, react, nextjs, express, nestjs, vue, svelte">
+    
+    <link rel="icon" type="image/png" href="./image.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .nav-links a {
+            display: inline-block;
+            margin: 5px 15px;
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .framework-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .framework-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #007bff;
+        }
+        
+        .framework-card h3 {
+            color: #007bff;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .framework-card h3 .emoji {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .framework-description {
+            margin-bottom: 20px;
+            color: #6c757d;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            line-height: 1.5;
+            font-size: 0.85em;
+        }
+        
+        .highlight {
+            color: #68d391;
+            font-weight: bold;
+        }
+        
+        .string {
+            color: #fbb6ce;
+        }
+        
+        .comment {
+            color: #a0aec0;
+            font-style: italic;
+        }
+        
+        .keyword {
+            color: #63b3ed;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        
+        .feature-list li {
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 6px;
+            border-left: 3px solid #007bff;
+            font-size: 0.9em;
+        }
+        
+        .feature-list li strong {
+            color: #007bff;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
+            margin: 20px 0 0 0;
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+            color: #6c757d;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            background: #007bff;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 0 0 8px 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            line-height: 1.5;
+            font-size: 0.85em;
+            overflow-x: auto;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+        
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚙️ Интеграция с фреймворками</h1>
+            <p>Готовые примеры для популярных фреймворков | DAYTONA</p>
+        </div>
+        
+        <div class="nav-links">
+            <a href="./QUICK-START.html">🚀 Быстрый старт</a>
+            <a href="./README.html">📖 Полное руководство</a>
+            <a href="./API-INDEX.html">📑 Индекс API</a>
+            <a href="./FAQ.html">❓ FAQ</a>
+            <a href="../index.html">🏠 Главная</a>
+        </div>
+        
+        <div class="content">
+            <div class="info">
+                <strong>🎯 Цель:</strong> Этот раздел содержит готовые примеры интеграции OZON Seller API SDK с популярными JavaScript/TypeScript фреймворками и платформами.
+            </div>
+            
+            <div class="framework-grid">
+                
+                <!-- Next.js -->
+                <div class="framework-card">
+                    <h3><span class="emoji">⚛️</span>Next.js + React</h3>
+                    <div class="framework-description">
+                        Современный React фреймворк с поддержкой SSR, API Routes и статической генерации
+                    </div>
+                    
+                    <div class="feature-list">
+                        <li><strong>API Routes</strong> - серверные эндпоинты</li>
+                        <li><strong>React Hooks</strong> - интеграция с компонентами</li>
+                        <li><strong>Middleware</strong> - аутентификация и кеширование</li>
+                        <li><strong>TypeScript</strong> - полная поддержка типов</li>
+                    </div>
+                    
+                    <div class="tabs">
+                        <button class="tab active" onclick="showTab(event, 'nextjs-client')">Client</button>
+                        <button class="tab" onclick="showTab(event, 'nextjs-api')">API Route</button>
+                        <button class="tab" onclick="showTab(event, 'nextjs-hook')">Hook</button>
+                    </div>
+                    
+                    <div id="nextjs-client" class="tab-content active">
+                        <code><span class="comment">// lib/ozon-client.ts</span>
+<span class="highlight">import</span> { <span class="highlight">OzonSellerAPI</span> } <span class="highlight">from</span> <span class="string">'daytona-ozon-seller-api'</span>;
+
+<span class="highlight">export</span> <span class="highlight">const</span> ozonApi = <span class="highlight">new</span> <span class="highlight">OzonSellerAPI</span>({
+  clientId: process.env.OZON_CLIENT_ID!,
+  apiKey: process.env.OZON_API_KEY!,
+  timeout: <span class="string">30000</span>,
+  debug: process.env.NODE_ENV === <span class="string">'development'</span>
+});</code>
+                    </div>
+                    
+                    <div id="nextjs-api" class="tab-content">
+                        <code><span class="comment">// pages/api/products.ts</span>
+<span class="highlight">import</span> <span class="keyword">type</span> { <span class="highlight">NextApiRequest</span>, <span class="highlight">NextApiResponse</span> } <span class="highlight">from</span> <span class="string">'next'</span>;
+<span class="highlight">import</span> { ozonApi } <span class="highlight">from</span> <span class="string">'../../lib/ozon-client'</span>;
+
+<span class="highlight">export</span> <span class="highlight">default</span> <span class="highlight">async function</span> handler(
+  req: <span class="highlight">NextApiRequest</span>,
+  res: <span class="highlight">NextApiResponse</span>
+) {
+  <span class="highlight">if</span> (req.method === <span class="string">'GET'</span>) {
+    <span class="highlight">try</span> {
+      <span class="highlight">const</span> products = <span class="highlight">await</span> ozonApi.product.getList({
+        limit: <span class="string">20</span>
+      });
+      res.status(<span class="string">200</span>).json(products);
+    } <span class="highlight">catch</span> (error) {
+      res.status(<span class="string">500</span>).json({ error: error.message });
+    }
+  }
+}</code>
+                    </div>
+                    
+                    <div id="nextjs-hook" class="tab-content">
+                        <code><span class="comment">// hooks/useProducts.ts</span>
+<span class="highlight">import</span> { useState, useEffect } <span class="highlight">from</span> <span class="string">'react'</span>;
+
+<span class="highlight">export</span> <span class="highlight">function</span> useProducts() {
+  <span class="highlight">const</span> [products, setProducts] = useState([]);
+  <span class="highlight">const</span> [loading, setLoading] = useState(<span class="string">true</span>);
+  
+  useEffect(() => {
+    fetch(<span class="string">'/api/products'</span>)
+      .then(<span class="highlight">res</span> => res.json())
+      .then(setProducts)
+      .finally(() => setLoading(<span class="string">false</span>));
+  }, []);
+  
+  <span class="highlight">return</span> { products, loading };
+}</code>
+                    </div>
+                </div>
+                
+                <!-- Express.js -->
+                <div class="framework-card">
+                    <h3><span class="emoji">🚀</span>Express.js</h3>
+                    <div class="framework-description">
+                        Минималистичный веб-фреймворк для Node.js с поддержкой middleware и роутинга
+                    </div>
+                    
+                    <div class="feature-list">
+                        <li><strong>REST API</strong> - создание API сервиса</li>
+                        <li><strong>Middleware</strong> - аутентификация и валидация</li>
+                        <li><strong>Error Handling</strong> - централизованная обработка ошибок</li>
+                        <li><strong>Rate Limiting</strong> - защита от спама</li>
+                    </div>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// server.js</span>
+<span class="highlight">import</span> express <span class="highlight">from</span> <span class="string">'express'</span>;
+<span class="highlight">import</span> { <span class="highlight">OzonSellerAPI</span> } <span class="highlight">from</span> <span class="string">'daytona-ozon-seller-api'</span>;
+
+<span class="highlight">const</span> app = express();
+<span class="highlight">const</span> ozonApi = <span class="highlight">new</span> <span class="highlight">OzonSellerAPI</span>({
+  clientId: process.env.OZON_CLIENT_ID,
+  apiKey: process.env.OZON_API_KEY
+});
+
+<span class="comment">// Middleware</span>
+app.use(express.json());
+
+<span class="comment">// Routes</span>
+app.get(<span class="string">'/api/products'</span>, <span class="highlight">async</span> (req, res) => {
+  <span class="highlight">try</span> {
+    <span class="highlight">const</span> products = <span class="highlight">await</span> ozonApi.product.getList({
+      limit: parseInt(req.query.limit) || <span class="string">20</span>
+    });
+    res.json(products);
+  } <span class="highlight">catch</span> (error) {
+    res.status(<span class="string">500</span>).json({ error: error.message });
+  }
+});
+
+app.listen(<span class="string">3000</span>, () => {
+  console.log(<span class="string">'Server running on port 3000'</span>);
+});</code>
+                    </div>
+                </div>
+                
+                <!-- NestJS -->
+                <div class="framework-card">
+                    <h3><span class="emoji">🏗️</span>NestJS</h3>
+                    <div class="framework-description">
+                        Enterprise Node.js фреймворк с TypeScript, декораторами и dependency injection
+                    </div>
+                    
+                    <div class="feature-list">
+                        <li><strong>Dependency Injection</strong> - IoC контейнер</li>
+                        <li><strong>Decorators</strong> - метапрограммирование</li>
+                        <li><strong>Guards & Pipes</strong> - валидация и авторизация</li>
+                        <li><strong>Modules</strong> - модульная архитектура</li>
+                    </div>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// ozon.service.ts</span>
+<span class="highlight">import</span> { Injectable } <span class="highlight">from</span> <span class="string">'@nestjs/common'</span>;
+<span class="highlight">import</span> { <span class="highlight">OzonSellerAPI</span> } <span class="highlight">from</span> <span class="string">'daytona-ozon-seller-api'</span>;
+
+<span class="highlight">@Injectable()</span>
+<span class="highlight">export</span> <span class="highlight">class</span> <span class="highlight">OzonService</span> {
+  <span class="highlight">private</span> <span class="highlight">readonly</span> api: <span class="highlight">OzonSellerAPI</span>;
+
+  <span class="highlight">constructor</span>() {
+    <span class="highlight">this</span>.api = <span class="highlight">new</span> <span class="highlight">OzonSellerAPI</span>({
+      clientId: process.env.OZON_CLIENT_ID,
+      apiKey: process.env.OZON_API_KEY
+    });
+  }
+
+  <span class="highlight">async</span> getProducts(limit: <span class="highlight">number</span> = <span class="string">20</span>) {
+    <span class="highlight">return</span> <span class="highlight">await</span> <span class="highlight">this</span>.api.product.getList({ limit });
+  }
+
+  <span class="highlight">async</span> updatePrices(priceUpdates: PriceUpdate[]) {
+    <span class="highlight">return</span> <span class="highlight">await</span> <span class="highlight">this</span>.api.pricesStocks.updatePrices(priceUpdates);
+  }
+}</code>
+                    </div>
+                </div>
+                
+                <!-- Vue.js -->
+                <div class="framework-card">
+                    <h3><span class="emoji">💚</span>Vue.js + Nuxt</h3>
+                    <div class="framework-description">
+                        Прогрессивный фреймворк для создания пользовательских интерфейсов
+                    </div>
+                    
+                    <div class="feature-list">
+                        <li><strong>Composition API</strong> - современный API</li>
+                        <li><strong>Reactivity</strong> - реактивность из коробки</li>
+                        <li><strong>Server Middleware</strong> - серверная логика</li>
+                        <li><strong>Auto-imports</strong> - автоматические импорты</li>
+                    </div>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// composables/useOzon.ts</span>
+<span class="highlight">import</span> { <span class="highlight">OzonSellerAPI</span> } <span class="highlight">from</span> <span class="string">'daytona-ozon-seller-api'</span>;
+
+<span class="highlight">export</span> <span class="highlight">const</span> useOzon = () => {
+  <span class="highlight">const</span> config = useRuntimeConfig();
+  
+  <span class="highlight">const</span> api = <span class="highlight">new</span> <span class="highlight">OzonSellerAPI</span>({
+    clientId: config.ozonClientId,
+    apiKey: config.ozonApiKey
+  });
+
+  <span class="highlight">const</span> products = ref([]);
+  <span class="highlight">const</span> loading = ref(<span class="string">false</span>);
+
+  <span class="highlight">const</span> fetchProducts = <span class="highlight">async</span> () => {
+    loading.value = <span class="string">true</span>;
+    <span class="highlight">try</span> {
+      <span class="highlight">const</span> result = <span class="highlight">await</span> api.product.getList({ limit: <span class="string">20</span> });
+      products.value = result.result?.items || [];
+    } <span class="highlight">finally</span> {
+      loading.value = <span class="string">false</span>;
+    }
+  };
+
+  <span class="highlight">return</span> {
+    products: readonly(products),
+    loading: readonly(loading),
+    fetchProducts
+  };
+};</code>
+                    </div>
+                </div>
+                
+                <!-- AWS Lambda -->
+                <div class="framework-card">
+                    <h3><span class="emoji">☁️</span>AWS Lambda</h3>
+                    <div class="framework-description">
+                        Serverless функции для обработки событий и создания API без управления серверами
+                    </div>
+                    
+                    <div class="feature-list">
+                        <li><strong>Event-driven</strong> - обработка событий</li>
+                        <li><strong>Auto-scaling</strong> - автомасштабирование</li>
+                        <li><strong>Pay per use</strong> - оплата за использование</li>
+                        <li><strong>Cold start optimization</strong> - оптимизация</li>
+                    </div>
+                    
+                    <div class="code-block">
+                        <code><span class="comment">// lambda/products.js</span>
+<span class="highlight">import</span> { <span class="highlight">OzonSellerAPI</span> } <span class="highlight">from</span> <span class="string">'daytona-ozon-seller-api'</span>;
+
+<span class="comment">// Initialize outside handler for connection reuse</span>
+<span class="highlight">const</span> ozonApi = <span class="highlight">new</span> <span class="highlight">OzonSellerAPI</span>({
+  clientId: process.env.OZON_CLIENT_ID,
+  apiKey: process.env.OZON_API_KEY,
+  timeout: <span class="string">25000</span> <span class="comment">// Lambda timeout - 5s</span>
+});
+
+<span class="highlight">export</span> <span class="highlight">const</span> handler = <span class="highlight">async</span> (event, context) => {
+  <span class="highlight">try</span> {
+    <span class="highlight">const</span> { limit = <span class="string">20</span> } = JSON.parse(event.body || <span class="string">'{}'</span>);
+    
+    <span class="highlight">const</span> products = <span class="highlight">await</span> ozonApi.product.getList({ limit });
+    
+    <span class="highlight">return</span> {
+      statusCode: <span class="string">200</span>,
+      headers: {
+        <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>,
+        <span class="string">'Access-Control-Allow-Origin'</span>: <span class="string">'*'</span>
+      },
+      body: JSON.stringify(products)
+    };
+  } <span class="highlight">catch</span> (error) {
+    <span class="highlight">return</span> {
+      statusCode: <span class="string">500</span>,
+      body: JSON.stringify({ error: error.message })
+    };
+  }
+};</code>
+                    </div>
+                </div>
+                
+                <!-- Docker -->
+                <div class="framework-card">
+                    <h3><span class="emoji">🐳</span>Docker</h3>
+                    <div class="framework-description">
+                        Контейнеризация приложений для изоляции и портируемости
+                    </div>
+                    
+                    <div class="feature-list">
+                        <li><strong>Multi-stage builds</strong> - оптимизированные образы</li>
+                        <li><strong>Environment variables</strong> - конфигурация</li>
+                        <li><strong>Health checks</strong> - мониторинг здоровья</li>
+                        <li><strong>Microservices</strong> - микросервисная архитектура</li>
+                    </div>
+                    
+                    <div class="code-block">
+                        <code><span class="comment"># Dockerfile</span>
+<span class="highlight">FROM</span> node:<span class="string">18-alpine</span> <span class="highlight">AS</span> builder
+
+<span class="highlight">WORKDIR</span> /app
+<span class="highlight">COPY</span> package*.json ./
+<span class="highlight">RUN</span> npm ci --only=production
+
+<span class="highlight">FROM</span> node:<span class="string">18-alpine</span>
+
+<span class="highlight">RUN</span> addgroup -g <span class="string">1001</span> -S nodejs
+<span class="highlight">RUN</span> adduser -S nextjs -u <span class="string">1001</span>
+
+<span class="highlight">WORKDIR</span> /app
+
+<span class="highlight">COPY</span> --from=builder /app/node_modules ./node_modules
+<span class="highlight">COPY</span> --chown=nextjs:nodejs . .
+
+<span class="highlight">USER</span> nextjs
+
+<span class="highlight">EXPOSE</span> <span class="string">3000</span>
+
+<span class="highlight">ENV</span> NODE_ENV=production
+
+<span class="highlight">CMD</span> [<span class="string">"npm"</span>, <span class="string">"start"</span>]</code>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="success">
+                <h3 style="margin-bottom: 15px;">🎯 Рекомендации по выбору</h3>
+                <div class="feature-list">
+                    <li><strong>Next.js</strong> - для fullstack веб-приложений с SSR</li>
+                    <li><strong>Express.js</strong> - для простых API сервисов</li>
+                    <li><strong>NestJS</strong> - для enterprise приложений</li>
+                    <li><strong>AWS Lambda</strong> - для serverless архитектуры</li>
+                    <li><strong>Docker</strong> - для любых приложений в production</li>
+                </div>
+            </div>
+            
+            <div class="warning">
+                <h3 style="margin-bottom: 15px;">⚠️ Важные моменты</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Переменные окружения:</strong> Никогда не храните API ключи в коде</li>
+                    <li><strong>Rate limiting:</strong> Соблюдайте лимиты OZON API (1000 запросов/мин)</li>
+                    <li><strong>Error handling:</strong> Всегда обрабатывайте ошибки API</li>
+                    <li><strong>Timeout:</strong> Устанавливайте разумные таймауты запросов</li>
+                </ul>
+            </div>
+            
+            <div class="info">
+                <h3 style="margin-bottom: 15px;">💡 Дополнительные ресурсы</h3>
+                <div class="feature-list">
+                    <li><strong>Примеры кода</strong> - <a href="https://github.com/salacoste/ozon-daytona-seller-api/tree/main/examples" target="_blank">GitHub Examples</a></li>
+                    <li><strong>TypeScript типы</strong> - Полная поддержка автодополнения</li>
+                    <li><strong>Тестирование</strong> - Моки и тестовые утилиты</li>
+                    <li><strong>Документация</strong> - <a href="./API-INDEX.html">Все 278 API методов</a></li>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Интеграция с фреймворками</strong> - Готовые примеры для популярных технологий</p>
+            <div>
+                <a href="./QUICK-START.html">🚀 Быстрый старт</a>
+                <a href="./README.html">📖 Руководство</a>
+                <a href="./FAQ.html">❓ FAQ</a>
+                <a href="../index.html">🏠 Главная</a>
+            </div>
+            <p>Made with ❤️ for OZON Marketplace developers | DAYTONA</p>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(event, tabId) {
+            // Hide all tab contents
+            const tabContents = event.target.parentElement.parentElement.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            const tabs = event.target.parentElement.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content and mark tab as active
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

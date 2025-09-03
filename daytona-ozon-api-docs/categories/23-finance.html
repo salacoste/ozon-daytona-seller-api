@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>23. Финансы — Отчёты и транзакции | DAYTONA</title>
+  <meta name="description" content="Финансы — компенсации, реализация, B2B, взаиморасчёты и транзакции (10 методов)">
+  <link rel="icon" type="image/png" href="../image.png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f8f9fa}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .header{background:linear-gradient(135deg,#28a745 0%,#20c997 100%);color:#fff;text-align:center;padding:30px 0;margin-bottom:30px;border-radius:15px}
+    .breadcrumb{margin-bottom:15px}
+    .breadcrumb a{color:rgba(255,255,255,.85);text-decoration:none}
+    .content{background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+    .method-table{width:100%;border-collapse:collapse;margin:16px 0 28px;border:2px solid #e9ecef;border-radius:10px;overflow:hidden}
+    .method-table th{background:#28a745;color:#fff;padding:10px 12px;text-align:left}
+    .method-table td{padding:9px 12px;border-bottom:1px solid #e9ecef}
+    .highlight{background:#fff3cd;padding:12px 16px;border-left:4px solid #ffc107;margin:16px 0}
+    .code-block{background:#2d3748;color:#e2e8f0;padding:16px;border-radius:8px;margin:15px 0;overflow-x:auto;font-family:Monaco,Consolas,ui-monospace,monospace;font-size:.92em}
+    .nav-links{text-align:center;margin-top:30px}
+    .nav-btn{display:inline-block;padding:10px 18px;margin:0 6px;background:#28a745;color:#fff;text-decoration:none;border-radius:20px;font-weight:500}
+    .nav-btn.secondary{background:#6c757d}
+    .nav-btn:hover{background:#1e7e34;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="breadcrumb"><a href="../../index.html">🏠 Главная</a> / <a href="../api-categories-index.html">📚 Категории</a> / <span>23. Финансы</span></div>
+      <h1>23. API Финансы</h1>
+      <p>Компенсации, реализация, B2B, взаиморасчёты и транзакции</p>
+    </div>
+    <div class="content">
+      <div class="highlight"><strong>Особенности:</strong> период до 31 дня, форматы Excel/JSON/CSV, RU/EN, валюта RUB.</div>
+
+      <h2>📋 Методы (10)</h2>
+      <table class="method-table">
+        <thead><tr><th>Группа</th><th>Методы</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td>Компенсации</td><td>createCompensationReport, createDecompensationReport</td><td>Отчёты по компенсациям и декомпенсациям</td></tr>
+          <tr><td>B2B</td><td>createDocumentB2BSalesReport, createDocumentB2BSalesJSONReport</td><td>Реестр продаж юрлицам (Excel/JSON)</td></tr>
+          <tr><td>Взаиморасчёты</td><td>createMutualSettlementReport</td><td>Отчёт по взаиморасчётам</td></tr>
+          <tr><td>Реализация</td><td>getProductsBuyout, getRealizationReportPosting, getRealizationReportV2</td><td>Выкупы и реализационные отчёты</td></tr>
+          <tr><td>Транзакции</td><td>getTransactionList, getTransactionTotals</td><td>Операции и агрегаты v3</td></tr>
+        </tbody>
+      </table>
+
+      <h2>🚀 Быстрый пример</h2>
+      <div class="code-block"><pre><code>// Транзакции и итоги
+const tx = await api.finance.getTransactionList({
+  page: 1, page_size: 1000,
+  filter: { date: { from: '2024-01-01', to: '2024-01-31' } }
+});
+const totals = await api.finance.getTransactionTotals({
+  filter: { date: { from: '2024-01-01', to: '2024-01-31' } }
+});
+</code></pre></div>
+
+      <div class="nav-links">
+        <a class="nav-btn secondary" href="../api-categories-index.html">📚 Все категории</a>
+        <a class="nav-btn" href="22-prices-stocks.html">⬅️ 22. Цены и Остатки</a>
+        <a class="nav-btn" href="24-returns.html">➡️ 24. Возвраты</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

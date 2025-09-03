@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>32.x Бизнес-отчёты | DAYTONA</title>
+  <meta name="description" content="Создание бизнес-отчётов: уценка, отправления, товары, остатки FBS, возвраты">
+  <link rel="icon" type="image/png" href="../image.png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f8f9fa}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .header{background:linear-gradient(135deg,#20c997 0%,#0d6efd 100%);color:#fff;text-align:center;padding:30px 0;margin-bottom:30px;border-radius:15px}
+    .breadcrumb{margin-bottom:15px}
+    .breadcrumb a{color:rgba(255,255,255,.85);text-decoration:none}
+    .content{background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+    .method-table{width:100%;border-collapse:collapse;margin:16px 0 28px;border:2px solid #e9ecef;border-radius:10px;overflow:hidden}
+    .method-table th{background:#20c997;color:#fff;padding:10px 12px;text-align:left}
+    .method-table td{padding:9px 12px;border-bottom:1px solid #e9ecef}
+    .nav-links{text-align:center;margin-top:30px}
+    .nav-btn{display:inline-block;padding:10px 18px;margin:0 6px;background:#20c997;color:#fff;text-decoration:none;border-radius:20px;font-weight:500}
+    .nav-btn.secondary{background:#6c757d}
+    .nav-btn:hover{background:#17a185;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="breadcrumb"><a href="../../index.html">🏠 Главная</a> / <a href="../api-categories-index.html">📚 Категории</a> / <a href="32-report.html">32. Report</a> / <span>Бизнес-отчёты</span></div>
+      <h1>Бизнес-отчёты</h1>
+      <p>Создание отчётов по отправлениям, товарам, остаткам, уценке и возвратам</p>
+    </div>
+    <div class="content">
+      <h2>📋 Методы</h2>
+      <table class="method-table">
+        <thead><tr><th>Метод</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><code>createDiscountedReport</code></td><td>Отчёт об уценённых товарах</td></tr>
+          <tr><td><code>createPostingsReport</code></td><td>Отчёт об отправлениях</td></tr>
+          <tr><td><code>createProductsReport</code></td><td>Отчёт по товарам</td></tr>
+          <tr><td><code>createStockByWarehouseReport</code></td><td>Остатки на складе FBS</td></tr>
+          <tr><td><code>createReturnsReport</code></td><td>Отчёт о возвратах</td></tr>
+        </tbody>
+      </table>
+
+      <div class="nav-links">
+        <a class="nav-btn secondary" href="../api-categories-index.html">📚 Все категории</a>
+        <a class="nav-btn" href="32-report-management.html">⬅️ Управление отчётами</a>
+        <a class="nav-btn" href="33-return.html">➡️ 33. Return</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

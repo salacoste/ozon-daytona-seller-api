@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>31. Questions & Answers — Overview | DAYTONA</title>
+  <meta name="description" content="Вопросы и ответы покупателей: управление вопросами и ответами, аналитика. Требует Premium Plus.">
+  <link rel="icon" type="image/png" href="../image.png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f8f9fa}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .header{background:linear-gradient(135deg,#6f42c1 0%,#e83e8c 100%);color:#fff;text-align:center;padding:30px 0;margin-bottom:30px;border-radius:15px}
+    .breadcrumb{margin-bottom:15px}
+    .breadcrumb a{color:rgba(255,255,255,.85);text-decoration:none}
+    .content{background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:20px 0}
+    .card{background:#f8f9fa;border:2px solid #e9ecef;border-radius:12px;padding:16px;text-decoration:none;color:inherit}
+    .card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(0,0,0,.08);border-color:#6f42c1}
+    .method-table{width:100%;border-collapse:collapse;margin:16px 0 28px;border:2px solid #e9ecef;border-radius:10px;overflow:hidden}
+    .method-table th{background:#6f42c1;color:#fff;padding:10px 12px;text-align:left}
+    .method-table td{padding:9px 12px;border-bottom:1px solid #e9ecef}
+    .highlight{background:#fff3cd;padding:12px 16px;border-left:4px solid #ffc107;margin:16px 0}
+    .nav-links{text-align:center;margin-top:30px}
+    .nav-btn{display:inline-block;padding:10px 18px;margin:0 6px;background:#6f42c1;color:#fff;text-decoration:none;border-radius:20px;font-weight:500}
+    .nav-btn.secondary{background:#6c757d}
+    .nav-btn:hover{background:#59359e;color:#fff;text-decoration:none}
+    .tags{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.8em;font-weight:600}
+    .tag-premium{background:#ffc107;color:#212529}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="breadcrumb"><a href="../../index.html">🏠 Главная</a> / <a href="../api-categories-index.html">📚 Категории</a> / <span>31. Questions & Answers</span></div>
+      <h1>31. Questions & Answers</h1>
+      <p>Вопросы и ответы покупателей: управление и аналитика (Premium Plus)</p>
+      <div class="tags"><span class="tag tag-premium">Premium Plus</span></div>
+    </div>
+    <div class="content">
+      <div class="highlight">⚠️ Доступ к API требует подписку Premium Plus</div>
+
+      <div class="cards">
+        <a class="card" href="31-questions-answers-api.html"><strong>📑 Questions & Answers API</strong><br/>Обзор методов и разделов</a>
+        <a class="card" href="31-questions-answers-management.html"><strong>📝 Управление ответами</strong><br/>createAnswer, deleteAnswer, getAnswersList</a>
+        <a class="card" href="31-questions-workflow.html"><strong>📋 Управление вопросами</strong><br/>changeStatus, getInfo, list, count</a>
+        <a class="card" href="31-questions-analytics.html"><strong>📈 Аналитика вопросов</strong><br/>getTopSKUWithQuestions</a>
+      </div>
+
+      <h2>📋 Группы методов</h2>
+      <table class="method-table">
+        <thead><tr><th>Раздел</th><th>Методы</th><th>Описание</th></tr></thead>
+        <tbody>
+          <tr><td>Ответы</td><td>createAnswer, deleteAnswer, getAnswersList</td><td>Управление ответами продавца</td></tr>
+          <tr><td>Вопросы</td><td>changeQuestionStatus, getQuestionInfo, getQuestionsList, getQuestionsCount</td><td>Статусы, списки и информация</td></tr>
+          <tr><td>Аналитика</td><td>getTopSKUWithQuestions</td><td>Товары с наибольшим числом вопросов</td></tr>
+        </tbody>
+      </table>
+
+      <div class="nav-links">
+        <a class="nav-btn secondary" href="../api-categories-index.html">📚 Все категории</a>
+        <a class="nav-btn" href="30-product.html">⬅️ 30. Product</a>
+        <a class="nav-btn" href="32-report.html">➡️ 32. Report</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

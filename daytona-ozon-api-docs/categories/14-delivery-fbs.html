@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚛 Delivery FBS API - Complete Shipment Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: deliveryMove 4s infinite;
+        }
+
+        @keyframes deliveryMove {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .truck-icon {
+            font-size: 4rem;
+            animation: truckBounce 2s ease-in-out infinite;
+            display: inline-block;
+            margin-right: 20px;
+            filter: drop-shadow(0 5px 15px rgba(102, 126, 234, 0.3));
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes truckBounce {
+            0%, 100% { 
+                transform: translateX(0) scale(1);
+                filter: drop-shadow(0 5px 15px rgba(102, 126, 234, 0.3));
+            }
+            50% { 
+                transform: translateX(20px) scale(1.05);
+                filter: drop-shadow(0 8px 25px rgba(102, 126, 234, 0.5));
+            }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            border-radius: 15px 15px 0 0;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            animation: featureFloat 3s ease-in-out infinite;
+        }
+
+        .feature-card:nth-child(1) .feature-icon { animation-delay: 0s; }
+        .feature-card:nth-child(2) .feature-icon { animation-delay: 0.5s; }
+        .feature-card:nth-child(3) .feature-icon { animation-delay: 1s; }
+        .feature-card:nth-child(4) .feature-icon { animation-delay: 1.5s; }
+        .feature-card:nth-child(5) .feature-icon { animation-delay: 2s; }
+
+        @keyframes featureFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .methods-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .method-category {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        .method-category.carriage { border-left: 5px solid #3498db; }
+        .method-category.documents { border-left: 5px solid #e74c3c; }
+        .method-category.barcode { border-left: 5px solid #f39c12; }
+        .method-category.utility { border-left: 5px solid #27ae60; }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .category-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            animation: categoryPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes categoryPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .category-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .method-count {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-left: auto;
+        }
+
+        .method-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .method-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 0.95rem;
+            opacity: 0;
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        .method-list li:last-child {
+            border-bottom: none;
+        }
+
+        .method-list li:nth-child(1) { animation-delay: 0.1s; }
+        .method-list li:nth-child(2) { animation-delay: 0.2s; }
+        .method-list li:nth-child(3) { animation-delay: 0.3s; }
+        .method-list li:nth-child(4) { animation-delay: 0.4s; }
+        .method-list li:nth-child(5) { animation-delay: 0.5s; }
+        .method-list li:nth-child(6) { animation-delay: 0.6s; }
+        .method-list li:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .workflow-step {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid #667eea;
+        }
+
+        .workflow-step:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .workflow-step::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: stepPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes stepPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 0 auto 15px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .process-flow {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .flow-step:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .flow-icon {
+            font-size: 2rem;
+            margin-right: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flow-content h3 {
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        .flow-content p {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .api-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .api-table thead {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .api-table th,
+        .api-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .api-table th {
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .api-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .api-table tbody tr {
+            transition: background 0.3s ease;
+        }
+
+        .endpoint-method {
+            background: #e3f2fd;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #1976d2;
+        }
+
+        .best-practices {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border-left: 5px solid #27ae60;
+        }
+
+        .practice-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .practice-title {
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        pre[class*="language-"] {
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .code-block {
+            position: relative;
+        }
+
+        .code-block::before {
+            content: 'TypeScript';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            z-index: 10;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        .nav-button {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .nav-button.prev {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            color: white;
+        }
+
+        .nav-button.next {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .status-badge {
+            background: #28a745;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header .truck-icon {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .methods-overview {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .flow-icon {
+                margin-bottom: 15px;
+                margin-right: 0;
+            }
+
+            .api-table {
+                font-size: 0.8rem;
+            }
+
+            .api-table th,
+            .api-table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><span class="truck-icon">🚛</span>Delivery FBS API</h1>
+            <p class="subtitle">Complete FBS shipment lifecycle management and tracking</p>
+            <div class="status-badge">✅ Implementation Complete</div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚛</div>
+                    <h3>Carriage Management</h3>
+                    <p>Create, approve, and manage FBS shipments</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Document Generation</h3>
+                    <p>PDF documents, acts, and waybills</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Barcode System</h3>
+                    <p>Generate shipment and container barcodes</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Status Tracking</h3>
+                    <p>Monitor shipment and document status</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Digital Acts</h3>
+                    <p>Digital waybill formation and retrieval</p>
+                </div>
+            </div>
+        </div>
+        <div style="text-align:center; margin: 10px 0 20px 0;">
+            <a href="../api-categories-index.html" style="display:inline-block;padding:8px 14px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">📚 Категории</a>
+            <a href="../API-INDEX.html" style="display:inline-block;padding:8px 14px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">📑 Индекс API</a>
+            <a href="../QUICK-START.html" style="display:inline-block;padding:8px 14px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">🚀 Быстрый старт</a>
+            <a href="../FAQ.html" style="display:inline-block;padding:8px 14px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">❓ FAQ</a>
+        </div>
+
+        <!-- Methods Overview -->
+        <div class="content-section">
+            <h2>📋 Methods Overview - 18 Endpoints</h2>
+            
+            <div class="methods-overview">
+                <div class="method-category carriage">
+                    <div class="category-header">
+                        <div class="category-icon">🚛</div>
+                        <div class="category-title">Carriage Management</div>
+                        <div class="method-count">7 methods</div>
+                    </div>
+                    <ul class="method-list">
+                        <li>createCarriage - Create new FBS shipment</li>
+                        <li>approveCarriage - Approve created shipment</li>
+                        <li>cancelCarriage - Cancel existing shipment</li>
+                        <li>getCarriage - Get carriage information</li>
+                        <li>getCarriageDeliveryList - List delivery methods</li>
+                        <li>setPostings - Modify carriage composition</li>
+                        <li>getCarriageAvailableList - Available carriages</li>
+                    </ul>
+                </div>
+                
+                <div class="method-category documents">
+                    <div class="category-header">
+                        <div class="category-icon">📝</div>
+                        <div class="category-title">Documents & Acts</div>
+                        <div class="method-count">7 methods</div>
+                    </div>
+                    <ul class="method-list">
+                        <li>createAct - Confirm shipment and create documents</li>
+                        <li>checkActStatus - Check document status</li>
+                        <li>getAct - Get PDF documents</li>
+                        <li>getActPostings - Get postings list in act</li>
+                        <li>getActList - Get acts list by shipments</li>
+                        <li>checkDigitalActStatus - Check waybill status</li>
+                        <li>getDigitalAct - Get digital shipment list PDF</li>
+                    </ul>
+                </div>
+                
+                <div class="method-category barcode">
+                    <div class="category-header">
+                        <div class="category-icon">📊</div>
+                        <div class="category-title">Barcode & Labels</div>
+                        <div class="method-count">3 methods</div>
+                    </div>
+                    <ul class="method-list">
+                        <li>getBarcode - Get shipment barcode image</li>
+                        <li>getBarcodeText - Get barcode text value</li>
+                        <li>getContainerLabels - Generate container labels</li>
+                    </ul>
+                </div>
+                
+                <div class="method-category utility">
+                    <div class="category-header">
+                        <div class="category-icon">🔧</div>
+                        <div class="category-title">Utility</div>
+                        <div class="method-count">1 method</div>
+                    </div>
+                    <ul class="method-list">
+                        <li>splitPosting - Split order into separate postings</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complete Workflow -->
+        <div class="content-section">
+            <h2>🔄 Complete FBS Shipment Workflow</h2>
+            
+            <div class="process-flow">
+                <div class="flow-step">
+                    <div class="flow-icon">1</div>
+                    <div class="flow-content">
+                        <h3>Create Carriage</h3>
+                        <p>Initialize new FBS shipment with delivery method and time window</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="flow-icon">2</div>
+                    <div class="flow-content">
+                        <h3>Approve Carriage</h3>
+                        <p>Confirm carriage to change status to "Formed" and enable document generation</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="flow-icon">3</div>
+                    <div class="flow-content">
+                        <h3>Create Act</h3>
+                        <p>Confirm shipment and initiate formation of transport waybill and barcode</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="flow-icon">4</div>
+                    <div class="flow-content">
+                        <h3>Monitor Status</h3>
+                        <p>Check document formation status until all documents are ready</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="flow-icon">5</div>
+                    <div class="flow-content">
+                        <h3>Get Documents & Barcode</h3>
+                        <p>Retrieve PDF documents, transport waybills, and barcode images</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <pre><code class="language-typescript">// Complete FBS Shipment Workflow
+async function completeFbsShipmentWorkflow() {
+  try {
+    // Step 1: Create carriage
+    const carriage = await deliveryFbsApi.createCarriage({
+      delivery_method_id: 123,
+      first_mile_from_time: '09:00',
+      first_mile_to_time: '18:00'
+    });
+    
+    const carriageId = carriage.result?.carriage_id;
+    if (!carriageId) throw new Error('Failed to create carriage');
+    
+    // Step 2: Approve carriage
+    const approved = await deliveryFbsApi.approveCarriage({
+      carriage_id: carriageId
+    });
+    
+    if (!approved.result) throw new Error('Failed to approve carriage');
+    
+    // Step 3: Create act and documents
+    const act = await deliveryFbsApi.createAct({
+      carriage_id: carriageId,
+      posting_number: ['12345-0001-1', '12345-0002-1']
+    });
+    
+    if (!act.result) throw new Error('Failed to create act');
+    
+    // Step 4: Wait for documents to be ready
+    let status;
+    do {
+      await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds
+      status = await deliveryFbsApi.checkActStatus({
+        carriage_id: carriageId
+      });
+    } while (status.documents?.some(doc => doc.status === 'processing'));
+    
+    // Step 5: Get documents and barcode
+    const [documents, barcode] = await Promise.all([
+      deliveryFbsApi.getAct({
+        carriage_id: carriageId,
+        doc_type: 'act'
+      }),
+      deliveryFbsApi.getBarcode({
+        carriage_id: carriageId
+      })
+    ]);
+    
+    console.log('FBS shipment workflow completed successfully');
+    return {
+      carriageId,
+      actId: act.act_id,
+      documents: documents.content,
+      barcode: barcode.barcode
+    };
+    
+  } catch (error) {
+    console.error('FBS shipment workflow failed:', error);
+    throw error;
+  }
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- Key Methods -->
+        <div class="content-section">
+            <h2>🔑 Key Method Examples</h2>
+            
+            <h3>🚛 Create and Approve Carriage</h3>
+            <div class="code-block">
+                <pre><code class="language-typescript">// Create new FBS carriage
+const carriage = await deliveryFbsApi.createCarriage({
+  delivery_method_id: 123,
+  first_mile_from_time: '09:00',
+  first_mile_to_time: '18:00'
+});
+
+if (carriage.result?.carriage_id) {
+  console.log(`Carriage created: ${carriage.result.carriage_id}`);
+  
+  // Approve the carriage
+  const approved = await deliveryFbsApi.approveCarriage({
+    carriage_id: carriage.result.carriage_id
+  });
+  
+  if (approved.result) {
+    console.log('Carriage approved successfully');
+    // Now you can get shipment list and barcode
+  }
+}</code></pre>
+            </div>
+
+            <h3>📝 Document Management</h3>
+            <div class="code-block">
+                <pre><code class="language-typescript">// Create act and get documents
+const act = await deliveryFbsApi.createAct({
+  carriage_id: 12345,
+  posting_number: ['12345-0001-1', '12345-0002-1']
+});
+
+// Check document status
+const status = await deliveryFbsApi.checkActStatus({
+  carriage_id: 12345
+});
+
+console.log(`Carriage status: ${status.carriage_status}`);
+console.log(`Barcode status: ${status.barcode_status}`);
+status.documents?.forEach(doc => {
+  console.log(`${doc.type}: ${doc.status}`);
+});
+
+// Get PDF documents when ready
+if (status.documents?.every(doc => doc.status === 'ready')) {
+  const documents = await deliveryFbsApi.getAct({
+    carriage_id: 12345,
+    doc_type: 'act'
+  });
+  
+  if (documents.content) {
+    // Save PDF file from base64
+    const docBuffer = Buffer.from(documents.content, 'base64');
+    console.log(`Document received: ${documents.filename}`);
+  }
+}</code></pre>
+            </div>
+
+            <h3>📊 Barcode Generation</h3>
+            <div class="code-block">
+                <pre><code class="language-typescript">// Get barcode image and text
+const [barcode, barcodeText] = await Promise.all([
+  deliveryFbsApi.getBarcode({ carriage_id: 12345 }),
+  deliveryFbsApi.getBarcodeText({ carriage_id: 12345 })
+]);
+
+if (barcode.barcode) {
+  // Save barcode image from base64
+  const barcodeBuffer = Buffer.from(barcode.barcode, 'base64');
+  console.log(`Barcode image: ${barcode.content_type}`);
+}
+
+if (barcodeText.barcode_text) {
+  console.log(`Barcode text: ${barcodeText.barcode_text}`);
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="content-section">
+            <h2>🎯 Best Practices</h2>
+            
+            <div class="best-practices">
+                <div class="practice-item">
+                    <div class="practice-title">Error Handling</div>
+                    <p>Always check for successful results and implement proper error handling for each step of the workflow.</p>
+                    <div class="code-block">
+                        <pre><code class="language-typescript">async function robustCarriageOperation(carriageId: number) {
+  try {
+    const result = await deliveryFbsApi.approveCarriage({
+      carriage_id: carriageId
+    });
+    
+    if (!result.result) {
+      throw new Error('Carriage approval failed');
+    }
+    
+    return result;
+  } catch (error) {
+    if (error.message.includes('not found')) {
+      console.error(`Carriage ${carriageId} not found`);
+    } else if (error.message.includes('already approved')) {
+      console.warn(`Carriage ${carriageId} already approved`);
+    }
+    throw error;
+  }
+}</code></pre>
+                    </div>
+                </div>
+                
+                <div class="practice-item">
+                    <div class="practice-title">Status Polling</div>
+                    <p>Use intelligent polling with exponential backoff to monitor document formation status.</p>
+                    <div class="code-block">
+                        <pre><code class="language-typescript">async function waitForDocumentReady(carriageId: number, maxAttempts = 30) {
+  let attempts = 0;
+  
+  while (attempts < maxAttempts) {
+    const status = await deliveryFbsApi.checkActStatus({
+      carriage_id: carriageId
+    });
+    
+    const allReady = status.documents?.every(doc => 
+      doc.status === 'ready' || doc.status === 'error'
+    );
+    
+    if (allReady) {
+      return status;
+    }
+    
+    attempts++;
+    await new Promise(resolve => setTimeout(resolve, 10000)); // Wait 10 seconds
+  }
+  
+  throw new Error(`Documents not ready after ${maxAttempts} attempts`);
+}</code></pre>
+                    </div>
+                </div>
+                
+                <div class="practice-item">
+                    <div class="practice-title">Batch Processing</div>
+                    <p>Use batch operations with rate limiting for processing multiple carriages efficiently.</p>
+                    <div class="code-block">
+                        <pre><code class="language-typescript">class DeliveryFbsManager {
+  private readonly batchSize = 10;
+  
+  async processBatchOperations(carriageIds: number[]) {
+    const batches = [];
+    for (let i = 0; i < carriageIds.length; i += this.batchSize) {
+      batches.push(carriageIds.slice(i, i + this.batchSize));
+    }
+    
+    const results = [];
+    for (const batch of batches) {
+      const batchResults = await Promise.allSettled(
+        batch.map(id => this.processCarriage(id))
+      );
+      results.push(...batchResults);
+      
+      // Rate limiting - wait between batches
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+    
+    return results;
+  }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Endpoints Reference -->
+        <div class="content-section">
+            <h2>📊 API Endpoints Reference</h2>
+            
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Endpoint</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="3" style="background: #f8f9fa; font-weight: bold; color: #495057;">🚛 Carriage Management</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> createCarriage</td>
+                        <td>/v1/carriage/create</td>
+                        <td>Create new FBS shipment</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> approveCarriage</td>
+                        <td>/v1/carriage/approve</td>
+                        <td>Approve created shipment</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> cancelCarriage</td>
+                        <td>/v1/carriage/cancel</td>
+                        <td>Cancel existing shipment</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> getCarriage</td>
+                        <td>/v1/carriage/get</td>
+                        <td>Get carriage information</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> getCarriageDeliveryList</td>
+                        <td>/v1/carriage/delivery/list</td>
+                        <td>List delivery methods and carriages</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> setPostings</td>
+                        <td>/v1/carriage/set-postings</td>
+                        <td>Modify carriage composition</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> getCarriageAvailableList</td>
+                        <td>/v1/posting/carriage-available/list</td>
+                        <td>Get available carriages</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="background: #f8f9fa; font-weight: bold; color: #495057;">📝 Documents & Acts</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> createAct</td>
+                        <td>/v2/posting/fbs/act/create</td>
+                        <td>Create documents</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> checkActStatus</td>
+                        <td>/v2/posting/fbs/act/check-status</td>
+                        <td>Check document status</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> getAct</td>
+                        <td>/v2/posting/fbs/act/get-pdf</td>
+                        <td>Get PDF documents</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> getActPostings</td>
+                        <td>/v2/posting/fbs/act/get-postings</td>
+                        <td>Get postings in act</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> getActList</td>
+                        <td>/v2/posting/fbs/act/list</td>
+                        <td>Get acts list</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> checkDigitalActStatus</td>
+                        <td>/v2/posting/fbs/digital/act/check-status</td>
+                        <td>Check waybill status</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> getDigitalAct</td>
+                        <td>/v2/posting/fbs/digital/act/get-pdf</td>
+                        <td>Get digital waybill</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="background: #f8f9fa; font-weight: bold; color: #495057;">📊 Barcodes & Labels</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> getBarcode</td>
+                        <td>/v2/posting/fbs/act/get-barcode</td>
+                        <td>Get barcode image</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> getBarcodeText</td>
+                        <td>/v2/posting/fbs/act/get-barcode/text</td>
+                        <td>Get barcode text</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> getContainerLabels</td>
+                        <td>/v2/posting/fbs/act/get-container-labels</td>
+                        <td>Get container labels</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="background: #f8f9fa; font-weight: bold; color: #495057;">🔧 Utilities</td>
+                    </tr>
+                    <tr>
+                        <td><span class="endpoint-method">POST</span> splitPosting</td>
+                        <td>/v1/posting/fbs/split</td>
+                        <td>Split posting</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <a href="13-chat.html" class="nav-button prev">
+                ← Previous: Chat API
+            </a>
+            <a href="15-delivery-rfbs.html" class="nav-button next">
+                Next: Delivery rFBS API →
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    
+    <script>
+        // Add line numbers to all code blocks
+        document.querySelectorAll('pre[class*="language-"]').forEach(pre => {
+            pre.classList.add('line-numbers');
+        });
+
+        // Enhanced truck animation with convoy effect
+        const truckIcon = document.querySelector('.truck-icon');
+        truckIcon.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(50px) scale(1.2)';
+            this.style.transition = 'all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+            this.style.filter = 'drop-shadow(0 10px 30px rgba(102, 126, 234, 0.6))';
+        });
+        
+        truckIcon.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(0) scale(1)';
+            this.style.filter = 'drop-shadow(0 5px 15px rgba(102, 126, 234, 0.3))';
+        });
+
+        // Method category hover effects
+        document.querySelectorAll('.method-category').forEach(category => {
+            category.addEventListener('mouseenter', function() {
+                const icon = this.querySelector('.category-icon');
+                icon.style.transform = 'scale(1.2) rotate(10deg)';
+                icon.style.transition = 'all 0.3s ease';
+            });
+            
+            category.addEventListener('mouseleave', function() {
+                const icon = this.querySelector('.category-icon');
+                icon.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Flow step interaction
+        document.querySelectorAll('.flow-step').forEach((step, index) => {
+            step.addEventListener('click', function() {
+                this.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                this.style.color = 'white';
+                this.style.transform = 'translateX(20px) scale(1.02)';
+                
+                setTimeout(() => {
+                    this.style.background = 'white';
+                    this.style.color = '#2c3e50';
+                    this.style.transform = 'translateX(0) scale(1)';
+                }, 500);
+            });
+        });
+
+        // API table row highlighting
+        document.querySelectorAll('.api-table tbody tr').forEach(row => {
+            row.addEventListener('click', function() {
+                // Remove previous highlights
+                document.querySelectorAll('.api-table tbody tr').forEach(r => {
+                    r.style.background = '';
+                });
+                
+                // Highlight clicked row
+                this.style.background = 'linear-gradient(135deg, #e3f2fd, #bbdefb)';
+                this.style.transform = 'scale(1.01)';
+                this.style.transition = 'all 0.3s ease';
+                
+                setTimeout(() => {
+                    this.style.background = '';
+                    this.style.transform = 'scale(1)';
+                }, 2000);
+            });
+        });
+
+        // Feature cards sequential animation on scroll
+        const observeFeatures = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const cards = entry.target.querySelectorAll('.feature-card');
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                            card.style.transition = 'all 0.6s ease';
+                        }, index * 200);
+                    });
+                }
+            });
+        });
+
+        // Initially hide feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+        });
+
+        // Observe features grid
+        const featuresGrid = document.querySelector('.features-grid');
+        if (featuresGrid) {
+            observeFeatures.observe(featuresGrid);
+        }
+
+        // Practice items expand/collapse
+        document.querySelectorAll('.practice-title').forEach(title => {
+            title.style.cursor = 'pointer';
+            title.addEventListener('click', function() {
+                const codeBlock = this.parentElement.querySelector('.code-block');
+                if (codeBlock) {
+                    if (codeBlock.style.display === 'none') {
+                        codeBlock.style.display = 'block';
+                        codeBlock.style.animation = 'fadeInUp 0.5s ease';
+                        this.textContent += ' ▼';
+                    } else {
+                        codeBlock.style.display = 'none';
+                        this.textContent = this.textContent.replace(' ▼', '');
+                    }
+                }
+            });
+        });
+
+        // Add scroll-triggered counter animation for methods
+        const observeMethodCounts = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const countEl = entry.target.querySelector('.method-count');
+                    if (countEl && !countEl.hasAttribute('data-animated')) {
+                        const finalText = countEl.textContent;
+                        const numberMatch = finalText.match(/(\d+)/);
+                        if (numberMatch) {
+                            const finalNum = parseInt(numberMatch[1]);
+                            let currentNum = 0;
+                            const increment = finalNum / 20;
+                            
+                            const timer = setInterval(() => {
+                                currentNum += increment;
+                                if (currentNum >= finalNum) {
+                                    countEl.textContent = finalText;
+                                    clearInterval(timer);
+                                } else {
+                                    countEl.textContent = Math.floor(currentNum) + finalText.replace(/\d+/, '');
+                                }
+                            }, 50);
+                            
+                            countEl.setAttribute('data-animated', 'true');
+                        }
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.method-category').forEach(category => {
+            observeMethodCounts.observe(category);
+        });
+    </script>
+</body>
+</html>

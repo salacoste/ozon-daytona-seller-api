@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>26. Premium API — Премиальные функции | DAYTONA</title>
+  <meta name="description" content="Premium API — расширенная аналитика, поисковые запросы по товарам, чат с покупателями и финансовые отчёты для подписчиков Premium/Premium Plus.">
+  <link rel="icon" type="image/png" href="../image.png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f8f9fa}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .header{background:linear-gradient(135deg,#8e44ad 0%,#20c997 100%);color:#fff;text-align:center;padding:30px 0;margin-bottom:30px;border-radius:15px}
+    .breadcrumb{margin-bottom:15px}
+    .breadcrumb a{color:rgba(255,255,255,.85);text-decoration:none}
+    .content{background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+    .method-table{width:100%;border-collapse:collapse;margin:16px 0 28px;border:2px solid #e9ecef;border-radius:10px;overflow:hidden}
+    .method-table th{background:#8e44ad;color:#fff;padding:10px 12px;text-align:left}
+    .method-table td{padding:9px 12px;border-bottom:1px solid #e9ecef}
+    .highlight{background:#fff3cd;padding:12px 16px;border-left:4px solid #ffc107;margin:16px 0}
+    .code-block{background:#2d3748;color:#e2e8f0;padding:16px;border-radius:8px;margin:15px 0;overflow-x:auto;font-family:Monaco,Consolas,ui-monospace,monospace;font-size:.92em}
+    .nav-links{text-align:center;margin-top:30px}
+    .nav-btn{display:inline-block;padding:10px 18px;margin:0 6px;background:#8e44ad;color:#fff;text-decoration:none;border-radius:20px;font-weight:500}
+    .nav-btn.secondary{background:#6c757d}
+    .nav-btn:hover{background:#7a3795;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="breadcrumb"><a href="../../index.html">🏠 Главная</a> / <a href="../api-categories-index.html">📚 Категории</a> / <span>26. Premium</span></div>
+      <h1>26. Premium API</h1>
+      <p>Премиальные функции: продвинутая аналитика, поисковые запросы, чат и отчёты</p>
+    </div>
+    <div class="content">
+      <div class="highlight"><strong>Подписки:</strong> Методы различаются по уровням — Premium и Premium Plus. Аналитика: 1 запрос/мин., финансовые данные хранятся до 32 дней.</div>
+
+      <h2>📋 Доступные методы (8)</h2>
+      <table class="method-table">
+        <thead><tr><th>Группа</th><th>Метод</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td>Analytics</td><td><code>getAnalyticsData</code></td><td>Многомерная продвинутая аналитика (Premium Plus)</td></tr>
+          <tr><td>Analytics</td><td><code>getRealizationByDay</code></td><td>Реализация по дням (Premium Plus)</td></tr>
+          <tr><td>Products</td><td><code>getProductQueries</code></td><td>Поисковые запросы по товарам (Premium)</td></tr>
+          <tr><td>Products</td><td><code>getProductQueriesDetails</code></td><td>Детализация запросов (Premium/Premium Plus)</td></tr>
+          <tr><td>Chat</td><td><code>startChat</code></td><td>Начать чат с покупателем (Premium Plus)</td></tr>
+          <tr><td>Chat</td><td><code>sendChatMessage</code></td><td>Отправить сообщение в чат (Premium Plus)</td></tr>
+          <tr><td>Chat</td><td><code>getChatHistory</code></td><td>История сообщений (Premium Plus)</td></tr>
+          <tr><td>Chat</td><td><code>markChatAsRead</code></td><td>Отметить сообщения как прочитанные (Premium Plus)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>🚀 Быстрый пример</h2>
+      <div class="code-block"><pre><code>// Аналитика и чат (Premium Plus)
+const analytics = await api.premium.getAnalyticsData({ date_from: '2024-01-01', date_to: '2024-01-31', dimension: ['sku','week'], metrics: ['revenue','ordered_units'] });
+const queries = await api.premium.getProductQueries({ date_from: '2024-01-01', date_to: '2024-01-31', page_size: 50 });
+const chat = await api.premium.startChat({ posting_number: '12345-0001-1' });
+</code></pre></div>
+
+      <div class="nav-links">
+        <a class="nav-btn secondary" href="../api-categories-index.html">📚 Все категории</a>
+        <a class="nav-btn" href="25-pass.html">⬅️ 25. Пропуски</a>
+        <a class="nav-btn" href="27-analytics.html">➡️ 27. Analytics</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

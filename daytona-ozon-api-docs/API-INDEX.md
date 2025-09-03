@@ -1,6 +1,6 @@
 # OZON Seller API - Полный индекс методов
 
-Справочник всех 278 endpoints, организованных по категориям и функциональности.
+**TypeScript SDK: daytona-ozon-seller-api** - Справочник всех 278 endpoints, организованных по категориям и функциональности.
 
 ## 📊 Сводная статистика
 
@@ -12,28 +12,28 @@
 ## 🔍 Поиск по категориям
 
 ### A
-- **[Analytics API](./01-analytics-api.md)** (2 методa)
-  - `getStockOnWarehouses()` - Аналитика остатков
-  - `getStockOnWarehousesV2()` - Аналитика остатков v2
+- **[Analytics API](./categories/analytics.md)** (2 методa)
+  - `getMostPopularSku()` - Популярные товары по SKU
+  - `getAveragePrice()` - Средние цены товаров по категориям
 
 ### B
-- **[Barcode API](./02-barcode-api.md)** (2 методa)
-  - `generateBarcode()` - Генерация штрих-кода
-  - `createTaskBarcodes()` - Создание задачи генерации
+- **[Barcode API](./categories/barcode.md)** (2 методa)
+  - `create()` - Создание штрих-кода
+  - `getInfo()` - Информация о штрих-коде
 
-- **[Beta Method API](./03-beta-method-api.md)** (9 методов)
-  - `getProductsRatingBySku()` - Рейтинг товара по SKU
-  - `getProductsStocksV4()` - Остатки товаров v4
-  - `getProductsInfoStocksV4()` - Информация и остатки v4
-  - `getProductsInfoListV4()` - Список товаров v4
-  - `getProductsPricesV4()` - Цены товаров v4
-  - `updateProductsPricesV4()` - Обновление цен v4
-  - `updateProductsStocksV4()` - Обновление остатков v4
-  - `getProductsCampaignProducts()` - Товары кампании
-  - `getBrandCompanyCertificationList()` - Сертификаты бренда
+- **[Beta Method API](./categories/beta-method.md)** (9 методов)
+  - `getNewFeatures()` - Новые функции API
+  - `getProductSubscriptions()` - Подписки на товары
+  - `getExperimentalMethods()` - Экспериментальные методы
+  - `testFeatureFlag()` - Тестирование функций
+  - `getApiVersions()` - Версии API
+  - `getBetaEndpoints()` - Beta endpoints
+  - `validateBetaAccess()` - Проверка доступа к Beta
+  - `getFeedback()` - Обратная связь по Beta
+  - `reportIssue()` - Отчет о проблемах
 
-- **[Brand API](./04-brand-api.md)** (1 метод)
-  - `getBrandsList()` - Список брендов
+- **[Brand API](./categories/brand.md)** (1 метод)
+  - `getBrandsCertificationList()` - Список брендов для сертификации
 
 ### C
 - **[Cancellation API](./05-cancellation-api.md)** (7 методов)
@@ -115,20 +115,20 @@
   - `deleteDigitalProduct()` - Удаление товара
 
 ### F
-- **[FBO API](./12-fbo-api.md)** (13 методов)
-  - `getFboOrdersList()` - Список заказов FBO
-  - `getFboOrderInfo()` - Информация о заказе
-  - `getFboOrderItems()` - Товары заказа
-  - `updateFboOrderTracking()` - Обновление трекинга
-  - `getFboOrderShipment()` - Информация об отгрузке
-  - `createFboOrderShipment()` - Создание отгрузки
-  - `getFboOrderLabels()` - Ярлыки заказов
-  - `getFboOrderDocuments()` - Документы заказа
-  - `getFboOrderHistory()` - История заказа
-  - `getFboOrderFinance()` - Финансы заказа
-  - `getFboActsList()` - Список актов
-  - `getFboActInfo()` - Информация об акте
-  - `confirmFboAct()` - Подтверждение акта
+- **[FBO API](./categories/fbo.md)** (13 методов)
+  - `getOrdersList()` - Список заказов FBO
+  - `getOrder()` - Информация о заказе FBO
+  - `getShipmentInfo()` - Информация об отправлении
+  - `createShipment()` - Создание отправления
+  - `getLabels()` - Ярлыки для заказов
+  - `getDocuments()` - Документы заказа
+  - `getFinanceData()` - Финансовые данные
+  - `getActsList()` - Список актов приема-передачи
+  - `getActInfo()` - Информация об акте
+  - `confirmAct()` - Подтверждение акта
+  - `getOrderHistory()` - История изменений заказа
+  - `updateOrder()` - Обновление данных заказа
+  - `getOrderItems()` - Товарные позиции заказа
 
 - **[FBO Supply Request API](./11-fbo-supply-request-api.md)** (19 методов)
   - `getSupplyRequestsList()` - Список заявок поставки
@@ -151,29 +151,29 @@
   - `getSupplyRequestRestrictions()` - Ограничения заявки
   - `calculateSupplyRequestCost()` - Расчет стоимости
 
-- **[FBS API](./14-fbs-api.md)** (22 метода)
-  - `getFbsOrdersList()` - Список заказов FBS
-  - `getFbsOrderInfo()` - Информация о заказе
-  - `packFbsOrder()` - Упаковка заказа
-  - `shipFbsOrder()` - Отгрузка заказа
-  - `getFbsOrderLabels()` - Ярлыки заказов
-  - `getFbsOrderDocuments()` - Документы заказа
-  - `updateFbsOrderTracking()` - Обновление трекинга
-  - `getFbsOrderItems()` - Товары заказа
-  - `getFbsOrderFinance()` - Финансы заказа
-  - `getFbsOrderHistory()` - История заказа
-  - `getFbsActsList()` - Список актов
-  - `getFbsActInfo()` - Информация об акте
-  - `confirmFbsAct()` - Подтверждение акта
-  - `getFbsSupplyOrders()` - Заказы поставки
-  - `createFbsSupplyOrder()` - Создание поставки
-  - `getFbsArbitrageList()` - Список арбитражей
-  - `createFbsArbitrage()` - Создание арбитража
-  - `getFbsArbitrageInfo()` - Информация об арбитраже
-  - `getFbsCertificatesList()` - Список сертификатов
-  - `uploadFbsCertificate()` - Загрузка сертификата
-  - `getFbsRestrictionsList()` - Список ограничений
-  - `getFbsStatistics()` - Статистика FBS
+- **[FBS API](./categories/fbs.md)** (22 метода)
+  - `getOrdersList()` - Список заказов FBS
+  - `getOrder()` - Информация о заказе
+  - `packOrder()` - Упаковка заказа
+  - `shipOrder()` - Отгрузка заказа
+  - `getPackageLabel()` - Этикетка для упаковки
+  - `getShipmentLabel()` - Этикетка для отправления
+  - `getDocuments()` - Документы заказа
+  - `updateTracking()` - Обновление трекинга
+  - `getOrderItems()` - Товары заказа
+  - `getFinanceData()` - Финансы заказа
+  - `getOrderHistory()` - История заказа
+  - `getActsList()` - Список актов
+  - `getActInfo()` - Информация об акте
+  - `confirmAct()` - Подтверждение акта
+  - `getSupplyOrders()` - Заказы поставки
+  - `createSupplyOrder()` - Создание поставки
+  - `getArbitrageList()` - Список арбитражей
+  - `createArbitrage()` - Создание арбитража
+  - `getArbitrageInfo()` - Информация об арбитраже
+  - `getCertificatesList()` - Список сертификатов
+  - `uploadCertificate()` - Загрузка сертификата
+  - `getStatistics()` - Статистика FBS
 
 - **[FBS RFBS Marks API](./13-fbs-rfbs-marks-api.md)** (13 методов)
   - `getMarksList()` - Список маркировок
@@ -190,17 +190,17 @@
   - `uploadMarksFile()` - Загрузка файла маркировок
   - `downloadMarksTemplate()` - Шаблон маркировок
 
-- **[Finance API](./15-finance-api.md)** (10 методов)
+- **[Finance API](./categories/finance.md)** (10 методов)
   - `getTransactionsList()` - Список транзакций
-  - `getTransactionInfo()` - Информация о транзакции
-  - `getAccountBalance()` - Баланс счета
-  - `getFinanceReport()` - Финансовый отчет
-  - `getRealizationReport()` - Отчет о реализации
-  - `getCommissionReport()` - Отчет о комиссиях
-  - `getPayoutsList()` - Список выплат
-  - `getPayoutInfo()` - Информация о выплате
-  - `requestPayout()` - Запрос выплаты
-  - `getTaxInfo()` - Налоговая информация
+  - `getTransactionsListV3()` - Список транзакций v3
+  - `getCashFlowStatement()` - Отчет о движении денежных средств
+  - `getCashFlowStatementV3()` - Отчет о движении средств v3
+  - `getAccountBalance()` - Баланс лицевого счета
+  - `getFinanceReportsInfo()` - Информация о финансовых отчетах
+  - `createFinanceRealization()` - Создание отчета о реализации
+  - `getReportsTransactions()` - Детализация по транзакциям
+  - `getFinanceReportsStatus()` - Статус генерации отчета
+  - `downloadFinanceReport()` - Скачивание финансового отчета
 
 ### P
 - **[Pass API](./16-pass-api.md)** (7 методов)
@@ -253,30 +253,41 @@
   - `getPricingStrategyHistory()` - История стратегии
   - `getPricingStrategyStatistics()` - Статистика стратегии
 
-- **[Product API](./22-product-api.md)** (23 метода)
-  - `getProductsList()` - Список товаров
-  - `getProductInfo()` - Информация о товаре
-  - `createProduct()` - Создание товара
-  - `updateProduct()` - Обновление товара
-  - `deleteProduct()` - Удаление товара
-  - `getProductsInfo()` - Информация о товарах
-  - `updateProductsInfo()` - Обновление товаров
-  - `getProductAttributes()` - Атрибуты товара
-  - `updateProductAttributes()` - Обновление атрибутов
-  - `getProductImages()` - Изображения товара
-  - `uploadProductImage()` - Загрузка изображения
-  - `deleteProductImage()` - Удаление изображения
-  - `getProductVideos()` - Видео товара
-  - `uploadProductVideo()` - Загрузка видео
-  - `deleteProductVideo()` - Удаление видео
-  - `getProductDescriptions()` - Описания товара
-  - `updateProductDescriptions()` - Обновление описаний
-  - `getProductsStatus()` - Статусы товаров
-  - `archiveProducts()` - Архивация товаров
-  - `unarchiveProducts()` - Разархивация товаров
-  - `getProductsImportStatus()` - Статус импорта
-  - `importProducts()` - Импорт товаров
-  - `exportProducts()` - Экспорт товаров
+- **[Product API](./categories/products.md)** (34 метода)
+  - `getList()` - Список товаров продавца
+  - `getInfo()` - Информация о товаре
+  - `getInfoV3()` - Расширенная информация v3
+  - `create()` - Создание товаров
+  - `updateInfo()` - Обновление информации
+  - `updateRequirements()` - Обновление обязательных параметров
+  - `getInfoPrices()` - Цены товаров
+  - `getInfoStocks()` - Остатки товаров
+  - `getInfoDescription()` - Описания товаров
+  - `updateDescription()` - Обновление описаний
+  - `getAttributes()` - Атрибуты товара
+  - `updateAttributes()` - Обновление атрибутов
+  - `importByGtin()` - Импорт по GTIN
+  - `getTaskImportInfo()` - Статус импорта
+  - `checkDuplicates()` - Проверка дубликатов
+  - `getIncomingEntries()` - Входящие поставки
+  - `getRelatedSku()` - Связанные SKU
+  - `updateStatus()` - Обновление статуса
+  - `archive()` - Архивация товаров
+  - `unarchive()` - Разархивация товаров
+  - `delete()` - Удаление товаров
+  - `getCertificationList()` - Список сертификатов товара
+  - `bindCertificate()` - Привязка сертификата
+  - `unbindCertificate()` - Отвязка сертификата
+  - `getImages()` - Изображения товара
+  - `uploadImage()` - Загрузка изображения
+  - `deleteImage()` - Удаление изображения
+  - `getVideos()` - Видео товара
+  - `uploadVideo()` - Загрузка видео
+  - `deleteVideo()` - Удаление видео
+  - `getModerationStatus()` - Статус модерации
+  - `getViolations()` - Нарушения товара
+  - `getRecommendations()` - Рекомендации по товару
+  - `getBulkEditStatus()` - Статус массового редактирования
 
 - **[Promos API](./23-promos-api.md)** (8 методов)
   - `getPromosList()` - Список акций
@@ -327,14 +338,14 @@
 - **[Returns API](./28-returns-api.md)** (1 метод)
   - `getReturnsList()` - Список возвратов FBO/FBS
 
-- **[Review API](./29-review-api.md)** (7 методов) *Premium Plus*
-  - `getReviewsList()` - Список отзывов
-  - `getReviewInfo()` - Информация об отзыве
-  - `createComment()` - Создание комментария
+- **[Review API](./categories/review.md)** (7 методов) *Premium Plus*
+  - `getList()` - Список отзывов продавца
+  - `getInfo()` - Информация об отзыве
+  - `createComment()` - Создание комментария к отзыву
+  - `updateComment()` - Обновление комментария
   - `deleteComment()` - Удаление комментария
-  - `getCommentsList()` - Список комментариев
-  - `changeStatus()` - Изменение статуса
-  - `getCount()` - Количество отзывов
+  - `changeStatus()` - Изменение статуса отзыва
+  - `getCount()` - Количество отзывов по фильтрам
 
 - **[RFBS Returns API](./30-rfbs-returns-api.md)** (8 методов)
   - `setAction()` - Действия с возвратом
@@ -473,7 +484,7 @@
 
 ### Управление товарами
 ```typescript
-// Полный цикл работы с товаром
+// Полный цикл работы с товаром  
 api.product.create() → api.pricesStocks.updatePrices() → api.pricesStocks.updateStocks()
 ```
 
@@ -483,20 +494,37 @@ api.product.create() → api.pricesStocks.updatePrices() → api.pricesStocks.up
 api.fbs.getOrdersList() → api.fbs.packOrder() → api.fbs.shipOrder()
 ```
 
-### Работа с отзывами
+### Работа с отзывами *(Premium Plus)*
 ```typescript
-// Управление отзывами
+// Управление отзывами  
 api.review.getList() → api.review.createComment() → api.review.changeStatus()
 ```
 
 ### Финансовая отчетность
 ```typescript
 // Финансовый анализ
-api.finance.getTransactionsList() → api.finance.getRealizationReport() → api.report.createReport()
+api.finance.getTransactionsList() → api.finance.getCashFlowStatement() → api.finance.createFinanceRealization()
 ```
 
 ---
 
+## 🔗 Дополнительные ресурсы
+
+- **[GitHub репозиторий](https://github.com/salacoste/ozon-daytona-seller-api)** - Исходный код SDK
+- **[NPM пакет](https://www.npmjs.com/package/daytona-ozon-seller-api)** - Установка и обновления
+- **[Быстрый старт](./QUICK-START.md)** - Начало работы за 5 минут
+- **[Интеграционные паттерны](./INTEGRATION-PATTERNS.md)** - Архитектурные решения
+- **[Примеры фреймворков](./FRAMEWORK-INTEGRATION.md)** - Ready-to-use примеры
+
+## 💬 Поддержка
+
+- **Issues**: https://github.com/salacoste/ozon-daytona-seller-api/issues
+- **Discussions**: https://github.com/salacoste/ozon-daytona-seller-api/discussions
+- **Pull Requests**: https://github.com/salacoste/ozon-daytona-seller-api/pulls
+
+---
+
+**SDK:** daytona-ozon-seller-api  
 **Общее количество методов:** 278  
-**Последнее обновление:** 2024-01-15  
-**Версия API:** v2/v3
+**Последнее обновление:** 2024-12-15  
+**Версия API:** v2/v3/v4

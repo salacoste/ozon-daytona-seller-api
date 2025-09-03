@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ру">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>18. FBS — Fulfillment by Seller | OZON Seller API SDK | DAYTONA</title>
+  <meta name="description" content="FBS — операции продавца: постинги, ярлыки и отгрузка, продукты и отмены, правовые требования. 22 метода в 4 разделах.">
+  <link rel="icon" type="image/png" href="../image.png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f8f9fa}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .header{background:linear-gradient(135deg,#6f42c1 0%,#20c997 100%);color:#fff;text-align:center;padding:30px 0;margin-bottom:30px;border-radius:15px}
+    .breadcrumb{margin-bottom:15px}
+    .breadcrumb a{color:rgba(255,255,255,.85);text-decoration:none}
+    .content{background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+    .links a{display:inline-block;margin:6px 8px 0 0;padding:8px 14px;background:#ecf5ff;color:#0d47a1;border-radius:18px;text-decoration:none}
+    .links a:hover{background:#d7ebff}
+    .method-table{width:100%;border-collapse:collapse;margin:12px 0 20px;border:2px solid #e9ecef;border-radius:10px;overflow:hidden}
+    .method-table th{background:#6f42c1;color:#fff;padding:10px 12px;text-align:left}
+    .method-table td{padding:9px 12px;border-bottom:1px solid #e9ecef}
+    .code-block{background:#2d3748;color:#e2e8f0;padding:16px;border-radius:8px;margin:15px 0;overflow-x:auto;font-family:Monaco,Consolas,ui-monospace,monospace;font-size:.92em}
+    .nav-links{text-align:center;margin-top:30px}
+    .nav-btn{display:inline-block;padding:10px 18px;margin:0 6px;background:#6f42c1;color:#fff;text-decoration:none;border-radius:20px;font-weight:500}
+    .nav-btn.secondary{background:#6c757d}
+    .nav-btn:hover{background:#59359e;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="breadcrumb">
+        <a href="../../index.html">🏠 Главная</a> / <a href="../README.html">📖 Документация</a> / <a href="../api-categories-index.html">📚 Категории</a> / <span>18. FBS</span>
+      </div>
+      <h1>18. FBS — Fulfillment by Seller</h1>
+      <p>Полный цикл FBS: постинги, ярлыки, статусы и управление товарами</p>
+    </div>
+    <div class="content">
+      <div class="links">
+        <a href="18-fbs-posting.html">📦 Posting Management</a>
+        <a href="18-fbs-labels.html">🏷️ Labels & Shipping</a>
+        <a href="18-fbs-products.html">🛠️ Products & Cancels</a>
+        <a href="18-fbs-compliance.html">⚖️ Legal & Compliance</a>
+      </div>
+
+      <h2>📋 Подразделы (22 метода)</h2>
+      <table class="method-table">
+        <thead><tr><th>Раздел</th><th>Методов</th><th>Описание</th></tr></thead>
+        <tbody>
+          <tr><td><a href="18-fbs-posting.html">Posting Management</a></td><td>8</td><td>Получение, список, движение статусов, арбитраж, коробки</td></tr>
+          <tr><td><a href="18-fbs-labels.html">Labels & Shipping</a></td><td>6</td><td>ШК упаковки, пакетная печать, верификация и ограничения</td></tr>
+          <tr><td><a href="18-fbs-products.html">Products & Cancels</a></td><td>6</td><td>Изменения товаров, страны, причины отмены</td></tr>
+          <tr><td><a href="18-fbs-compliance.html">Legal & Compliance</a></td><td>2</td><td>ETGB, неоплаченные юридические товары</td></tr>
+        </tbody>
+      </table>
+
+      <h2>🚀 Быстрый пример</h2>
+      <div class="code-block"><pre><code>// Пример рабочего потока FBS
+const unfulfilled = await api.fbs.getUnfulfilledListV3({ limit: 50 });
+for (const p of unfulfilled.postings || []) {
+  const label = await api.fbs.packageLabel({ posting_number: [p.posting_number!] });
+  await api.fbs.moveToAwaitingDelivery({ posting_number: p.posting_number!, carrier_id: 1, tracking_number: `TRK${Date.now()}` });
+}
+</code></pre></div>
+
+      <div class="nav-links">
+        <a class="nav-btn secondary" href="../api-categories-index.html">📚 Все категории</a>
+        <a class="nav-btn" href="17-fbo-supply-request.html">⬅️ 17. FBO Supply Request</a>
+        <a class="nav-btn" href="19-fbs-rfbs-marks.html">➡️ 19. FBS/rFBS Marks</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

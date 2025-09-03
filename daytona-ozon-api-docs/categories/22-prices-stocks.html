@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>22. Цены и Остатки — Overview | DAYTONA</title>
+  <meta name="description" content="Цены и Остатки — обзор: управление ценами, остатками, уценёнными товарами и таймерами актуальности. 9 методов, 4 раздела.">
+  <link rel="icon" type="image/png" href="../image.png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f8f9fa}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .header{background:linear-gradient(135deg,#0d6efd 0%,#fd7e14 100%);color:#fff;text-align:center;padding:30px 0;margin-bottom:30px;border-radius:15px}
+    .breadcrumb{margin-bottom:15px}
+    .breadcrumb a{color:rgba(255,255,255,.85);text-decoration:none}
+    .content{background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:20px 0}
+    .card{background:#f8f9fa;border:2px solid #e9ecef;border-radius:12px;padding:16px;text-decoration:none;color:inherit}
+    .card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(0,0,0,.08);border-color:#0d6efd}
+    .method-table{width:100%;border-collapse:collapse;margin:16px 0 28px;border:2px solid #e9ecef;border-radius:10px;overflow:hidden}
+    .method-table th{background:#0d6efd;color:#fff;padding:10px 12px;text-align:left}
+    .method-table td{padding:9px 12px;border-bottom:1px solid #e9ecef}
+    .nav-links{text-align:center;margin-top:30px}
+    .nav-btn{display:inline-block;padding:10px 18px;margin:0 6px;background:#0d6efd;color:#fff;text-decoration:none;border-radius:20px;font-weight:500}
+    .nav-btn.secondary{background:#6c757d}
+    .nav-btn:hover{background:#0b5ed7;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="breadcrumb"><a href="../../index.html">🏠 Главная</a> / <a href="../api-categories-index.html">📚 Категории</a> / <span>22. Цены и Остатки</span></div>
+      <h1>22. API Цены и Остатки</h1>
+      <p>Цены, остатки, уценённые товары и таймеры актуальности</p>
+    </div>
+    <div class="content">
+      <div class="cards">
+        <a class="card" href="22-prices-stocks-prices.html"><strong>📊 Управление ценами</strong><br/>updatePrices, getPrices, updateDiscountedProductDiscount</a>
+        <a class="card" href="22-prices-stocks-timers.html"><strong>⏰ Таймеры актуальности</strong><br/>getActionTimerStatus, updateActionTimer</a>
+        <a class="card" href="22-prices-stocks-stocks.html"><strong>📦 Управление остатками</strong><br/>updateStocks, getStocks, getStocksByWarehouseFbs</a>
+        <a class="card" href="22-prices-stocks-discounted.html"><strong>🏷️ Уценённые товары</strong><br/>getDiscountedProductInfo</a>
+      </div>
+
+      <h2>📋 Методы (общее)</h2>
+      <table class="method-table">
+        <thead><tr><th>Раздел</th><th>Методы</th><th>Описание</th></tr></thead>
+        <tbody>
+          <tr><td>Цены</td><td>updatePrices, getPrices, updateDiscountedProductDiscount</td><td>Цены, премиум-цены и скидки</td></tr>
+          <tr><td>Таймеры</td><td>getActionTimerStatus, updateActionTimer</td><td>Контроль актуальности минимальных цен</td></tr>
+          <tr><td>Остатки</td><td>updateStocks, getStocks, getStocksByWarehouseFbs</td><td>Остатки на складах FBS/rFBS</td></tr>
+          <tr><td>Уценка</td><td>getDiscountedProductInfo</td><td>Информация по уценённым (FBO)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="nav-links">
+        <a class="nav-btn secondary" href="../api-categories-index.html">📚 Все категории</a>
+        <a class="nav-btn" href="21-premium.html">⬅️ 21. Premium</a>
+        <a class="nav-btn" href="23-finance.html">➡️ 23. Финансы</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

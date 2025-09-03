@@ -5,27 +5,27 @@
 ## 📦 Управление товарами
 
 ### Создание и редактирование товаров
-- **[product.create()](./22-product-api.md#create)** - Создание новых товаров
-- **[product.importByGtin()](./22-product-api.md#importByGtin)** - Импорт по штрих-коду GTIN
-- **[product.updateRequirements()](./22-product-api.md#updateRequirements)** - Обновление обязательных атрибутов
-- **[product.updateStatus()](./22-product-api.md#updateStatus)** - Управление статусом товара
-- **[product.delete()](./22-product-api.md#delete)** - Удаление товаров
-- **[product.edit()](./22-product-api.md#edit)** - Редактирование атрибутов
+- **[product.create()](./categories/products.md#create)** - Создание новых товаров
+- **[product.importByGtin()](./categories/products.md#importByGtin)** - Импорт по штрих-коду GTIN
+- **[product.updateRequirements()](./categories/products.md#updateRequirements)** - Обновление обязательных атрибутов
+- **[product.updateStatus()](./categories/products.md#updateStatus)** - Управление статусом товара
+- **[product.delete()](./categories/products.md#delete)** - Удаление товаров
+- **[product.edit()](./categories/products.md#edit)** - Редактирование атрибутов
 
 ### Поиск и получение информации о товарах
-- **[product.getList()](./22-product-api.md#getList)** - Список товаров с фильтрацией
-- **[product.getInfo()](./22-product-api.md#getInfo)** - Подробная информация о товаре
-- **[product.getInfoV3()](./22-product-api.md#getInfoV3)** - Расширенная информация (v3)
-- **[product.getInfoStocks()](./22-product-api.md#getInfoStocks)** - Остатки товаров
-- **[product.getInfoPrices()](./22-product-api.md#getInfoPrices)** - Цены товаров
-- **[product.getInfoDescription()](./22-product-api.md#getInfoDescription)** - Описания товаров
-- **[product.getIncomingEntries()](./22-product-api.md#getIncomingEntries)** - Входящие поставки
+- **[product.getList()](./categories/products.md#getList)** - Список товаров с фильтрацией
+- **[product.getInfo()](./categories/products.md#getInfo)** - Подробная информация о товаре
+- **[product.getInfoV3()](./categories/products.md#getInfoV3)** - Расширенная информация (v3)
+- **[product.getInfoStocks()](./categories/products.md#getInfoStocks)** - Остатки товаров
+- **[product.getInfoPrices()](./categories/products.md#getInfoPrices)** - Цены товаров
+- **[product.getInfoDescription()](./categories/products.md#getInfoDescription)** - Описания товаров
+- **[product.getIncomingEntries()](./categories/products.md#getIncomingEntries)** - Входящие поставки
 
 ### Цены и остатки
-- **[pricesStocks.getInfo()](./20-prices-stocks-api.md#getInfo)** - Информация о ценах и остатках
-- **[pricesStocks.updatePrices()](./20-prices-stocks-api.md#updatePrices)** - Обновление цен
-- **[pricesStocks.updateStocks()](./20-prices-stocks-api.md#updateStocks)** - Обновление остатков
-- **[pricesStocks.updateDiscounts()](./20-prices-stocks-api.md#updateDiscounts)** - Управление скидками
+- **[pricesStocks.getInfo()](./categories/prices-stocks.md#getInfo)** - Информация о ценах и остатках
+- **[pricesStocks.updatePrices()](./categories/prices-stocks.md#updatePrices)** - Обновление цен
+- **[pricesStocks.updateStocks()](./categories/prices-stocks.md#updateStocks)** - Обновление остатков
+- **[pricesStocks.updateDiscounts()](./categories/prices-stocks.md#updateDiscounts)** - Управление скидками
 
 ### Категории и атрибуты
 - **[category.getTree()](./06-category-api.md#getTree)** - Дерево категорий
@@ -40,17 +40,17 @@
 ## 🚚 Управление заказами
 
 ### Заказы FBS (Fulfillment by Seller)
-- **[fbs.getOrdersList()](./15-fbs-api.md#getOrdersList)** - Список заказов FBS
-- **[fbs.getOrder()](./15-fbs-api.md#getOrder)** - Детальная информация о заказе
-- **[fbs.packOrder()](./15-fbs-api.md#packOrder)** - Упаковка заказа
-- **[fbs.shipOrder()](./15-fbs-api.md#shipOrder)** - Отправка в доставку
-- **[fbs.getPackageLabel()](./15-fbs-api.md#getPackageLabel)** - Этикетки для упаковок
-- **[fbs.getShipmentLabel()](./15-fbs-api.md#getShipmentLabel)** - Этикетки для отправлений
+- **[fbs.getOrdersList()](./categories/fbs.md#getOrdersList)** - Список заказов FBS
+- **[fbs.getOrder()](./categories/fbs.md#getOrder)** - Детальная информация о заказе
+- **[fbs.packOrder()](./categories/fbs.md#packOrder)** - Упаковка заказа
+- **[fbs.shipOrder()](./categories/fbs.md#shipOrder)** - Отправка в доставку
+- **[fbs.getPackageLabel()](./categories/fbs.md#getPackageLabel)** - Этикетки для упаковок
+- **[fbs.getShipmentLabel()](./categories/fbs.md#getShipmentLabel)** - Этикетки для отправлений
 
 ### Заказы FBO (Fulfillment by OZON)
-- **[fbo.getOrdersList()](./13-fbo-api.md#getOrdersList)** - Список заказов FBO
-- **[fbo.getOrder()](./13-fbo-api.md#getOrder)** - Информация о заказе FBO
-- **[fbo.getShipmentInfo()](./13-fbo-api.md#getShipmentInfo)** - Информация об отправлении
+- **[fbo.getOrdersList()](./categories/fbo.md#getOrdersList)** - Список заказов FBO
+- **[fbo.getOrder()](./categories/fbo.md#getOrder)** - Информация о заказе FBO
+- **[fbo.getShipmentInfo()](./categories/fbo.md#getShipmentInfo)** - Информация об отправлении
 
 ### Доставка FBS
 - **[deliveryFbs.getDeliveryVariants()](./09-delivery-fbs-api.md#getDeliveryVariants)** - Варианты доставки
@@ -69,10 +69,10 @@
 ## 💰 Финансы и отчетность
 
 ### Финансовая информация
-- **[finance.getAccountBalance()](./16-finance-api.md#getAccountBalance)** - Текущий баланс
-- **[finance.getTransactionsList()](./16-finance-api.md#getTransactionsList)** - История транзакций
-- **[finance.getCashFlowStatement()](./16-finance-api.md#getCashFlowStatement)** - Отчет о движении денежных средств
-- **[finance.getReportsInfo()](./16-finance-api.md#getReportsInfo)** - Информация об отчетах
+- **[finance.getAccountBalance()](./categories/finance.md#getAccountBalance)** - Текущий баланс
+- **[finance.getTransactionsList()](./categories/finance.md#getTransactionsList)** - История транзакций
+- **[finance.getCashFlowStatement()](./categories/finance.md#getCashFlowStatement)** - Отчет о движении денежных средств
+- **[finance.getReportsInfo()](./categories/finance.md#getReportsInfo)** - Информация об отчетах
 
 ### Отчеты и аналитика
 - **[report.getStock()](./26-report-api.md#getStock)** - Отчет об остатках
@@ -81,8 +81,8 @@
 - **[report.getOrders()](./26-report-api.md#getOrders)** - Отчет по заказам
 
 ### Аналитические данные
-- **[analytics.getMostPopularSku()](./01-analytics-api.md#getMostPopularSku)** - Популярные товары
-- **[analytics.getAveragePrice()](./01-analytics-api.md#getAveragePrice)** - Средние цены
+- **[analytics.getMostPopularSku()](./categories/analytics.md#getMostPopularSku)** - Популярные товары
+- **[analytics.getAveragePrice()](./categories/analytics.md#getAveragePrice)** - Средние цены
 
 ## 🔄 Возвраты и обмены
 
@@ -117,9 +117,9 @@
 ## 💬 Взаимодействие с покупателями
 
 ### Отзывы покупателей *Premium Plus*
-- **[review.getList()](./29-review-api.md#getList)** - Список отзывов
-- **[review.getInfo()](./29-review-api.md#getInfo)** - Детальная информация об отзыве
-- **[review.createComment()](./29-review-api.md#createComment)** - Ответ на отзыв
+- **[review.getList()](./categories/review.md#getList)** - Список отзывов
+- **[review.getInfo()](./categories/review.md#getInfo)** - Детальная информация об отзыве
+- **[review.createComment()](./categories/review.md#createComment)** - Ответ на отзыв
 
 ### Вопросы и ответы *Premium Plus*
 - **[questionsAnswers.getList()](./25-questions-answers-api.md#getList)** - Список вопросов
@@ -153,8 +153,8 @@
 - **[sellerRating.getRatingHistory()](./31-seller-rating-api.md#getRatingHistory)** - История рейтингов
 
 ### Товары эконом-сегмента
-- **[quants.getOrdersAnalytics()](./24-quants-api.md#getOrdersAnalytics)** - Аналитика заказов Quant
-- **[quants.getForecast()](./24-quants-api.md#getForecast)** - Прогноз продаж
+- **[quants.getOrdersAnalytics()](./categories/quants.md#getOrdersAnalytics)** - Аналитика заказов Quant
+- **[quants.getForecast()](./categories/quants.md#getForecast)** - Прогноз продаж
 
 ## 🔧 Специализированные API
 
@@ -204,9 +204,9 @@
 4. **[report.getOrders()](./26-report-api.md#getOrders)** → Анализ заказов
 
 ### Работа с отзывами *(Premium Plus)*
-1. **[review.getList()](./29-review-api.md#getList)** → Получение новых отзывов
-2. **[review.getInfo()](./29-review-api.md#getInfo)** → Анализ отзыва
-3. **[review.createComment()](./29-review-api.md#createComment)** → Ответ на отзыв
+1. **[review.getList()](./categories/review.md#getList)** → Получение новых отзывов
+2. **[review.getInfo()](./categories/review.md#getInfo)** → Анализ отзыва
+3. **[review.createComment()](./categories/review.md#createComment)** → Ответ на отзыв
 
 ### Управление возвратами
 1. **[return.getReturns()](./27-return-api.md#getReturns)** → Список возвратов
@@ -245,6 +245,7 @@
 - **[🚀 Быстрый старт](./QUICK-START.md)** - Начало работы за 5 минут
 - **[🔧 Паттерны интеграции](./INTEGRATION-PATTERNS.md)** - Архитектурные решения
 - **[📑 Алфавитный индекс](./API-INDEX.md)** - Все 278 методов по алфавиту
+- **[GitHub репозиторий](https://github.com/salacoste/ozon-daytona-seller-api)** - исходный код и Issues
 
 **Подписки:**
 - ***Premium Plus*** - Требуется для работы с отзывами и вопросами покупателей

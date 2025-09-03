@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Категории - OZON Seller API SDK | DAYTONA</title>
+    <meta name="description" content="Подробная документация всех 33 категорий OZON Seller API с примерами кода и строгой типизацией TypeScript">
+    <link rel="icon" type="image/png" href="./image.png">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; color: white; padding: 40px 0; margin-bottom: 30px; }
+        .title { font-size: 2.5em; font-weight: 700; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .breadcrumb { background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 25px; display: inline-block; margin-bottom: 20px; }
+        .breadcrumb a { color: white; text-decoration: none; opacity: 0.8; }
+        .content { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        
+        .search-input {
+            width: 100%; max-width: 500px; padding: 15px 20px;
+            border: 2px solid #e9ecef; border-radius: 50px; font-size: 1.1em;
+            outline: none; transition: border-color 0.3s ease;
+        }
+        .search-input:focus { border-color: #007bff; }
+        
+        .categories-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px; margin: 30px 0;
+        }
+        
+        .category-card {
+            background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 15px;
+            padding: 25px; transition: all 0.3s ease; text-decoration: none;
+            color: inherit; display: block;
+        }
+        .category-card:hover {
+            transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #007bff; text-decoration: none;
+        }
+        
+        .category-header { display: flex; align-items: center; margin-bottom: 15px; }
+        .category-icon { font-size: 2em; margin-right: 15px; }
+        .category-title { font-size: 1.3em; font-weight: 600; color: #007bff; margin: 0; }
+        .complexity-badge {
+            display: inline-block; padding: 4px 12px; border-radius: 20px;
+            font-size: 0.8em; font-weight: 500; margin-left: auto;
+        }
+        .complexity-beginner { background: #d4edda; color: #155724; }
+        .complexity-intermediate { background: #fff3cd; color: #856404; }
+        .complexity-advanced { background: #f8d7da; color: #721c24; }
+        
+        .category-stats { display: flex; gap: 15px; font-size: 0.9em; color: #28a745; font-weight: 500; }
+        .tags { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.75em; font-weight: 600; }
+        .tag-premium { background: #ffc107; color: #212529; }
+        .tag-legacy { background: #6c757d; color: #fff; }
+        .tag-deprecated { background: #dc3545; color: #fff; }
+        .tag-recommended { background: #28a745; color: #fff; }
+        .nav-button {
+            display: inline-block; padding: 12px 24px; margin: 0 10px;
+            background: #007bff; color: white; text-decoration: none;
+            border-radius: 25px; font-weight: 500; transition: all 0.3s ease;
+        }
+        .nav-button:hover { background: #0056b3; transform: translateY(-2px); color: white; }
+        .nav-button.secondary { background: #6c757d; }
+        
+        @media (max-width: 768px) {
+            .categories-grid { grid-template-columns: 1fr; }
+            .content { padding: 20px; margin: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="breadcrumb">
+                <a href="../index.html">🏠 Главная</a> / 
+                <a href="./README.html">📖 Документация</a> / 
+                <span>📚 API Категории</span>
+            </div>
+            <h1 class="title">📚 API Категории</h1>
+            <p>Подробная документация всех категорий OZON Seller API</p>
+        </div>
+        
+        <div class="content">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <input type="text" id="categorySearch" class="search-input" 
+                       placeholder="🔍 Поиск по категориям API..." onkeyup="filterCategories()">
+            </div>
+            
+            <div class="categories-grid" id="categoriesGrid">
+                <a href="./categories/01-products.html" class="category-card" data-category="products товары каталог">
+                    <div class="category-header">
+                        <div class="category-icon">📦</div>
+                        <div style="flex: 1;">
+                            <h3 class="category-title">Products API</h3>
+                            <span class="complexity-badge complexity-intermediate">Средний</span>
+                        </div>
+                    </div>
+                    <p style="color: #666; margin-bottom: 15px;">Управление каталогом товаров: создание, редактирование, поиск</p>
+                    <div class="category-stats">
+                        <span>📊 34 метода</span>
+                        <span>⚡ Готово</span>
+                    </div>
+                </a>
+                
+                <a href="./categories/02-finance.html" class="category-card" data-category="finance финансы отчеты">
+                    <div class="category-header">
+                        <div class="category-icon">💰</div>
+                        <div style="flex: 1;">
+                            <h3 class="category-title">Finance API</h3>
+                            <span class="complexity-badge complexity-intermediate">Средний</span>
+                        </div>
+                    </div>
+                    <p style="color: #666; margin-bottom: 15px;">Финансовые операции: баланс, транзакции, отчеты</p>
+                    <div class="category-stats">
+                        <span>📊 10 методов</span>
+                        <span>⚡ Готово</span>
+                    </div>
+                </a>
+                
+                <a href="./categories/03-analytics.html" class="category-card" data-category="analytics аналитика">
+                    <div class="category-header">
+                        <div class="category-icon">📈</div>
+                        <div style="flex: 1;">
+                            <h3 class="category-title">Analytics API</h3>
+                            <span class="complexity-badge complexity-advanced">Продвинутый</span>
+                        </div>
+                    </div>
+                    <p style="color: #666; margin-bottom: 15px;">Аналитика продаж: популярные товары, средние цены</p>
+                    <div class="category-stats">
+                        <span>📊 7 методов</span>
+                        <span>⚡ Готово</span>
+                    </div>
+                </a>
+                
+                <a href="./categories/04-warehouse.html" class="category-card" data-category="warehouse склад">
+                    <div class="category-header">
+                        <div class="category-icon">🏪</div>
+                        <div style="flex: 1;">
+                            <h3 class="category-title">Warehouse API</h3>
+                            <span class="complexity-badge complexity-beginner">Начальный</span>
+                        </div>
+                    </div>
+                    <p style="color: #666; margin-bottom: 15px;">Управление складами FBS/rFBS</p>
+                    <div class="category-stats">
+                        <span>📊 2 метода</span>
+                        <span>⚡ Готово</span>
+                    </div>
+                </a>
+                
+                <a href="./categories/05-supplier.html" class="category-card" data-category="supplier поставщик">
+                    <div class="category-header">
+                        <div class="category-icon">🏭</div>
+                        <div style="flex: 1;">
+                            <h3 class="category-title">Supplier API</h3>
+                            <span class="complexity-badge complexity-beginner">Начальный</span>
+                        </div>
+                    </div>
+                    <p style="color: #666; margin-bottom: 15px;">Таможенные счёт-фактуры для турецких продавцов</p>
+                    <div class="category-stats">
+                        <span>📊 4 метода</span>
+                        <span>⚡ Готово</span>
+                    </div>
+                </a>
+            </div>
+            
+            <h2 style="margin: 20px 0 10px; color:#333;">🗂️ Все категории (01–36)</h2>
+            <div class="categories-grid">
+                <a href="./categories/01-products.html" class="category-card" data-category="products товары каталог"><div class="category-header"><div class="category-icon">📦</div><div style="flex:1"><h3 class="category-title">01. Products</h3></div></div><p style="color:#666">Каталог товаров</p></a>
+                <a href="./categories/02-finance.html" class="category-card" data-category="finance финансы"><div class="category-header"><div class="category-icon">💰</div><div style="flex:1"><h3 class="category-title">02. Finance</h3></div></div><p style="color:#666">Финансовые операции</p></a>
+                <a href="./categories/03-analytics.html" class="category-card" data-category="analytics аналитика"><div class="category-header"><div class="category-icon">📈</div><div style="flex:1"><h3 class="category-title">03. Analytics</h3></div></div><p style="color:#666">Аналитика остатков</p></a>
+                <a href="./categories/04-warehouse.html" class="category-card" data-category="warehouse склад"><div class="category-header"><div class="category-icon">🏪</div><div style="flex:1"><h3 class="category-title">04. Warehouse</h3></div></div><p style="color:#666">Склады</p></a>
+                <a href="./categories/05-supplier.html" class="category-card" data-category="supplier поставщик"><div class="category-header"><div class="category-icon">🏭</div><div style="flex:1"><h3 class="category-title">05. Supplier</h3></div></div><p style="color:#666">Поставщики</p></a>
+                <a href="./categories/06-barcode.html" class="category-card" data-category="barcode штрихкод"><div class="category-header"><div class="category-icon">🏷️</div><div style="flex:1"><h3 class="category-title">06. Barcode</h3></div></div><p style="color:#666">Штрихкоды</p></a>
+                <a href="./categories/07-fbs.html" class="category-card" data-category="fbs заказы"><div class="category-header"><div class="category-icon">🚚</div><div style="flex:1"><h3 class="category-title">07. FBS</h3></div></div><p style="color:#666">Fulfillment by Seller</p></a>
+                <a href="./categories/08-review.html" class="category-card" data-category="review отзывы"><div class="category-header"><div class="category-icon">⭐</div><div style="flex:1"><h3 class="category-title">08. Review</h3></div></div><p style="color:#666">Отзывы</p></a>
+                <a href="./categories/09-beta-method.html" class="category-card" data-category="beta"><div class="category-header"><div class="category-icon">🧪</div><div style="flex:1"><h3 class="category-title">09. Beta Method</h3></div></div><p style="color:#666">Экспериментальные методы</p></a>
+                <a href="./categories/10-brand.html" class="category-card" data-category="brand бренд"><div class="category-header"><div class="category-icon">🏷️</div><div style="flex:1"><h3 class="category-title">10. Brand</h3></div></div><p style="color:#666">Бренды</p></a>
+                <a href="./categories/11-category.html" class="category-card" data-category="category категории"><div class="category-header"><div class="category-icon">🗂️</div><div style="flex:1"><h3 class="category-title">11. Category</h3></div></div><p style="color:#666">Категории</p></a>
+                <a href="./categories/12-certification.html" class="category-card" data-category="certification сертификация"><div class="category-header"><div class="category-icon">✅</div><div style="flex:1"><h3 class="category-title">12. Certification</h3></div></div><p style="color:#666">Сертификация</p></a>
+                <a href="./categories/13-chat.html" class="category-card" data-category="chat чат"><div class="category-header"><div class="category-icon">💬</div><div style="flex:1"><h3 class="category-title">13. Chat</h3></div></div><p style="color:#666">Чаты</p></a>
+                <a href="./categories/14-delivery-fbs.html" class="category-card" data-category="delivery fbs доставка"><div class="category-header"><div class="category-icon">🚛</div><div style="flex:1"><h3 class="category-title">14. Delivery FBS</h3></div></div><p style="color:#666">Доставка FBS</p></a>
+                <a href="./categories/15-delivery-rfbs.html" class="category-card" data-category="delivery rfbs"><div class="category-header"><div class="category-icon">📦</div><div style="flex:1"><h3 class="category-title">15. Delivery rFBS</h3></div></div><p style="color:#666">Региональная доставка</p></a>
+                <a href="./categories/16-fbo.html" class="category-card" data-category="fbo"><div class="category-header"><div class="category-icon">🏢</div><div style="flex:1"><h3 class="category-title">16. FBO</h3></div></div><p style="color:#666">Fulfillment by OZON</p></a>
+                <a href="./categories/17-fbo-supply-request.html" class="category-card" data-category="fbo supply request"><div class="category-header"><div class="category-icon">📦</div><div style="flex:1"><h3 class="category-title">17. FBO Supply Request</h3></div></div><p style="color:#666">Поставки FBO</p></a>
+                <a href="./categories/18-fbs.html" class="category-card" data-category="fbs"><div class="category-header"><div class="category-icon">🚚</div><div style="flex:1"><h3 class="category-title">18. FBS</h3></div></div><p style="color:#666">Операции FBS</p></a>
+                <a href="./categories/19-fbs-rfbs-marks.html" class="category-card" data-category="marks маркировка deprecated v4 v5 v6 recommended"><div class="category-header"><div class="category-icon">🔖</div><div style="flex:1"><h3 class="category-title">19. FBS/rFBS Marks</h3></div></div><p style="color:#666">Маркировка и экземпляры</p><div class="tags"><span class="tag tag-deprecated">Устаревшие v4</span><span class="tag tag-recommended">Рекомендуем v5/v6</span></div></a>
+                <a href="./categories/20-pass.html" class="category-card" data-category="pass пропуски"><div class="category-header"><div class="category-icon">🎫</div><div style="flex:1"><h3 class="category-title">20. Pass</h3></div></div><p style="color:#666">Пропуски на склад</p></a>
+                <a href="./categories/21-premium.html" class="category-card" data-category="premium"><div class="category-header"><div class="category-icon">🥇</div><div style="flex:1"><h3 class="category-title">21. Premium</h3></div></div><p style="color:#666">Премиальные функции</p></a>
+                <a href="./categories/22-prices-stocks.html" class="category-card" data-category="prices stocks цены остатки"><div class="category-header"><div class="category-icon">💵</div><div style="flex:1"><h3 class="category-title">22. Prices & Stocks</h3></div></div><p style="color:#666">Цены и остатки</p></a>
+                <a href="./categories/23-finance.html" class="category-card" data-category="finance"><div class="category-header"><div class="category-icon">💰</div><div style="flex:1"><h3 class="category-title">23. Finance</h3></div></div><p style="color:#666">Финансы v2/v3</p></a>
+                <a href="./categories/24-returns.html" class="category-card" data-category="returns возвраты"><div class="category-header"><div class="category-icon">↩️</div><div style="flex:1"><h3 class="category-title">24. Returns</h3></div></div><p style="color:#666">Возвраты</p></a>
+                <a href="./categories/25-pass.html" class="category-card" data-category="pass пропуски"><div class="category-header"><div class="category-icon">🎫</div><div style="flex:1"><h3 class="category-title">25. Pass</h3></div></div><p style="color:#666">Пропуска</p></a>
+                <a href="./categories/26-premium.html" class="category-card" data-category="premium"><div class="category-header"><div class="category-icon">🥇</div><div style="flex:1"><h3 class="category-title">26. Premium</h3></div></div><p style="color:#666">Премиальные функции</p></a>
+                <a href="./categories/27-analytics.html" class="category-card" data-category="analytics"><div class="category-header"><div class="category-icon">📊</div><div style="flex:1"><h3 class="category-title">27. Analytics</h3></div></div><p style="color:#666">Складская аналитика</p><div class="tags"><span class="tag tag-deprecated">Содержит устаревший метод</span></div></a>
+                <a href="./categories/28-prices-stocks.html" class="category-card" data-category="prices stocks"><div class="category-header"><div class="category-icon">💵</div><div style="flex:1"><h3 class="category-title">28. Prices & Stocks</h3></div></div><p style="color:#666">Цены и остатки</p></a>
+                <a href="./categories/29-pricing-strategy.html" class="category-card" data-category="pricing стратегия"><div class="category-header"><div class="category-icon">🧭</div><div style="flex:1"><h3 class="category-title">29. Pricing Strategy</h3></div></div><p style="color:#666">Стратегии цен</p></a>
+                <a href="./categories/30-product.html" class="category-card" data-category="product"><div class="category-header"><div class="category-icon">📦</div><div style="flex:1"><h3 class="category-title">30. Product</h3></div></div><p style="color:#666">Товары</p></a>
+                <a href="./categories/31-questions.html" class="category-card" data-category="questions вопросы premium plus"><div class="category-header"><div class="category-icon">❓</div><div style="flex:1"><h3 class="category-title">31. Questions & Answers</h3></div></div><p style="color:#666">Вопросы и ответы</p><div class="tags"><span class="tag tag-premium">Premium Plus</span></div></a>
+                <a href="./categories/32-report.html" class="category-card" data-category="report отчёты"><div class="category-header"><div class="category-icon">📑</div><div style="flex:1"><h3 class="category-title">32. Report</h3></div></div><p style="color:#666">Отчёты</p></a>
+                <a href="./categories/33-return.html" class="category-card" data-category="return возврат"><div class="category-header"><div class="category-icon">🔄</div><div style="flex:1"><h3 class="category-title">33. Return</h3></div></div><p style="color:#666">Возвратные отгрузки</p></a>
+                <a href="./categories/34-review.html" class="category-card" data-category="review отзывы premium plus"><div class="category-header"><div class="category-icon">⭐</div><div style="flex:1"><h3 class="category-title">34. Review</h3></div></div><p style="color:#666">Отзывы и комментарии</p><div class="tags"><span class="tag tag-premium">Premium Plus</span></div></a>
+                <a href="./categories/35-rfbs-returns.html" class="category-card" data-category="rfbs returns legacy"><div class="category-header"><div class="category-icon">♻️</div><div style="flex:1"><h3 class="category-title">35. rFBS Returns</h3></div></div><p style="color:#666">Возвраты rFBS</p><div class="tags"><span class="tag tag-legacy">Есть legacy-методы</span></div></a>
+                <a href="./categories/36-seller-rating.html" class="category-card" data-category="rating рейтинг"><div class="category-header"><div class="category-icon">📈</div><div style="flex:1"><h3 class="category-title">36. Seller Rating</h3></div></div><p style="color:#666">Рейтинги продавца</p></a>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px solid #e9ecef;">
+                <a href="../index.html" class="nav-button secondary">🏠 На главную</a>
+                <a href="./API-INDEX.html" class="nav-button">📑 Все методы</a>
+                <a href="./QUICK-START.html" class="nav-button">🚀 Быстрый старт</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function filterCategories() {
+            const searchTerm = document.getElementById('categorySearch').value.toLowerCase();
+            const categoryCards = document.querySelectorAll('.category-card');
+            
+            categoryCards.forEach(card => {
+                const searchData = card.getAttribute('data-category') || '';
+                const title = card.querySelector('.category-title').textContent.toLowerCase();
+                const matchesSearch = searchData.includes(searchTerm) || title.includes(searchTerm);
+                card.style.display = matchesSearch ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

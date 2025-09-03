@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics API - OZON Seller API SDK | DAYTONA</title>
+    <meta name="description" content="Документация Analytics API - аналитика остатков и оборачиваемости товаров OZON с TypeScript типизацией">
+    <link rel="icon" type="image/png" href="../image.png">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; color: #333; background: #f8f9fa;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header {
+            background: linear-gradient(135deg, #e83e8c 0%, #fd7e14 100%);
+            color: white; text-align: center; padding: 30px 0; margin-bottom: 30px;
+            border-radius: 15px;
+        }
+        .breadcrumb { margin-bottom: 15px; }
+        .breadcrumb a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        .content { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        .method-table {
+            width: 100%; border-collapse: collapse; margin: 20px 0;
+            border: 2px solid #e9ecef; border-radius: 10px; overflow: hidden;
+        }
+        .method-table th { background: #e83e8c; color: white; padding: 12px; text-align: left; }
+        .method-table td { padding: 10px 12px; border-bottom: 1px solid #e9ecef; }
+        .method-table tr:hover { background: #f8f9fa; }
+        
+        .code-block {
+            background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 8px;
+            margin: 15px 0; overflow-x: auto; font-family: 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        .nav-links { text-align: center; margin-top: 30px; }
+        .nav-btn {
+            display: inline-block; padding: 10px 20px; margin: 0 5px;
+            background: #e83e8c; color: white; text-decoration: none;
+            border-radius: 20px; font-weight: 500;
+        }
+        .nav-btn:hover { background: #c2185b; text-decoration: none; color: white; }
+        .nav-btn.secondary { background: #6c757d; }
+        
+        .highlight { background: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0; }
+        .warning { background: #f8d7da; padding: 15px; border-left: 4px solid #dc3545; margin: 20px 0; }
+        
+        .grades-legend {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px; margin: 20px 0;
+        }
+        .grade-item {
+            padding: 10px; border-radius: 8px; text-align: center; font-weight: 500;
+        }
+        .grade-critical { background: #f8d7da; color: #721c24; }
+        .grade-red { background: #f5c6cb; color: #721c24; }
+        .grade-yellow { background: #fff3cd; color: #856404; }
+        .grade-green { background: #d4edda; color: #155724; }
+        .grade-nosales { background: #e2e3e5; color: #383d41; }
+        
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .content { padding: 20px; }
+            .method-table { font-size: 0.9em; }
+            .grades-legend { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="breadcrumb">
+                <a href="../../index.html">🏠 Главная</a> / 
+                <a href="../README.html">📖 Документация</a> / 
+                <a href="../api-categories-index.html">📚 Категории</a> / 
+                <span>📊 Analytics API</span>
+            </div>
+            <h1>📊 Analytics API</h1>
+            <p>Аналитика остатков и оборачиваемости товаров OZON</p>
+    </div>
+        <div class="nav-links">
+            <a href="../api-categories-index.html" class="nav-btn secondary">📚 Категории</a>
+            <a href="../API-INDEX.html" class="nav-btn">📑 Индекс API</a>
+            <a href="../QUICK-START.html" class="nav-btn">🚀 Быстрый старт</a>
+            <a href="../FAQ.html" class="nav-btn">❓ FAQ</a>
+        </div>
+
+        <div class="content">
+            <h2>🎯 Назначение API</h2>
+            <p>Analytics API предоставляет специализированные инструменты для анализа товарных остатков:</p>
+            <ul style="margin: 15px 0 30px 20px;">
+                <li><strong>Анализ оборачиваемости</strong> — расчёт оборачиваемости товаров и дней до конца остатка</li>
+                <li><strong>Мониторинг остатков</strong> — контроль товаров на складах с детализацией по типам</li>
+                <li><strong>Планирование закупок</strong> — данные для принятия решений о поставках</li>
+                <li><strong>Оптимизация склада</strong> — анализ эффективности управления остатками</li>
+            </ul>
+            
+            <div class="warning">
+                <strong>⚠️ Внимание:</strong> Метод <code>getStockOnWarehouses</code> будет отключён в будущем. 
+                Рекомендуется использовать новый endpoint <code>/v1/analytics/stocks</code>.
+            </div>
+            
+            <h2>📋 Методы Analytics API (7 endpoints)</h2>
+            
+            <h3>📈 Анализ оборачиваемости</h3>
+            <table class="method-table">
+                <thead>
+                    <tr><th>Метод</th><th>Endpoint</th><th>Назначение</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>getMostPopularSku</code></td><td><code>/v1/analytics/most-popular-sku</code></td><td>Самые популярные SKU товаров</td></tr>
+                    <tr><td><code>getStocksTurnover</code></td><td><code>/v1/analytics/turnover/stocks</code></td><td>Оборачиваемость товаров с прогнозом</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>💰 Анализ цен</h3>
+            <table class="method-table">
+                <thead>
+                    <tr><th>Метод</th><th>Endpoint</th><th>Назначение</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>getAveragePrice</code></td><td><code>/v1/analytics/average-price</code></td><td>Средние цены товаров по категориям</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>📦 Анализ остатков (Deprecated)</h3>
+            <table class="method-table">
+                <thead>
+                    <tr><th>Метод</th><th>Endpoint</th><th>Статус</th></tr>
+                </thead>
+                <tbody>
+                    <tr style="opacity: 0.6;"><td><code>getStockOnWarehouses</code></td><td><code>/v2/analytics/stock_on_warehouses</code></td><td>⚠️ Будет отключён</td></tr>
+                </tbody>
+            </table>
+            
+            <h2>📊 Система оценки остатков</h2>
+            <p>Analytics API использует систему градации остатков по уровням:</p>
+            
+            <div class="grades-legend">
+                <div class="grade-item grade-critical">🔴 CRITICAL<br>Критический уровень</div>
+                <div class="grade-item grade-red">🟠 RED<br>Низкий уровень</div>
+                <div class="grade-item grade-yellow">🟡 YELLOW<br>Средний уровень</div>
+                <div class="grade-item grade-green">🟢 GREEN<br>Хороший уровень</div>
+                <div class="grade-item grade-nosales">⚫ NO_SALES<br>Нет продаж</div>
+            </div>
+            
+            <h2>🚀 Быстрый пример</h2>
+            <div class="code-block">
+<span style="color: #68d391;">import</span> { <span style="color: #fbb6ce;">OzonSellerAPI</span> } <span style="color: #68d391;">from</span> <span style="color: #fbb6ce;">'daytona-ozon-seller-api'</span>;
+
+<span style="color: #a0aec0;">// Инициализация</span>
+<span style="color: #68d391;">const</span> client = <span style="color: #68d391;">new</span> <span style="color: #fbb6ce;">OzonSellerAPI</span>({
+  clientId: <span style="color: #fbb6ce;">'your-client-id'</span>,
+  apiKey: <span style="color: #fbb6ce;">'your-api-key'</span>
+});
+
+<span style="color: #a0aec0;">// Получить популярные товары</span>
+<span style="color: #68d391;">const</span> popularSku = <span style="color: #68d391;">await</span> client.analytics.getMostPopularSku({
+  limit: <span style="color: #fbb6ce;">10</span>
+});
+
+<span style="color: #a0aec0;">// Анализ оборачиваемости</span>
+<span style="color: #68d391;">const</span> turnover = <span style="color: #68d391;">await</span> client.analytics.getStocksTurnover({
+  limit: <span style="color: #fbb6ce;">100</span>,
+  offset: <span style="color: #fbb6ce;">0</span>
+});
+
+<span style="color: #a0aec0;">// Подсчёт товаров по уровням остатка</span>
+<span style="color: #68d391;">const</span> analysis = {
+  critical: <span style="color: #fbb6ce;">0</span>,
+  red: <span style="color: #fbb6ce;">0</span>,
+  yellow: <span style="color: #fbb6ce;">0</span>,
+  green: <span style="color: #fbb6ce;">0</span>,
+  noSales: <span style="color: #fbb6ce;">0</span>
+};
+
+turnover.items?.forEach(<span style="color: #68d391;">item</span> => {
+  <span style="color: #68d391;">switch</span> (item.idc_grade) {
+    <span style="color: #68d391;">case</span> <span style="color: #fbb6ce;">'GRADES_CRITICAL'</span>: analysis.critical++; <span style="color: #68d391;">break</span>;
+    <span style="color: #68d391;">case</span> <span style="color: #fbb6ce;">'GRADES_RED'</span>: analysis.red++; <span style="color: #68d391;">break</span>;
+    <span style="color: #68d391;">case</span> <span style="color: #fbb6ce;">'GRADES_YELLOW'</span>: analysis.yellow++; <span style="color: #68d391;">break</span>;
+    <span style="color: #68d391;">case</span> <span style="color: #fbb6ce;">'GRADES_GREEN'</span>: analysis.green++; <span style="color: #68d391;">break</span>;
+  }
+});
+
+console.log(<span style="color: #fbb6ce;">'📊 Анализ остатков:'</span>, analysis);
+            </div>
+            
+            <div class="nav-links">
+                <a href="../api-categories-index.html" class="nav-btn secondary">📚 Все категории</a>
+                <a href="02-finance.html" class="nav-btn">💰 Finance API</a>
+                <a href="04-warehouse.html" class="nav-btn">🏪 Warehouse API</a>
+                <a href="../QUICK-START.html" class="nav-btn">🚀 Быстрый старт</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

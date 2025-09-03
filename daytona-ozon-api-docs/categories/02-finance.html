@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance API - OZON Seller API SDK | DAYTONA</title>
+    <meta name="description" content="Документация Finance API - финансовая отчётность OZON с TypeScript типизацией">
+    <link rel="icon" type="image/png" href="../image.png">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; color: #333; background: #f8f9fa;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white; text-align: center; padding: 30px 0; margin-bottom: 30px;
+            border-radius: 15px;
+        }
+        .breadcrumb { margin-bottom: 15px; }
+        .breadcrumb a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        .content { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        .method-table {
+            width: 100%; border-collapse: collapse; margin: 20px 0;
+            border: 2px solid #e9ecef; border-radius: 10px; overflow: hidden;
+        }
+        .method-table th { background: #28a745; color: white; padding: 12px; text-align: left; }
+        .method-table td { padding: 10px 12px; border-bottom: 1px solid #e9ecef; }
+        .method-table tr:hover { background: #f8f9fa; }
+        
+        .code-block {
+            background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 8px;
+            margin: 15px 0; overflow-x: auto; font-family: 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        .nav-links { text-align: center; margin-top: 30px; }
+        .nav-btn {
+            display: inline-block; padding: 10px 20px; margin: 0 5px;
+            background: #28a745; color: white; text-decoration: none;
+            border-radius: 20px; font-weight: 500;
+        }
+        .nav-btn:hover { background: #1e7e34; text-decoration: none; color: white; }
+        .nav-btn.secondary { background: #6c757d; }
+        
+        .highlight { background: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0; }
+        
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .content { padding: 20px; }
+            .method-table { font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="breadcrumb">
+                <a href="../../index.html">🏠 Главная</a> / 
+                <a href="../README.html">📖 Документация</a> / 
+                <a href="../api-categories-index.html">📚 Категории</a> / 
+                <span>💰 Finance API</span>
+            </div>
+            <h1>💰 Finance API</h1>
+            <p>Финансовая отчётность и анализ транзакций OZON</p>
+    </div>
+        <div class="nav-links">
+            <a href="../api-categories-index.html" class="nav-btn secondary">📚 Категории</a>
+            <a href="../API-INDEX.html" class="nav-btn">📑 Индекс API</a>
+            <a href="../QUICK-START.html" class="nav-btn">🚀 Быстрый старт</a>
+            <a href="../FAQ.html" class="nav-btn">❓ FAQ</a>
+        </div>
+
+        <div class="content">
+            <h2>🎯 Назначение API</h2>
+            <p>Finance API предоставляет полный набор инструментов для финансового управления:</p>
+            <ul style="margin: 15px 0 30px 20px;">
+                <li><strong>Финансовая отчётность</strong> — детальные отчёты по продажам и реализации</li>
+                <li><strong>Анализ транзакций</strong> — подробная информация о начислениях и списаниях</li>
+                <li><strong>Взаиморасчёты</strong> — отчёты о взаиморасчётах с OZON</li>
+                <li><strong>Компенсации</strong> — управление компенсациями и декомпенсациями</li>
+                <li><strong>B2B продажи</strong> — специализированные отчёты для юридических лиц</li>
+            </ul>
+            
+            <div class="highlight">
+                <strong>⚠️ Важно:</strong> Finance API содержит критическую финансовую информацию. 
+                Обеспечьте защищённое хранение API ключей и логирование доступа к финансовым данным.
+            </div>
+            
+            <h2>📋 Основные методы (10 endpoints)</h2>
+            
+            <h3>📊 Основные отчёты</h3>
+            <table class="method-table">
+                <thead>
+                    <tr><th>Метод</th><th>Endpoint</th><th>Назначение</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>getTransactionList</code></td><td><code>/v3/finance/transaction/list</code></td><td>Список транзакций с детализацией</td></tr>
+                    <tr><td><code>getTransactionTotals</code></td><td><code>/v3/finance/transaction/totals</code></td><td>Итоговые суммы транзакций</td></tr>
+                    <tr><td><code>getRealizationReport</code></td><td><code>/v2/finance/realization</code></td><td>Отчёт о реализации товаров</td></tr>
+                    <tr><td><code>getRealizationReportPosting</code></td><td><code>/v1/finance/realization/posting</code></td><td>Позаказный отчёт о реализации</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>🏢 B2B отчёты</h3>
+            <table class="method-table">
+                <thead>
+                    <tr><th>Метод</th><th>Endpoint</th><th>Назначение</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>getDocumentB2BSalesReport</code></td><td><code>/v1/finance/document-b2b-sales</code></td><td>Реестр продаж юридическим лицам</td></tr>
+                    <tr><td><code>getDocumentB2BSalesJSON</code></td><td><code>/v1/finance/document-b2b-sales/json</code></td><td>B2B отчёт в JSON формате</td></tr>
+                    <tr><td><code>getMutualSettlementReport</code></td><td><code>/v1/finance/mutual-settlement</code></td><td>Отчёт о взаиморасчётах</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>🔄 Компенсации</h3>
+            <table class="method-table">
+                <thead>
+                    <tr><th>Метод</th><th>Endpoint</th><th>Назначение</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>getCompensationReport</code></td><td><code>/v1/finance/compensation</code></td><td>Отчёт о компенсациях</td></tr>
+                    <tr><td><code>getDecompensationReport</code></td><td><code>/v1/finance/decompensation</code></td><td>Отчёт о декомпенсациях</td></tr>
+                    <tr><td><code>getProductsBuyoutReport</code></td><td><code>/v1/finance/products/buyout</code></td><td>Отчёт о выкупленных товарах</td></tr>
+                </tbody>
+            </table>
+            
+            <h2>🚀 Быстрый пример</h2>
+            <div class="code-block">
+<span style="color: #68d391;">import</span> { <span style="color: #fbb6ce;">OzonSellerAPI</span> } <span style="color: #68d391;">from</span> <span style="color: #fbb6ce;">'daytona-ozon-seller-api'</span>;
+
+<span style="color: #a0aec0;">// Инициализация</span>
+<span style="color: #68d391;">const</span> client = <span style="color: #68d391;">new</span> <span style="color: #fbb6ce;">OzonSellerAPI</span>({
+  clientId: <span style="color: #fbb6ce;">'your-client-id'</span>,
+  apiKey: <span style="color: #fbb6ce;">'your-api-key'</span>
+});
+
+<span style="color: #a0aec0;">// Получить транзакции за месяц</span>
+<span style="color: #68d391;">const</span> transactions = <span style="color: #68d391;">await</span> client.finance.getTransactionList({
+  filter: {
+    date: {
+      from: <span style="color: #fbb6ce;">'2024-01-01T00:00:00.000Z'</span>,
+      to: <span style="color: #fbb6ce;">'2024-01-31T23:59:59.999Z'</span>
+    },
+    operation_type: [<span style="color: #fbb6ce;">'orders'</span>]
+  },
+  page: <span style="color: #fbb6ce;">1</span>,
+  page_size: <span style="color: #fbb6ce;">1000</span>
+});
+
+<span style="color: #a0aec0;">// Анализ доходов и расходов</span>
+<span style="color: #68d391;">let</span> totalIncome = <span style="color: #fbb6ce;">0</span>;
+<span style="color: #68d391;">let</span> totalExpenses = <span style="color: #fbb6ce;">0</span>;
+
+transactions.result?.operations?.forEach(<span style="color: #68d391;">operation</span> => {
+  <span style="color: #68d391;">const</span> amount = parseFloat(operation.amount || <span style="color: #fbb6ce;">'0'</span>);
+  <span style="color: #68d391;">if</span> (amount > <span style="color: #fbb6ce;">0</span>) {
+    totalIncome += amount;
+  } <span style="color: #68d391;">else</span> {
+    totalExpenses += Math.abs(amount);
+  }
+});
+
+console.log(<span style="color: #fbb6ce;">`📈 Доходы: ${totalIncome}₽`</span>);
+console.log(<span style="color: #fbb6ce;">`📉 Расходы: ${totalExpenses}₽`</span>);
+console.log(<span style="color: #fbb6ce;">`💰 Прибыль: ${totalIncome - totalExpenses}₽`</span>);
+            </div>
+            
+            <div class="nav-links">
+                <a href="../api-categories-index.html" class="nav-btn secondary">📚 Все категории</a>
+                <a href="01-products.html" class="nav-btn">📦 Products API</a>
+                <a href="03-analytics.html" class="nav-btn">📈 Analytics API</a>
+                <a href="../QUICK-START.html" class="nav-btn">🚀 Быстрый старт</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

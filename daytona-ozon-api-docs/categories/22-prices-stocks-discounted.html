@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>22.4 Уценённые товары | DAYTONA</title>
+  <meta name="description" content="Информация об уценённых товарах FBO: состояния, дефекты, связь с основным SKU (getDiscountedProductInfo)">
+  <link rel="icon" type="image/png" href="../image.png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f8f9fa}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .header{background:linear-gradient(135deg,#0d6efd 0%,#fd7e14 100%);color:#fff;text-align:center;padding:30px 0;margin-bottom:30px;border-radius:15px}
+    .breadcrumb{margin-bottom:15px}
+    .breadcrumb a{color:rgba(255,255,255,.85);text-decoration:none}
+    .content{background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+    .method-table{width:100%;border-collapse:collapse;margin:16px 0 28px;border:2px solid #e9ecef;border-radius:10px;overflow:hidden}
+    .method-table th{background:#0d6efd;color:#fff;padding:10px 12px;text-align:left}
+    .method-table td{padding:9px 12px;border-bottom:1px solid #e9ecef}
+    .links a{display:inline-block;margin:6px 8px 0 0;padding:8px 14px;background:#ecf5ff;color:#0d47a1;border-radius:18px;text-decoration:none}
+    .links a:hover{background:#d7ebff}
+    .code-block{background:#2d3748;color:#e2e8f0;padding:16px;border-radius:8px;margin:15px 0;overflow-x:auto;font-family:Monaco,Consolas,ui-monospace,monospace;font-size:.92em}
+    .nav-links{text-align:center;margin-top:30px}
+    .nav-btn{display:inline-block;padding:10px 18px;margin:0 6px;background:#0d6efd;color:#fff;text-decoration:none;border-radius:20px;font-weight:500}
+    .nav-btn.secondary{background:#6c757d}
+    .nav-btn:hover{background:#0b5ed7;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="breadcrumb"><a href="../../index.html">🏠 Главная</a> / <a href="../api-categories-index.html">📚 Категории</a> / <a href="22-prices-stocks.html">22. Цены и Остатки</a> / <span>Уценка</span></div>
+      <h1>22.4 Уценённые товары</h1>
+      <p>Состояние, дефекты и связь с основным SKU (FBO)</p>
+    </div>
+    <div class="content">
+      <div class="links">
+        <a href="22-prices-stocks.html">⬅️ Обзор</a>
+        <a href="22-prices-stocks-prices.html">📊 Цены</a>
+        <a href="22-prices-stocks-stocks.html">📦 Остатки</a>
+        <a href="22-prices-stocks-timers.html">⏰ Таймеры</a>
+      </div>
+
+      <h2>📋 Методы</h2>
+      <table class="method-table">
+        <thead><tr><th>Метод</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><code>getDiscountedProductInfo</code></td><td>Информация об уценённых товарах, дефекты и привязка к SKU</td></tr>
+        </tbody>
+      </table>
+
+      <h2>🚀 Пример</h2>
+      <div class="code-block"><pre><code>// Получение информации по уценённым товарам
+const info = await api.pricesStocks.getDiscountedProductInfo({ discounted_skus: ['987654321','123456789'] });
+</code></pre></div>
+
+      <div class="nav-links">
+        <a class="nav-btn secondary" href="../api-categories-index.html">📚 Все категории</a>
+        <a class="nav-btn" href="22-prices-stocks-stocks.html">⬅️ Остатки</a>
+        <a class="nav-btn" href="22-prices-stocks-timers.html">➡️ Таймеры</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

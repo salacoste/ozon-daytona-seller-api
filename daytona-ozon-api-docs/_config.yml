@@ -1,0 +1,71 @@
+title: "Daytona OZON Seller API SDK"
+description: "Полнофункциональный TypeScript/JavaScript SDK для OZON Seller API с полной типизацией и документацией"
+baseurl: "/ozon-daytona-seller-api"
+url: "https://salacoste.github.io"
+
+# GitHub Pages settings
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Navigation
+header_pages:
+  - README.md
+  - categories/README.md
+
+# Markdown settings
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    default_lang: typescript
+    
+highlighter: rouge
+
+# Collections
+collections:
+  categories:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+  - scope:
+      path: "categories"
+      type: "pages"
+    values:
+      layout: "page"
+
+# SEO settings
+author: salacoste
+twitter:
+  username: salacoste_dev
+  card: summary_large_image
+
+logo: /assets/images/logo.png
+
+social:
+  name: salacoste
+  links:
+    - https://github.com/salacoste
+
+# Analytics (optional)
+google_analytics: # Add your GA tracking ID here
+
+# Exclude files
+exclude:
+  - .gitignore
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - package.json
+  - package-lock.json

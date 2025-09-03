@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>35.x rFBS Returns API | DAYTONA</title>
+  <meta name="description" content="Современные и устаревшие методы rFBS возвратов (8 методов): setAction, списки, детали и legacy операции">
+  <link rel="icon" type="image/png" href="../image.png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f8f9fa}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .header{background:linear-gradient(135deg,#17a2b8 0%,#dc3545 100%);color:#fff;text-align:center;padding:30px 0;margin-bottom:30px;border-radius:15px}
+    .breadcrumb{margin-bottom:15px}
+    .breadcrumb a{color:rgba(255,255,255,.85);text-decoration:none}
+    .content{background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+    .method-table{width:100%;border-collapse:collapse;margin:16px 0 28px;border:2px solid #e9ecef;border-radius:10px;overflow:hidden}
+    .method-table th{background:#17a2b8;color:#fff;padding:10px 12px;text-align:left}
+    .method-table td{padding:9px 12px;border-bottom:1px solid #e9ecef}
+    .links a{display:inline-block;margin:6px 8px 0 0;padding:8px 14px;background:#ecf5ff;color:#0d47a1;border-radius:18px;text-decoration:none}
+    .links a:hover{background:#d7ebff}
+    .nav-links{text-align:center;margin-top:30px}
+    .nav-btn{display:inline-block;padding:10px 18px;margin:0 6px;background:#17a2b8;color:#fff;text-decoration:none;border-radius:20px;font-weight:500}
+    .nav-btn.secondary{background:#6c757d}
+    .nav-btn:hover{background:#138496;color:#fff;text-decoration:none}
+    .disclaimer{background:#fff3cd;border:1px solid #ffeeba;color:#856404;padding:12px 16px;border-radius:8px;margin:16px 0}
+    .tags{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.8em;font-weight:600}
+    .tag-legacy{background:#6c757d;color:#fff}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="breadcrumb"><a href="../../index.html">🏠 Главная</a> / <a href="../api-categories-index.html">📚 Категории</a> / <a href="35-rfbs-returns.html">35. rFBS Returns</a> / <span>API</span></div>
+      <h1>rFBS Returns API</h1>
+      <p>Современные setAction и устаревшие методы</p>
+      <div class="tags"><span class="tag tag-legacy">Есть legacy-методы</span></div>
+    </div>
+    <div class="content">
+      <div class="disclaimer"><strong>Важное уведомление:</strong> методы <code>compensate</code>, <code>receiveReturn</code>, <code>reject</code>, <code>returnMoney</code>, <code>verify</code> являются <em>legacy</em>. Используйте <code>setAction</code> как универсальную замену.</div>
+      <div class="links">
+        <a href="35-rfbs-returns.html">⬅️ Обзор</a>
+        <a href="35-rfbs-returns-management.html">🎯 Управление</a>
+        <a href="35-rfbs-returns-legacy.html">🕰️ Legacy</a>
+        <a href="35-rfbs-returns-automation.html">🤖 Автоматизация</a>
+      </div>
+
+      <h2>📋 Группы методов</h2>
+      <table class="method-table">
+        <thead><tr><th>Группа</th><th>Методы</th><th>Описание</th></tr></thead>
+        <tbody>
+          <tr><td>Современные</td><td>setAction, getReturn, getReturnsList</td><td>Унифицированные операции</td></tr>
+          <tr><td>Legacy</td><td>compensate, receiveReturn, reject, returnMoney, verify</td><td>Для обратной совместимости</td></tr>
+        </tbody>
+      </table>
+
+      <div class="nav-links">
+        <a class="nav-btn secondary" href="../api-categories-index.html">📚 Все категории</a>
+        <a class="nav-btn" href="35-rfbs-returns.html">⬅️ Обзор</a>
+        <a class="nav-btn" href="35-rfbs-returns-management.html">➡️ Управление</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

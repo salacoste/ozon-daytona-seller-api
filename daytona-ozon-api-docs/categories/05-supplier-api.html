@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📋 Supplier API | Daytona OZON Seller API</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin: 20px 0;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1));
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .api-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 600;
+            margin: 10px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .specialized-badge {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 40px 0 20px 0;
+            color: #34495e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin: 30px 0 15px 0;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+            margin: 25px 0 12px 0;
+            color: #34495e;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        pre {
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        code {
+            font-family: 'Fira Code', Consolas, Monaco, monospace;
+            font-size: 0.9rem;
+            color: #f8f8f2;
+        }
+        
+        .inline-code {
+            background: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #c0392b;
+        }
+        
+        .navigation {
+            background: #34495e;
+            color: white;
+            padding: 20px 40px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .navigation a {
+            color: #ecf0f1;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+        
+        .methods-overview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .method-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .method-card h4 {
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .tech-features {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .tech-features h3 {
+            color: #495057;
+            margin-bottom: 20px;
+        }
+        
+        .currency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .currency-badge {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        .documentation-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .doc-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+        
+        .doc-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .doc-card h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .doc-card a {
+            color: white;
+            font-weight: 600;
+        }
+        
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .scenario-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .scenario-card:hover {
+            border-color: #3498db;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .scenario-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-left: 4px solid #fdcb6e;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-left: 4px solid #17a2b8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .trends-section {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            color: #2c3e50;
+        }
+        
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .integration-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .integration-card:hover {
+            border-color: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.15);
+        }
+        
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid #ecf0f1;
+            text-align: center;
+            color: #7f8c8d;
+        }
+        
+        .file-formats {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .format-badge {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(46, 204, 113, 0.3);
+        }
+        
+        .hs-code-example {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: #495057;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .methods-grid, .documentation-links, .scenarios-grid, .integration-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .currency-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <a href="../index.html">🏠 Главная</a>
+        <a href="./README.html">📚 Категории</a>
+        <a href="../QUICK-START.html">🚀 Быстрый старт</a>
+        <a href="#overview">📊 Обзор</a>
+        <a href="#quickstart">🚀 Quick Start</a>
+    </div>
+
+    <div class="container">
+        <div class="hero-section">
+            <h1>📋 Supplier API</h1>
+            <p>Система управления таможенными счёт-фактурами для возврата НДС продавцам из Турции на платформе OZON. Обеспечивает полный цикл работы с счёт-фактурами от загрузки файлов до получения информации о документах.</p>
+            <div class="specialized-badge">📋 СПЕЦИАЛИЗИРОВАННОЕ API — Предназначено исключительно для продавцов из Турции, участвующих в программе возврата НДС</div>
+        </div>
+
+        <div class="methods-overview" id="overview">
+            <h2>📊 Обзор методов API</h2>
+            <p><strong>Всего методов: 4</strong> — полный цикл управления счёт-фактурами</p>
+            
+            <div class="methods-grid">
+                <div class="method-card">
+                    <h4>📤 Управление файлами (1 метод)</h4>
+                    <p><strong>uploadInvoiceFile()</strong> — Загрузка файла счёт-фактуры (PDF/JPEG, до 10 МБ)</p>
+                </div>
+                <div class="method-card">
+                    <h4>📋 Управление документами (2 метода)</h4>
+                    <p><strong>createOrUpdateInvoice()</strong> — Создание или изменение счёт-фактуры</p>
+                    <p><strong>getInvoice()</strong> — Получение информации о счёт-фактуре</p>
+                </div>
+                <div class="method-card">
+                    <h4>🗑️ Управление жизненным циклом (1 метод)</h4>
+                    <p><strong>deleteInvoice()</strong> — Удаление ссылки на счёт-фактуру</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-features">
+            <h2>🔧 Технические особенности</h2>
+            
+            <h3>Таможенные требования</h3>
+            <ul>
+                <li><strong>Целевая аудитория:</strong> Продавцы из Турции</li>
+                <li><strong>Назначение:</strong> Возврат НДС через таможенные счёт-фактуры</li>
+                <li><strong>Обязательные данные:</strong> HS-коды товаров для таможенной классификации</li>
+                <li><strong>Статус документов:</strong> Контроль жизненного цикла от загрузки до обработки</li>
+            </ul>
+
+            <h3>Поддерживаемые форматы файлов</h3>
+            <div class="file-formats">
+                <div class="format-badge">PDF — Цифровые документы (рекомендуется)</div>
+                <div class="format-badge">JPEG — Сканированные документы</div>
+            </div>
+            <ul>
+                <li><strong>Ограничение размера:</strong> Максимум 10 МБ</li>
+                <li><strong>Кодирование:</strong> Base64 для передачи через API</li>
+            </ul>
+
+            <h3>Поддерживаемые валюты</h3>
+            <div class="currency-grid">
+                <div class="currency-badge">USD — Доллар США</div>
+                <div class="currency-badge">EUR — Евро</div>
+                <div class="currency-badge">TRY — Турецкая лира</div>
+                <div class="currency-badge">CNY — Китайский юань</div>
+                <div class="currency-badge">RUB — Российский рубль</div>
+                <div class="currency-badge">GBP — Британский фунт</div>
+            </div>
+
+            <h3>HS-коды товаров</h3>
+            <ul>
+                <li><strong>Формат:</strong> 10-значные коды международной номенклатуры</li>
+                <li><strong>Назначение:</strong> Таможенная классификация товаров</li>
+                <li><strong>Обязательность:</strong> Требуются для корректного возврата НДС</li>
+                <li><strong>Множественность:</strong> Поддержка нескольких HS-кодов на одну счёт-фактуру</li>
+            </ul>
+            
+            <div class="hs-code-example">
+                Примеры HS-кодов:<br>
+                6203420000 — Мужские брюки из хлопка<br>
+                6109100000 — Футболки из хлопка<br>
+                6204620000 — Женские брюки из хлопка
+            </div>
+        </div>
+
+        <h2>📚 Документация по разделам</h2>
+        <p>Документация организована по функциональным блокам для эффективного изучения и внедрения:</p>
+
+        <div class="documentation-links">
+            <div class="doc-card">
+                <h3><a href="./05-supplier-invoice-management.html">🔗 Управление счёт-фактурами</a></h3>
+                <p><strong>3 метода:</strong> Основные операции с документами</p>
+                <ul>
+                    <li>Загрузка файлов с валидацией формата и размера</li>
+                    <li>Создание и обновление счёт-фактур с полной типизацией</li>
+                    <li>Получение детальной информации о документах</li>
+                    <li>Удаление ссылок на документы с аудитом операций</li>
+                </ul>
+            </div>
+
+            <div class="doc-card">
+                <h3><a href="./05-supplier-automation.html">🔗 Автоматизация и workflow</a></h3>
+                <p><strong>Классы автоматизации:</strong> Интеграция с бизнес-процессами</p>
+                <ul>
+                    <li>Пакетная обработка множественных счёт-фактур</li>
+                    <li>Автоматическая валидация данных и форматов</li>
+                    <li>Интеграция с системами учета и отчетности</li>
+                    <li>Мониторинг статусов и уведомления о проблемах</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 id="quickstart">🚀 Quick Start</h2>
+        <pre><code class="language-typescript">import { SupplierApi } from 'daytona-ozon-seller-api';
+
+const supplierApi = new SupplierApi(httpClient);
+
+// 1. Загрузка файла счёт-фактуры
+const uploadResult = await supplierApi.uploadInvoiceFile({
+  base64_content: 'JVBERi0xLjQKJcOkw7zDtsO...', // PDF в Base64
+  posting_number: '0001-1234567-0000001'
+});
+
+console.log(`📄 Файл загружен: ${uploadResult.url}`);
+
+// 2. Создание счёт-фактуры для турецкого продавца
+const invoice = await supplierApi.createOrUpdateInvoice({
+  date: '2024-01-15T10:00:00Z',
+  posting_number: '0001-1234567-0000001',
+  url: uploadResult.url!,
+  number: 'TR-INV-2024-001',
+  price: 2500.75,
+  price_currency: 'TRY', // Турецкая лира
+  hs_codes: [
+    { code: '6203420000' }, // Мужские брюки из хлопка
+    { code: '6109100000' }, // Футболки из хлопка
+    { code: '6204620000' }  // Женские брюки из хлопка
+  ]
+});
+
+console.log(`✅ Счёт-фактура создана: ${invoice.result ? 'успешно' : 'ошибка'}`);
+
+// 3. Получение информации о счёт-фактуре
+const invoiceInfo = await supplierApi.getInvoice({
+  posting_number: '0001-1234567-0000001'
+});
+
+const data = invoiceInfo.result;
+console.log('📋 Детали счёт-фактуры:');
+console.log(`   📄 Номер: ${data?.number}`);
+console.log(`   📅 Дата: ${data?.date}`);
+console.log(`   💰 Сумма: ${data?.price} ${data?.price_currency}`);
+console.log(`   📦 HS-коды: ${data?.hs_codes?.length} товарных позиций`);
+console.log(`   🔗 URL: ${data?.file_url}`);
+
+// Детальная информация по каждому HS-коду
+data?.hs_codes?.forEach((hsCode, index) => {
+  console.log(`   [${index + 1}] HS-код: ${hsCode.code}`);
+});
+
+// 4. Удаление ссылки на счёт-фактуру при необходимости
+const deleteResult = await supplierApi.deleteInvoice({
+  posting_number: '0001-1234567-0000001'
+});
+
+console.log(`🗑️ Удаление: ${deleteResult.result ? 'успешно' : 'ошибка'}`);</code></pre>
+
+        <h2>💡 Основные сценарии использования</h2>
+
+        <div class="scenarios-grid">
+            <div class="scenario-card">
+                <h3>📊 Операционное управление документооборотом</h3>
+                <p>Ежедневная работа с таможенными документами для возврата НДС.</p>
+                <h4>Применение:</h4>
+                <ul>
+                    <li>Загрузка сканированных или цифровых счёт-фактур</li>
+                    <li>Систематизация документов по отправлениям</li>
+                    <li>Отслеживание статуса обработки документов</li>
+                    <li>Ведение архива таможенных документов</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card">
+                <h3>🏭 Интеграция с системами учета</h3>
+                <p>Автоматический обмен данными с корпоративными системами.</p>
+                <h4>Применение:</h4>
+                <ul>
+                    <li>Синхронизация данных с ERP-системами</li>
+                    <li>Автоматическая выгрузка в системы бухгалтерского учета</li>
+                    <li>Интеграция с системами управления складом</li>
+                    <li>Создание отчетов для налоговых органов</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card">
+                <h3>🔄 Пакетная обработка документов</h3>
+                <p>Массовая обработка счёт-фактур для крупных продавцов.</p>
+                <h4>Применение:</h4>
+                <ul>
+                    <li>Обработка нескольких десятков документов за сеанс</li>
+                    <li>Автоматическая валидация данных перед отправкой</li>
+                    <li>Мониторинг прогресса обработки пакетов</li>
+                    <li>Восстановление после сбоев с продолжением с места остановки</li>
+                </ul>
+            </div>
+
+            <div class="scenario-card">
+                <h3>📈 Аналитика и контроль качества</h3>
+                <p>Анализ эффективности процессов возврата НДС.</p>
+                <h4>Применение:</h4>
+                <ul>
+                    <li>Отслеживание времени обработки документов</li>
+                    <li>Анализ причин отклонения счёт-фактур</li>
+                    <li>Мониторинг качества загружаемых файлов</li>
+                    <li>Построение отчетов по валютам и HS-кодам</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h2>⚠️ Важные ограничения и требования</h2>
+            
+            <h3>Технические ограничения</h3>
+            <ul>
+                <li><strong>Размер файла:</strong> Максимум 10 МБ для каждого файла</li>
+                <li><strong>Форматы файлов:</strong> Только PDF и JPEG (PNG не поддерживается)</li>
+                <li><strong>Кодирование:</strong> Base64 для передачи файлов через API</li>
+                <li><strong>Скорость загрузки:</strong> Рекомендуется пауза 1 секунда между запросами</li>
+            </ul>
+
+            <h3>Бизнес-требования</h3>
+            <ul>
+                <li><strong>География:</strong> Только для продавцов из Турции</li>
+                <li><strong>Валюты:</strong> Поддержка 6 основных валют международной торговли</li>
+                <li><strong>HS-коды:</strong> Обязательное указание для таможенного оформления</li>
+                <li><strong>Нумерация:</strong> Уникальные номера счёт-фактур (до 50 символов)</li>
+            </ul>
+
+            <h3>Правила валидации</h3>
+            <ul>
+                <li><strong>Номер отправления:</strong> Формат OZON (0001-1234567-0000001)</li>
+                <li><strong>Цены:</strong> До 2 знаков после десятичной точки</li>
+                <li><strong>Даты:</strong> Формат ISO 8601 с указанием временной зоны</li>
+                <li><strong>HS-коды:</strong> Ровно 10 цифр для каждого кода</li>
+            </ul>
+        </div>
+
+        <div class="trends-section">
+            <h2>🔮 Тренды и развитие</h2>
+            
+            <h3>Текущие возможности</h3>
+            <ul>
+                <li>Загрузка и управление индивидуальными счёт-фактурами</li>
+                <li>Поддержка множественных HS-кодов для одного документа</li>
+                <li>Работа с основными международными валютами</li>
+                <li>Полный CRUD-цикл для управления документами</li>
+            </ul>
+
+            <h3>Планируемые улучшения</h3>
+            <ul>
+                <li><strong>Автоматическое распознавание:</strong> OCR для автоматического извлечения данных</li>
+                <li><strong>Пакетная загрузка:</strong> Одновременная загрузка нескольких файлов</li>
+                <li><strong>Интеграция с таможней:</strong> Прямое взаимодействие с таможенными системами</li>
+                <li><strong>Шаблоны документов:</strong> Предзаполненные формы для типовых операций</li>
+            </ul>
+
+            <h3>Долгосрочная перспектива</h3>
+            <ul>
+                <li><strong>ИИ-валидация:</strong> Автоматическая проверка корректности документов</li>
+                <li><strong>Блокчейн-аудит:</strong> Неизменяемый след всех операций с документами</li>
+                <li><strong>Многоязычность:</strong> Поддержка документов на турецком и других языках</li>
+                <li><strong>API расширения:</strong> Интеграция с системами других стран и юрисдикций</li>
+            </ul>
+        </div>
+
+        <h2>💼 Интеграция с корпоративными системами</h2>
+
+        <div class="integration-grid">
+            <div class="integration-card">
+                <h3>ERP системы</h3>
+                <ul>
+                    <li>Синхронизация данных о счёт-фактурах с основным учетом</li>
+                    <li>Автоматическое создание проводок по возврату НДС</li>
+                    <li>Интеграция с модулями управления международной торговлей</li>
+                    <li>Создание аналитических отчетов по географическим рынкам</li>
+                </ul>
+            </div>
+
+            <div class="integration-card">
+                <h3>Системы документооборота</h3>
+                <ul>
+                    <li>Автоматическая классификация и архивирование документов</li>
+                    <li>Интеграция с системами электронного документооборота</li>
+                    <li>Настройка маршрутов согласования для различных типов документов</li>
+                    <li>Автоматическое уведомление ответственных лиц о статусах</li>
+                </ul>
+            </div>
+
+            <div class="integration-card">
+                <h3>Бухгалтерские системы</h3>
+                <ul>
+                    <li>Автоматический учет операций по возврату НДС</li>
+                    <li>Интеграция с налоговыми декларациями</li>
+                    <li>Создание первичных документов для российского учета</li>
+                    <li>Валютное планирование и учет курсовых разниц</li>
+                </ul>
+            </div>
+
+            <div class="integration-card">
+                <h3>Системы мониторинга и аналитики</h3>
+                <ul>
+                    <li>Дашборды с ключевыми метриками по документообороту</li>
+                    <li>Автоматические уведомления о проблемах и задержках</li>
+                    <li>Анализ эффективности процессов возврата НДС</li>
+                    <li>Прогнозирование объемов документооборота</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><a href="./README.html">📚 Назад к категориям</a> | <a href="../index.html">🏠 Главная страница</a></p>
+        <p>© 2024 Daytona OZON Seller API. Документация создана с ❤️ для разработчиков.</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

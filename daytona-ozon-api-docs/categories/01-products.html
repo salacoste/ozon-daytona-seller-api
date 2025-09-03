@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products API - OZON Seller API SDK | DAYTONA</title>
+    <meta name="description" content="Документация Products API - управление каталогом товаров OZON с TypeScript типизацией">
+    <link rel="icon" type="image/png" href="../image.png">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; color: #333; background: #f8f9fa;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; text-align: center; padding: 30px 0; margin-bottom: 30px;
+            border-radius: 15px;
+        }
+        .breadcrumb { margin-bottom: 15px; }
+        .breadcrumb a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        .content { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        .method-table {
+            width: 100%; border-collapse: collapse; margin: 20px 0;
+            border: 2px solid #e9ecef; border-radius: 10px; overflow: hidden;
+        }
+        .method-table th { background: #007bff; color: white; padding: 12px; text-align: left; }
+        .method-table td { padding: 10px 12px; border-bottom: 1px solid #e9ecef; }
+        .method-table tr:hover { background: #f8f9fa; }
+        
+        .code-block {
+            background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 8px;
+            margin: 15px 0; overflow-x: auto; font-family: 'Monaco', monospace;
+        }
+        .nav-links { text-align: center; margin-top: 30px; }
+        .nav-btn {
+            display: inline-block; padding: 10px 20px; margin: 0 5px;
+            background: #007bff; color: white; text-decoration: none;
+            border-radius: 20px; font-weight: 500;
+        }
+        .nav-btn:hover { background: #0056b3; text-decoration: none; color: white; }
+        .nav-btn.secondary { background: #6c757d; }
+        
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .content { padding: 20px; }
+            .method-table { font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="breadcrumb">
+                <a href="../../index.html">🏠 Главная</a> / 
+                <a href="../README.html">📖 Документация</a> / 
+                <a href="../api-categories-index.html">📚 Категории</a> / 
+                <span>📦 Products API</span>
+            </div>
+            <h1>📦 Products API</h1>
+            <p>Управление каталогом товаров OZON</p>
+    </div>
+        <div class="nav-links">
+            <a href="../api-categories-index.html" class="nav-btn secondary">📚 Категории</a>
+            <a href="../API-INDEX.html" class="nav-btn">📑 Индекс API</a>
+            <a href="../QUICK-START.html" class="nav-btn">🚀 Быстрый старт</a>
+            <a href="../FAQ.html" class="nav-btn">❓ FAQ</a>
+        </div>
+
+        <div class="content">
+            <h2>🎯 Назначение API</h2>
+            <p>Products API предоставляет полный набор инструментов для управления каталогом товаров:</p>
+            <ul style="margin: 15px 0 30px 20px;">
+                <li><strong>Создание и импорт</strong> товаров в каталог OZON</li>
+                <li><strong>Управление атрибутами</strong> и характеристиками товаров</li>
+                <li><strong>Контроль цен и остатков</strong> на складах</li>
+                <li><strong>Работа с медиа</strong> (фотографии, видео, 360° обзоры)</li>
+                <li><strong>Массовые операции</strong> для больших каталогов</li>
+            </ul>
+            
+            <h2>📋 Основные методы (34 endpoint'а)</h2>
+            
+            <h3>🏗️ Создание и импорт товаров</h3>
+            <table class="method-table">
+                <thead>
+                    <tr><th>Метод</th><th>Endpoint</th><th>Назначение</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>create</code></td><td><code>/v2/product/import</code></td><td>Создание/импорт товаров</td></tr>
+                    <tr><td><code>importBySKU</code></td><td><code>/v1/product/import-by-sku</code></td><td>Импорт по артикулам</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>📊 Получение информации</h3>
+            <table class="method-table">
+                <thead>
+                    <tr><th>Метод</th><th>Endpoint</th><th>Назначение</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>getList</code></td><td><code>/v2/product/list</code></td><td>Список товаров с фильтрами</td></tr>
+                    <tr><td><code>getInfo</code></td><td><code>/v2/product/info</code></td><td>Детальная информация о товарах</td></tr>
+                    <tr><td><code>getDescription</code></td><td><code>/v1/product/info/description</code></td><td>Описания товаров</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>💰 Цены и остатки</h3>
+            <table class="method-table">
+                <thead>
+                    <tr><th>Метод</th><th>Endpoint</th><th>Назначение</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>updatePrices</code></td><td><code>/v1/product/import/prices</code></td><td>Обновление цен</td></tr>
+                    <tr><td><code>updateStocks</code></td><td><code>/v1/product/import/stocks</code></td><td>Обновление остатков</td></tr>
+                    <tr><td><code>getPrices</code></td><td><code>/v4/product/info/prices</code></td><td>Получение цен товаров</td></tr>
+                </tbody>
+            </table>
+            
+            <h2>🚀 Быстрый пример</h2>
+            <div class="code-block">
+<span style="color: #68d391;">import</span> { <span style="color: #fbb6ce;">OzonSellerAPI</span> } <span style="color: #68d391;">from</span> <span style="color: #fbb6ce;">'daytona-ozon-seller-api'</span>;
+
+<span style="color: #a0aec0;">// Инициализация</span>
+<span style="color: #68d391;">const</span> api = <span style="color: #68d391;">new</span> <span style="color: #fbb6ce;">OzonSellerAPI</span>({
+  clientId: <span style="color: #fbb6ce;">'your-client-id'</span>,
+  apiKey: <span style="color: #fbb6ce;">'your-api-key'</span>
+});
+
+<span style="color: #a0aec0;">// Получить список товаров</span>
+<span style="color: #68d391;">const</span> products = <span style="color: #68d391;">await</span> api.product.getList({ 
+  limit: <span style="color: #fbb6ce;">100</span> 
+});
+
+<span style="color: #a0aec0;">// Обновить цену товара</span>
+<span style="color: #68d391;">await</span> api.pricesStocks.updatePrices([{
+  product_id: <span style="color: #fbb6ce;">123456789</span>,
+  price: <span style="color: #fbb6ce;">'1500.00'</span>
+}]);
+            </div>
+            
+            <div class="nav-links">
+                <a href="../api-categories-index.html" class="nav-btn secondary">📚 Все категории</a>
+                <a href="02-finance.html" class="nav-btn">💰 Finance API</a>
+                <a href="03-analytics.html" class="nav-btn">📈 Analytics API</a>
+                <a href="../QUICK-START.html" class="nav-btn">🚀 Быстрый старт</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

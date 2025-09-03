@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warehouse API - OZON Seller API SDK | DAYTONA</title>
+    <meta name="description" content="Документация Warehouse API - управление складами FBS/rFBS OZON с TypeScript типизацией">
+    <link rel="icon" type="image/png" href="../image.png">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; color: #333; background: #f8f9fa;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header {
+            background: linear-gradient(135deg, #17a2b8 0%, #6f42c1 100%);
+            color: white; text-align: center; padding: 30px 0; margin-bottom: 30px;
+            border-radius: 15px;
+        }
+        .breadcrumb { margin-bottom: 15px; }
+        .breadcrumb a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        .content { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        .method-table {
+            width: 100%; border-collapse: collapse; margin: 20px 0;
+            border: 2px solid #e9ecef; border-radius: 10px; overflow: hidden;
+        }
+        .method-table th { background: #17a2b8; color: white; padding: 12px; text-align: left; }
+        .method-table td { padding: 10px 12px; border-bottom: 1px solid #e9ecef; }
+        .method-table tr:hover { background: #f8f9fa; }
+        
+        .code-block {
+            background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 8px;
+            margin: 15px 0; overflow-x: auto; font-family: 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        .nav-links { text-align: center; margin-top: 30px; }
+        .nav-btn {
+            display: inline-block; padding: 10px 20px; margin: 0 5px;
+            background: #17a2b8; color: white; text-decoration: none;
+            border-radius: 20px; font-weight: 500;
+        }
+        .nav-btn:hover { background: #138496; text-decoration: none; color: white; }
+        .nav-btn.secondary { background: #6c757d; }
+        
+        .highlight { background: #d1ecf1; padding: 15px; border-left: 4px solid #bee5eb; margin: 20px 0; }
+        
+        .warehouse-types {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; margin: 20px 0;
+        }
+        .type-card {
+            background: #f8f9fa; padding: 20px; border-radius: 10px; border: 2px solid #e9ecef;
+            text-align: center; transition: all 0.3s ease;
+        }
+        .type-card:hover { border-color: #17a2b8; transform: translateY(-2px); }
+        .type-icon { font-size: 3em; margin-bottom: 10px; }
+        
+        .comparison-table {
+            width: 100%; border-collapse: collapse; margin: 20px 0;
+            border: 2px solid #e9ecef; border-radius: 10px; overflow: hidden;
+        }
+        .comparison-table th { background: #6f42c1; color: white; padding: 12px; text-align: center; }
+        .comparison-table td { padding: 10px 12px; border-bottom: 1px solid #e9ecef; text-align: center; }
+        
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .content { padding: 20px; }
+            .method-table { font-size: 0.9em; }
+            .warehouse-types { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="breadcrumb">
+                <a href="../../index.html">🏠 Главная</a> / 
+                <a href="../README.html">📖 Документация</a> / 
+                <a href="../api-categories-index.html">📚 Категории</a> / 
+                <span>🏪 Warehouse API</span>
+            </div>
+            <h1>🏪 Warehouse API</h1>
+            <p>Управление складами FBS/rFBS и логистической информацией</p>
+        </div>
+        <div class="nav-links">
+            <a href="../api-categories-index.html" class="nav-btn secondary">📚 Категории</a>
+            <a href="../API-INDEX.html" class="nav-btn">📑 Индекс API</a>
+            <a href="../QUICK-START.html" class="nav-btn">🚀 Быстрый старт</a>
+            <a href="../FAQ.html" class="nav-btn">❓ FAQ</a>
+        </div>
+
+        <div class="content">
+            <h2>🎯 Назначение API</h2>
+            <p>Warehouse API предоставляет базовые инструменты для работы со складской инфраструктурой OZON:</p>
+            <ul style="margin: 15px 0 30px 20px;">
+                <li><strong>Информация о складах</strong> — получение списка доступных складов FBS/rFBS</li>
+                <li><strong>Характеристики складов</strong> — адреса, контакты, режимы работы</li>
+                <li><strong>Планирование логистики</strong> — выбор оптимальных складов для размещения</li>
+                <li><strong>Интеграция с заказами</strong> — связь складских данных с системой FBS</li>
+            </ul>
+            
+            <h2>🏭 Типы складов OZON</h2>
+            <div class="warehouse-types">
+                <div class="type-card">
+                    <div class="type-icon">🏪</div>
+                    <h3>FBS склады</h3>
+                    <p><strong>Fulfillment by Seller</strong><br>Продавец самостоятельно отправляет товары покупателям</p>
+                </div>
+                <div class="type-card">
+                    <div class="type-icon">🏢</div>
+                    <h3>rFBS склады</h3>
+                    <p><strong>Regional FBS</strong><br>Региональные склады для ускорения доставки</p>
+                </div>
+                <div class="type-card">
+                    <div class="type-icon">📦</div>
+                    <h3>Сортировочные центры</h3>
+                    <p>Центры консолидации и распределения товаров по регионам</p>
+                </div>
+            </div>
+            
+            <h2>📋 Методы Warehouse API (2 endpoints)</h2>
+            
+            <div class="highlight">
+                <strong>⚠️ Важно:</strong> Для получения списка складов FBO используйте отдельный метод <code>/v1/cluster/list</code>
+            </div>
+            
+            <h3>📍 Управление складами FBS/rFBS</h3>
+            <table class="method-table">
+                <thead>
+                    <tr><th>Метод</th><th>Endpoint</th><th>Назначение</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>getWarehousesList</code></td><td><code>/v1/warehouse/list</code></td><td>Список всех доступных складов FBS/rFBS</td></tr>
+                    <tr><td><code>getDeliveryMethods</code></td><td><code>/v1/delivery-method/list</code></td><td>Методы доставки склада</td></tr>
+                </tbody>
+            </table>
+            
+            <h2>🔄 Сравнение FBS vs rFBS</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr><th>Характеристика</th><th>FBS</th><th>rFBS</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Размещение товаров</strong></td><td>На складе продавца</td><td>На складе OZON</td></tr>
+                    <tr><td><strong>Отправка заказов</strong></td><td>Продавец</td><td>OZON</td></tr>
+                    <tr><td><strong>Скорость доставки</strong></td><td>Зависит от продавца</td><td>1-3 дня по России</td></tr>
+                    <tr><td><strong>Охват регионов</strong></td><td>Ограниченный</td><td>Вся Россия</td></tr>
+                    <tr><td><strong>Сложность управления</strong></td><td>Высокая</td><td>Низкая</td></tr>
+                </tbody>
+            </table>
+            
+            <div class="highlight">
+                <strong>💡 Рекомендация:</strong> Используйте rFBS для максимального охвата регионов и быстрой доставки. 
+                FBS подходит для специфических товаров и контроля логистики.
+            </div>
+            
+            <h2>🚀 Быстрый пример</h2>
+            <div class="code-block">
+<span style="color: #68d391;">import</span> { <span style="color: #fbb6ce;">OzonSellerAPI</span> } <span style="color: #68d391;">from</span> <span style="color: #fbb6ce;">'daytona-ozon-seller-api'</span>;
+
+<span style="color: #a0aec0;">// Инициализация</span>
+<span style="color: #68d391;">const</span> client = <span style="color: #68d391;">new</span> <span style="color: #fbb6ce;">OzonSellerAPI</span>({
+  clientId: <span style="color: #fbb6ce;">'your-client-id'</span>,
+  apiKey: <span style="color: #fbb6ce;">'your-api-key'</span>
+});
+
+<span style="color: #68d391;">try</span> {
+  <span style="color: #a0aec0;">// Получить список всех складов FBS/rFBS</span>
+  <span style="color: #68d391;">const</span> warehouses = <span style="color: #68d391;">await</span> client.warehouse.getWarehousesList();
+  
+  console.log(<span style="color: #fbb6ce;">`🏪 Найдено складов: ${warehouses.result?.length || 0}`</span>);
+  
+  <span style="color: #a0aec0;">// Анализ складов по типам</span>
+  <span style="color: #68d391;">const</span> warehouseStats = {
+    fbs: <span style="color: #fbb6ce;">0</span>,
+    rfbs: <span style="color: #fbb6ce;">0</span>,
+    crossdock: <span style="color: #fbb6ce;">0</span>
+  };
+  
+  warehouses.result?.forEach(<span style="color: #68d391;">warehouse</span> => {
+    console.log(<span style="color: #fbb6ce;">`📍 ${warehouse.name} (ID: ${warehouse.warehouse_id})`</span>);
+    console.log(<span style="color: #fbb6ce;">`   Статус: ${warehouse.status === 'ACTIVE' ? '✅ Активен' : '❌ Неактивен'}`</span>);
+    console.log(<span style="color: #fbb6ce;">`   Тип: ${warehouse.is_rfbs ? 'rFBS' : 'FBS'}`</span>);
+    console.log(<span style="color: #fbb6ce;">`   Эконом товары: ${warehouse.is_economy ? '✅' : '❌'}`</span>);
+    console.log(<span style="color: #fbb6ce;">`   КГТ товары: ${warehouse.is_kgt ? '✅' : '❌'}`</span>);
+    
+    <span style="color: #68d391;">if</span> (warehouse.has_postings_limit) {
+      console.log(<span style="color: #fbb6ce;">`   Лимит отправлений: ${warehouse.postings_limit}`</span>);
+    }
+    
+    <span style="color: #a0aec0;">// Подсчёт по типам</span>
+    <span style="color: #68d391;">if</span> (warehouse.is_rfbs) {
+      warehouseStats.rfbs++;
+    } <span style="color: #68d391;">else</span> {
+      warehouseStats.fbs++;
+    }
+  });
+  
+  console.log(<span style="color: #fbb6ce;">'📊 Статистика складов:'</span>);
+  console.log(<span style="color: #fbb6ce;">`   FBS: ${warehouseStats.fbs}`</span>);
+  console.log(<span style="color: #fbb6ce;">`   rFBS: ${warehouseStats.rfbs}`</span>);
+  console.log(<span style="color: #fbb6ce;">`   Cross-dock: ${warehouseStats.crossdock}`</span>);
+  
+  <span style="color: #a0aec0;">// Получить способы доставки</span>
+  <span style="color: #68d391;">const</span> deliveryMethods = <span style="color: #68d391;">await</span> client.warehouse.getDeliveryMethods();
+  
+  console.log(<span style="color: #fbb6ce;">`🚚 Способов доставки: ${deliveryMethods.result?.length || 0}`</span>);
+  
+} <span style="color: #68d391;">catch</span> (error) {
+  console.error(<span style="color: #fbb6ce;">'❌ Ошибка получения информации о складах:'</span>, error.message);
+}
+            </div>
+            
+            <div class="nav-links">
+                <a href="../api-categories-index.html" class="nav-btn secondary">📚 Все категории</a>
+                <a href="03-analytics.html" class="nav-btn">📊 Analytics API</a>
+                <a href="05-supplier.html" class="nav-btn">🏭 Supplier API</a>
+                <a href="../QUICK-START.html" class="nav-btn">🚀 Быстрый старт</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

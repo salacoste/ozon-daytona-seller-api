@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💬 Review API - Управление отзывами клиентов | Daytona OZON Seller API</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin: 20px 0;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '💬';
+            position: absolute;
+            font-size: 10rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        
+        .hero-section h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-section .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .premium-badge {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            animation: pulse 2s infinite;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 40px 0 20px 0;
+            color: #34495e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin: 30px 0 15px 0;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+            margin: 25px 0 12px 0;
+            color: #34495e;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        pre {
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        code {
+            font-family: 'Fira Code', Consolas, Monaco, monospace;
+            font-size: 0.9rem;
+            color: #f8f8f2;
+        }
+        
+        .inline-code {
+            background: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #c0392b;
+        }
+        
+        .navigation {
+            background: #34495e;
+            color: white;
+            padding: 20px 40px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .navigation a {
+            color: #ecf0f1;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+        
+        .methods-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .methods-table th,
+        .methods-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .methods-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .methods-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .methods-table tr:hover {
+            background: #e3f2fd;
+            transform: scale(1.01);
+            transition: all 0.2s ease;
+        }
+        
+        .methods-table code {
+            background: #e9ecef;
+            color: #495057;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .workflow-section {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .api-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .method-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+        
+        .method-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .method-card h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .method-card code {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .examples-section {
+            margin: 40px 0;
+        }
+        
+        .example-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 25px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .example-card:hover {
+            border-color: #3498db;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.1);
+        }
+        
+        .example-card h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .analytics-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            border-radius: 12px;
+            color: white;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .rating-distribution {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .rating-item {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            flex: 1;
+            min-width: 80px;
+        }
+        
+        .rating-stars {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .rating-count {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .limitations-section {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-left: 4px solid #fdcb6e;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .limitations-section h3 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .feature-item {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            border-color: #3498db;
+            transform: translateY(-2px);
+        }
+        
+        .feature-item h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .status-badges {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .status-unprocessed {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-processed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .tip-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid #ecf0f1;
+            text-align: center;
+            color: #7f8c8d;
+        }
+        
+        .emoji-large {
+            font-size: 1.3rem;
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .api-methods,
+            .feature-grid,
+            .analytics-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .rating-distribution {
+                justify-content: space-between;
+            }
+            
+            .methods-table {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <a href="../index.html">🏠 Главная</a>
+        <a href="./README.html">📚 Категории</a>
+        <a href="../QUICK-START.html">🚀 Быстрый старт</a>
+        <a href="#methods">📋 Методы</a>
+        <a href="#examples">💡 Примеры</a>
+        <a href="#quickstart">🚀 Quick Start</a>
+  </div>
+
+  <div class="container">
+        <div class="hero-section">
+            <h1>💬 Review API</h1>
+            <p class="subtitle">Управление отзывами клиентов</p>
+            <p><strong>API для работы с отзывами и комментариями</strong> — доступен только для продавцов с подпиской Premium Plus.</p>
+            
+            <div class="premium-badge">🔒 Только для Premium Plus</div>
+  </div>
+
+  <div style="text-align:center; margin: 20px 0;">
+    <a href="../api-categories-index.html" style="display:inline-block;padding:10px 16px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">📚 Категории</a>
+    <a href="../API-INDEX.html" style="display:inline-block;padding:10px 16px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">📑 Индекс API</a>
+    <a href="../QUICK-START.html" style="display:inline-block;padding:10px 16px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">🚀 Быстрый старт</a>
+    <a href="../FAQ.html" style="display:inline-block;padding:10px 16px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">❓ FAQ</a>
+  </div>
+
+        <h2 id="methods">📋 Методы (7 endpoints)</h2>
+        
+        <table class="methods-table">
+            <thead>
+                <tr>
+                    <th>Метод</th>
+                    <th>Endpoint</th>
+                    <th>Назначение</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>getList</code></td>
+                    <td><code>/v1/review/list</code></td>
+                    <td>Список отзывов с фильтрацией</td>
+                </tr>
+                <tr>
+                    <td><code>getInfo</code></td>
+                    <td><code>/v1/review/info</code></td>
+                    <td>Подробная информация об отзыве</td>
+                </tr>
+                <tr>
+                    <td><code>getCount</code></td>
+                    <td><code>/v1/review/count</code></td>
+                    <td>Количество отзывов по статусам</td>
+                </tr>
+                <tr>
+                    <td><code>changeStatus</code></td>
+                    <td><code>/v1/review/change-status</code></td>
+                    <td>Изменение статуса отзывов</td>
+                </tr>
+                <tr>
+                    <td><code>createComment</code></td>
+                    <td><code>/v1/review/comment/create</code></td>
+                    <td>Ответ на отзыв</td>
+                </tr>
+                <tr>
+                    <td><code>deleteComment</code></td>
+                    <td><code>/v1/review/comment/delete</code></td>
+                    <td>Удаление комментария</td>
+                </tr>
+                <tr>
+                    <td><code>getCommentList</code></td>
+                    <td><code>/v1/review/comment/list</code></td>
+                    <td>Список комментариев к отзыву</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="quickstart">🚀 Быстрый старт</h2>
+
+        <h3>Инициализация клиента</h3>
+        <pre><code class="language-typescript">import { OzonSellerAPI } from 'daytona-ozon-seller-api';
+
+const client = new OzonSellerAPI({
+  clientId: 'your-client-id',
+  apiKey: 'your-api-key'
+});
+
+// ⚠️ Требуется подписка Premium Plus</code></pre>
+
+        <div class="workflow-section">
+            <h3>Базовый workflow управления отзывами</h3>
+            <pre><code class="language-typescript">try {
+  // 1. Получить статистику отзывов
+  const counts = await client.review.getCount();
+  console.log(`📊 Всего: ${counts.total}, Необработанных: ${counts.unprocessed}`);
+
+  // 2. Получить список необработанных отзывов
+  const reviews = await client.review.getList({
+    limit: 50,
+    status: 'UNPROCESSED',
+    sort_dir: 'DESC'
+  });
+
+  // 3. Обработать каждый отзыв
+  for (const review of reviews.reviews || []) {
+    console.log(`\n⭐ ${review.rating}/5 - SKU: ${review.sku}`);
+    console.log(`📝 ${review.text.substring(0, 100)}...`);
+    
+    // 4. Ответить на отзыв
+    if (review.rating >= 4) {
+      await client.review.createComment({
+        review_id: review.id,
+        text: 'Спасибо за положительный отзыв! 😊',
+        mark_review_as_processed: true
+      });
+    } else {
+      await client.review.createComment({
+        review_id: review.id,
+        text: 'Благодарим за отзыв. Мы учтем ваши замечания для улучшения качества.',
+        mark_review_as_processed: true
+      });
+    }
+  }
+
+} catch (error) {
+  console.error('❌ Ошибка управления отзывами:', error);
+}</code></pre>
+        </div>
+
+        <h2>🎯 Основные методы</h2>
+
+        <div class="api-methods">
+            <div class="method-card">
+                <h3><code>getList()</code> - Список отзывов</h3>
+                <pre><code class="language-typescript">interface ReviewListRequest {
+  /** Количество отзывов (20-100) */
+  limit: number;
+  /** ID последнего отзыва для пагинации */
+  last_id?: string;
+  /** Направление сортировки */
+  sort_dir?: 'ASC' | 'DESC';
+  /** Фильтр по статусу */
+  status?: 'ALL' | 'UNPROCESSED' | 'PROCESSED';
+}
+
+interface ReviewListItem {
+  id: string;
+  sku: number;
+  text: string;
+  rating: number;
+  published_at: string;
+  status: 'UNPROCESSED' | 'PROCESSED';
+  order_status: 'DELIVERED' | 'CANCELLED';
+  comments_amount: number;
+  photos_amount: number;
+  videos_amount: number;
+}</code></pre>
+            </div>
+
+            <div class="method-card">
+                <h3><code>createComment()</code> - Ответ на отзыв</h3>
+                <pre><code class="language-typescript">interface CommentCreateRequest {
+  /** ID отзыва */
+  review_id: string;
+  /** Текст комментария */
+  text: string;
+  /** Отметить отзыв как обработанный */
+  mark_review_as_processed?: boolean;
+  /** ID родительского комментария */
+  parent_comment_id?: string;
+}
+
+interface CommentCreateResponse {
+  /** ID созданного комментария */
+  comment_id?: string;
+}</code></pre>
+            </div>
+
+            <div class="method-card">
+                <h3><code>getInfo()</code> - Подробная информация</h3>
+                <pre><code class="language-typescript">interface ReviewInfo {
+  id: string;
+  sku: number;
+  text: string;
+  rating: number;
+  published_at: string;
+  status: 'UNPROCESSED' | 'PROCESSED';
+  comments_amount: number;
+  likes_amount: number;
+  dislikes_amount: number;
+  photos_amount: number;
+  videos_amount: number;
+  photos: ReviewPhoto[];
+  videos: ReviewVideo[];
+}</code></pre>
+            </div>
+        </div>
+
+        <h2 id="examples">💡 Практические примеры</h2>
+
+        <div class="examples-section">
+            <div class="example-card">
+                <h3>Автоматическая обработка отзывов</h3>
+                <pre><code class="language-typescript">const autoProcessReviews = async () => {
+  try {
+    // Получить необработанные отзывы
+    const reviews = await client.review.getList({
+      limit: 100,
+      status: 'UNPROCESSED'
+    });
+
+    const results = {
+      processed: 0,
+      positive: 0,
+      negative: 0,
+      withMedia: 0
+    };
+
+    for (const review of reviews.reviews || []) {
+      // Анализ отзыва
+      const isPositive = review.rating >= 4;
+      const hasMedia = review.photos_amount > 0 || review.videos_amount > 0;
+      
+      if (hasMedia) results.withMedia++;
+      if (isPositive) results.positive++;
+      else results.negative++;
+
+      // Персонализированный ответ
+      let responseText = '';
+      
+      if (isPositive) {
+        responseText = hasMedia 
+          ? 'Благодарим за подробный отзыв с фото! Ваше мнение очень важно для нас. 📸✨'
+          : 'Спасибо за положительную оценку! Рады, что товар вам понравился! 😊';
+      } else {
+        responseText = 'Благодарим за ваш отзыв. Мы внимательно изучили ваши замечания и учтем их для улучшения качества. 🔧';
+      }
+
+      // Создать комментарий
+      await client.review.createComment({
+        review_id: review.id,
+        text: responseText,
+        mark_review_as_processed: true
+      });
+
+      results.processed++;
+      
+      // Пауза между запросами
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+
+    return results;
+
+  } catch (error) {
+    console.error('❌ Ошибка автообработки:', error);
+  }
+};</code></pre>
+            </div>
+
+            <div class="example-card">
+                <h3>Аналитика отзывов</h3>
+                <pre><code class="language-typescript">const analyzeReviews = async () => {
+  try {
+    // Получить счетчики
+    const counts = await client.review.getCount();
+    
+    // Получить все отзывы для анализа
+    const allReviews = await client.review.getList({
+      limit: 100,
+      status: 'ALL'
+    });
+
+    const analytics = {
+      total: counts.total || 0,
+      processed: counts.processed || 0,
+      unprocessed: counts.unprocessed || 0,
+      rating: {
+        5: 0, 4: 0, 3: 0, 2: 0, 1: 0
+      },
+      withPhotos: 0,
+      withVideos: 0,
+      withComments: 0
+    };
+
+    // Анализ по рейтингам и медиа
+    allReviews.reviews?.forEach(review => {
+      analytics.rating[review.rating as keyof typeof analytics.rating]++;
+      
+      if (review.photos_amount > 0) analytics.withPhotos++;
+      if (review.videos_amount > 0) analytics.withVideos++;
+      if (review.comments_amount > 0) analytics.withComments++;
+    });
+
+    return analytics;
+
+  } catch (error) {
+    console.error('❌ Ошибка аналитики:', error);
+  }
+};</code></pre>
+                
+                <div class="analytics-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">4.7</span>
+                        <div class="stat-label">Средний рейтинг</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1,247</span>
+                        <div class="stat-label">Всего отзывов</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">89%</span>
+                        <div class="stat-label">Обработанных</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">234</span>
+                        <div class="stat-label">С медиа</div>
+                    </div>
+                </div>
+                
+                <div class="rating-distribution">
+                    <div class="rating-item">
+                        <div class="rating-stars">5⭐</div>
+                        <div class="rating-count">687 (55%)</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-stars">4⭐</div>
+                        <div class="rating-count">312 (25%)</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-stars">3⭐</div>
+                        <div class="rating-count">149 (12%)</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-stars">2⭐</div>
+                        <div class="rating-count">62 (5%)</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-stars">1⭐</div>
+                        <div class="rating-count">37 (3%)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h3>Управление комментариями</h3>
+                <pre><code class="language-typescript">const manageComments = async (reviewId: string) => {
+  try {
+    // 1. Получить список комментариев
+    const comments = await client.review.getCommentList({
+      review_id: reviewId,
+      limit: 50,
+      sort_dir: 'ASC'
+    });
+
+    console.log(`💬 Комментариев к отзыву: ${comments.comments?.length || 0}`);
+
+    // 2. Показать диалог
+    comments.comments?.forEach((comment, index) => {
+      const author = comment.is_owner ? '🏪 Продавец' : '👤 Покупатель';
+      console.log(`${index + 1}. ${author}: ${comment.text}`);
+      console.log(`   📅 ${comment.published_at}`);
+      if (comment.parent_comment_id) {
+        console.log(`   ↳ Ответ на комментарий ${comment.parent_comment_id}`);
+      }
+    });
+
+    // 3. Ответить на последний комментарий покупателя
+    const lastCustomerComment = comments.comments?.reverse().find(c => !c.is_owner);
+    
+    if (lastCustomerComment) {
+      const reply = await client.review.createComment({
+        review_id: reviewId,
+        text: 'Спасибо за дополнение к отзыву!',
+        parent_comment_id: lastCustomerComment.id
+      });
+      
+      console.log(`✅ Ответ создан: ${reply.comment_id}`);
+    }
+
+  } catch (error) {
+    console.error('❌ Ошибка управления комментариями:', error);
+  }
+};</code></pre>
+            </div>
+        </div>
+
+        <div class="limitations-section">
+            <h2>⚠️ Ограничения и особенности</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4><span class="emoji-large">🔒</span>Доступность</h4>
+                    <ul>
+                        <li><strong>Только для Premium Plus</strong> - API недоступен для базовых тарифов</li>
+                        <li>Полный доступ к отзывам и комментариям</li>
+                        <li>Расширенная аналитика и статистика</li>
+                    </ul>
+                </div>
+
+                <div class="feature-item">
+                    <h4><span class="emoji-large">📊</span>Лимиты и пагинация</h4>
+                    <ul>
+                        <li><strong>Размер страницы:</strong> 20-100 отзывов за запрос</li>
+                        <li><strong>Пагинация:</strong> через <code>last_id</code> (курсор)</li>
+                        <li><strong>Rate limiting:</strong> стандартные лимиты API OZON</li>
+                    </ul>
+                </div>
+
+                <div class="feature-item">
+                    <h4><span class="emoji-large">🏷️</span>Статусы отзывов</h4>
+                    <div class="status-badges">
+                        <span class="status-badge status-unprocessed">UNPROCESSED - новые отзывы</span>
+                        <span class="status-badge status-processed">PROCESSED - обработанные отзывы</span>
+                    </div>
+                    <p>Автоматическая смена статуса при создании комментария с <code>mark_review_as_processed: true</code></p>
+                </div>
+
+                <div class="feature-item">
+                    <h4><span class="emoji-large">💬</span>Комментарии</h4>
+                    <ul>
+                        <li>✅ Многоуровневые ответы (через <code>parent_comment_id</code>)</li>
+                        <li>✅ Различение комментариев продавца и покупателя</li>
+                        <li>❌ Нельзя редактировать комментарии, только удалять</li>
+                        <li>✅ Модерация комментариев перед публикацией</li>
+                    </ul>
+                </div>
+
+                <div class="feature-item">
+                    <h4><span class="emoji-large">📸</span>Медиа в отзывах</h4>
+                    <ul>
+                        <li>📸 <strong>Фото:</strong> ссылки с размерами</li>
+                        <li>🎥 <strong>Видео:</strong> основной файл + превью</li>
+                        <li>❌ Нельзя добавлять медиа через API (только просмотр)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <h3>💡 Совет профессионала</h3>
+            <p>Review API идеально подходит для создания автоматизированных систем работы с отзывами. Используйте персонализированные ответы и регулярный мониторинг для повышения лояльности клиентов.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><a href="./README.html">📚 Назад к категориям</a> | <a href="../index.html">🏠 Главная страница</a></p>
+        <p>© 2024 Daytona OZON Seller API. Документация создана с ❤️ для разработчиков.</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

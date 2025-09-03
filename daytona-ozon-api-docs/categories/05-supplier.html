@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier API - OZON Seller API SDK | DAYTONA</title>
+    <meta name="description" content="Документация Supplier API - таможенные счёт-фактуры для турецких продавцов OZON с TypeScript типизацией">
+    <link rel="icon" type="image/png" href="../image.png">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; color: #333; background: #f8f9fa;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header {
+            background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+            color: white; text-align: center; padding: 30px 0; margin-bottom: 30px;
+            border-radius: 15px;
+        }
+        .breadcrumb { margin-bottom: 15px; }
+        .breadcrumb a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        .content { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        .method-table {
+            width: 100%; border-collapse: collapse; margin: 20px 0;
+            border: 2px solid #e9ecef; border-radius: 10px; overflow: hidden;
+        }
+        .method-table th { background: #dc3545; color: white; padding: 12px; text-align: left; }
+        .method-table td { padding: 10px 12px; border-bottom: 1px solid #e9ecef; }
+        .method-table tr:hover { background: #f8f9fa; }
+        
+        .code-block {
+            background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 8px;
+            margin: 15px 0; overflow-x: auto; font-family: 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        .nav-links { text-align: center; margin-top: 30px; }
+        .nav-btn {
+            display: inline-block; padding: 10px 20px; margin: 0 5px;
+            background: #dc3545; color: white; text-decoration: none;
+            border-radius: 20px; font-weight: 500;
+        }
+        .nav-btn:hover { background: #c82333; text-decoration: none; color: white; }
+        .nav-btn.secondary { background: #6c757d; }
+        
+        .highlight { background: #d1ecf1; padding: 15px; border-left: 4px solid #bee5eb; margin: 20px 0; }
+        .warning { background: #f8d7da; padding: 15px; border-left: 4px solid #dc3545; margin: 20px 0; }
+        
+        .feature-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; margin: 20px 0;
+        }
+        .feature-card {
+            background: #f8f9fa; padding: 20px; border-radius: 10px; border: 2px solid #e9ecef;
+            text-align: center;
+        }
+        .feature-icon { font-size: 2.5em; margin-bottom: 10px; }
+        
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .content { padding: 20px; }
+            .method-table { font-size: 0.9em; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="breadcrumb">
+                <a href="../../index.html">🏠 Главная</a> / 
+                <a href="../README.html">📖 Документация</a> / 
+                <a href="../api-categories-index.html">📚 Категории</a> / 
+                <span>🏭 Supplier API</span>
+            </div>
+            <h1>🏭 Supplier API</h1>
+            <p>Таможенные счёт-фактуры для турецких продавцов</p>
+        </div>
+        <div class="nav-links">
+            <a href="../api-categories-index.html" class="nav-btn secondary">📚 Категории</a>
+            <a href="../API-INDEX.html" class="nav-btn">📑 Индекс API</a>
+            <a href="../QUICK-START.html" class="nav-btn">🚀 Быстрый старт</a>
+            <a href="../FAQ.html" class="nav-btn">❓ FAQ</a>
+        </div>
+
+        <div class="content">
+            <h2>🎯 Назначение API</h2>
+            <p>Supplier API предназначен исключительно для <strong>турецких продавцов</strong> и предоставляет инструменты для:</p>
+            <ul style="margin: 15px 0 30px 20px;">
+                <li><strong>Управление счёт-фактурами</strong> — создание и получение таможенных документов</li>
+                <li><strong>Соответствие законодательству</strong> — выполнение требований турецкого налогового права</li>
+                <li><strong>Автоматизация документооборота</strong> — интеграция с системами учёта</li>
+                <li><strong>Таможенное оформление</strong> — поддержка процедур импорта/экспорта</li>
+            </ul>
+            
+            <div class="warning">
+                <strong>⚠️ Важно:</strong> Данный API доступен только для продавцов, зарегистрированных в Турции. 
+                Для других стран используйте соответствующие категории API.
+            </div>
+            
+            <h2>🇹🇷 Особенности турецкого рынка</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Счёт-фактуры</h3>
+                    <p>Автоматическое создание документов в соответствии с турецким законодательством</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛃</div>
+                    <h3>Таможенные процедуры</h3>
+                    <p>Интеграция с таможенными органами для оформления товаров</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h3>Налоговое право</h3>
+                    <p>Соответствие требованиям турецкой налоговой системы</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Автоматизация</h3>
+                    <p>Интеграция с системами учёта и документооборота</p>
+                </div>
+            </div>
+            
+            <h2>📋 Методы Supplier API (4 endpoints)</h2>
+            
+            <h3>📄 Управление файлами и документами</h3>
+            <table class="method-table">
+                <thead>
+                    <tr><th>Метод</th><th>Endpoint</th><th>Назначение</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>uploadInvoiceFile</code></td><td><code>/v1/invoice/file/upload</code></td><td>Загрузка файла счёт-фактуры (JPEG, PDF ≤10MB)</td></tr>
+                    <tr><td><code>createOrUpdateInvoice</code></td><td><code>/v2/invoice/create-or-update</code></td><td>Создание/обновление счёт-фактуры с HS-кодами</td></tr>
+                    <tr><td><code>getInvoice</code></td><td><code>/v2/invoice/get</code></td><td>Получение информации о счёт-фактуре</td></tr>
+                    <tr><td><code>deleteInvoice</code></td><td><code>/v1/invoice/delete</code></td><td>Удаление ссылки на счёт-фактуру</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>💱 Поддерживаемые валюты</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💵</div>
+                    <h4>USD</h4>
+                    <p>Доллар США (по умолчанию)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💶</div>
+                    <h4>EUR • TRY</h4>
+                    <p>Евро • Турецкая лира</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💷</div>
+                    <h4>CNY • RUB • GBP</h4>
+                    <p>Юань • Рубль • Фунт</p>
+                </div>
+            </div>
+            
+            <div class="highlight">
+                <strong>💡 Рекомендация:</strong> Интегрируйте Supplier API с вашей системой учёта для автоматического 
+                создания таможенных документов при обработке заказов.
+            </div>
+            
+            <h2>🚀 Быстрый пример</h2>
+            <div class="code-block">
+<span style="color: #68d391;">import</span> { <span style="color: #fbb6ce;">OzonSellerAPI</span> } <span style="color: #68d391;">from</span> <span style="color: #fbb6ce;">'daytona-ozon-seller-api'</span>;
+
+<span style="color: #a0aec0;">// Инициализация для турецкого продавца</span>
+<span style="color: #68d391;">const</span> client = <span style="color: #68d391;">new</span> <span style="color: #fbb6ce;">OzonSellerAPI</span>({
+  clientId: <span style="color: #fbb6ce;">'your-turkish-client-id'</span>,
+  apiKey: <span style="color: #fbb6ce;">'your-turkish-api-key'</span>
+});
+
+<span style="color: #68d391;">try</span> {
+  <span style="color: #a0aec0;">// 1. Загрузка файла счёт-фактуры</span>
+  <span style="color: #68d391;">const</span> file = <span style="color: #68d391;">await</span> fs.readFile(<span style="color: #fbb6ce;">'invoice.pdf'</span>);
+  <span style="color: #68d391;">const</span> base64Content = file.toString(<span style="color: #fbb6ce;">'base64'</span>);
+
+  <span style="color: #68d391;">const</span> uploadResult = <span style="color: #68d391;">await</span> client.supplier.uploadInvoiceFile({
+    base64_content: base64Content,
+    posting_number: <span style="color: #fbb6ce;">'0001-1234567-0000001'</span>
+  });
+
+  console.log(<span style="color: #fbb6ce;">`📄 Файл загружен: ${uploadResult.url}`</span>);
+
+  <span style="color: #a0aec0;">// 2. Создание записи о счёт-фактуре</span>
+  <span style="color: #68d391;">const</span> invoice = <span style="color: #68d391;">await</span> client.supplier.createOrUpdateInvoice({
+    date: <span style="color: #fbb6ce;">'2024-01-15T10:00:00Z'</span>,
+    posting_number: <span style="color: #fbb6ce;">'0001-1234567-0000001'</span>,
+    url: uploadResult.url!,
+    number: <span style="color: #fbb6ce;">'INV-TR-2024-001'</span>,
+    price: <span style="color: #fbb6ce;">15000.50</span>,
+    price_currency: <span style="color: #fbb6ce;">'TRY'</span>,
+    hs_codes: [
+      { code: <span style="color: #fbb6ce;">'6203420000'</span> }, <span style="color: #a0aec0;">// Мужские брюки из хлопка</span>
+      { code: <span style="color: #fbb6ce;">'6109100000'</span> }  <span style="color: #a0aec0;">// Футболки из хлопка</span>
+    ]
+  });
+
+  console.log(<span style="color: #fbb6ce;">`✅ Счёт-фактура: ${invoice.result ? 'создана' : 'ошибка'}`</span>);
+
+  <span style="color: #a0aec0;">// 3. Получение информации о счёт-фактуре</span>
+  <span style="color: #68d391;">const</span> invoiceInfo = <span style="color: #68d391;">await</span> client.supplier.getInvoice({
+    posting_number: <span style="color: #fbb6ce;">'0001-1234567-0000001'</span>
+  });
+
+  console.log(<span style="color: #fbb6ce;">'📋 Информация о счёт-фактуре:'</span>);
+  console.log(<span style="color: #fbb6ce;">`   Номер: ${invoiceInfo.result?.number}`</span>);
+  console.log(<span style="color: #fbb6ce;">`   Сумма: ${invoiceInfo.result?.price} ${invoiceInfo.result?.price_currency}`</span>);
+
+} <span style="color: #68d391;">catch</span> (error) {
+  console.error(<span style="color: #fbb6ce;">'❌ Ошибка работы с счёт-фактурой:'</span>, error.message);
+}
+            </div>
+            
+            <div class="nav-links">
+                <a href="../api-categories-index.html" class="nav-btn secondary">📚 Все категории</a>
+                <a href="04-warehouse.html" class="nav-btn">🏪 Warehouse API</a>
+                <a href="01-products.html" class="nav-btn">📦 Products API</a>
+                <a href="../QUICK-START.html" class="nav-btn">🚀 Быстрый старт</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

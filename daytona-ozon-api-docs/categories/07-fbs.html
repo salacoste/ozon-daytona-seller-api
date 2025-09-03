@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📋 FBS API - Fulfillment by Seller | Daytona OZON Seller API</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin: 20px 0;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '📋';
+            position: absolute;
+            font-size: 12rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-section .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+        }
+        
+        .api-features {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: left;
+        }
+        
+        .feature-card h4 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .feature-card p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 40px 0 20px 0;
+            color: #34495e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin: 30px 0 15px 0;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+            margin: 25px 0 12px 0;
+            color: #34495e;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        pre {
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        code {
+            font-family: 'Fira Code', Consolas, Monaco, monospace;
+            font-size: 0.9rem;
+            color: #f8f8f2;
+        }
+        
+        .inline-code {
+            background: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #c0392b;
+        }
+        
+        .navigation {
+            background: #34495e;
+            color: white;
+            padding: 20px 40px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .navigation a {
+            color: #ecf0f1;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+        
+        .methods-overview {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .methods-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .methods-table th,
+        .methods-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .methods-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .methods-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .methods-table tr:hover {
+            background: #e3f2fd;
+            transform: scale(1.01);
+            transition: all 0.2s ease;
+        }
+        
+        .complexity-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .simple { background: #d4edda; color: #155724; }
+        .medium { background: #fff3cd; color: #856404; }
+        .complex { background: #f8d7da; color: #721c24; }
+        
+        .documentation-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .doc-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+        
+        .doc-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .doc-section h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .doc-section a {
+            color: white;
+            font-weight: 600;
+        }
+        
+        .status-flow {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .flow-diagram {
+            font-family: monospace;
+            background: #2d3748;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+        
+        .status-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .status-table th,
+        .status-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .status-table th {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .status-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .status-table code {
+            background: #e9ecef;
+            color: #495057;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .limitations-section {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-left: 4px solid #fdcb6e;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .limitations-section h3 {
+            color: #856404;
+        }
+        
+        .best-practices {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .best-practices h3 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .good-bad-examples {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .good-example {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ffffff;
+        }
+        
+        .bad-example {
+            background: rgba(231, 76, 60, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .good-example h4 {
+            color: white;
+        }
+        
+        .bad-example h4 {
+            color: #e74c3c;
+        }
+        
+        .schemes-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .scheme-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .scheme-card:hover {
+            border-color: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.15);
+        }
+        
+        .scheme-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .next-steps {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .next-steps h2,
+        .next-steps h3 {
+            color: white;
+        }
+        
+        .next-steps a {
+            color: #ecf0f1;
+            text-decoration: underline;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .tip-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid #ecf0f1;
+            text-align: center;
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .features-grid,
+            .documentation-sections,
+            .schemes-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .good-bad-examples {
+                grid-template-columns: 1fr;
+            }
+            
+            .methods-table,
+            .status-table {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <a href="../index.html">🏠 Главная</a>
+        <a href="./README.html">📚 Категории</a>
+        <a href="../QUICK-START.html">🚀 Быстрый старт</a>
+        <a href="#overview">📊 Обзор</a>
+        <a href="#workflow">🔄 Статусы</a>
+        <a href="#quickstart">🚀 Quick Start</a>
+  </div>
+
+  <div class="container">
+        <div class="hero-section">
+            <h1>📋 FBS API</h1>
+            <p class="subtitle">Fulfillment by Seller</p>
+            <p><strong>Самая комплексная категория для управления отправлениями FBS</strong> — полный жизненный цикл заказов от получения до доставки со схемой фулфилмента от продавца.</p>
+            
+            <div class="api-features">
+                <h3>🎯 Назначение API</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>📦 Управление отправлениями</h4>
+                        <p>Получение списков, фильтрация, отслеживание статусов</p>
+  </div>
+
+  <div style="text-align:center; margin: 20px 0;">
+    <a href="../api-categories-index.html" style="display:inline-block;padding:10px 16px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">📚 Категории</a>
+    <a href="../API-INDEX.html" style="display:inline-block;padding:10px 16px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">📑 Индекс API</a>
+    <a href="../QUICK-START.html" style="display:inline-block;padding:10px 16px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">🚀 Быстрый старт</a>
+    <a href="../FAQ.html" style="display:inline-block;padding:10px 16px;margin:0 5px;background:#667eea;color:#fff;text-decoration:none;border-radius:18px;font-weight:500">❓ FAQ</a>
+  </div>
+                    <div class="feature-card">
+                        <h4>🏷️ Печать этикеток</h4>
+                        <p>Создание и получение этикеток для отправлений</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>⚖️ Отмена и споры</h4>
+                        <p>Управление отменами, арбитражами и проблемными заказами</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📋 Работа с товарами</h4>
+                        <p>Изменение весов, отмена отдельных позиций</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🌟 Специальные функции</h4>
+                        <p>Коды курьеров, ограничения, многокоробочные отправления</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🌍 Международная торговля</h4>
+                        <p>Таможенные декларации ETGB для турецких продавцов</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="methods-overview" id="overview">
+            <h2>📊 Обзор методов (22 endpoints)</h2>
+            
+            <h3>🗂️ Категории методов</h3>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Категория</th>
+                        <th>Количество</th>
+                        <th>Сложность</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Управление отправлениями</strong></td>
+                        <td>6 методов</td>
+                        <td><span class="complexity-badge medium">🟡 Средняя</span></td>
+                        <td>Список, поиск, получение, отмена отправлений</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Этикетки и печать</strong></td>
+                        <td>4 метода</td>
+                        <td><span class="complexity-badge simple">🟢 Простая</span></td>
+                        <td>Создание, получение этикеток, пакетная печать</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Работа с товарами</strong></td>
+                        <td>4 метода</td>
+                        <td><span class="complexity-badge medium">🟡 Средняя</span></td>
+                        <td>Изменение весов, отмена позиций, страны-изготовители</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Специальные функции</strong></td>
+                        <td>5 методов</td>
+                        <td><span class="complexity-badge complex">🔴 Сложная</span></td>
+                        <td>Арбитраж, коды курьеров, ограничения, rFBS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Международные операции</strong></td>
+                        <td>2 метода</td>
+                        <td><span class="complexity-badge medium">🟡 Средняя</span></td>
+                        <td>ETGB декларации, неоплаченные B2B заказы</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Причины отмены</strong></td>
+                        <td>1 метод</td>
+                        <td><span class="complexity-badge simple">🟢 Простая</span></td>
+                        <td>Справочник причин отмены</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 id="quickstart">🚀 Быстрый старт</h2>
+
+        <h3>Инициализация клиента</h3>
+        <pre><code class="language-typescript">import { OzonSellerAPI } from 'daytona-ozon-seller-api';
+
+const client = new OzonSellerAPI({
+  clientId: 'your-client-id',
+  apiKey: 'your-api-key'
+});</code></pre>
+
+        <h3>Базовый workflow FBS</h3>
+        <pre><code class="language-typescript">try {
+  // 1. Получить новые отправления
+  const newPostings = await client.fbs.getPostingListV3({
+    filter: {
+      since: '2024-01-01T00:00:00Z',
+      to: '2024-01-31T23:59:59Z',
+      status: 'awaiting_packaging' // Ожидают упаковки
+    },
+    limit: 50
+  });
+
+  console.log(`📦 Новых отправлений: ${newPostings.result?.postings?.length || 0}`);
+
+  // 2. Обработать каждое отправление
+  for (const posting of newPostings.result?.postings || []) {
+    console.log(`\n🔄 Отправление: ${posting.posting_number}`);
+    console.log(`   Статус: ${posting.status}`);
+    console.log(`   Товаров: ${posting.products?.length}`);
+    console.log(`   Дата отгрузки: ${posting.shipment_date}`);
+    
+    // 3. Создать этикетку для отправления
+    const label = await client.fbs.packageLabel({
+      posting_number: [posting.posting_number]
+    });
+    
+    if (label.content) {
+      console.log(`   ✅ Этикетка создана (${label.content.length} байт)`);
+    }
+  }
+
+  // 4. Получить необработанные отправления
+  const unfulfilledPostings = await client.fbs.getUnfulfilledListV3({
+    limit: 100
+  });
+  
+  console.log(`⏳ Необработанных отправлений: ${unfulfilledPostings.result?.postings?.length || 0}`);
+
+} catch (error) {
+  console.error('❌ Ошибка FBS workflow:', error);
+}</code></pre>
+
+        <h2>📚 Подробные разделы документации</h2>
+
+        <div class="documentation-sections">
+            <div class="doc-section">
+                <h3>🗂️ 1. Управление отправлениями</h3>
+                <p><strong><a href="./fbs-postings.html">→ Подробная документация: fbs-postings.html</a></strong></p>
+                <p>Основные методы работы с отправлениями:</p>
+                <ul>
+                    <li><code>getPostingListV3()</code> — список отправлений (v3) с расширенной фильтрацией</li>
+                    <li><code>getUnfulfilledListV3()</code> — необработанные отправления</li>
+                    <li><code>getPostingV3()</code> — детальная информация по ID</li>
+                    <li><code>getPostingByBarcode()</code> — поиск по штрихкоду</li>
+                    <li><code>cancelPosting()</code> — отмена отправления</li>
+                    <li><code>moveToAwaitingDelivery()</code> — передача к отгрузке</li>
+                </ul>
+            </div>
+
+            <div class="doc-section">
+                <h3>🏷️ 2. Этикетки и печать</h3>
+                <p><strong><a href="./fbs-labels.html">→ Подробная документация: fbs-labels.html</a></strong></p>
+                <p>Методы для работы с этикетками:</p>
+                <ul>
+                    <li><code>packageLabel()</code> — прямая печать этикеток (до 20 за раз)</li>
+                    <li><code>createLabelBatch()</code> — создание задания на этикетки (асинхронно)</li>
+                    <li><code>createLabelBatchV2()</code> — улучшенная версия с поддержкой размеров</li>
+                    <li><code>getLabelBatch()</code> — получение готовых этикеток</li>
+                </ul>
+            </div>
+
+            <div class="doc-section">
+                <h3>📦 3. Работа с товарами</h3>
+                <p><strong><a href="./fbs-products.html">→ Подробная документация: fbs-products.html</a></strong></p>
+                <p>Методы управления товарами в отправлениях:</p>
+                <ul>
+                    <li><code>cancelPostingProduct()</code> — отмена отдельных товаров</li>
+                    <li><code>changePostingProduct()</code> — изменение веса товаров</li>
+                    <li><code>getProductCountryList()</code> — список стран-изготовителей</li>
+                    <li><code>setProductCountry()</code> — установка страны-изготовителя</li>
+                </ul>
+            </div>
+
+            <div class="doc-section">
+                <h3>⚙️ 4. Специальные функции</h3>
+                <p><strong><a href="./fbs-special.html">→ Подробная документация: fbs-special.html</a></strong></p>
+                <p>Продвинутые возможности FBS:</p>
+                <ul>
+                    <li><code>moveToArbitration()</code> — открытие споров</li>
+                    <li><code>verifyPickupCode()</code> — проверка кодов курьеров rFBS Express</li>
+                    <li><code>getRestrictions()</code> — ограничения пунктов приема</li>
+                    <li><code>setMultiBoxQty()</code> — количество коробок для многокоробочных товаров</li>
+                    <li><code>getEtgb()</code> — таможенные декларации для Турции</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="status-flow" id="workflow">
+            <h2>🔄 Статусы отправлений FBS</h2>
+            
+            <h3>Жизненный цикл отправления</h3>
+            <div class="flow-diagram">
+awaiting_registration → acceptance_in_progress → awaiting_approve
+         ↓
+awaiting_packaging → awaiting_deliver → delivering → delivered
+         ↓                    ↓             ↓
+    cancelled         not_accepted    driver_pickup
+         ↓                    ↓             ↓
+    arbitration      client_arbitration  sent_by_seller
+            </div>
+
+            <h3>Описание статусов</h3>
+            <table class="status-table">
+                <thead>
+                    <tr>
+                        <th>Статус</th>
+                        <th>Описание</th>
+                        <th>Действия продавца</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>awaiting_registration</code></td>
+                        <td>Ожидает регистрации</td>
+                        <td>Ожидание</td>
+                    </tr>
+                    <tr>
+                        <td><code>acceptance_in_progress</code></td>
+                        <td>Идет приемка</td>
+                        <td>Ожидание</td>
+                    </tr>
+                    <tr>
+                        <td><code>awaiting_approve</code></td>
+                        <td>Ожидает подтверждения</td>
+                        <td>Подтвердить получение</td>
+                    </tr>
+                    <tr style="background: #fff3cd;">
+                        <td><code>awaiting_packaging</code></td>
+                        <td>Ожидает упаковки</td>
+                        <td><strong>Упаковать и создать этикетку</strong></td>
+                    </tr>
+                    <tr style="background: #fff3cd;">
+                        <td><code>awaiting_deliver</code></td>
+                        <td>Ожидает отгрузки</td>
+                        <td><strong>Передать в доставку</strong></td>
+                    </tr>
+                    <tr>
+                        <td><code>arbitration</code></td>
+                        <td>Арбитраж</td>
+                        <td>Решить спорную ситуацию</td>
+                    </tr>
+                    <tr>
+                        <td><code>delivering</code></td>
+                        <td>Доставляется</td>
+                        <td>Мониторинг</td>
+                    </tr>
+                    <tr style="background: #d4edda;">
+                        <td><code>delivered</code></td>
+                        <td>Доставлено</td>
+                        <td>Завершено ✅</td>
+                    </tr>
+                    <tr>
+                        <td><code>cancelled</code></td>
+                        <td>Отменено</td>
+                        <td>Обработать отмену</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="limitations-section">
+            <h2>⚠️ Важные ограничения и особенности</h2>
+            
+            <h3>🚦 Лимиты операций</h3>
+            <ul>
+                <li><strong>Печать этикеток:</strong> максимум 20 отправлений за один запрос</li>
+                <li><strong>Временной период:</strong> максимум 1 год для фильтрации отправлений</li>
+                <li><strong>Отмена отправлений:</strong> условно-доставленные отменить нельзя</li>
+            </ul>
+
+            <h3>🔧 Специфика работы</h3>
+            <ul>
+                <li><strong>Рекомендуемая задержка:</strong> запрашивать этикетки через 45-60 секунд после сборки</li>
+                <li><strong>Статус этикеток:</strong> ошибка "The next postings aren't ready" = повторить запрос позже</li>
+                <li><strong>rFBS Express:</strong> специальные коды курьеров для передачи отправлений</li>
+            </ul>
+        </div>
+
+        <div class="best-practices">
+            <h3>💡 Best Practices</h3>
+            <div class="good-bad-examples">
+                <div class="good-example">
+                    <h4>✅ Хорошо - проверка готовности этикеток</h4>
+                    <pre><code class="language-typescript">const createLabelWithRetry = async (postingNumbers: string[]) => {
+  let attempts = 0;
+  const maxAttempts = 5;
+  
+  while (attempts < maxAttempts) {
+    try {
+      const label = await client.fbs.packageLabel({
+        posting_number: postingNumbers
+      });
+      
+      return label;
+    } catch (error) {
+      if (error.message.includes("aren't ready")) {
+        attempts++;
+        console.log(`⏳ Этикетки не готовы, попытка ${attempts}/${maxAttempts}`);
+        await new Promise(resolve => setTimeout(resolve, 60000)); // 1 минута
+      } else {
+        throw error;
+      }
+    }
+  }
+  
+  throw new Error('Этикетки не готовы после максимального количества попыток');
+};</code></pre>
+                </div>
+                
+                <div class="bad-example">
+                    <h4>❌ Плохо - игнорирование статусов и ошибок</h4>
+                    <pre><code class="language-typescript">const badExample = async () => {
+  await client.fbs.packageLabel({ posting_number: ['123-456-1'] });
+  // Нет проверки готовности этикеток
+};</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <h2>📊 Схемы FBS и rFBS</h2>
+
+        <div class="schemes-comparison">
+            <div class="scheme-card">
+                <h3>FBS (Fulfillment by Seller)</h3>
+                <ul>
+                    <li>Товары хранятся на складе продавца</li>
+                    <li>Продавец сам упаковывает и передает в доставку</li>
+                    <li>Полный контроль над процессом</li>
+                </ul>
+            </div>
+
+            <div class="scheme-card">
+                <h3>rFBS (regional FBS)</h3>
+                <ul>
+                    <li>Региональные склады для быстрой доставки</li>
+                    <li>Возможность Express доставки с кодами курьеров</li>
+                    <li>Оптимизация логистических затрат</li>
+                </ul>
+            </div>
+
+            <div class="scheme-card">
+                <h3>Выбор схемы</h3>
+                <pre><code class="language-typescript">// Определение подходящей схемы на основе товара
+const chooseFbsScheme = (product: Product): 'FBS' | 'rFBS' => {
+  const criteria = {
+    weight: product.weight,
+    dimensions: product.dimensions,
+    fragility: product.fragile,
+    region: product.region
+  };
+  
+  if (criteria.weight > 10000 || criteria.fragility) {
+    return 'FBS'; // Больше контроля для тяжелых/хрупких товаров
+  }
+  
+  if (criteria.region === 'moscow' || criteria.region === 'spb') {
+    return 'rFBS'; // Быстрая доставка в крупных городах
+  }
+  
+  return 'FBS';
+};</code></pre>
+            </div>
+        </div>
+
+        <div class="next-steps">
+            <h2>🎓 Следующие шаги</h2>
+            
+            <h3>1. Изучите детальную документацию</h3>
+            <ul>
+                <li><strong><a href="./fbs-postings.html">fbs-postings.html</a></strong> — Управление отправлениями</li>
+                <li><strong><a href="./fbs-labels.html">fbs-labels.html</a></strong> — Этикетки и печать</li>
+                <li><strong><a href="./fbs-products.html">fbs-products.html</a></strong> — Работа с товарами</li>
+                <li><strong><a href="./fbs-special.html">fbs-special.html</a></strong> — Специальные функции</li>
+            </ul>
+
+            <h3>2. Интеграция с другими API</h3>
+            <ul>
+                <li><strong><a href="./01-products.html">Products API</a></strong> — для получения информации о товарах</li>
+                <li><strong><a href="./04-warehouse.html">Warehouse API</a></strong> — для управления складами</li>
+                <li><strong>Prices & Stocks API</strong> — для обновления остатков после отгрузки</li>
+            </ul>
+
+            <h3>3. Автоматизация процессов</h3>
+            <pre><code class="language-typescript">// Пример автоматизированного обработчика FBS
+class FbsOrderProcessor {
+  async processNewOrders() {
+    // 1. Получить новые заказы
+    const newOrders = await this.getNewOrders();
+    
+    // 2. Создать этикетки
+    const labels = await this.createLabelsWithRetry(newOrders);
+    
+    // 3. Уведомить склад об упаковке
+    await this.notifyWarehouse(newOrders);
+    
+    // 4. Обновить статусы
+    await this.updateOrderStatuses(newOrders, 'processing');
+  }
+  
+  async handleCancellations() {
+    const reasons = await client.fbs.getCancelReasonList();
+    // Обработка отмен с правильными причинами
+  }
+}</code></pre>
+        </div>
+
+        <div class="tip-box">
+            <h3>💡 Совет профессионала</h3>
+            <p>FBS API требует понимания полного жизненного цикла заказов. Начните с базовых операций (список → этикетки → отгрузка) и постепенно добавляйте продвинутые функции как споры и специальные схемы доставки.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><a href="./README.html">📚 Назад к категориям</a> | <a href="../index.html">🏠 Главная страница</a></p>
+        <p>© 2024 Daytona OZON Seller API. Документация создана с ❤️ для разработчиков.</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

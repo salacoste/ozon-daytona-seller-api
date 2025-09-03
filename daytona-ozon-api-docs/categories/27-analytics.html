@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>27. Analytics API — Складская аналитика | DAYTONA</title>
+  <meta name="description" content="Analytics API — оборачиваемость, новая аналитика остатков и устаревший отчёт по складам">
+  <link rel="icon" type="image/png" href="../image.png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f8f9fa}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .header{background:linear-gradient(135deg,#e83e8c 0%,#fd7e14 100%);color:#fff;text-align:center;padding:30px 0;margin-bottom:30px;border-radius:15px}
+    .breadcrumb{margin-bottom:15px}
+    .breadcrumb a{color:rgba(255,255,255,.85);text-decoration:none}
+    .content{background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+    .method-table{width:100%;border-collapse:collapse;margin:16px 0 28px;border:2px solid #e9ecef;border-radius:10px;overflow:hidden}
+    .method-table th{background:#e83e8c;color:#fff;padding:10px 12px;text-align:left}
+    .method-table td{padding:9px 12px;border-bottom:1px solid #e9ecef}
+    .warning{background:#f8d7da;padding:12px 16px;border-left:4px solid #dc3545;margin:16px 0}
+    .nav-links{text-align:center;margin-top:30px}
+    .nav-btn{display:inline-block;padding:10px 18px;margin:0 6px;background:#e83e8c;color:#fff;text-decoration:none;border-radius:20px;font-weight:500}
+    .nav-btn.secondary{background:#6c757d}
+    .nav-btn:hover{background:#c2185b;color:#fff;text-decoration:none}
+    .tags{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.8em;font-weight:600}
+    .tag-deprecated{background:#dc3545;color:#fff}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="breadcrumb"><a href="../../index.html">🏠 Главная</a> / <a href="../api-categories-index.html">📚 Категории</a> / <span>27. Analytics</span></div>
+      <h1>27. Analytics API</h1>
+      <p>Оборачиваемость и аналитика остатков FBO</p>
+      <div class="tags"><span class="tag tag-deprecated">Содержит устаревший метод</span></div>
+    </div>
+    <div class="content">
+      <div class="warning"><strong>Важно:</strong> Метод <code>getStockOnWarehouses</code> устаревший. Используйте <code>getAnalyticsStocks</code>.</div>
+
+      <h2>📋 Методы</h2>
+      <table class="method-table">
+        <thead><tr><th>Метод</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><code>getStocksTurnover</code></td><td>Анализ оборачиваемости и дней до исчерпания</td></tr>
+          <tr><td><code>getAnalyticsStocks</code></td><td>Новая аналитика по остаткам (рекомендуется)</td></tr>
+          <tr><td><code>getStockOnWarehouses</code></td><td>Отчёт по остаткам (устаревший)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="nav-links">
+        <a class="nav-btn secondary" href="../api-categories-index.html">📚 Все категории</a>
+        <a class="nav-btn" href="26-premium.html">⬅️ 26. Premium</a>
+        <a class="nav-btn" href="28-prices-stocks.html">➡️ 28. Prices & Stocks</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

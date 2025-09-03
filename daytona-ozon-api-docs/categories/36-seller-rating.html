@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>36. Seller Rating — Overview | DAYTONA</title>
+  <meta name="description" content="Seller Rating — мониторинг рейтингов продавца: текущие значения, история, аналитика и предупреждения.">
+  <link rel="icon" type="image/png" href="../image.png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f8f9fa}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .header{background:linear-gradient(135deg,#28a745 0%,#6610f2 100%);color:#fff;text-align:center;padding:30px 0;margin-bottom:30px;border-radius:15px}
+    .breadcrumb{margin-bottom:15px}
+    .breadcrumb a{color:rgba(255,255,255,.85);text-decoration:none}
+    .content{background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:20px 0}
+    .card{background:#f8f9fa;border:2px solid #e9ecef;border-radius:12px;padding:16px;text-decoration:none;color:inherit}
+    .card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(0,0,0,.08);border-color:#28a745}
+    .method-table{width:100%;border-collapse:collapse;margin:16px 0 28px;border:2px solid #e9ecef;border-radius:10px;overflow:hidden}
+    .method-table th{background:#28a745;color:#fff;padding:10px 12px;text-align:left}
+    .method-table td{padding:9px 12px;border-bottom:1px solid #e9ecef}
+    .nav-links{text-align:center;margin-top:30px}
+    .nav-btn{display:inline-block;padding:10px 18px;margin:0 6px;background:#28a745;color:#fff;text-decoration:none;border-radius:20px;font-weight:500}
+    .nav-btn.secondary{background:#6c757d}
+    .nav-btn:hover{background:#1e7e34;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="breadcrumb"><a href="../../index.html">🏠 Главная</a> / <a href="../api-categories-index.html">📚 Категории</a> / <span>36. Seller Rating</span></div>
+      <h1>36. Seller Rating API</h1>
+      <p>Мониторинг рейтингов продавца, история и аналитика</p>
+    </div>
+    <div class="content">
+      <div class="cards">
+        <a class="card" href="36-seller-rating-api.html"><strong>📑 Seller Rating API</strong><br/>Обзор 2 методов</a>
+        <a class="card" href="36-seller-rating-performance.html"><strong>📈 Мониторинг производительности</strong><br/>текущие рейтинги и история</a>
+        <a class="card" href="36-seller-rating-analytics.html"><strong>📊 Аналитика и алерты</strong><br/>риски, предупреждения, дашборды</a>
+      </div>
+
+      <h2>📋 Методы</h2>
+      <table class="method-table">
+        <thead><tr><th>Группа</th><th>Методы</th><th>Описание</th></tr></thead>
+        <tbody>
+          <tr><td>Мониторинг</td><td>getCurrentRatings, getRatingHistory</td><td>Текущие значения и исторические тренды</td></tr>
+        </tbody>
+      </table>
+
+      <div class="nav-links">
+        <a class="nav-btn secondary" href="../api-categories-index.html">📚 Все категории</a>
+        <a class="nav-btn" href="35-rfbs-returns.html">⬅️ 35. rFBS Returns</a>
+        <a class="nav-btn" href="../api-categories-index.html">🏁 К категориям</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

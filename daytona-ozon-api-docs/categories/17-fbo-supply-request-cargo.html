@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FBO Supply Request — Cargo & Labels | DAYTONA</title>
+  <meta name="description" content="Карго и ярлыки: создание/удаление карго, статусы задач, правила, генерация PDF-этикеток. 8 методов.">
+  <link rel="icon" type="image/png" href="../image.png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f8f9fa}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .header{background:linear-gradient(135deg,#0d6efd 0%,#20c997 100%);color:#fff;text-align:center;padding:30px 0;margin-bottom:30px;border-radius:15px}
+    .breadcrumb{margin-bottom:15px}
+    .breadcrumb a{color:rgba(255,255,255,.85);text-decoration:none}
+    .content{background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+    .method-table{width:100%;border-collapse:collapse;margin:16px 0 28px;border:2px solid #e9ecef;border-radius:10px;overflow:hidden}
+    .method-table th{background:#0d6efd;color:#fff;padding:10px 12px;text-align:left}
+    .method-table td{padding:9px 12px;border-bottom:1px solid #e9ecef}
+    .links a{display:inline-block;margin:6px 8px 0 0;padding:8px 14px;background:#ecf5ff;color:#0d47a1;border-radius:18px;text-decoration:none}
+    .links a:hover{background:#d7ebff}
+    .code-block{background:#2d3748;color:#e2e8f0;padding:16px;border-radius:8px;margin:15px 0;overflow-x:auto;font-family:Monaco,Consolas,ui-monospace,monospace;font-size:.92em}
+    .nav-links{text-align:center;margin-top:30px}
+    .nav-btn{display:inline-block;padding:10px 18px;margin:0 6px;background:#0d6efd;color:#fff;text-decoration:none;border-radius:20px;font-weight:500}
+    .nav-btn.secondary{background:#6c757d}
+    .nav-btn:hover{background:#0b5ed7;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="breadcrumb">
+        <a href="../../index.html">🏠 Главная</a> / <a href="../api-categories-index.html">📚 Категории</a> / <a href="17-fbo-supply-request.html">17. FBO Supply Request</a> / <span>Cargo</span>
+      </div>
+      <h1>📦 Cargo & Label Management</h1>
+      <p>Карго, статусы операций, правила и генерация ярлыков</p>
+    </div>
+    <div class="content">
+      <div class="links">
+        <a href="17-fbo-supply-request.html">Обзор</a>
+        <a href="17-fbo-supply-request-drafts.html">Drafts & Orders</a>
+        <a href="17-fbo-supply-request-warehouse.html">Warehouses & Clusters</a>
+      </div>
+
+      <h2>📋 Методы (8)</h2>
+      <table class="method-table">
+        <thead><tr><th>Метод</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><code>createCargoes</code></td><td>Создать карго (контейнеры)</td></tr>
+          <tr><td><code>getCargoesCreateInfo</code></td><td>Статус создания карго</td></tr>
+          <tr><td><code>deleteCargoes</code></td><td>Удалить карго</td></tr>
+          <tr><td><code>getCargoesDeleteStatus</code></td><td>Статус удаления</td></tr>
+          <tr><td><code>getCargoRules</code></td><td>Правила и ограничения карго</td></tr>
+          <tr><td><code>createCargoLabels</code></td><td>Запустить генерацию ярлыков</td></tr>
+          <tr><td><code>getCargoLabels</code></td><td>Статус генерации ярлыков</td></tr>
+          <tr><td><code>getCargoLabelsFile</code></td><td>Скачать PDF с ярлыками</td></tr>
+        </tbody>
+      </table>
+
+      <h2>🚀 Пример</h2>
+      <div class="code-block"><pre><code>// Создать карго и ярлыки
+const task = await api.fboSupplyRequest.createCargoes({
+  supply_order_id: 12345,
+  cargoes: [{ cargo_number: 'CARGO001', weight: 25.5, length: 40, width: 30, height: 20, items: [{ sku: '123', quantity: 5 }] }]
+});
+const labels = await api.fboSupplyRequest.createCargoLabels({ supply_order_id: 12345, cargo_ids: [1001] });
+</code></pre></div>
+
+      <div class="nav-links">
+        <a class="nav-btn secondary" href="../api-categories-index.html">📚 Все категории</a>
+        <a class="nav-btn" href="17-fbo-supply-request-drafts.html">⬅️ Drafts & Orders</a>
+        <a class="nav-btn" href="17-fbo-supply-request-warehouse.html">➡️ Warehouses & Clusters</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

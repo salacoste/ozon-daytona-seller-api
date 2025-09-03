@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📑 Алфавитный индекс API | daytona-ozon-seller-api SDK</title>
+    
+    <meta name="description" content="Справочник всех 278 endpoints OZON Seller API, организованных по категориям">
+    <meta name="keywords" content="ozon api, индекс, справочник, endpoints, методы">
+    
+    <link rel="icon" type="image/png" href="./image.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .nav-links a {
+            display: inline-block;
+            margin: 5px 15px;
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .category-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #007bff;
+        }
+        
+        .category-card h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .category-card .method-count {
+            background: #007bff;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .category-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .category-card ul li {
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 6px;
+            font-size: 0.9em;
+            border-left: 3px solid #007bff;
+        }
+        
+        .category-card ul li strong {
+            color: #007bff;
+        }
+        
+        .search-box {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .search-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        
+        .premium-tag {
+            background: #ffc107;
+            color: #212529;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .beta-tag {
+            background: #17a2b8;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📑 Алфавитный индекс API</h1>
+            <p>Справочник всех 278 endpoints | daytona-ozon-seller-api</p>
+        </div>
+        
+        <div class="nav-links">
+            <a href="./QUICK-START.html">🚀 Быстрый старт</a>
+            <a href="./README.html">📖 Полное руководство</a>
+            <a href="./FUNCTIONAL-INDEX.html">🔍 Поиск по функциям</a>
+            <a href="./FAQ.html">❓ FAQ</a>
+            <a href="../index.html">🏠 Главная</a>
+        </div>
+        
+        <div class="content">
+            <div class="search-box">
+                <h3 style="margin-bottom: 15px; color: #333;">🔍 Поиск по методам</h3>
+                <input type="text" class="search-input" placeholder="Найти API метод..." id="searchInput" onkeyup="searchMethods()">
+                <p style="margin-top: 10px; color: #6c757d; font-size: 0.9em;">Введите название API или метода для быстрого поиска</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">33</span>
+                    <span class="stat-label">Категорий API</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">278</span>
+                    <span class="stat-label">Методов API</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">15</span>
+                    <span class="stat-label">Premium Plus</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">9</span>
+                    <span class="stat-label">Экспериментальных</span>
+                </div>
+            </div>
+            
+            <h2 style="text-align: center; margin: 40px 0 30px; color: #333;">📚 Категории API</h2>
+            
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Popular APIs -->
+                <div class="category-card">
+                    <h3>📦 Product API</h3>
+                    <span class="method-count">34 методa</span>
+                    <ul>
+                        <li><strong>getList()</strong> - Список товаров продавца</li>
+                        <li><strong>getInfo()</strong> - Информация о товаре</li>
+                        <li><strong>create()</strong> - Создание товаров</li>
+                        <li><strong>updateInfo()</strong> - Обновление информации</li>
+                        <li><strong>archive()</strong> - Архивация товаров</li>
+                        <li>+ 29 дополнительных методов</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>🛒 FBS API</h3>
+                    <span class="method-count">22 метода</span>
+                    <ul>
+                        <li><strong>getOrdersList()</strong> - Список заказов FBS</li>
+                        <li><strong>getOrder()</strong> - Информация о заказе</li>
+                        <li><strong>packOrder()</strong> - Упаковка заказа</li>
+                        <li><strong>shipOrder()</strong> - Отгрузка заказа</li>
+                        <li><strong>getPackageLabel()</strong> - Этикетка для упаковки</li>
+                        <li>+ 17 дополнительных методов</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>💰 Finance API</h3>
+                    <span class="method-count">10 методов</span>
+                    <ul>
+                        <li><strong>getTransactionsList()</strong> - Список транзакций</li>
+                        <li><strong>getAccountBalance()</strong> - Баланс лицевого счета</li>
+                        <li><strong>getCashFlowStatement()</strong> - Отчет о движении средств</li>
+                        <li><strong>getFinanceReportsInfo()</strong> - Информация о финансовых отчетах</li>
+                        <li><strong>createFinanceRealization()</strong> - Создание отчета о реализации</li>
+                        <li>+ 5 дополнительных методов</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>📈 Analytics API</h3>
+                    <span class="method-count">2 метода</span>
+                    <ul>
+                        <li><strong>getMostPopularSku()</strong> - Популярные товары по SKU</li>
+                        <li><strong>getAveragePrice()</strong> - Средние цены по категориям</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>🎯 Pricing Strategy API</h3>
+                    <span class="method-count">11 методов</span>
+                    <ul>
+                        <li><strong>createStrategy()</strong> - Создание стратегии</li>
+                        <li><strong>getCompetitors()</strong> - Анализ конкурентов</li>
+                        <li><strong>updatePrices()</strong> - Обновление цен</li>
+                        <li><strong>getStrategiesList()</strong> - Список стратегий</li>
+                        <li>+ 7 дополнительных методов</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>⭐ Review API</h3>
+                    <span class="method-count">8 методов</span>
+                    <span class="premium-tag">Premium+</span>
+                    <ul>
+                        <li><strong>getList()</strong> - Список отзывов</li>
+                        <li><strong>getInfo()</strong> - Информация об отзыве</li>
+                        <li><strong>createComment()</strong> - Ответ на отзыв</li>
+                        <li><strong>changeStatus()</strong> - Изменение статуса</li>
+                        <li>+ 4 дополнительных метода</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>❓ Questions Answers API</h3>
+                    <span class="method-count">8 методов</span>
+                    <span class="premium-tag">Premium+</span>
+                    <ul>
+                        <li><strong>getQuestionList()</strong> - Список вопросов</li>
+                        <li><strong>createAnswer()</strong> - Создание ответа</li>
+                        <li><strong>deleteAnswer()</strong> - Удаление ответа</li>
+                        <li><strong>getQuestionCount()</strong> - Количество вопросов</li>
+                        <li>+ 4 дополнительных метода</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>💬 Chat API</h3>
+                    <span class="method-count">8 методов</span>
+                    <span class="premium-tag">Premium+</span>
+                    <ul>
+                        <li><strong>getChatList()</strong> - Список чатов</li>
+                        <li><strong>sendMessage()</strong> - Отправка сообщения</li>
+                        <li><strong>sendFile()</strong> - Отправка файла</li>
+                        <li><strong>getChatHistory()</strong> - История чата</li>
+                        <li>+ 4 дополнительных метода</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>🔥 FBO API</h3>
+                    <span class="method-count">13 методов</span>
+                    <ul>
+                        <li><strong>getOrdersList()</strong> - Список заказов FBO</li>
+                        <li><strong>getOrder()</strong> - Информация о заказе FBO</li>
+                        <li><strong>getShipmentInfo()</strong> - Информация об отправлении</li>
+                        <li><strong>createShipment()</strong> - Создание отправления</li>
+                        <li><strong>getLabels()</strong> - Ярлыки для заказов</li>
+                        <li>+ 8 дополнительных методов</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>🏭 Warehouse API</h3>
+                    <span class="method-count">2 метода</span>
+                    <ul>
+                        <li><strong>getWarehousesList()</strong> - Список складов</li>
+                        <li><strong>getDeliveryMethods()</strong> - Способы доставки</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>🎭 Specialized APIs</h3>
+                    <span class="method-count">+150 методов</span>
+                    <ul>
+                        <li><strong>Barcode API</strong> - Штрих-коды (2)</li>
+                        <li><strong>Category API</strong> - Категории (6)</li>
+                        <li><strong>Certification API</strong> - Сертификаты (12)</li>
+                        <li><strong>Delivery APIs</strong> - Доставка (35)</li>
+                        <li><strong>Returns API</strong> - Возвраты (15)</li>
+                        <li>+ 21 дополнительная категория</li>
+                    </ul>
+                </div>
+                
+                <div class="category-card">
+                    <h3>🧪 Beta Method API</h3>
+                    <span class="method-count">9 методов</span>
+                    <span class="beta-tag">Beta</span>
+                    <ul>
+                        <li><strong>getProductRatingBySku()</strong> - Рейтинг v4</li>
+                        <li><strong>getProductStocksV4()</strong> - Остатки v4</li>
+                        <li><strong>updatePricesV4()</strong> - Цены v4</li>
+                        <li><strong>getCampaignProducts()</strong> - Кампании</li>
+                        <li>+ 5 дополнительных методов</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 style="margin: 50px 0 15px; color: #333;">🗂️ Полный список страниц категорий</h2>
+            <p style="color:#6c757d; margin-bottom:10px;">Ниже перечислены все HTML-страницы из папки <code>categories/</code>. Используйте поиск сверху для фильтрации по названиям.</p>
+            <div class="categories-grid" id="allCategoryPages">
+                <div class="category-card">
+                    <h3>01–09</h3>
+                    <ul>
+                        <li><a href="./categories/01-products.html">01-products.html</a></li>
+                        <li><a href="./categories/02-finance.html">02-finance.html</a></li>
+                        <li><a href="./categories/03-analytics.html">03-analytics.html</a></li>
+                        <li><a href="./categories/04-warehouse.html">04-warehouse.html</a></li>
+                        <li><a href="./categories/04-warehouse-api.html">04-warehouse-api.html</a></li>
+                        <li><a href="./categories/05-supplier.html">05-supplier.html</a></li>
+                        <li><a href="./categories/05-supplier-api.html">05-supplier-api.html</a></li>
+                        <li><a href="./categories/06-barcode.html">06-barcode.html</a></li>
+                        <li><a href="./categories/07-fbs.html">07-fbs.html</a></li>
+                        <li><a href="./categories/08-review.html">08-review.html</a></li>
+                        <li><a href="./categories/09-beta-method.html">09-beta-method.html</a></li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3>10–15</h3>
+                    <ul>
+                        <li><a href="./categories/10-brand.html">10-brand.html</a></li>
+                        <li><a href="./categories/11-category.html">11-category.html</a></li>
+                        <li><a href="./categories/12-certification.html">12-certification.html</a></li>
+                        <li><a href="./categories/13-chat.html">13-chat.html</a></li>
+                        <li><a href="./categories/14-delivery-fbs.html">14-delivery-fbs.html</a></li>
+                        <li><a href="./categories/15-delivery-rfbs.html">15-delivery-rfbs.html</a></li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3>16–18</h3>
+                    <ul>
+                        <li><a href="./categories/16-fbo.html">16-fbo.html</a></li>
+                        <li><a href="./categories/16-fbo-supply.html">16-fbo-supply.html</a></li>
+                        <li><a href="./categories/16-fbo-timeslot.html">16-fbo-timeslot.html</a></li>
+                        <li><a href="./categories/16-fbo-operations.html">16-fbo-operations.html</a></li>
+                        <li><a href="./categories/17-fbo-supply-request.html">17-fbo-supply-request.html</a></li>
+                        <li><a href="./categories/17-fbo-supply-request-drafts.html">17-fbo-supply-request-drafts.html</a></li>
+                        <li><a href="./categories/17-fbo-supply-request-cargo.html">17-fbo-supply-request-cargo.html</a></li>
+                        <li><a href="./categories/17-fbo-supply-request-warehouse.html">17-fbo-supply-request-warehouse.html</a></li>
+                        <li><a href="./categories/18-fbs.html">18-fbs.html</a></li>
+                        <li><a href="./categories/18-fbs-posting.html">18-fbs-posting.html</a></li>
+                        <li><a href="./categories/18-fbs-labels.html">18-fbs-labels.html</a></li>
+                        <li><a href="./categories/18-fbs-products.html">18-fbs-products.html</a></li>
+                        <li><a href="./categories/18-fbs-compliance.html">18-fbs-compliance.html</a></li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3>19–21</h3>
+                    <ul>
+                        <li><a href="./categories/19-fbs-rfbs-marks.html">19-fbs-rfbs-marks.html</a></li>
+                        <li><a href="./categories/20-pass.html">20-pass.html</a></li>
+                        <li><a href="./categories/21-premium.html">21-premium.html</a></li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3>22–24</h3>
+                    <ul>
+                        <li><a href="./categories/22-prices-stocks.html">22-prices-stocks.html</a></li>
+                        <li><a href="./categories/22-prices-stocks-prices.html">22-prices-stocks-prices.html</a></li>
+                        <li><a href="./categories/22-prices-stocks-timers.html">22-prices-stocks-timers.html</a></li>
+                        <li><a href="./categories/22-prices-stocks-stocks.html">22-prices-stocks-stocks.html</a></li>
+                        <li><a href="./categories/22-prices-stocks-discounted.html">22-prices-stocks-discounted.html</a></li>
+                        <li><a href="./categories/23-finance.html">23-finance.html</a></li>
+                        <li><a href="./categories/24-returns.html">24-returns.html</a></li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3>25–27</h3>
+                    <ul>
+                        <li><a href="./categories/25-pass.html">25-pass.html</a></li>
+                        <li><a href="./categories/26-premium.html">26-premium.html</a></li>
+                        <li><a href="./categories/27-analytics.html">27-analytics.html</a></li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3>28–30</h3>
+                    <ul>
+                        <li><a href="./categories/28-prices-stocks.html">28-prices-stocks.html</a></li>
+                        <li><a href="./categories/28-prices-stocks-prices.html">28-prices-stocks-prices.html</a></li>
+                        <li><a href="./categories/28-prices-stocks-timers.html">28-prices-stocks-timers.html</a></li>
+                        <li><a href="./categories/28-prices-stocks-stocks.html">28-prices-stocks-stocks.html</a></li>
+                        <li><a href="./categories/28-prices-stocks-discounted.html">28-prices-stocks-discounted.html</a></li>
+                        <li><a href="./categories/30-product.html">30-product.html</a></li>
+                        <li><a href="./categories/30-product-catalog-management.html">30-product-catalog-management.html</a></li>
+                        <li><a href="./categories/30-product-information.html">30-product-information.html</a></li>
+                        <li><a href="./categories/30-product-creation-editing.html">30-product-creation-editing.html</a></li>
+                        <li><a href="./categories/30-product-content-management.html">30-product-content-management.html</a></li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3>31–33</h3>
+                    <ul>
+                        <li><a href="./categories/31-questions.html">31-questions.html</a></li>
+                        <li><a href="./categories/31-questions-answers-api.html">31-questions-answers-api.html</a></li>
+                        <li><a href="./categories/31-questions-answers-management.html">31-questions-answers-management.html</a></li>
+                        <li><a href="./categories/31-questions-workflow.html">31-questions-workflow.html</a></li>
+                        <li><a href="./categories/31-questions-analytics.html">31-questions-analytics.html</a></li>
+                        <li><a href="./categories/32-report.html">32-report.html</a></li>
+                        <li><a href="./categories/32-report-api.html">32-report-api.html</a></li>
+                        <li><a href="./categories/32-report-financial.html">32-report-financial.html</a></li>
+                        <li><a href="./categories/32-report-management.html">32-report-management.html</a></li>
+                        <li><a href="./categories/32-report-business.html">32-report-business.html</a></li>
+                        <li><a href="./categories/33-return.html">33-return.html</a></li>
+                        <li><a href="./categories/33-return-api.html">33-return-api.html</a></li>
+                        <li><a href="./categories/33-return-giveout.html">33-return-giveout.html</a></li>
+                        <li><a href="./categories/33-return-analytics.html">33-return-analytics.html</a></li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3>34–36 + README</h3>
+                    <ul>
+                        <li><a href="./categories/34-review.html">34-review.html</a></li>
+                        <li><a href="./categories/34-review-api.html">34-review-api.html</a></li>
+                        <li><a href="./categories/34-review-management.html">34-review-management.html</a></li>
+                        <li><a href="./categories/34-comment-management.html">34-comment-management.html</a></li>
+                        <li><a href="./categories/34-review-analytics.html">34-review-analytics.html</a></li>
+                        <li><a href="./categories/35-rfbs-returns.html">35-rfbs-returns.html</a></li>
+                        <li><a href="./categories/35-rfbs-returns-api.html">35-rfbs-returns-api.html</a></li>
+                        <li><a href="./categories/35-rfbs-returns-management.html">35-rfbs-returns-management.html</a></li>
+                        <li><a href="./categories/35-rfbs-returns-legacy.html">35-rfbs-returns-legacy.html</a></li>
+                        <li><a href="./categories/35-rfbs-returns-automation.html">35-rfbs-returns-automation.html</a></li>
+                        <li><a href="./categories/36-seller-rating.html">36-seller-rating.html</a></li>
+                        <li><a href="./categories/36-seller-rating-api.html">36-seller-rating-api.html</a></li>
+                        <li><a href="./categories/36-seller-rating-performance.html">36-seller-rating-performance.html</a></li>
+                        <li><a href="./categories/36-seller-rating-analytics.html">36-seller-rating-analytics.html</a></li>
+                        <li><a href="./categories/README.html">categories/README.html</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="background: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; padding: 20px; border-radius: 12px; margin: 30px 0;">
+                <h3 style="margin-bottom: 15px;">💡 Как использовать индекс</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>🔍 Поиск:</strong> Используйте поле поиска для быстрого нахождения нужного API</li>
+                    <li><strong>📂 Категории:</strong> Методы организованы по функциональным категориям</li>
+                    <li><strong>🏷️ Теги:</strong> Premium+ требует подписку, Beta - экспериментальные</li>
+                    <li><strong>📖 Документация:</strong> Кликните на название API для подробной документации</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>278 API методов в 33 категориях</strong> - Полное покрытие OZON Seller API</p>
+            <div>
+                <a href="./QUICK-START.html">🚀 Быстрый старт</a>
+                <a href="./README.html">📖 Руководство</a>
+                <a href="./FUNCTIONAL-INDEX.html">🔍 По функциям</a>
+                <a href="../index.html">🏠 Главная</a>
+                <a href="https://github.com/salacoste/ozon-daytona-seller-api">🔗 GitHub</a>
+                <a href="https://www.npmjs.com/package/daytona-ozon-seller-api">📦 NPM</a>
+            </div>
+            <p>Made with ❤️ for OZON Marketplace developers | <strong>daytona-ozon-seller-api</strong></p>
+        </div>
+    </div>
+    
+    <script>
+        function searchMethods() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const grid = document.getElementById('categoriesGrid');
+            const cards = grid.getElementsByClassName('category-card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const text = card.textContent || card.innerText;
+                
+                if (text.toUpperCase().indexOf(filter) > -1) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

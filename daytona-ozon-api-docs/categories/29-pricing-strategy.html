@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>29. Pricing Strategy — Overview | DAYTONA</title>
+  <meta name="description" content="Pricing Strategy — анализ конкурентов, стратегии, управление товарами и операции. 13 методов, 4 раздела.">
+  <link rel="icon" type="image/png" href="../image.png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#333;background:#f8f9fa}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .header{background:linear-gradient(135deg,#17a2b8 0%,#6610f2 100%);color:#fff;text-align:center;padding:30px 0;margin-bottom:30px;border-radius:15px}
+    .breadcrumb{margin-bottom:15px}
+    .breadcrumb a{color:rgba(255,255,255,.85);text-decoration:none}
+    .content{background:#fff;padding:40px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:20px 0}
+    .card{background:#f8f9fa;border:2px solid #e9ecef;border-radius:12px;padding:16px;text-decoration:none;color:inherit}
+    .card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(0,0,0,.08);border-color:#17a2b8}
+    .method-table{width:100%;border-collapse:collapse;margin:16px 0 28px;border:2px solid #e9ecef;border-radius:10px;overflow:hidden}
+    .method-table th{background:#17a2b8;color:#fff;padding:10px 12px;text-align:left}
+    .method-table td{padding:9px 12px;border-bottom:1px solid #e9ecef}
+    .nav-links{text-align:center;margin-top:30px}
+    .nav-btn{display:inline-block;padding:10px 18px;margin:0 6px;background:#17a2b8;color:#fff;text-decoration:none;border-radius:20px;font-weight:500}
+    .nav-btn.secondary{background:#6c757d}
+    .nav-btn:hover{background:#138496;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="breadcrumb"><a href="../../index.html">🏠 Главная</a> / <a href="../api-categories-index.html">📚 Категории</a> / <span>29. Pricing Strategy</span></div>
+      <h1>29. Pricing Strategy API</h1>
+      <p>Динамические стратегии ценообразования на основе конкурентов</p>
+    </div>
+    <div class="content">
+      <div class="cards">
+        <a class="card" href="29-pricing-strategy-competitors.html"><strong>🔎 Анализ конкурентов</strong><br/>getCompetitors</a>
+        <a class="card" href="29-pricing-strategy-management.html"><strong>🧭 Управление стратегиями</strong><br/>create/get/update/delete/list</a>
+        <a class="card" href="29-pricing-strategy-products.html"><strong>🛠️ Управление товарами</strong><br/>add/remove/list/info</a>
+        <a class="card" href="29-pricing-strategy-operations.html"><strong>⚙️ Операции</strong><br/>status, strategyIDsByItemIDs</a>
+      </div>
+
+      <h2>📋 Методы (общее)</h2>
+      <table class="method-table">
+        <thead><tr><th>Раздел</th><th>Методы</th><th>Описание</th></tr></thead>
+        <tbody>
+          <tr><td>Конкуренты</td><td>getCompetitors</td><td>Поиск и анализ конкурентов</td></tr>
+          <tr><td>Стратегии</td><td>createStrategy, getStrategiesList, getStrategyInfo, updateStrategy, deleteStrategy</td><td>Жизненный цикл стратегий</td></tr>
+          <tr><td>Товары</td><td>addItemsToStrategy, removeItemsFromStrategy, getStrategyItems, getStrategyItemInfo</td><td>Товары внутри стратегий</td></tr>
+          <tr><td>Операции</td><td>updateStrategyStatus, getStrategyIDsByItemIDs</td><td>Статусы и связывание</td></tr>
+        </tbody>
+      </table>
+
+      <div class="nav-links">
+        <a class="nav-btn secondary" href="../api-categories-index.html">📚 Все категории</a>
+        <a class="nav-btn" href="28-prices-stocks.html">⬅️ 28. Prices & Stocks</a>
+        <a class="nav-btn" href="30-product.html">➡️ 30. Product</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
