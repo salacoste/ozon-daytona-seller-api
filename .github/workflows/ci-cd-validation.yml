@@ -270,7 +270,7 @@ jobs:
                 
                 const expectedCounts = {
                   fbs: 22, deliveryFbs: 18, deliveryRfbs: 8, fbo: 13,
-                  fbsRfbsMarks: 13, rfbsReturns: 8, supplier: 4,
+                  fbsRfbsMarks: 17, rfbsReturns: 8, supplier: 4,
                   warehouse: 2, fboSupplyRequest: 19
                 };
                 
