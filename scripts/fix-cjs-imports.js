@@ -12,7 +12,16 @@ import { join, extname } from 'path';
 function fixJsImportsInFile(filePath) {
   try {
     const content = readFileSync(filePath, 'utf-8');
-    const fixedContent = content.replace(/require\("([^"]+)\.js"\)/g, 'require("$1")');
+    let fixedContent = content;
+    
+    // Remove .js extensions from all require() calls
+    fixedContent = fixedContent.replace(/require\("([^"]+)\.js"\)/g, 'require("$1")');
+    
+    // Special handling for main index.cjs file - redirect paths to dist-cjs
+    if (filePath.endsWith('dist/index.cjs')) {
+      // Fix relative paths to point to ../dist-cjs/ instead of ./
+      fixedContent = fixedContent.replace(/require\("\.\/([^"]+)"\)/g, 'require("../dist-cjs/$1")');
+    }
     
     if (content !== fixedContent) {
       writeFileSync(filePath, fixedContent, 'utf-8');
@@ -65,6 +74,17 @@ if (fixJsImportsInFile(mainCjsFile)) {
 // Fix all files in dist-cjs directory
 const distCjsDir = join(process.cwd(), 'dist-cjs');
 totalFixed += fixJsImportsInDirectory(distCjsDir);
+
+// Create package.json in dist-cjs to mark it as CommonJS
+try {
+  const cjsPackageJson = { type: "commonjs" };
+  writeFileSync(join(distCjsDir, 'package.json'), JSON.stringify(cjsPackageJson, null, 2), 'utf-8');
+  // eslint-disable-next-line no-console
+  console.log('✅ Created CommonJS package.json in dist-cjs');
+} catch (error) {
+  // eslint-disable-next-line no-console
+  console.error('❌ Error creating CommonJS package.json:', error.message);
+}
 
 // eslint-disable-next-line no-console
 console.log(`🎯 Fixed CommonJS imports in ${totalFixed} files`);
