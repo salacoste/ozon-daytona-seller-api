@@ -283,7 +283,7 @@ jobs:
           echo "📋 Component sizes:"
           
           # Main entry point
-          main_size=$(stat -f%z dist/index.js 2>/dev/null || stat -c%s dist/index.js)
+          main_size=$(stat -f%z dist/index.cjs 2>/dev/null || stat -c%s dist/index.cjs)
           echo "   Main bundle: $((main_size / 1024))KB"
           
           # Core components

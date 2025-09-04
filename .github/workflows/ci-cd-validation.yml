@@ -338,7 +338,7 @@ jobs:
           
           # Check that all main files are built
           required_files=(
-            "dist/index.js"
+            "dist/index.cjs"
             "dist/index.d.ts" 
             "dist/core/client.js"
             "dist/core/client.d.ts"
@@ -416,7 +416,7 @@ jobs:
           echo "📊 Checking bundle size..."
           
           # Check main bundle size (should be reasonable for an SDK)
-          main_size=$(stat -f%z dist/index.js 2>/dev/null || stat -c%s dist/index.js)
+          main_size=$(stat -f%z dist/index.cjs 2>/dev/null || stat -c%s dist/index.cjs)
           max_size=1048576  # 1MB limit for main bundle
           
           echo "Main bundle size: $((main_size / 1024))KB"
