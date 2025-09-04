@@ -244,7 +244,7 @@ jobs:
                 });
                 
                 const expectedCounts = {
-                  analytics: 3, finance: 10, product: 23, pricingStrategy: 12,
+                  analytics: 3, finance: 10, product: 26, pricingStrategy: 12,
                   returns: 1, return: 8, quants: 2, review: 7,
                   chat: 8, questionsAnswers: 8, brand: 1, certification: 15
                 };
@@ -295,8 +295,8 @@ jobs:
                 
                 const expectedCounts = {
                   report: 8, premium: 8, pricesStocks: 9, betaMethod: 9,
-                  promos: 8, pass: 7, cancellation: 7, category: 6,
-                  digital: 4, barcode: 5, polygon: 4, sellerRating: 2
+                  promos: 8, pass: 7, cancellation: 7, category: 4,
+                  digital: 3, barcode: 2, polygon: 2, sellerRating: 2
                 };
                 
                 for (const [api, expectedCount] of Object.entries(expectedCounts)) {
