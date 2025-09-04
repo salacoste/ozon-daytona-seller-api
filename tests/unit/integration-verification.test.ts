@@ -29,14 +29,14 @@ describe('Story 1.4 Integration Verification', () => {
   describe('IV1: No breaking changes to existing Product API consumers', () => {
     it('should maintain existing ProductAPI interface', () => {
       // Verify existing Product API is still accessible
-      expect(client.products).toBeDefined();
-      expect(typeof client.products.getList).toBe('function');
-      expect(typeof client.products.archive).toBe('function');
-      expect(typeof client.products.importProducts).toBe('function');
+      expect(client.product).toBeDefined();
+      expect(typeof client.product.getList).toBe('function');
+      expect(typeof client.product.archive).toBe('function');
+      expect(typeof client.product.importProducts).toBe('function');
     });
 
     it('should maintain all 18 ProductAPI endpoints', () => {
-      const productApi = client.products;
+      const productApi = client.product;
       
       // Verify all endpoints are available
       expect(typeof productApi.archive).toBe('function');
@@ -174,7 +174,7 @@ describe('Story 1.4 Integration Verification', () => {
   describe('Complete Story 1.4 requirements verification', () => {
     it('should cover all 29 endpoints as specified in the story', () => {
       // ProductAPI: 18 endpoints (already implemented)
-      expect(Object.getOwnPropertyNames(Object.getPrototypeOf(client.products))
+      expect(Object.getOwnPropertyNames(Object.getPrototypeOf(client.product))
         .filter(name => name !== 'constructor').length).toBeGreaterThanOrEqual(18);
       
       // ReturnsAPI: 1 endpoint  

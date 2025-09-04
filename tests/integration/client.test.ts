@@ -38,7 +38,7 @@ describe('OzonSellerApiClient Integration', () => {
 
       expect(client).toBeInstanceOf(OzonSellerApiClient);
       expect(client.config).toEqual(validConfig);
-      expect(client.products).toBeDefined();
+      expect(client.product).toBeDefined();
     });
 
     it('should create client using static factory method', () => {
@@ -113,7 +113,7 @@ describe('OzonSellerApiClient Integration', () => {
       client = new OzonSellerApiClient(validConfig);
     });
 
-    it('should access ProductAPI through client.products', async () => {
+    it('should access ProductAPI through client.product', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         status: 200,
@@ -121,7 +121,7 @@ describe('OzonSellerApiClient Integration', () => {
         text: () => Promise.resolve(JSON.stringify(PRODUCT_LIST_RESPONSE))
       });
 
-      const result = await client.products.getList();
+      const result = await client.product.getList();
 
       expect(result).toEqual(PRODUCT_LIST_RESPONSE);
       expect(mockFetch).toHaveBeenCalledWith(
@@ -144,7 +144,7 @@ describe('OzonSellerApiClient Integration', () => {
         text: () => Promise.resolve(JSON.stringify(SUCCESS_RESPONSE))
       });
 
-      const result = await client.products.archive({
+      const result = await client.product.archive({
         product_id: [123, 456] as any
       });
 
