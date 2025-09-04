@@ -46,7 +46,7 @@ jobs:
           
           node -e "
             const { performance } = require('perf_hooks');
-            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.cjs');
             
             console.log('🔄 Running client initialization benchmark...');
             
@@ -113,7 +113,7 @@ jobs:
           
           node -e "
             const { performance } = require('perf_hooks');
-            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.cjs');
             
             console.log('🔄 Running API access benchmark...');
             
@@ -191,7 +191,7 @@ jobs:
           echo "🧠 Testing memory usage..."
           
           node -e "
-            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.cjs');
             
             console.log('🔄 Running memory usage analysis...');
             
@@ -371,7 +371,7 @@ jobs:
           
           node -e "
             const { performance } = require('perf_hooks');
-            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.cjs');
             
             const client = new OzonSellerApiClient({
               apiKey: createApiKey('test-key-1234567890123456789012345678901234567890'),
@@ -451,7 +451,7 @@ jobs:
             
             node -e "
               const { performance } = require('perf_hooks');
-              const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+              const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.cjs');
               
               const iterations = 1000;
               const times = [];
@@ -488,7 +488,7 @@ jobs:
           node -e "
             const fs = require('fs');
             const { performance } = require('perf_hooks');
-            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.cjs');
             
             const baseline = JSON.parse(fs.readFileSync('performance-baseline.json', 'utf8'));
             console.log('📊 Baseline performance:', baseline);

@@ -239,8 +239,8 @@ jobs:
               node -e "
                 const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.cjs');
                 const client = new OzonSellerApiClient({
-                  apiKey: createApiKey('test'),
-                  clientId: createClientId('test')
+                  apiKey: createApiKey('test-key-1234567890123456789012345678901234567890'),
+                  clientId: createClientId('123456')
                 });
                 
                 const expectedCounts = {
@@ -264,8 +264,8 @@ jobs:
               node -e "
                 const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.cjs');
                 const client = new OzonSellerApiClient({
-                  apiKey: createApiKey('test'),
-                  clientId: createClientId('test')
+                  apiKey: createApiKey('test-key-1234567890123456789012345678901234567890'),
+                  clientId: createClientId('123456')
                 });
                 
                 const expectedCounts = {
@@ -289,8 +289,8 @@ jobs:
               node -e "
                 const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.cjs');
                 const client = new OzonSellerApiClient({
-                  apiKey: createApiKey('test'),
-                  clientId: createClientId('test')
+                  apiKey: createApiKey('test-key-1234567890123456789012345678901234567890'),
+                  clientId: createClientId('123456')
                 });
                 
                 const expectedCounts = {
@@ -382,7 +382,7 @@ jobs:
           
           # Test that the built package can be imported and used
           node -e "
-            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.cjs');
             
             console.log('Testing package import...');
             const client = new OzonSellerApiClient({
@@ -556,7 +556,7 @@ jobs:
           
           node -e "
             const { performance } = require('perf_hooks');
-            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.cjs');
             
             const startTime = performance.now();
             

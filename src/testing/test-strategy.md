@@ -139,7 +139,7 @@ export const PRODUCT_LIST_RESPONSE: GetProductListResponse = {
 ```typescript
 // test/setup.ts
 export const TEST_CONFIG: OzonConfig = {
-  apiKey: createApiKey(process.env.OZON_TEST_API_KEY || 'test-key'),
+  apiKey: createApiKey(process.env.OZON_TEST_API_KEY || 'test-key-1234567890123456789012345678901234567890'),
   clientId: createClientId(process.env.OZON_TEST_CLIENT_ID || 'test-client'),
   baseUrl: 'https://api-seller-test.ozon.ru',
   timeout: 5000,

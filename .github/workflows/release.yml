@@ -86,7 +86,7 @@ jobs:
           npm run build
           
           node -e "
-            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.cjs');
             const client = new OzonSellerApiClient({
               apiKey: createApiKey('test-key-1234567890123456789012345678901234567890'),
               clientId: createClientId('123456')
@@ -290,10 +290,10 @@ jobs:
           npm run build
           
           node -e "
-            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.js');
+            const { OzonSellerApiClient, createApiKey, createClientId } = require('./dist/index.cjs');
             const client = new OzonSellerApiClient({
-              apiKey: createApiKey('test'),
-              clientId: createClientId('test')
+              apiKey: createApiKey('test-key-1234567890123456789012345678901234567890'),
+              clientId: createClientId('123456')
             });
             
             const apis = [
