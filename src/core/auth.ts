@@ -40,9 +40,9 @@ export class AuthManager {
       throw new ConfigurationError("Client ID is required and cannot be empty");
     }
 
-    // Basic format validation for Client ID (should be numeric)
-    if (!/^\d+$/.test(credentials.clientId)) {
-      throw new ConfigurationError("Client ID must be a numeric string");
+    // Basic format validation for Client ID (should be a non-empty string)
+    if (credentials.clientId.length < 1) {
+      throw new ConfigurationError("Client ID must be a non-empty string");
     }
 
     // Basic format validation for API key (should be a long alphanumeric string)
