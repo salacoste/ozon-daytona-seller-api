@@ -31,7 +31,7 @@ const result = await client.chat.startChat(/* parameters */);
 
 ### `startChat()`
 
-Chat API implementation Generated from MCP documentation: chatapi--chunk-001.md and premium--chunk-002.md Handles customer communication and chat management / import { HttpClient } from '../../core/http.js'; import type { RequestOptions } from '../../core/types.js'; import type { ChatStartRequest, ChatSendMessageRequest, ChatSendFileRequest, ChatReadRequest, ChatHistoryV2Request, ChatHistoryV3Request, ChatListV2Request, ChatListV3Request, } from '../../types/requests/chat.js'; import type { ChatStartResponse, ChatSendMessageResponse, ChatSendFileResponse, ChatReadResponse, ChatHistoryV2Response, ChatHistoryV3Response, ChatListV2Response, ChatListV3Response, } from '../../types/responses/chat.js'; /** Chat API для управления чатами и сообщениями Chat API for chat and message management Доступно для продавцов с подпиской Premium Plus. Available for sellers with Premium Plus subscription. ```typescript // Создать новый чат с покупателем const chat = await chatApi.startChat({ posting_number: 'FBS-12345' }); // Отправить сообщение в чат await chatApi.sendMessage({ chat_id: chat.result?.chat_id!, text: 'Здравствуйте! Как дела с заказом?' }); ``` / export class ChatApi { constructor(private readonly httpClient: HttpClient) {} /** Создать новый чат Start new chat Создает новый чат с покупателем по отправлению. Например, чтобы уточнить адрес или модель товара. Ограничения: - FBO — начать чат может только покупатель. - FBS и rFBS — вы можете открыть чат в течение 72 часов после оплаты или доставки отправления. ```typescript const chat = await chatApi.startChat({ posting_number: 'FBS-12345' }); console.log(`Чат создан с ID: ${chat.result?.chat_id}`); ```
+Chat API implementation Generated from MCP documentation: chatapi--chunk-001.md and premium--chunk-002.md Handles customer communication and chat management / import { HttpClient } from '../../core/http.js'; import type { RequestOptions } from '../../core/types.js'; import type { ChatStartRequest, ChatSendMessageRequest, ChatSendFileRequest, ChatReadRequest, ChatHistoryV2Request, ChatHistoryV3Request, ChatListV2Request, ChatListV3Request, } from '../../types/requests/chat.js'; import type { ChatStartResponse, ChatSendMessageResponse, ChatSendFileResponse, ChatReadResponse, ChatHistoryV2Response, ChatHistoryV3Response, ChatListV2Response, ChatListV3Response, } from '../../types/responses/chat.js'; /** Chat API для управления чатами и сообщениями Chat API for chat and message management ⚠️ **ТРЕБУЕТ ПОДПИСКУ PREMIUM PLUS** - Все методы доступны только для продавцов с подпиской Premium Plus. ⚠️ **REQUIRES PREMIUM PLUS SUBSCRIPTION** - All methods are available only for sellers with Premium Plus subscription. ```typescript // Создать новый чат с покупателем const chat = await chatApi.startChat({ posting_number: 'FBS-12345' }); // Отправить сообщение в чат await chatApi.sendMessage({ chat_id: chat.result?.chat_id!, text: 'Здравствуйте! Как дела с заказом?' }); ``` / export class ChatApi { constructor(private readonly httpClient: HttpClient) {} /** Создать новый чат Start new chat Создает новый чат с покупателем по отправлению. Например, чтобы уточнить адрес или модель товара. Ограничения: - FBO — начать чат может только покупатель. - FBS и rFBS — вы можете открыть чат в течение 72 часов после оплаты или доставки отправления. ```typescript const chat = await chatApi.startChat({ posting_number: 'FBS-12345' }); console.log(`Чат создан с ID: ${chat.result?.chat_id}`); ```
 
 **Example:**
 ```typescript
@@ -71,7 +71,7 @@ console.log(result);
 
 ### `getChatHistoryV2()`
 
-Получить историю чата (v2) Get chat history v2 ⚠️ Этот метод устаревает. Используйте getChatHistoryV3. Возвращает историю сообщений чата. По умолчанию от самого нового сообщения к старым. ```typescript const history = await chatApi.getChatHistoryV2({ chat_id: 'chat-123', limit: 50, direction: 'Backward' }); history.messages?.forEach(message => { console.log(`${message.user?.name}: ${message.data?.join(' ')}`); }); ```
+Получить историю чата (v2) Get chat history v2 Возвращает историю сообщений чата. По умолчанию от самого нового сообщения к старым. ```typescript const history = await chatApi.getChatHistoryV2({ chat_id: 'chat-123', limit: 50, direction: 'Backward' }); history.messages?.forEach(message => { console.log(`${message.user?.name}: ${message.data?.join(' ')}`); }); ```
 
 **Example:**
 ```typescript
@@ -91,7 +91,7 @@ console.log(result);
 
 ### `getChatListV2()`
 
-Получить список чатов (v2) Get chat list v2 ⚠️ Этот метод устаревает. Используйте getChatListV3. Возвращает информацию о чатах по указанным фильтрам. ```typescript const chats = await chatApi.getChatListV2({ limit: 100, filter: { chat_status: 'Opened', unread_only: true } }); console.log(`Найдено ${chats.total_chats_count} чатов`); console.log(`Непрочитанных сообщений: ${chats.total_unread_count}`); ```
+Получить список чатов (v2) Get chat list v2 Возвращает информацию о чатах по указанным фильтрам. ```typescript const chats = await chatApi.getChatListV2({ limit: 100, filter: { chat_status: 'Opened', unread_only: true } }); console.log(`Найдено ${chats.total_chats_count} чатов`); console.log(`Непрочитанных сообщений: ${chats.total_unread_count}`); ```
 
 **Example:**
 ```typescript

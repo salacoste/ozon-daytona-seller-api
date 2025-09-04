@@ -4,11 +4,11 @@ Certification API implementation
 
 ## Overview
 
-The CertificationApi class provides 12 methods for certification api implementation.
+The CertificationApi class provides 15 methods for certification api implementation.
 
 ## Core Features
 
-- **Core Operations** - 12 methods for comprehensive functionality
+- **Core Operations** - 15 methods for comprehensive functionality
 - **Type Safety** - Full TypeScript support with typed interfaces
 - **Error Handling** - Robust error handling and validation
 - **Documentation** - Detailed method documentation and examples
@@ -31,7 +31,7 @@ const result = await client.certification.getCertificateList(/* parameters */);
 
 ### `getCertificateList()`
 
-Certification API implementation Generated from MCP documentation: certificationapi--chunk-001.md, certificationapi--chunk-002.md Handles product certification and document management / import { HttpClient } from '../../core/http.js'; import type { RequestOptions } from '../../core/types.js'; import type { CertificateListRequest, CertificateBindRequest, CertificateCreateRequest, CertificateDeleteRequest, CertificateInfoFromListRequest, CertificateRejectionReasonsListRequest, CertificateStatusListRequest, CertificateUnbindRequest, ProductCertificationListRequest, ProductCertificationListV2Request, } from '../../types/requests/certification.js'; import type { CertificateListResponse, CertificateBindResponse, CertificateCreateResponse, CertificateDeleteResponse, CertificateInfoFromListResponse, CertificateRejectionReasonsListResponse, CertificateStatusListResponse, ProductCertificateTypesResponse, CertificateUnbindResponse, ProductCertificationListResponse, CertificateAccordanceTypesResponse, ProductCertificationListV2Response, } from '../../types/responses/certification.js'; /** Certification API для управления сертификатами и документами Certification API for certificate and document management ```typescript // Получить список сертификатов const certificates = await certificationApi.getCertificateList({ page: 1, page_size: 50 }); // Привязать товар к сертификату await certificationApi.bindCertificate({ certificate_id: 12345, product_id: ['product-1', 'product-2'] }); ``` / export class CertificationApi { constructor(private readonly httpClient: HttpClient) {} /** Получить список сертификатов Get certificate list Возвращает список сертификатов продавца с возможностью фильтрации по различным параметрам. ```typescript const certificates = await certificationApi.getCertificateList({ page: 1, page_size: 100, status: 'ACTIVE', type: 'CERTIFICATE' }); console.log(`Найдено сертификатов: ${certificates.result?.total}`); certificates.result?.certificates.forEach(cert => { console.log(`${cert.name} (${cert.status}) - истекает ${cert.expire_date}`); }); ```
+Certification API implementation Generated from MCP documentation: certificationapi--chunk-001.md, certificationapi--chunk-002.md Handles product certification and document management / import { HttpClient } from '../../core/http.js'; import type { RequestOptions } from '../../core/types.js'; import type { CertificateListRequest, CertificateBindRequest, CertificateCreateRequest, CertificateDeleteRequest, CertificateInfoRequest, CertificateProductsListRequest, ProductStatusListRequest, CertificateRejectionReasonsListRequest, CertificateStatusListRequest, CertificateUnbindRequest, ProductCertificationListRequest, ProductCertificationListV2Request, } from '../../types/requests/certification.js'; import type { CertificateListResponse, CertificateBindResponse, CertificateCreateResponse, CertificateDeleteResponse, CertificateInfoResponse, CertificateProductsListResponse, ProductStatusListResponse, CertificateRejectionReasonsListResponse, CertificateStatusListResponse, ProductCertificateTypesResponse, CertificateUnbindResponse, ProductCertificationListResponse, CertificateAccordanceTypesResponse, CertificateAccordanceTypesV1Response, ProductCertificationListV2Response, } from '../../types/responses/certification.js'; /** Certification API для управления сертификатами и документами Certification API for certificate and document management ```typescript // Получить список сертификатов const certificates = await certificationApi.getCertificateList({ page: 1, page_size: 50 }); // Привязать товар к сертификату await certificationApi.bindCertificate({ certificate_id: 12345, product_id: ['product-1', 'product-2'] }); ``` / export class CertificationApi { constructor(private readonly httpClient: HttpClient) {} /** Получить список сертификатов Get certificate list Возвращает список сертификатов продавца с возможностью фильтрации по различным параметрам. ```typescript const certificates = await certificationApi.getCertificateList({ page: 1, page_size: 100, status: 'ACTIVE', type: 'CERTIFICATE' }); console.log(`Найдено сертификатов: ${certificates.result?.total}`); certificates.result?.certificates.forEach(cert => { console.log(`${cert.name} (${cert.status}) - истекает ${cert.expire_date}`); }); ```
 
 **Example:**
 ```typescript
@@ -51,7 +51,7 @@ console.log(result);
 
 ### `createCertificate()`
 
-Создать сертификат Create certificate Создает новый сертификат с указанными параметрами и файлами. ```typescript const newCert = await certificationApi.createCertificate({ name: 'Сертификат соответствия ГОСТ', type: 'GOST_CERTIFICATE', number: 'РОСС RU.АИ37.H00124', expire_date: '2025-12-31T23:59:59Z', file: ['base64_file_content_1', 'base64_file_content_2'] }); console.log(`Создан сертификат с ID: ${newCert.certificate_id}`); ```
+Создать сертификат Create certificate Создает новый сертификат с указанными параметрами и файлами. ```typescript const newCert = await certificationApi.createCertificate({ name: 'Сертификат соответствия ГОСТ', type_code: 'GOST_CERTIFICATE', number: 'РОСС RU.АИ37.H00124', issue_date: '2025-08-21T00:00:00Z', files: ['base64_file_content_1', 'base64_file_content_2'] }); console.log(`Создан сертификат с ID: ${newCert.id}`); ```
 
 **Example:**
 ```typescript
@@ -69,13 +69,33 @@ const result = await client.deleteCertificates(/* parameters */);
 console.log(result);
 ```
 
-### `getCertificateProducts()`
+### `getCertificateInfo()`
 
-Получить информацию о товарах, привязанных к сертификату Get product info from certificate Возвращает список товаров, которые привязаны к указанному сертификату. ```typescript const products = await certificationApi.getCertificateProducts({ certificate_id: 12345, page: 1, page_size: 50 }); console.log(`К сертификату привязано товаров: ${products.result?.total}`); products.result?.products.forEach(product => { console.log(`${product.name} (${product.offer_id}) - ${product.status}`); }); ```
+Получить информацию о сертификате Get certificate info Возвращает детальную информацию о сертификате по его идентификатору. ```typescript const certInfo = await certificationApi.getCertificateInfo({ certificate_id: 12345 }); console.log(`Сертификат: ${certInfo.result?.name}`); console.log(`Статус: ${certInfo.result?.status}`); console.log(`Номер: ${certInfo.result?.number}`); ```
 
 **Example:**
 ```typescript
-const result = await client.getCertificateProducts(/* parameters */);
+const result = await client.getCertificateInfo(/* parameters */);
+console.log(result);
+```
+
+### `getCertificateProductsList()`
+
+Получить список товаров, привязанных к сертификату Get certificate products list Возвращает список товаров, которые привязаны к указанному сертификату. ```typescript const products = await certificationApi.getCertificateProductsList({ certificate_id: 12345, page: 1, page_size: 50 }); console.log(`К сертификату привязано товаров: ${products.result?.total}`); products.result?.products.forEach(product => { console.log(`${product.name} (${product.offer_id}) - ${product.status}`); }); ```
+
+**Example:**
+```typescript
+const result = await client.getCertificateProductsList(/* parameters */);
+console.log(result);
+```
+
+### `getProductStatusList()`
+
+Получить список возможных статусов товаров Get product status list Возвращает список возможных статусов товаров при их привязке к сертификату. ```typescript const statuses = await certificationApi.getProductStatusList(); console.log('Возможные статусы товаров:'); statuses.result?.forEach(status => { console.log(`${status.code}: ${status.name}`); }); ```
+
+**Example:**
+```typescript
+const result = await client.getProductStatusList(/* parameters */);
 console.log(result);
 ```
 
@@ -129,13 +149,23 @@ const result = await client.getProductCertificationList(/* parameters */);
 console.log(result);
 ```
 
-### `getCertificateAccordanceTypes()`
+### `getCertificateAccordanceTypesV1()`
 
-Получить список типов соответствия требованиям (версия 2) Get certificate accordance types v2 Возвращает список типов соответствия требованиям для сертификации. ```typescript const accordanceTypes = await certificationApi.getCertificateAccordanceTypes(); console.log('Доступные типы соответствия:'); accordanceTypes.result?.accordance_types.forEach(type => { console.log(`${type.code}: ${type.name} (ID: ${type.id})`); }); ```
+Получить список типов соответствия требованиям (версия 1) Get certificate accordance types v1 Возвращает список типов соответствия требованиям для сертификации (версия 1). ```typescript const accordanceTypesV1 = await certificationApi.getCertificateAccordanceTypesV1(); console.log('Доступные типы соответствия (v1):'); accordanceTypesV1.result?.forEach(type => { console.log(`${type.code}: ${type.name}`); }); ```
 
 **Example:**
 ```typescript
-const result = await client.getCertificateAccordanceTypes(/* parameters */);
+const result = await client.getCertificateAccordanceTypesV1(/* parameters */);
+console.log(result);
+```
+
+### `getCertificateAccordanceTypesV2()`
+
+Получить список типов соответствия требованиям (версия 2) Get certificate accordance types v2 Возвращает список типов соответствия требованиям для сертификации. ```typescript const accordanceTypes = await certificationApi.getCertificateAccordanceTypesV2(); console.log('Доступные типы соответствия:'); accordanceTypes.result?.accordance_types.forEach(type => { console.log(`${type.code}: ${type.name} (ID: ${type.id})`); }); ```
+
+**Example:**
+```typescript
+const result = await client.getCertificateAccordanceTypesV2(/* parameters */);
 console.log(result);
 ```
 

@@ -14,6 +14,20 @@ import { PricingStrategyApi } from "../categories/pricing-strategy/index.js";
 import { ReturnsApi } from "../categories/returns/index.js";
 import { ReturnApi } from "../categories/return/index.js";
 import { QuantsApi } from "../categories/quants/index.js";
+import { ReviewApi } from "../categories/review/index.js";
+import { ChatApi } from "../categories/chat/index.js";
+import { QuestionsAnswersApi } from "../categories/questions-answers/index.js";
+import { BrandApi } from "../categories/brand/index.js";
+import { CertificationApi } from "../categories/certification/index.js";
+import { FbsApi } from "../categories/fbs/index.js";
+import { DeliveryFbsApi } from "../categories/delivery-fbs/index.js";
+import { DeliveryRfbsApi } from "../categories/delivery-rfbs/index.js";
+import { FboApi } from "../categories/fbo/index.js";
+import { FbsRfbsMarksApi } from "../categories/fbs-rfbs-marks/index.js";
+import { RfbsReturnsApi } from "../categories/rfbs-returns/index.js";
+import { SupplierApi } from "../categories/supplier/index.js";
+import { WarehouseApi } from "../categories/warehouse/index.js";
+import { FboSupplyRequestApi } from "../categories/fbo-supply-request/index.js";
 // Story 1.7 APIs
 import { ReportApi } from "../categories/report/index.js";
 import { PremiumApi } from "../categories/premium/index.js";
@@ -34,13 +48,27 @@ export class OzonSellerApiClient {
   public readonly config: OzonConfig;
 
   // API category modules
-  public readonly products: ProductApi;
+  public readonly product: ProductApi;
   public readonly finance: FinanceApi;
   public readonly analytics: AnalyticsApi;
   public readonly pricingStrategy: PricingStrategyApi;
   public readonly returns: ReturnsApi;
   public readonly return: ReturnApi;
   public readonly quants: QuantsApi;
+  public readonly review: ReviewApi;
+  public readonly chat: ChatApi;
+  public readonly questionsAnswers: QuestionsAnswersApi;
+  public readonly brand: BrandApi;
+  public readonly certification: CertificationApi;
+  public readonly fbs: FbsApi;
+  public readonly deliveryFbs: DeliveryFbsApi;
+  public readonly deliveryRfbs: DeliveryRfbsApi;
+  public readonly fbo: FboApi;
+  public readonly fbsRfbsMarks: FbsRfbsMarksApi;
+  public readonly rfbsReturns: RfbsReturnsApi;
+  public readonly supplier: SupplierApi;
+  public readonly warehouse: WarehouseApi;
+  public readonly fboSupplyRequest: FboSupplyRequestApi;
 
   // Story 1.7 API categories
   public readonly report: ReportApi;
@@ -68,13 +96,27 @@ export class OzonSellerApiClient {
     this.httpClient = new HttpClient(config);
 
     // Initialize API category modules
-    this.products = new ProductApi(this.httpClient);
+    this.product = new ProductApi(this.httpClient);
     this.finance = new FinanceApi(this.httpClient);
     this.analytics = new AnalyticsApi(this.httpClient);
     this.pricingStrategy = new PricingStrategyApi(this.httpClient);
     this.returns = new ReturnsApi(this.httpClient);
     this.return = new ReturnApi(this.httpClient);
     this.quants = new QuantsApi(this.httpClient);
+    this.review = new ReviewApi(this.httpClient);
+    this.chat = new ChatApi(this.httpClient);
+    this.questionsAnswers = new QuestionsAnswersApi(this.httpClient);
+    this.brand = new BrandApi(this.httpClient);
+    this.certification = new CertificationApi(this.httpClient);
+    this.fbs = new FbsApi(this.httpClient);
+    this.deliveryFbs = new DeliveryFbsApi(this.httpClient);
+    this.deliveryRfbs = new DeliveryRfbsApi(this.httpClient);
+    this.fbo = new FboApi(this.httpClient);
+    this.fbsRfbsMarks = new FbsRfbsMarksApi(this.httpClient);
+    this.rfbsReturns = new RfbsReturnsApi(this.httpClient);
+    this.supplier = new SupplierApi(this.httpClient);
+    this.warehouse = new WarehouseApi(this.httpClient);
+    this.fboSupplyRequest = new FboSupplyRequestApi(this.httpClient);
 
     // Initialize Story 1.7 API categories
     this.report = new ReportApi(this.httpClient);
