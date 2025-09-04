@@ -4,8 +4,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 /**
- * Fix CommonJS imports in dist/index.cjs
- * Replace .js extensions with proper CommonJS paths
+ * Simple CommonJS import fixer - just remove .js extensions from require() calls
  */
 
 const cjsFilePath = join(process.cwd(), 'dist/index.cjs');
