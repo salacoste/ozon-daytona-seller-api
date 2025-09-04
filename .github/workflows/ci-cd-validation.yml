@@ -11,7 +11,7 @@ on:
 
 env:
   NODE_VERSION: '18'
-  COVERAGE_THRESHOLD: 35
+  COVERAGE_THRESHOLD: 40
 
 jobs:
   # Job 1: Code Quality and Type Safety

@@ -12,7 +12,13 @@ export default defineConfig({
         '**/*.test.ts',
         '**/*.spec.ts',
         'src/examples/',
+        'src/types/**',
+        '**/*.d.ts',
         'src/types/generated/',
+        'src/types/requests.backup/',
+        'src/types/responses.backup/',
+        '**/*.config.*',
+        'scripts/',
       ],
       thresholds: {
         global: {
