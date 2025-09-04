@@ -1,6 +1,6 @@
 {
   "name": "daytona-ozon-seller-api",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "Complete TypeScript SDK for OZON Seller API with 278 methods across 33 categories. Production-ready with comprehensive documentation and enterprise-grade architecture.",
   "keywords": [
     "ozon-api",
@@ -44,7 +44,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "tsc && tsc -p tsconfig.cjs.json && cp dist-cjs/index.js dist/index.cjs",
+    "build": "tsc && tsc -p tsconfig.cjs.json && cp dist-cjs/index.js dist/index.cjs && node scripts/fix-cjs-imports.js",
     "build:mcp": "echo 'MCP Build Integration disabled - was overwriting manual implementations'",
     "build:watch": "tsc --watch",
     "clean": "rimraf dist dist-cjs",
