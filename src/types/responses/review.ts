@@ -4,7 +4,7 @@
  * Ready for manual editing and enhancements
  */
 
-import type { BaseResponse } from '../../core/types.js';
+import type { BaseResponse } from "../../core/types.js";
 
 /**
  * Информация об изображении в отзыве
@@ -40,13 +40,13 @@ export interface ReviewVideo {
  * Статус заказа в отзыве
  * Order status in review
  */
-export type ReviewOrderStatus = 'DELIVERED' | 'CANCELLED';
+export type ReviewOrderStatus = "DELIVERED" | "CANCELLED";
 
 /**
  * Статус отзыва
  * Review status
  */
-export type ReviewProcessingStatus = 'UNPROCESSED' | 'PROCESSED';
+export type ReviewProcessingStatus = "UNPROCESSED" | "PROCESSED";
 
 /**
  * Информация о комментарии к отзыву
@@ -139,7 +139,7 @@ export interface ReviewInfo {
  */
 export interface ReviewChangeStatusResponse extends BaseResponse {
   /** Результат операции */
-  result?: 'ok';
+  result?: "ok";
   readonly [key: string]: unknown;
 }
 
@@ -159,7 +159,7 @@ export interface CommentCreateResponse extends BaseResponse {
  */
 export interface CommentDeleteResponse extends BaseResponse {
   /** Результат операции */
-  result?: 'ok';
+  result?: "ok";
   readonly [key: string]: unknown;
 }
 

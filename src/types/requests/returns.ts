@@ -3,8 +3,8 @@
  * Generated from OZON API documentation
  */
 
-import type { BaseRequest } from '../../core/types.js';
-import type { Sku, ReturnStatus, DateString, PaginationRequest } from '../common/base.js';
+import type { BaseRequest } from "../../core/types.js";
+import type { Sku, ReturnStatus, DateString, PaginationRequest } from "../common/base.js";
 
 /**
  * Фильтр для запроса списка возвратов

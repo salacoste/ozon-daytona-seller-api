@@ -4,7 +4,7 @@
  * Ready for manual editing and enhancements
  */
 
-import { z } from 'zod';
+import { z } from "zod";
 
 // Zod schemas for finance API will be generated here
 export const FinanceRequestSchema = z.object({

@@ -25,12 +25,12 @@ export interface FboWarehouseAvailabilityRequest {
  * Request for supply order bundle
  */
 export interface FboSupplyOrderBundleRequest {
-  /** 
+  /**
    * Идентификатор поставки или черновика заявки
    * Supply order or draft ID
    */
   supply_order_id?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -39,13 +39,13 @@ export interface FboSupplyOrderBundleRequest {
  * Request for driver and vehicle data
  */
 export interface FboSupplyOrderPassCreateRequest {
-  /** 
+  /**
    * Идентификатор заявки на поставку
    * Supply order ID
    */
   supply_order_id?: number;
-  
-  /** 
+
+  /**
    * Данные о водителе
    * Driver information
    */
@@ -57,8 +57,8 @@ export interface FboSupplyOrderPassCreateRequest {
     /** Серия и номер паспорта */
     passport?: string;
   };
-  
-  /** 
+
+  /**
    * Данные об автомобиле
    * Vehicle information
    */
@@ -70,7 +70,7 @@ export interface FboSupplyOrderPassCreateRequest {
     /** Цвет автомобиля */
     color?: string;
   };
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -79,12 +79,12 @@ export interface FboSupplyOrderPassCreateRequest {
  * Request for driver and vehicle data status
  */
 export interface FboSupplyOrderPassStatusRequest {
-  /** 
+  /**
    * Идентификатор заявки на поставку
    * Supply order ID
    */
   supply_order_id?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -101,24 +101,24 @@ export interface FboSupplyOrderStatusCounterRequest {
  * Request for supply order timeslots
  */
 export interface FboSupplyOrderTimeslotGetRequest {
-  /** 
+  /**
    * Идентификатор склада
    * Warehouse ID
    */
   warehouse_id?: number;
-  
-  /** 
+
+  /**
    * Дата начала периода
    * Period start date
    */
   date_from?: string;
-  
-  /** 
+
+  /**
    * Дата окончания периода
    * Period end date
    */
   date_to?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -127,12 +127,12 @@ export interface FboSupplyOrderTimeslotGetRequest {
  * Request for supply order timeslot status
  */
 export interface FboSupplyOrderTimeslotStatusRequest {
-  /** 
+  /**
    * Идентификатор интервала поставки
    * Timeslot ID
    */
   timeslot_id?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -141,18 +141,18 @@ export interface FboSupplyOrderTimeslotStatusRequest {
  * Request for supply order timeslot update
  */
 export interface FboSupplyOrderTimeslotUpdateRequest {
-  /** 
+  /**
    * Идентификатор заявки на поставку
    * Supply order ID
    */
   supply_order_id?: number;
-  
-  /** 
+
+  /**
    * Новый идентификатор интервала поставки
    * New timeslot ID
    */
   timeslot_id?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -161,13 +161,13 @@ export interface FboSupplyOrderTimeslotUpdateRequest {
  * Request for FBO posting information
  */
 export interface FboPostingGetRequest {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Дополнительные поля для ответа
    * Additional fields for response
    */
@@ -179,7 +179,7 @@ export interface FboPostingGetRequest {
     /** Включить финансовые данные */
     financial_data?: boolean;
   };
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -188,25 +188,25 @@ export interface FboPostingGetRequest {
  * Request for FBO postings list
  */
 export interface FboPostingListRequest {
-  /** 
+  /**
    * Дата начала периода
    * Period start date
    */
   since?: string;
-  
-  /** 
+
+  /**
    * Дата окончания периода
    * Period end date
    */
   to?: string;
-  
-  /** 
+
+  /**
    * Направление сортировки
    * Sort direction
    */
-  dir?: 'ASC' | 'DESC';
-  
-  /** 
+  dir?: "ASC" | "DESC";
+
+  /**
    * Фильтр по статусу
    * Status filter
    */
@@ -216,20 +216,20 @@ export interface FboPostingListRequest {
     /** Склады отправления */
     warehouse_id?: number[];
   };
-  
-  /** 
+
+  /**
    * Лимит записей
    * Record limit
    */
   limit?: number;
-  
-  /** 
+
+  /**
    * Смещение для пагинации
    * Pagination offset
    */
   offset?: number;
-  
-  /** 
+
+  /**
    * Дополнительные поля для ответа
    * Additional fields for response
    */
@@ -241,7 +241,7 @@ export interface FboPostingListRequest {
     /** Включить финансовые данные */
     financial_data?: boolean;
   };
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -250,12 +250,12 @@ export interface FboPostingListRequest {
  * Request for supply order information
  */
 export interface FboSupplyOrderGetRequest {
-  /** 
+  /**
    * Идентификатор заявки на поставку
    * Supply order ID
    */
   supply_order_id?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -264,25 +264,25 @@ export interface FboSupplyOrderGetRequest {
  * Request for supply orders list
  */
 export interface FboSupplyOrderListRequest {
-  /** 
+  /**
    * Дата начала периода
    * Period start date
    */
   since?: string;
-  
-  /** 
+
+  /**
    * Дата окончания периода
    * Period end date
    */
   to?: string;
-  
-  /** 
+
+  /**
    * Направление сортировки
    * Sort direction
    */
-  dir?: 'ASC' | 'DESC';
-  
-  /** 
+  dir?: "ASC" | "DESC";
+
+  /**
    * Фильтр по статусу
    * Status filter
    */
@@ -292,18 +292,18 @@ export interface FboSupplyOrderListRequest {
     /** Склады назначения */
     warehouse_id?: number[];
   };
-  
-  /** 
+
+  /**
    * Лимит записей
    * Record limit
    */
   limit?: number;
-  
-  /** 
+
+  /**
    * Смещение для пагинации
    * Pagination offset
    */
   offset?: number;
-  
+
   readonly [key: string]: unknown;
 }

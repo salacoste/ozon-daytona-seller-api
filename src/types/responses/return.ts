@@ -3,15 +3,8 @@
  * Generated from OZON API documentation
  */
 
-import type { BaseResponse } from '../../core/types.js';
-import type { 
-  GiveoutId, 
-  GiveoutStatus, 
-  BasicProductInfo, 
-  DateString, 
-  CurrencyCode, 
-  PaginationResponse 
-} from '../common/base.js';
+import type { BaseResponse } from "../../core/types.js";
+import type { GiveoutId, GiveoutStatus, BasicProductInfo, DateString, CurrencyCode, PaginationResponse } from "../common/base.js";
 
 /**
  * Ответ на запрос штрихкода

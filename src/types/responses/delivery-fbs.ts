@@ -9,12 +9,12 @@
  * Response for carriage approval
  */
 export interface DeliveryFbsCarriageApproveResponse {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
   result?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -23,12 +23,12 @@ export interface DeliveryFbsCarriageApproveResponse {
  * Response for carriage cancellation
  */
 export interface DeliveryFbsCarriageCancelResponse {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
   result?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -37,36 +37,36 @@ export interface DeliveryFbsCarriageCancelResponse {
  * Created carriage information
  */
 export interface DeliveryFbsCarriageInfo {
-  /** 
+  /**
    * Идентификатор отгрузки
    * Carriage ID
    */
   carriage_id?: number;
-  
-  /** 
+
+  /**
    * Статус отгрузки
    * Carriage status
    */
   status?: string;
-  
-  /** 
+
+  /**
    * Дата создания
    * Creation date
    */
   created_at?: string;
-  
-  /** 
+
+  /**
    * Время начала интервала отгрузки
    * Carriage interval start time
    */
   first_mile_from_time?: string;
-  
-  /** 
+
+  /**
    * Время окончания интервала отгрузки
    * Carriage interval end time
    */
   first_mile_to_time?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -75,12 +75,12 @@ export interface DeliveryFbsCarriageInfo {
  * Response for carriage creation
  */
 export interface DeliveryFbsCarriageCreateResponse {
-  /** 
+  /**
    * Информация о созданной отгрузке
    * Created carriage information
    */
   result?: DeliveryFbsCarriageInfo;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -89,30 +89,30 @@ export interface DeliveryFbsCarriageCreateResponse {
  * Delivery method information
  */
 export interface DeliveryFbsDeliveryMethod {
-  /** 
+  /**
    * Идентификатор метода доставки
    * Delivery method ID
    */
   id?: number;
-  
-  /** 
+
+  /**
    * Название метода доставки
    * Delivery method name
    */
   name?: string;
-  
-  /** 
+
+  /**
    * Тип доставки
    * Delivery type
    */
   type?: string;
-  
-  /** 
+
+  /**
    * Доступность метода
    * Method availability
    */
   is_available?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -121,7 +121,7 @@ export interface DeliveryFbsDeliveryMethod {
  * Response for delivery methods and carriages list
  */
 export interface DeliveryFbsCarriageDeliveryListResponse {
-  /** 
+  /**
    * Список методов доставки с отгрузками
    * List of delivery methods with carriages
    */
@@ -131,13 +131,13 @@ export interface DeliveryFbsCarriageDeliveryListResponse {
     /** Отгрузки для метода */
     carriages?: DeliveryFbsCarriageInfo[];
   }>;
-  
-  /** 
+
+  /**
    * Есть следующая страница
    * Has next page
    */
   has_next?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -146,12 +146,12 @@ export interface DeliveryFbsCarriageDeliveryListResponse {
  * Response for carriage information
  */
 export interface DeliveryFbsCarriageGetResponse {
-  /** 
+  /**
    * Информация о перевозке
    * Carriage information
    */
   result?: DeliveryFbsCarriageInfo;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -160,12 +160,12 @@ export interface DeliveryFbsCarriageGetResponse {
  * Response for carriage postings modification
  */
 export interface DeliveryFbsSetPostingsResponse {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
   result?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -174,30 +174,30 @@ export interface DeliveryFbsSetPostingsResponse {
  * Available carriage
  */
 export interface DeliveryFbsAvailableCarriage {
-  /** 
+  /**
    * Идентификатор перевозки
    * Carriage ID
    */
   carriage_id?: number;
-  
-  /** 
+
+  /**
    * Статус перевозки
    * Carriage status
    */
   status?: string;
-  
-  /** 
+
+  /**
    * Количество отправлений
    * Number of postings
    */
   postings_count?: number;
-  
-  /** 
+
+  /**
    * Дата создания
    * Creation date
    */
   created_at?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -206,18 +206,18 @@ export interface DeliveryFbsAvailableCarriage {
  * Response for available carriages list
  */
 export interface DeliveryFbsCarriageAvailableListResponse {
-  /** 
+  /**
    * Список доступных перевозок
    * List of available carriages
    */
   result?: DeliveryFbsAvailableCarriage[];
-  
-  /** 
+
+  /**
    * Есть следующая страница
    * Has next page
    */
   has_next?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -226,18 +226,18 @@ export interface DeliveryFbsCarriageAvailableListResponse {
  * Response for posting split
  */
 export interface DeliveryFbsPostingSplitResponse {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
   result?: boolean;
-  
-  /** 
+
+  /**
    * Созданные отправления
    * Created postings
    */
   created_postings?: string[];
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -246,24 +246,24 @@ export interface DeliveryFbsPostingSplitResponse {
  * Document status
  */
 export interface DeliveryFbsDocumentStatus {
-  /** 
+  /**
    * Тип документа
    * Document type
    */
   type?: string;
-  
-  /** 
+
+  /**
    * Статус формирования
    * Formation status
    */
-  status?: 'pending' | 'processing' | 'ready' | 'error';
-  
-  /** 
+  status?: "pending" | "processing" | "ready" | "error";
+
+  /**
    * Ссылка на документ (если готов)
    * Document URL (if ready)
    */
   url?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -272,24 +272,24 @@ export interface DeliveryFbsDocumentStatus {
  * Response for shipment and documents status
  */
 export interface DeliveryFbsActCheckStatusResponse {
-  /** 
+  /**
    * Статус отгрузки
    * Shipment status
    */
   carriage_status?: string;
-  
-  /** 
+
+  /**
    * Статусы документов
    * Documents statuses
    */
   documents?: DeliveryFbsDocumentStatus[];
-  
-  /** 
+
+  /**
    * Статус штрихкода
    * Barcode status
    */
   barcode_status?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -298,18 +298,18 @@ export interface DeliveryFbsActCheckStatusResponse {
  * Response for shipment confirmation and document creation
  */
 export interface DeliveryFbsActCreateResponse {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
   result?: boolean;
-  
-  /** 
+
+  /**
    * Идентификатор созданного акта
    * Created act ID
    */
   act_id?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -318,18 +318,18 @@ export interface DeliveryFbsActCreateResponse {
  * Response for shipment barcode
  */
 export interface DeliveryFbsGetBarcodeResponse {
-  /** 
+  /**
    * Изображение штрихкода в base64
    * Barcode image in base64
    */
   barcode?: string;
-  
-  /** 
+
+  /**
    * Тип изображения
    * Image type
    */
   content_type?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -338,12 +338,12 @@ export interface DeliveryFbsGetBarcodeResponse {
  * Response for barcode text value
  */
 export interface DeliveryFbsGetBarcodeTextResponse {
-  /** 
+  /**
    * Значение штрихкода
    * Barcode value
    */
   barcode_text?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -352,18 +352,18 @@ export interface DeliveryFbsGetBarcodeTextResponse {
  * Response for container labels
  */
 export interface DeliveryFbsGetContainerLabelsResponse {
-  /** 
+  /**
    * PDF файл с этикетками в base64
    * PDF file with labels in base64
    */
   content?: string;
-  
-  /** 
+
+  /**
    * Тип содержимого
    * Content type
    */
   content_type?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -372,24 +372,24 @@ export interface DeliveryFbsGetContainerLabelsResponse {
  * Response for PDF documents
  */
 export interface DeliveryFbsGetActResponse {
-  /** 
+  /**
    * PDF файл с документами в base64
    * PDF file with documents in base64
    */
   content?: string;
-  
-  /** 
+
+  /**
    * Тип содержимого
    * Content type
    */
   content_type?: string;
-  
-  /** 
+
+  /**
    * Название файла
    * File name
    */
   filename?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -398,24 +398,24 @@ export interface DeliveryFbsGetActResponse {
  * Posting in act
  */
 export interface DeliveryFbsActPosting {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Статус отправления
    * Posting status
    */
   status?: string;
-  
-  /** 
+
+  /**
    * Дата создания
    * Creation date
    */
   created_at?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -424,18 +424,18 @@ export interface DeliveryFbsActPosting {
  * Response for postings list in act
  */
 export interface DeliveryFbsActGetPostingsResponse {
-  /** 
+  /**
    * Список отправлений
    * List of postings
    */
   result?: DeliveryFbsActPosting[];
-  
-  /** 
+
+  /**
    * Есть следующая страница
    * Has next page
    */
   has_next?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -444,42 +444,42 @@ export interface DeliveryFbsActGetPostingsResponse {
  * Shipment act
  */
 export interface DeliveryFbsAct {
-  /** 
+  /**
    * Идентификатор акта
    * Act ID
    */
   act_id?: number;
-  
-  /** 
+
+  /**
    * Идентификатор отгрузки
    * Carriage ID
    */
   carriage_id?: number;
-  
-  /** 
+
+  /**
    * Статус акта
    * Act status
    */
   status?: string;
-  
-  /** 
+
+  /**
    * Дата создания
    * Creation date
    */
   created_at?: string;
-  
-  /** 
+
+  /**
    * Тип интеграции
    * Integration type
    */
   integration_type?: string;
-  
-  /** 
+
+  /**
    * Количество отправлений
    * Number of postings
    */
   postings_count?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -488,18 +488,18 @@ export interface DeliveryFbsAct {
  * Response for acts list by shipments
  */
 export interface DeliveryFbsActListResponse {
-  /** 
+  /**
    * Список актов
    * List of acts
    */
   result?: DeliveryFbsAct[];
-  
-  /** 
+
+  /**
    * Есть следующая страница
    * Has next page
    */
   has_next?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -508,18 +508,18 @@ export interface DeliveryFbsActListResponse {
  * Response for waybill formation status
  */
 export interface DeliveryFbsDigitalActCheckStatusResponse {
-  /** 
+  /**
    * Статус формирования
    * Formation status
    */
-  status?: 'PROCESSING' | 'FORMED' | 'CONFIRMED' | 'CONFIRMED_WITH_MISMATCH' | 'ERROR';
-  
-  /** 
+  status?: "PROCESSING" | "FORMED" | "CONFIRMED" | "CONFIRMED_WITH_MISMATCH" | "ERROR";
+
+  /**
    * Сообщение об ошибке (если есть)
    * Error message (if any)
    */
   error_message?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -528,23 +528,23 @@ export interface DeliveryFbsDigitalActCheckStatusResponse {
  * Response for shipment list by carriage
  */
 export interface DeliveryFbsGetDigitalActResponse {
-  /** 
+  /**
    * PDF файл с листом отгрузки в base64
    * PDF file with shipment list in base64
    */
   content?: string;
-  
-  /** 
+
+  /**
    * Тип содержимого
    * Content type
    */
   content_type?: string;
-  
-  /** 
+
+  /**
    * Название файла
    * File name
    */
   filename?: string;
-  
+
   readonly [key: string]: unknown;
 }

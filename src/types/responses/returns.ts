@@ -3,8 +3,8 @@
  * Generated from OZON API documentation
  */
 
-import type { BaseResponse } from '../../core/types.js';
-import type { ReturnId, BasicProductInfo, ReturnStatus, DateString, CurrencyCode, PaginationResponse } from '../common/base.js';
+import type { BaseResponse } from "../../core/types.js";
+import type { ReturnId, BasicProductInfo, ReturnStatus, DateString, CurrencyCode, PaginationResponse } from "../common/base.js";
 
 /**
  * Элемент возврата в списке

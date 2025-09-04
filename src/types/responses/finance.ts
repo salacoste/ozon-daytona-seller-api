@@ -4,9 +4,9 @@
  * Ready for manual editing and enhancements
  */
 
-import type { TransactionType } from '../requests/finance.js';
+import type { TransactionType } from "../requests/finance.js";
 
-export type CreateReportCode = 'SUCCESS' | 'IN_PROGRESS' | 'ERROR';
+export type CreateReportCode = "SUCCESS" | "IN_PROGRESS" | "ERROR";
 
 export interface CreateReportResult {
   code?: CreateReportCode;
@@ -54,7 +54,7 @@ export interface GetFinanceProductsBuyoutResponse {
 }
 
 /**
- * Информация об операции (строго по MCP документации)  
+ * Информация об операции (строго по MCP документации)
  * Operation information (strict per MCP documentation)
  */
 export interface FinanceTransactionOperation {

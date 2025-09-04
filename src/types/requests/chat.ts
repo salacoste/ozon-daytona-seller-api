@@ -54,7 +54,7 @@ export interface ChatHistoryRequestFilter {
 export interface ChatHistoryV3Request {
   /** Идентификатор чата */
   chat_id: string;
-  /** 
+  /**
    * Направление сортировки сообщений:
    * - `Forward` — от старых к новым.
    * - `Backward` — от новых к старым.
@@ -70,7 +70,6 @@ export interface ChatHistoryV3Request {
   readonly [key: string]: unknown;
 }
 
-
 /**
  * Запрос отправки файла в чат
  * Chat send file request
@@ -85,12 +84,11 @@ export interface ChatSendFileRequest {
   readonly [key: string]: unknown;
 }
 
-
 /**
  * Направление сортировки сообщений
  * Chat message direction
  */
-export type ChatDirection = 'Forward' | 'Backward';
+export type ChatDirection = "Forward" | "Backward";
 
 /**
  * Запрос истории чата (v2) - УСТАРЕЛ
@@ -102,7 +100,7 @@ export interface ChatHistoryV2Request {
   chat_id: string;
   /** Количество сообщений в ответе. По умолчанию — 50. Максимальное значение — 1000 */
   limit: number;
-  /** 
+  /**
    * Направление сортировки сообщений:
    * - `Forward` — от старых к новым.
    * - `Backward` — от новых к старым.
@@ -113,7 +111,6 @@ export interface ChatHistoryV2Request {
   from_message_id?: number;
   readonly [key: string]: unknown;
 }
-
 
 /**
  * Фильтр для списка чатов v2

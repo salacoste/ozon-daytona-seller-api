@@ -9,12 +9,12 @@
  * Request for getting posting cancellation reasons
  */
 export interface FbsCancelReasonRequest {
-  /** 
+  /**
    * Номера отправлений
    * Posting numbers
    */
   related_posting_numbers: string[];
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -23,12 +23,12 @@ export interface FbsCancelReasonRequest {
  * Request for creating label batch task
  */
 export interface FbsCreateLabelBatchRequest {
-  /** 
+  /**
    * Номера отправлений, для которых нужны этикетки
    * Posting numbers for which labels are needed
    */
   posting_number: string[];
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -37,12 +37,12 @@ export interface FbsCreateLabelBatchRequest {
  * Request for getting label batch file
  */
 export interface FbsGetLabelBatchRequest {
-  /** 
+  /**
    * Номер задания на формирование этикеток
    * Label batch task ID
    */
   task_id: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -51,18 +51,18 @@ export interface FbsGetLabelBatchRequest {
  * Request for courier code verification
  */
 export interface FbsPickupCodeVerifyRequest {
-  /** 
+  /**
    * Код курьера для проверки
    * Courier code to verify
    */
   code?: string;
-  
-  /** 
+
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -71,12 +71,12 @@ export interface FbsPickupCodeVerifyRequest {
  * Request for pickup point restrictions
  */
 export interface FbsGetRestrictionsRequest {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -85,12 +85,12 @@ export interface FbsGetRestrictionsRequest {
  * Request for moving posting
  */
 export interface FbsMovePostingRequest {
-  /** 
+  /**
    * Идентификаторы отправлений
    * Posting identifiers
    */
   posting_number: string[];
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -99,24 +99,24 @@ export interface FbsMovePostingRequest {
  * Request for FBS posting cancellation
  */
 export interface FbsCancelPostingRequest {
-  /** 
+  /**
    * Идентификатор причины отмены отправления
    * Cancellation reason ID
    */
   cancel_reason_id?: number;
-  
-  /** 
+
+  /**
    * Дополнительная информация по отмене
    * Additional cancellation information
    */
   cancel_reason_message?: string;
-  
-  /** 
+
+  /**
    * Идентификатор отправления
    * Posting identifier
    */
   posting_number?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -125,12 +125,12 @@ export interface FbsCancelPostingRequest {
  * Request for getting posting info by barcode
  */
 export interface FbsGetPostingByBarcodeRequest {
-  /** 
+  /**
    * Штрихкод отправления
    * Posting barcode
    */
   barcode?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -139,12 +139,12 @@ export interface FbsGetPostingByBarcodeRequest {
  * Request for printing label
  */
 export interface FbsPackageLabelRequest {
-  /** 
+  /**
    * Номера отправлений для печати этикеток
    * Posting numbers for label printing
    */
   posting_number?: string[];
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -153,13 +153,13 @@ export interface FbsPackageLabelRequest {
  * Request for cancelling products in posting
  */
 export interface FbsProductCancelRequest {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Данные отменяемых товаров
    * Cancelled products data
    */
@@ -171,7 +171,7 @@ export interface FbsProductCancelRequest {
     /** Причина отмены */
     cancel_reason_id?: number;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -180,13 +180,13 @@ export interface FbsProductCancelRequest {
  * Request for changing products in posting
  */
 export interface FbsProductChangeRequest {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Данные изменяемых товаров
    * Changed products data
    */
@@ -198,7 +198,7 @@ export interface FbsProductChangeRequest {
     /** Вес товара */
     weight?: number;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -215,13 +215,13 @@ export interface FbsProductCountryListRequest {
  * Request for setting product country
  */
 export interface FbsProductCountrySetRequest {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Данные товаров со странами-изготовителями
    * Products with country data
    */
@@ -231,7 +231,7 @@ export interface FbsProductCountrySetRequest {
     /** ISO код страны-изготовителя */
     country_iso_code?: string;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -240,18 +240,18 @@ export interface FbsProductCountrySetRequest {
  * Request for getting posting info v3
  */
 export interface FbsGetPostingV3Request {
-  /** 
+  /**
    * Идентификатор отправления
    * Posting identifier
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Данные для транслитерации
    * Transliteration options
    */
   translit?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -260,24 +260,24 @@ export interface FbsGetPostingV3Request {
  * Filter for postings list
  */
 export interface FbsPostingFilter {
-  /** 
+  /**
    * Дата создания от
    * Created from date
    */
   since?: string;
-  
-  /** 
+
+  /**
    * Дата создания до
    * Created to date
    */
   to?: string;
-  
-  /** 
+
+  /**
    * Статус отправления
    * Posting status
    */
   status?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -286,37 +286,37 @@ export interface FbsPostingFilter {
  * Request for postings list v3
  */
 export interface FbsGetPostingListV3Request {
-  /** 
+  /**
    * Фильтр
    * Filter
    */
   filter?: FbsPostingFilter;
-  
-  /** 
+
+  /**
    * Направление сортировки
    * Sort direction
    */
-  dir?: 'ASC' | 'DESC';
-  
-  /** 
+  dir?: "ASC" | "DESC";
+
+  /**
    * Количество значений в ответе
    * Number of values in response
    */
   limit?: number;
-  
-  /** 
+
+  /**
    * Смещение относительно первого элемента
    * Offset from first element
    */
   offset?: number;
-  
-  /** 
+
+  /**
    * Данные для транслитерации
    * Transliteration options
    */
   translit?: boolean;
-  
-  /** 
+
+  /**
    * Дополнительные поля в ответе
    * Additional fields in response
    */
@@ -326,7 +326,7 @@ export interface FbsGetPostingListV3Request {
     /** Финансовые данные */
     financial_data?: boolean;
   };
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -335,36 +335,36 @@ export interface FbsGetPostingListV3Request {
  * Request for unfulfilled postings list v3
  */
 export interface FbsGetUnfulfilledListV3Request {
-  /** 
+  /**
    * Фильтр
    * Filter
    */
   filter?: FbsPostingFilter;
-  
-  /** 
+
+  /**
    * Направление сортировки
    * Sort direction
    */
-  dir?: 'ASC' | 'DESC';
-  
-  /** 
+  dir?: "ASC" | "DESC";
+
+  /**
    * Количество значений в ответе
    * Number of values in response
    */
   limit?: number;
-  
-  /** 
+
+  /**
    * Смещение относительно первого элемента
    * Offset from first element
    */
   offset?: number;
-  
-  /** 
+
+  /**
    * Данные для транслитерации
    * Transliteration options
    */
   translit?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -373,18 +373,18 @@ export interface FbsGetUnfulfilledListV3Request {
  * Request for setting multi-box quantity
  */
 export interface FbsMultiBoxQtySetV3Request {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Количество коробок
    * Number of boxes
    */
   multi_box_qty?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -393,18 +393,18 @@ export interface FbsMultiBoxQtySetV3Request {
  * Request for ETGB customs declarations
  */
 export interface FbsGetEtgbRequest {
-  /** 
+  /**
    * Номера отправлений
    * Posting numbers
    */
   posting_number?: string[];
-  
-  /** 
+
+  /**
    * Тип документа
    * Document type
    */
   doc_type?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -413,17 +413,17 @@ export interface FbsGetEtgbRequest {
  * Request for unpaid legal products list
  */
 export interface FbsUnpaidLegalProductListRequest {
-  /** 
+  /**
    * Количество значений в ответе
    * Number of values in response
    */
   limit?: number;
-  
-  /** 
+
+  /**
    * Смещение относительно первого элемента
    * Offset from first element
    */
   offset?: number;
-  
+
   readonly [key: string]: unknown;
 }

@@ -9,18 +9,18 @@
  * Response for posting shipment date clarification
  */
 export interface DeliveryRfbsSetCutoffResponse {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
-  result?: 'success' | 'error';
-  
-  /** 
+  result?: "success" | "error";
+
+  /**
    * Сообщение об ошибке
    * Error message
    */
   error?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -29,24 +29,24 @@ export interface DeliveryRfbsSetCutoffResponse {
  * Delivery rescheduling restrictions information
  */
 export interface DeliveryRfbsTimeslotChangeRestrictions {
-  /** 
+  /**
    * Доступные даты для переноса
    * Available dates for rescheduling
    */
   available_dates?: string[];
-  
-  /** 
+
+  /**
    * Количество доступных переносов
    * Available reschedules count
    */
   available_reschedules?: number;
-  
-  /** 
+
+  /**
    * Общее количество разрешенных переносов
    * Total allowed reschedules
    */
   max_reschedules?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -55,12 +55,12 @@ export interface DeliveryRfbsTimeslotChangeRestrictions {
  * Response with available delivery rescheduling dates
  */
 export interface DeliveryRfbsTimeslotChangeRestrictionsResponse {
-  /** 
+  /**
    * Информация об ограничениях
    * Restrictions information
    */
   restrictions?: DeliveryRfbsTimeslotChangeRestrictions;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -69,24 +69,24 @@ export interface DeliveryRfbsTimeslotChangeRestrictionsResponse {
  * Response for delivery date rescheduling
  */
 export interface DeliveryRfbsTimeslotSetResponse {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
-  result?: 'success' | 'error';
-  
-  /** 
+  result?: "success" | "error";
+
+  /**
    * Новая дата доставки
    * New delivery date
    */
   new_timeslot_date?: string;
-  
-  /** 
+
+  /**
    * Сообщение об ошибке
    * Error message
    */
   error?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -95,30 +95,30 @@ export interface DeliveryRfbsTimeslotSetResponse {
  * Response for posting status change
  */
 export interface DeliveryRfbsPostingMoveStatusResponse {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
-  result?: 'success' | 'error';
-  
-  /** 
+  result?: "success" | "error";
+
+  /**
    * Новый статус отправления
    * New posting status
    */
   status?: string;
-  
-  /** 
+
+  /**
    * Дата изменения статуса
    * Status change date
    */
   status_changed_at?: string;
-  
-  /** 
+
+  /**
    * Сообщение об ошибке
    * Error message
    */
   error?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -151,36 +151,36 @@ export interface DeliveryRfbsPostingLastMileResponse extends DeliveryRfbsPosting
  * Response for status change to "Sent by seller"
  */
 export interface DeliveryRfbsPostingSentBySellerResponse {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
-  result?: 'success' | 'error';
-  
-  /** 
+  result?: "success" | "error";
+
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Новый статус
    * New status
    */
   status?: string;
-  
-  /** 
+
+  /**
    * Дата отправки продавцом
    * Sent by seller date
    */
   sent_by_seller_at?: string;
-  
-  /** 
+
+  /**
    * Сообщение об ошибке
    * Error message
    */
   error?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -189,30 +189,30 @@ export interface DeliveryRfbsPostingSentBySellerResponse {
  * Tracking number addition result
  */
 export interface DeliveryRfbsTrackingNumberResult {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Результат операции
    * Operation result
    */
-  result?: 'success' | 'error';
-  
-  /** 
+  result?: "success" | "error";
+
+  /**
    * Трек-номер
    * Tracking number
    */
   tracking_number?: string;
-  
-  /** 
+
+  /**
    * Сообщение об ошибке
    * Error message
    */
   error?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -221,11 +221,11 @@ export interface DeliveryRfbsTrackingNumberResult {
  * Response for tracking numbers addition
  */
 export interface DeliveryRfbsTrackingNumberSetResponse {
-  /** 
+  /**
    * Результаты добавления трек-номеров
    * Tracking numbers addition results
    */
   results?: DeliveryRfbsTrackingNumberResult[];
-  
+
   readonly [key: string]: unknown;
 }

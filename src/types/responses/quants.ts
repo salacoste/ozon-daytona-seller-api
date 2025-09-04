@@ -3,15 +3,8 @@
  * Generated from OZON API documentation
  */
 
-import type { BaseResponse } from '../../core/types.js';
-import type { 
-  QuantCode, 
-  BasicProductInfo, 
-  ProductStatus, 
-  ProductVisibilityState, 
-  DateString, 
-  CursorPaginationResponse 
-} from '../common/base.js';
+import type { BaseResponse } from "../../core/types.js";
+import type { QuantCode, BasicProductInfo, ProductStatus, ProductVisibilityState, DateString, CursorPaginationResponse } from "../common/base.js";
 
 /**
  * Элемент информации об эконом-товаре

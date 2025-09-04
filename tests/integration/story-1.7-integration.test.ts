@@ -3,36 +3,36 @@
  * Verify all new API categories are properly integrated and accessible
  */
 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { OzonSellerApiClient } from '../../src/core/client.js';
-import { createApiKey, createClientId } from '../../src/core/types.js';
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { OzonSellerApiClient } from "../../src/core/client.js";
+import { createApiKey, createClientId } from "../../src/core/types.js";
 
 // Mock fetch globally
 global.fetch = vi.fn();
 
-describe('Story 1.7: Marketing, Reporting & Specialized Operations Integration', () => {
+describe("Story 1.7: Marketing, Reporting & Specialized Operations Integration", () => {
   let client: OzonSellerApiClient;
 
   beforeEach(() => {
     vi.clearAllMocks();
-    
+
     // Mock successful response
     vi.mocked(global.fetch).mockResolvedValue({
       ok: true,
       status: 200,
-      headers: new Headers({ 'content-type': 'application/json' }),
-      text: async () => JSON.stringify({ result: 'success' })
+      headers: new Headers({ "content-type": "application/json" }),
+      text: async () => JSON.stringify({ result: "success" }),
     } as Response);
 
     client = new OzonSellerApiClient({
-      apiKey: createApiKey('test-api-key-1234567890123456789012345678901234567890'),
-      clientId: createClientId('123456'),
-      baseUrl: 'https://api-seller.ozon.ru'
+      apiKey: createApiKey("test-api-key-1234567890123456789012345678901234567890"),
+      clientId: createClientId("123456"),
+      baseUrl: "https://api-seller.ozon.ru",
     });
   });
 
-  describe('Client Integration - All APIs Available', () => {
-    it('should have all Story 1.7 API categories available', () => {
+  describe("Client Integration - All APIs Available", () => {
+    it("should have all Story 1.7 API categories available", () => {
       // High-Value Categories (26 endpoints)
       expect(client.report).toBeDefined();
       expect(client.premium).toBeDefined();
@@ -54,106 +54,94 @@ describe('Story 1.7: Marketing, Reporting & Specialized Operations Integration',
       expect(client.sellerRating).toBeDefined();
     });
 
-    it('should have correct API class types', () => {
-      expect(client.report.constructor.name).toBe('ReportApi');
-      expect(client.premium.constructor.name).toBe('PremiumApi');
-      expect(client.pricesStocks.constructor.name).toBe('PricesStocksApi');
-      expect(client.betaMethod.constructor.name).toBe('BetaMethodApi');
-      expect(client.promos.constructor.name).toBe('PromosApi');
-      expect(client.pass.constructor.name).toBe('PassApi');
-      expect(client.cancellation.constructor.name).toBe('CancellationApi');
-      expect(client.category.constructor.name).toBe('CategoryApi');
-      expect(client.digital.constructor.name).toBe('DigitalApi');
-      expect(client.barcode.constructor.name).toBe('BarcodeApi');
-      expect(client.polygon.constructor.name).toBe('PolygonApi');
-      expect(client.sellerRating.constructor.name).toBe('SellerRatingApi');
+    it("should have correct API class types", () => {
+      expect(client.report.constructor.name).toBe("ReportApi");
+      expect(client.premium.constructor.name).toBe("PremiumApi");
+      expect(client.pricesStocks.constructor.name).toBe("PricesStocksApi");
+      expect(client.betaMethod.constructor.name).toBe("BetaMethodApi");
+      expect(client.promos.constructor.name).toBe("PromosApi");
+      expect(client.pass.constructor.name).toBe("PassApi");
+      expect(client.cancellation.constructor.name).toBe("CancellationApi");
+      expect(client.category.constructor.name).toBe("CategoryApi");
+      expect(client.digital.constructor.name).toBe("DigitalApi");
+      expect(client.barcode.constructor.name).toBe("BarcodeApi");
+      expect(client.polygon.constructor.name).toBe("PolygonApi");
+      expect(client.sellerRating.constructor.name).toBe("SellerRatingApi");
     });
   });
 
-  describe('High-Value Categories Integration (26 endpoints)', () => {
-    it('should have ReportAPI with correct method count', async () => {
-      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.report))
-        .filter(name => name !== 'constructor').length;
+  describe("High-Value Categories Integration (26 endpoints)", () => {
+    it("should have ReportAPI with correct method count", async () => {
+      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.report)).filter((name) => name !== "constructor").length;
       expect(methodCount).toBe(8);
-      expect(typeof client.report.getReportInfo).toBe('function');
+      expect(typeof client.report.getReportInfo).toBe("function");
     });
 
-    it('should have PremiumAPI with correct method count', async () => {
-      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.premium))
-        .filter(name => name !== 'constructor').length;
+    it("should have PremiumAPI with correct method count", async () => {
+      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.premium)).filter((name) => name !== "constructor").length;
       expect(methodCount).toBe(8);
     });
 
-    it('should have Prices&StocksAPI with correct method count', async () => {
-      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.pricesStocks))
-        .filter(name => name !== 'constructor').length;
+    it("should have Prices&StocksAPI with correct method count", async () => {
+      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.pricesStocks)).filter((name) => name !== "constructor").length;
       expect(methodCount).toBe(9);
     });
   });
 
-  describe('Marketing & Promotional Categories Integration (16 endpoints)', () => {
-    it('should have PromosAPI with correct method count', async () => {
-      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.promos))
-        .filter(name => name !== 'constructor').length;
+  describe("Marketing & Promotional Categories Integration (16 endpoints)", () => {
+    it("should have PromosAPI with correct method count", async () => {
+      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.promos)).filter((name) => name !== "constructor").length;
       expect(methodCount).toBe(8);
-      expect(typeof client.promos.getActions).toBe('function');
+      expect(typeof client.promos.getActions).toBe("function");
     });
 
-    it('should have BetaMethodAPI with correct method count', async () => {
-      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.betaMethod))
-        .filter(name => name !== 'constructor').length;
+    it("should have BetaMethodAPI with correct method count", async () => {
+      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.betaMethod)).filter((name) => name !== "constructor").length;
       expect(methodCount).toBe(9);
     });
   });
 
-  describe('Operational Categories Integration (18 endpoints)', () => {
-    it('should have PassAPI with correct method count', async () => {
-      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.pass))
-        .filter(name => name !== 'constructor').length;
+  describe("Operational Categories Integration (18 endpoints)", () => {
+    it("should have PassAPI with correct method count", async () => {
+      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.pass)).filter((name) => name !== "constructor").length;
       expect(methodCount).toBe(7);
     });
 
-    it('should have CancellationAPI with correct method count', async () => {
-      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.cancellation))
-        .filter(name => name !== 'constructor').length;
+    it("should have CancellationAPI with correct method count", async () => {
+      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.cancellation)).filter((name) => name !== "constructor").length;
       expect(methodCount).toBe(7);
     });
 
-    it('should have CategoryAPI with correct method count', async () => {
-      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.category))
-        .filter(name => name !== 'constructor').length;
+    it("should have CategoryAPI with correct method count", async () => {
+      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.category)).filter((name) => name !== "constructor").length;
       expect(methodCount).toBe(4); // Actual count from runtime
     });
   });
 
-  describe('Specialized Utility Categories Integration (8 endpoints)', () => {
-    it('should have DigitalAPI with correct method count', async () => {
-      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.digital))
-        .filter(name => name !== 'constructor').length;
+  describe("Specialized Utility Categories Integration (8 endpoints)", () => {
+    it("should have DigitalAPI with correct method count", async () => {
+      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.digital)).filter((name) => name !== "constructor").length;
       expect(methodCount).toBe(3); // Actual count from runtime
     });
 
-    it('should have BarcodeAPI with correct method count', async () => {
-      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.barcode))
-        .filter(name => name !== 'constructor').length;
+    it("should have BarcodeAPI with correct method count", async () => {
+      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.barcode)).filter((name) => name !== "constructor").length;
       expect(methodCount).toBe(2); // Actual count from runtime
     });
 
-    it('should have PolygonAPI with correct method count', async () => {
-      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.polygon))
-        .filter(name => name !== 'constructor').length;
+    it("should have PolygonAPI with correct method count", async () => {
+      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.polygon)).filter((name) => name !== "constructor").length;
       expect(methodCount).toBe(2); // Actual count from runtime
     });
 
-    it('should have SellerRatingAPI with correct method count', async () => {
-      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.sellerRating))
-        .filter(name => name !== 'constructor').length;
+    it("should have SellerRatingAPI with correct method count", async () => {
+      const methodCount = Object.getOwnPropertyNames(Object.getPrototypeOf(client.sellerRating)).filter((name) => name !== "constructor").length;
       expect(methodCount).toBe(2);
     });
   });
 
-  describe('Cross-Category Workflow Integration', () => {
-    it('should support cross-category access', async () => {
+  describe("Cross-Category Workflow Integration", () => {
+    it("should support cross-category access", async () => {
       // Verify that all API categories are accessible and functional
       expect(client.report).toBeDefined();
       expect(client.premium).toBeDefined();
@@ -164,8 +152,8 @@ describe('Story 1.7: Marketing, Reporting & Specialized Operations Integration',
     });
   });
 
-  describe('Error Handling Consistency', () => {
-    it('should use shared HttpClient for error handling', async () => {
+  describe("Error Handling Consistency", () => {
+    it("should use shared HttpClient for error handling", async () => {
       // Verify all APIs use the same HttpClient instance for consistent error handling
       expect(client.report).toBeDefined();
       expect(client.premium).toBeDefined();
@@ -182,13 +170,13 @@ describe('Story 1.7: Marketing, Reporting & Specialized Operations Integration',
     });
   });
 
-  describe('Performance and Memory Efficiency', () => {
-    it('should initialize all APIs efficiently', () => {
+  describe("Performance and Memory Efficiency", () => {
+    it("should initialize all APIs efficiently", () => {
       const startTime = performance.now();
-      
+
       const newClient = new OzonSellerApiClient({
-        apiKey: createApiKey('test-api-key-1234567890123456789012345678901234567890'),
-        clientId: createClientId('123456')
+        apiKey: createApiKey("test-api-key-1234567890123456789012345678901234567890"),
+        clientId: createClientId("123456"),
       });
 
       const endTime = performance.now();
@@ -196,7 +184,7 @@ describe('Story 1.7: Marketing, Reporting & Specialized Operations Integration',
 
       // Should initialize all APIs in under 20ms
       expect(initTime).toBeLessThan(20);
-      
+
       // Verify all Story 1.7 APIs are initialized
       expect(newClient.report).toBeDefined();
       expect(newClient.premium).toBeDefined();
@@ -213,58 +201,46 @@ describe('Story 1.7: Marketing, Reporting & Specialized Operations Integration',
     });
   });
 
-  describe('Story 1.7 Complete Coverage Verification', () => {
-    it('should have all 68 endpoints accessible', () => {
+  describe("Story 1.7 Complete Coverage Verification", () => {
+    it("should have all 68 endpoints accessible", () => {
       let totalEndpoints = 0;
-      
+
       // Count all methods across Story 1.7 APIs
       // ReportAPI: 8 endpoints
-      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.report))
-        .filter(name => name !== 'constructor').length;
-      
+      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.report)).filter((name) => name !== "constructor").length;
+
       // PremiumAPI: 8 endpoints
-      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.premium))
-        .filter(name => name !== 'constructor').length;
-        
+      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.premium)).filter((name) => name !== "constructor").length;
+
       // Prices&StocksAPI: 9 endpoints
-      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.pricesStocks))
-        .filter(name => name !== 'constructor').length;
-        
+      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.pricesStocks)).filter((name) => name !== "constructor").length;
+
       // BetaMethodAPI: 9 endpoints
-      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.betaMethod))
-        .filter(name => name !== 'constructor').length;
-        
+      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.betaMethod)).filter((name) => name !== "constructor").length;
+
       // PromosAPI: 7 endpoints
-      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.promos))
-        .filter(name => name !== 'constructor').length;
-        
+      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.promos)).filter((name) => name !== "constructor").length;
+
       // PassAPI: 7 endpoints
-      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.pass))
-        .filter(name => name !== 'constructor').length;
-        
+      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.pass)).filter((name) => name !== "constructor").length;
+
       // CancellationAPI: 7 endpoints
-      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.cancellation))
-        .filter(name => name !== 'constructor').length;
-        
+      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.cancellation)).filter((name) => name !== "constructor").length;
+
       // CategoryAPI: 4 endpoints
-      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.category))
-        .filter(name => name !== 'constructor').length;
-        
+      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.category)).filter((name) => name !== "constructor").length;
+
       // DigitalAPI: 3 endpoints
-      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.digital))
-        .filter(name => name !== 'constructor').length;
-        
+      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.digital)).filter((name) => name !== "constructor").length;
+
       // BarcodeAPI: 2 endpoints
-      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.barcode))
-        .filter(name => name !== 'constructor').length;
-        
+      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.barcode)).filter((name) => name !== "constructor").length;
+
       // PolygonAPI: 2 endpoints
-      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.polygon))
-        .filter(name => name !== 'constructor').length;
-        
+      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.polygon)).filter((name) => name !== "constructor").length;
+
       // SellerRatingAPI: 2 endpoints
-      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.sellerRating))
-        .filter(name => name !== 'constructor').length;
+      totalEndpoints += Object.getOwnPropertyNames(Object.getPrototypeOf(client.sellerRating)).filter((name) => name !== "constructor").length;
 
       // Should have all implemented endpoints (actual runtime count)
       expect(totalEndpoints).toBe(69);

@@ -3,8 +3,8 @@
  * Generated from OZON API documentation
  */
 
-import type { BaseRequest } from '../../core/types.js';
-import type { QuantCode, ProductVisibilityState, CursorPaginationRequest } from '../common/base.js';
+import type { BaseRequest } from "../../core/types.js";
+import type { QuantCode, ProductVisibilityState, CursorPaginationRequest } from "../common/base.js";
 
 /**
  * Запрос информации об эконом-товаре

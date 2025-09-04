@@ -9,11 +9,11 @@
  * Create delivery polygon response
  */
 export interface PolygonCreateResponse {
-  /** 
+  /**
    * Идентификатор созданного полигона
    * Created polygon identifier
    */
   polygon_id?: number;
-  
+
   readonly [key: string]: unknown;
 }

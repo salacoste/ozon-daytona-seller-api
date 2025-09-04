@@ -9,18 +9,18 @@
  * Response for cargo labels generation
  */
 export interface FboSupplyRequestCargoesLabelCreateResponse {
-  /** 
+  /**
    * Идентификатор задачи генерации этикеток
    * Label generation task ID
    */
   task_id?: string;
-  
-  /** 
+
+  /**
    * Статус задачи
    * Task status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
+  status?: "pending" | "processing" | "completed" | "error";
+
   readonly [key: string]: unknown;
 }
 
@@ -29,30 +29,30 @@ export interface FboSupplyRequestCargoesLabelCreateResponse {
  * Response for label status
  */
 export interface FboSupplyRequestCargoesLabelGetResponse {
-  /** 
+  /**
    * Статус генерации этикеток
    * Label generation status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
-  /** 
+  status?: "pending" | "processing" | "completed" | "error";
+
+  /**
    * Идентификатор файла с этикетками
    * Label file ID
    */
   file_guid?: string;
-  
-  /** 
+
+  /**
    * Ссылка на файл с этикетками
    * Label file URL
    */
   file_url?: string;
-  
-  /** 
+
+  /**
    * Сообщение об ошибке (если есть)
    * Error message (if any)
    */
   error_message?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -61,25 +61,25 @@ export interface FboSupplyRequestCargoesLabelGetResponse {
  * Cargo information
  */
 export interface FboSupplyRequestCargo {
-  /** 
+  /**
    * Идентификатор грузоместа
    * Cargo ID
    */
   cargo_id?: number;
-  
-  /** 
+
+  /**
    * Номер грузоместа
    * Cargo number
    */
   cargo_number?: string;
-  
-  /** 
+
+  /**
    * Вес (кг)
    * Weight (kg)
    */
   weight?: number;
-  
-  /** 
+
+  /**
    * Габариты
    * Dimensions
    */
@@ -91,8 +91,8 @@ export interface FboSupplyRequestCargo {
     /** Высота (см) */
     height?: number;
   };
-  
-  /** 
+
+  /**
    * Товары в грузоместе
    * Items in cargo
    */
@@ -104,13 +104,13 @@ export interface FboSupplyRequestCargo {
     /** Название товара */
     name?: string;
   }>;
-  
-  /** 
+
+  /**
    * Статус грузоместа
    * Cargo status
    */
   status?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -119,18 +119,18 @@ export interface FboSupplyRequestCargo {
  * Response for setting cargoes
  */
 export interface FboSupplyRequestCargoesCreateResponse {
-  /** 
+  /**
    * Идентификатор задачи установки грузомест
    * Cargoes creation task ID
    */
   task_id?: string;
-  
-  /** 
+
+  /**
    * Статус задачи
    * Task status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
+  status?: "pending" | "processing" | "completed" | "error";
+
   readonly [key: string]: unknown;
 }
 
@@ -139,19 +139,19 @@ export interface FboSupplyRequestCargoesCreateResponse {
  * Response for cargoes creation info
  */
 export interface FboSupplyRequestCargoesCreateInfoResponse {
-  /** 
+  /**
    * Статус установки грузомест
    * Cargoes creation status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
-  /** 
+  status?: "pending" | "processing" | "completed" | "error";
+
+  /**
    * Созданные грузоместа
    * Created cargoes
    */
   cargoes?: FboSupplyRequestCargo[];
-  
-  /** 
+
+  /**
    * Ошибки при создании
    * Creation errors
    */
@@ -161,7 +161,7 @@ export interface FboSupplyRequestCargoesCreateInfoResponse {
     /** Описание ошибки */
     error_message?: string;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -170,18 +170,18 @@ export interface FboSupplyRequestCargoesCreateInfoResponse {
  * Response for cargo deletion
  */
 export interface FboSupplyRequestCargoesDeleteResponse {
-  /** 
+  /**
    * Идентификатор задачи удаления
    * Deletion task ID
    */
   task_id?: string;
-  
-  /** 
+
+  /**
    * Статус задачи
    * Task status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
+  status?: "pending" | "processing" | "completed" | "error";
+
   readonly [key: string]: unknown;
 }
 
@@ -190,13 +190,13 @@ export interface FboSupplyRequestCargoesDeleteResponse {
  * Response for cargo deletion status
  */
 export interface FboSupplyRequestCargoesDeleteStatusResponse {
-  /** 
+  /**
    * Статус удаления
    * Deletion status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
-  /** 
+  status?: "pending" | "processing" | "completed" | "error";
+
+  /**
    * Результаты удаления
    * Deletion results
    */
@@ -208,7 +208,7 @@ export interface FboSupplyRequestCargoesDeleteStatusResponse {
     /** Ошибка (если есть) */
     error_message?: string;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -217,24 +217,24 @@ export interface FboSupplyRequestCargoesDeleteStatusResponse {
  * Cargo rule
  */
 export interface FboSupplyRequestCargoRule {
-  /** 
+  /**
    * Тип правила
    * Rule type
    */
   type?: string;
-  
-  /** 
+
+  /**
    * Описание правила
    * Rule description
    */
   description?: string;
-  
-  /** 
+
+  /**
    * Обязательность
    * Is required
    */
   required?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -243,12 +243,12 @@ export interface FboSupplyRequestCargoRule {
  * Response for cargo rules checklist
  */
 export interface FboSupplyRequestCargoesRulesGetResponse {
-  /** 
+  /**
    * Список правил
    * List of rules
    */
   rules?: FboSupplyRequestCargoRule[];
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -257,42 +257,42 @@ export interface FboSupplyRequestCargoesRulesGetResponse {
  * Warehouse information
  */
 export interface FboSupplyRequestWarehouse {
-  /** 
+  /**
    * Идентификатор склада
    * Warehouse ID
    */
   warehouse_id?: number;
-  
-  /** 
+
+  /**
    * Название склада
    * Warehouse name
    */
   name?: string;
-  
-  /** 
+
+  /**
    * Адрес склада
    * Warehouse address
    */
   address?: string;
-  
-  /** 
+
+  /**
    * Тип склада
    * Warehouse type
    */
-  type?: 'DIRECT' | 'CROSSDOCK';
-  
-  /** 
+  type?: "DIRECT" | "CROSSDOCK";
+
+  /**
    * Регион
    * Region
    */
   region?: string;
-  
-  /** 
+
+  /**
    * Доступность
    * Availability
    */
   is_available?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -301,24 +301,24 @@ export interface FboSupplyRequestWarehouse {
  * Cluster information
  */
 export interface FboSupplyRequestCluster {
-  /** 
+  /**
    * Идентификатор кластера
    * Cluster ID
    */
   cluster_id?: number;
-  
-  /** 
+
+  /**
    * Название кластера
    * Cluster name
    */
   name?: string;
-  
-  /** 
+
+  /**
    * Склады в кластере
    * Warehouses in cluster
    */
   warehouses?: FboSupplyRequestWarehouse[];
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -327,12 +327,12 @@ export interface FboSupplyRequestCluster {
  * Response for cluster and warehouse information
  */
 export interface FboSupplyRequestClusterListResponse {
-  /** 
+  /**
    * Список кластеров
    * List of clusters
    */
   clusters?: FboSupplyRequestCluster[];
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -341,25 +341,25 @@ export interface FboSupplyRequestClusterListResponse {
  * Draft information
  */
 export interface FboSupplyRequestDraft {
-  /** 
+  /**
    * Идентификатор черновика
    * Draft ID
    */
   draft_id?: string;
-  
-  /** 
+
+  /**
    * Тип поставки
    * Supply type
    */
-  supply_type?: 'DIRECT' | 'CROSSDOCK';
-  
-  /** 
+  supply_type?: "DIRECT" | "CROSSDOCK";
+
+  /**
    * Склад назначения
    * Destination warehouse
    */
   warehouse?: FboSupplyRequestWarehouse;
-  
-  /** 
+
+  /**
    * Товары
    * Items
    */
@@ -371,19 +371,19 @@ export interface FboSupplyRequestDraft {
     /** Название товара */
     name?: string;
   }>;
-  
-  /** 
+
+  /**
    * Статус черновика
    * Draft status
    */
   status?: string;
-  
-  /** 
+
+  /**
    * Дата создания
    * Creation date
    */
   created_at?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -392,12 +392,12 @@ export interface FboSupplyRequestDraft {
  * Response for supply draft creation
  */
 export interface FboSupplyRequestDraftCreateResponse {
-  /** 
+  /**
    * Информация о созданном черновике
    * Created draft information
    */
   draft?: FboSupplyRequestDraft;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -406,12 +406,12 @@ export interface FboSupplyRequestDraftCreateResponse {
  * Response for draft information
  */
 export interface FboSupplyRequestDraftCreateInfoResponse {
-  /** 
+  /**
    * Информация о черновике
    * Draft information
    */
   draft?: FboSupplyRequestDraft;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -420,18 +420,18 @@ export interface FboSupplyRequestDraftCreateInfoResponse {
  * Response for supply order creation from draft
  */
 export interface FboSupplyRequestDraftSupplyCreateResponse {
-  /** 
+  /**
    * Идентификатор задачи создания
    * Creation task ID
    */
   task_id?: string;
-  
-  /** 
+
+  /**
    * Статус задачи
    * Task status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
+  status?: "pending" | "processing" | "completed" | "error";
+
   readonly [key: string]: unknown;
 }
 
@@ -440,24 +440,24 @@ export interface FboSupplyRequestDraftSupplyCreateResponse {
  * Response for supply order creation status
  */
 export interface FboSupplyRequestDraftSupplyCreateStatusResponse {
-  /** 
+  /**
    * Статус создания
    * Creation status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
-  /** 
+  status?: "pending" | "processing" | "completed" | "error";
+
+  /**
    * Идентификатор созданной заявки на поставку
    * Created supply order ID
    */
   supply_order_id?: number;
-  
-  /** 
+
+  /**
    * Сообщение об ошибке (если есть)
    * Error message (if any)
    */
   error_message?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -466,36 +466,36 @@ export interface FboSupplyRequestDraftSupplyCreateStatusResponse {
  * Timeslot information
  */
 export interface FboSupplyRequestTimeslot {
-  /** 
+  /**
    * Идентификатор таймслота
    * Timeslot ID
    */
   timeslot_id?: string;
-  
-  /** 
+
+  /**
    * Дата и время начала
    * Start date and time
    */
   start_time?: string;
-  
-  /** 
+
+  /**
    * Дата и время окончания
    * End date and time
    */
   end_time?: string;
-  
-  /** 
+
+  /**
    * Доступность
    * Availability
    */
   is_available?: boolean;
-  
-  /** 
+
+  /**
    * Максимальное количество палет
    * Maximum pallets count
    */
   max_pallets?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -504,12 +504,12 @@ export interface FboSupplyRequestTimeslot {
  * Response for available timeslots
  */
 export interface FboSupplyRequestDraftTimeslotInfoResponse {
-  /** 
+  /**
    * Список доступных таймслотов
    * List of available timeslots
    */
   timeslots?: FboSupplyRequestTimeslot[];
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -518,18 +518,18 @@ export interface FboSupplyRequestDraftTimeslotInfoResponse {
  * Response for supply order cancellation
  */
 export interface FboSupplyRequestSupplyOrderCancelResponse {
-  /** 
+  /**
    * Идентификатор задачи отмены
    * Cancellation task ID
    */
   task_id?: string;
-  
-  /** 
+
+  /**
    * Статус задачи
    * Task status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
+  status?: "pending" | "processing" | "completed" | "error";
+
   readonly [key: string]: unknown;
 }
 
@@ -538,24 +538,24 @@ export interface FboSupplyRequestSupplyOrderCancelResponse {
  * Response for supply order cancellation status
  */
 export interface FboSupplyRequestSupplyOrderCancelStatusResponse {
-  /** 
+  /**
    * Статус отмены
    * Cancellation status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
-  /** 
+  status?: "pending" | "processing" | "completed" | "error";
+
+  /**
    * Результат отмены
    * Cancellation result
    */
   success?: boolean;
-  
-  /** 
+
+  /**
    * Сообщение об ошибке (если есть)
    * Error message (if any)
    */
   error_message?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -564,18 +564,18 @@ export interface FboSupplyRequestSupplyOrderCancelStatusResponse {
  * Response for content update
  */
 export interface FboSupplyRequestSupplyOrderContentUpdateResponse {
-  /** 
+  /**
    * Идентификатор задачи редактирования
    * Update task ID
    */
   task_id?: string;
-  
-  /** 
+
+  /**
    * Статус задачи
    * Task status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
+  status?: "pending" | "processing" | "completed" | "error";
+
   readonly [key: string]: unknown;
 }
 
@@ -584,13 +584,13 @@ export interface FboSupplyRequestSupplyOrderContentUpdateResponse {
  * Response for content update status
  */
 export interface FboSupplyRequestSupplyOrderContentUpdateStatusResponse {
-  /** 
+  /**
    * Статус редактирования
    * Update status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
-  /** 
+  status?: "pending" | "processing" | "completed" | "error";
+
+  /**
    * Результаты редактирования
    * Update results
    */
@@ -598,13 +598,13 @@ export interface FboSupplyRequestSupplyOrderContentUpdateStatusResponse {
     /** SKU товара */
     sku?: string;
     /** Операция */
-    operation?: 'add' | 'update' | 'delete';
+    operation?: "add" | "update" | "delete";
     /** Результат */
     success?: boolean;
     /** Ошибка (если есть) */
     error_message?: string;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -613,11 +613,11 @@ export interface FboSupplyRequestSupplyOrderContentUpdateStatusResponse {
  * Response for FBO warehouse list
  */
 export interface FboSupplyRequestWarehouseFboListResponse {
-  /** 
+  /**
    * Список складов
    * List of warehouses
    */
   warehouses?: FboSupplyRequestWarehouse[];
-  
+
   readonly [key: string]: unknown;
 }

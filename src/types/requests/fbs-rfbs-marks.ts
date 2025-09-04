@@ -9,13 +9,13 @@
  * Request for updating exemplar data
  */
 export interface FbsRfbsMarksProductExemplarUpdateRequest {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Данные экземпляров для обновления
    * Exemplar data for update
    */
@@ -32,7 +32,7 @@ export interface FbsRfbsMarksProductExemplarUpdateRequest {
       gtd?: string;
     }>;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -41,13 +41,13 @@ export interface FbsRfbsMarksProductExemplarUpdateRequest {
  * Request for checking and saving exemplar data (v4)
  */
 export interface FbsRfbsMarksProductExemplarSetV4Request {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Товары с экземплярами
    * Products with exemplars
    */
@@ -64,7 +64,7 @@ export interface FbsRfbsMarksProductExemplarSetV4Request {
       is_gtd_absent?: boolean;
     }>;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -73,12 +73,12 @@ export interface FbsRfbsMarksProductExemplarSetV4Request {
  * Request for exemplar addition status (v4)
  */
 export interface FbsRfbsMarksProductExemplarStatusV4Request {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -87,13 +87,13 @@ export interface FbsRfbsMarksProductExemplarStatusV4Request {
  * Request for marking codes validation (v4)
  */
 export interface FbsRfbsMarksProductExemplarValidateV4Request {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Товары с кодами для валидации
    * Products with codes for validation
    */
@@ -110,7 +110,7 @@ export interface FbsRfbsMarksProductExemplarValidateV4Request {
       is_gtd_absent?: boolean;
     }>;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -119,13 +119,13 @@ export interface FbsRfbsMarksProductExemplarValidateV4Request {
  * Request for order assembly (v4)
  */
 export interface FbsRfbsMarksPostingShipV4Request {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Упаковки с товарами
    * Packages with products
    */
@@ -138,7 +138,7 @@ export interface FbsRfbsMarksPostingShipV4Request {
       quantity?: number;
     }>;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -147,13 +147,13 @@ export interface FbsRfbsMarksPostingShipV4Request {
  * Request for partial posting assembly (v4)
  */
 export interface FbsRfbsMarksPostingShipPackageV4Request {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Товары для частичной сборки
    * Products for partial assembly
    */
@@ -163,7 +163,7 @@ export interface FbsRfbsMarksPostingShipPackageV4Request {
     /** Количество */
     quantity?: number;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -174,13 +174,13 @@ export interface FbsRfbsMarksPostingShipPackageV4Request {
  * Request for exemplar information (v5)
  */
 export interface FbsRfbsMarksProductExemplarCreateOrGetV5Request {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Товары для получения экземпляров
    * Products for exemplar retrieval
    */
@@ -190,7 +190,7 @@ export interface FbsRfbsMarksProductExemplarCreateOrGetV5Request {
     /** Количество экземпляров */
     quantity?: number;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -199,13 +199,13 @@ export interface FbsRfbsMarksProductExemplarCreateOrGetV5Request {
  * Request for checking and saving exemplar data (v5)
  */
 export interface FbsRfbsMarksProductExemplarSetV5Request {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Товары с экземплярами
    * Products with exemplars
    */
@@ -231,7 +231,7 @@ export interface FbsRfbsMarksProductExemplarSetV5Request {
       };
     }>;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -240,12 +240,12 @@ export interface FbsRfbsMarksProductExemplarSetV5Request {
  * Request for exemplar addition status (v5)
  */
 export interface FbsRfbsMarksProductExemplarStatusV5Request {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -254,13 +254,13 @@ export interface FbsRfbsMarksProductExemplarStatusV5Request {
  * Request for marking codes validation (v5)
  */
 export interface FbsRfbsMarksProductExemplarValidateV5Request {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Товары с кодами для валидации
    * Products with codes for validation
    */
@@ -277,7 +277,7 @@ export interface FbsRfbsMarksProductExemplarValidateV5Request {
       is_gtd_absent?: boolean;
     }>;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -288,13 +288,13 @@ export interface FbsRfbsMarksProductExemplarValidateV5Request {
  * Request for created exemplar data (v6)
  */
 export interface FbsRfbsMarksProductExemplarCreateOrGetV6Request {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Товары для получения экземпляров
    * Products for exemplar retrieval
    */
@@ -304,7 +304,7 @@ export interface FbsRfbsMarksProductExemplarCreateOrGetV6Request {
     /** Количество экземпляров */
     quantity?: number;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -313,13 +313,13 @@ export interface FbsRfbsMarksProductExemplarCreateOrGetV6Request {
  * Request for checking and saving exemplar data (v6)
  */
 export interface FbsRfbsMarksProductExemplarSetV6Request {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Товары с экземплярами
    * Products with exemplars
    */
@@ -347,7 +347,7 @@ export interface FbsRfbsMarksProductExemplarSetV6Request {
       };
     }>;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -356,12 +356,12 @@ export interface FbsRfbsMarksProductExemplarSetV6Request {
  * Request for marking codes upload status
  */
 export interface FbsRfbsMarksPostingCodesUploadStatusRequest {
-  /** 
+  /**
    * Идентификатор задачи загрузки
    * Upload task ID
    */
   task_id?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -370,12 +370,12 @@ export interface FbsRfbsMarksPostingCodesUploadStatusRequest {
  * Request for posting marking codes validation
  */
 export interface FbsRfbsMarksPostingCodesValidateRequest {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -384,12 +384,12 @@ export interface FbsRfbsMarksPostingCodesValidateRequest {
  * Request for marking codes validation status
  */
 export interface FbsRfbsMarksPostingCodesValidateStatusRequest {
-  /** 
+  /**
    * Идентификатор задачи проверки
    * Validation task ID
    */
   task_id?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -398,12 +398,12 @@ export interface FbsRfbsMarksPostingCodesValidateStatusRequest {
  * Request for posting marking codes information
  */
 export interface FbsRfbsMarksPostingCodesInfoRequest {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -412,35 +412,35 @@ export interface FbsRfbsMarksPostingCodesInfoRequest {
  * Request for postings with mandatory marking
  */
 export interface FbsRfbsMarksPostingListRequest {
-  /** 
+  /**
    * Фильтр по статусу
    * Status filter
    */
-  status?: 'awaiting_codes' | 'codes_uploaded' | 'validated' | 'error';
-  
-  /** 
+  status?: "awaiting_codes" | "codes_uploaded" | "validated" | "error";
+
+  /**
    * Дата создания от
    * Creation date from
    */
   date_from?: string;
-  
-  /** 
+
+  /**
    * Дата создания до
    * Creation date to
    */
   date_to?: string;
-  
-  /** 
+
+  /**
    * Лимит записей
    * Record limit
    */
   limit?: number;
-  
-  /** 
+
+  /**
    * Смещение для пагинации
    * Pagination offset
    */
   offset?: number;
-  
+
   readonly [key: string]: unknown;
 }

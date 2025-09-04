@@ -11,12 +11,12 @@
 export interface ReviewChangeStatusRequest {
   /** Массив с идентификаторами отзывов от 1 до 100 */
   review_ids: string[];
-  /** 
+  /**
    * Статус отзыва:
    * - `PROCESSED` — обработанный,
    * - `UNPROCESSED` — необработанный.
    */
-  status: 'PROCESSED' | 'UNPROCESSED';
+  status: "PROCESSED" | "UNPROCESSED";
   readonly [key: string]: unknown;
 }
 
@@ -29,7 +29,7 @@ export interface CommentCreateRequest {
   review_id: string;
   /** Текст комментария */
   text: string;
-  /** 
+  /**
    * Обновление статуса у отзыва:
    * - `true` — статус изменится на `Processed`.
    * - `false` — статус не изменится.
@@ -54,7 +54,7 @@ export interface CommentDeleteRequest {
  * Направление сортировки комментариев
  * Comment sort direction
  */
-export type CommentSort = 'ASC' | 'DESC';
+export type CommentSort = "ASC" | "DESC";
 
 /**
  * Запрос списка комментариев к отзыву
@@ -63,13 +63,13 @@ export type CommentSort = 'ASC' | 'DESC';
 export interface CommentListRequest {
   /** Идентификатор отзыва */
   review_id: string;
-  /** 
+  /**
    * Ограничение значений в ответе.
    * Минимум — 20. Максимум — 100.
    */
   limit: number;
-  /** 
-   * Количество элементов, которое будет пропущено с начала списка в ответе. 
+  /**
+   * Количество элементов, которое будет пропущено с начала списка в ответе.
    * Например, если `offset = 10`, то ответ начнётся с 11-го найденного элемента.
    */
   offset?: number;
@@ -100,33 +100,33 @@ export interface ReviewInfoRequest {
  * Статус отзыва для фильтрации
  * Review status filter
  */
-export type ReviewStatus = 'ALL' | 'UNPROCESSED' | 'PROCESSED';
+export type ReviewStatus = "ALL" | "UNPROCESSED" | "PROCESSED";
 
 /**
  * Направление сортировки отзывов
  * Review sort direction
  */
-export type ReviewSortDirection = 'ASC' | 'DESC';
+export type ReviewSortDirection = "ASC" | "DESC";
 
 /**
  * Запрос списка отзывов
  * Review list request
  */
 export interface ReviewListRequest {
-  /** 
-   * Количество отзывов в ответе. 
+  /**
+   * Количество отзывов в ответе.
    * Минимум — 20, максимум — 100.
    */
   limit: number;
   /** Идентификатор последнего отзыва на странице */
   last_id?: string;
-  /** 
+  /**
    * Направление сортировки:
    * - `ASC` — по возрастанию,
    * - `DESC` — по убыванию.
    */
   sort_dir?: ReviewSortDirection;
-  /** 
+  /**
    * Статусы отзывов:
    * - `ALL` — все,
    * - `UNPROCESSED` — необработанные,

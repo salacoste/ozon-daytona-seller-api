@@ -1,26 +1,26 @@
 /**
  * FBO API implementation
  * Fulfillment by OZON operations
- * 
+ *
  * @example
  * ```typescript
  * import { OzonSellerAPI } from 'bmad-ozon-seller-api';
- * 
+ *
  * const api = new OzonSellerAPI({
  *   clientId: 'your-client-id',
  *   apiKey: 'your-api-key'
  * });
- * 
+ *
  * // Get warehouse availability
  * const warehouses = await api.fbo.getWarehouseAvailability();
  * console.log('Available warehouses:', warehouses.warehouses);
- * 
+ *
  * // Get posting information
  * const posting = await api.fbo.getPosting({
  *   posting_number: 'FBO-123456789',
  *   with: { analytics_data: true, financial_data: true }
  * });
- * 
+ *
  * // Get supply orders list
  * const orders = await api.fbo.getSupplyOrdersList({
  *   since: '2024-01-01T00:00:00Z',
@@ -30,8 +30,8 @@
  * ```
  */
 
-import { HttpClient } from '../../core/http.js';
-import type { RequestOptions } from '../../core/types.js';
+import { HttpClient } from "../../core/http.js";
+import type { RequestOptions } from "../../core/types.js";
 
 // Request types
 import {
@@ -48,7 +48,7 @@ import {
   FboPostingListRequest,
   FboSupplyOrderGetRequest,
   FboSupplyOrderListRequest,
-} from '../../types/requests/fbo';
+} from "../../types/requests/fbo";
 
 // Response types
 import {
@@ -65,7 +65,7 @@ import {
   FboPostingListResponse,
   FboSupplyOrderGetResponse,
   FboSupplyOrderListResponse,
-} from '../../types/responses/fbo';
+} from "../../types/responses/fbo";
 
 /**
  * FBO API class
@@ -76,40 +76,29 @@ export class FboApi {
   /**
    * Получить список причин отмены отправлений FBO
    * Get FBO posting cancel reasons list
-   * 
+   *
    * @param request - Cancel reasons request
    * @param options - Request options
    * @returns Promise with cancel reasons list
-   * 
+   *
    * @example
    * ```typescript
    * const reasons = await api.fbo.getCancelReasons();
    * console.log('Available cancel reasons:', reasons.cancel_reasons);
    * ```
    */
-  async getCancelReasons(
-    request: FboCancelReasonListRequest = {},
-    options?: RequestOptions
-  ): Promise<FboCancelReasonListResponse> {
-    return this.httpClient.request<
-      FboCancelReasonListRequest,
-      FboCancelReasonListResponse
-    >(
-      'POST',
-      '/v1/posting/fbo/cancel-reason/list',
-      request,
-      options
-    );
+  async getCancelReasons(request: FboCancelReasonListRequest = {}, options?: RequestOptions): Promise<FboCancelReasonListResponse> {
+    return this.httpClient.request<FboCancelReasonListRequest, FboCancelReasonListResponse>("POST", "/v1/posting/fbo/cancel-reason/list", request, options);
   }
 
   /**
    * Получить информацию о загруженности складов Ozon
    * Get Ozon warehouse availability information
-   * 
+   *
    * @param request - Warehouse availability request
    * @param options - Request options
    * @returns Promise with warehouse availability data
-   * 
+   *
    * @example
    * ```typescript
    * const availability = await api.fbo.getWarehouseAvailability();
@@ -118,29 +107,18 @@ export class FboApi {
    * });
    * ```
    */
-  async getWarehouseAvailability(
-    request: FboWarehouseAvailabilityRequest = {},
-    options?: RequestOptions
-  ): Promise<FboWarehouseAvailabilityResponse> {
-    return this.httpClient.request<
-      FboWarehouseAvailabilityRequest,
-      FboWarehouseAvailabilityResponse
-    >(
-      'GET',
-      '/v1/supplier/available_warehouses',
-      request,
-      options
-    );
+  async getWarehouseAvailability(request: FboWarehouseAvailabilityRequest = {}, options?: RequestOptions): Promise<FboWarehouseAvailabilityResponse> {
+    return this.httpClient.request<FboWarehouseAvailabilityRequest, FboWarehouseAvailabilityResponse>("GET", "/v1/supplier/available_warehouses", request, options);
   }
 
   /**
    * Получить состав поставки или заявки на поставку
    * Get supply order bundle composition
-   * 
+   *
    * @param request - Supply order bundle request
    * @param options - Request options
    * @returns Promise with supply order bundle information
-   * 
+   *
    * @example
    * ```typescript
    * const bundle = await api.fbo.getSupplyOrderBundle({
@@ -150,29 +128,18 @@ export class FboApi {
    * console.log('Total amount:', bundle.total_amount);
    * ```
    */
-  async getSupplyOrderBundle(
-    request: FboSupplyOrderBundleRequest,
-    options?: RequestOptions
-  ): Promise<FboSupplyOrderBundleResponse> {
-    return this.httpClient.request<
-      FboSupplyOrderBundleRequest,
-      FboSupplyOrderBundleResponse
-    >(
-      'POST',
-      '/v1/supply-order/bundle',
-      request,
-      options
-    );
+  async getSupplyOrderBundle(request: FboSupplyOrderBundleRequest, options?: RequestOptions): Promise<FboSupplyOrderBundleResponse> {
+    return this.httpClient.request<FboSupplyOrderBundleRequest, FboSupplyOrderBundleResponse>("POST", "/v1/supply-order/bundle", request, options);
   }
 
   /**
    * Указать данные о водителе и автомобиле
    * Set driver and vehicle data
-   * 
+   *
    * @param request - Driver and vehicle data request
    * @param options - Request options
    * @returns Promise with creation task information
-   * 
+   *
    * @example
    * ```typescript
    * const result = await api.fbo.createSupplyOrderPass({
@@ -191,29 +158,18 @@ export class FboApi {
    * console.log('Task ID:', result.task_id);
    * ```
    */
-  async createSupplyOrderPass(
-    request: FboSupplyOrderPassCreateRequest,
-    options?: RequestOptions
-  ): Promise<FboSupplyOrderPassCreateResponse> {
-    return this.httpClient.request<
-      FboSupplyOrderPassCreateRequest,
-      FboSupplyOrderPassCreateResponse
-    >(
-      'POST',
-      '/v1/supply-order/pass/create',
-      request,
-      options
-    );
+  async createSupplyOrderPass(request: FboSupplyOrderPassCreateRequest, options?: RequestOptions): Promise<FboSupplyOrderPassCreateResponse> {
+    return this.httpClient.request<FboSupplyOrderPassCreateRequest, FboSupplyOrderPassCreateResponse>("POST", "/v1/supply-order/pass/create", request, options);
   }
 
   /**
    * Получить статус ввода данных о водителе и автомобиле
    * Get driver and vehicle data status
-   * 
+   *
    * @param request - Pass status request
    * @param options - Request options
    * @returns Promise with pass data status
-   * 
+   *
    * @example
    * ```typescript
    * const status = await api.fbo.getSupplyOrderPassStatus({
@@ -225,29 +181,18 @@ export class FboApi {
    * }
    * ```
    */
-  async getSupplyOrderPassStatus(
-    request: FboSupplyOrderPassStatusRequest,
-    options?: RequestOptions
-  ): Promise<FboSupplyOrderPassStatusResponse> {
-    return this.httpClient.request<
-      FboSupplyOrderPassStatusRequest,
-      FboSupplyOrderPassStatusResponse
-    >(
-      'POST',
-      '/v1/supply-order/pass/status',
-      request,
-      options
-    );
+  async getSupplyOrderPassStatus(request: FboSupplyOrderPassStatusRequest, options?: RequestOptions): Promise<FboSupplyOrderPassStatusResponse> {
+    return this.httpClient.request<FboSupplyOrderPassStatusRequest, FboSupplyOrderPassStatusResponse>("POST", "/v1/supply-order/pass/status", request, options);
   }
 
   /**
    * Получить количество заявок по статусам
    * Get supply orders count by statuses
-   * 
+   *
    * @param request - Status counter request
    * @param options - Request options
    * @returns Promise with orders count by status
-   * 
+   *
    * @example
    * ```typescript
    * const counters = await api.fbo.getSupplyOrderStatusCounter();
@@ -257,29 +202,18 @@ export class FboApi {
    * console.log('Total orders:', counters.total);
    * ```
    */
-  async getSupplyOrderStatusCounter(
-    request: FboSupplyOrderStatusCounterRequest = {},
-    options?: RequestOptions
-  ): Promise<FboSupplyOrderStatusCounterResponse> {
-    return this.httpClient.request<
-      FboSupplyOrderStatusCounterRequest,
-      FboSupplyOrderStatusCounterResponse
-    >(
-      'POST',
-      '/v1/supply-order/status/counter',
-      request,
-      options
-    );
+  async getSupplyOrderStatusCounter(request: FboSupplyOrderStatusCounterRequest = {}, options?: RequestOptions): Promise<FboSupplyOrderStatusCounterResponse> {
+    return this.httpClient.request<FboSupplyOrderStatusCounterRequest, FboSupplyOrderStatusCounterResponse>("POST", "/v1/supply-order/status/counter", request, options);
   }
 
   /**
    * Получить интервалы поставки
    * Get supply order timeslots
-   * 
+   *
    * @param request - Timeslots request
    * @param options - Request options
    * @returns Promise with available timeslots
-   * 
+   *
    * @example
    * ```typescript
    * const timeslots = await api.fbo.getSupplyOrderTimeslots({
@@ -293,29 +227,18 @@ export class FboApi {
    * });
    * ```
    */
-  async getSupplyOrderTimeslots(
-    request: FboSupplyOrderTimeslotGetRequest,
-    options?: RequestOptions
-  ): Promise<FboSupplyOrderTimeslotGetResponse> {
-    return this.httpClient.request<
-      FboSupplyOrderTimeslotGetRequest,
-      FboSupplyOrderTimeslotGetResponse
-    >(
-      'POST',
-      '/v1/supply-order/timeslot/get',
-      request,
-      options
-    );
+  async getSupplyOrderTimeslots(request: FboSupplyOrderTimeslotGetRequest, options?: RequestOptions): Promise<FboSupplyOrderTimeslotGetResponse> {
+    return this.httpClient.request<FboSupplyOrderTimeslotGetRequest, FboSupplyOrderTimeslotGetResponse>("POST", "/v1/supply-order/timeslot/get", request, options);
   }
 
   /**
    * Получить статус интервала поставки
    * Get supply order timeslot status
-   * 
+   *
    * @param request - Timeslot status request
    * @param options - Request options
    * @returns Promise with timeslot status
-   * 
+   *
    * @example
    * ```typescript
    * const status = await api.fbo.getSupplyOrderTimeslotStatus({
@@ -325,29 +248,18 @@ export class FboApi {
    * console.log('Current occupancy:', status.timeslot?.current_occupancy);
    * ```
    */
-  async getSupplyOrderTimeslotStatus(
-    request: FboSupplyOrderTimeslotStatusRequest,
-    options?: RequestOptions
-  ): Promise<FboSupplyOrderTimeslotStatusResponse> {
-    return this.httpClient.request<
-      FboSupplyOrderTimeslotStatusRequest,
-      FboSupplyOrderTimeslotStatusResponse
-    >(
-      'POST',
-      '/v1/supply-order/timeslot/status',
-      request,
-      options
-    );
+  async getSupplyOrderTimeslotStatus(request: FboSupplyOrderTimeslotStatusRequest, options?: RequestOptions): Promise<FboSupplyOrderTimeslotStatusResponse> {
+    return this.httpClient.request<FboSupplyOrderTimeslotStatusRequest, FboSupplyOrderTimeslotStatusResponse>("POST", "/v1/supply-order/timeslot/status", request, options);
   }
 
   /**
    * Обновить интервал поставки
    * Update supply order timeslot
-   * 
+   *
    * @param request - Timeslot update request
    * @param options - Request options
    * @returns Promise with update task information
-   * 
+   *
    * @example
    * ```typescript
    * const result = await api.fbo.updateSupplyOrderTimeslot({
@@ -357,29 +269,18 @@ export class FboApi {
    * console.log('Update task ID:', result.task_id);
    * ```
    */
-  async updateSupplyOrderTimeslot(
-    request: FboSupplyOrderTimeslotUpdateRequest,
-    options?: RequestOptions
-  ): Promise<FboSupplyOrderTimeslotUpdateResponse> {
-    return this.httpClient.request<
-      FboSupplyOrderTimeslotUpdateRequest,
-      FboSupplyOrderTimeslotUpdateResponse
-    >(
-      'POST',
-      '/v1/supply-order/timeslot/update',
-      request,
-      options
-    );
+  async updateSupplyOrderTimeslot(request: FboSupplyOrderTimeslotUpdateRequest, options?: RequestOptions): Promise<FboSupplyOrderTimeslotUpdateResponse> {
+    return this.httpClient.request<FboSupplyOrderTimeslotUpdateRequest, FboSupplyOrderTimeslotUpdateResponse>("POST", "/v1/supply-order/timeslot/update", request, options);
   }
 
   /**
    * Получить информацию об отправлении FBO
    * Get FBO posting information
-   * 
+   *
    * @param request - FBO posting request
    * @param options - Request options
    * @returns Promise with posting information
-   * 
+   *
    * @example
    * ```typescript
    * const posting = await api.fbo.getPosting({
@@ -395,29 +296,18 @@ export class FboApi {
    * console.log('Payout amount:', posting.posting?.financial_data?.payout_amount);
    * ```
    */
-  async getPosting(
-    request: FboPostingGetRequest,
-    options?: RequestOptions
-  ): Promise<FboPostingGetResponse> {
-    return this.httpClient.request<
-      FboPostingGetRequest,
-      FboPostingGetResponse
-    >(
-      'POST',
-      '/v2/posting/fbo/get',
-      request,
-      options
-    );
+  async getPosting(request: FboPostingGetRequest, options?: RequestOptions): Promise<FboPostingGetResponse> {
+    return this.httpClient.request<FboPostingGetRequest, FboPostingGetResponse>("POST", "/v2/posting/fbo/get", request, options);
   }
 
   /**
    * Получить список отправлений FBO
    * Get FBO postings list
-   * 
+   *
    * @param request - FBO postings list request
    * @param options - Request options
    * @returns Promise with postings list
-   * 
+   *
    * @example
    * ```typescript
    * const postings = await api.fbo.getPostingsList({
@@ -436,29 +326,18 @@ export class FboApi {
    * });
    * ```
    */
-  async getPostingsList(
-    request: FboPostingListRequest,
-    options?: RequestOptions
-  ): Promise<FboPostingListResponse> {
-    return this.httpClient.request<
-      FboPostingListRequest,
-      FboPostingListResponse
-    >(
-      'POST',
-      '/v2/posting/fbo/list',
-      request,
-      options
-    );
+  async getPostingsList(request: FboPostingListRequest, options?: RequestOptions): Promise<FboPostingListResponse> {
+    return this.httpClient.request<FboPostingListRequest, FboPostingListResponse>("POST", "/v2/posting/fbo/list", request, options);
   }
 
   /**
    * Получить информацию о заявке на поставку
    * Get supply order information
-   * 
+   *
    * @param request - Supply order request
    * @param options - Request options
    * @returns Promise with supply order information
-   * 
+   *
    * @example
    * ```typescript
    * const order = await api.fbo.getSupplyOrder({
@@ -469,29 +348,18 @@ export class FboApi {
    * console.log('Total products:', order.supply_order?.total_products);
    * ```
    */
-  async getSupplyOrder(
-    request: FboSupplyOrderGetRequest,
-    options?: RequestOptions
-  ): Promise<FboSupplyOrderGetResponse> {
-    return this.httpClient.request<
-      FboSupplyOrderGetRequest,
-      FboSupplyOrderGetResponse
-    >(
-      'POST',
-      '/v2/supply-order/get',
-      request,
-      options
-    );
+  async getSupplyOrder(request: FboSupplyOrderGetRequest, options?: RequestOptions): Promise<FboSupplyOrderGetResponse> {
+    return this.httpClient.request<FboSupplyOrderGetRequest, FboSupplyOrderGetResponse>("POST", "/v2/supply-order/get", request, options);
   }
 
   /**
    * Получить список заявок на поставку
    * Get supply orders list
-   * 
+   *
    * @param request - Supply orders list request
    * @param options - Request options
    * @returns Promise with supply orders list
-   * 
+   *
    * @example
    * ```typescript
    * const orders = await api.fbo.getSupplyOrdersList({
@@ -509,18 +377,7 @@ export class FboApi {
    * });
    * ```
    */
-  async getSupplyOrdersList(
-    request: FboSupplyOrderListRequest,
-    options?: RequestOptions
-  ): Promise<FboSupplyOrderListResponse> {
-    return this.httpClient.request<
-      FboSupplyOrderListRequest,
-      FboSupplyOrderListResponse
-    >(
-      'POST',
-      '/v2/supply-order/list',
-      request,
-      options
-    );
+  async getSupplyOrdersList(request: FboSupplyOrderListRequest, options?: RequestOptions): Promise<FboSupplyOrderListResponse> {
+    return this.httpClient.request<FboSupplyOrderListRequest, FboSupplyOrderListResponse>("POST", "/v2/supply-order/list", request, options);
   }
 }

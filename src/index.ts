@@ -1,103 +1,62 @@
 /**
  * @spacechemical/ozon-seller-api
- * 
+ *
  * Comprehensive TypeScript SDK for Ozon Seller API with full type safety
  * and category-based organization covering all 33 API categories.
  */
 
 // Core exports
-export { OzonSellerApiClient } from './core/client.js';
-export { HttpClient } from './core/http.js';
-export { AuthManager } from './core/auth.js';
+export { OzonSellerApiClient } from "./core/client.js";
+export { HttpClient } from "./core/http.js";
+export { AuthManager } from "./core/auth.js";
 
 // Types
-export type {
-  OzonConfig,
-  ApiKey,
-  ClientId,
-  RequestId,
-  IdempotencyKey,
-  BaseRequest,
-  BaseResponse,
-  ApiErrorResponse,
-  PaginationParams,
-  PaginatedResponse,
-  RequestOptions,
-  EndpointConfig,
-  HttpMethod,
-  OperationStatus,
-  NonEmptyArray,
-  Optional,
-  RequiredFields,
-} from './core/types.js';
+export type { OzonConfig, ApiKey, ClientId, RequestId, IdempotencyKey, BaseRequest, BaseResponse, ApiErrorResponse, PaginationParams, PaginatedResponse, RequestOptions, EndpointConfig, HttpMethod, OperationStatus, NonEmptyArray, Optional, RequiredFields } from "./core/types.js";
 
-export { 
-  Language,
-  Currency,
-  createApiKey,
-  createClientId,
-  createRequestId,
-  createIdempotencyKey,
-} from './core/types.js';
+export { Language, Currency, createApiKey, createClientId, createRequestId, createIdempotencyKey } from "./core/types.js";
 
 // Error exports
-export {
-  OzonError,
-  ApiError,
-  BadRequestError,
-  AuthenticationError,
-  PermissionError,
-  NotFoundError,
-  ValidationError,
-  RateLimitError,
-  InternalServerError,
-  ConnectionError,
-  TimeoutError,
-  ConfigurationError,
-  SDKError,
-  isRetryableError,
-  getRetryDelay,
-} from './core/errors.js';
+export { OzonError, ApiError, BadRequestError, AuthenticationError, PermissionError, NotFoundError, ValidationError, RateLimitError, InternalServerError, ConnectionError, TimeoutError, ConfigurationError, SDKError, isRetryableError, getRetryDelay } from "./core/errors.js";
 
 // API Category exports
-export { ProductApi } from './categories/product/index.js';
-export { FinanceApi } from './categories/finance/index.js';
-export { AnalyticsApi } from './categories/analytics/index.js';
-export { PricingStrategyApi } from './categories/pricing-strategy/index.js';
-export { ReturnsApi } from './categories/returns/index.js';
-export { ReturnApi } from './categories/return/index.js';
-export { QuantsApi } from './categories/quants/index.js';
-export { ReviewApi } from './categories/review/index.js';
-export { ChatApi } from './categories/chat/index.js';
-export { QuestionsAnswersApi } from './categories/questions-answers/index.js';
-export { CertificationApi } from './categories/certification/index.js';
-export { BrandApi } from './categories/brand/index.js';
-export { FbsApi } from './categories/fbs/index.js';
-export { DeliveryFbsApi } from './categories/delivery-fbs/index.js';
-export { FboSupplyRequestApi } from './categories/fbo-supply-request/index.js';
-export { FbsRfbsMarksApi } from './categories/fbs-rfbs-marks/index.js';
-export { FboApi } from './categories/fbo/index.js';
-export { DeliveryRfbsApi } from './categories/delivery-rfbs/index.js';
-export { RfbsReturnsApi } from './categories/rfbs-returns/index.js';
-export { WarehouseApi } from './categories/warehouse/index.js';
-export { SupplierApi } from './categories/supplier/index.js';
+export { ProductApi } from "./categories/product/index.js";
+export { FinanceApi } from "./categories/finance/index.js";
+export { AnalyticsApi } from "./categories/analytics/index.js";
+export { PricingStrategyApi } from "./categories/pricing-strategy/index.js";
+export { ReturnsApi } from "./categories/returns/index.js";
+export { ReturnApi } from "./categories/return/index.js";
+export { QuantsApi } from "./categories/quants/index.js";
+export { ReviewApi } from "./categories/review/index.js";
+export { ChatApi } from "./categories/chat/index.js";
+export { QuestionsAnswersApi } from "./categories/questions-answers/index.js";
+export { CertificationApi } from "./categories/certification/index.js";
+export { BrandApi } from "./categories/brand/index.js";
+export { FbsApi } from "./categories/fbs/index.js";
+export { DeliveryFbsApi } from "./categories/delivery-fbs/index.js";
+export { FboSupplyRequestApi } from "./categories/fbo-supply-request/index.js";
+export { FbsRfbsMarksApi } from "./categories/fbs-rfbs-marks/index.js";
+export { FboApi } from "./categories/fbo/index.js";
+export { DeliveryRfbsApi } from "./categories/delivery-rfbs/index.js";
+export { RfbsReturnsApi } from "./categories/rfbs-returns/index.js";
+export { WarehouseApi } from "./categories/warehouse/index.js";
+export { SupplierApi } from "./categories/supplier/index.js";
 // Story 1.7 API categories
-export { ReportApi } from './categories/report/index.js';
-export { PremiumApi } from './categories/premium/index.js';
-export { PricesStocksApi } from './categories/prices-stocks/index.js';
-export { BetaMethodApi } from './categories/beta-method/index.js';
-export { PromosApi } from './categories/promos/index.js';
-export { PassApi } from './categories/pass/index.js';
-export { CancellationApi } from './categories/cancellation/index.js';
-export { CategoryApi } from './categories/category/index.js';
-export { DigitalApi } from './categories/digital/index.js';
-export { BarcodeApi } from './categories/barcode/index.js';
-export { PolygonApi } from './categories/polygon/index.js';
-export { SellerRatingApi } from './categories/seller-rating/index.js';
+export { ReportApi } from "./categories/report/index.js";
+export { PremiumApi } from "./categories/premium/index.js";
+export { PricesStocksApi } from "./categories/prices-stocks/index.js";
+export { BetaMethodApi } from "./categories/beta-method/index.js";
+export { PromosApi } from "./categories/promos/index.js";
+export { PassApi } from "./categories/pass/index.js";
+export { CancellationApi } from "./categories/cancellation/index.js";
+export { CategoryApi } from "./categories/category/index.js";
+export { DigitalApi } from "./categories/digital/index.js";
+export { BarcodeApi } from "./categories/barcode/index.js";
+export { PolygonApi } from "./categories/polygon/index.js";
+export { SellerRatingApi } from "./categories/seller-rating/index.js";
 
 // Re-export types for convenience function
-import type { OzonConfig } from './core/types.js';
-import { OzonSellerApiClient } from './core/client.js';
+import type { OzonConfig } from "./core/types.js";
+import { OzonSellerApiClient } from "./core/client.js";
 
 // Convenience function to create SDK instance
 export const createOzonSellerApiClient = (config: OzonConfig): OzonSellerApiClient => {
@@ -110,18 +69,9 @@ export default OzonSellerApiClient;
 // Product API types are exported in the main Product exports section
 
 // Analytics API types
-export type {
-  AnalyticsTurnoverStocksRequest,
-  AnalyticsStockOnWarehouseRequest,
-  AnalyticsWarehouseType,
-} from './types/requests/analytics.js';
+export type { AnalyticsTurnoverStocksRequest, AnalyticsStockOnWarehouseRequest, AnalyticsWarehouseType } from "./types/requests/analytics.js";
 
-export type {
-  AnalyticsTurnoverStocksResponse,
-  AnalyticsStockOnWarehouseResponse,
-  AnalyticsTurnoverStocksResponseItem,
-  AnalyticsStockOnWarehouseResponseResult,
-} from './types/responses/analytics.js';
+export type { AnalyticsTurnoverStocksResponse, AnalyticsStockOnWarehouseResponse, AnalyticsTurnoverStocksResponseItem, AnalyticsStockOnWarehouseResponseResult } from "./types/responses/analytics.js";
 
 // Finance API types
 export type {
@@ -138,7 +88,7 @@ export type {
   TransactionType,
   CompensationReportLanguage,
   CommonLanguage,
-} from './types/requests/finance.js';
+} from "./types/requests/finance.js";
 
 export type {
   CreateReportResponse,
@@ -151,7 +101,7 @@ export type {
   FinanceTransactionTotalsV3Response,
   FinanceTransactionOperation,
   B2BLegalSaleInvoice,
-} from './types/responses/finance.js';
+} from "./types/responses/finance.js";
 
 // Pricing Strategy API types
 export type {
@@ -168,7 +118,7 @@ export type {
   GetStrategyIDsByItemIDsRequest,
   UpdatePricingStrategyRequest,
   PricingStrategyCompetitor,
-} from './types/requests/pricing-strategy.js';
+} from "./types/requests/pricing-strategy.js";
 
 export type {
   GetCompetitorsResponse,
@@ -183,26 +133,15 @@ export type {
   PricingStrategy,
   StrategyItemInfo,
   CompetitorInfo,
-} from './types/responses/pricing-strategy.js';
+} from "./types/responses/pricing-strategy.js";
 
 // Returns API types
-export type {
-  GetReturnsListRequest,
-  GetReturnsListRequestFilter,
-} from './types/requests/returns.js';
+export type { GetReturnsListRequest, GetReturnsListRequestFilter } from "./types/requests/returns.js";
 
-export type {
-  GetReturnsListResponse,
-  GetReturnsListResponseReturnsItem,
-} from './types/responses/returns.js';
+export type { GetReturnsListResponse, GetReturnsListResponseReturnsItem } from "./types/responses/returns.js";
 
 // Return API types
-export type {
-  GiveoutInfoRequest,
-  GiveoutListRequest,
-  ReturnsCompanyFbsInfoRequest,
-  EmptyRequest,
-} from './types/requests/return.js';
+export type { GiveoutInfoRequest, GiveoutListRequest, ReturnsCompanyFbsInfoRequest, EmptyRequest } from "./types/requests/return.js";
 
 export type {
   GiveoutGetBarcodeResponse,
@@ -216,34 +155,15 @@ export type {
   GiveoutListResponseItem,
   ReturnsCompanyFbsInfoResponse,
   ReturnsCompanyFbsInfoResponseItem,
-} from './types/responses/return.js';
+} from "./types/responses/return.js";
 
 // Quants API types
-export type {
-  QuantInfoRequest,
-  QuantListRequest,
-} from './types/requests/quants.js';
+export type { QuantInfoRequest, QuantListRequest } from "./types/requests/quants.js";
 
-export type {
-  QuantInfoResponse,
-  QuantInfoResponseItem,
-  QuantListResponse,
-  QuantListResponseProduct,
-} from './types/responses/quants.js';
+export type { QuantInfoResponse, QuantInfoResponseItem, QuantListResponse, QuantListResponseProduct } from "./types/responses/quants.js";
 
 // Review API types
-export type {
-  ReviewChangeStatusRequest,
-  CommentCreateRequest,
-  CommentDeleteRequest,
-  CommentListRequest,
-  ReviewCountRequest,
-  ReviewInfoRequest,
-  ReviewListRequest,
-  CommentSort,
-  ReviewStatus,
-  ReviewSortDirection,
-} from './types/requests/review.js';
+export type { ReviewChangeStatusRequest, CommentCreateRequest, CommentDeleteRequest, CommentListRequest, ReviewCountRequest, ReviewInfoRequest, ReviewListRequest, CommentSort, ReviewStatus, ReviewSortDirection } from "./types/requests/review.js";
 
 export type {
   ReviewChangeStatusResponse,
@@ -260,47 +180,15 @@ export type {
   ReviewInfo,
   ReviewOrderStatus,
   ReviewProcessingStatus,
-} from './types/responses/review.js';
+} from "./types/responses/review.js";
 
 // Chat API types
-export type {
-  ChatStartRequest,
-  ChatSendMessageRequest,
-  ChatSendFileRequest,
-  ChatReadRequest,
-  ChatHistoryV2Request,
-  ChatHistoryV3Request,
-  ChatListV2Request,
-  ChatListV3Request,
-  ChatDirection,
-} from './types/requests/chat.js';
+export type { ChatStartRequest, ChatSendMessageRequest, ChatSendFileRequest, ChatReadRequest, ChatHistoryV2Request, ChatHistoryV3Request, ChatListV2Request, ChatListV3Request, ChatDirection } from "./types/requests/chat.js";
 
-export type {
-  ChatStartResponse,
-  ChatSendMessageResponse,
-  ChatSendFileResponse,
-  ChatReadResponse,
-  ChatHistoryV2Response,
-  ChatHistoryV3Response,
-  ChatListV2Response,
-  ChatListV3Response,
-  ChatInfoV2,
-  ChatInfoV3,
-  ChatMessageV2,
-  ChatMessageV3,
-} from './types/responses/chat.js';
+export type { ChatStartResponse, ChatSendMessageResponse, ChatSendFileResponse, ChatReadResponse, ChatHistoryV2Response, ChatHistoryV3Response, ChatListV2Response, ChatListV3Response, ChatInfoV2, ChatInfoV3, ChatMessageV2, ChatMessageV3 } from "./types/responses/chat.js";
 
 // Questions & Answers API types
-export type {
-  QuestionAnswerCreateRequest,
-  QuestionAnswerDeleteRequest,
-  QuestionAnswerListRequest,
-  QuestionChangeStatusRequest,
-  QuestionCountRequest,
-  QuestionInfoRequest,
-  QuestionListRequest,
-  QuestionTopSkuRequest,
-} from './types/requests/questions-answers.js';
+export type { QuestionAnswerCreateRequest, QuestionAnswerDeleteRequest, QuestionAnswerListRequest, QuestionChangeStatusRequest, QuestionCountRequest, QuestionInfoRequest, QuestionListRequest, QuestionTopSkuRequest } from "./types/requests/questions-answers.js";
 
 export type {
   QuestionAnswerCreateResponse,
@@ -315,7 +203,7 @@ export type {
   QuestionAnswerInfo,
   QuestionListItem,
   QuestionDetailedInfo,
-} from './types/responses/questions-answers.js';
+} from "./types/responses/questions-answers.js";
 
 // Certification API types
 export type {
@@ -328,7 +216,7 @@ export type {
   CertificateUnbindRequest,
   ProductCertificationListRequest,
   ProductCertificationListV2Request,
-} from './types/requests/certification.js';
+} from "./types/requests/certification.js";
 
 export type {
   CertificateListResponse,
@@ -346,18 +234,12 @@ export type {
   CertificateType,
   ProductCertificationInfo,
   ProductCertificationInfoV2,
-} from './types/responses/certification.js';
+} from "./types/responses/certification.js";
 
 // Brand API types
-export type {
-  BrandCertificationListRequest,
-} from './types/requests/brand.js';
+export type { BrandCertificationListRequest } from "./types/requests/brand.js";
 
-export type {
-  BrandCertificationListResponse,
-  BrandCertificationInfo,
-  BrandCertificationListResult,
-} from './types/responses/brand.js';
+export type { BrandCertificationListResponse, BrandCertificationInfo, BrandCertificationListResult } from "./types/responses/brand.js";
 
 // FBS API types
 export type {
@@ -381,7 +263,7 @@ export type {
   FbsGetEtgbRequest,
   FbsUnpaidLegalProductListRequest,
   FbsPostingFilter,
-} from './types/requests/fbs.js';
+} from "./types/requests/fbs.js";
 
 export type {
   FbsCancelReasonResponse,
@@ -416,7 +298,7 @@ export type {
   FbsProductCountrySetResult,
   FbsEtgbDeclaration,
   FbsUnpaidLegalProduct,
-} from './types/responses/fbs.js';
+} from "./types/responses/fbs.js";
 
 // DeliveryFBS API types
 export type {
@@ -437,7 +319,7 @@ export type {
   DeliveryFbsActListRequest,
   DeliveryFbsDigitalActCheckStatusRequest,
   DeliveryFbsGetDigitalActRequest,
-} from './types/requests/delivery-fbs';
+} from "./types/requests/delivery-fbs";
 
 export type {
   DeliveryFbsCarriageApproveResponse,
@@ -464,7 +346,7 @@ export type {
   DeliveryFbsDocumentStatus,
   DeliveryFbsActPosting,
   DeliveryFbsAct,
-} from './types/responses/delivery-fbs';
+} from "./types/responses/delivery-fbs";
 
 // FBOSupplyRequest API types
 export type {
@@ -486,7 +368,7 @@ export type {
   FboSupplyRequestSupplyOrderContentUpdateRequest,
   FboSupplyRequestSupplyOrderContentUpdateStatusRequest,
   FboSupplyRequestWarehouseFboListRequest,
-} from './types/requests/fbo-supply-request';
+} from "./types/requests/fbo-supply-request";
 
 export type {
   FboSupplyRequestCargoesLabelCreateResponse,
@@ -513,7 +395,7 @@ export type {
   FboSupplyRequestSupplyOrderContentUpdateResponse,
   FboSupplyRequestSupplyOrderContentUpdateStatusResponse,
   FboSupplyRequestWarehouseFboListResponse,
-} from './types/responses/fbo-supply-request';
+} from "./types/responses/fbo-supply-request";
 
 // FBS&rFBSMarks API types
 export type {
@@ -527,7 +409,7 @@ export type {
   FbsRfbsMarksPostingCodesValidateStatusRequest,
   FbsRfbsMarksPostingCodesInfoRequest,
   FbsRfbsMarksPostingListRequest,
-} from './types/requests/fbs-rfbs-marks';
+} from "./types/requests/fbs-rfbs-marks";
 
 export type {
   FbsRfbsMarksProductExemplarSetV4Response,
@@ -540,7 +422,7 @@ export type {
   FbsRfbsMarksPostingCodesInfoResponse,
   FbsRfbsMarksPosting,
   FbsRfbsMarksPostingListResponse,
-} from './types/responses/fbs-rfbs-marks';
+} from "./types/responses/fbs-rfbs-marks";
 
 // FBO API types
 export type {
@@ -557,7 +439,7 @@ export type {
   FboPostingListRequest,
   FboSupplyOrderGetRequest,
   FboSupplyOrderListRequest,
-} from './types/requests/fbo';
+} from "./types/requests/fbo";
 
 export type {
   FboCancelReason,
@@ -581,7 +463,7 @@ export type {
   FboSupplyOrder,
   FboSupplyOrderGetResponse,
   FboSupplyOrderListResponse,
-} from './types/responses/fbo';
+} from "./types/responses/fbo";
 
 // DeliveryrFBS API types
 export type {
@@ -593,7 +475,7 @@ export type {
   DeliveryRfbsPostingLastMileRequest,
   DeliveryRfbsPostingSentBySellerRequest,
   DeliveryRfbsTrackingNumberSetRequest,
-} from './types/requests/delivery-rfbs';
+} from "./types/requests/delivery-rfbs";
 
 export type {
   DeliveryRfbsSetCutoffResponse,
@@ -607,61 +489,25 @@ export type {
   DeliveryRfbsPostingSentBySellerResponse,
   DeliveryRfbsTrackingNumberResult,
   DeliveryRfbsTrackingNumberSetResponse,
-} from './types/responses/delivery-rfbs';
+} from "./types/responses/delivery-rfbs";
 
 // RFBSReturnsAPI types
-export type {
-  RfbsReturnsActionSetRequest,
-  RfbsReturnsCompensateRequest,
-  RfbsReturnsGetRequest,
-  RfbsReturnsListRequest,
-  RfbsReturnsReceiveReturnRequest,
-  RfbsReturnsRejectRequest,
-  RfbsReturnsReturnMoneyRequest,
-  RfbsReturnsVerifyRequest,
-} from './types/requests/rfbs-returns';
+export type { RfbsReturnsActionSetRequest, RfbsReturnsCompensateRequest, RfbsReturnsGetRequest, RfbsReturnsListRequest, RfbsReturnsReceiveReturnRequest, RfbsReturnsRejectRequest, RfbsReturnsReturnMoneyRequest, RfbsReturnsVerifyRequest } from "./types/requests/rfbs-returns";
 
-export type {
-  RfbsReturnsActionSetResponse,
-  RfbsReturnsEmptyResponse,
-  RfbsReturnProduct,
-  RfbsReturn,
-  RfbsReturnsGetResponse,
-  RfbsReturnsListResponse,
-} from './types/responses/rfbs-returns';
+export type { RfbsReturnsActionSetResponse, RfbsReturnsEmptyResponse, RfbsReturnProduct, RfbsReturn, RfbsReturnsGetResponse, RfbsReturnsListResponse } from "./types/responses/rfbs-returns";
 
 // WarehouseAPI types
-export type {
-  WarehouseDeliveryMethodListRequest,
-  WarehouseListRequest,
-} from './types/requests/warehouse';
+export type { WarehouseDeliveryMethodListRequest, WarehouseListRequest } from "./types/requests/warehouse";
 
-export type {
-  WarehouseDeliveryMethod,
-  WarehouseDeliveryMethodListResponse,
-  Warehouse,
-  WarehouseListResponse,
-} from './types/responses/warehouse';
+export type { WarehouseDeliveryMethod, WarehouseDeliveryMethodListResponse, Warehouse, WarehouseListResponse } from "./types/responses/warehouse";
 
 // SupplierAPI types
-export type {
-  SupplierInvoiceDeleteRequest,
-  SupplierInvoiceFileUploadRequest,
-  SupplierInvoiceCreateOrUpdateRequest,
-  SupplierInvoiceGetRequest,
-} from './types/requests/supplier';
+export type { SupplierInvoiceDeleteRequest, SupplierInvoiceFileUploadRequest, SupplierInvoiceCreateOrUpdateRequest, SupplierInvoiceGetRequest } from "./types/requests/supplier";
 
-export type {
-  SupplierInvoiceDeleteResponse,
-  SupplierInvoiceFileUploadResponse,
-  SupplierInvoiceItem,
-  SupplierInvoice,
-  SupplierInvoiceCreateOrUpdateResponse,
-  SupplierInvoiceGetResponse,
-} from './types/responses/supplier';
+export type { SupplierInvoiceDeleteResponse, SupplierInvoiceFileUploadResponse, SupplierInvoiceItem, SupplierInvoice, SupplierInvoiceCreateOrUpdateResponse, SupplierInvoiceGetResponse } from "./types/responses/supplier";
 
 // Utility exports
-export * from './utils/index.js';
+export * from "./utils/index.js";
 
 // Common types
 export type {
@@ -685,14 +531,7 @@ export type {
   PaginationResponse,
   CursorPaginationResponse,
   DateString,
-} from './types/common/base.js';
+} from "./types/common/base.js";
 
 // Helper functions - these are actual functions, not types
-export {
-  createProductId,
-  createOfferId,
-  createCategoryId,
-  createReturnId,
-  createGiveoutId,
-  createQuantCode,
-} from './types/common/base.js';
+export { createProductId, createOfferId, createCategoryId, createReturnId, createGiveoutId, createQuantCode } from "./types/common/base.js";

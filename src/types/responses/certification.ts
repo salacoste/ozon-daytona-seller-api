@@ -4,7 +4,7 @@
  * Ready for manual editing and enhancements
  */
 
-import type { BaseResponse } from '../../core/types.js';
+import type { BaseResponse } from "../../core/types.js";
 
 /**
  * Информация о сертификате

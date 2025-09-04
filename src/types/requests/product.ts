@@ -4,7 +4,7 @@
  * Ready for manual editing and enhancements
  */
 
-import type { ProductId } from '../common/base.js';
+import type { ProductId } from "../common/base.js";
 
 /**
  * Запрос архивирования товаров
@@ -36,7 +36,33 @@ export interface ProductListFilter {
   /** Идентификатор товара в системе Ozon */
   product_id?: ProductId[];
   /** Статус товара */
-  visibility?: 'ALL' | 'VISIBLE' | 'INVISIBLE' | 'EMPTY_STOCK' | 'NOT_MODERATED' | 'MODERATED' | 'DISABLED' | 'STATE_FAILED_MODERATION' | 'READY_TO_SUPPLY' | 'VALIDATION_STATE_PENDING' | 'VALIDATION_STATE_FAIL' | 'VALIDATION_STATE_SUCCESS' | 'TO_SUPPLY' | 'IN_SALE' | 'REMOVED_FROM_SALE' | 'BANNED' | 'OVERPRICED' | 'CRITICALLY_OVERPRICED' | 'EMPTY_BARCODE' | 'BARCODE_EXISTS' | 'QUARANTINE' | 'ARCHIVED' | 'OVERPRICED_WITH_STOCK' | 'PARTIAL_APPROVED' | 'IMAGE_ABSENT' | 'MODERATION_BLOCK';
+  visibility?:
+    | "ALL"
+    | "VISIBLE"
+    | "INVISIBLE"
+    | "EMPTY_STOCK"
+    | "NOT_MODERATED"
+    | "MODERATED"
+    | "DISABLED"
+    | "STATE_FAILED_MODERATION"
+    | "READY_TO_SUPPLY"
+    | "VALIDATION_STATE_PENDING"
+    | "VALIDATION_STATE_FAIL"
+    | "VALIDATION_STATE_SUCCESS"
+    | "TO_SUPPLY"
+    | "IN_SALE"
+    | "REMOVED_FROM_SALE"
+    | "BANNED"
+    | "OVERPRICED"
+    | "CRITICALLY_OVERPRICED"
+    | "EMPTY_BARCODE"
+    | "BARCODE_EXISTS"
+    | "QUARANTINE"
+    | "ARCHIVED"
+    | "OVERPRICED_WITH_STOCK"
+    | "PARTIAL_APPROVED"
+    | "IMAGE_ABSENT"
+    | "MODERATION_BLOCK";
 }
 
 /**
@@ -111,7 +137,7 @@ export interface GetProductInfoRequest {
 
 /**
  * Запрос информации о товаре
- * Get product info request  
+ * Get product info request
  */
 export interface GetProductInfoByIdRequest {
   /** Идентификатор товара в системе продавца */
@@ -135,7 +161,7 @@ export interface GetProductStocksRequest {
     /** Идентификаторы товаров в системе Ozon */
     product_id?: ProductId[];
     /** Статус товара */
-    visibility?: 'ALL' | 'VISIBLE' | 'INVISIBLE';
+    visibility?: "ALL" | "VISIBLE" | "INVISIBLE";
   };
   /** Идентификатор последней записи */
   last_id?: string;
@@ -156,7 +182,7 @@ export interface GetProductPricesRequest {
     /** Идентификаторы товаров в системе Ozon */
     product_id?: ProductId[];
     /** Статус товара */
-    visibility?: 'ALL' | 'VISIBLE' | 'INVISIBLE';
+    visibility?: "ALL" | "VISIBLE" | "INVISIBLE";
   };
   /** Идентификатор последней записи */
   last_id?: string;
@@ -179,16 +205,16 @@ export interface GetProductAttributesRequest {
     /** SKU товаров */
     sku?: string[];
     /** Статус товара */
-    visibility?: 'ALL' | 'VISIBLE' | 'INVISIBLE';
+    visibility?: "ALL" | "VISIBLE" | "INVISIBLE";
   };
   /** Идентификатор последней записи */
   last_id?: string;
   /** Количество записей в ответе (1-1000) */
   limit?: number;
   /** Параметр сортировки: sku, offer_id, id, title */
-  sort_by?: 'sku' | 'offer_id' | 'id' | 'title';
+  sort_by?: "sku" | "offer_id" | "id" | "title";
   /** Направление сортировки: asc, desc */
-  sort_dir?: 'asc' | 'desc';
+  sort_dir?: "asc" | "desc";
   readonly [key: string]: unknown;
 }
 
@@ -402,7 +428,33 @@ export interface GetProductListV3Request {
     /** Идентификаторы товаров в системе Ozon */
     product_id?: ProductId[];
     /** Статус товара */
-    visibility?: 'ALL' | 'VISIBLE' | 'INVISIBLE' | 'EMPTY_STOCK' | 'NOT_MODERATED' | 'MODERATED' | 'DISABLED' | 'STATE_FAILED_MODERATION' | 'READY_TO_SUPPLY' | 'VALIDATION_STATE_PENDING' | 'VALIDATION_STATE_FAIL' | 'VALIDATION_STATE_SUCCESS' | 'TO_SUPPLY' | 'IN_SALE' | 'REMOVED_FROM_SALE' | 'BANNED' | 'OVERPRICED' | 'CRITICALLY_OVERPRICED' | 'EMPTY_BARCODE' | 'BARCODE_EXISTS' | 'QUARANTINE' | 'ARCHIVED' | 'OVERPRICED_WITH_STOCK' | 'PARTIAL_APPROVED' | 'IMAGE_ABSENT' | 'MODERATION_BLOCK';
+    visibility?:
+      | "ALL"
+      | "VISIBLE"
+      | "INVISIBLE"
+      | "EMPTY_STOCK"
+      | "NOT_MODERATED"
+      | "MODERATED"
+      | "DISABLED"
+      | "STATE_FAILED_MODERATION"
+      | "READY_TO_SUPPLY"
+      | "VALIDATION_STATE_PENDING"
+      | "VALIDATION_STATE_FAIL"
+      | "VALIDATION_STATE_SUCCESS"
+      | "TO_SUPPLY"
+      | "IN_SALE"
+      | "REMOVED_FROM_SALE"
+      | "BANNED"
+      | "OVERPRICED"
+      | "CRITICALLY_OVERPRICED"
+      | "EMPTY_BARCODE"
+      | "BARCODE_EXISTS"
+      | "QUARANTINE"
+      | "ARCHIVED"
+      | "OVERPRICED_WITH_STOCK"
+      | "PARTIAL_APPROVED"
+      | "IMAGE_ABSENT"
+      | "MODERATION_BLOCK";
   };
   /** Идентификатор последней записи на странице (для пагинации) */
   last_id?: string;
@@ -418,4 +470,3 @@ export interface GetProductListV3Request {
 export interface GetUploadQuotaRequest {
   readonly [key: string]: unknown;
 }
-

@@ -2,26 +2,17 @@
  * CertificationApi unit tests
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { CertificationApi } from '../../../../src/categories/certification/index.js';
-import { HttpClient } from '../../../../src/core/http.js';
-import type {
-  CertificateListRequest,
-  CertificateBindRequest,
-  CertificateCreateRequest,
-  CertificateDeleteRequest,
-  CertificateInfoFromListRequest,
-  CertificateUnbindRequest,
-  ProductCertificationListRequest,
-  ProductCertificationListV2Request,
-} from '../../../../src/types/requests/certification.js';
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { CertificationApi } from "../../../../src/categories/certification/index.js";
+import { HttpClient } from "../../../../src/core/http.js";
+import type { CertificateListRequest, CertificateBindRequest, CertificateCreateRequest, CertificateDeleteRequest, CertificateInfoFromListRequest, CertificateUnbindRequest, ProductCertificationListRequest, ProductCertificationListV2Request } from "../../../../src/types/requests/certification.js";
 
 // Mock HttpClient
 const mockHttpClient = {
   request: vi.fn(),
 } as unknown as HttpClient;
 
-describe('CertificationApi', () => {
+describe("CertificationApi", () => {
   let certificationApi: CertificationApi;
 
   beforeEach(() => {
@@ -29,8 +20,8 @@ describe('CertificationApi', () => {
     vi.clearAllMocks();
   });
 
-  describe('getCertificateList', () => {
-    it('should get certificate list successfully', async () => {
+  describe("getCertificateList", () => {
+    it("should get certificate list successfully", async () => {
       const request: CertificateListRequest = {
         page: 1,
         page_size: 50,
@@ -41,13 +32,13 @@ describe('CertificationApi', () => {
           certificates: [
             {
               id: 12345,
-              name: 'Сертификат соответствия ГОСТ',
-              type: 'GOST_CERTIFICATE',
-              number: 'РОСС RU.АИ37.H00124',
-              status: 'ACTIVE',
-              created_at: '2024-01-15T10:00:00Z',
-              expire_date: '2025-12-31T23:59:59Z',
-              files: ['file-1', 'file-2'],
+              name: "Сертификат соответствия ГОСТ",
+              type: "GOST_CERTIFICATE",
+              number: "РОСС RU.АИ37.H00124",
+              status: "ACTIVE",
+              created_at: "2024-01-15T10:00:00Z",
+              expire_date: "2025-12-31T23:59:59Z",
+              files: ["file-1", "file-2"],
             },
           ],
           total: 1,
@@ -58,22 +49,17 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.getCertificateList(request);
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'POST',
-        '/v1/product/certificate/list',
-        request,
-        undefined
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("POST", "/v1/product/certificate/list", request, undefined);
       expect(result).toEqual(expectedResponse);
     });
 
-    it('should get certificate list with filters', async () => {
+    it("should get certificate list with filters", async () => {
       const request: CertificateListRequest = {
         page: 1,
         page_size: 100,
-        offer_id: 'product-123',
-        status: 'ACTIVE',
-        type: 'GOST_CERTIFICATE',
+        offer_id: "product-123",
+        status: "ACTIVE",
+        type: "GOST_CERTIFICATE",
       };
 
       const expectedResponse = {
@@ -87,32 +73,27 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.getCertificateList(request);
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'POST',
-        '/v1/product/certificate/list',
-        request,
-        undefined
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("POST", "/v1/product/certificate/list", request, undefined);
       expect(result).toEqual(expectedResponse);
     });
   });
 
-  describe('bindCertificate', () => {
-    it('should bind certificate successfully', async () => {
+  describe("bindCertificate", () => {
+    it("should bind certificate successfully", async () => {
       const request: CertificateBindRequest = {
         certificate_id: 12345,
-        product_id: ['product-1', 'product-2'],
+        product_id: ["product-1", "product-2"],
       };
 
       const expectedResponse = {
         result: [
           {
-            product_id: 'product-1',
-            status: 'success',
+            product_id: "product-1",
+            status: "success",
           },
           {
-            product_id: 'product-2',
-            status: 'success',
+            product_id: "product-2",
+            status: "success",
           },
         ],
       };
@@ -121,27 +102,22 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.bindCertificate(request);
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'POST',
-        '/v1/product/certificate/bind',
-        request,
-        undefined
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("POST", "/v1/product/certificate/bind", request, undefined);
       expect(result).toEqual(expectedResponse);
     });
 
-    it('should handle binding errors', async () => {
+    it("should handle binding errors", async () => {
       const request: CertificateBindRequest = {
         certificate_id: 12345,
-        product_id: ['invalid-product'],
+        product_id: ["invalid-product"],
       };
 
       const expectedResponse = {
         result: [
           {
-            product_id: 'invalid-product',
-            status: 'error',
-            error: 'Product not found',
+            product_id: "invalid-product",
+            status: "error",
+            error: "Product not found",
           },
         ],
       };
@@ -154,14 +130,14 @@ describe('CertificationApi', () => {
     });
   });
 
-  describe('createCertificate', () => {
-    it('should create certificate successfully', async () => {
+  describe("createCertificate", () => {
+    it("should create certificate successfully", async () => {
       const request: CertificateCreateRequest = {
-        name: 'Сертификат соответствия ГОСТ',
-        type: 'GOST_CERTIFICATE',
-        number: 'РОСС RU.АИ37.H00124',
-        expire_date: '2025-12-31T23:59:59Z',
-        file: ['base64_file_content_1', 'base64_file_content_2'],
+        name: "Сертификат соответствия ГОСТ",
+        type: "GOST_CERTIFICATE",
+        number: "РОСС RU.АИ37.H00124",
+        expire_date: "2025-12-31T23:59:59Z",
+        file: ["base64_file_content_1", "base64_file_content_2"],
       };
 
       const expectedResponse = {
@@ -172,19 +148,14 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.createCertificate(request);
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'POST',
-        '/v1/product/certificate/create',
-        request,
-        undefined
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("POST", "/v1/product/certificate/create", request, undefined);
       expect(result).toEqual(expectedResponse);
     });
 
-    it('should create certificate with minimal data', async () => {
+    it("should create certificate with minimal data", async () => {
       const request: CertificateCreateRequest = {
-        name: 'Декларация о соответствии',
-        type: 'DECLARATION',
+        name: "Декларация о соответствии",
+        type: "DECLARATION",
       };
 
       const expectedResponse = {
@@ -199,8 +170,8 @@ describe('CertificationApi', () => {
     });
   });
 
-  describe('deleteCertificates', () => {
-    it('should delete certificates successfully', async () => {
+  describe("deleteCertificates", () => {
+    it("should delete certificates successfully", async () => {
       const request: CertificateDeleteRequest = {
         certificate_id: [12345, 12346],
       };
@@ -209,11 +180,11 @@ describe('CertificationApi', () => {
         result: [
           {
             certificate_id: 12345,
-            status: 'success',
+            status: "success",
           },
           {
             certificate_id: 12346,
-            status: 'success',
+            status: "success",
           },
         ],
       };
@@ -222,16 +193,11 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.deleteCertificates(request);
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'POST',
-        '/v1/product/certificate/delete',
-        request,
-        undefined
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("POST", "/v1/product/certificate/delete", request, undefined);
       expect(result).toEqual(expectedResponse);
     });
 
-    it('should handle deletion errors', async () => {
+    it("should handle deletion errors", async () => {
       const request: CertificateDeleteRequest = {
         certificate_id: [99999],
       };
@@ -240,8 +206,8 @@ describe('CertificationApi', () => {
         result: [
           {
             certificate_id: 99999,
-            status: 'error',
-            error: 'Certificate not found',
+            status: "error",
+            error: "Certificate not found",
           },
         ],
       };
@@ -254,8 +220,8 @@ describe('CertificationApi', () => {
     });
   });
 
-  describe('getCertificateProductsList', () => {
-    it('should get certificate products successfully', async () => {
+  describe("getCertificateProductsList", () => {
+    it("should get certificate products successfully", async () => {
       const request: CertificateInfoFromListRequest = {
         certificate_id: 12345,
         page: 1,
@@ -266,16 +232,16 @@ describe('CertificationApi', () => {
         result: {
           products: [
             {
-              product_id: 'product-1',
-              offer_id: 'offer-123',
-              name: 'Товар 1',
-              status: 'ACTIVE',
+              product_id: "product-1",
+              offer_id: "offer-123",
+              name: "Товар 1",
+              status: "ACTIVE",
             },
             {
-              product_id: 'product-2',
-              offer_id: 'offer-456',
-              name: 'Товар 2',
-              status: 'ACTIVE',
+              product_id: "product-2",
+              offer_id: "offer-456",
+              name: "Товар 2",
+              status: "ACTIVE",
             },
           ],
           total: 2,
@@ -286,31 +252,26 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.getCertificateProductsList(request);
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'POST',
-        '/v1/product/certificate/products/list',
-        request,
-        undefined
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("POST", "/v1/product/certificate/products/list", request, undefined);
       expect(result).toEqual(expectedResponse);
     });
   });
 
-  describe('getRejectionReasons', () => {
-    it('should get rejection reasons successfully', async () => {
+  describe("getRejectionReasons", () => {
+    it("should get rejection reasons successfully", async () => {
       const expectedResponse = {
         result: [
           {
-            code: 'INVALID_FORMAT',
-            name: 'Неверный формат документа',
+            code: "INVALID_FORMAT",
+            name: "Неверный формат документа",
           },
           {
-            code: 'EXPIRED',
-            name: 'Документ просрочен',
+            code: "EXPIRED",
+            name: "Документ просрочен",
           },
           {
-            code: 'ILLEGIBLE',
-            name: 'Документ нечитаем',
+            code: "ILLEGIBLE",
+            name: "Документ нечитаем",
           },
         ],
       };
@@ -319,16 +280,11 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.getRejectionReasons();
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'POST',
-        '/v1/product/certificate/rejection_reasons/list',
-        {},
-        undefined
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("POST", "/v1/product/certificate/rejection_reasons/list", {}, undefined);
       expect(result).toEqual(expectedResponse);
     });
 
-    it('should get rejection reasons with empty request', async () => {
+    it("should get rejection reasons with empty request", async () => {
       const request = {};
 
       const expectedResponse = {
@@ -339,35 +295,30 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.getRejectionReasons(request);
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'POST',
-        '/v1/product/certificate/rejection_reasons/list',
-        request,
-        undefined
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("POST", "/v1/product/certificate/rejection_reasons/list", request, undefined);
       expect(result).toEqual(expectedResponse);
     });
   });
 
-  describe('getCertificateStatuses', () => {
-    it('should get certificate statuses successfully', async () => {
+  describe("getCertificateStatuses", () => {
+    it("should get certificate statuses successfully", async () => {
       const expectedResponse = {
         result: [
           {
-            code: 'NEW',
-            name: 'Новый',
+            code: "NEW",
+            name: "Новый",
           },
           {
-            code: 'ACTIVE',
-            name: 'Активный',
+            code: "ACTIVE",
+            name: "Активный",
           },
           {
-            code: 'EXPIRED',
-            name: 'Просрочен',
+            code: "EXPIRED",
+            name: "Просрочен",
           },
           {
-            code: 'REJECTED',
-            name: 'Отклонен',
+            code: "REJECTED",
+            name: "Отклонен",
           },
         ],
       };
@@ -376,33 +327,28 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.getCertificateStatuses();
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'POST',
-        '/v1/product/certificate/status/list',
-        {},
-        undefined
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("POST", "/v1/product/certificate/status/list", {}, undefined);
       expect(result).toEqual(expectedResponse);
     });
   });
 
-  describe('getCertificateTypes', () => {
-    it('should get certificate types successfully', async () => {
+  describe("getCertificateTypes", () => {
+    it("should get certificate types successfully", async () => {
       const expectedResponse = {
         result: [
           {
-            code: 'GOST_CERTIFICATE',
-            name: 'Сертификат соответствия ГОСТ',
-            description: 'Документ, подтверждающий соответствие товара ГОСТ',
+            code: "GOST_CERTIFICATE",
+            name: "Сертификат соответствия ГОСТ",
+            description: "Документ, подтверждающий соответствие товара ГОСТ",
           },
           {
-            code: 'DECLARATION',
-            name: 'Декларация о соответствии',
-            description: 'Документ декларирования соответствия',
+            code: "DECLARATION",
+            name: "Декларация о соответствии",
+            description: "Документ декларирования соответствия",
           },
           {
-            code: 'QUALITY_CERTIFICATE',
-            name: 'Сертификат качества',
+            code: "QUALITY_CERTIFICATE",
+            name: "Сертификат качества",
           },
         ],
       };
@@ -411,32 +357,27 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.getCertificateTypes();
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'GET',
-        '/v1/product/certificate/types',
-        {},
-        undefined
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("GET", "/v1/product/certificate/types", {}, undefined);
       expect(result).toEqual(expectedResponse);
     });
   });
 
-  describe('unbindCertificate', () => {
-    it('should unbind certificate successfully', async () => {
+  describe("unbindCertificate", () => {
+    it("should unbind certificate successfully", async () => {
       const request: CertificateUnbindRequest = {
         certificate_id: 12345,
-        product_id: ['product-1', 'product-2'],
+        product_id: ["product-1", "product-2"],
       };
 
       const expectedResponse = {
         result: [
           {
-            product_id: 'product-1',
-            status: 'success',
+            product_id: "product-1",
+            status: "success",
           },
           {
-            product_id: 'product-2',
-            status: 'success',
+            product_id: "product-2",
+            status: "success",
           },
         ],
       };
@@ -445,18 +386,13 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.unbindCertificate(request);
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'POST',
-        '/v1/product/certificate/unbind',
-        request,
-        undefined
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("POST", "/v1/product/certificate/unbind", request, undefined);
       expect(result).toEqual(expectedResponse);
     });
   });
 
-  describe('getProductCertificationList (v1 - deprecated)', () => {
-    it('should get product certification list v1', async () => {
+  describe("getProductCertificationList (v1 - deprecated)", () => {
+    it("should get product certification list v1", async () => {
       const request: ProductCertificationListRequest = {
         page: 1,
         page_size: 100,
@@ -467,9 +403,9 @@ describe('CertificationApi', () => {
           certification: [
             {
               category_id: 15621,
-              category_name: 'Электроника',
+              category_name: "Электроника",
               has_certificate: true,
-              certificate_type: 'GOST_CERTIFICATE',
+              certificate_type: "GOST_CERTIFICATE",
             },
           ],
           total: 1,
@@ -480,30 +416,25 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.getProductCertificationList(request);
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'POST',
-        '/v1/product/certification/list',
-        request,
-        undefined
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("POST", "/v1/product/certification/list", request, undefined);
       expect(result).toEqual(expectedResponse);
     });
   });
 
-  describe('getCertificateAccordanceTypesV2', () => {
-    it('should get certificate accordance types successfully', async () => {
+  describe("getCertificateAccordanceTypesV2", () => {
+    it("should get certificate accordance types successfully", async () => {
       const expectedResponse = {
         result: {
           accordance_types: [
             {
               id: 1,
-              name: 'Техрегламент ТР ТС',
-              code: 'TR_TS',
+              name: "Техрегламент ТР ТС",
+              code: "TR_TS",
             },
             {
               id: 2,
-              name: 'ГОСТ Р',
-              code: 'GOST_R',
+              name: "ГОСТ Р",
+              code: "GOST_R",
             },
           ],
         },
@@ -513,18 +444,13 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.getCertificateAccordanceTypesV2();
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'GET',
-        '/v2/product/certificate/accordance-types/list',
-        {},
-        undefined
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("GET", "/v2/product/certificate/accordance-types/list", {}, undefined);
       expect(result).toEqual(expectedResponse);
     });
   });
 
-  describe('getProductCertificationListV2', () => {
-    it('should get product certification list v2 successfully', async () => {
+  describe("getProductCertificationListV2", () => {
+    it("should get product certification list v2 successfully", async () => {
       const request: ProductCertificationListV2Request = {
         page: 1,
         page_size: 100,
@@ -534,14 +460,14 @@ describe('CertificationApi', () => {
         certification: [
           {
             category_id: 15621,
-            category_name: 'Электроника',
+            category_name: "Электроника",
             has_certificate: true,
-            certificate_type: 'GOST_CERTIFICATE',
-            requirements: ['Сертификат соответствия', 'Декларация'],
+            certificate_type: "GOST_CERTIFICATE",
+            requirements: ["Сертификат соответствия", "Декларация"],
           },
           {
             category_id: 15622,
-            category_name: 'Одежда',
+            category_name: "Одежда",
             has_certificate: false,
           },
         ],
@@ -552,16 +478,11 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.getProductCertificationListV2(request);
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'POST',
-        '/v2/product/certification/list',
-        request,
-        undefined
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("POST", "/v2/product/certification/list", request, undefined);
       expect(result).toEqual(expectedResponse);
     });
 
-    it('should get product certification list v2 with pagination', async () => {
+    it("should get product certification list v2 with pagination", async () => {
       const request: ProductCertificationListV2Request = {
         page: 2,
         page_size: 50,
@@ -580,46 +501,46 @@ describe('CertificationApi', () => {
     });
   });
 
-  describe('error handling', () => {
-    it('should handle API errors', async () => {
+  describe("error handling", () => {
+    it("should handle API errors", async () => {
       const request: CertificateListRequest = {
         page: 1,
         page_size: 50,
       };
 
-      const error = new Error('API Error');
+      const error = new Error("API Error");
       (mockHttpClient.request as any).mockRejectedValue(error);
 
-      await expect(certificationApi.getCertificateList(request)).rejects.toThrow('API Error');
+      await expect(certificationApi.getCertificateList(request)).rejects.toThrow("API Error");
     });
 
-    it('should handle certificate not found errors', async () => {
+    it("should handle certificate not found errors", async () => {
       const request: CertificateBindRequest = {
         certificate_id: 99999,
-        product_id: ['product-1'],
+        product_id: ["product-1"],
       };
 
-      const error = new Error('Certificate not found');
+      const error = new Error("Certificate not found");
       (mockHttpClient.request as any).mockRejectedValue(error);
 
-      await expect(certificationApi.bindCertificate(request)).rejects.toThrow('Certificate not found');
+      await expect(certificationApi.bindCertificate(request)).rejects.toThrow("Certificate not found");
     });
 
-    it('should handle validation errors', async () => {
+    it("should handle validation errors", async () => {
       const request: CertificateCreateRequest = {
-        name: '', // Empty name should cause validation error
-        type: 'INVALID_TYPE',
+        name: "", // Empty name should cause validation error
+        type: "INVALID_TYPE",
       };
 
-      const error = new Error('Invalid certificate data');
+      const error = new Error("Invalid certificate data");
       (mockHttpClient.request as any).mockRejectedValue(error);
 
-      await expect(certificationApi.createCertificate(request)).rejects.toThrow('Invalid certificate data');
+      await expect(certificationApi.createCertificate(request)).rejects.toThrow("Invalid certificate data");
     });
   });
 
-  describe('request options', () => {
-    it('should pass custom request options', async () => {
+  describe("request options", () => {
+    it("should pass custom request options", async () => {
       const request: CertificateListRequest = {
         page: 1,
         page_size: 50,
@@ -641,18 +562,13 @@ describe('CertificationApi', () => {
 
       const result = await certificationApi.getCertificateList(request, options);
 
-      expect(mockHttpClient.request).toHaveBeenCalledWith(
-        'POST',
-        '/v1/product/certificate/list',
-        request,
-        options
-      );
+      expect(mockHttpClient.request).toHaveBeenCalledWith("POST", "/v1/product/certificate/list", request, options);
       expect(result).toEqual(expectedResponse);
     });
   });
 
-  describe('pagination handling', () => {
-    it('should handle large page sizes', async () => {
+  describe("pagination handling", () => {
+    it("should handle large page sizes", async () => {
       const request: CertificateListRequest = {
         page: 1,
         page_size: 1000, // Maximum allowed
@@ -672,7 +588,7 @@ describe('CertificationApi', () => {
       expect(result).toEqual(expectedResponse);
     });
 
-    it('should handle multiple pages', async () => {
+    it("should handle multiple pages", async () => {
       const request: CertificateListRequest = {
         page: 5,
         page_size: 100,

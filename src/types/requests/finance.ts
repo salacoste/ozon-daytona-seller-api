@@ -8,13 +8,13 @@
  * Язык отчёта о компенсациях
  * Compensation report language
  */
-export type CompensationReportLanguage = 'DEFAULT' | 'RU' | 'EN';
+export type CompensationReportLanguage = "DEFAULT" | "RU" | "EN";
 
 /**
  * Общий язык для отчётов
  * Common language for reports
  */
-export type CommonLanguage = 'DEFAULT' | 'RU' | 'EN';
+export type CommonLanguage = "DEFAULT" | "RU" | "EN";
 
 /**
  * Запрос отчёта о компенсациях
@@ -120,51 +120,51 @@ export interface FinanceTransactionListV3Request {
  * Типы операций из MCP документации
  * Operation types from MCP documentation
  */
-export type OperationType = 
-  | 'ClientReturnAgentOperation'
-  | 'MarketplaceMarketingActionCostOperation'
-  | 'MarketplaceSaleReviewsOperation'
-  | 'MarketplaceSellerCompensationOperation'
-  | 'OperationAgentDeliveredToCustomer'
-  | 'OperationAgentDeliveredToCustomerCanceled'
-  | 'OperationAgentStornoDeliveredToCustomer'
-  | 'OperationClaim'
-  | 'OperationCorrectionSeller'
-  | 'OperationDefectiveWriteOff'
-  | 'OperationItemReturn'
-  | 'OperationLackWriteOff'
-  | 'OperationMarketplaceCrossDockServiceWriteOff'
-  | 'OperationMarketplaceServiceStorage'
-  | 'OperationSetOff'
-  | 'MarketplaceSellerReexposureDeliveryReturnOperation'
-  | 'OperationReturnGoodsFBSofRMS'
-  | 'ReturnAgentOperationRFBS'
-  | 'ItemAgentServiceStarsMembership'
-  | 'MarketplaceSellerShippingCompensationReturnOperation'
-  | 'OperationMarketplaceServicePremiumCashback'
-  | 'MarketplaceServicePremiumPromotion'
-  | 'MarketplaceRedistributionOfAcquiringOperation'
-  | 'MarketplaceReturnStorageServiceAtThePickupPointFbsItem'
-  | 'MarketplaceReturnStorageServiceInTheWarehouseFbsItem'
-  | 'MarketplaceServiceItemDeliveryKGT'
-  | 'MarketplaceServiceItemDirectFlowLogistic'
-  | 'MarketplaceServiceItemReturnFlowLogistic'
-  | 'MarketplaceServicePremiumCashbackIndividualPoints'
-  | 'OperationMarketplaceWithHoldingForUndeliverableGoods'
-  | 'MarketplaceServiceItemDirectFlowLogisticVDC'
-  | 'MarketplaceServiceItemDropoffPPZ'
-  | 'MarketplaceServicePremiumCashback'
-  | 'MarketplaceServiceItemRedistributionReturnsPVZ'
-  | 'OperationElectronicServiceStencil'
-  | 'OperationElectronicServicesPromotionInSearch'
-  | 'OperationMarketplaceServiceItemElectronicServicesBrandShelf'
-  | 'OperationSubscriptionPremium';
+export type OperationType =
+  | "ClientReturnAgentOperation"
+  | "MarketplaceMarketingActionCostOperation"
+  | "MarketplaceSaleReviewsOperation"
+  | "MarketplaceSellerCompensationOperation"
+  | "OperationAgentDeliveredToCustomer"
+  | "OperationAgentDeliveredToCustomerCanceled"
+  | "OperationAgentStornoDeliveredToCustomer"
+  | "OperationClaim"
+  | "OperationCorrectionSeller"
+  | "OperationDefectiveWriteOff"
+  | "OperationItemReturn"
+  | "OperationLackWriteOff"
+  | "OperationMarketplaceCrossDockServiceWriteOff"
+  | "OperationMarketplaceServiceStorage"
+  | "OperationSetOff"
+  | "MarketplaceSellerReexposureDeliveryReturnOperation"
+  | "OperationReturnGoodsFBSofRMS"
+  | "ReturnAgentOperationRFBS"
+  | "ItemAgentServiceStarsMembership"
+  | "MarketplaceSellerShippingCompensationReturnOperation"
+  | "OperationMarketplaceServicePremiumCashback"
+  | "MarketplaceServicePremiumPromotion"
+  | "MarketplaceRedistributionOfAcquiringOperation"
+  | "MarketplaceReturnStorageServiceAtThePickupPointFbsItem"
+  | "MarketplaceReturnStorageServiceInTheWarehouseFbsItem"
+  | "MarketplaceServiceItemDeliveryKGT"
+  | "MarketplaceServiceItemDirectFlowLogistic"
+  | "MarketplaceServiceItemReturnFlowLogistic"
+  | "MarketplaceServicePremiumCashbackIndividualPoints"
+  | "OperationMarketplaceWithHoldingForUndeliverableGoods"
+  | "MarketplaceServiceItemDirectFlowLogisticVDC"
+  | "MarketplaceServiceItemDropoffPPZ"
+  | "MarketplaceServicePremiumCashback"
+  | "MarketplaceServiceItemRedistributionReturnsPVZ"
+  | "OperationElectronicServiceStencil"
+  | "OperationElectronicServicesPromotionInSearch"
+  | "OperationMarketplaceServiceItemElectronicServicesBrandShelf"
+  | "OperationSubscriptionPremium";
 
 /**
  * Типы транзакций для итогов (строгие по MCP документации)
  * Transaction types for totals (strict per MCP documentation)
  */
-export type TransactionType = 'all' | 'orders' | 'returns' | 'services' | 'compensation' | 'transferDelivery' | 'other';
+export type TransactionType = "all" | "orders" | "returns" | "services" | "compensation" | "transferDelivery" | "other";
 
 /**
  * Период дат для итогов транзакций

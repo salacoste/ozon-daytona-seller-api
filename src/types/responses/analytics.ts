@@ -4,7 +4,7 @@
  * Ready for manual editing and enhancements
  */
 
-import type { AnalyticsItemTag, AnalyticsTurnoverGrade } from '../requests/analytics.js';
+import type { AnalyticsItemTag, AnalyticsTurnoverGrade } from "../requests/analytics.js";
 
 /**
  * Элемент ответа оборачиваемости товара

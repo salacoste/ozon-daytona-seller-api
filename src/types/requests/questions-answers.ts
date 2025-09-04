@@ -39,9 +39,9 @@ export interface QuestionAnswerListRequest {
   question_id: string;
   /** Идентификатор товара в системе Ozon — SKU */
   sku: number;
-  /** 
+  /**
    * Идентификатор последнего значения на странице.
-   * Если запрос первый, оставьте поле пустым. 
+   * Если запрос первый, оставьте поле пустым.
    * Для следующих значений указывайте last_id из ответа предыдущего запроса.
    */
   last_id?: string;
@@ -52,7 +52,7 @@ export interface QuestionAnswerListRequest {
  * Статус вопроса
  * Question status
  */
-export type QuestionStatus = 'NEW' | 'VIEWED' | 'PROCESSED' | 'UNPROCESSED' | 'ALL';
+export type QuestionStatus = "NEW" | "VIEWED" | "PROCESSED" | "UNPROCESSED" | "ALL";
 
 /**
  * Запрос изменения статуса вопросов
@@ -61,13 +61,13 @@ export type QuestionStatus = 'NEW' | 'VIEWED' | 'PROCESSED' | 'UNPROCESSED' | 'A
 export interface QuestionChangeStatusRequest {
   /** Идентификаторы вопросов */
   question_ids: string[];
-  /** 
+  /**
    * Статусы вопросов:
    * - `NEW` — новые,
    * - `VIEWED` — просмотренные,
    * - `PROCESSED` — обработанные.
    */
-  status: 'NEW' | 'VIEWED' | 'PROCESSED';
+  status: "NEW" | "VIEWED" | "PROCESSED";
   readonly [key: string]: unknown;
 }
 
@@ -98,7 +98,7 @@ export interface QuestionListFilter {
   date_from?: string;
   /** Конец периода */
   date_to?: string;
-  /** 
+  /**
    * Статусы вопроса:
    * - `NEW` — новый,
    * - `ALL` — все вопросы,
@@ -116,7 +116,7 @@ export interface QuestionListFilter {
 export interface QuestionListRequest {
   /** Фильтр для списка вопросов */
   filter?: QuestionListFilter;
-  /** 
+  /**
    * Идентификатор последнего значения на странице.
    * Оставьте это поле пустым при выполнении первого запроса.
    * Чтобы получить следующие значения, укажите last_id из ответа предыдущего запроса.

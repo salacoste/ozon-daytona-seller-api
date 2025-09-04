@@ -4,7 +4,7 @@
  * Ready for manual editing and enhancements
  */
 
-import type { ProductId } from '../common/base.js';
+import type { ProductId } from "../common/base.js";
 
 /**
  * Элемент списка товаров
@@ -71,7 +71,7 @@ export interface ProductStockItem {
   /** Остатки товара */
   stocks?: Array<{
     /** Тип склада */
-    type?: 'fbo' | 'fbs';
+    type?: "fbo" | "fbs";
     /** В наличии */
     present?: number;
     /** Резерв */
@@ -811,4 +811,3 @@ export interface GetUploadQuotaResponse {
   total?: TotalQuota;
   readonly [key: string]: unknown;
 }
-

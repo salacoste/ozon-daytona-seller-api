@@ -9,30 +9,30 @@
  * Request to set available actions for rFBS returns
  */
 export interface RfbsReturnsActionSetRequest {
-  /** 
+  /**
    * Идентификатор возврата
    * Return ID
    */
   return_id?: number;
-  
-  /** 
+
+  /**
    * Действие для возврата
    * Return action
    */
-  action?: 'approve' | 'reject' | 'compensate' | 'return_money' | 'receive_return';
-  
-  /** 
+  action?: "approve" | "reject" | "compensate" | "return_money" | "receive_return";
+
+  /**
    * Комментарий к действию
    * Action comment
    */
   comment?: string;
-  
-  /** 
+
+  /**
    * Сумма компенсации (для действия compensate)
    * Compensation amount (for compensate action)
    */
   compensation_amount?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -41,24 +41,24 @@ export interface RfbsReturnsActionSetRequest {
  * Request for partial product cost compensation
  */
 export interface RfbsReturnsCompensateRequest {
-  /** 
+  /**
    * Идентификатор возврата
    * Return ID
    */
   return_id?: number;
-  
-  /** 
+
+  /**
    * Сумма компенсации
    * Compensation amount
    */
   compensation_amount?: number;
-  
-  /** 
+
+  /**
    * Причина компенсации
    * Compensation reason
    */
   reason?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -67,12 +67,12 @@ export interface RfbsReturnsCompensateRequest {
  * Request for return application information
  */
 export interface RfbsReturnsGetRequest {
-  /** 
+  /**
    * Идентификатор возврата
    * Return ID
    */
   return_id?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -81,7 +81,7 @@ export interface RfbsReturnsGetRequest {
  * Request for returns list
  */
 export interface RfbsReturnsListRequest {
-  /** 
+  /**
    * Фильтр по статусу
    * Status filter
    */
@@ -93,19 +93,19 @@ export interface RfbsReturnsListRequest {
     /** Дата создания до */
     created_to?: string;
   };
-  
-  /** 
+
+  /**
    * Лимит записей
    * Record limit
    */
   limit?: number;
-  
-  /** 
+
+  /**
    * Смещение для пагинации
    * Pagination offset
    */
   offset?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -114,18 +114,18 @@ export interface RfbsReturnsListRequest {
  * Request to confirm product receipt for inspection
  */
 export interface RfbsReturnsReceiveReturnRequest {
-  /** 
+  /**
    * Идентификатор возврата
    * Return ID
    */
   return_id?: number;
-  
-  /** 
+
+  /**
    * Дата получения товара
    * Product receipt date
    */
   received_at?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -134,18 +134,18 @@ export interface RfbsReturnsReceiveReturnRequest {
  * Request to reject return application
  */
 export interface RfbsReturnsRejectRequest {
-  /** 
+  /**
    * Идентификатор возврата
    * Return ID
    */
   return_id?: number;
-  
-  /** 
+
+  /**
    * Причина отклонения
    * Rejection reason
    */
   comment?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -154,30 +154,30 @@ export interface RfbsReturnsRejectRequest {
  * Request to return money to customer
  */
 export interface RfbsReturnsReturnMoneyRequest {
-  /** 
+  /**
    * Идентификатор возврата
    * Return ID
    */
   return_id?: number;
-  
-  /** 
+
+  /**
    * Возвращается ли полная стоимость
    * Whether full amount is returned
    */
   full_amount?: boolean;
-  
-  /** 
+
+  /**
    * Сумма к возврату (если не полная)
    * Return amount (if not full)
    */
   return_amount?: number;
-  
-  /** 
+
+  /**
    * Возмещать ли стоимость пересылки
    * Whether to compensate shipping cost
    */
   compensate_shipping?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -186,17 +186,17 @@ export interface RfbsReturnsReturnMoneyRequest {
  * Request to approve return application
  */
 export interface RfbsReturnsVerifyRequest {
-  /** 
+  /**
    * Идентификатор возврата
    * Return ID
    */
   return_id?: number;
-  
-  /** 
+
+  /**
    * Комментарий к одобрению
    * Approval comment
    */
   comment?: string;
-  
+
   readonly [key: string]: unknown;
 }

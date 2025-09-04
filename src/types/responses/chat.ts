@@ -4,25 +4,25 @@
  * Ready for manual editing and enhancements
  */
 
-import type { BaseResponse } from '../../core/types.js';
+import type { BaseResponse } from "../../core/types.js";
 
 /**
  * Статус чата
  * Chat status
  */
-export type ChatStatus = 'All' | 'Opened' | 'Closed';
+export type ChatStatus = "All" | "Opened" | "Closed";
 
 /**
  * Тип чата
  * Chat type
  */
-export type ChatType = 'Seller_Support' | 'Buyer_Seller';
+export type ChatType = "Seller_Support" | "Buyer_Seller";
 
 /**
  * Статус модерации изображения
  * Image moderation status
  */
-export type ChatMessageModerateImageStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
+export type ChatMessageModerateImageStatus = "PENDING" | "APPROVED" | "REJECTED";
 
 /**
  * Пользователь чата v2

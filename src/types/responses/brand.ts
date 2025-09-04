@@ -4,7 +4,7 @@
  * Ready for manual editing and enhancements
  */
 
-import type { BaseResponse } from '../../core/types.js';
+import type { BaseResponse } from "../../core/types.js";
 
 /**
  * Информация о сертифицируемом бренде
@@ -13,7 +13,7 @@ import type { BaseResponse } from '../../core/types.js';
 export interface BrandCertificationInfo {
   /** Название бренда */
   brand_name: string;
-  /** 
+  /**
    * Признак, что требуется сертификат:
    * - `true` — требуется сертификат;
    * - `false` — сертификат не нужен.

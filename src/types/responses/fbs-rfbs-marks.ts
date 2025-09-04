@@ -9,18 +9,18 @@
  * Response for marking file upload
  */
 export interface FbsRfbsMarksProductExemplarCreateResponse {
-  /** 
+  /**
    * Идентификатор задачи загрузки
    * Upload task ID
    */
   task_id?: string;
-  
-  /** 
+
+  /**
    * Статус задачи
    * Task status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
+  status?: "pending" | "processing" | "completed" | "error";
+
   readonly [key: string]: unknown;
 }
 
@@ -29,54 +29,54 @@ export interface FbsRfbsMarksProductExemplarCreateResponse {
  * Marking exemplar information
  */
 export interface FbsRfbsMarksProductExemplar {
-  /** 
+  /**
    * Идентификатор образца
    * Exemplar ID
    */
   exemplar_id?: string;
-  
-  /** 
+
+  /**
    * Идентификатор товара
    * Product ID
    */
   product_id?: number;
-  
-  /** 
+
+  /**
    * Название файла
    * File name
    */
   file_name?: string;
-  
-  /** 
+
+  /**
    * Размер файла
    * File size
    */
   file_size?: number;
-  
-  /** 
+
+  /**
    * Статус образца
    * Exemplar status
    */
-  status?: 'uploaded' | 'validated' | 'rejected' | 'expired';
-  
-  /** 
+  status?: "uploaded" | "validated" | "rejected" | "expired";
+
+  /**
    * Дата создания
    * Creation date
    */
   created_at?: string;
-  
-  /** 
+
+  /**
    * Дата валидации
    * Validation date
    */
   validated_at?: string;
-  
-  /** 
+
+  /**
    * Комментарий к отклонению
    * Rejection comment
    */
   rejection_reason?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -85,24 +85,24 @@ export interface FbsRfbsMarksProductExemplar {
  * Response with uploaded marking file information
  */
 export interface FbsRfbsMarksProductExemplarInfoResponse {
-  /** 
+  /**
    * Статус загрузки
    * Upload status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
-  /** 
+  status?: "pending" | "processing" | "completed" | "error";
+
+  /**
    * Информация об образце
    * Exemplar information
    */
   exemplar?: FbsRfbsMarksProductExemplar;
-  
-  /** 
+
+  /**
    * Сообщение об ошибке
    * Error message
    */
   error_message?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -111,24 +111,24 @@ export interface FbsRfbsMarksProductExemplarInfoResponse {
  * Response with marking exemplars list
  */
 export interface FbsRfbsMarksProductExemplarListResponse {
-  /** 
+  /**
    * Список образцов
    * List of exemplars
    */
   exemplars?: FbsRfbsMarksProductExemplar[];
-  
-  /** 
+
+  /**
    * Общее количество
    * Total count
    */
   total?: number;
-  
-  /** 
+
+  /**
    * Есть ли еще записи
    * Has more records
    */
   has_next?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -137,18 +137,18 @@ export interface FbsRfbsMarksProductExemplarListResponse {
  * Response for marking exemplar deletion
  */
 export interface FbsRfbsMarksProductExemplarDeleteResponse {
-  /** 
+  /**
    * Идентификатор задачи удаления
    * Deletion task ID
    */
   task_id?: string;
-  
-  /** 
+
+  /**
    * Статус задачи
    * Task status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
+  status?: "pending" | "processing" | "completed" | "error";
+
   readonly [key: string]: unknown;
 }
 
@@ -157,24 +157,24 @@ export interface FbsRfbsMarksProductExemplarDeleteResponse {
  * Response for exemplar deletion status
  */
 export interface FbsRfbsMarksProductExemplarDeleteStatusResponse {
-  /** 
+  /**
    * Статус удаления
    * Deletion status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
-  /** 
+  status?: "pending" | "processing" | "completed" | "error";
+
+  /**
    * Результат удаления
    * Deletion result
    */
   success?: boolean;
-  
-  /** 
+
+  /**
    * Сообщение об ошибке
    * Error message
    */
   error_message?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -183,18 +183,18 @@ export interface FbsRfbsMarksProductExemplarDeleteStatusResponse {
  * Response for marking exemplar validation
  */
 export interface FbsRfbsMarksProductExemplarValidateResponse {
-  /** 
+  /**
    * Идентификатор задачи валидации
    * Validation task ID
    */
   task_id?: string;
-  
-  /** 
+
+  /**
    * Статус задачи
    * Task status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
+  status?: "pending" | "processing" | "completed" | "error";
+
   readonly [key: string]: unknown;
 }
 
@@ -203,25 +203,25 @@ export interface FbsRfbsMarksProductExemplarValidateResponse {
  * Response for exemplar validation status
  */
 export interface FbsRfbsMarksProductExemplarValidateStatusResponse {
-  /** 
+  /**
    * Статус валидации
    * Validation status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
-  /** 
+  status?: "pending" | "processing" | "completed" | "error";
+
+  /**
    * Результат валидации
    * Validation result
    */
   is_valid?: boolean;
-  
-  /** 
+
+  /**
    * Причина отклонения
    * Rejection reason
    */
   rejection_reason?: string;
-  
-  /** 
+
+  /**
    * Детальная информация
    * Detailed information
    */
@@ -233,7 +233,7 @@ export interface FbsRfbsMarksProductExemplarValidateStatusResponse {
     /** Читаемость кодов */
     codes_readable?: boolean;
   };
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -242,43 +242,43 @@ export interface FbsRfbsMarksProductExemplarValidateStatusResponse {
  * Product marking codes information
  */
 export interface FbsRfbsMarksProductCodes {
-  /** 
+  /**
    * SKU товара
    * Product SKU
    */
   sku?: string;
-  
-  /** 
+
+  /**
    * Название товара
    * Product name
    */
   name?: string;
-  
-  /** 
+
+  /**
    * Требуемое количество кодов
    * Required codes count
    */
   required_count?: number;
-  
-  /** 
+
+  /**
    * Загружено кодов
    * Uploaded codes count
    */
   uploaded_count?: number;
-  
-  /** 
+
+  /**
    * Валидных кодов
    * Valid codes count
    */
   valid_count?: number;
-  
-  /** 
+
+  /**
    * Статус кодов товара
    * Product codes status
    */
-  status?: 'awaiting' | 'uploaded' | 'validated' | 'error';
-  
-  /** 
+  status?: "awaiting" | "uploaded" | "validated" | "error";
+
+  /**
    * Коды маркировки
    * Marking codes
    */
@@ -286,11 +286,11 @@ export interface FbsRfbsMarksProductCodes {
     /** Код маркировки */
     gtd?: string;
     /** Статус кода */
-    status?: 'valid' | 'invalid' | 'duplicate';
+    status?: "valid" | "invalid" | "duplicate";
     /** Ошибка валидации */
     error?: string;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -299,18 +299,18 @@ export interface FbsRfbsMarksProductCodes {
  * Response for marking codes upload
  */
 export interface FbsRfbsMarksPostingCodesUploadResponse {
-  /** 
+  /**
    * Идентификатор задачи загрузки
    * Upload task ID
    */
   task_id?: string;
-  
-  /** 
+
+  /**
    * Статус задачи
    * Task status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
+  status?: "pending" | "processing" | "completed" | "error";
+
   readonly [key: string]: unknown;
 }
 
@@ -319,13 +319,13 @@ export interface FbsRfbsMarksPostingCodesUploadResponse {
  * Response for marking codes upload status
  */
 export interface FbsRfbsMarksPostingCodesUploadStatusResponse {
-  /** 
+  /**
    * Статус загрузки
    * Upload status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
-  /** 
+  status?: "pending" | "processing" | "completed" | "error";
+
+  /**
    * Результат загрузки
    * Upload result
    */
@@ -339,19 +339,19 @@ export interface FbsRfbsMarksPostingCodesUploadStatusResponse {
     /** Количество дублирующихся кодов */
     duplicate_codes?: number;
   };
-  
-  /** 
+
+  /**
    * Детали по товарам
    * Product details
    */
   products?: FbsRfbsMarksProductCodes[];
-  
-  /** 
+
+  /**
    * Сообщение об ошибке
    * Error message
    */
   error_message?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -360,18 +360,18 @@ export interface FbsRfbsMarksPostingCodesUploadStatusResponse {
  * Response for marking codes validation
  */
 export interface FbsRfbsMarksPostingCodesValidateResponse {
-  /** 
+  /**
    * Идентификатор задачи проверки
    * Validation task ID
    */
   task_id?: string;
-  
-  /** 
+
+  /**
    * Статус задачи
    * Task status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
+  status?: "pending" | "processing" | "completed" | "error";
+
   readonly [key: string]: unknown;
 }
 
@@ -380,13 +380,13 @@ export interface FbsRfbsMarksPostingCodesValidateResponse {
  * Response for marking codes validation status
  */
 export interface FbsRfbsMarksPostingCodesValidateStatusResponse {
-  /** 
+  /**
    * Статус проверки
    * Validation status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
-  /** 
+  status?: "pending" | "processing" | "completed" | "error";
+
+  /**
    * Результат валидации
    * Validation result
    */
@@ -398,19 +398,19 @@ export interface FbsRfbsMarksPostingCodesValidateStatusResponse {
     /** Общее количество ошибок */
     total_errors?: number;
   };
-  
-  /** 
+
+  /**
    * Детали по товарам
    * Product details
    */
   products?: FbsRfbsMarksProductCodes[];
-  
-  /** 
+
+  /**
    * Сообщение об ошибке
    * Error message
    */
   error_message?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -419,31 +419,31 @@ export interface FbsRfbsMarksPostingCodesValidateStatusResponse {
  * Response with posting marking codes information
  */
 export interface FbsRfbsMarksPostingCodesInfoResponse {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Статус кодов отправления
    * Posting codes status
    */
-  status?: 'awaiting_codes' | 'codes_uploaded' | 'validated' | 'error';
-  
-  /** 
+  status?: "awaiting_codes" | "codes_uploaded" | "validated" | "error";
+
+  /**
    * Обязательна ли маркировка
    * Is marking required
    */
   marking_required?: boolean;
-  
-  /** 
+
+  /**
    * Детали по товарам
    * Product details
    */
   products?: FbsRfbsMarksProductCodes[];
-  
-  /** 
+
+  /**
    * Общая статистика
    * Overall statistics
    */
@@ -455,7 +455,7 @@ export interface FbsRfbsMarksPostingCodesInfoResponse {
     /** Товаров с валидными кодами */
     products_validated?: number;
   };
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -464,48 +464,48 @@ export interface FbsRfbsMarksPostingCodesInfoResponse {
  * Posting with marking information
  */
 export interface FbsRfbsMarksPosting {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
-  /** 
+
+  /**
    * Статус отправления
    * Posting status
    */
   status?: string;
-  
-  /** 
+
+  /**
    * Статус кодов маркировки
    * Marking codes status
    */
-  marking_status?: 'awaiting_codes' | 'codes_uploaded' | 'validated' | 'error';
-  
-  /** 
+  marking_status?: "awaiting_codes" | "codes_uploaded" | "validated" | "error";
+
+  /**
    * Дата создания
    * Creation date
    */
   created_at?: string;
-  
-  /** 
+
+  /**
    * Дата обновления кодов
    * Codes update date
    */
   codes_updated_at?: string;
-  
-  /** 
+
+  /**
    * Количество товаров
    * Products count
    */
   products_count?: number;
-  
-  /** 
+
+  /**
    * Товаров с кодами
    * Products with codes
    */
   products_with_codes?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -514,24 +514,24 @@ export interface FbsRfbsMarksPosting {
  * Response with postings with marking list
  */
 export interface FbsRfbsMarksPostingListResponse {
-  /** 
+  /**
    * Список отправлений
    * List of postings
    */
   postings?: FbsRfbsMarksPosting[];
-  
-  /** 
+
+  /**
    * Общее количество
    * Total count
    */
   total?: number;
-  
-  /** 
+
+  /**
    * Есть ли еще записи
    * Has more records
    */
   has_next?: boolean;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -542,12 +542,12 @@ export interface FbsRfbsMarksPostingListResponse {
  * Response for exemplar data update
  */
 export interface FbsRfbsMarksProductExemplarUpdateResponse {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
   result?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -556,12 +556,12 @@ export interface FbsRfbsMarksProductExemplarUpdateResponse {
  * Response for checking and saving exemplar data (v4)
  */
 export interface FbsRfbsMarksProductExemplarSetV4Response {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
   result?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -570,13 +570,13 @@ export interface FbsRfbsMarksProductExemplarSetV4Response {
  * Response for exemplar addition status (v4)
  */
 export interface FbsRfbsMarksProductExemplarStatusV4Response {
-  /** 
+  /**
    * Статус добавления экземпляров
    * Exemplar addition status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
-  /** 
+  status?: "pending" | "processing" | "completed" | "error";
+
+  /**
    * Данные экземпляров
    * Exemplar data
    */
@@ -592,10 +592,10 @@ export interface FbsRfbsMarksProductExemplarStatusV4Response {
       /** ГТД */
       gtd?: string;
       /** Статус экземпляра */
-      status?: 'valid' | 'invalid' | 'pending';
+      status?: "valid" | "invalid" | "pending";
     }>;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -604,13 +604,13 @@ export interface FbsRfbsMarksProductExemplarStatusV4Response {
  * Response for marking codes validation (v4)
  */
 export interface FbsRfbsMarksProductExemplarValidateV4Response {
-  /** 
+  /**
    * Результат валидации
    * Validation result
    */
   result?: string;
-  
-  /** 
+
+  /**
    * Ошибки валидации
    * Validation errors
    */
@@ -622,7 +622,7 @@ export interface FbsRfbsMarksProductExemplarValidateV4Response {
     /** Описание ошибки */
     error?: string;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -631,13 +631,13 @@ export interface FbsRfbsMarksProductExemplarValidateV4Response {
  * Response for order assembly (v4)
  */
 export interface FbsRfbsMarksPostingShipV4Response {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
   result?: string;
-  
-  /** 
+
+  /**
    * Созданные отправления
    * Created postings
    */
@@ -647,7 +647,7 @@ export interface FbsRfbsMarksPostingShipV4Response {
     /** Статус отправления */
     status?: string;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -656,13 +656,13 @@ export interface FbsRfbsMarksPostingShipV4Response {
  * Response for partial posting assembly (v4)
  */
 export interface FbsRfbsMarksPostingShipPackageV4Response {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
   result?: string;
-  
-  /** 
+
+  /**
    * Информация о разделенном отправлении
    * Split posting information
    */
@@ -672,7 +672,7 @@ export interface FbsRfbsMarksPostingShipPackageV4Response {
     /** Новые номера отправлений */
     new_posting_numbers?: string[];
   };
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -683,13 +683,13 @@ export interface FbsRfbsMarksPostingShipPackageV4Response {
  * Response for exemplar information (v5)
  */
 export interface FbsRfbsMarksProductExemplarCreateOrGetV5Response {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
   result?: string;
-  
-  /** 
+
+  /**
    * Информация об экземплярах
    * Exemplar information
    */
@@ -704,7 +704,7 @@ export interface FbsRfbsMarksProductExemplarCreateOrGetV5Response {
       quantity?: number;
     }>;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -713,12 +713,12 @@ export interface FbsRfbsMarksProductExemplarCreateOrGetV5Response {
  * Response for checking and saving exemplar data (v5)
  */
 export interface FbsRfbsMarksProductExemplarSetV5Response {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
   result?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -727,13 +727,13 @@ export interface FbsRfbsMarksProductExemplarSetV5Response {
  * Response for exemplar addition status (v5)
  */
 export interface FbsRfbsMarksProductExemplarStatusV5Response {
-  /** 
+  /**
    * Статус добавления экземпляров
    * Exemplar addition status
    */
-  status?: 'pending' | 'processing' | 'completed' | 'error';
-  
-  /** 
+  status?: "pending" | "processing" | "completed" | "error";
+
+  /**
    * Данные экземпляров с расширенной информацией
    * Exemplar data with extended information
    */
@@ -758,10 +758,10 @@ export interface FbsRfbsMarksProductExemplarStatusV5Response {
         ean_code?: string;
       };
       /** Статус экземпляра */
-      status?: 'valid' | 'invalid' | 'pending';
+      status?: "valid" | "invalid" | "pending";
     }>;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -770,13 +770,13 @@ export interface FbsRfbsMarksProductExemplarStatusV5Response {
  * Response for marking codes validation (v5)
  */
 export interface FbsRfbsMarksProductExemplarValidateV5Response {
-  /** 
+  /**
    * Результат валидации
    * Validation result
    */
   result?: string;
-  
-  /** 
+
+  /**
    * Ошибки валидации
    * Validation errors
    */
@@ -788,7 +788,7 @@ export interface FbsRfbsMarksProductExemplarValidateV5Response {
     /** Описание ошибки */
     error?: string;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -799,13 +799,13 @@ export interface FbsRfbsMarksProductExemplarValidateV5Response {
  * Response for created exemplar data (v6)
  */
 export interface FbsRfbsMarksProductExemplarCreateOrGetV6Response {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
   result?: string;
-  
-  /** 
+
+  /**
    * Информация об экземплярах с расширенными данными
    * Exemplar information with extended data
    */
@@ -831,7 +831,7 @@ export interface FbsRfbsMarksProductExemplarCreateOrGetV6Response {
       };
     }>;
   }>;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -840,11 +840,11 @@ export interface FbsRfbsMarksProductExemplarCreateOrGetV6Response {
  * Response for checking and saving exemplar data (v6)
  */
 export interface FbsRfbsMarksProductExemplarSetV6Response {
-  /** 
+  /**
    * Результат операции
    * Operation result
    */
   result?: string;
-  
+
   readonly [key: string]: unknown;
 }

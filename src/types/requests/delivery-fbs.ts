@@ -9,12 +9,12 @@
  * Request for carriage approval
  */
 export interface DeliveryFbsCarriageApproveRequest {
-  /** 
+  /**
    * Идентификатор отгрузки
    * Carriage ID
    */
   carriage_id?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -23,12 +23,12 @@ export interface DeliveryFbsCarriageApproveRequest {
  * Request for carriage cancellation
  */
 export interface DeliveryFbsCarriageCancelRequest {
-  /** 
+  /**
    * Идентификатор отгрузки
    * Carriage ID
    */
   carriage_id?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -37,24 +37,24 @@ export interface DeliveryFbsCarriageCancelRequest {
  * Request for carriage creation
  */
 export interface DeliveryFbsCarriageCreateRequest {
-  /** 
+  /**
    * Идентификатор метода доставки
    * Delivery method ID
    */
   delivery_method_id?: number;
-  
-  /** 
+
+  /**
    * Время начала интервала отгрузки
    * Carriage interval start time
    */
   first_mile_from_time?: string;
-  
-  /** 
+
+  /**
    * Время окончания интервала отгрузки
    * Carriage interval end time
    */
   first_mile_to_time?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -63,24 +63,24 @@ export interface DeliveryFbsCarriageCreateRequest {
  * Request for delivery methods and carriages list
  */
 export interface DeliveryFbsCarriageDeliveryListRequest {
-  /** 
+  /**
    * Фильтр по статусу отгрузки
    * Carriage status filter
    */
   status?: string;
-  
-  /** 
+
+  /**
    * Лимит записей в ответе
    * Records limit in response
    */
   limit?: number;
-  
-  /** 
+
+  /**
    * Смещение для пагинации
    * Pagination offset
    */
   offset?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -89,12 +89,12 @@ export interface DeliveryFbsCarriageDeliveryListRequest {
  * Request for carriage information
  */
 export interface DeliveryFbsCarriageGetRequest {
-  /** 
+  /**
    * Идентификатор перевозки
    * Carriage ID
    */
   carriage_id?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -103,18 +103,18 @@ export interface DeliveryFbsCarriageGetRequest {
  * Request for carriage postings modification
  */
 export interface DeliveryFbsSetPostingsRequest {
-  /** 
+  /**
    * Идентификатор отгрузки
    * Carriage ID
    */
   carriage_id?: number;
-  
-  /** 
+
+  /**
    * Список номеров отправлений
    * List of posting numbers
    */
   posting_number?: string[];
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -123,18 +123,18 @@ export interface DeliveryFbsSetPostingsRequest {
  * Request for available carriages list
  */
 export interface DeliveryFbsCarriageAvailableListRequest {
-  /** 
+  /**
    * Лимит записей в ответе
    * Records limit in response
    */
   limit?: number;
-  
-  /** 
+
+  /**
    * Смещение для пагинации
    * Pagination offset
    */
   offset?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -143,12 +143,12 @@ export interface DeliveryFbsCarriageAvailableListRequest {
  * Request for posting split
  */
 export interface DeliveryFbsPostingSplitRequest {
-  /** 
+  /**
    * Номер отправления
    * Posting number
    */
   posting_number?: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -157,12 +157,12 @@ export interface DeliveryFbsPostingSplitRequest {
  * Request for shipment and documents status
  */
 export interface DeliveryFbsActCheckStatusRequest {
-  /** 
+  /**
    * Идентификатор отгрузки
    * Carriage ID
    */
   carriage_id?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -171,18 +171,18 @@ export interface DeliveryFbsActCheckStatusRequest {
  * Request for shipment confirmation and document creation
  */
 export interface DeliveryFbsActCreateRequest {
-  /** 
+  /**
    * Идентификатор отгрузки
    * Carriage ID
    */
   carriage_id?: number;
-  
-  /** 
+
+  /**
    * Номера отправлений для включения в акт
    * Posting numbers to include in the act
    */
   posting_number?: string[];
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -191,12 +191,12 @@ export interface DeliveryFbsActCreateRequest {
  * Request for shipment barcode
  */
 export interface DeliveryFbsGetBarcodeRequest {
-  /** 
+  /**
    * Идентификатор отгрузки
    * Carriage ID
    */
   carriage_id?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -205,18 +205,18 @@ export interface DeliveryFbsGetBarcodeRequest {
  * Request for container labels
  */
 export interface DeliveryFbsGetContainerLabelsRequest {
-  /** 
+  /**
    * Идентификатор отгрузки
    * Carriage ID
    */
   carriage_id?: number;
-  
-  /** 
+
+  /**
    * Номера контейнеров
    * Container numbers
    */
   container_numbers?: string[];
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -225,18 +225,18 @@ export interface DeliveryFbsGetContainerLabelsRequest {
  * Request for PDF documents
  */
 export interface DeliveryFbsGetActRequest {
-  /** 
+  /**
    * Идентификатор отгрузки
    * Carriage ID
    */
   carriage_id?: number;
-  
-  /** 
+
+  /**
    * Тип документа
    * Document type
    */
-  doc_type?: 'act' | 'waybill' | 'shipment_list';
-  
+  doc_type?: "act" | "waybill" | "shipment_list";
+
   readonly [key: string]: unknown;
 }
 
@@ -245,24 +245,24 @@ export interface DeliveryFbsGetActRequest {
  * Request for postings list in act
  */
 export interface DeliveryFbsActGetPostingsRequest {
-  /** 
+  /**
    * Идентификатор отгрузки
    * Carriage ID
    */
   carriage_id?: number;
-  
-  /** 
+
+  /**
    * Лимит записей в ответе
    * Records limit in response
    */
   limit?: number;
-  
-  /** 
+
+  /**
    * Смещение для пагинации
    * Pagination offset
    */
   offset?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -271,7 +271,7 @@ export interface DeliveryFbsActGetPostingsRequest {
  * Request for acts list by shipments
  */
 export interface DeliveryFbsActListRequest {
-  /** 
+  /**
    * Фильтр по периоду
    * Period filter
    */
@@ -285,19 +285,19 @@ export interface DeliveryFbsActListRequest {
     /** Тип интеграции */
     integration_type?: string;
   };
-  
-  /** 
+
+  /**
    * Лимит записей в ответе
    * Records limit in response
    */
   limit?: number;
-  
-  /** 
+
+  /**
    * Смещение для пагинации
    * Pagination offset
    */
   offset?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -306,12 +306,12 @@ export interface DeliveryFbsActListRequest {
  * Request for waybill formation status
  */
 export interface DeliveryFbsDigitalActCheckStatusRequest {
-  /** 
+  /**
    * Идентификатор перевозки
    * Carriage ID
    */
   carriage_id?: number;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -320,11 +320,11 @@ export interface DeliveryFbsDigitalActCheckStatusRequest {
  * Request for shipment list by carriage
  */
 export interface DeliveryFbsGetDigitalActRequest {
-  /** 
+  /**
    * Идентификатор перевозки
    * Carriage ID
    */
   carriage_id?: number;
-  
+
   readonly [key: string]: unknown;
 }

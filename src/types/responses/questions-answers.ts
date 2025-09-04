@@ -4,13 +4,13 @@
  * Ready for manual editing and enhancements
  */
 
-import type { BaseResponse } from '../../core/types.js';
+import type { BaseResponse } from "../../core/types.js";
 
 /**
  * Статус вопроса (полный список)
  * Question status (complete list)
  */
-export type QuestionStatusEnum = 'NEW' | 'ALL' | 'VIEWED' | 'PROCESSED' | 'UNPROCESSED';
+export type QuestionStatusEnum = "NEW" | "ALL" | "VIEWED" | "PROCESSED" | "UNPROCESSED";
 
 /**
  * Информация об ответе на вопрос
@@ -108,7 +108,7 @@ export interface QuestionAnswerDeleteResponse extends BaseResponse {
 export interface QuestionAnswerListResponse extends BaseResponse {
   /** Ответы */
   answers?: QuestionAnswerInfo[];
-  /** 
+  /**
    * Идентификатор последнего значения на странице.
    * Чтобы получить следующие значения, передайте полученное значение в следующем запросе в параметре last_id.
    */
@@ -159,7 +159,7 @@ export interface QuestionInfoResponse extends BaseResponse, QuestionDetailedInfo
 export interface QuestionListResponse extends BaseResponse {
   /** Вопросы */
   questions?: QuestionListItem[];
-  /** 
+  /**
    * Идентификатор последнего значения на странице.
    * Чтобы получить следующие значения, передайте полученное значение в следующем запросе в параметре last_id.
    */

@@ -4,7 +4,7 @@
  * Ready for manual editing and enhancements
  */
 
-import { z } from 'zod';
+import { z } from "zod";
 
 // Zod schemas for product API will be generated here
 export const ProductRequestSchema = z.object({

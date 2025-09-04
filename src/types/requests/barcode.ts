@@ -9,18 +9,18 @@
  * Barcode for product binding
  */
 export interface BarcodeInfo {
-  /** 
+  /**
    * Идентификатор товара в системе Ozon — SKU
    * Product identifier in Ozon system — SKU
    */
   sku: string;
-  
-  /** 
+
+  /**
    * Значение штрихкода (не более 100 символов)
    * Barcode value (maximum 100 characters)
    */
   barcode: string;
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -29,12 +29,12 @@ export interface BarcodeInfo {
  * Add barcodes to products request
  */
 export interface BarcodeAddRequest {
-  /** 
+  /**
    * Список штрихкодов и товаров (максимум 100)
    * List of barcodes and products (maximum 100)
    */
   barcodes: BarcodeInfo[];
-  
+
   readonly [key: string]: unknown;
 }
 
@@ -43,11 +43,11 @@ export interface BarcodeAddRequest {
  * Generate barcodes for products request
  */
 export interface BarcodeGenerateRequest {
-  /** 
+  /**
    * Идентификаторы товаров для создания штрихкодов (максимум 100)
    * Product identifiers for barcode generation (maximum 100)
    */
   product_ids: string[];
-  
+
   readonly [key: string]: unknown;
 }

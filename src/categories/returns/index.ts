@@ -3,15 +3,15 @@
  * For managing FBO and FBS returns
  */
 
-import { HttpClient } from '../../core/http.js';
-import type { RequestOptions } from '../../core/types.js';
-import type { GetReturnsListRequest } from '../../types/requests/returns.js';
-import type { GetReturnsListResponse } from '../../types/responses/returns.js';
+import { HttpClient } from "../../core/http.js";
+import type { RequestOptions } from "../../core/types.js";
+import type { GetReturnsListRequest } from "../../types/requests/returns.js";
+import type { GetReturnsListResponse } from "../../types/responses/returns.js";
 
 /**
  * Returns API для управления возвратами FBO и FBS
  * Returns API for FBO and FBS returns management
- * 
+ *
  * @example
  * ```typescript
  * // Получить список возвратов
@@ -29,13 +29,13 @@ export class ReturnsApi {
   /**
    * Получить список возвратов FBO и FBS
    * Get FBO and FBS returns list
-   * 
+   *
    * Метод для получения информации о возвратах с фильтрацией и пагинацией.
-   * 
+   *
    * @param request - Параметры запроса списка возвратов
    * @param options - Дополнительные опции запроса
    * @returns Список возвратов
-   * 
+   *
    * @example
    * ```typescript
    * const returns = await returnsApi.getList({
@@ -46,21 +46,13 @@ export class ReturnsApi {
    *   },
    *   limit: 100
    * });
-   * 
+   *
    * returns.returns?.forEach(returnItem => {
    *   console.log(`Return ${returnItem.id}: ${returnItem.name} - ${returnItem.status}`);
    * });
    * ```
    */
-  async getList(
-    request: GetReturnsListRequest,
-    options?: RequestOptions
-  ): Promise<GetReturnsListResponse> {
-    return this.httpClient.request<GetReturnsListRequest, GetReturnsListResponse>(
-      'POST',
-      '/v1/returns/list',
-      request,
-      options
-    );
+  async getList(request: GetReturnsListRequest, options?: RequestOptions): Promise<GetReturnsListResponse> {
+    return this.httpClient.request<GetReturnsListRequest, GetReturnsListResponse>("POST", "/v1/returns/list", request, options);
   }
 }

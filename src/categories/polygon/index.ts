@@ -3,31 +3,26 @@
  * Polygon binding for delivery zones
  */
 
-import { HttpClient } from '../../core/http.js';
-import type { RequestOptions } from '../../core/types.js';
-import type { EmptyResponse } from '../../types/common/base.js';
-import type { 
-  PolygonCreateRequest,
-  PolygonBindRequest
-} from '../../types/requests/polygon.js';
-import type { 
-  PolygonCreateResponse
-} from '../../types/responses/polygon.js';
+import { HttpClient } from "../../core/http.js";
+import type { RequestOptions } from "../../core/types.js";
+import type { EmptyResponse } from "../../types/common/base.js";
+import type { PolygonCreateRequest, PolygonBindRequest } from "../../types/requests/polygon.js";
+import type { PolygonCreateResponse } from "../../types/responses/polygon.js";
 
 /**
  * PolygonAPI для управления полигонами доставки
  * PolygonAPI for delivery polygon management
- * 
+ *
  * 🗺️ Используйте https://geojson.io для создания координат полигонов
  * 🗺️ Use https://geojson.io to create polygon coordinates
- * 
+ *
  * @example
  * ```typescript
  * // Создать полигон доставки для Москвы
  * const polygonResult = await polygonApi.createDeliveryPolygon({
  *   coordinates: "[[[55.7558, 37.6176], [55.7558, 37.7176], [55.8558, 37.7176], [55.8558, 37.6176], [55.7558, 37.6176]]]"
  * });
- * 
+ *
  * // Привязать полигон к методу доставки
  * await polygonApi.bindPolygonToDeliveryMethod({
  *   delivery_method_id: 123,
@@ -48,15 +43,15 @@ export class PolygonApi {
   /**
    * Создать полигон доставки
    * Create delivery polygon
-   * 
+   *
    * Создайте полигон для зоны доставки, указав координаты в формате GeoJSON.
    * Для создания координат используйте https://geojson.io - отметьте на карте
    * минимум 3 точки и соедините их линиями.
-   * 
+   *
    * @param request - Параметры запроса создания полигона
    * @param options - Дополнительные опции запроса
    * @returns Идентификатор созданного полигона
-   * 
+   *
    * @example
    * ```typescript
    * // Создать полигон для центра Москвы
@@ -69,9 +64,9 @@ export class PolygonApi {
    *     [55.7558, 37.6176]  // Замыкание полигона
    *   ]]]`
    * });
-   * 
+   *
    * console.log(`Создан полигон с ID: ${moscowCenterPolygon.polygon_id}`);
-   * 
+   *
    * // Создать полигон для Санкт-Петербурга
    * const spbPolygon = await polygonApi.createDeliveryPolygon({
    *   coordinates: `[[[
@@ -82,7 +77,7 @@ export class PolygonApi {
    *     [59.9311, 30.3609]  // Замыкание полигона
    *   ]]]`
    * });
-   * 
+   *
    * // Создать сложный полигон с несколькими зонами
    * const complexPolygon = await polygonApi.createDeliveryPolygon({
    *   coordinates: `[[[
@@ -99,7 +94,7 @@ export class PolygonApi {
    *     [55.7200, 37.5200]
    *   ]]]`
    * });
-   * 
+   *
    * // Функция-помощник для создания прямоугольного полигона
    * const createRectangularPolygon = async (
    *   minLat: number, minLon: number,
@@ -112,36 +107,28 @@ export class PolygonApi {
    *     [${maxLat}, ${minLon}],
    *     [${minLat}, ${minLon}]
    *   ]]]`;
-   *   
+   *
    *   return await polygonApi.createDeliveryPolygon({ coordinates });
    * };
-   * 
+   *
    * const rectPolygon = await createRectangularPolygon(55.7, 37.6, 55.8, 37.7);
    * ```
    */
-  async createDeliveryPolygon(
-    request: PolygonCreateRequest,
-    options?: RequestOptions
-  ): Promise<PolygonCreateResponse> {
-    return this.httpClient.request<PolygonCreateRequest, PolygonCreateResponse>(
-      'POST',
-      '/v1/polygon/create',
-      request,
-      options
-    );
+  async createDeliveryPolygon(request: PolygonCreateRequest, options?: RequestOptions): Promise<PolygonCreateResponse> {
+    return this.httpClient.request<PolygonCreateRequest, PolygonCreateResponse>("POST", "/v1/polygon/create", request, options);
   }
 
   /**
    * Привязать полигон к методу доставки
    * Bind polygon to delivery method
-   * 
+   *
    * Свяжите созданные полигоны с методом доставки, указав время доставки
    * для каждого полигона и местоположение склада.
-   * 
+   *
    * @param request - Параметры запроса привязки полигонов
    * @param options - Дополнительные опции запроса
    * @returns Результат привязки полигонов
-   * 
+   *
    * @example
    * ```typescript
    * // Привязать несколько полигонов к методу экспресс-доставки
@@ -166,7 +153,7 @@ export class PolygonApi {
    *     }
    *   ]
    * });
-   * 
+   *
    * // Привязать полигон к методу обычной доставки
    * await polygonApi.bindPolygonToDeliveryMethod({
    *   delivery_method_id: 456, // ID метода обычной доставки
@@ -179,7 +166,7 @@ export class PolygonApi {
    *     time: 1440       // 24 часа (1 день)
    *   }]
    * });
-   * 
+   *
    * // Пример создания и привязки полигона в одном workflow
    * const setupDeliveryZone = async (
    *   coordinates: string,
@@ -192,11 +179,11 @@ export class PolygonApi {
    *   const polygonResult = await polygonApi.createDeliveryPolygon({
    *     coordinates
    *   });
-   *   
+   *
    *   if (!polygonResult.polygon_id) {
    *     throw new Error('Не удалось создать полигон');
    *   }
-   *   
+   *
    *   // 2. Привязываем полигон к методу доставки
    *   await polygonApi.bindPolygonToDeliveryMethod({
    *     delivery_method_id: deliveryMethodId,
@@ -209,10 +196,10 @@ export class PolygonApi {
    *       time: deliveryTimeMinutes
    *     }]
    *   });
-   *   
+   *
    *   return polygonResult.polygon_id;
    * };
-   * 
+   *
    * // Настроить экспресс-доставку для МКАД
    * const mkadPolygonId = await setupDeliveryZone(
    *   `[[[55.5742, 37.1427], [55.5742, 37.8427], [55.9742, 37.8427], [55.9742, 37.1427], [55.5742, 37.1427]]]`,
@@ -221,19 +208,11 @@ export class PolygonApi {
    *   "55.7558", // Широта склада
    *   "37.6176"  // Долгота склада
    * );
-   * 
+   *
    * console.log(`Настроена зона экспресс-доставки, полигон ID: ${mkadPolygonId}`);
    * ```
    */
-  async bindPolygonToDeliveryMethod(
-    request: PolygonBindRequest,
-    options?: RequestOptions
-  ): Promise<void> {
-    await this.httpClient.request<PolygonBindRequest, EmptyResponse>(
-      'POST',
-      '/v1/polygon/bind',
-      request,
-      options
-    );
+  async bindPolygonToDeliveryMethod(request: PolygonBindRequest, options?: RequestOptions): Promise<void> {
+    await this.httpClient.request<PolygonBindRequest, EmptyResponse>("POST", "/v1/polygon/bind", request, options);
   }
 }
