@@ -1,6 +1,6 @@
 {
   "name": "daytona-ozon-seller-api",
-  "version": "2.2.16",
+  "version": "2.2.17",
   "description": "Complete TypeScript SDK for OZON Seller API with 278 methods across 33 categories. Production-ready with comprehensive documentation and enterprise-grade architecture.",
   "keywords": [
     "ozon-api",
