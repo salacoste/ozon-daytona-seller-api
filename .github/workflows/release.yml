@@ -374,25 +374,16 @@ jobs:
 
       - name: Create GitHub Release
         id: create_release
-        uses: actions/create-release@v1
+        uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref_name }}
-          release_name: OZON Seller API SDK v${{ needs.validate-release.outputs.version }}
+          name: OZON Seller API SDK v${{ needs.validate-release.outputs.version }}
           body_path: RELEASE_NOTES.md
+          files: ./*.tgz
           draft: false
           prerelease: ${{ needs.validate-release.outputs.is-prerelease }}
-
-      - name: Upload package to release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./*.tgz
-          asset_name: ozon-seller-api-${{ needs.validate-release.outputs.version }}.tgz
-          asset_content_type: application/gzip
 
   # Job 5: Publish to NPM (Manual Approval Required)
   publish-npm:
