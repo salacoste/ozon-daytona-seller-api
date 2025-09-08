@@ -19,6 +19,11 @@ on:
 env:
   NODE_VERSION: '18'
 
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
 jobs:
   # Job 1: Validate Release Prerequisites
   validate-release:
