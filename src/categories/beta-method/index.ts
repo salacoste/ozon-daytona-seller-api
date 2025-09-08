@@ -195,9 +195,10 @@ export class BetaMethodApi {
    * });
    *
    * analytics.items?.forEach(item => {
-   *   console.log(`${item.product_name} (SKU: ${item.sku})`);
-   *   console.log(`Остаток: ${item.warehouse_stock}, статус: ${item.turnover_grade}`);
-   *   console.log(`Прогноз продаж: ${item.sales_forecast}, тег: ${item.item_tag}`);
+   *   console.log(`${item.name} (SKU: ${item.sku})`);
+   *   console.log(`Остаток: ${item.available_stock_count}, статус: ${item.turnover_grade}`);
+   *   console.log(`Среднесуточные продажи: ${item.ads}, дней хватит: ${item.idc}`);
+   *   console.log(`Склад: ${item.warehouse_name}, кластер: ${item.cluster_name}`);
    * });
    * ```
    */

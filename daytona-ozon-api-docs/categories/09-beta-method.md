@@ -132,12 +132,34 @@ interface BetaMethodAnalyticsStocksRequest {
 
 interface BetaMethodAnalyticsStocksResponse {
   items?: {
-    sku: string;
-    product_name: string;
-    warehouse_stock: number;
+    sku: number;
+    offer_id: string;
+    name: string;
+    cluster_id: number;
+    cluster_name: string;
+    warehouse_id: number;
+    warehouse_name: string;
+    item_tags: string[];
     turnover_grade: string;
-    sales_forecast: number;
-    item_tag: string;
+    turnover_grade_cluster: string;
+    ads: number;
+    ads_cluster: number;
+    idc: number;
+    idc_cluster: number;
+    days_without_sales: number;
+    days_without_sales_cluster: number;
+    available_stock_count: number;
+    transit_stock_count: number;
+    requested_stock_count: number;
+    valid_stock_count: number;
+    waiting_docs_stock_count: number;
+    other_stock_count: number;
+    return_from_customer_stock_count: number;
+    return_to_seller_stock_count: number;
+    stock_defect_stock_count: number;
+    transit_defect_stock_count: number;
+    excess_stock_count: number;
+    expiring_stock_count: number;
   }[];
 }
 ```
@@ -252,15 +274,15 @@ const manageStockLevels = async (skus: string[]) => {
       switch (item.turnover_grade) {
         case 'DEFICIT':
           summary.deficit.push(item);
-          summary.recommendations.push(`📈 Увеличить поставку для ${item.product_name} (SKU: ${item.sku})`);
+          summary.recommendations.push(`📈 Увеличить поставку для ${item.name} (SKU: ${item.sku}) - остаток ${item.available_stock_count}, дней хватит ${item.idc}`);
           break;
         case 'SURPLUS':
           summary.surplus.push(item);
-          summary.recommendations.push(`📉 Снизить цену для ${item.product_name} (SKU: ${item.sku})`);
+          summary.recommendations.push(`📉 Снизить цену для ${item.name} (SKU: ${item.sku}) - остаток ${item.available_stock_count}, дней хватит ${item.idc}`);
           break;
         case 'NO_SALES':
           summary.noSales.push(item);
-          summary.recommendations.push(`🛑 Проверить товар ${item.product_name} (SKU: ${item.sku}) - нет продаж`);
+          summary.recommendations.push(`🛑 Проверить товар ${item.name} (SKU: ${item.sku}) - нет продаж ${item.days_without_sales} дней`);
           break;
       }
     });

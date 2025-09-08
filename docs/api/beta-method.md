@@ -71,7 +71,7 @@ console.log(result);
 
 ### `getAnalyticsStocks()`
 
-Получить аналитику по остаткам Get stock analytics Используйте метод для получения аналитики по остаткам товаров на складах. Метод соответствует разделу "FBO → Управление остатками" в личном кабинете. Аналитика обновляется раз в день в 07:00 UTC. ```typescript const analytics = await betaMethodApi.getAnalyticsStocks({ skus: ['123456789', '987654321'], turnover_grades: ['DEFICIT', 'POPULAR'], item_tags: ['NOVEL', 'SUPER'], warehouse_ids: ['12345', '67890'] }); analytics.items?.forEach(item => { console.log(`${item.product_name} (SKU: ${item.sku})`); console.log(`Остаток: ${item.warehouse_stock}, статус: ${item.turnover_grade}`); console.log(`Прогноз продаж: ${item.sales_forecast}, тег: ${item.item_tag}`); }); ```
+Получить аналитику по остаткам Get stock analytics Используйте метод для получения аналитики по остаткам товаров на складах. Метод соответствует разделу "FBO → Управление остатками" в личном кабинете. Аналитика обновляется раз в день в 07:00 UTC. ```typescript const analytics = await betaMethodApi.getAnalyticsStocks({ skus: ['123456789', '987654321'], turnover_grades: ['DEFICIT', 'POPULAR'], item_tags: ['NOVEL', 'SUPER'], warehouse_ids: ['12345', '67890'] }); analytics.items?.forEach(item => { console.log(`${item.name} (SKU: ${item.sku})`); console.log(`Остаток: ${item.available_stock_count}, статус: ${item.turnover_grade}`); console.log(`Среднесуточные продажи: ${item.ads}, дней хватит: ${item.idc}`); console.log(`Склад: ${item.warehouse_name}, кластер: ${item.cluster_name}`); }); ```
 
 **Example:**
 ```typescript

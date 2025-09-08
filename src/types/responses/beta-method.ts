@@ -257,52 +257,172 @@ export interface BetaMethodManageStocksResponse {
  */
 export interface BetaMethodStocksAnalyticsItem {
   /**
-   * SKU товара
-   * Product SKU
+   * Идентификатор товара в системе Ozon — SKU
+   * Product identifier in Ozon system - SKU
    */
-  sku?: string;
+  sku?: number;
+
+  /**
+   * Идентификатор товара в системе продавца — артикул
+   * Product identifier in seller system - offer ID
+   */
+  offer_id?: string;
 
   /**
    * Название товара
    * Product name
    */
-  product_name?: string;
+  name?: string;
 
   /**
-   * Остаток на складе
-   * Warehouse stock
+   * Идентификатор кластера
+   * Cluster identifier
    */
-  warehouse_stock?: number;
+  cluster_id?: number;
 
   /**
-   * Статус ликвидности
-   * Turnover status
+   * Название кластера
+   * Cluster name
    */
-  turnover_grade?: string;
-
-  /**
-   * Тег товара
-   * Product tag
-   */
-  item_tag?: string;
-
-  /**
-   * Кластер
-   * Cluster
-   */
-  cluster_id?: string;
+  cluster_name?: string;
 
   /**
    * Идентификатор склада
    * Warehouse identifier
    */
-  warehouse_id?: string;
+  warehouse_id?: number;
 
   /**
-   * Прогноз продаж
-   * Sales forecast
+   * Название склада
+   * Warehouse name
    */
-  sales_forecast?: number;
+  warehouse_name?: string;
+
+  /**
+   * Теги товара
+   * Product tags
+   */
+  item_tags?: string[];
+
+  /**
+   * Статус ликвидности товара по всем кластерам
+   * Turnover grade status across all clusters
+   */
+  turnover_grade?: string;
+
+  /**
+   * Статус ликвидности товара в кластере
+   * Turnover grade status in cluster
+   */
+  turnover_grade_cluster?: string;
+
+  /**
+   * Среднесуточное количество проданных единиц товара за последние 28 дней по всем кластерам
+   * Average daily sales units over last 28 days across all clusters
+   */
+  ads?: number;
+
+  /**
+   * Среднесуточное количество проданных единиц товара за последние 28 дней в кластере
+   * Average daily sales units over last 28 days in cluster
+   */
+  ads_cluster?: number;
+
+  /**
+   * Количество дней, на которое хватит остатка товара с учётом среднесуточных продаж за 28 дней по всем кластерам
+   * Days of stock remaining based on average daily sales over 28 days across all clusters
+   */
+  idc?: number;
+
+  /**
+   * Количество дней, на которое хватит остатка товара с учётом среднесуточных продаж за 28 дней в кластере
+   * Days of stock remaining based on average daily sales over 28 days in cluster
+   */
+  idc_cluster?: number;
+
+  /**
+   * Количество дней без продаж по всем кластерам
+   * Days without sales across all clusters
+   */
+  days_without_sales?: number;
+
+  /**
+   * Количество дней без продаж в кластере
+   * Days without sales in cluster
+   */
+  days_without_sales_cluster?: number;
+
+  /**
+   * Количество единиц товара, доступное к продаже
+   * Number of units available for sale
+   */
+  available_stock_count?: number;
+
+  /**
+   * Количество единиц товара в поставках в пути
+   * Number of units in transit
+   */
+  transit_stock_count?: number;
+
+  /**
+   * Количество единиц товара в заявках на поставку
+   * Number of units in supply requests
+   */
+  requested_stock_count?: number;
+
+  /**
+   * Количество единиц товара без брака и с достаточным сроком годности, которое скоро разместим на складе
+   * Number of units without defects and with sufficient shelf life, soon to be placed in warehouse
+   */
+  valid_stock_count?: number;
+
+  /**
+   * Количество маркируемых товаров, которые ожидают ваших действий
+   * Number of marked products awaiting your actions
+   */
+  waiting_docs_stock_count?: number;
+
+  /**
+   * Количество единиц товара, проходящих проверку
+   * Number of units under inspection
+   */
+  other_stock_count?: number;
+
+  /**
+   * Количество единиц товара в процессе возврата от покупателей
+   * Number of units in return process from customers
+   */
+  return_from_customer_stock_count?: number;
+
+  /**
+   * Количество единиц товара, готовящихся к вывозу по вашей заявке
+   * Number of units being prepared for removal by your request
+   */
+  return_to_seller_stock_count?: number;
+
+  /**
+   * Количество брака, доступное к вывозу со стока
+   * Number of defective units available for removal from stock
+   */
+  stock_defect_stock_count?: number;
+
+  /**
+   * Количество брака, доступное к вывозу с поставки
+   * Number of defective units available for removal from supply
+   */
+  transit_defect_stock_count?: number;
+
+  /**
+   * Количество излишков с поставки, которые доступны к вывозу
+   * Number of excess units from supply available for removal
+   */
+  excess_stock_count?: number;
+
+  /**
+   * Количество единиц товара с истекающим сроком годности
+   * Number of units with expiring shelf life
+   */
+  expiring_stock_count?: number;
 
   readonly [key: string]: unknown;
 }

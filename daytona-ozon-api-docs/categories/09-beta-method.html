@@ -806,15 +806,15 @@ interface BetaMethodProductInfoWrongVolumeResponse {
       switch (item.turnover_grade) {
         case 'DEFICIT':
           summary.deficit.push(item);
-          summary.recommendations.push(`📈 Увеличить поставку для ${item.product_name}`);
+          summary.recommendations.push(`📈 Увеличить поставку для ${item.name}`);
           break;
         case 'SURPLUS':
           summary.surplus.push(item);
-          summary.recommendations.push(`📉 Снизить цену для ${item.product_name}`);
+          summary.recommendations.push(`📉 Снизить цену для ${item.name}`);
           break;
         case 'NO_SALES':
           summary.noSales.push(item);
-          summary.recommendations.push(`🛑 Проверить товар ${item.product_name} - нет продаж`);
+          summary.recommendations.push(`🛑 Проверить товар ${item.name} - нет продаж`);
           break;
       }
     });

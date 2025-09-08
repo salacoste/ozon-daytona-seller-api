@@ -131,15 +131,16 @@ const manageStocks = await client.betaMethod.getManageStocks({
 
 ```typescript
 const stocks = await client.betaMethod.getAnalyticsStocks({
-  limit: 100,
-  offset: 0,
-  warehouse_type: 'ALL',
-  sku: ['123456789', '987654321']
+  skus: ['123456789', '987654321'],
+  turnover_grades: ['DEFICIT', 'POPULAR', 'SURPLUS'],
+  item_tags: ['NOVEL', 'SUPER']
 });
 
-stocks.result?.items?.forEach(item => {
-  console.log(`${item.name}: остаток ${item.present_count}`);
-  console.log(`Зарезервировано: ${item.reserved_count}, в пути: ${item.incoming_count}`);
+stocks.items?.forEach(item => {
+  console.log(`${item.name}: остаток ${item.available_stock_count}`);
+  console.log(`Склад: ${item.warehouse_name}, кластер: ${item.cluster_name}`);
+  console.log(`Статус ликвидности: ${item.turnover_grade}`);
+  console.log(`Среднесуточные продажи: ${item.ads}, дней хватит: ${item.idc}`);
 });
 ```
 
@@ -280,8 +281,8 @@ async function analyzeDeliveryEfficiency(client: OzonSellerApiClient) {
 async function monitorStockQuality(client: OzonSellerApiClient) {
   // Получаем аналитику остатков
   const stocks = await client.betaMethod.getAnalyticsStocks({
-    limit: 1000,
-    warehouse_type: 'FULFILLMENT'
+    skus: ['123456789', '987654321'], // Укажите реальные SKU
+    turnover_grades: ['DEFICIT', 'SURPLUS', 'NO_SALES']
   });
 
   // Получаем товары с неверными ОВХ
@@ -290,12 +291,12 @@ async function monitorStockQuality(client: OzonSellerApiClient) {
   });
 
   // Анализ проблемных позиций
-  const lowStockItems = stocks.result?.items?.filter(item => 
-    (item.present_count || 0) < 10 && (item.incoming_count || 0) === 0
+  const lowStockItems = stocks.items?.filter(item => 
+    (item.available_stock_count || 0) < 10 && (item.transit_stock_count || 0) === 0
   );
 
-  const overstockItems = stocks.result?.items?.filter(item => 
-    (item.present_count || 0) > 1000 && (item.reserved_count || 0) < (item.present_count || 0) * 0.1
+  const overstockItems = stocks.items?.filter(item => 
+    (item.available_stock_count || 0) > 1000 && item.turnover_grade === 'SURPLUS'
   );
 
   console.log('📈 Качество остатков:');
@@ -468,8 +469,8 @@ const oldStocks = await client.betaMethod.getManageStocks({
 
 // ✅ Современный способ
 const newStocks = await client.betaMethod.getAnalyticsStocks({
-  limit: 100,
-  warehouse_type: 'FULFILLMENT'
+  skus: ['123456789', '987654321'],
+  turnover_grades: ['DEFICIT', 'POPULAR', 'SURPLUS']
 });
 ```
 
