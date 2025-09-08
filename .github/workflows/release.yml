@@ -355,6 +355,23 @@ jobs:
         with:
           name: release-docs
 
+      - name: Generate release notes
+        run: |
+          VERSION="${{ needs.validate-release.outputs.version }}"
+          echo "# OZON Seller API SDK v$VERSION" > RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "## 🎉 Release Highlights" >> RELEASE_NOTES.md
+          echo "- Fixed Analytics API response structure in BetaMethod" >> RELEASE_NOTES.md
+          echo "- Updated documentation with correct field names" >> RELEASE_NOTES.md
+          echo "- SDK now returns correct data for getAnalyticsStocks()" >> RELEASE_NOTES.md
+          echo "- Fixed Release Pipeline version conflict issue" >> RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "## 📦 Package Information" >> RELEASE_NOTES.md
+          echo "- **Version**: $VERSION" >> RELEASE_NOTES.md
+          echo "- **API Categories**: 32" >> RELEASE_NOTES.md
+          echo "- **Total Methods**: 278" >> RELEASE_NOTES.md
+          echo "- **Release Date**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> RELEASE_NOTES.md
+
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
@@ -363,7 +380,7 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: OZON Seller API SDK v${{ needs.validate-release.outputs.version }}
-          body_path: RELEASE_CHANGELOG.md
+          body_path: RELEASE_NOTES.md
           draft: false
           prerelease: ${{ needs.validate-release.outputs.is-prerelease }}
 
