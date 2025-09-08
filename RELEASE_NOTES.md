@@ -1,4 +1,27 @@
-# OZON Seller API SDK v0.1.0 - Release Notes
+# OZON Seller API SDK Release Notes
+
+## v2.2.14 - Analytics API Fix (2024-12-19)
+
+### 🐛 Bug Fixes
+- **Fixed Analytics API Response Structure**: Corrected `BetaMethodAnalyticsStocksResponse` to match actual Ozon API response format
+- **Updated Response Types**: Fixed `BetaMethodStocksAnalyticsItem` interface with correct field names and data types
+- **Documentation Updates**: Updated all documentation examples to use correct field names (`item.name`, `item.available_stock_count`, etc.)
+- **GitHub Pages**: Updated documentation in `@daytona-ozon-api-docs/` with correct API examples
+
+### 🔧 Technical Changes
+- Changed `sku` field type from `string` to `number` in `BetaMethodStocksAnalyticsItem`
+- Added missing fields: `ads`, `idc`, `available_stock_count`, `warehouse_name`, `cluster_name`
+- Removed incorrect `result` wrapper from `BetaMethodAnalyticsStocksResponse`
+- Updated JSDoc examples with correct field usage
+
+### 📚 Documentation
+- Fixed examples in `docs/api/beta-method.md`
+- Updated `daytona-ozon-api-docs/categories/09-beta-method.html`
+- Corrected all references to use proper API response structure
+
+---
+
+## v0.1.0 - Complete SDK Release
 
 ## 🎉 Complete SDK Release
 
