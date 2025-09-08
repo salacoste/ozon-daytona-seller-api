@@ -141,8 +141,15 @@ jobs:
       - name: Update package.json version
         run: |
           VERSION="${{ needs.validate-release.outputs.version }}"
-          npm version $VERSION --no-git-tag-version
-          echo "📦 Updated package.json to version $VERSION"
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          
+          if [ "$CURRENT_VERSION" = "$VERSION" ]; then
+            echo "✅ Package.json already has correct version: $VERSION"
+          else
+            echo "📦 Updating package.json from $CURRENT_VERSION to $VERSION"
+            npm version $VERSION --no-git-tag-version
+            echo "📦 Updated package.json to version $VERSION"
+          fi
 
       - name: Build TypeScript
         run: npm run build
