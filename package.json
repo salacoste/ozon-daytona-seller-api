@@ -107,7 +107,7 @@
     "release-it": "^19.0.4",
     "rimraf": "^5.0.5",
     "tsx": "^4.6.2",
-    "typedoc": "^0.25.4",
+    "typedoc": "^0.28.0",
     "typescript": "^5.3.3",
     "vitest": "^3.2.4"
   },
